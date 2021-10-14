@@ -10,6 +10,18 @@ namespace IDAL
             public Enums.Weight QWeight { get; set; }
             public int Battery { get; set; } //charging level
             public Enums.QuadocopterState State { get; set; }
+
+            public override string ToString()
+            {
+                String result = "";
+                result += $"ID is {ID}, \n";
+                result += $"Model is {Model}, \n";
+                result += $"Quadocopster weight is {QWeight}, \n";
+                result += $"Battery precent is {Battery}, \n";
+                result += $"Quadocopster state is {State}, \n";
+
+                return result;
+            }
         }
     }
 }

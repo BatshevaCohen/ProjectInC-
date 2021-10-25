@@ -11,10 +11,16 @@ namespace DAL
     {
         class DataSource
         {
-           
-               
+            internal static List<Drone> drones = new List<Drone>();
+            internal static List<BaseStation> baseStations = new List<BaseStation>();
+            internal static List<Client> clients = new List<Client>();
+            internal static List<Package> packages = new List<Package>();
+            static Random r = new Random();
+
 
 
         }
+       
     }
+
 }

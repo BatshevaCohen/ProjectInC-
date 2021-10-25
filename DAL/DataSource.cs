@@ -16,8 +16,7 @@ namespace DAL
             internal static List<Client> clients = new List<Client>();
             internal static List<Package> packages = new List<Package>();
             static Random r = new Random();
-
-
+                   
 
         }
        

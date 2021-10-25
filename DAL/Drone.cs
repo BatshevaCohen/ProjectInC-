@@ -3,14 +3,14 @@ namespace IDAL
 {
     namespace DO
     {
-        public struct Quadocopster
+        public struct Drone
         {
             public int ID { get; set; }
             public int Model { get; set; }
             public Enums.Weight QWeight { get; set; }
             public int Battery { get; set; } //charging level
-            public Enums.QuadocopterState State { get; set; }
-
+            public Enums.Drone State { get; set; }
+            
             public override string ToString()
             {
                 String result = "";

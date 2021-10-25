@@ -12,7 +12,7 @@ namespace IDAL
                 Heavy
             }
 
-            public enum Drone
+            public enum DroneState
             {
                 Available,
                 Maintenance,

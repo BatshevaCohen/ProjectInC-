@@ -13,7 +13,7 @@ namespace IDAL
             public Enums.Weight PWeight { get; set; }
 
             public Enums.Priority PPriority { get; set; }
-            public  int QuadocopterID { get; set; }
+            public  int DroneID { get; set; }
 
             public DateTime Create { get; set; }//Time to create a package for the sender
             public DateTime Affiliation { get; set; }//Time to assign the package to the glider
@@ -27,7 +27,7 @@ namespace IDAL
                 result += $"Reciving customer is {GettingCustomer}, \n";
                 result += $"Package weight is {PWeight}, \n";
                 result += $"Priority is {PPriority}, \n";
-                result += $"Quadocopter ID is {QuadocopterID}, \n";
+                result += $"Quadocopter ID is {DroneID}, \n";
                 result += $"Creating package time is {Create}, \n";
                 result += $"Package to quadocopter affiliation time is {Affiliation}, \n";
                 result += $"Collecting package time is {Collection}, \n";

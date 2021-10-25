@@ -9,7 +9,7 @@ namespace IDAL
             public int Model { get; set; }
             public Enums.Weight QWeight { get; set; }
             public int Battery { get; set; } //charging level
-            public Enums.Drone State { get; set; }
+            public Enums.DroneState State { get; set; }
             
             public override string ToString()
             {

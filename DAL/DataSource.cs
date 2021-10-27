@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL
+namespace DalObject
 {
     namespace DO
     {
@@ -13,7 +13,7 @@ namespace DAL
         {
             internal static List<Drone> drones = new List<Drone>(10);
             internal static List<BaseStation> baseStations = new List<BaseStation>(5);
-            internal static List<Client> clients = new List<Client>(100);
+            internal static List<Customer> customer = new List<Customer>(100);
             internal static List<Package> packages = new List<Package>(1000);
             static Random r = new Random();
 
@@ -23,6 +23,7 @@ namespace DAL
                 internal static int IndexBasestation = 0;
                 internal static int IndexClient = 0;
                 internal static int IndexPackage = 0;
+                internal static int OrdinalNumber;
                 static T RandomEnumValue<T>()
                 {
                     var v = Enum.GetValues(typeof(T));
@@ -56,7 +57,7 @@ namespace DAL
                         b.Longitude = r.Next(-180, 179) + r.NextDouble();
                         b.Latitude = r.Next(-90, 89) + r.NextDouble();
                     }
-                    Client c = new Client();
+                    Customer c = new Customer();
                     string[] arrClientFirstName = new string[10] { "Michael", "Christopher", "Jessica", "Matthew", "Ashley", "Jennifer", "Joshua", "Yoni", "Daniel", "David" };
                     for (int i = 0; i < 10; i++)
                     {
@@ -81,6 +82,8 @@ namespace DAL
                         p.Affiliation = myDateTime();
                         p.Collection = myDateTime();
                         p.Supply = myDateTime();
+                        OrdinalNumber = i + 1;
+                        i++;
                     }
                 }
 

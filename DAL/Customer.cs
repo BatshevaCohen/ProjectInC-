@@ -3,7 +3,7 @@ namespace IDAL
 {
     namespace DO
     {
-        public struct Client
+        public struct Customer
         {
             public int ID { get; set; }
             public String Name { get; set; }

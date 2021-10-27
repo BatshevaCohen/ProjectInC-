@@ -12,7 +12,6 @@ namespace IDAL
             public double Latitude { get; set; }
 
 
-
             public override string ToString()
             {
                 String result = "";

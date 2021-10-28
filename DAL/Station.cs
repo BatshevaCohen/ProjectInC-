@@ -3,11 +3,11 @@ namespace IDAL
 {
     namespace DO
     {
-        public struct BaseStation
+        public struct Station
         {
-            public int ID { get; set; }
-            public string Name { get; set; }
-            public int NumColumns { get; set; }
+            public int Id { get; set; }
+            public int Name { get; set; }
+            public int ChargeSlots { get; set; }
             public double Longitude { get; set; }
             public double Latitude { get; set; }
 
@@ -15,7 +15,7 @@ namespace IDAL
             public override string ToString()
             {
                 String result = "";
-                result += $"ID is {ID}, \n";
+                result += $"ID is {Id}, \n";
                 result += $"Name is {Name}, \n";
                 //---BONOS OPTION---
                 result += $"Latitude is {Longitude}, \n";

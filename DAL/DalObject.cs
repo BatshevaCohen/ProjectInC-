@@ -11,6 +11,8 @@ namespace DalObject
 {
     public class DalObject
     {
+        
+
         //add functions
         public int AddBaseStation(BaseStation baseStation)
         {
@@ -36,7 +38,7 @@ namespace DalObject
         //update functions
         public void UpdatePackageToDrone()
         {
-
+            
         }
         public void UpdatePackageCollectionByDrone()
         {

@@ -18,6 +18,7 @@ namespace ConsoleUI
             EntityOptions entityOptions;
            DalObject.DalObject dalobject=new DalObject.DalObject();
             
+            
             do
             {
                 Console.WriteLine("WELCOME!");

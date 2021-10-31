@@ -11,7 +11,15 @@ namespace DalObject
 {
     public class DalObject
     {
-        
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="name"></param>
+        /// <param name="longtitut"></param>
+        /// <param name="latitute"></param>
+        /// <param name="chargesolt"></param>
+        /// <returns></returns>        
 
        //add functions
         public int AddBaseStation(int id,string name,double longtitut , double latitute,int chargesolt)

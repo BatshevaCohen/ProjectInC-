@@ -5,21 +5,21 @@ namespace IDAL
     {
         public struct Enums
         {
-            public enum Weight
+            public enum WeightCategories
             {
                 Light,
                 Medium,
                 Heavy
             }
 
-            public enum DroneState
+            public enum DroneStatuses
             {
                 Available,
                 Maintenance,
                 Shipping
             }
 
-            public enum Priority
+            public enum Priorities
             {
                 Regular,
                 Fast,

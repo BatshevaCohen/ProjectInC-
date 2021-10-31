@@ -5,18 +5,18 @@ namespace IDAL
     {
         public struct Customer
         {
-            public int ID { get; set; }
+            public int Id { get; set; }
             public String Name { get; set; }
-            public String Telephone { get; set; }
+            public String Phone { get; set; }
             public double Latitude { get; set; }
             public double Longitude { get; set; }
 
             public override string ToString()
             {
                 String result = "";
-                result += $"ID is {ID}, \n";
+                result += $"ID is {Id}, \n";
                 result += $"Name is {Name}, \n";
-                result += $"Telephone is {Telephone.Substring(0,3)+ '-' +Telephone.Substring(3)}, \n";
+                result += $"Telephone is {Phone.Substring(0,3)+ '-' +Phone.Substring(3)}, \n";
                 
                 //---BONOS OPTION---
                 result += $"Latitude is {Latitude}, \n";

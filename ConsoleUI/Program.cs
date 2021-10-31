@@ -16,7 +16,7 @@ namespace ConsoleUI
             
             MenuOptions menuOptions;
             EntityOptions entityOptions;
-           // DalObject.DalObject dalobject=new DalObject.DalObject();
+           DalObject.DalObject dalobject=new DalObject.DalObject();
             
             do
             {
@@ -40,7 +40,7 @@ namespace ConsoleUI
                                 double latitude = double.Parse(Console.ReadLine());
                                 int Position;
                                 int.TryParse(Console.ReadLine(), out Position);
-                               DalObject.DalObject.AddBaseStation(id_S, StationName, longitude, latitude, Position);
+                                dalobject.AddBaseStation(id_S, StationName, longitude, latitude, Position);
                                 
                                 break;
 
@@ -53,7 +53,7 @@ namespace ConsoleUI
                                 Console.WriteLine("enter WeightCategories 1-Light 2-Medium, 3-Heavy");
                                 int Weight= int.Parse(Console.ReadLine());
                                 double battery = double.Parse(Console.ReadLine());
-                                DalObject.DalObject.AddDrone(id_D, model, battery, Weight, status);
+                                dalobject.AddDrone(id_D, model, battery, Weight, status);
                                 break;
                             case EntityOptions.Custumer:
                                 Console.WriteLine(" plese enter id, name, pone ");

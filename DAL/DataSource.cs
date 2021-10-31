@@ -18,9 +18,9 @@ namespace DalObject
                 throw new NotImplementedException();
             }
 
-            internal static List<Station> Stations = new List<Station>();
-            internal static List<Customer> customer = new List<Customer>();
-            internal static List<Parcel> parcels = new List<Parcel>();
+            internal static List<Station> Stations = new List<Station>(5);
+            internal static List<Customer> customer = new List<Customer>(100);
+            internal static List<Parcel> parcels = new List<Parcel>(1000);
             static Random r = new Random();
 
             internal class config

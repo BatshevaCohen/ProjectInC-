@@ -11,10 +11,10 @@ namespace ConsoleUI
         private static Enums.WeightCategories wheight;
         private static Enums.Priorities priority;
 
-        enum MenuOptions { Add, Update, Show_One, Show_List, Exit }
-        enum EntityOptions { BaseStation, Drone, Custumer, Parcel, Exit }
-        enum UpdateOptions { Assignement, Pickedup, Delivery, Recharge, Discharge, Exit }
-        enum ListOptions { BaseStation, Drone, Custumer, Parcel, UnAsignementParcel, AvailbleChagingStation, Exit }
+        enum MenuOptions { Add = 1, Update, Show_One, Show_List, Exit }
+        enum EntityOptions { BaseStation = 1, Drone, Custumer, Parcel, Exit }
+        enum UpdateOptions { Assignement = 1, Pickedup, Delivery, Recharge, Discharge, Exit }
+        enum ListOptions { BaseStation = 1, Drone, Custumer, Parcel, UnAsignementParcel, AvailbleChagingStation, Exit }
 
         private static void ShowMenu()
         {
@@ -167,28 +167,40 @@ namespace ConsoleUI
                                     int drone_id = int.Parse(Console.ReadLine());
                                     Console.WriteLine("Please enter Parcel ID");
                                     int parcel_id = int.Parse(Console.ReadLine());
-
-
+                                    dalobject.UpdateParcelToDrone(parcel_id, drone_id);
                                     break;
 
                                 case UpdateOptions.Pickedup:
-
-
+                                    Console.WriteLine("Please enter Drone ID");
+                                    int drone_id2 = int.Parse(Console.ReadLine());
+                                    Console.WriteLine("Please enter Parcel ID");
+                                    int parcel_id2 = int.Parse(Console.ReadLine());
+                                    dalobject.UpdateParcelPickedupByDrone(parcel_id2, drone_id2);
                                     break;
 
                                 case UpdateOptions.Delivery:
-
-
+                                    Console.WriteLine("Please enter Customer ID");
+                                    int customer_id = int.Parse(Console.ReadLine());
+                                    Console.WriteLine("Please enter Parcel ID");
+                                    int parcel_id3 = int.Parse(Console.ReadLine());
+                                    dalobject.UpdateDeliveryToCustomer(parcel_id3, customer_id);
                                     break;
 
                                 case UpdateOptions.Recharge:
-
-
+                                    Console.WriteLine("Please enter Drone ID");
+                                    int drone_id4 = int.Parse(Console.ReadLine());
+                                    Console.WriteLine("choose a station for charging");
+                                    //פה צריך להציג רשימת תחנות פלוס איי די שלהן
+                                    int station_id = int.Parse(Console.ReadLine());
+                                    dalobject.UpdateDroneToCharge(drone_id4, station_id);
                                     break;
 
                                 case UpdateOptions.Discharge:
-
-
+                                    Console.WriteLine("Please enter Drone ID");
+                                    int drone_id5 = int.Parse(Console.ReadLine());
+                                    Console.WriteLine("choose a station for charging");
+                                    int station_id_discharge = int.Parse(Console.ReadLine());
+                                    dalobject.DischargeDrone(drone_id5, station_id_discharge);
                                     break;
 
                                 case UpdateOptions.Exit:
@@ -197,6 +209,8 @@ namespace ConsoleUI
                             }
                             break;
                         }
+
+                    // show options
                     case MenuOptions.Show_One:
                         Console.WriteLine("View item options: \n 1- base station \n 2-Drone\n 3- Custumer\n 4- Parcel\n 5- Exit\n");
                         entityOptions = (EntityOptions)int.Parse(Console.ReadLine());
@@ -208,19 +222,31 @@ namespace ConsoleUI
                         switch (entityOptions)
                         {
                             case EntityOptions.BaseStation:
-                                //Console.WriteLine(DalObject.DalObject.get///)
+                                Console.WriteLine("Please enter station id");
+                                int stationID = int.Parse(Console.ReadLine());
+                                dalobject.ShowBaseStation(stationID);
                                 break;
 
                             case EntityOptions.Drone:
+                                Console.WriteLine("Please enter drone id");
+                                int droneID = int.Parse(Console.ReadLine());
+                                dalobject.ShowDrone(droneID);
                                 break;
 
                             case EntityOptions.Custumer:
+                                Console.WriteLine("Please enter customer id");
+                                int customerID = int.Parse(Console.ReadLine());
+                                dalobject.ShowBaseStation(customerID);
                                 break;
 
                             case EntityOptions.Parcel:
+                                Console.WriteLine("Please enter parcel id");
+                                int parcelID = int.Parse(Console.ReadLine());
+                                dalobject.ShowBaseStation(parcelID);
                                 break;
 
                             case EntityOptions.Exit:
+                                DalObject.DalObject.Exit();
                                 break;
                         }
                         break;
@@ -230,22 +256,23 @@ namespace ConsoleUI
                         switch (listOptions)
                         {
                             case ListOptions.BaseStation:
-                                //foreach
+                                dalobject.ShowBaseStationList();
                                 break;
                             case ListOptions.Drone:
-                                //foreach
+                                dalobject.ShowDroneList();
                                 break;
                             case ListOptions.Custumer:
-                                //foreach
+                                dalobject.ShowCustomerList();
                                 break;
                             case ListOptions.Parcel:
-                                //foreach
+                                dalobject.ShowParcelList();
                                 break;
                             case ListOptions.AvailbleChagingStation:
+                                dalobject.ShowNonAssociatedParcelList();
                                 break;
                             case ListOptions.UnAsignementParcel:
+                                dalobject.ShowChargeableBaseStationList();
                                 break;
-
                         }
                         break;
                     case MenuOptions.Exit:

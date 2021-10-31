@@ -17,9 +17,9 @@ namespace IDAL
                 String result = "";
                 result += $"ID is {Id}, \n";
                 result += $"Model is {Model}, \n";
-                result += $"Quadocopster weight is {MaxWeight}, \n";
+                result += $"Drone weight is {MaxWeight}, \n";
                 result += $"Battery precent is {Battery}, \n";
-                result += $"Quadocopster state is {Staus}, \n";
+                result += $"Drone state is {Staus}, \n";
 
                 return result;
             }

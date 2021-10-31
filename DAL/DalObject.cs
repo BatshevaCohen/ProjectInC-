@@ -40,33 +40,47 @@ namespace DalObject
         }
 
         //update functions
-        public void UpdateParcelToDrone(Parcel p, Drone d)
+        public void UpdateParcelToDrone(int parcel_id, int drone_id)
         {
-            p.DroneID = d.Id;
-        }
-        public void UpdateParcelCollectionByDrone(Parcel p, Drone d)
-        {
+            Parcel p = DataSource.parcels.Find(x => x.Id == parcel_id);
+            Drone d = DataSource.drones.Find(x => x.Id == drone_id);
             p.DroneID = d.Id;
             p.Scheduled = DateTime.Now;
             d.Staus = Enums.DroneStatuses.Shipping;
         }
-        public void UpdateSupplyParcelToCustomer(Parcel p, Drone drone)
+        public void UpdateParcelPickedupByDrone(int parcel_id, int drone_id)
         {
-            p.Delivered = DateTime.Now;
-            drone.Staus = Enums.DroneStatuses.Available;
+            Parcel p = DataSource.parcels.Find(x => x.Id == parcel_id);
+            Drone d = DataSource.drones.Find(x => x.Id == drone_id);
+            p.PickedUp = DateTime.Now;
+            d.Staus = Enums.DroneStatuses.Shipping;
         }
-        public void UpdateDroneToCharge(Drone drone, Station station)
+        public void UpdateDeliveryToCustomer(int parcel_id, int customer_id)
         {
-            drone.Staus = Enums.DroneStatuses.Maintenance;
+            Parcel p = DataSource.parcels.Find(x => x.Id == parcel_id);
+            Customer c = DataSource.customer.Find(x => x.Id == customer_id);
+            p.Delivered= DateTime.Now;
+            // finding the drone that sent the parcel-- to make it available to the next ship
+            int drone_id = p.DroneID;
+            Drone d= DataSource.drones.Find(x => x.Id == drone_id);
+            d.Staus = Enums.DroneStatuses.Available;
+        }
+        public void UpdateDroneToCharge(int drone_id, int station_id)
+        {
+            Drone d = DataSource.drones.Find(x => x.Id == drone_id);
+            d.Staus = Enums.DroneStatuses.Maintenance;
             DroneCharge droneCharge = new DroneCharge();
-            droneCharge.DroneId = drone.Id;
-            droneCharge.StationId = station.Id;
-            station.ChargeSlots--;
+            droneCharge.DroneId = drone_id;
+            Station s = DataSource.Stations.Find(x => x.Id == station_id);
+            droneCharge.StationId = station_id;
+            s.ChargeSlots--;
         }
-        public void DischargeDrone(Drone drone, Station station)
+        public void DischargeDrone(int drone_id, int station_id)
         {
-            station.ChargeSlots++;
-            drone.Staus = Enums.DroneStatuses.Available;
+            Drone d = DataSource.drones.Find(x => x.Id == drone_id);
+            Station s = DataSource.Stations.Find(x => x.Id == station_id);
+            d.Staus = Enums.DroneStatuses.Available;
+            s.ChargeSlots++;
         }
 
         //view function

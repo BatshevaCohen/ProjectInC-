@@ -11,9 +11,15 @@ namespace DalObject
 {
     public class DalObject
     {
-        
+        /// <summary>
+        /// ctor
+        /// </summary>
+        public DalObject()
+        {
+            DataSource.Initialize();
+        }
 
-       //add functions
+        //add functions
         public int AddBaseStation(int id,string name,double longtitut , double latitute,int chargesolt)
         {
             Station b = new Station();
@@ -24,7 +30,6 @@ namespace DalObject
             DataSource.Stations.Add(b);
 
             return 1;
-            //
         }
         public int AddDrone(int id, string model, double battery,int maxWeight,int status)
         {
@@ -48,13 +53,13 @@ namespace DalObject
             DataSource.customer.Add(c);
             return 1;
         }
-        public int AddPackage(int id, int senderId, int targetId, Enum wheit, Enum priority, DateTime reqested, int droneId, DateTime steduled,DateTime pickedUp,DateTime delivary )
+        public int AddPackage(int id, int senderId, int targetId, int wheight, int priority, DateTime reqested, int droneId, DateTime steduled,DateTime pickedUp,DateTime delivary )
         {
             Parcel p = new Parcel();
             p.Id = id;
             p.SenderId = senderId;
             p.TargetId = targetId;
-            p.Weight = (Enums.WeightCategories)wheit;
+            p.Weight = (Enums.WeightCategories)wheight;
             p.Priority = (Enums.Priorities)priority;
             p.Requested = reqested;
             p.DroneID = droneId;
@@ -161,7 +166,7 @@ namespace DalObject
             }
         }
         //EXIT
-        public int Exit()
+        public static int Exit()
         {
             return 0;
         }

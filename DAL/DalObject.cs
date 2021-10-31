@@ -11,13 +11,19 @@ namespace DalObject
 {
     public class DalObject
     {
-        
+        DalObject()
+        {
+            DataSource.Initialize();
+        }
+
+
 
         //add functions
-        public int AddBaseStation(int id,string name,double longtitut , double latitute,int chargesolt)
+        public static int AddBaseStation(int id,string name,double longtitut , double latitute,int chargesolt)
         {
             Station b = new Station();
             b.Id = id;
+            b.Name = name;
             b.Latitude = latitute;
             b.Longitude = longtitut;
             b.ChargeSlots = chargesolt;
@@ -26,7 +32,7 @@ namespace DalObject
             return 1;
 
         }
-        public int AddDrone(int id, string model, int battery,Enum maxWeight,Enum status)
+        public static int AddDrone(int id, string model,  double battery,int maxWeight,int status)
         {
             Drone d = new Drone();
             d.Id = id;
@@ -38,7 +44,7 @@ namespace DalObject
 
             return 1;
         }
-        public int AddCustomer(int id, string name, string pone, double longtitut, double latitute)
+        public static int AddCustomer(int id, string name, string pone, double longtitut, double latitute)
         {
             Customer c = new Customer();
             c.Id = id;
@@ -48,7 +54,7 @@ namespace DalObject
             DataSource.customer.Add(c);
             return 1;
         }
-        public int AddPackage(int id, int senderId, int targetId, Enum wheit, Enum priority, DateTime reqested, int droneId, DateTime steduled,DateTime pickedUp,DateTime delivary )
+        public static int AddPackage(int id, int senderId, int targetId, Enum wheit, Enum priority, DateTime reqested, int droneId, DateTime steduled,DateTime pickedUp,DateTime delivary )
         {
             Parcel p = new Parcel();
             p.Id = id;

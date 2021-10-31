@@ -12,6 +12,12 @@ namespace DalObject
         class DataSource
         {
             internal static List<Drone> drones = new List<Drone>();
+
+            internal static void Initialize()
+            {
+                throw new NotImplementedException();
+            }
+
             internal static List<Station> Stations = new List<Station>();
             internal static List<Customer> customer = new List<Customer>();
             internal static List<Parcel> parcels = new List<Parcel>();

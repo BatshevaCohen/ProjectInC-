@@ -11,64 +11,30 @@ namespace DalObject
 {
     public class DalObject
     {
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="id"></param>
-        /// <param name="name"></param>
-        /// <param name="longtitut"></param>
-        /// <param name="latitute"></param>
-        /// <param name="chargesolt"></param>
-        /// <returns></returns>        
+        
 
-       //add functions
-        public int AddBaseStation(int id,string name,double longtitut , double latitute,int chargesolt)
-        {
-            Station b = new Station();
-            b.Id = id;
-            b.Latitude = latitute;
-            b.Longitude = longtitut;
-            b.ChargeSlots = chargesolt;
-            DataSource.Stations.Add(b);
+        //add functions
+        public int AddBaseStation(Station s)
+        { 
+            
+            DataSource.Stations.Add(s);
 
             return 1;
-            //
         }
-        public int AddDrone(int id, string model, double battery,int maxWeight,int status)
+        public int AddDrone(Drone d)
         {
-            Drone d = new Drone();
-            d.Id = id;
-            d.Model = model;
-            d.Battery = battery;
-            d.Staus = (Enums.DroneStatuses)status;
-            d.MaxWeight = (Enums.WeightCategories)maxWeight;
+            
             DataSource.drones.Add(d);
-
             return 1;
         }
-        public int AddCustomer(int id, string name, string pone, double longtitut, double latitute)
+        public int AddCustomer(Customer c)
         {
-            Customer c = new Customer();
-            c.Id = id;
-            c.Name = name;
-            c.Latitude = latitute;
-            c.Longitude = longtitut;
             DataSource.customer.Add(c);
             return 1;
         }
-        public int AddPackage(int id, int senderId, int targetId, Enum wheit, Enum priority, DateTime reqested, int droneId, DateTime steduled,DateTime pickedUp,DateTime delivary )
+        public int AddParcel(Parcel p )
         {
-            Parcel p = new Parcel();
-            p.Id = id;
-            p.SenderId = senderId;
-            p.TargetId = targetId;
-            p.Weight = (Enums.WeightCategories)wheit;
-            p.Priority = (Enums.Priorities)priority;
-            p.Requested = reqested;
-            p.DroneID = droneId;
-            p.Scheduled = steduled;
-            p.PickedUp = pickedUp;
-            p.Delivered = delivary;
+          
             DataSource.parcels.Add(p);
             return 1;
         }
@@ -169,7 +135,7 @@ namespace DalObject
             }
         }
         //EXIT
-        public int Exit()
+        public static int Exit()
         {
             return 0;
         }

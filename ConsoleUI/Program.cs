@@ -40,7 +40,7 @@ namespace ConsoleUI
                                 double latitude = double.Parse(Console.ReadLine());
                                 int Position;
                                 int.TryParse(Console.ReadLine(), out Position);
-                               DalObject.DalObject.AddBaseStation(id_S, StationName, longitude, latitude, Position);
+                                DalObject.DalObject.AddBaseStation(id_S, StationName, longitude, latitude, Position);
                                 
                                 break;
 

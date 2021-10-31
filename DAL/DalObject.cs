@@ -11,14 +11,10 @@ namespace DalObject
 {
     public class DalObject
     {
-       public DalObject()
-        {
-            DataSource.Initialize();
-        }
+        
 
-
-        //add functions
-        public static int AddBaseStation(int id,string name,double longtitut , double latitute,int chargesolt)
+       //add functions
+        public int AddBaseStation(int id,string name,double longtitut , double latitute,int chargesolt)
         {
             Station b = new Station();
             b.Id = id;
@@ -30,7 +26,7 @@ namespace DalObject
             return 1;
 
         }
-        public static int AddDrone(int id, string model,  double battery,int maxWeight,int status)
+        public int AddDrone(int id, string model, double battery,int maxWeight,int status)
         {
             Drone d = new Drone();
             d.Id = id;

@@ -41,7 +41,7 @@ namespace ConsoleUI
                                 int Position;
                                 int.TryParse(Console.ReadLine(), out Position);
                                 dalobject.AddBaseStation(id_S, StationName, longitude, latitude, Position);
-                                
+
                                 break;
 
                             case EntityOptions.Drone:

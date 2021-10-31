@@ -29,7 +29,7 @@ namespace ConsoleUI
             do
             {
                 Console.WriteLine("WELCOME!");
-                Console.WriteLine("option:\n 1-Add,\n 2-Update,\n 3-Show_One,\n 4-Show_List,\n 5- Exit,\n");
+                Console.WriteLine("option:\n 1- Add,\n 2- Update,\n 3- Show_One,\n 4- Show_List,\n 5- Exit,\n");
                 menuOptions = (MenuOptions)int.Parse(Console.ReadLine());
                 switch (menuOptions)
                 {
@@ -190,7 +190,8 @@ namespace ConsoleUI
                                     Console.WriteLine("Please enter Drone ID");
                                     int drone_id4 = int.Parse(Console.ReadLine());
                                     Console.WriteLine("choose a station for charging");
-                                    //פה צריך להציג רשימת תחנות פלוס איי די שלהן
+                                    // show the list os stations to choose from
+                                    dalobject.ShowBaseStationList();
                                     int station_id = int.Parse(Console.ReadLine());
                                     dalobject.UpdateDroneToCharge(drone_id4, station_id);
                                     break;
@@ -212,7 +213,7 @@ namespace ConsoleUI
 
                     // show options
                     case MenuOptions.Show_One:
-                        Console.WriteLine("View item options: \n 1- base station \n 2-Drone\n 3- Custumer\n 4- Parcel\n 5- Exit\n");
+                        Console.WriteLine("View item options: \n 1- base station \n 2- Drone\n 3- Custumer\n 4- Parcel\n 5- Exit\n");
                         entityOptions = (EntityOptions)int.Parse(Console.ReadLine());
                         Console.WriteLine($"Enter a requested {entityOptions} id");
                         int requestion;
@@ -251,7 +252,7 @@ namespace ConsoleUI
                         }
                         break;
                     case MenuOptions.Show_List:
-                        Console.WriteLine(" List options:\n 1-BaseStation  \n 2- Drone \n 3- Custumer\n 4- Parcel\n 5- UnAsignementParcel\n 6- AvailbleChagingStation\n 7- Exit \n");
+                        Console.WriteLine(" List options:\n 1- BaseStation  \n 2- Drone \n 3- Custumer\n 4- Parcel\n 5- UnAsignementParcel\n 6- AvailbleChagingStation\n 7- Exit \n");
                         ListOptions listOptions = (ListOptions)int.Parse(Console.ReadLine());
                         switch (listOptions)
                         {

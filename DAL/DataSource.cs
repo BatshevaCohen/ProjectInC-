@@ -47,7 +47,7 @@ namespace DalObject
                     string[] arrDroneModel = new string[5] { "Drone1", "Drone2", "Drone3", "Drone4", "Drone5" };
                     for (int i = 1; i <= 5; i++)
                     {
-                        d.Id = r.Next(100000000, 999999999);
+                        d.Id = i;
                         d.Model = arrDroneModel[i];
                         d.MaxWeight = RandomEnumValue<Enums.WeightCategories>();
                         d.Battery = r.Next(0, 100);

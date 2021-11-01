@@ -7,9 +7,6 @@ namespace ConsoleUI
 {
     class Program
     {
-        private static Enums.WeightCategories maxWeight;
-        private static Enums.WeightCategories wheight;
-        private static Enums.Priorities priority;
 
         enum MenuOptions { Add = 1, Update, Show_One, Show_List, Exit }
         enum EntityOptions { BaseStation = 1, Drone, Custumer, Parcel, Exit }
@@ -45,6 +42,7 @@ namespace ConsoleUI
                                 int id_S;
                                 int.TryParse(Console.ReadLine(), out id_S);
                                 string StationName = Console.ReadLine();
+                                s.Name = StationName;
                                 double longitude;
                                 double.TryParse(Console.ReadLine(), out longitude);
                                 double latitude;
@@ -53,6 +51,7 @@ namespace ConsoleUI
                                 int.TryParse(Console.ReadLine(), out Position);
 
                                 s.Id = id_S;
+                                s.Name = StationName;
                                 s.Latitude = latitude;
                                 s.Longitude = longitude;
                                 s.ChargeSlots = Position;
@@ -80,7 +79,7 @@ namespace ConsoleUI
                                 d.Model = model;
                                 d.Battery = battery;
                                 d.Staus = (Enums.DroneStatuses)status;
-                                d.MaxWeight = (Enums.WeightCategories)maxWeight;
+                                d.MaxWeight = (Enums.WeightCategories)Weight;
                                 dalobject.AddDrone(d);
                                 break;
 
@@ -90,7 +89,7 @@ namespace ConsoleUI
                                 int.TryParse(Console.ReadLine(), out id_C);
                                 string name_C = Console.ReadLine();
                                 //נצטרך לבדוק תקינות של מס טלפון
-                                Console.WriteLine("enter phone number in format ###-#######");
+                                Console.WriteLine("enter phone number in format ##-#######");
                                 string phone_C = Console.ReadLine();
                                 Console.WriteLine("enter longitude and latitude");
                                 double longitude_C;
@@ -164,43 +163,53 @@ namespace ConsoleUI
                             {
                                 case UpdateOptions.Assignement:
                                     Console.WriteLine("Please enter Drone ID");
-                                    int drone_id = int.Parse(Console.ReadLine());
+                                    int drone_id;
+                                    int.TryParse(Console.ReadLine(),out drone_id);
                                     Console.WriteLine("Please enter Parcel ID");
-                                    int parcel_id = int.Parse(Console.ReadLine());
+                                    int parcel_id;
+                                    int.TryParse(Console.ReadLine(),out parcel_id);
                                     dalobject.UpdateParcelToDrone(parcel_id, drone_id);
                                     break;
 
                                 case UpdateOptions.Pickedup:
                                     Console.WriteLine("Please enter Drone ID");
-                                    int drone_id2 = int.Parse(Console.ReadLine());
+                                    int drone_id2;
+                                    int.TryParse(Console.ReadLine(),out drone_id2);
                                     Console.WriteLine("Please enter Parcel ID");
-                                    int parcel_id2 = int.Parse(Console.ReadLine());
+                                    int parcel_id2;
+                                    int.TryParse(Console.ReadLine(),out parcel_id2);
                                     dalobject.UpdateParcelPickedupByDrone(parcel_id2, drone_id2);
                                     break;
 
                                 case UpdateOptions.Delivery:
                                     Console.WriteLine("Please enter Customer ID");
-                                    int customer_id = int.Parse(Console.ReadLine());
+                                    int customer_id;
+                                    int.TryParse(Console.ReadLine(),out customer_id);
                                     Console.WriteLine("Please enter Parcel ID");
-                                    int parcel_id3 = int.Parse(Console.ReadLine());
+                                    int parcel_id3;
+                                    int.TryParse(Console.ReadLine(),out parcel_id3);
                                     dalobject.UpdateDeliveryToCustomer(parcel_id3, customer_id);
                                     break;
 
                                 case UpdateOptions.Recharge:
                                     Console.WriteLine("Please enter Drone ID");
-                                    int drone_id4 = int.Parse(Console.ReadLine());
+                                    int drone_id4;
+                                    int.TryParse(Console.ReadLine(),out drone_id4);
                                     Console.WriteLine("choose a station for charging");
                                     // show the list os stations to choose from
                                     dalobject.ShowBaseStationList();
-                                    int station_id = int.Parse(Console.ReadLine());
+                                    int station_id;
+                                    int.TryParse(Console.ReadLine(),out station_id);
                                     dalobject.UpdateDroneToCharge(drone_id4, station_id);
                                     break;
 
                                 case UpdateOptions.Discharge:
                                     Console.WriteLine("Please enter Drone ID");
-                                    int drone_id5 = int.Parse(Console.ReadLine());
+                                    int drone_id5;
+                                    int.TryParse(Console.ReadLine(),out drone_id5);
                                     Console.WriteLine("choose a station for charging");
-                                    int station_id_discharge = int.Parse(Console.ReadLine());
+                                    int station_id_discharge;
+                                    int.TryParse(Console.ReadLine(),out station_id_discharge);
                                     dalobject.DischargeDrone(drone_id5, station_id_discharge);
                                     break;
 
@@ -216,40 +225,35 @@ namespace ConsoleUI
                         Console.WriteLine("View item options: \n 1- base station \n 2- Drone\n 3- Custumer\n 4- Parcel\n 5- Exit\n");
                         entityOptions = (EntityOptions)int.Parse(Console.ReadLine());
                         Console.WriteLine($"Enter a requested {entityOptions} id");
-                        int requestion;
-                        int.TryParse(Console.ReadLine(), out requestion);
-
-                        break;
-                        switch (entityOptions)
+                        switch(entityOptions)
                         {
                             case EntityOptions.BaseStation:
-                                Console.WriteLine("Please enter station id");
-                                int stationID = int.Parse(Console.ReadLine());
-                                dalobject.ShowBaseStation(stationID);
+                                int Id_S;
+                                int.TryParse(Console.ReadLine(), out Id_S);
+                                dalobject.ShowBaseStation(Id_S);
                                 break;
-
                             case EntityOptions.Drone:
-                                Console.WriteLine("Please enter drone id");
-                                int droneID = int.Parse(Console.ReadLine());
-                                dalobject.ShowDrone(droneID);
+                                int Id_D;
+                                int.TryParse(Console.ReadLine(), out Id_D);
+                                dalobject.ShowDrone(Id_D);
                                 break;
-
                             case EntityOptions.Custumer:
-                                Console.WriteLine("Please enter customer id");
-                                int customerID = int.Parse(Console.ReadLine());
-                                dalobject.ShowBaseStation(customerID);
+                                int Id_C;
+                                int.TryParse(Console.ReadLine(), out Id_C);
+                                dalobject.ShowCustomer(Id_C);
                                 break;
-
                             case EntityOptions.Parcel:
-                                Console.WriteLine("Please enter parcel id");
-                                int parcelID = int.Parse(Console.ReadLine());
-                                dalobject.ShowBaseStation(parcelID);
+                                int Id_P;
+                                int.TryParse(Console.ReadLine(), out Id_P);
+                                dalobject.ShowParcel(Id_P);
                                 break;
-
                             case EntityOptions.Exit:
                                 DalObject.DalObject.Exit();
                                 break;
                         }
+                        int requestion;
+                        int.TryParse(Console.ReadLine(), out requestion);
+
                         break;
                     case MenuOptions.Show_List:
                         Console.WriteLine(" List options:\n 1- BaseStation  \n 2- Drone \n 3- Custumer\n 4- Parcel\n 5- UnAsignementParcel\n 6- AvailbleChagingStation\n 7- Exit \n");

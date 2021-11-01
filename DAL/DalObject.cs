@@ -11,7 +11,10 @@ namespace DalObject
 {
     public class DalObject
     {
-        
+        public DalObject()
+        {
+            DataSource.Initialize();
+        }
 
         //add functions
         public int AddBaseStation(Station s)
@@ -86,19 +89,35 @@ namespace DalObject
         //view function
         public void ShowBaseStation(int id)
         {
-            DataSource.Stations.Find(x => x.Id == id).ToString();
+            foreach (Station element in DataSource.Stations)
+            {
+                if (element.Id == id)
+                    Console.WriteLine(element.ToString());
+            }
         }
         public void ShowDrone(int id)
         {
-            DataSource.drones.Find(x => x.Id == id).ToString();
+            foreach (Drone element in DataSource.drones)
+            {
+                if(element.Id==id)
+                Console.WriteLine(element.ToString());
+            }
         }
         public void ShowCustomer(int id)
         {
-            DataSource.customer.Find(x => x.Id == id).ToString();
+            foreach (Customer element in DataSource.customer)
+            {
+                if (element.Id == id)
+                    Console.WriteLine(element.ToString());
+            }
         }
         public void ShowParcel(int id)
         {
-            DataSource.parcels.Find(x => x.Id == id).ToString();
+            foreach (Parcel element in DataSource.parcels)
+            {
+                if (element.Id == id)
+                    Console.WriteLine(element.ToString());
+            }
         }
 
         //view lists functions

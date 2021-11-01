@@ -133,6 +133,10 @@ namespace DalObject
                     Console.WriteLine(element.ToString());
             }
         }
+        /// <summary>
+        /// ShowParcel in help id
+        /// </summary>
+        /// <param name="id"></param>
         public void ShowParcel(int id)
         {
             foreach (Parcel element in DataSource.parcels)

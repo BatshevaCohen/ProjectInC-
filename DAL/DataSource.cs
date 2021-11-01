@@ -51,7 +51,8 @@ namespace DalObject
                     d.Battery = r.Next(0, 100);
                     d.Staus = RandomEnumValue<Enums.DroneStatuses>();
                     drones.Add(d);
-                   
+                    
+                  
                 }
                 string[] arrStation = new string[2] { "station1", "station2" };
                 Station b = new Station();
@@ -63,7 +64,7 @@ namespace DalObject
                     b.Longitude = r.Next(-180, 179) + r.NextDouble();
                     b.Latitude = r.Next(-90, 89) + r.NextDouble();
                    Stations.Add(b);
-                   
+                    //Console.WriteLine(Stations);
                 }
                 Customer c = new Customer();
                 string[] arrClientFirstName = new string[10] { "Michael", "Christopher", "Jessica", "Matthew", "Ashley", "Jennifer", "Joshua", "Yoni", "Daniel", "David" };

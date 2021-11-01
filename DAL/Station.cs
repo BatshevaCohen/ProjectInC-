@@ -20,6 +20,7 @@ namespace IDAL
                 //---BONOS OPTION---
                 result += $"Latitude is {Longitude}, \n";
                 result += $"Longitude is {Latitude}, \n";
+                result += $"Charge level is {ChargeSlots}, \n";
 
                 return result;
             }

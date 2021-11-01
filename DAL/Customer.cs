@@ -16,7 +16,7 @@ namespace IDAL
                 String result = "";
                 result += $"ID is {Id}, \n";
                 result += $"Name is {Name}, \n";
-                result += $"Telephone is {Phone.Substring(0,3)+ '-' +Phone.Substring(3)}, \n";
+                result += $"Telephone is {Phone.Substring(0,3)+ "-" +Phone.Substring(3)}, \n";
                 
                 //---BONOS OPTION---
                 result += $"Latitude is {Latitude}, \n";

@@ -10,12 +10,9 @@ namespace IDAL
             public int Id { get; set; }
             public int SenderId { get; set; }
             public int TargetId { get; set; }
-            public Enums.WeightCategories Weight { get; set; }
-
-            public Enums.Priorities Priority { get; set; }
-            
+            public WeightCategories Weight { get; set; }
+            public Priorities Priority { get; set; }
             public  int DroneID { get; set; }
-
             public DateTime Requested { get; set; }//Time to create a package for the sender
             public DateTime Scheduled { get; set; }//Time to assign the package to the glider
             public DateTime PickedUp { get; set; }//Time to pick up the package from the sender

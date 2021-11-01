@@ -71,14 +71,14 @@ namespace DalObject
             Drone d = DataSource.drones.Find(x => x.Id == drone_id);
             p.DroneID = d.Id;
             p.Scheduled = DateTime.Now;
-            d.Staus = Enums.DroneStatuses.Shipping;
+            d.Status = DroneStatuses.Shipping;
         }
         public void UpdateParcelPickedupByDrone(int parcel_id, int drone_id)
         {
             Parcel p = DataSource.parcels.Find(x => x.Id == parcel_id);
             Drone d = DataSource.drones.Find(x => x.Id == drone_id);
             p.PickedUp = DateTime.Now;
-            d.Staus = Enums.DroneStatuses.Shipping;
+            d.Status = DroneStatuses.Shipping;
         }
         public void UpdateDeliveryToCustomer(int parcel_id, int customer_id)
         {
@@ -88,12 +88,12 @@ namespace DalObject
             // finding the drone that sent the parcel-- to make it available to the next ship
             int drone_id = p.DroneID;
             Drone d= DataSource.drones.Find(x => x.Id == drone_id);
-            d.Staus = Enums.DroneStatuses.Available;
+            d.Status = DroneStatuses.Available;
         }
         public void UpdateDroneToCharge(int drone_id, int station_id)
         {
             Drone d = DataSource.drones.Find(x => x.Id == drone_id);
-            d.Staus = Enums.DroneStatuses.Maintenance;
+            d.Status = DroneStatuses.Maintenance;
             DroneCharge droneCharge = new DroneCharge();
             droneCharge.DroneId = drone_id;
             Station s = DataSource.Stations.Find(x => x.Id == station_id);
@@ -104,7 +104,7 @@ namespace DalObject
         {
             Drone d = DataSource.drones.Find(x => x.Id == drone_id);
             Station s = DataSource.Stations.Find(x => x.Id == station_id);
-            d.Staus = Enums.DroneStatuses.Available;
+            d.Status = DroneStatuses.Available;
             s.ChargeSlots++;
         }
 

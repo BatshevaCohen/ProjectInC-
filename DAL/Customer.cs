@@ -19,8 +19,8 @@ namespace IDAL
                 result += $"Telephone is {Phone.Substring(0,3)+ "-" +Phone.Substring(3)}, \n";
                 
                 //---BONOS OPTION---
-                result += $"Latitude is {Latitude}, \n";
-                result += $"Longitude is {Longitude}, \n";
+                result += $"Latitude is {Latitude}, \n Sexagesimal angle: {SexagesimalAngle.FromDouble(Latitude)}\n";
+                result += $"Longitude is {Longitude}, \n Sexagesimal angle: {SexagesimalAngle.FromDouble(Longitude)}\n";
 
                 return result;
             }

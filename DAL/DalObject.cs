@@ -193,6 +193,12 @@ namespace DalObject
                     Console.WriteLine(element.ToString());
             }
         }
+        //--BONUS--: another option that recives coordinates and print the distance from it to a station or a customer
+        public double CalculateDistance(double longitude, double latitude)
+        {
+
+        }
+
         //EXIT
         public static int Exit()
         {

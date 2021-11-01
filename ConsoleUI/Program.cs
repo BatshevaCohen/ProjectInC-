@@ -7,13 +7,13 @@ namespace ConsoleUI
 {
     class Program
     {
-
-        enum MenuOptions { Add = 1, Update, Show_One, Show_List, Exit }
+        enum MenuOptions { Add = 1, Update, Show_One, Show_List, Calculate_distance, Exit }
         enum EntityOptions { BaseStation = 1, Drone, Custumer, Parcel, Exit }
         enum UpdateOptions { Assignement = 1, Pickedup, Delivery, Recharge, Discharge, Exit }
         enum ListOptions { BaseStation = 1, Drone, Custumer, Parcel, UnAsignementParcel, AvailbleChagingStation, Exit }
+        enum DistanceOptions { From_Station = 1, From_Drone, Exit}
 
-        private static void ShowMenu()
+    private static void ShowMenu()
         {
 
             MenuOptions menuOptions;
@@ -291,9 +291,45 @@ namespace ConsoleUI
                             case ListOptions.UnAsignementParcel:
                                 dalobject.ShowChargeableBaseStationList();
                                 break;
+                            case ListOptions.Exit:
+                                DalObject.DalObject.Exit();
+                                break;
                         }
                         break;
-                    case MenuOptions.Exit:
+                    //--BONUS--: another option that recives coordinates and print the distance from it to a station or a customer
+                    //אפשרות נוספת שקולטת קואורדינטות נקודה כלשהי ומדפיסה מרחק מבסיס או מלקוח כלשהו לנקודה הזו 
+                    case MenuOptions.Calculate_distance:
+                        Console.WriteLine("Insert longitude coordinates");
+                        double longitudeCoor;
+                        double.TryParse(Console.ReadLine(), out longitudeCoor);
+                        Console.WriteLine("Insert latitude coordinates");
+                        double latitudeCoor;
+                        double.TryParse(Console.ReadLine(), out latitudeCoor);
+                        Console.WriteLine("Choose distance options:\n 1- from Station\n 2- from Customer\n 3- Exit");
+                        DistanceOptions distanceOptions= (DistanceOptions)int.Parse(Console.ReadLine());
+                        switch(distanceOptions)
+                        {
+                            //למצוא את הקורדינאטות של תחנת בסיס או הלקוח ולשלוח גם אותם לפונקציה
+                            case DistanceOptions.From_Station:
+                                Console.WriteLine("Please enter station ID");
+                                int stationID;
+                                int.TryParse(Console.ReadLine(), out stationID);
+                                double distance_station = dalobject.CalculateDistance(longitudeCoor, latitudeCoor);
+                                Console.WriteLine($"The distance between your coordination and the station is: {distance_station}");
+                                break;
+                            case DistanceOptions.From_Drone:
+                                Console.WriteLine("Please enter customer ID");
+                                int droneID;
+                                int.TryParse(Console.ReadLine(), out droneID);
+                                double distance_customer = dalobject.CalculateDistance(longitudeCoor, latitudeCoor);
+                                Console.WriteLine($"The distance between your coordination and the customer is: {distance_customer}");
+                                break;
+                            case DistanceOptions.Exit:
+                                DalObject.DalObject.Exit();
+                                break;
+                        }
+                        break;
+                        case MenuOptions.Exit:
                         break;
                 }
 

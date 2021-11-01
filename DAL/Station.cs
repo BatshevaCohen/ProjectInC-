@@ -18,8 +18,8 @@ namespace IDAL
                 result += $"ID is {Id}, \n";
                 result += $"Name is {Name}, \n";
                 //---BONOS OPTION---
-                result += $"Latitude is {Longitude}, \n";
-                result += $"Longitude is {Latitude}, \n";
+                result += $"Latitude is {Longitude}, \n Sexagesimal angle: {SexagesimalAngle.FromDouble(Latitude)}\n";
+                result += $"Longitude is {Latitude}, \n Sexagesimal angle: {SexagesimalAngle.FromDouble(Longitude)}\n";
                 result += $"Charge level is {ChargeSlots}, \n";
 
                 return result;

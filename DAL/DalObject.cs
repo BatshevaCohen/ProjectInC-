@@ -9,6 +9,9 @@ using IDAL.DO;
 //
 namespace DalObject
 {
+    /// <summary>
+    /// constractor 
+    /// </summary>
     public class DalObject
     {
         public DalObject()
@@ -16,7 +19,11 @@ namespace DalObject
             DataSource.Initialize();
         }
 
-        //add functions
+        /// <summary>
+        /// add Station to the stations list
+        /// </summary>
+        /// <param name="s"></param>
+        /// <returns></returns>
         public int AddBaseStation(Station s)
         { 
             
@@ -24,17 +31,32 @@ namespace DalObject
 
             return 1;
         }
+        /// <summary>
+        /// add Drone to the drons list
+        /// </summary>
+        /// <param name="d"></param>
+        /// <returns></returns>
         public int AddDrone(Drone d)
         {
             
             DataSource.drones.Add(d);
             return 1;
         }
+        /// <summary>
+        /// add Customer to the Customers list
+        /// </summary>
+        /// <param name="c"></param>
+        /// <returns></returns>
         public int AddCustomer(Customer c)
         {
             DataSource.customer.Add(c);
             return 1;
         }
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="p"></param>
+        /// <returns></returns>
         public int AddParcel(Parcel p )
         {
           

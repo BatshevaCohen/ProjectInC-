@@ -34,6 +34,9 @@ namespace DalObject
                 DateTime myDateTime = new DateTime(r.Next(0, 60), 0);
                 return myDateTime;
             }
+            /// <summary>
+            /// Initialize all the lists
+            /// </summary>
             public static void Initialize()
             {
 

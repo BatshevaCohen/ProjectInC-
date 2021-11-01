@@ -19,7 +19,7 @@ namespace ConsoleUI
             MenuOptions menuOptions;
             EntityOptions entityOptions;
             UpdateOptions updateOptions;
-            DalObject.DalObject dalobject = new DalObject.DalObject();
+            DalObject.DalObject dalobject = new DalObject.DalObject();//constractor DalObject
 
 
 
@@ -302,7 +302,7 @@ namespace ConsoleUI
         }
         static void Main(string[] arg)
         {
-            new DalObject.DalObject();
+          
             ShowMenu();
         }
     

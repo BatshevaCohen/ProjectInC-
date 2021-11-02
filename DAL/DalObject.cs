@@ -194,11 +194,28 @@ namespace DalObject
             }
         }
         //--BONUS--: another option that recives coordinates and print the distance from it to a station or a customer
-        public double CalculateDistance(double longitude, double latitude)
+        public double CalculateDistance(double longitude1, double latitude1, double longitude2, double latitude2)
         {
+            // this function is from https://stackoverflow.com/questions/27928/calculate-distance-between-two-latitude-longitude-points-haversine-formula
+            // (with changes for C#)
+            var p = 0.017453292519943295;    // Math.PI / 180
+            var a = 0.5 - Math.Cos((latitude2 - latitude1) * p) / 2 +
+                    Math.Cos(latitude1 * p) * Math.Cos(latitude2 * p) *
+                    (1 - Math.Cos((longitude2 - longitude1) * p)) / 2;
+
+            return 12742 * Math.Asin(Math.Sqrt(a)); // 2 * R; R = 6371 km
 
         }
-
+        // find customer by ID
+        public Customer FindCustomer(int customerID)
+        {
+            return DataSource.customer.Find(x => x.Id == customerID);
+        }
+        // find station by ID
+        public Station FindStetion(int stationID)
+        {
+            return DataSource.Stations.Find(x => x.Id == stationID);
+        }
         //EXIT
         public static int Exit()
         {

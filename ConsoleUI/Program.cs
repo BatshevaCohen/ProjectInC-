@@ -11,7 +11,7 @@ namespace ConsoleUI
         enum EntityOptions { BaseStation = 1, Drone, Custumer, Parcel, Exit }
         enum UpdateOptions { Assignement = 1, Pickedup, Delivery, Recharge, Discharge, Exit }
         enum ListOptions { BaseStation = 1, Drone, Custumer, Parcel, UnAsignementParcel, AvailbleChagingStation, Exit }
-        enum DistanceOptions { From_Station = 1, From_Drone, Exit}
+        enum DistanceOptions { From_Station = 1, From_Customer, Exit}
 
     private static void ShowMenu()
         {
@@ -309,19 +309,21 @@ namespace ConsoleUI
                         DistanceOptions distanceOptions= (DistanceOptions)int.Parse(Console.ReadLine());
                         switch(distanceOptions)
                         {
-                            //למצוא את הקורדינאטות של תחנת בסיס או הלקוח ולשלוח גם אותם לפונקציה
                             case DistanceOptions.From_Station:
                                 Console.WriteLine("Please enter station ID");
                                 int stationID;
                                 int.TryParse(Console.ReadLine(), out stationID);
-                                double distance_station = dalobject.CalculateDistance(longitudeCoor, latitudeCoor);
+                                Station s = dalobject.FindStetion(stationID); //finds the station by its ID
+                                double distance_station = dalobject.CalculateDistance(longitudeCoor, latitudeCoor, s.Longitude, s.Latitude);
                                 Console.WriteLine($"The distance between your coordination and the station is: {distance_station}");
                                 break;
-                            case DistanceOptions.From_Drone:
+
+                            case DistanceOptions.From_Customer:
                                 Console.WriteLine("Please enter customer ID");
-                                int droneID;
-                                int.TryParse(Console.ReadLine(), out droneID);
-                                double distance_customer = dalobject.CalculateDistance(longitudeCoor, latitudeCoor);
+                                int customerID;
+                                int.TryParse(Console.ReadLine(), out customerID);
+                                Customer c = dalobject.FindCustomer(customerID); //finds the customer by his ID
+                                double distance_customer = dalobject.CalculateDistance(longitudeCoor, latitudeCoor, c.Latitude, c.Latitude);
                                 Console.WriteLine($"The distance between your coordination and the customer is: {distance_customer}");
                                 break;
                             case DistanceOptions.Exit:

@@ -2,7 +2,8 @@
 using IDAL;
 using DalObject;
 using IDAL.DO;
-
+//Shirel Kadosh
+//Batsheva Cohen
 namespace ConsoleUI
 {
     class Program
@@ -130,16 +131,34 @@ namespace ConsoleUI
                                 Console.WriteLine("Please enter time to prepare a package for delivery in format ##:##");
                                 DateTime requested_P;
                                 DateTime.TryParse(Console.ReadLine(), out requested_P);
-                                /**
-                                 * מתי מוכנסים הזמנים האלה?
-                                DateTime steduled_P;
-                                DateTime.TryParse(Console.ReadLine(), out steduled_P);
-                                DateTime pickedUp_P;
-                                DateTime.TryParse(Console.ReadLine(), out pickedUp_P);
-                                DateTime delivary_P;
-                                DateTime.TryParse(Console.ReadLine(), out delivary_P);
-                                **/
                                 Parcel p = new Parcel();
+
+                                //try to order the steduled_P pickedUp_P and delivary_P if the user know this
+                                //else he added this after
+
+                                try
+                                {
+                                    Console.Write("pleas enter the time of steduled_P pickedUp_P and delivary_P if you dont Know prese 0:");
+                                    DateTime ans = DateTime.Parse(Console.ReadLine());
+                                    DateTime steduled_P;
+                                    DateTime.TryParse(Console.ReadLine(), out steduled_P);
+                                    DateTime pickedUp_P;
+                                    DateTime.TryParse(Console.ReadLine(), out pickedUp_P);
+                                    DateTime delivary_P;
+                                    DateTime.TryParse(Console.ReadLine(), out delivary_P);
+                                    p.Scheduled = steduled_P;
+                                    p.PickedUp = pickedUp_P;
+                                    p.Delivered = delivary_P;
+
+                                }
+
+                                catch
+                                {
+                                    p.Scheduled = DateTime.Now;
+                                    p.PickedUp = DateTime.Now;
+                                    p.Delivered = DateTime.Now;
+                                }
+                               
                                 p.Id = id_P;
                                 p.SenderId = id_Psender;
                                 p.TargetId = id_Ptarget;
@@ -147,12 +166,7 @@ namespace ConsoleUI
                                 p.Priority = (Priorities)priority_P;
                                 p.Requested = requested_P;
                                 p.DroneID = id_Pdrone;
-                                /**
-                                p.Scheduled = steduled_P;
-                                p.PickedUp = pickedUp_P;
-                                p.Delivered = delivary_P;
-                                **/
-
+                               
                                 dalobject.AddParcel(p);
                                 Console.WriteLine("\nParcel added successfully! \n");
                                 break;
@@ -232,7 +246,7 @@ namespace ConsoleUI
                             }
                             break;
                         }
-
+                        
                     // show options
                     case MenuOptions.Show_One:
                         Console.WriteLine("View item options: \n 1- base station \n 2- Drone\n 3- Custumer\n 4- Parcel\n 5- Exit\n");
@@ -340,7 +354,7 @@ namespace ConsoleUI
         }
         static void Main(string[] arg)
         {
-          
+    
             ShowMenu();
         }
     

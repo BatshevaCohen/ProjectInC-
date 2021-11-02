@@ -11,7 +11,10 @@ namespace DalObject
     {
         public class DataSource
         {
-            //database of DO entities
+
+            /// <summary>
+            /// database of DO entities
+            /// </summary>
             internal static List<Drone> drones = new List<Drone>(2);
             internal static List<Station> Stations = new List<Station>(5);
             internal static List<Customer> customer = new List<Customer>(100);
@@ -50,7 +53,7 @@ namespace DalObject
                         Status = RandomEnumValue<DroneStatuses>()
                     });
                 }
-
+                
                 //adding stations
                 for (int i = 1; i <= 2; i++)
                 {

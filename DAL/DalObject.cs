@@ -64,7 +64,12 @@ namespace DalObject
             return 1;
         }
 
-        //update functions
+        //
+        /// <summary>
+        /// update functions to Parcel
+        /// </summary>
+        /// <param name="parcel_id"></param>
+        /// <param name="drone_id"></param>
         public void UpdateParcelToDrone(int parcel_id, int drone_id)
         {
             Parcel p = DataSource.parcels.Find(x => x.Id == parcel_id);
@@ -73,6 +78,11 @@ namespace DalObject
             p.Scheduled = DateTime.Now;
             d.Status = DroneStatuses.Shipping;
         }
+        /// <summary>
+        /// Update function for parcel
+        /// </summary>
+        /// <param name="parcel_id"></param>
+        /// <param name="drone_id"></param>
         public void UpdateParcelPickedupByDrone(int parcel_id, int drone_id)
         {
             Parcel p = DataSource.parcels.Find(x => x.Id == parcel_id);
@@ -80,6 +90,11 @@ namespace DalObject
             p.PickedUp = DateTime.Now;
             d.Status = DroneStatuses.Shipping;
         }
+        /// <summary>
+        ///  Update function for parcel Customer
+        /// </summary>
+        /// <param name="parcel_id"></param>
+        /// <param name="customer_id"></param>
         public void UpdateDeliveryToCustomer(int parcel_id, int customer_id)
         {
             Parcel p = DataSource.parcels.Find(x => x.Id == parcel_id);
@@ -90,6 +105,11 @@ namespace DalObject
             Drone d= DataSource.drones.Find(x => x.Id == drone_id);
             d.Status = DroneStatuses.Available;
         }
+        /// <summary>
+        ///  Update function for parcel DroneToCharge
+        /// </summary>
+        /// <param name="drone_id"></param>
+        /// <param name="station_id"></param>
         public void UpdateDroneToCharge(int drone_id, int station_id)
         {
             Drone d = DataSource.drones.Find(x => x.Id == drone_id);
@@ -100,6 +120,11 @@ namespace DalObject
             droneCharge.StationId = station_id;
             s.ChargeSlots--;
         }
+        /// <summary>
+        /// Release function of Drone
+        /// </summary>
+        /// <param name="drone_id"></param>
+        /// <param name="station_id"></param>
         public void DischargeDrone(int drone_id, int station_id)
         {
             Drone d = DataSource.drones.Find(x => x.Id == drone_id);
@@ -108,7 +133,11 @@ namespace DalObject
             s.ChargeSlots++;
         }
 
-        //view function
+
+        /// <summary>
+        /// view function for Station
+        /// </summary>
+        /// <param name="id"></param>
         public void ShowBaseStation(int id)
         {
             foreach (Station element in DataSource.Stations)
@@ -117,6 +146,10 @@ namespace DalObject
                     Console.WriteLine(element.ToString());
             }
         }
+        /// <summary>
+        /// view function for Drone
+        /// </summary>
+        /// <param name="id"></param>
         public void ShowDrone(int id)
         {
             foreach (Drone element in DataSource.drones)
@@ -125,6 +158,10 @@ namespace DalObject
                 Console.WriteLine(element.ToString());
             }
         }
+        /// <summary>
+        /// view function for Customer with id
+        /// </summary>
+        /// <param name="id"></param>
         public void ShowCustomer(int id)
         {
             foreach (Customer element in DataSource.customer)
@@ -134,7 +171,7 @@ namespace DalObject
             }
         }
         /// <summary>
-        /// ShowParcel in help id
+        /// view function for Parcel with id
         /// </summary>
         /// <param name="id"></param>
         public void ShowParcel(int id)
@@ -146,7 +183,10 @@ namespace DalObject
             }
         }
 
-        //view lists functions
+        
+        /// <summary>
+        /// view lists functions for BaseStation
+        /// </summary>
         public void ShowBaseStationList()
         {
             foreach(Station element in DataSource.Stations)
@@ -154,6 +194,9 @@ namespace DalObject
                 Console.WriteLine(element.ToString());
             }
         }
+        /// <summary>
+        /// view lists functions for Drone
+        /// </summary>
         public void ShowDroneList()
         {
             foreach (Drone element in DataSource.drones)
@@ -161,6 +204,9 @@ namespace DalObject
                 Console.WriteLine(element.ToString());
             }
         }
+        /// <summary>
+        /// view lists functions for Customer
+        /// </summary>
         public void ShowCustomerList()
         {
             foreach (Customer element in DataSource.customer)
@@ -168,6 +214,9 @@ namespace DalObject
                 Console.WriteLine(element.ToString());
             }
         }
+        /// <summary>
+        /// view lists functions for Parcel
+        /// </summary>
         public void ShowParcelList()
         {
             foreach (Parcel element in DataSource.parcels)
@@ -175,7 +224,10 @@ namespace DalObject
                 Console.WriteLine(element.ToString());
             }
         }
-        // shows the list of packages that haven't been associated to a drone
+        
+        /// <summary>
+        /// shows the list of packages that haven't been associated to a drone
+        /// </summary>
         public void ShowNonAssociatedParcelList()
         {
             foreach (Parcel element in DataSource.parcels)
@@ -184,7 +236,10 @@ namespace DalObject
                     Console.WriteLine(element.ToString());
             }
         }
-        // shows base stations with available charging spots
+        /// <summary>
+        ///  shows base stations with available charging spots
+        /// </summary>
+
         public void ShowChargeableBaseStationList()
         {
             foreach (Station element in DataSource.Stations)
@@ -206,17 +261,29 @@ namespace DalObject
             return 12742 * Math.Asin(Math.Sqrt(a)); // 2 * R; R = 6371 km
 
         }
-        // find customer by ID
+
+        /// <summary>
+        /// find customer by ID
+        /// </summary>
+        /// <param name="customerID"></param>
+        /// <returns></returns>
         public Customer FindCustomer(int customerID)
         {
             return DataSource.customer.Find(x => x.Id == customerID);
         }
-        // find station by ID
+        /// <summary>
+        /// find station by ID
+        /// </summary>
+        /// <param name="stationID"></param>
+        /// <returns></returns
         public Station FindStetion(int stationID)
         {
             return DataSource.Stations.Find(x => x.Id == stationID);
         }
-        //EXIT
+        /// <summary>
+        /// Exit function
+        /// </summary>
+        /// <returns></returns>
         public static int Exit()
         {
             return 0;

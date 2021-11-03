@@ -12,9 +12,9 @@ namespace ConsoleUI
         enum EntityOptions { BaseStation = 1, Drone, Custumer, Parcel, Exit }
         enum UpdateOptions { Assignement = 1, Pickedup, Delivery, Recharge, Discharge, Exit }
         enum ListOptions { BaseStation = 1, Drone, Custumer, Parcel, UnAsignementParcel, AvailbleChagingStation, Exit }
-        enum DistanceOptions { From_Station = 1, From_Customer, Exit}
+        enum DistanceOptions { From_Station = 1, From_Customer, Exit }
 
-    private static void ShowMenu()
+        private static void ShowMenu()
         {
 
             MenuOptions menuOptions;
@@ -31,12 +31,14 @@ namespace ConsoleUI
                 menuOptions = (MenuOptions)int.Parse(Console.ReadLine());
                 switch (menuOptions)
                 {
+                    //adding options
                     case MenuOptions.Add:
                         Console.WriteLine("Adding option:\n 1-BaseStation,\n 2-Drone,\n 3-Custumer,\n 4-Parcel,\n 5-Exit");
 
                         entityOptions = (EntityOptions)int.Parse(Console.ReadLine());
                         switch (entityOptions)
                         {
+                            // add a new station
                             case EntityOptions.BaseStation:
                                 Station s = new Station();
                                 Console.WriteLine("Please insert ID, StationName (string), longitude, latitude and charging level ");
@@ -59,7 +61,7 @@ namespace ConsoleUI
                                 dalobject.AddBaseStation(s);
                                 Console.WriteLine("\nBase station added successfully! \n");
                                 break;
-
+                            // add a new drone
                             case EntityOptions.Drone:
                                 Console.WriteLine("please enter ID, Model (string), Weight categories, Status and Batery level (double)");
                                 int id_D;
@@ -84,7 +86,7 @@ namespace ConsoleUI
                                 dalobject.AddDrone(d);
                                 Console.WriteLine("\nDrone added successfully! \n");
                                 break;
-
+                            // add a new customer
                             case EntityOptions.Custumer:
                                 Console.WriteLine("please enter Customer ID, Name, Phone number, Longitude and Latitude ");
                                 int id_C;
@@ -108,7 +110,7 @@ namespace ConsoleUI
                                 dalobject.AddCustomer(c);
                                 Console.WriteLine("\nCustomer added successfully! \n");
                                 break;
-
+                            // add a new parcel
                             case EntityOptions.Parcel:
                                 Console.WriteLine("Please enter parcel ID");
                                 int id_P;
@@ -135,7 +137,6 @@ namespace ConsoleUI
 
                                 //try to order the steduled_P pickedUp_P and delivary_P if the user know this
                                 //else he added this after
-
                                 try
                                 {
                                     Console.Write("pleas enter the time of steduled_P pickedUp_P and delivary_P if you dont Know prese 0:");
@@ -151,14 +152,13 @@ namespace ConsoleUI
                                     p.Delivered = delivary_P;
 
                                 }
-
                                 catch
                                 {
                                     p.Scheduled = DateTime.Now;
                                     p.PickedUp = DateTime.Now;
                                     p.Delivered = DateTime.Now;
                                 }
-                               
+
                                 p.Id = id_P;
                                 p.SenderId = id_Psender;
                                 p.TargetId = id_Ptarget;
@@ -166,17 +166,19 @@ namespace ConsoleUI
                                 p.Priority = (Priorities)priority_P;
                                 p.Requested = requested_P;
                                 p.DroneID = id_Pdrone;
-                               
+
                                 dalobject.AddParcel(p);
                                 Console.WriteLine("\nParcel added successfully! \n");
                                 break;
 
+                            // EXIT
                             case EntityOptions.Exit:
                                 DalObject.DalObject.Exit();
                                 break;
                         }
                         break;
 
+                    //update functions
                     case MenuOptions.Update:
                         {
                             Console.WriteLine("Updating option:\n 1-Parcel to drone,\n 2-Parcel pickedup by drone,\n 3-Supply parcel to customer,\n 4-Send drone to charge,\n 5-Discharge drone, \n 6- Exit");
@@ -186,10 +188,10 @@ namespace ConsoleUI
                                 case UpdateOptions.Assignement:
                                     Console.WriteLine("Please enter Drone ID");
                                     int drone_id;
-                                    int.TryParse(Console.ReadLine(),out drone_id);
+                                    int.TryParse(Console.ReadLine(), out drone_id);
                                     Console.WriteLine("Please enter Parcel ID");
                                     int parcel_id;
-                                    int.TryParse(Console.ReadLine(),out parcel_id);
+                                    int.TryParse(Console.ReadLine(), out parcel_id);
                                     dalobject.UpdateParcelToDrone(parcel_id, drone_id);
                                     Console.WriteLine("\nParcel updated to drone successfully!\n");
                                     break;
@@ -197,10 +199,10 @@ namespace ConsoleUI
                                 case UpdateOptions.Pickedup:
                                     Console.WriteLine("Please enter Drone ID");
                                     int drone_id2;
-                                    int.TryParse(Console.ReadLine(),out drone_id2);
+                                    int.TryParse(Console.ReadLine(), out drone_id2);
                                     Console.WriteLine("Please enter Parcel ID");
                                     int parcel_id2;
-                                    int.TryParse(Console.ReadLine(),out parcel_id2);
+                                    int.TryParse(Console.ReadLine(), out parcel_id2);
                                     dalobject.UpdateParcelPickedupByDrone(parcel_id2, drone_id2);
                                     Console.WriteLine("\nParcel pick up updated successfully!\n");
                                     break;
@@ -208,10 +210,10 @@ namespace ConsoleUI
                                 case UpdateOptions.Delivery:
                                     Console.WriteLine("Please enter Customer ID");
                                     int customer_id;
-                                    int.TryParse(Console.ReadLine(),out customer_id);
+                                    int.TryParse(Console.ReadLine(), out customer_id);
                                     Console.WriteLine("Please enter Parcel ID");
                                     int parcel_id3;
-                                    int.TryParse(Console.ReadLine(),out parcel_id3);
+                                    int.TryParse(Console.ReadLine(), out parcel_id3);
                                     dalobject.UpdateDeliveryToCustomer(parcel_id3, customer_id);
                                     Console.WriteLine("\nParcel updated to customer successfully!\n");
                                     break;
@@ -219,12 +221,12 @@ namespace ConsoleUI
                                 case UpdateOptions.Recharge:
                                     Console.WriteLine("Please enter Drone ID");
                                     int drone_id4;
-                                    int.TryParse(Console.ReadLine(),out drone_id4);
+                                    int.TryParse(Console.ReadLine(), out drone_id4);
                                     Console.WriteLine("choose a station for charging");
                                     // show the list os stations to choose from
                                     dalobject.ShowBaseStationList();
                                     int station_id;
-                                    int.TryParse(Console.ReadLine(),out station_id);
+                                    int.TryParse(Console.ReadLine(), out station_id);
                                     dalobject.UpdateDroneToCharge(drone_id4, station_id);
                                     Console.WriteLine("\nDrone updated to- charge status successfully!\n");
                                     break;
@@ -232,10 +234,10 @@ namespace ConsoleUI
                                 case UpdateOptions.Discharge:
                                     Console.WriteLine("Please enter Drone ID");
                                     int drone_id5;
-                                    int.TryParse(Console.ReadLine(),out drone_id5);
+                                    int.TryParse(Console.ReadLine(), out drone_id5);
                                     Console.WriteLine("choose a station for charging");
                                     int station_id_discharge;
-                                    int.TryParse(Console.ReadLine(),out station_id_discharge);
+                                    int.TryParse(Console.ReadLine(), out station_id_discharge);
                                     dalobject.DischargeDrone(drone_id5, station_id_discharge);
                                     Console.WriteLine("\nDrone updated to- discharge status successfully!\n");
                                     break;
@@ -246,13 +248,13 @@ namespace ConsoleUI
                             }
                             break;
                         }
-                        
+
                     // show options
                     case MenuOptions.Show_One:
                         Console.WriteLine("View item options: \n 1- base station \n 2- Drone\n 3- Custumer\n 4- Parcel\n 5- Exit\n");
                         entityOptions = (EntityOptions)int.Parse(Console.ReadLine());
                         Console.WriteLine($"Enter a requested {entityOptions} id");
-                        switch(entityOptions)
+                        switch (entityOptions)
                         {
                             case EntityOptions.BaseStation:
                                 int Id_S;
@@ -280,8 +282,8 @@ namespace ConsoleUI
                         }
                         int requestion;
                         int.TryParse(Console.ReadLine(), out requestion);
-
                         break;
+                    // show_list options
                     case MenuOptions.Show_List:
                         Console.WriteLine(" List options:\n 1- BaseStation  \n 2- Drone \n 3- Custumer\n 4- Parcel\n 5- UnAsignementParcel\n 6- AvailbleChagingStation\n 7- Exit \n");
                         ListOptions listOptions = (ListOptions)int.Parse(Console.ReadLine());
@@ -320,9 +322,10 @@ namespace ConsoleUI
                         double latitudeCoor;
                         double.TryParse(Console.ReadLine(), out latitudeCoor);
                         Console.WriteLine("Choose distance options:\n 1- from Station\n 2- from Customer\n 3- Exit");
-                        DistanceOptions distanceOptions= (DistanceOptions)int.Parse(Console.ReadLine());
-                        switch(distanceOptions)
+                        DistanceOptions distanceOptions = (DistanceOptions)int.Parse(Console.ReadLine());
+                        switch (distanceOptions)
                         {
+                            //calculate the distance from a station
                             case DistanceOptions.From_Station:
                                 Console.WriteLine("Please enter station ID");
                                 int stationID;
@@ -331,7 +334,7 @@ namespace ConsoleUI
                                 double distance_station = dalobject.CalculateDistance(longitudeCoor, latitudeCoor, s.Longitude, s.Latitude);
                                 Console.WriteLine($"The distance between your coordination and the station is: {distance_station}");
                                 break;
-
+                            //calculate the distance from a customer
                             case DistanceOptions.From_Customer:
                                 Console.WriteLine("Please enter customer ID");
                                 int customerID;
@@ -340,12 +343,13 @@ namespace ConsoleUI
                                 double distance_customer = dalobject.CalculateDistance(longitudeCoor, latitudeCoor, c.Latitude, c.Latitude);
                                 Console.WriteLine($"The distance between your coordination and the customer is: {distance_customer}");
                                 break;
+                            // Exit
                             case DistanceOptions.Exit:
                                 DalObject.DalObject.Exit();
                                 break;
                         }
                         break;
-                        case MenuOptions.Exit:
+                    case MenuOptions.Exit:
                         break;
                 }
 
@@ -354,10 +358,9 @@ namespace ConsoleUI
         }
         static void Main(string[] arg)
         {
-    
+
             ShowMenu();
         }
-    
-    } 
+
+    }
 }
-         

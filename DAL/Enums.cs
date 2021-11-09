@@ -19,9 +19,15 @@ namespace IDAL
 
         public enum Priorities
         {
-            Regular = 1,
+            Standart = 1,
             Fast,
             Emergency
+        }
+        public enum Severity
+        {
+            Mild = 1,
+            Severe,
+            Terrible
         }
     }
 }

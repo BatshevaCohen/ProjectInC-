@@ -12,7 +12,7 @@ namespace DalObject
     /// <summary>
     /// constractor 
     /// </summary>
-    public class DalObject
+    public class DalObject : IDal
     {
         public DalObject()
         {
@@ -24,47 +24,40 @@ namespace DalObject
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        public int AddBaseStation(Station s)
-        { 
-            
-            DataSource.Stations.Add(s);
+        public void AddBaseStation(Station s)
+        {
 
-            return 1;
+            DataSource.Stations.Add(s);
         }
         /// <summary>
         /// add Drone to the drons list
         /// </summary>
         /// <param name="d"></param>
         /// <returns></returns>
-        public int AddDrone(Drone d)
+        public void AddDrone(Drone d)
         {
-            
+
             DataSource.drones.Add(d);
-            return 1;
         }
         /// <summary>
         /// add Customer to the Customers list
         /// </summary>
         /// <param name="c"></param>
         /// <returns></returns>
-        public int AddCustomer(Customer c)
+        public void AddCustomer(Customer c)
         {
             DataSource.customer.Add(c);
-            return 1;
         }
         /// <summary>
-        /// 
+        /// add parcel to the parcels list
         /// </summary>
         /// <param name="p"></param>
         /// <returns></returns>
-        public int AddParcel(Parcel p )
+        public void AddParcel(Parcel p)
         {
-          
             DataSource.parcels.Add(p);
-            return 1;
         }
 
-        //
         /// <summary>
         /// update functions to Parcel
         /// </summary>
@@ -99,10 +92,10 @@ namespace DalObject
         {
             Parcel p = DataSource.parcels.Find(x => x.Id == parcel_id);
             Customer c = DataSource.customer.Find(x => x.Id == customer_id);
-            p.Delivered= DateTime.Now;
+            p.Delivered = DateTime.Now;
             // finding the drone that sent the parcel-- to make it available to the next ship
             int drone_id = p.DroneID;
-            Drone d= DataSource.drones.Find(x => x.Id == drone_id);
+            Drone d = DataSource.drones.Find(x => x.Id == drone_id);
             d.Status = DroneStatuses.Available;
         }
         /// <summary>
@@ -138,115 +131,115 @@ namespace DalObject
         /// view function for Station
         /// </summary>
         /// <param name="id"></param>
-        public void ShowBaseStation(int id)
+        public Station GetBaseStation(int id)
         {
-            foreach (Station element in DataSource.Stations)
-            {
-                if (element.Id == id)
-                    Console.WriteLine(element.ToString());
-            }
+            return DataSource.Stations.First(c => c.Id == id);
         }
         /// <summary>
         /// view function for Drone
         /// </summary>
         /// <param name="id"></param>
-        public void ShowDrone(int id)
+        public Drone GetDrone(int id)
         {
-            foreach (Drone element in DataSource.drones)
-            {
-                if(element.Id==id)
-                Console.WriteLine(element.ToString());
-            }
+            return DataSource.drones.First(c => c.Id == id);
         }
         /// <summary>
-        /// view function for Customer with id
+        /// view function for Customer by id
         /// </summary>
         /// <param name="id"></param>
-        public void ShowCustomer(int id)
+        public Customer GetCustomer(int IDc)
         {
-            foreach (Customer element in DataSource.customer)
+            if (!DataSource.customer.Exists(item => item.Id == IDc))
             {
-                if (element.Id == id)
-                    Console.WriteLine(element.ToString());
+                throw new ClientException($"ID: {IDc} does not exist!!", Severity.Mild);
             }
+            return DataSource.customer.First(c => c.Id == IDc);
         }
         /// <summary>
         /// view function for Parcel with id
         /// </summary>
         /// <param name="id"></param>
-        public void ShowParcel(int id)
+        public Parcel GetParcel(int id)
         {
-            foreach (Parcel element in DataSource.parcels)
-            {
-                if (element.Id == id)
-                    Console.WriteLine(element.ToString());
-            }
+            return DataSource.parcels.First(c => c.Id == id);
         }
 
-        
+
         /// <summary>
         /// view lists functions for BaseStation
         /// </summary>
-        public void ShowBaseStationList()
+        public List<Station> ShowBaseStationList()
         {
-            foreach(Station element in DataSource.Stations)
+            List <Station> baseStationList = new List<Station>();
+            foreach (Station element in DataSource.Stations)
             {
-                Console.WriteLine(element.ToString());
+                baseStationList.Add(element);
             }
+            return baseStationList;
         }
         /// <summary>
         /// view lists functions for Drone
         /// </summary>
-        public void ShowDroneList()
+        public List<Drone> ShowDroneList()
         {
+            List<Drone> DroneList = new List<Drone>();
             foreach (Drone element in DataSource.drones)
             {
-                Console.WriteLine(element.ToString());
+                DroneList.Add(element);
             }
+            return DroneList;
         }
         /// <summary>
         /// view lists functions for Customer
         /// </summary>
-        public void ShowCustomerList()
+        public List<Customer> ShowCustomerList()
         {
+            List<Customer> CustomerList = new List<Customer>();
             foreach (Customer element in DataSource.customer)
             {
-                Console.WriteLine(element.ToString());
+                CustomerList.Add(element);
             }
+            return CustomerList;
         }
         /// <summary>
         /// view lists functions for Parcel
         /// </summary>
-        public void ShowParcelList()
+        public List<Parcel> ShowParcelList()
         {
+            List<Parcel> ParcelList = new List<Parcel>();
             foreach (Parcel element in DataSource.parcels)
             {
-                Console.WriteLine(element.ToString());
+                ParcelList.Add(element);
             }
+            return ParcelList;
         }
-        
+
         /// <summary>
         /// shows the list of packages that haven't been associated to a drone
         /// </summary>
-        public void ShowNonAssociatedParcelList()
+        /// <returns></returns>
+        public List<Parcel> ShowNonAssociatedParcelList()
         {
+            List<Parcel> NonAssociatedParcelList = new List<Parcel>();
             foreach (Parcel element in DataSource.parcels)
             {
                 if (element.DroneID == 0)
-                    Console.WriteLine(element.ToString());
+                    NonAssociatedParcelList.Add(element);
             }
+            return NonAssociatedParcelList;
         }
         /// <summary>
         ///  shows base stations with available charging spots
         /// </summary>
-
-        public void ShowChargeableBaseStationList()
+        public List<Station> ShowChargeableBaseStationList()
         {
+            List<Station> ChargeableBaseStationList = new List<Station>();
             foreach (Station element in DataSource.Stations)
             {
                 if (element.ChargeSlots > 0)
-                    Console.WriteLine(element.ToString());
+                    ChargeableBaseStationList.Add(element);
             }
+            return ChargeableBaseStationList;
         }
         //--BONUS--: another option that recives coordinates and print the distance from it to a station or a customer
         public double CalculateDistance(double longitude1, double latitude1, double longitude2, double latitude2)

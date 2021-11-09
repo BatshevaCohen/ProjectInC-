@@ -259,22 +259,22 @@ namespace ConsoleUI
                             case EntityOptions.BaseStation:
                                 int Id_S;
                                 int.TryParse(Console.ReadLine(), out Id_S);
-                                dalobject.ShowBaseStation(Id_S);
+                                dalobject.GetBaseStation(Id_S);
                                 break;
                             case EntityOptions.Drone:
                                 int Id_D;
                                 int.TryParse(Console.ReadLine(), out Id_D);
-                                dalobject.ShowDrone(Id_D);
+                                dalobject.GetDrone(Id_D);
                                 break;
                             case EntityOptions.Custumer:
                                 int Id_C;
                                 int.TryParse(Console.ReadLine(), out Id_C);
-                                dalobject.ShowCustomer(Id_C);
+                                dalobject.GetCustomer(Id_C);
                                 break;
                             case EntityOptions.Parcel:
                                 int Id_P;
                                 int.TryParse(Console.ReadLine(), out Id_P);
-                                dalobject.ShowParcel(Id_P);
+                                dalobject.GetParcel(Id_P);
                                 break;
                             case EntityOptions.Exit:
                                 DalObject.DalObject.Exit();

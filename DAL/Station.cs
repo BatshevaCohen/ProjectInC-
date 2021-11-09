@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+
 namespace IDAL
 {
     namespace DO
@@ -23,6 +25,11 @@ namespace IDAL
                 result += $"Charge level is {ChargeSlots}, \n";
 
                 return result;
+            }
+
+            public static implicit operator List<object>(Station v)
+            {
+                throw new NotImplementedException();
             }
         }
     }

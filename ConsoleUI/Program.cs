@@ -2,6 +2,8 @@
 using IDAL;
 using DalObject;
 using IDAL.DO;
+using System.Collections.Generic;
+using DalObject.DO;
 //Shirel Kadosh
 //Batsheva Cohen
 namespace ConsoleUI
@@ -139,7 +141,7 @@ namespace ConsoleUI
                                 //else he added this after
                                 try
                                 {
-                                    Console.Write("pleas enter the time of steduled_P pickedUp_P and delivary_P if you dont Know prese 0:");
+                                    Console.Write("pleas enter the time of steduled_P pickedUp_P and delivary_P if you don't know prese 0:");
                                     DateTime ans = DateTime.Parse(Console.ReadLine());
                                     DateTime steduled_P;
                                     DateTime.TryParse(Console.ReadLine(), out steduled_P);
@@ -259,22 +261,22 @@ namespace ConsoleUI
                             case EntityOptions.BaseStation:
                                 int Id_S;
                                 int.TryParse(Console.ReadLine(), out Id_S);
-                                dalobject.GetBaseStation(Id_S);
+                                Console.WriteLine(dalobject.GetBaseStation(Id_S));
                                 break;
                             case EntityOptions.Drone:
                                 int Id_D;
                                 int.TryParse(Console.ReadLine(), out Id_D);
-                                dalobject.GetDrone(Id_D);
+                                Console.WriteLine(dalobject.GetDrone(Id_D));
                                 break;
                             case EntityOptions.Custumer:
                                 int Id_C;
                                 int.TryParse(Console.ReadLine(), out Id_C);
-                                dalobject.GetCustomer(Id_C);
+                                Console.WriteLine(dalobject.GetCustomer(Id_C));
                                 break;
                             case EntityOptions.Parcel:
                                 int Id_P;
                                 int.TryParse(Console.ReadLine(), out Id_P);
-                                dalobject.GetParcel(Id_P);
+                                Console.WriteLine(dalobject.GetParcel(Id_P));
                                 break;
                             case EntityOptions.Exit:
                                 DalObject.DalObject.Exit();
@@ -289,23 +291,48 @@ namespace ConsoleUI
                         ListOptions listOptions = (ListOptions)int.Parse(Console.ReadLine());
                         switch (listOptions)
                         {
+                            // prints the list of the base stations
                             case ListOptions.BaseStation:
-                                dalobject.ShowBaseStationList();
-                                break;
+                                List<Station> BaseStationList = new List<Station>();
+                                BaseStationList = dalobject.ShowBaseStationList();
+                                foreach (Station element in BaseStationList) //prints the elements in the list
+                                    Console.WriteLine(element);
+                                    break;
+                            // prints the list of the drones
                             case ListOptions.Drone:
-                                dalobject.ShowDroneList();
+                                List<Drone> DroneList = new List<Drone>();
+                                DroneList = dalobject.ShowDroneList();
+                                foreach (Drone element in DroneList) //prints the elements in the list
+                                    Console.WriteLine(element);
                                 break;
+                            // prints the list of the customers
                             case ListOptions.Custumer:
-                                dalobject.ShowCustomerList();
+                                List<Customer> CustomerList = new List<Customer>();
+                                CustomerList = dalobject.ShowCustomerList();
+                                foreach (Customer element in CustomerList) //prints the elements in the list
+                                    Console.WriteLine(element);
                                 break;
+                            // prints the list of the parcels
                             case ListOptions.Parcel:
-                                dalobject.ShowParcelList();
+                                List<Parcel> ParcelList = new List<Parcel>();
+                                ParcelList = dalobject.ShowParcelList();
+                                foreach (Parcel element in ParcelList) //prints the elements in the list
+                                    Console.WriteLine(element);
                                 break;
+                            // prints the list of the stations that available for charging
                             case ListOptions.AvailbleChagingStation:
-                                dalobject.ShowNonAssociatedParcelList();
+                                List<Station> ChargeableBaseStationList = new List<Station>();
+                                ChargeableBaseStationList = dalobject.ShowChargeableBaseStationList();
+                                foreach (Station element in ChargeableBaseStationList) //prints the elements in the list
+                                    Console.WriteLine(element);
                                 break;
+                            // prints the list of the non associated parcel
                             case ListOptions.UnAsignementParcel:
-                                dalobject.ShowChargeableBaseStationList();
+                                dalobject.ShowNonAssociatedParcelList();
+                                List<Parcel> NonAssociatedParcelList = new List<Parcel>();
+                                NonAssociatedParcelList = dalobject.ShowNonAssociatedParcelList();
+                                foreach (Parcel element in NonAssociatedParcelList) //prints the elements in the list
+                                    Console.WriteLine(element);
                                 break;
                             case ListOptions.Exit:
                                 DalObject.DalObject.Exit();

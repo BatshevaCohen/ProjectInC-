@@ -168,6 +168,8 @@ namespace DalObject
         /// <param name="id"></param>
         public Parcel GetParcel(int id)
         {
+            if (DataSource.parcels.Exists(item => item.Id == id))
+                throw new ParcelException(id, "does not exist!!", Severity.Mild);
             return DataSource.parcels.First(c => c.Id == id);
         }
 

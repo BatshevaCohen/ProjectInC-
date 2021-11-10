@@ -19,4 +19,16 @@
         Picked,
         Delivered
     }
+    public enum ParcelStatusBool
+    {
+        WaitingToBePickedUp,
+        OnTheWayToDestination
+    }
+    public enum DroneStatuses
+    {
+        Available = 1,
+        Maintenance,
+        Shipping
+    }
+
 }

@@ -17,7 +17,7 @@ namespace BL
             {
                 someone = dal.GetCustomer(id);
             }
-            catch (IDAL.DO.ClientException cex)
+            catch (IDAL.DO.CustomerException cex)
             {
                 // TO DO SOMETHING
                 throw;

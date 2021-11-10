@@ -82,8 +82,8 @@ namespace ConsoleUI
 
                                 d.Id = id_D;
                                 d.Model = model;
-                                d.Battery = battery;
-                                d.Status = (DroneStatuses)status;
+                                //d.Battery = battery;
+                                //d.Status = (DroneStatuses)status;
                                 d.MaxWeight = (WeightCategories)Weight;
                                 dalobject.AddDrone(d);
                                 Console.WriteLine("\nDrone added successfully! \n");
@@ -322,7 +322,7 @@ namespace ConsoleUI
                             // prints the list of the stations that available for charging
                             case ListOptions.AvailbleChagingStation:
                                 List<Station> ChargeableBaseStationList = new List<Station>();
-                                ChargeableBaseStationList = dalobject.ShowChargeableBaseStationList();
+                                ChargeableBaseStationList = dalobject.ShowChargeableStationList();
                                 foreach (Station element in ChargeableBaseStationList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;

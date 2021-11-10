@@ -10,12 +10,12 @@ namespace IDAL
             Heavy
         }
 
-        public enum DroneStatuses
-        {
-            Available = 1,
-            Maintenance,
-            Shipping
-        }
+        //public enum DroneStatuses
+        //{
+        //    Available = 1,
+        //    Maintenance,
+        //    Shipping
+        //}
 
         public enum Priorities
         {

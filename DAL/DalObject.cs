@@ -9,6 +9,7 @@ using IDAL.DO;
 //
 namespace DalObject
 {
+
     /// <summary>
     /// constractor 
     /// </summary>
@@ -19,7 +20,6 @@ namespace DalObject
             DataSource.Initialize();
         }
 
-        // ADD functions
         /// <summary>
         /// add Station to the stations list
         /// </summary>
@@ -35,7 +35,8 @@ namespace DalObject
         /// </summary>
         /// <param name="d"></param>
         /// <returns></returns>
-        public void AddDrone(Drone d)
+     
+public void AddDrone(Drone d)
         {
 
             DataSource.drones.Add(d);
@@ -59,7 +60,6 @@ namespace DalObject
             DataSource.parcels.Add(p);
         }
 
-        // UPDATE functions:
         /// <summary>
         /// update functions to Parcel
         /// </summary>
@@ -71,8 +71,7 @@ namespace DalObject
             Drone d = DataSource.drones.Find(x => x.Id == drone_id);
             p.DroneID = d.Id;
             p.Scheduled = DateTime.Now;
-            //d.Status = DroneStatuses.Shipping;
-
+            d.Status = DroneStatuses.Shipping;
         }
         /// <summary>
         /// Update function for parcel
@@ -84,7 +83,7 @@ namespace DalObject
             Parcel p = DataSource.parcels.Find(x => x.Id == parcel_id);
             Drone d = DataSource.drones.Find(x => x.Id == drone_id);
             p.PickedUp = DateTime.Now;
-            //d.Status = DroneStatuses.Shipping;
+            d.Status = DroneStatuses.Shipping;
         }
         /// <summary>
         ///  Update function for parcel Customer
@@ -99,7 +98,7 @@ namespace DalObject
             // finding the drone that sent the parcel-- to make it available to the next ship
             int drone_id = p.DroneID;
             Drone d = DataSource.drones.Find(x => x.Id == drone_id);
-            //d.Status = DroneStatuses.Available;
+            d.Status = DroneStatuses.Available;
         }
         /// <summary>
         ///  Update function for parcel DroneToCharge
@@ -109,7 +108,7 @@ namespace DalObject
         public void UpdateDroneToCharge(int drone_id, int station_id)
         {
             Drone d = DataSource.drones.Find(x => x.Id == drone_id);
-            //d.Status = DroneStatuses.Maintenance;
+            d.Status = DroneStatuses.Maintenance;
             DroneCharge droneCharge = new DroneCharge();
             droneCharge.DroneId = drone_id;
             Station s = DataSource.Stations.Find(x => x.Id == station_id);
@@ -125,19 +124,17 @@ namespace DalObject
         {
             Drone d = DataSource.drones.Find(x => x.Id == drone_id);
             Station s = DataSource.Stations.Find(x => x.Id == station_id);
-            //d.Status = DroneStatuses.Available;
+            d.Status = DroneStatuses.Available;
             s.ChargeSlots++;
         }
 
-        // SHOW functions:
+
         /// <summary>
         /// view function for Station
         /// </summary>
         /// <param name="id"></param>
         public Station GetBaseStation(int id)
         {
-            if (!DataSource.Stations.Exists(item => item.Id == id)) //if ID doesn't exist-> throw exception
-                throw new StationException(id, "does not exist!!");
             return DataSource.Stations.First(c => c.Id == id);
         }
         /// <summary>
@@ -146,8 +143,6 @@ namespace DalObject
         /// <param name="id"></param>
         public Drone GetDrone(int id)
         {
-            if (!DataSource.drones.Exists(item => item.Id == id))
-                throw new DroneException(id, "does not exist!!");
             return DataSource.drones.First(c => c.Id == id);
         }
         /// <summary>
@@ -158,7 +153,7 @@ namespace DalObject
         {
             if (!DataSource.customer.Exists(item => item.Id == IDc))
             {
-                throw new CustomerException(IDc, "does not exist!!", Severity.Mild);
+                throw new ClientException($"ID: {IDc} does not exist!!", Severity.Mild);
             }
             return DataSource.customer.First(c => c.Id == IDc);
         }
@@ -168,29 +163,26 @@ namespace DalObject
         /// <param name="id"></param>
         public Parcel GetParcel(int id)
         {
-            if (DataSource.parcels.Exists(item => item.Id == id))
-                throw new ParcelException(id, "does not exist!!", Severity.Mild);
             return DataSource.parcels.First(c => c.Id == id);
         }
 
-        // SHOW LIST FUNCTION
+
         /// <summary>
         /// view lists functions for BaseStation
         /// </summary>
-        public IEnumerable<Station> ShowBaseStationList()
+        public List<Station> ShowBaseStationList()
         {
             List <Station> baseStationList = new List<Station>();
             foreach (Station element in DataSource.Stations)
             {
                 baseStationList.Add(element);
             }
-
             return baseStationList;
         }
         /// <summary>
         /// view lists functions for Drone
         /// </summary>
-        public IEnumerable<Drone> ShowDroneList()
+        public List<Drone> ShowDroneList()
         {
             List<Drone> DroneList = new List<Drone>();
             foreach (Drone element in DataSource.drones)
@@ -202,7 +194,7 @@ namespace DalObject
         /// <summary>
         /// view lists functions for Customer
         /// </summary>
-        public IEnumerable<Customer> ShowCustomerList()
+        public List<Customer> ShowCustomerList()
         {
             List<Customer> CustomerList = new List<Customer>();
             foreach (Customer element in DataSource.customer)
@@ -214,7 +206,7 @@ namespace DalObject
         /// <summary>
         /// view lists functions for Parcel
         /// </summary>
-        public IEnumerable<Parcel> ShowParcelList()
+        public List<Parcel> ShowParcelList()
         {
             List<Parcel> ParcelList = new List<Parcel>();
             foreach (Parcel element in DataSource.parcels)
@@ -228,7 +220,7 @@ namespace DalObject
         /// shows the list of packages that haven't been associated to a drone
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Parcel> ShowNonAssociatedParcelList()
+        public List<Parcel> ShowNonAssociatedParcelList()
         {
             List<Parcel> NonAssociatedParcelList = new List<Parcel>();
             foreach (Parcel element in DataSource.parcels)
@@ -241,7 +233,7 @@ namespace DalObject
         /// <summary>
         ///  shows base stations with available charging spots
         /// </summary>
-        public IEnumerable<Station> ShowChargeableStationList()
+        public List<Station> ShowChargeableBaseStationList()
         {
             List<Station> ChargeableBaseStationList = new List<Station>();
             foreach (Station element in DataSource.Stations)

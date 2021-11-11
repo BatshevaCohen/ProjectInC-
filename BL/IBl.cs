@@ -6,4 +6,5 @@ namespace IBL.BO
     {
         Customer GetCustomer(int id);
     }
+
 }

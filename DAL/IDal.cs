@@ -1,4 +1,5 @@
 ﻿using IDAL.DO;
+using System;
 using System.Collections.Generic;
 
 namespace IDAL.DO
@@ -27,5 +28,10 @@ namespace IDAL.DO
         void UpdateDroneToCharge(int drone_id, int station_id);
         void UpdateParcelPickedupByDrone(int parcel_id, int drone_id);
         void UpdateParcelToDrone(int parcel_id, int drone_id);
+        void StationException(int id, string errMsg);
+        void CustomerException(int id, string errMsg, Severity severity);
+        void ParcelException(int id, string errMsg, Severity severity);
+        void DroneException(int id, string errMsg);
     }
+
 }

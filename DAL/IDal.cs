@@ -6,7 +6,7 @@ namespace IDAL.DO
 {
     public interface IDal
     {
-        void AddBaseStation(Station s);
+        void AddStation(Station s);
         void AddCustomer(Customer c);
         void AddDrone(Drone d);
         void AddParcel(Parcel p);

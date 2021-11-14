@@ -20,14 +20,21 @@ namespace DalObject
             DataSource.Initialize();
         }
 
+
+        // ADD:
+
         /// <summary>
         /// add Station to the stations list
         /// </summary>
         /// <param name="s"></param>
         /// <returns></returns>
-        public void AddBaseStation(Station s)
+        public void AddStation(Station s)
         {
-
+            if (DataSource.Stations.Exists(station => station.Id == s.Id))
+            {
+                throw new StationException($"ID {s.Id} already exists!!");
+            }
+            else
             DataSource.Stations.Add(s);
         }
         /// <summary>
@@ -35,10 +42,13 @@ namespace DalObject
         /// </summary>
         /// <param name="d"></param>
         /// <returns></returns>
-     
-public void AddDrone(Drone d)
+        public void AddDrone(Drone d)
         {
-
+            if (DataSource.drones.Exists(drone => drone.Id == d.Id))
+            {
+                throw new DroneException($"ID {d.Id} already exists!!");
+            }
+            else
             DataSource.drones.Add(d);
         }
         /// <summary>
@@ -48,7 +58,12 @@ public void AddDrone(Drone d)
         /// <returns></returns>
         public void AddCustomer(Customer c)
         {
-            DataSource.customer.Add(c);
+            if(DataSource.customer.Exists(client => client.Id==c.Id))
+            {
+                throw new CustomerException($"ID {c.Id} already exists!!");
+            }
+            else
+                DataSource.customer.Add(c);
         }
         /// <summary>
         /// add parcel to the parcels list
@@ -57,8 +72,16 @@ public void AddDrone(Drone d)
         /// <returns></returns>
         public void AddParcel(Parcel p)
         {
+            if (DataSource.parcels.Exists(parcel => parcel.Id == p.Id))
+            {
+                throw new ParcelException($"ID {p.Id} already exists!!");
+            }
+            else
             DataSource.parcels.Add(p);
         }
+
+
+        //UPDATE:
 
         /// <summary>
         /// update functions to Parcel
@@ -71,7 +94,7 @@ public void AddDrone(Drone d)
             Drone d = DataSource.drones.Find(x => x.Id == drone_id);
             p.DroneID = d.Id;
             p.Scheduled = DateTime.Now;
-            d.Status = DroneStatuses.Shipping;
+            //d.Status = DroneStatuses.Shipping;
         }
         /// <summary>
         /// Update function for parcel
@@ -129,12 +152,18 @@ public void AddDrone(Drone d)
         }
 
 
+        //GET:
+
         /// <summary>
         /// view function for Station
         /// </summary>
         /// <param name="id"></param>
         public Station GetBaseStation(int id)
         {
+            if (!DataSource.Stations.Exists(item => item.Id == id))
+            {
+                throw new StationException($"ID: {id} does not exist!!", Severity.Mild);
+            }
             return DataSource.Stations.First(c => c.Id == id);
         }
         /// <summary>
@@ -143,6 +172,10 @@ public void AddDrone(Drone d)
         /// <param name="id"></param>
         public Drone GetDrone(int id)
         {
+            if (!DataSource.drones.Exists(item => item.Id == id))
+            {
+                throw new DroneException($"ID: {id} does not exist!!", Severity.Mild);
+            }
             return DataSource.drones.First(c => c.Id == id);
         }
         /// <summary>
@@ -153,7 +186,7 @@ public void AddDrone(Drone d)
         {
             if (!DataSource.customer.Exists(item => item.Id == IDc))
             {
-                throw new ClientException($"ID: {IDc} does not exist!!", Severity.Mild);
+                throw new CustomerException($"ID: {IDc} does not exist!!", Severity.Mild);
             }
             return DataSource.customer.First(c => c.Id == IDc);
         }
@@ -163,6 +196,10 @@ public void AddDrone(Drone d)
         /// <param name="id"></param>
         public Parcel GetParcel(int id)
         {
+            if (!DataSource.parcels.Exists(item => item.Id == id))
+            {
+                throw new ParcelException($"ID: {id} does not exist!!", Severity.Mild);
+            }
             return DataSource.parcels.First(c => c.Id == id);
         }
 

@@ -25,6 +25,13 @@ namespace DalObject
             internal class config
             {
                 public static int OrdinalNumber = 1000000;
+                
+
+                internal static double Light { get => 10;}
+                internal static double Available { get => 0; }
+                internal static double Medium { get => 50; }
+                internal static double Heavy { get => 150; }
+                internal static double ChargingRate { get => 10.25; }
             }
             public static DateTime myDateTime()
             {
@@ -104,8 +111,12 @@ namespace DalObject
                     });
                 }
             }
-
-            // from https://stackoverflow.com/questions/3132126/how-do-i-select-a-random-value-from-an-enumeration
+            /// <summary>
+            /// function for random enums
+            /// from https://stackoverflow.com/questions/3132126/how-do-i-select-a-random-value-from-an-enumeration
+            /// </summary>
+            /// <typeparam name="T"></typeparam>
+            /// <returns></returns>
             private static T RandomEnumValue<T>()
             {
                 var v = Enum.GetValues(typeof(T));

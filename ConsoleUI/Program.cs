@@ -60,7 +60,7 @@ namespace ConsoleUI
                                 s.Latitude = latitude;
                                 s.Longitude = longitude;
                                 s.ChargeSlots = Position;
-                                dalobject.AddBaseStation(s);
+                                dalobject.AddStation(s);
                                 Console.WriteLine("\nBase station added successfully! \n");
                                 break;
                             // add a new drone

@@ -13,7 +13,7 @@ namespace DalObject
     /// <summary>
     /// constractor 
     /// </summary>
-    public class DalObject : IDal
+    public class DalObject : IDAL
     {
         public DalObject()
         {
@@ -22,7 +22,6 @@ namespace DalObject
 
 
         // ADD:
-
         /// <summary>
         /// add Station to the stations list
         /// </summary>
@@ -82,18 +81,25 @@ namespace DalObject
 
 
         //UPDATE:
-
         /// <summary>
-        /// update functions to Parcel
+        /// update function: parcel to drone by id
         /// </summary>
         /// <param name="parcel_id"></param>
         /// <param name="drone_id"></param>
         public void UpdateParcelToDrone(int parcel_id, int drone_id)
         {
-            Parcel p = DataSource.parcels.Find(x => x.Id == parcel_id);
-            Drone d = DataSource.drones.Find(x => x.Id == drone_id);
-            p.DroneID = d.Id;
-            p.Scheduled = DateTime.Now;
+            Parcel parcel = default;
+            try
+            {
+                parcel = GetParcel(parcel_id); //finds the parcel by its ID
+            }
+            catch(ParcelException pex)
+            {
+                throw new ParcelException($"Couldn't attribute drone {drone_id} to parcel", pex);
+            }
+            Drone drone = DataSource.drones.Find(x => x.Id == drone_id); //finds the drone by its ID
+            parcel.DroneID = drone.Id;
+            parcel.Scheduled = DateTime.Now;
             //d.Status = DroneStatuses.Shipping;
         }
         /// <summary>
@@ -106,7 +112,7 @@ namespace DalObject
             Parcel p = DataSource.parcels.Find(x => x.Id == parcel_id);
             Drone d = DataSource.drones.Find(x => x.Id == drone_id);
             p.PickedUp = DateTime.Now;
-            d.Status = DroneStatuses.Shipping;
+            //d.Status = DroneStatuses.Shipping;
         }
         /// <summary>
         ///  Update function for parcel Customer
@@ -121,7 +127,7 @@ namespace DalObject
             // finding the drone that sent the parcel-- to make it available to the next ship
             int drone_id = p.DroneID;
             Drone d = DataSource.drones.Find(x => x.Id == drone_id);
-            d.Status = DroneStatuses.Available;
+            //d.Status = DroneStatuses.Available;
         }
         /// <summary>
         ///  Update function for parcel DroneToCharge
@@ -131,7 +137,7 @@ namespace DalObject
         public void UpdateDroneToCharge(int drone_id, int station_id)
         {
             Drone d = DataSource.drones.Find(x => x.Id == drone_id);
-            d.Status = DroneStatuses.Maintenance;
+            //d.Status = DroneStatuses.Maintenance;
             DroneCharge droneCharge = new DroneCharge();
             droneCharge.DroneId = drone_id;
             Station s = DataSource.Stations.Find(x => x.Id == station_id);
@@ -147,7 +153,7 @@ namespace DalObject
         {
             Drone d = DataSource.drones.Find(x => x.Id == drone_id);
             Station s = DataSource.Stations.Find(x => x.Id == station_id);
-            d.Status = DroneStatuses.Available;
+            //d.Status = DroneStatuses.Available;
             s.ChargeSlots++;
         }
 
@@ -199,7 +205,7 @@ namespace DalObject
             if (!DataSource.parcels.Exists(item => item.Id == id))
             {
                 throw new ParcelException($"ID: {id} does not exist!!", Severity.Mild);
-            }
+            };
             return DataSource.parcels.First(c => c.Id == id);
         }
 

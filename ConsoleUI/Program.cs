@@ -323,7 +323,7 @@ namespace ConsoleUI
                             // prints the list of the stations that available for charging
                             case ListOptions.AvailbleChagingStation:
                                 List<Station> ChargeableBaseStationList = new List<Station>();
-                                ChargeableBaseStationList = dalobject.ShowChargeableStationList();
+                                ChargeableBaseStationList = (List<Station>)dalobject.ShowChargeableStationList();
                                 foreach (Station element in ChargeableBaseStationList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;

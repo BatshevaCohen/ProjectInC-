@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using IBL.BO;
 using IDAL.DO;
 
-namespace BL
+namespace IBL
 {
     public class BLObject : IBL
     {
@@ -42,7 +42,7 @@ namespace BL
             throw new NotImplementedException();
 
         }
-        BaseStation IBL.GetStation(int requestedId)
+        BaseStation GetStation(int requestedId)
         {
             throw new NotImplementedException();
         }

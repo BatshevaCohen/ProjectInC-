@@ -259,6 +259,7 @@ namespace ConsoleUI
                         switch (entityOptions)
                         {
                             case EntityOptions.BaseStation:
+           
                                 int Id_S;
                                 int.TryParse(Console.ReadLine(), out Id_S);
                                 Console.WriteLine(dalobject.GetBaseStation(Id_S));

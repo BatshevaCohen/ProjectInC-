@@ -13,7 +13,7 @@ namespace DalObject
     /// <summary>
     /// constractor 
     /// </summary>
-    public class DalObject : IDAL
+    public class DalObject : IDal
     {
         public DalObject()
         {
@@ -168,7 +168,7 @@ namespace DalObject
         {
             if (!DataSource.Stations.Exists(item => item.Id == id))
             {
-                throw new StationException($"ID: {id} does not exist!!", Severity.Mild);
+                throw new StationException($"ID: {id} does not exist!!");
             }
             return DataSource.Stations.First(c => c.Id == id);
         }
@@ -180,7 +180,7 @@ namespace DalObject
         {
             if (!DataSource.drones.Exists(item => item.Id == id))
             {
-                throw new DroneException($"ID: {id} does not exist!!", Severity.Mild);
+                throw new DroneException($"ID: {id} does not exist!!");
             }
             return DataSource.drones.First(c => c.Id == id);
         }
@@ -192,7 +192,7 @@ namespace DalObject
         {
             if (!DataSource.customer.Exists(item => item.Id == IDc))
             {
-                throw new CustomerException($"ID: {IDc} does not exist!!", Severity.Mild);
+                throw new CustomerException($"ID: {IDc} does not exist!!");
             }
             return DataSource.customer.First(c => c.Id == IDc);
         }
@@ -204,7 +204,7 @@ namespace DalObject
         {
             if (!DataSource.parcels.Exists(item => item.Id == id))
             {
-                throw new ParcelException($"ID: {id} does not exist!!", Severity.Mild);
+                throw new ParcelException($"ID: {id} does not exist!!");
             };
             return DataSource.parcels.First(c => c.Id == id);
         }
@@ -325,6 +325,56 @@ namespace DalObject
         public static int Exit()
         {
             return 0;
+        }
+
+        IEnumerable<Station> IDal.ShowBaseStationList()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<Drone> IDal.ShowDroneList()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<Customer> IDal.ShowCustomerList()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<Parcel> IDal.ShowParcelList()
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<Parcel> IDal.ShowNonAssociatedParcelList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Station> ShowChargeableStationList()
+        {
+            throw new NotImplementedException();
+        }
+
+        public void StationException(int id, string errMsg)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void CustomerException(int id, string errMsg, Severity severity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void ParcelException(int id, string errMsg, Severity severity)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void DroneException(int id, string errMsg)
+        {
+            throw new NotImplementedException();
         }
     }
 }

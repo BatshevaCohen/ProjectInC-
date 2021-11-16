@@ -1,35 +1,51 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using IBL.BO;
+using IDAL.DO;
 
 namespace BL
 {
-    public class BLObject : IBl
+    public class BLObject : IBL
     {
-        IDAL.DO.IDal dal;
+        private IDal dal;
+        private List<IBL.BO.Drone> drones;
         public BLObject()
         {
+            drones = new List<IBL.BO.Drone>();
             dal = new DalObject.DalObject();
         }
-        public Customer GetCustomer(int id)
+        public void AddStation(string stationName, int positions)
         {
-            IDAL.DO.Customer someone;
-            try
-            {
-                someone = dal.GetCustomer(id);
-            }
-            catch (IDAL.DO.CustomerException cex)
-            {
-                // TO DO SOMETHING
-                throw;
-            }
-            return new Customer
-            {
-                Id = someone.Id,
-                Name = someone.Name,
-                Phone = someone.Phone,
-                Location = new Location { Latitude = someone.Latitude, Longitude = someone.Longitude },
-
-            };
+            throw new NotImplementedException();
         }
+        public int AddDrone()
+        {
+            throw new NotImplementedException();
+        }
+        public void AssignmentParcelToDrone(int parcelId, int station)
+        {
+            throw new NotImplementedException();
+        }
+        public void PickedupParcel(int parcelid)
+        {
+            throw new NotImplementedException();
+        }
+        public void SendDroneToRecharge(int droneId, int station)
+        {
+            throw new NotImplementedException();
+        }
+        public void RelizeDroneFromeRecharg(int droneId)
+        {
+            throw new NotImplementedException();
+
+        }
+        BaseStation IBL.GetStation(int requestedId)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

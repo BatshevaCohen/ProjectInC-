@@ -11,11 +11,11 @@ namespace IDAL.DO
         private string errMsg;
         Severity severity;
 
-        public CustomerException()
+        public CustomerException(string v)
         {
         }
 
-        public CustomerException(string message) : base(message)
+        public CustomerException(string message, Severity mild) : base(message)
         {
         }
 

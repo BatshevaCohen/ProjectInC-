@@ -23,6 +23,8 @@ namespace DalObject
 
             static Random r = new Random();
 
+            public static object Station { get; set; }
+
             internal class config
             {
                 
@@ -100,7 +102,7 @@ namespace DalObject
                     {
                         Id = ++OrdinalNumber,    //serial number
                         SenderId = senderId,
-                        TargetId = targetId,
+                        Resiver = targetId,
                         Weight = RandomEnumValue<WeightCategories>(),
                         Priority = RandomEnumValue<Priorities>(),
                         DroneID = r.Next(1000, 5000),

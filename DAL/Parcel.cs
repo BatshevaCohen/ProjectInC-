@@ -8,7 +8,7 @@ namespace IDAL
         {
             public int Id { get; set; }
             public int SenderId { get; set; }
-            public int TargetId { get; set; }
+            public int Resiver { get; set; }
             public WeightCategories Weight { get; set; }
             public Priorities Priority { get; set; }
             public  int DroneID { get; set; }
@@ -16,12 +16,14 @@ namespace IDAL
             public DateTime Scheduled { get; set; }//Time to assign the package to the glider
             public DateTime PickedUp { get; set; }//Time to pick up the package from the sender
             public DateTime Delivered { get; set; }//Time of arrival of the package to the recipient
+            public object DroneInParcel { get; set; }
+
             public override string ToString()
             {
                 String result = "";
                 result += $"ID is {Id}, \n";
                 result += $"Sending customer is {SenderId}, \n";
-                result += $"Reciving customer is {TargetId}, \n";
+                result += $"Reciving customer is {Resiver}, \n";
                 result += $"Package weight is {Weight}, \n";
                 result += $"Priority is {Priority}, \n";
                 result += $"Quadocopter ID is {DroneID}, \n";

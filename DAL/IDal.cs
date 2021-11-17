@@ -1,7 +1,7 @@
 ﻿using IDAL.DO;
 using System.Collections.Generic;
 
-namespace DalObject
+namespace IDAL
 {
     public interface IDal
     {
@@ -15,6 +15,7 @@ namespace DalObject
         void DroneException(int id, string errMsg);
         Customer FindCustomer(int customerID);
         Station FindStetion(int stationID);
+        Drone FindDrone(int DroneID);
         Station GetBaseStation(int id);
         Customer GetCustomer(int IDc);
         Drone GetDrone(int id);
@@ -32,5 +33,9 @@ namespace DalObject
         void UpdateDroneToCharge(int drone_id, int station_id);
         void UpdateParcelPickedupByDrone(int parcel_id, int drone_id);
         void UpdateParcelToDrone(int parcel_id, int drone_id);
+        void UpdateDroneToStation(int StationId,Drone drone);
+        void UpdateNameOfDrone(int DroneId, string model);
+        void UpdateStetion(int StationId, string name, int charging_spots);
+        void UpdateCustumer(int custumerId, string name, string phon);
     }
 }

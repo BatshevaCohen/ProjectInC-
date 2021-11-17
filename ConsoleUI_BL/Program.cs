@@ -11,7 +11,7 @@ namespace ConsoleUI_BL
 {
     class Program
     {
-        static IBL bl = new IBL.BO.BLObject();
+      //  static IBL bl = new IBL.BO.BLObject();
         enum MenuOptions { Add = 1, Update, Show_One, Show_List, Exit }
         enum EntityOptions { BaseStation = 1, Drone, Custumer, Parcel, Exit }
         enum UpdateOptions { Drone_Name = 1, Stetion_Details, Customer_Details, Charge, Discharge, Assignement, Pickedup, Parcel_Supply_By_Drone, Exit }
@@ -55,7 +55,7 @@ namespace ConsoleUI_BL
                                 int Position;
                                 int.TryParse(Console.ReadLine(), out Position);
                                 List<Drone> droneList= new List<Drone>();
-                                s.AvailableChargingSpots = droneList;
+                                s.AvailableChargingSpots = Position;
                                 bLObject.AddStation(s);
                                 Console.WriteLine("\nBase station added successfully! \n");
                                 break;
@@ -87,17 +87,12 @@ namespace ConsoleUI_BL
                                 Console.WriteLine("enter phone number");
                                 string phone_C = Console.ReadLine();
                                 Console.WriteLine("enter longitude and latitude");
-                                double longitude_C;
-                                double.TryParse(Console.ReadLine(), out longitude_C);
-                                double latitude_C;
-                                double.TryParse(Console.ReadLine(), out latitude_C);
+                              
 
                                 Customer c = new Customer();
                                 c.Id = id_C;
                                 c.Name = name_C;
                                 c.Phone = phone_C;
-                                c.Location.Latitude = latitude_C;
-                                c.Location.Longitude = longitude_C;
                                 bLObject.AddCustomer(c);
                                 Console.WriteLine("\nCustomer added successfully! \n");
                                 break;
@@ -115,7 +110,7 @@ namespace ConsoleUI_BL
                                 
                                 Parcel p = new Parcel();
                                 p.Sender.Id = id_Psender;
-                                p.Reciver.Id = id_Reciver;
+                                p.Resiver.Id = id_Reciver;
                                 p.Weight = (Weight)weight_P;
                                 p.Priority = (Priority)priority_P;
                                 bLObject.AddParcel(p);
@@ -163,7 +158,15 @@ namespace ConsoleUI_BL
                                     break;
 
                                 case UpdateOptions.Customer_Details:
-
+                                    int Customer_id;
+                                    string nameCustumer, phonCustumer;
+                                    Console.WriteLine("Please enter custumer ID");
+                                    int.TryParse(Console.ReadLine(), out Customer_id);
+                                    Console.WriteLine("Enter new name custumer:");
+                                    nameCustumer = Console.ReadLine();
+                                    Console.WriteLine("Enter Phon's custumer:");
+                                    phonCustumer= Console.ReadLine();
+                                    bLObject.UpdateCustomer(Customer_id, nameCustumer, phonCustumer);
                                     break;
 
                                 case UpdateOptions.Charge:
@@ -172,10 +175,10 @@ namespace ConsoleUI_BL
                                     int.TryParse(Console.ReadLine(), out drone_id4);
                                     Console.WriteLine("choose a station for charging");
                                     // show the list os stations to choose from
-                                    dalobject.ShowStationList();
+                                    bLObject.ShowStationList();
                                     int station_id;
                                     int.TryParse(Console.ReadLine(), out station_id);
-                                    dalobject.UpdateDroneToCharge(drone_id4, station_id);
+                                    bLObject.UpdateChargeDrone(drone_id4, station_id);
                                     Console.WriteLine("\nDrone updated to- charge status successfully!\n");
                                     break;
 

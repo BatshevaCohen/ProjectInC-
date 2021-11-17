@@ -161,7 +161,7 @@ namespace ConsoleUI
 
                                 p.Id = id_P;
                                 p.SenderId = id_Psender;
-                                p.TargetId = id_Ptarget;
+                                p.Resiver = id_Ptarget;
                                 p.Weight = (WeightCategories)weight_P;
                                 p.Priority = (Priorities)priority_P;
                                 p.Requested = requested_P;

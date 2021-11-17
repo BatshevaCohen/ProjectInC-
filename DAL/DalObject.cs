@@ -156,6 +156,42 @@ namespace DalObject
             //d.Status = DroneStatuses.Available;
             s.ChargeSlots++;
         }
+        /// <summary>
+        /// Put the skimmer in it for initial charging
+        /// </summary>
+        /// <param name="StationId"></param>
+        /// <param name="drone"></param>
+        public void UpdateDroneToStation(int StationId,Drone drone)
+        {
+            Station station = DataSource.Stations.Find(x => x.Id == StationId);
+            station.ChargeSlots = drone.Id;
+        }
+         public  void UpdateNameOfDrone(int id, string model)
+        {
+            Drone drone = DataSource.drones.Find(x => x.Id == id);
+            drone.Model = model;
+        }
+        /// <summary>
+        /// Update station data
+        /// </summary>
+        /// <param name="StationId"></param>
+        /// <param name="name"></param>
+        /// <param name="charging_spots"></param>
+        public void UpdateStetion(int StationId, string name, int charging_spots)
+        {
+            Station station = DataSource.Stations.Find(x => x.Id == StationId);
+            station.ChargeSlots = charging_spots;
+            station.Name = name;
+            station.Id = StationId;
+        }
+       public void UpdateCustumer(int custumerId, string name, string phon)
+        {
+            Customer customer = DataSource.customer.Find(x => x.Id == custumerId);
+            customer.Id = custumerId;
+            customer.Name = name;
+            customer.Phone = phon;
+        }
+
 
 
         //GET:
@@ -322,6 +358,11 @@ namespace DalObject
         /// Exit function
         /// </summary>
         /// <returns></returns>
+        /// 
+        public Drone FindDrone(int droneId)
+        {
+            return DataSource.drones.Find(x => x.Id == droneId);
+        }
         public static int Exit()
         {
             return 0;

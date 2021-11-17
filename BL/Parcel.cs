@@ -10,7 +10,7 @@ namespace IBL.BO
     {
         public int Id { get; set; }
         public CustomerInParcel Sender { get; set; } //the sender of the parcel
-        public CustomerInParcel Reciver { get; set; } //the person who recive the parcel
+        public CustomerInParcel Resiver { get; set; } //the person who recive the parcel
         public Weight Weight { get; set; } //wheight category
         public Priority Priority { get; set; } // parcel's priority
         public DroneInParcel DroneInParcel { get; set; }

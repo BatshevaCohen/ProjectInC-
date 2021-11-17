@@ -11,9 +11,9 @@ namespace DalObject
         private string errMsg;
         private Severity severity;
 
-        //public ParcelException()
-        //{
-        //}
+        public ParcelException()
+        {
+        }
 
         public ParcelException(string message) : base(message)
         {

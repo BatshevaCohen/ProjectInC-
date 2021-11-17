@@ -24,8 +24,6 @@ namespace ConsoleUI
             UpdateOptions updateOptions;
             DalObject.DalObject dalobject = new DalObject.DalObject();//constractor DalObject
 
-
-
             do
             {
                 Console.WriteLine("WELCOME!");
@@ -226,7 +224,7 @@ namespace ConsoleUI
                                     int.TryParse(Console.ReadLine(), out drone_id4);
                                     Console.WriteLine("choose a station for charging");
                                     // show the list os stations to choose from
-                                    dalobject.ShowBaseStationList();
+                                    dalobject.ShowStationList();
                                     int station_id;
                                     int.TryParse(Console.ReadLine(), out station_id);
                                     dalobject.UpdateDroneToCharge(drone_id4, station_id);
@@ -295,7 +293,7 @@ namespace ConsoleUI
                             // prints the list of the base stations
                             case ListOptions.BaseStation:
                                 List<Station> BaseStationList = new List<Station>();
-                                BaseStationList = dalobject.ShowBaseStationList();
+                                BaseStationList = dalobject.ShowStationList();
                                 foreach (Station element in BaseStationList) //prints the elements in the list
                                     Console.WriteLine(element);
                                     break;

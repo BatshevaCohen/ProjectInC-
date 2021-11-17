@@ -8,7 +8,7 @@ namespace IBL.BO
 {
     public class Parcel
     {
-        public int Id { get; init; }
+        public int Id { get; set; }
         public CustomerInParcel Sender { get; set; } //the sender of the parcel
         public CustomerInParcel Reciver { get; set; } //the person who recive the parcel
         public Weight Weight { get; set; } //wheight category

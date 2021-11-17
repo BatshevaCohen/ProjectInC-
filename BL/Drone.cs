@@ -9,11 +9,11 @@ namespace IBL.BO
    public class Drone
     {
         public int Id { get; set; }
-        public string model { get; set; }
-        public Weight weight { get; set; }
+        public string Model { get; set; }
+        public Weight Weight { get; set; }
         public double Battery { get; set; } //charging level
-        public DroneStatuses droneStatuses { get; set; }
+        public DroneStatuses DroneStatuses { get; set; }
         public ParcelInTransfer ParcelInTransfer { get; set; }
-        public Location location { get; set; }
+        public Location Location { get; set; }
     }
 }

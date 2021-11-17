@@ -34,7 +34,7 @@ namespace DalObject
                 throw new StationException($"ID {s.Id} already exists!!");
             }
             else
-            DataSource.Stations.Add(s);
+                DataSource.Stations.Add(s);
         }
         /// <summary>
         /// add Drone to the drons list
@@ -48,7 +48,7 @@ namespace DalObject
                 throw new DroneException($"ID {d.Id} already exists!!");
             }
             else
-            DataSource.drones.Add(d);
+                DataSource.drones.Add(d);
         }
         /// <summary>
         /// add Customer to the Customers list
@@ -57,7 +57,7 @@ namespace DalObject
         /// <returns></returns>
         public void AddCustomer(Customer c)
         {
-            if(DataSource.customer.Exists(client => client.Id==c.Id))
+            if (DataSource.customer.Exists(client => client.Id == c.Id))
             {
                 throw new CustomerException($"ID {c.Id} already exists!!");
             }
@@ -76,7 +76,7 @@ namespace DalObject
                 throw new ParcelException($"ID {p.Id} already exists!!");
             }
             else
-            DataSource.parcels.Add(p);
+                DataSource.parcels.Add(p);
         }
 
 
@@ -93,7 +93,7 @@ namespace DalObject
             {
                 parcel = GetParcel(parcel_id); //finds the parcel by its ID
             }
-            catch(ParcelException pex)
+            catch (ParcelException pex)
             {
                 throw new ParcelException($"Couldn't attribute drone {drone_id} to parcel", pex);
             }
@@ -213,9 +213,9 @@ namespace DalObject
         /// <summary>
         /// view lists functions for BaseStation
         /// </summary>
-        public List<Station> ShowBaseStationList()
+        public List<Station> ShowStationList()
         {
-            List <Station> baseStationList = new List<Station>();
+            List<Station> baseStationList = new List<Station>();
             foreach (Station element in DataSource.Stations)
             {
                 baseStationList.Add(element);
@@ -327,30 +327,31 @@ namespace DalObject
             return 0;
         }
 
-        IEnumerable<Station> IDal.ShowBaseStationList()
-        {
-            throw new NotImplementedException();
-        }
+        //IEnumerable<Station> IDal.ShowBaseStationList()
+        //{
+        //    throw new NotImplementedException();
+           
+        //}
 
-        IEnumerable<Drone> IDal.ShowDroneList()
-        {
-            throw new NotImplementedException();
-        }
+        //IEnumerable<Drone> IDal.ShowDroneList()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        IEnumerable<Customer> IDal.ShowCustomerList()
-        {
-            throw new NotImplementedException();
-        }
+        //IEnumerable<Customer> IDal.ShowCustomerList()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        IEnumerable<Parcel> IDal.ShowParcelList()
-        {
-            throw new NotImplementedException();
-        }
+        //IEnumerable<Parcel> IDal.ShowParcelList()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
-        IEnumerable<Parcel> IDal.ShowNonAssociatedParcelList()
-        {
-            throw new NotImplementedException();
-        }
+        //IEnumerable<Parcel> IDal.ShowNonAssociatedParcelList()
+        //{
+        //    throw new NotImplementedException();
+        //}
 
         public IEnumerable<Station> ShowChargeableStationList()
         {

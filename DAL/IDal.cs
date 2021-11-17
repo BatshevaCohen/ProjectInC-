@@ -1,37 +1,36 @@
 ﻿using IDAL.DO;
-using System;
 using System.Collections.Generic;
 
-namespace IDAL.DO
+namespace DalObject
 {
     public interface IDal
     {
-        void AddStation(Station s);
         void AddCustomer(Customer c);
         void AddDrone(Drone d);
         void AddParcel(Parcel p);
-        void DischargeDrone(int drone_id, int station_id);
+        void AddStation(Station s);
         double CalculateDistance(double longitude1, double latitude1, double longitude2, double latitude2);
+        void CustomerException(int id, string errMsg, Severity severity);
+        void DischargeDrone(int drone_id, int station_id);
+        void DroneException(int id, string errMsg);
         Customer FindCustomer(int customerID);
         Station FindStetion(int stationID);
         Station GetBaseStation(int id);
         Customer GetCustomer(int IDc);
         Drone GetDrone(int id);
         Parcel GetParcel(int id);
-        IEnumerable<Station> ShowBaseStationList();
-        IEnumerable<Drone> ShowDroneList();
-        IEnumerable<Customer> ShowCustomerList();
-        IEnumerable<Parcel> ShowParcelList();
-        IEnumerable<Parcel> ShowNonAssociatedParcelList();
+        void ParcelException(int id, string errMsg, Severity severity);
+        List<Station> ShowStationList();
+        List<Station> ShowChargeableBaseStationList();
         IEnumerable<Station> ShowChargeableStationList();
+        List<Customer> ShowCustomerList();
+        List<Drone> ShowDroneList();
+        List<Parcel> ShowNonAssociatedParcelList();
+        List<Parcel> ShowParcelList();
+        void StationException(int id, string errMsg);
         void UpdateDeliveryToCustomer(int parcel_id, int customer_id);
         void UpdateDroneToCharge(int drone_id, int station_id);
         void UpdateParcelPickedupByDrone(int parcel_id, int drone_id);
         void UpdateParcelToDrone(int parcel_id, int drone_id);
-        void StationException(int id, string errMsg);
-        void CustomerException(int id, string errMsg, Severity severity);
-        void ParcelException(int id, string errMsg, Severity severity);
-        void DroneException(int id, string errMsg);
     }
-
 }

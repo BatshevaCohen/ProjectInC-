@@ -15,6 +15,7 @@ namespace DalObject
             /// <summary>
             /// database of DO entities
             /// </summary>
+            public static int OrdinalNumber = 1000000;
             internal static List<Drone> drones = new List<Drone>(2);
             internal static List<Station> Stations = new List<Station>(5);
             internal static List<Customer> customer = new List<Customer>(100);
@@ -24,7 +25,6 @@ namespace DalObject
 
             internal class config
             {
-                public static int OrdinalNumber = 1000000;
                 
 
                 internal static double Light { get => 10;}
@@ -98,7 +98,7 @@ namespace DalObject
 
                     parcels.Add(new Parcel()
                     {
-                        Id = ++config.OrdinalNumber,    //serial number
+                        Id = ++OrdinalNumber,    //serial number
                         SenderId = senderId,
                         TargetId = targetId,
                         Weight = RandomEnumValue<WeightCategories>(),

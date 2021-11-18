@@ -11,7 +11,7 @@ namespace ConsoleUI_BL
 {
     class Program
     {
-      //  static IBL bl = new IBL.BO.BLObject();
+     
         enum MenuOptions { Add = 1, Update, Show_One, Show_List, Exit }
         enum EntityOptions { BaseStation = 1, Drone, Custumer, Parcel, Exit }
         enum UpdateOptions { Drone_Name = 1, Stetion_Details, Customer_Details, Charge, Discharge, Assignement, Pickedup, Parcel_Supply_By_Drone, Exit }
@@ -168,17 +168,12 @@ namespace ConsoleUI_BL
                                     phonCustumer= Console.ReadLine();
                                     bLObject.UpdateCustomer(Customer_id, nameCustumer, phonCustumer);
                                     break;
-
+                                //send drone to Charge
                                 case UpdateOptions.Charge:
                                     Console.WriteLine("Please enter Drone ID");
                                     int drone_id4;
                                     int.TryParse(Console.ReadLine(), out drone_id4);
-                                    Console.WriteLine("choose a station for charging");
-                                    // show the list os stations to choose from
-                                    bLObject.ShowStationList();
-                                    int station_id;
-                                    int.TryParse(Console.ReadLine(), out station_id);
-                                    bLObject.UpdateChargeDrone(drone_id4, station_id);
+                                    bLObject.UpdateChargeDrone(drone_id4);
                                     Console.WriteLine("\nDrone updated to- charge status successfully!\n");
                                     break;
 

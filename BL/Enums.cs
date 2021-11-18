@@ -1,6 +1,6 @@
 ﻿namespace IBL.BO
 {
-    public enum Weight
+    public enum Weight 
     {
         Light = 1,
         Medium,

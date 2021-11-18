@@ -13,8 +13,8 @@ namespace IBL.BO
 {
     public class BLObject : IBL
     {
-        public static IDAL.IDal dalo = new DalObject.DalObject();//Access to the e layer DAL
-        private List<DroneToList> drones;
+        public static IDAL.IDal dalo = new DalObject.DalObject();//Access to the layer DAL
+        public List<DroneToList> drones;
         static Random r = new Random();
         DateTime ZeroTime = new DateTime(2000, 1, 1, 00, 00, 00); //default time when nothing inserted 
         public BLObject()
@@ -81,6 +81,7 @@ namespace IBL.BO
         //UPDATE:
         public void UpdateDroneName(int id, string model)
         {
+           
             dalo.UpdateNameOfDrone(id, model);
           
         }
@@ -90,10 +91,52 @@ namespace IBL.BO
         }
         public void UpdateCustomer(int id, string name, string phone)
         {
-
+            //???????????????????????????????????????????????????????????????????
         }
         public void UpdateChargeDrone(int id)
         {
+            IDAL.DO.Station station = new IDAL.DO.Station();
+            DroneToList dronel = drones.Find(x => x.Id == id);
+            if (dronel.droneStatuses == DroneStatuses.Available)
+            {
+                List<Distanse> d = dalo.MinimumDistance(dronel.location.Longitude, dronel.location.Latitude);
+                double min = 9999999;
+                int id1;
+                bool flag = false;
+                int sized = d.Count;int counter = 0;
+                while (!flag&&counter<=sized)
+                {
+                    foreach (Distanse item in d)
+                    {
+                        if (item.distanse <= min)
+                        {
+                            min = item.distanse;
+                            id1 = item.id;
+                        }
+                        station = dalo.GetBaseStation(id);
+                        if (station.ChargeSlots > 0)
+                        {
+                            if (dronel.battery > 50)///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                            {
+                                flag = true;
+                            }
+
+                        }
+                        counter++;
+                        d.Remove(item);
+                    }
+                }
+            }
+            
+
+
+              
+
+
+
+
+            
+
 
         }
         public void UpdateDichargeDrone(int id, DateTime chargingTime)
@@ -119,11 +162,11 @@ namespace IBL.BO
         }
         BO.Drone GetDrone(int droneId)
         {
-
+            throw new NotImplementedException();
         }
         Customer GetCustomer(int customerId)
         {
-
+            throw new NotImplementedException();
         }
         Parcel GetParcel(int parcelId)
         {
@@ -177,9 +220,6 @@ namespace IBL.BO
 
 
 
-        //Station IBL.GetStation(int requestedId)
-        //{
-        //    throw new NotImplementedException();
-        //}
+       
     }
 }

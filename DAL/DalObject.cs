@@ -144,6 +144,13 @@ namespace DalObject
             droneCharge.StationId = station_id;
             s.ChargeSlots--;
         }
+
+        //public void UpdateDroneToChargeInID(int drone_id)
+        //{
+        //    Drone d = DataSource.drones.Find(x => x.Id == drone_id);
+        //    DroneCharge droneCharge = new DroneCharge();
+        //    droneCharge.DroneId = drone_id;
+        //}
         /// <summary>
         /// Release function of Drone
         /// </summary>
@@ -191,7 +198,28 @@ namespace DalObject
             customer.Name = name;
             customer.Phone = phon;
         }
+        /// <summary>
+        /// Looking for the most base with upcoming vacancies
+        /// </summary>
+       public List<Distanse> MinimumDistance(double lang, double lati)
+        {
+            List<Distanse> listDis=new List<Distanse>();
+            foreach (Station element in DataSource.Stations)
+            {
+               
+                Distanse distanse=new Distanse();
+                double dis=0;
+                dis = (element.Longitude - lang)* (element.Longitude - lang) + (element.Latitude - lang)* (element.Latitude - lang);
+                dis= Math.Sqrt(dis);
+                distanse.id = element.Id;
+                distanse.distanse = dis;
 
+                listDis.Add(distanse);
+
+
+            }
+            return listDis;
+        }
 
 
         //GET:

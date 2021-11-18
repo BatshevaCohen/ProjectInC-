@@ -1,4 +1,5 @@
 ﻿using IDAL.DO;
+using DalObject;
 using System.Collections.Generic;
 
 namespace IDAL
@@ -37,5 +38,6 @@ namespace IDAL
         void UpdateNameOfDrone(int DroneId, string model);
         void UpdateStetion(int StationId, string name, int charging_spots);
         void UpdateCustumer(int custumerId, string name, string phon);
+        List<Distanse> MinimumDistance(double lang,double lati);
     }
 }

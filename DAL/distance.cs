@@ -9,7 +9,7 @@ namespace DalObject
    public class Distanse
     {
         public int id { get; set; }
-        public double distanse { get; set; }
+        public double distance { get; set; }
         public  bool status { get; set; }
     }
 }

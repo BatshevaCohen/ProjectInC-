@@ -136,26 +136,13 @@ namespace DalObject
         /// <param name="station_id"></param>
         public void UpdateDroneToCharge(int drone_id, int station_id)
         {
-            Drone d = DataSource.drones.Find(x => x.Id == drone_id);
-            //d.Status = DroneStatuses.Maintenance;
+            Drone d = DataSource.drones.Find(x => x.Id == drone_id;
             DroneCharge droneCharge = new DroneCharge();
             droneCharge.DroneId = drone_id;
             Station s = DataSource.Stations.Find(x => x.Id == station_id);
             droneCharge.StationId = station_id;
             s.ChargeSlots--;
         }
-
-        //public void UpdateDroneToChargeInID(int drone_id)
-        //{
-        //    Drone d = DataSource.drones.Find(x => x.Id == drone_id);
-        //    DroneCharge droneCharge = new DroneCharge();
-        //    droneCharge.DroneId = drone_id;
-        //}
-        /// <summary>
-        /// Release function of Drone
-        /// </summary>
-        /// <param name="drone_id"></param>
-        /// <param name="station_id"></param>
         public void DischargeDrone(int drone_id, int station_id)
         {
             Drone d = DataSource.drones.Find(x => x.Id == drone_id);
@@ -206,20 +193,27 @@ namespace DalObject
             List<Distanse> listDis=new List<Distanse>();
             foreach (Station element in DataSource.Stations)
             {
-               
-                Distanse distanse=new Distanse();
+
+                Distanse distanse =new Distanse();
                 double dis=0;
                 dis = (element.Longitude - lang)* (element.Longitude - lang) + (element.Latitude - lang)* (element.Latitude - lang);
                 dis= Math.Sqrt(dis);
                 distanse.id = element.Id;
-                distanse.distanse = dis;
+                distanse.distance = dis;
 
                 listDis.Add(distanse);
 
 
             }
             return listDis;
+
         }
+       public void UpdateChargeSlots(int stationId)
+        {
+            Station station = DataSource.Stations.Find(x => x.Id == stationId);
+            station.ChargeSlots--;
+        }
+
 
 
         //GET:
@@ -446,5 +440,13 @@ namespace DalObject
         {
             throw new NotImplementedException();
         }
+
+     
+        //List<Distanse> IDal(double lang, double lati)
+        //{
+        //    throw new NotImplementedException();
+        //}
+
     }
+  
 }

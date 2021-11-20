@@ -177,15 +177,14 @@ namespace ConsoleUI_BL
                                     Console.WriteLine("\nDrone updated to- charge status successfully!\n");
                                     break;
 
-                                case UpdateOptions.Discharge:
+                                case UpdateOptions.Discharge://release
                                     Console.WriteLine("Please enter Drone ID");
-                                    int drone_id5;
                                     int.TryParse(Console.ReadLine(), out drone_id5);
-                                    Console.WriteLine("choose a station for charging");
-                                    int station_id_discharge;
-                                    int.TryParse(Console.ReadLine(), out station_id_discharge);
-                                    dalobject.DischargeDrone(drone_id5, station_id_discharge);
-                                    Console.WriteLine("\nDrone updated to- discharge status successfully!\n");
+                                    Console.WriteLine("enter the time of charging");
+                                    int TimeOfCharging;
+                                    int.TryParse(Console.ReadLine(), out TimeOfCharging);
+                                    bLObject.DischargeDrone(drone_id5, TimeOfCharging);
+                                    Console.WriteLine("\nDrone updated to- discharge successfully!\n");
                                     break;
 
 
@@ -196,7 +195,7 @@ namespace ConsoleUI_BL
                                     Console.WriteLine("Please enter Parcel ID");
                                     int parcel_id;
                                     int.TryParse(Console.ReadLine(), out parcel_id);
-                                    dalobject.UpdateParcelToDrone(parcel_id, drone_id);
+                                    bLObject.UpdateParcelToDrone(parcel_id, drone_id);
                                     Console.WriteLine("\nParcel updated to drone successfully!\n");
                                     break;
 

@@ -93,49 +93,58 @@ namespace IBL.BO
         {
             //???????????????????????????????????????????????????????????????????
         }
-        public void UpdateChargeDrone(int id)
+        public void UpdateChargeDrone(int droneId)
         {
             IDAL.DO.Station station = new IDAL.DO.Station();
-            DroneToList dronel = drones.Find(x => x.Id == id);
+            DroneToList dronel = drones.Find(x => x.Id == droneId);
             if (dronel.droneStatuses == DroneStatuses.Available)
             {
-                List<Distanse> d = dalo.MinimumDistance(dronel.location.Longitude, dronel.location.Latitude);
+                List<Distanse> disStationFromDrone = dalo.MinimumDistance(dronel.location.Longitude, dronel.location.Latitude);//the distance all station from the drone
                 double min = 9999999;
-                int id1;
+                int idS;
                 bool flag = false;
-                int sized = d.Count;int counter = 0;
-                while (!flag&&counter<=sized)
+                int sized = disStationFromDrone.Count;
+                int counter = 0;
+                while (!flag && counter <= sized)
                 {
-                    foreach (Distanse item in d)
+                    foreach (Distanse item in disStationFromDrone)
                     {
-                        if (item.distanse <= min)
+                        if (item.distance <= min)
                         {
-                            min = item.distanse;
-                            id1 = item.id;
+
+                            min = item.distance;
+                            idS = item.id;
+
                         }
-                        station = dalo.GetBaseStation(id);
+
+                        station = dalo.GetBaseStation(item.id);
                         if (station.ChargeSlots > 0)
                         {
-                            if (dronel.battery > 50)///////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                            if (dronel.battery > min * 10 / 100)
                             {
                                 flag = true;
+                                //function to update Battery, drone mode drone location
+                                updateDtoneAndStation(droneId, station.Id, min);
                             }
 
                         }
                         counter++;
-                        d.Remove(item);
+                        disStationFromDrone.Remove(item);
                     }
                 }
             }
-            
-
-
-              
-
-
-
-
-            
+        }
+        public void updateDtoneAndStation(int droneId,int stationId,double minDistance )
+        {
+            DroneToList dronel = drones.Find(x => x.Id == droneId);
+            IDAL.DO.Station station = new IDAL.DO.Station();
+            station = dalo.GetBaseStation(stationId);
+            dronel.droneStatuses = DroneStatuses.Shipping;
+            dronel.location.Latitude = station.Latitude;
+            dronel.location.Longitude = station.Longitude;
+            double droneBattery = minDistance * 10 / 100;
+            dronel.battery = droneBattery;
+            dalo.UpdateChargeSlots(station.Id);
 
 
         }
@@ -143,7 +152,7 @@ namespace IBL.BO
         {
 
         }
-        public void UpdateParcelToDrone(int droneId)
+        public void UpdateParcelToDrone(int droneId, int drone_id)
         {
 
         }
@@ -218,8 +227,25 @@ namespace IBL.BO
             throw new NotImplementedException();
         }
 
+        public void DischargeDrone(int droneId, int TimeOfCharging)
+        {
+            DroneToList dronel = drones.Find(x => x.Id == droneId);
+            if (dronel.droneStatuses != DroneStatuses.Maintenance)
+            {
+                throw new NotImplementedException();
+            }
+            //   else
 
+        }
 
-       
+        public void UpdateDeliveryToCustomer(int parcel_id3, int customer_id)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateParcelToDrone(int droneId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -136,6 +136,7 @@ namespace IBL.BO
         }
         public void updateDtoneAndStation(int droneId,int stationId,double minDistance )
         {
+            //עדכון בעיקבות הנסיעה
             DroneToList dronel = drones.Find(x => x.Id == droneId);
             IDAL.DO.Station station = new IDAL.DO.Station();
             station = dalo.GetBaseStation(stationId);
@@ -145,6 +146,13 @@ namespace IBL.BO
             double droneBattery = minDistance * 10 / 100;
             dronel.battery = droneBattery;
             dalo.UpdateChargeSlots(station.Id);
+            //להכניס את זה לרשימת רחפנים בטעינה 
+            DroneInCharging droneInCharging = new DroneInCharging();
+            droneInCharging.battery = droneBattery;
+            droneInCharging.Id = droneId;
+            Station s = new Station();
+            s.droneInChargings.Add(droneInCharging);
+           
 
 
         }

@@ -60,8 +60,6 @@ namespace IBL.BO
         }
         public void AddParcel(Parcel parcel)
         {
-            
-
             parcel.Id = ++(DalObject.DO.DataSource.OrdinalNumber); //static serial number for parcel id
             parcel.ParcelCreationTime = DateTime.Now;
             parcel.AssignmentToParcelTime = ZeroTime;
@@ -81,9 +79,7 @@ namespace IBL.BO
         //UPDATE:
         public void UpdateDroneName(int id, string model)
         {
-           
             dalo.UpdateNameOfDrone(id, model);
-          
         }
         public void UpdateStetion(int id, string name, int charging_spots)
         {
@@ -91,8 +87,9 @@ namespace IBL.BO
         }
         public void UpdateCustomer(int id, string name, string phone)
         {
-            //???????????????????????????????????????????????????????????????????
+            dalo.UpdateCustumer(id, name, phone);
         }
+        //sending drone to charge
         public void UpdateChargeDrone(int droneId)
         {
             IDAL.DO.Station station = new IDAL.DO.Station();

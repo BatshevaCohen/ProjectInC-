@@ -178,12 +178,12 @@ namespace DalObject
             station.Name = name;
             station.Id = StationId;
         }
-       public void UpdateCustumer(int custumerId, string name, string phon)
+       public void UpdateCustumer(int custumerId, string name, string phone)
         {
             Customer customer = DataSource.customer.Find(x => x.Id == custumerId);
             customer.Id = custumerId;
             customer.Name = name;
-            customer.Phone = phon;
+            customer.Phone = phone;
         }
         /// <summary>
         /// Looking for the most base with upcoming vacancies

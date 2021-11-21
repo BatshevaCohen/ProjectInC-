@@ -15,6 +15,7 @@ namespace IBL.BO
     {
         public static IDAL.IDal dalo = new DalObject.DalObject();//Access to the layer DAL
         public List<DroneToList> drones;
+        public List<StationToList> stations;
         static Random r = new Random();
         DateTime ZeroTime = new DateTime(2000, 1, 1, 00, 00, 00); //default time when nothing inserted 
         public BLObject()
@@ -93,31 +94,27 @@ namespace IBL.BO
         public void UpdateChargeDrone(int droneId)
         {
             IDAL.DO.Station station = new IDAL.DO.Station();
-            DroneToList dronel = drones.Find(x => x.Id == droneId);
-            if (dronel.droneStatuses == DroneStatuses.Available)
+            DroneToList dronel = drones.Find(x => x.Id == droneId); //finds the drone by the recived ID
+            if (dronel.droneStatuses == DroneStatuses.Available) //if the drone is available- it can be sent for charging
             {
-                List<Distanse> disStationFromDrone = dalo.MinimumDistance(dronel.location.Longitude, dronel.location.Latitude);//the distance all station from the drone
+                List<Distanse> disStationFromDrone = dalo.MinimumDistance(dronel.location.Longitude, dronel.location.Latitude);//list of the distances from the drone to every station
                 double min = 9999999;
-                int idS;
+                int idS, counter = 0;
                 bool flag = false;
-                int sized = disStationFromDrone.Count;
-                int counter = 0;
-                while (!flag && counter <= sized)
+                int sized = disStationFromDrone.Count; //number of distances in the list
+                while (!flag && counter <= sized) //goes over the list
                 {
                     foreach (Distanse item in disStationFromDrone)
                     {
-                        if (item.distance <= min)
+                        if (item.distance <= min) //to find the station with the minimum distance from the drone
                         {
-
                             min = item.distance;
                             idS = item.id;
-
                         }
-
                         station = dalo.GetBaseStation(item.id);
-                        if (station.ChargeSlots > 0)
+                        if (station.ChargeSlots > 0) //if there is an available charging spot in the station
                         {
-                            if (dronel.battery > min * 10 / 100)
+                            if (dronel.battery > min * 10 / 100) //only if there is enough battery
                             {
                                 flag = true;
                                 //function to update Battery, drone mode drone location
@@ -133,29 +130,32 @@ namespace IBL.BO
         }
         public void updateDtoneAndStation(int droneId,int stationId,double minDistance )
         {
-            //עדכון בעיקבות הנסיעה
-            DroneToList dronel = drones.Find(x => x.Id == droneId);
+            //update for the way to the station
+            DroneToList dronel = drones.Find(x => x.Id == droneId); //finds the drone by its ID
             IDAL.DO.Station station = new IDAL.DO.Station();
-            station = dalo.GetBaseStation(stationId);
-            dronel.droneStatuses = DroneStatuses.Shipping;
-            dronel.location.Latitude = station.Latitude;
-            dronel.location.Longitude = station.Longitude;
+            station = dalo.GetBaseStation(stationId); //finds the station by its ID
+            dronel.droneStatuses = DroneStatuses.Maintenance; //update the drone to charging status
+            dronel.location.Latitude = station.Latitude; //update the drone's location to the charging station location - latitude
+            dronel.location.Longitude = station.Longitude; //update the drone's location to the charging station location - longitudw
             double droneBattery = minDistance * 10 / 100;
             dronel.battery = droneBattery;
             dalo.UpdateChargeSlots(station.Id);
-            //להכניס את זה לרשימת רחפנים בטעינה 
             DroneInCharging droneInCharging = new DroneInCharging();
             droneInCharging.battery = droneBattery;
             droneInCharging.Id = droneId;
             Station s = new Station();
             s.droneInChargings.Add(droneInCharging);
-           
-
-
         }
-        public void UpdateDichargeDrone(int id, DateTime chargingTime)
+        public void UpdateDichargeDrone(int droneID, DateTime chargingTime)
         {
-
+            DroneToList dronel = drones.Find(x => x.Id == droneId); //finds the drone by its ID
+            if(dronel.droneStatuses== DroneStatuses.Maintenance) //only a drone that was in charging could be discharge
+            { 
+                Location droneLocation= dronel.location;
+                Station station= stations.Find(x => x.Location == droneLocation) //finds the station where the drone is charged
+                int stationID= station.Id;
+                dalo.DischargeDrone(droneID, stationID);
+            }
         }
         public void UpdateParcelToDrone(int droneId, int drone_id)
         {

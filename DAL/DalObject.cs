@@ -208,6 +208,7 @@ namespace DalObject
             return listDis;
 
         }
+        //updates the number of available charging spots
        public void UpdateChargeSlots(int stationId)
         {
             Station station = DataSource.Stations.Find(x => x.Id == stationId);

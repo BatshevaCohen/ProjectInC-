@@ -12,7 +12,7 @@ namespace IDAL
         void AddStation(Station s);
         double CalculateDistance(double longitude1, double latitude1, double longitude2, double latitude2);
         void CustomerException(int id, string errMsg, Severity severity);
-        void DischargeDrone(int drone_id, int station_id);
+        void DischargeDrone(int drone_id, double longt,double latit);
         void DroneException(int id, string errMsg);
         Customer FindCustomer(int customerID);
         Station FindStetion(int stationID);

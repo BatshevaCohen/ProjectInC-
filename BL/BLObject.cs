@@ -148,13 +148,15 @@ namespace IBL.BO
         }
         public void UpdateDichargeDrone(int droneID, DateTime chargingTime)
         {
-            DroneToList dronel = drones.Find(x => x.Id == droneId); //finds the drone by its ID
+            
+            DroneToList dronel = drones.Find(x => x.Id == droneID); //finds the drone by its ID
             if(dronel.droneStatuses== DroneStatuses.Maintenance) //only a drone that was in charging could be discharge
-            { 
-                Location droneLocation= dronel.location;
-                Station station= stations.Find(x => x.Location == droneLocation) //finds the station where the drone is charged
-                int stationID= station.Id;
-                dalo.DischargeDrone(droneID, stationID);
+            {
+                
+                double droneLocationLatitude = dronel.location.Latitude;
+                double droneLocationLongitude = dronel.location.Longitude;
+
+                dalo.DischargeDrone(droneID, droneLocationLatitude, droneLocationLongitude);
             }
         }
         public void UpdateParcelToDrone(int droneId, int drone_id)

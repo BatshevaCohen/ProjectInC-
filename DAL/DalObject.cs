@@ -136,18 +136,19 @@ namespace DalObject
         /// <param name="station_id"></param>
         public void UpdateDroneToCharge(int drone_id, int station_id)
         {
-            Drone d = DataSource.drones.Find(x => x.Id == drone_id;
+            Drone d = DataSource.drones.Find(x => x.Id == drone_id);
             DroneCharge droneCharge = new DroneCharge();
             droneCharge.DroneId = drone_id;
             Station s = DataSource.Stations.Find(x => x.Id == station_id);
             droneCharge.StationId = station_id;
             s.ChargeSlots--;
         }
-        public void DischargeDrone(int drone_id, int station_id)
-        {
-            Drone d = DataSource.drones.Find(x => x.Id == drone_id);
-            Station s = DataSource.Stations.Find(x => x.Id == station_id);
-            //d.Status = DroneStatuses.Available;
+        public void DischargeDrone(int droneID,double droneLocationLatitude,double droneLocationLongitude)
+        { 
+            
+            Drone d = DataSource.drones.Find(x => x.Id == droneID);
+            Station s = DataSource.Stations.Find(x => x.Latitude == droneLocationLatitude);
+
             s.ChargeSlots++;
         }
         /// <summary>

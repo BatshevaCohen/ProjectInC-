@@ -19,6 +19,10 @@ namespace IDAL
                 return result;
             }
 
+            public DroneCharge Find(Func<object, bool> p)
+            {
+                throw new NotImplementedException();
+            }
         }
     }
 }

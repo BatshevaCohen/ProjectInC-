@@ -12,6 +12,7 @@ namespace IBL.BO
         public string Name { get; set; }
         public Location Location { get; set; }
         public int AvailableChargingSpots { get; set; } //Number of available charging spots in free
-        public List<DroneInCharging> droneInChargings= new List<DroneInCharging>(); //number of drones in charging
+
+        public List<DroneInCharging> droneInChargings= new List<DroneInCharging>(); //list of drones in charging
     }
 }

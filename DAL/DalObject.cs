@@ -111,11 +111,18 @@ namespace DalObject
             {
                 throw new ParcelException($"Couldn't attribute drone {drone_id} to parcel", pex);
             }
+          
             Drone drone = DataSource.drones.Find(x => x.Id == drone_id); //finds the drone by its ID
+            if(drone.Id == 0)
+            {
+                throw new DroneException($"noo drone found");
+            }
+
             parcel.DroneID = drone.Id;
             parcel.Scheduled = DateTime.Now;
             //d.Status = DroneStatuses.Shipping;
         }
+
         /// <summary>
         /// Update function for parcel
         /// </summary>
@@ -221,7 +228,7 @@ namespace DalObject
         /// <summary>
         /// Looking for the most base with upcoming vacancies
         /// </summary>
-       public List<Distanse> MinimumDistance(double lang, double lati)
+       public IEnumerable<Distanse> MinimumDistance(double lang, double lati)
         {
             List<Distanse> listDis=new List<Distanse>();
             foreach (Station element in DataSource.Stations)
@@ -306,7 +313,7 @@ namespace DalObject
         /// <summary>
         /// view lists functions for BaseStation
         /// </summary>
-        public List<Station> ShowStationList()
+        public IEnumerable<Station> ShowStationList()
         {
             List<Station> baseStationList = new List<Station>();
             foreach (Station element in DataSource.Stations)
@@ -318,7 +325,7 @@ namespace DalObject
         /// <summary>
         /// view lists functions for Drone
         /// </summary>
-        public List<Drone> ShowDroneList()
+        public IEnumerable<Drone> ShowDroneList()
         {
             List<Drone> DroneList = new List<Drone>();
             foreach (Drone element in DataSource.drones)
@@ -330,7 +337,7 @@ namespace DalObject
         /// <summary>
         /// view lists functions for Customer
         /// </summary>
-        public List<Customer> ShowCustomerList()
+        public IEnumerable<Customer> ShowCustomerList()
         {
             List<Customer> CustomerList = new List<Customer>();
             foreach (Customer element in DataSource.customer)
@@ -342,7 +349,7 @@ namespace DalObject
         /// <summary>
         /// view lists functions for Parcel
         /// </summary>
-        public List<Parcel> ShowParcelList()
+        public IEnumerable<Parcel> ShowParcelList()
         {
             List<Parcel> ParcelList = new List<Parcel>();
             foreach (Parcel element in DataSource.parcels)
@@ -356,7 +363,7 @@ namespace DalObject
         /// shows the list of packages that haven't been associated to a drone
         /// </summary>
         /// <returns></returns>
-        public List<Parcel> ShowNonAssociatedParcelList()
+        public IEnumerable<Parcel> ShowNonAssociatedParcelList()
         {
             List<Parcel> NonAssociatedParcelList = new List<Parcel>();
             foreach (Parcel element in DataSource.parcels)
@@ -369,7 +376,7 @@ namespace DalObject
         /// <summary>
         ///  shows base stations with available charging spots
         /// </summary>
-        public List<Station> ShowChargeableBaseStationList()
+        public IEnumerable<Station> ShowChargeableBaseStationList()
         {
             List<Station> ChargeableBaseStationList = new List<Station>();
             foreach (Station element in DataSource.Stations)

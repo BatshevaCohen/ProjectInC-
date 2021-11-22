@@ -17,7 +17,6 @@ namespace IBL.BO
         void UpdateStetion(int id, string name, int charging_spots);
         void UpdateCustomer(int id, string name, string phone);
         void UpdateChargeDrone(int id);
-        void UpdateDichargeDrone(int id, DateTime chargingTime);
         void UpdateParcelToDrone(int droneId);
         void UpdatePickUpParcelByDrone(int droneId);
         void UpdateParcelSupplyByDrone(int droneId);

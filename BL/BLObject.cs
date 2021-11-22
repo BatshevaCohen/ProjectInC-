@@ -147,7 +147,7 @@ namespace IBL.BO
         }
         public void UpdateDichargeDrone(int droneID, double chargingTime)
         {
-            DroneToList dronel = drones.Find(x => x.Id == droneID); //finds the drone by its ID
+            DroneToList dronel = drones.Find(x => x.Id == droneID); 
             Station station = new Station();
             if (dronel.droneStatuses == DroneStatuses.Maintenance) //only a drone that was in charging could be discharge
             {

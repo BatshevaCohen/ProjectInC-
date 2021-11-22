@@ -102,7 +102,7 @@ namespace DalObject
                     {
                         Id = ++OrdinalNumber,    //serial number
                         SenderId = senderId,
-                        Resiver = targetId,
+                        ReceiverId = targetId,
                         Weight = RandomEnumValue<WeightCategories>(),
                         Priority = RandomEnumValue<Priorities>(),
                         DroneID = r.Next(1000, 5000),

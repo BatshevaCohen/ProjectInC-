@@ -22,13 +22,13 @@ namespace IDAL
         Drone GetDrone(int id);
         Parcel GetParcel(int id);
         void ParcelException(int id, string errMsg, Severity severity);
-        List<Station> ShowStationList();
-        List<Station> ShowChargeableBaseStationList();
+        IEnumerable<Station> ShowStationList();
+        IEnumerable<Station> ShowChargeableBaseStationList();
         IEnumerable<Station> ShowChargeableStationList();
-        List<Customer> ShowCustomerList();
-        List<Drone> ShowDroneList();
-        List<Parcel> ShowNonAssociatedParcelList();
-        List<Parcel> ShowParcelList();
+        IEnumerable<Customer> ShowCustomerList();
+        IEnumerable<Drone> ShowDroneList();
+        IEnumerable<Parcel> ShowNonAssociatedParcelList();
+        IEnumerable<Parcel> ShowParcelList();
         void StationException(int id, string errMsg);
         void UpdateDeliveryToCustomer(int parcel_id, int customer_id);
         void UpdateDroneToCharge(int drone_id, int station_id);
@@ -38,7 +38,7 @@ namespace IDAL
         void UpdateNameOfDrone(int DroneId, string model);
         void UpdateStetion(int StationId, string name, int charging_spots);
         void UpdateCustumer(int custumerId, string name, string phon);
-        List<Distanse> MinimumDistance(double lang,double lati);
+        IEnumerable<Distanse> MinimumDistance(double lang,double lati);
 
         void UpdateChargeSlots(int stationId);
         double[] PowerRequest();

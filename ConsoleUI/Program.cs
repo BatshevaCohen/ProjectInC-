@@ -4,6 +4,7 @@ using DalObject;
 using IDAL.DO;
 using System.Collections.Generic;
 using DalObject.DO;
+using System.Linq;
 //Shirel Kadosh
 //Batsheva Cohen
 namespace ConsoleUI
@@ -161,7 +162,7 @@ namespace ConsoleUI
 
                                 p.Id = id_P;
                                 p.SenderId = id_Psender;
-                                p.Resiver = id_Ptarget;
+                                p.ReceiverId = id_Ptarget;
                                 p.Weight = (WeightCategories)weight_P;
                                 p.Priority = (Priorities)priority_P;
                                 p.Requested = requested_P;
@@ -292,8 +293,7 @@ namespace ConsoleUI
                         {
                             // prints the list of the base stations
                             case ListOptions.BaseStation:
-                                List<Station> BaseStationList = new List<Station>();
-                                BaseStationList = dalobject.ShowStationList();
+                                IEnumerable<Station> BaseStationList = dalobject.ShowStationList();
                                 foreach (Station element in BaseStationList) //prints the elements in the list
                                     Console.WriteLine(element);
                                     break;
@@ -328,8 +328,7 @@ namespace ConsoleUI
                             // prints the list of the non associated parcel
                             case ListOptions.UnAsignementParcel:
                                 dalobject.ShowNonAssociatedParcelList();
-                                List<Parcel> NonAssociatedParcelList = new List<Parcel>();
-                                NonAssociatedParcelList = dalobject.ShowNonAssociatedParcelList();
+                                List<Parcel> NonAssociatedParcelList =  dalobject.ShowNonAssociatedParcelList().ToList();
                                 foreach (Parcel element in NonAssociatedParcelList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;

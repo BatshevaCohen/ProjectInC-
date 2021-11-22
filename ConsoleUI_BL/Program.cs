@@ -14,7 +14,7 @@ namespace ConsoleUI_BL
      
         enum MenuOptions { Add = 1, Update, Show_One, Show_List, Exit }
         enum EntityOptions { BaseStation = 1, Drone, Custumer, Parcel, Exit }
-        enum UpdateOptions { Drone_Name = 1, Stetion_Details, Customer_Details, Charge, Discharge, Assignement, Pickedup, Parcel_Supply_By_Drone, Exit }
+        enum UpdateOptions { Drone_Name = 1, Stetion_Details, Customer_Details, Charge, Discharge, AssignParcelToDrone, Pickedup, Parcel_Supply_By_Drone, Exit }
         enum ListOptions { BaseStation = 1, Drone, Custumer, Parcel, UnAsignementParcel, AvailbleChagingStation, Exit }
 
         private static void ShowMenu()
@@ -188,14 +188,11 @@ namespace ConsoleUI_BL
                                     break;
 
 
-                                case UpdateOptions.Assignement:
+                                case UpdateOptions.AssignParcelToDrone:
                                     Console.WriteLine("Please enter Drone ID");
                                     int drone_id;
                                     int.TryParse(Console.ReadLine(), out drone_id);
-                                    Console.WriteLine("Please enter Parcel ID");
-                                    int parcel_id;
-                                    int.TryParse(Console.ReadLine(), out parcel_id);
-                                    bLObject.UpdateParcelToDrone(parcel_id, drone_id);
+                                    bLObject.UpdateParcelToDrone(drone_id);
                                     Console.WriteLine("\nParcel updated to drone successfully!\n");
                                     break;
 

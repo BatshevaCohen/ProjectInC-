@@ -15,19 +15,33 @@ namespace DalObject
     /// </summary>
     public class DalObject : IDal
     {
+        private IEnumerable<Station> Stations;
+
         public DalObject()
         {
             DataSource.Initialize();
         }
 
 
-        // ADD:
-        /// <summary>
-        /// add Station to the stations list
-        /// </summary>
-        /// <param name="s"></param>
-        /// <returns></returns>
-        public void AddStation(Station s)
+
+        public double[] PowerRequest()
+        {
+            double[] arr = new double[5];
+            arr[0] = DataSource.config.Available;
+            arr[1] = DataSource.config.Heavy;
+            arr[2] = DataSource.config.Light;
+            arr[3] = DataSource.config.Medium;
+            arr[4] = DataSource.config.ChargingRate;
+            return arr;
+        }
+
+            // ADD:
+            /// <summary>
+            /// add Station to the stations list
+            /// </summary>
+            /// <param name="s"></param>
+            /// <returns></returns>
+            public void AddStation(Station s)
         {
             if (DataSource.Stations.Exists(station => station.Id == s.Id))
             {
@@ -143,13 +157,31 @@ namespace DalObject
             droneCharge.StationId = station_id;
             s.ChargeSlots--;
         }
-        public void DischargeDrone(int droneID,double droneLocationLatitude,double droneLocationLongitude)
-        { 
-            
+        public void DischargeDrone(int droneID,double droneLatitude,double droneLongitude)
+        {
+            bool flag = false;
             Drone d = DataSource.drones.Find(x => x.Id == droneID);
-            Station s = DataSource.Stations.Find(x => x.Latitude == droneLocationLatitude);
+            Station s;
+            foreach (Station item in Stations) //finds the station
+            {
+                if (item.Latitude == droneLatitude && item.Longitude == droneLongitude)
+                {
+                    flag = true;
+                    s = item;
+                    s.ChargeSlots++;
+                    break;
+                }
+            }
+            if (flag ==false)
+            {
+                throw new Exception("couldn't find station by drones location");/////////////////לעשות חריגה שלא קיים מיקום תחנה לרחפן
+            }
+            
+            
 
-            s.ChargeSlots++;
+
+
+           
         }
         /// <summary>
         /// Put the skimmer in it for initial charging
@@ -262,6 +294,7 @@ namespace DalObject
         /// <param name="id"></param>
         public Parcel GetParcel(int id)
         {
+
             if (!DataSource.parcels.Exists(item => item.Id == id))
             {
                 throw new ParcelException($"ID: {id} does not exist!!");

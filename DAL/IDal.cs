@@ -41,5 +41,6 @@ namespace IDAL
         List<Distanse> MinimumDistance(double lang,double lati);
 
         void UpdateChargeSlots(int stationId);
+        double[] PowerRequest();
     }
 }

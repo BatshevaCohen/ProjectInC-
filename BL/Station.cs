@@ -14,5 +14,6 @@ namespace IBL.BO
         public int AvailableChargingSpots { get; set; } //Number of available charging spots in free
 
         public List<DroneInCharging> droneInChargings= new List<DroneInCharging>(); //list of drones in charging
+
     }
 }

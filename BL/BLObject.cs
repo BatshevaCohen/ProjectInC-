@@ -145,17 +145,28 @@ namespace IBL.BO
             Station s = new Station();
             s.droneInChargings.Add(droneInCharging);
         }
-        public void UpdateDichargeDrone(int droneID, DateTime chargingTime)
+        public void UpdateDichargeDrone(int droneID, double chargingTime)
         {
-            
             DroneToList dronel = drones.Find(x => x.Id == droneID); //finds the drone by its ID
-            if(dronel.droneStatuses== DroneStatuses.Maintenance) //only a drone that was in charging could be discharge
+            Station station = new Station();
+            if (dronel.droneStatuses == DroneStatuses.Maintenance) //only a drone that was in charging could be discharge
             {
-                
                 double droneLocationLatitude = dronel.location.Latitude;
                 double droneLocationLongitude = dronel.location.Longitude;
                 dalo.DischargeDrone(droneID, droneLocationLatitude, droneLocationLongitude);
+                DroneInCharging droneInCharge = new DroneInCharging();
+                droneInCharge = station.droneInChargings.Find(x => x.Id == droneID); //find the drone in charging
+                station.droneInChargings.Remove(droneInCharge); //remove the drone frome the list of droneInChargings
+
+
             }
+            else
+            {
+                throw new Exception("drone can't be discharged");
+            }
+            dronel.battery += chargingTime * dalo.PowerRequest()[4];
+            dronel.droneStatuses = DroneStatuses.Available;
+
         }
         public void UpdateParcelToDrone(int droneId, int drone_id)
         {
@@ -249,6 +260,19 @@ namespace IBL.BO
         }
 
         public void UpdateParcelToDrone(int droneId)
+        {
+            IDAL.DO.Drone drone = new IDAL.DO.Drone();
+            ParcelToList parcelToList = new ParcelToList();
+            drone = dalo.GetDrone(droneId);
+            if (drone.Status==IDAL.DO.DroneStatuses.Available)
+            {
+                
+            }
+            else
+                throw new NotImplementedException();
+        }
+
+        public void UpdateDichargeDrone(int id, DateTime chargingTime)
         {
             throw new NotImplementedException();
         }

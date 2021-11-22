@@ -15,7 +15,6 @@ namespace IBL.BO
     {
         public static IDAL.IDal dalo = new DalObject.DalObject();//Access to the layer DAL
         public List<DroneToList> drones;
-        public List<StationToList> stations;
         static Random r = new Random();
         DateTime ZeroTime = new DateTime(2000, 1, 1, 00, 00, 00); //default time when nothing inserted 
         public BLObject()
@@ -155,7 +154,6 @@ namespace IBL.BO
                 
                 double droneLocationLatitude = dronel.location.Latitude;
                 double droneLocationLongitude = dronel.location.Longitude;
-
                 dalo.DischargeDrone(droneID, droneLocationLatitude, droneLocationLongitude);
             }
         }

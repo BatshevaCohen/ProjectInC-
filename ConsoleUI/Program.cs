@@ -261,7 +261,7 @@ namespace ConsoleUI
            
                                 int Id_S;
                                 int.TryParse(Console.ReadLine(), out Id_S);
-                                Console.WriteLine(dalobject.GetBaseStation(Id_S));
+                                Console.WriteLine(dalobject.GetStation(Id_S));
                                 break;
                             case EntityOptions.Drone:
                                 int Id_D;

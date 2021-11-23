@@ -17,7 +17,7 @@ namespace IDAL
         Customer FindCustomer(int customerID);
         Station FindStetion(int stationID);
         Drone FindDrone(int DroneID);
-        Station GetBaseStation(int id);
+        Station GetStation(int id);
         Customer GetCustomer(int IDc);
         Drone GetDrone(int id);
         Parcel GetParcel(int id);
@@ -40,7 +40,7 @@ namespace IDAL
         void UpdateCustumer(int custumerId, string name, string phon);
         IEnumerable<Distanse> MinimumDistance(double lang,double lati);
 
-        void UpdateChargeSlots(int stationId);
+        void UpdateChargeSpots(int stationId);
         double[] PowerRequest();
     }
 }

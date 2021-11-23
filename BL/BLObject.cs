@@ -11,7 +11,7 @@ using IDAL.DO;
 
 namespace IBL.BO
 {
-    public class BLObject : IBL
+    public partial class BLObject : IBL
     {
         public IDAL.IDal dalo;
         public List<DroneToList> drones;
@@ -23,129 +23,7 @@ namespace IBL.BO
             drones = new List<DroneToList>();
            // dal = new DalObject.DalObject();
         }
-        //ADD:
-        public void AddStation(Station station)
-        {
-            IDAL.DO.Station s = new IDAL.DO.Station();
-            s.Name = station.Name;
-            s.Id = station.Id;
-            s.Longitude = station.Location.Longitude;
-            s.Latitude = station.Location.Latitude;
-            dalo.AddStation(s);//send the new station to DAL 
-            throw new NotImplementedException();
-        }
-        public int AddDrone(Drone drone, int stationId)
-        {
-            IDAL.DO.Drone d = new IDAL.DO.Drone();
-            d.Id = drone.Id;
-            d.Model = drone.Model;
-            d.MaxWeight = (WeightCategories)drone.Weight;
-            dalo.AddDrone(d);
-
-
-            dalo.UpdateDroneToStation(stationId, d);
-           
-            
-           
-            throw new NotImplementedException();
-        }
-        public void AddCustomer(Customer customer)
-        {
-            IDAL.DO.Customer c = new IDAL.DO.Customer();
-            c.Id = customer.Id;
-            c.Name = customer.Name;
-            c.Phone = customer.Phone;
-            dalo.AddCustomer(c);
-            
-            throw new NotImplementedException();
-        }
-        public void AddParcel(Parcel parcel)
-        {
-            parcel.Id = ++(DalObject.DO.DataSource.OrdinalNumber); //static serial number for parcel id
-            parcel.ParcelCreationTime = DateTime.Now;
-            parcel.AssignmentToParcelTime = ZeroTime;
-            parcel.CollectionTime = ZeroTime;
-            parcel.SupplyTime = ZeroTime;
-            parcel.DroneInParcel = null;
-            IDAL.DO.Parcel p = new IDAL.DO.Parcel();
-
-            p.Id = parcel.Id;
-            p.SenderId = parcel.Sender.Id;
-            p.ReceiverId = parcel.Resiver.Id;
-            p.Weight = (WeightCategories)parcel.Weight;
-            p.Priority = (Priorities)parcel.Priority;
-            dalo.AddParcel(p);
-            
-        }
-        //UPDATE:
-        public void UpdateDroneName(int id, string model)
-        {
-            dalo.UpdateNameOfDrone(id, model);
-        }
-        public void UpdateStetion(int id, string name, int charging_spots)
-        {
-            dalo.UpdateStetion(id, name, charging_spots);
-        }
-        public void UpdateCustomer(int id, string name, string phone)
-        {
-            dalo.UpdateCustumer(id, name, phone);
-        }
-        //sending drone to charge
-        public void UpdateChargeDrone(int droneId)
-        {
-            IDAL.DO.Station station = new IDAL.DO.Station();
-            DroneToList dronel = drones.Find(x => x.Id == droneId); //finds the drone by the recived ID
-            if (dronel.droneStatuses == DroneStatuses.Available) //if the drone is available- it can be sent for charging
-            {
-                List<Distanse> disStationFromDrone = dalo.MinimumDistance(dronel.location.Longitude, dronel.location.Latitude).ToList();//list of the distances from the drone to every station
-                double min = 9999999;
-                int idS, counter = 0;
-                bool flag = false;
-                int sized = disStationFromDrone.Count; //number of distances in the list
-                while (!flag && counter <= sized) //goes over the list
-                {
-                    foreach (Distanse item in disStationFromDrone)
-                    {
-                        if (item.distance <= min) //to find the station with the minimum distance from the drone
-                        {
-                            min = item.distance;
-                            idS = item.id;
-                        }
-                        station = dalo.GetBaseStation(item.id);
-                        if (station.ChargeSlots > 0) //if there is an available charging spot in the station
-                        {
-                            if (dronel.battery > min * 10 / 100) //only if there is enough battery
-                            {
-                                flag = true;
-                                //function to update Battery, drone mode drone location
-                                updateDtoneAndStation(droneId, station.Id, min);
-                            }
-
-                        }
-                        counter++;
-                        disStationFromDrone.Remove(item);
-                    }
-                }
-            }
-        }
-        public void updateDtoneAndStation(int droneId,int stationId,double minDistance )
-        {
-            //update for the way to the station
-            DroneToList dronel = drones.Find(x => x.Id == droneId); //finds the drone by its ID
-            IDAL.DO.Station station = new IDAL.DO.Station();
-            station = dalo.GetBaseStation(stationId); //finds the station by its ID
-            dronel.droneStatuses = DroneStatuses.Maintenance; //update the drone to charging status
-            dronel.location.Latitude = station.Latitude; //update the drone's location to the charging station location - latitude
-            dronel.location.Longitude = station.Longitude; //update the drone's location to the charging station location - longitudw
-            double droneBattery = minDistance * 10 / 100;
-            dronel.battery = droneBattery;
-            dalo.UpdateChargeSlots(station.Id);
-            DroneInCharging droneInCharging = new DroneInCharging();
-            droneInCharging.battery = droneBattery;
-            droneInCharging.Id = droneId;
-            Station s = new Station();
-            s.droneInChargings.Add(droneInCharging);
-        }
+        
         public void UpdateParcelToDrone(int droneId, int drone_id)
         {
 
@@ -221,58 +99,13 @@ namespace IBL.BO
             throw new NotImplementedException();
         }
 
-        public void DischargeDrone(int droneID, double chargingTime)
-        {
-            DroneToList dronel = drones.Find(x => x.Id == droneID); //finds the drone by its ID
-            Station station = new Station();
-            if (dronel.droneStatuses == DroneStatuses.Maintenance) //only a drone that was in charging could be discharge
-            {
-                double droneLocationLatitude = dronel.location.Latitude;
-                double droneLocationLongitude = dronel.location.Longitude;
-                dalo.DischargeDrone(droneID, droneLocationLatitude, droneLocationLongitude);
-                DroneInCharging droneInCharge = new DroneInCharging();
-                droneInCharge = station.droneInChargings.Find(x => x.Id == droneID); //find the drone in charging
-                station.droneInChargings.Remove(droneInCharge); //remove the drone frome the list of droneInChargings
-            }
-            else
-            {
-                throw new Exception("drone can't be discharged");
-            }
-            dronel.battery += chargingTime * dalo.PowerRequest()[4];
-            dronel.droneStatuses = DroneStatuses.Available;
-        }
+        
 
         public void UpdateDeliveryToCustomer(int parcel_id3, int customer_id)
         {
             throw new NotImplementedException();
         }
 
-        public void UpdateParcelToDrone(int droneId)
-        {
-            IDAL.DO.Drone drone= dalo.GetDrone(droneId);
-
-            if (drone.Status==IDAL.DO.DroneStatuses.Available)
-            {
-                var parcels = dalo.ShowParcelList().Where(p => p.Requested == null);
-                var orderedParcels = from parcel in parcels
-                                     orderby parcel.Priority descending, parcel.Weight ascending
-                                     where parcel.Weight <= drone.MaxWeight
-                                     select parcel;
-
-                var theParcel = orderedParcels.FirstOrDefault();
-
-                IDAL.DO.Customer customer = dalo.ShowCustomerList().Where(c => c.Id== theParcel.SenderId).FirstOrDefault();
-                if(customer.Id !=0) 
-                {
-                    DroneToList dr = drones.Find(d => d.Id == droneId);
-                    dr.location = new Location { Latitude = customer.Latitude, Longitude = customer.Longitude };
-               
-                    dalo.UpdateParcelToDrone(theParcel.Id, droneId);
-                }
- 
-            }
-            else
-                throw new NotImplementedException();
-        }
+        
     }
 }

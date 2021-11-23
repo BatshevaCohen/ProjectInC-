@@ -134,12 +134,11 @@ namespace ConsoleUI_BL
                             {
                                 //update drone's name
                                 case UpdateOptions.Drone_Name:
-                                    int drone_id5;
-                                    String name;
+                                int  drone_id5;
                                     Console.WriteLine("Please enter Drone ID");
                                     int.TryParse(Console.ReadLine(), out drone_id5);
                                     Console.WriteLine("Please enter new name for the drone:");
-                                    name = Console.ReadLine();
+                                   string name = Console.ReadLine();
                                     bLObject.UpdateDroneName(drone_id5, name);
                                     Console.WriteLine("Drone's name updated successfully!");
                                     break;
@@ -200,21 +199,15 @@ namespace ConsoleUI_BL
                                     Console.WriteLine("Please enter Drone ID");
                                     int drone_id2;
                                     int.TryParse(Console.ReadLine(), out drone_id2);
-                                    Console.WriteLine("Please enter Parcel ID");
-                                    int parcel_id2;
-                                    int.TryParse(Console.ReadLine(), out parcel_id2);
-                                    dalobject.UpdateParcelPickedupByDrone(parcel_id2, drone_id2);
+                                    bLObject.UpdatePickUpParcelByDrone(drone_id2);
                                     Console.WriteLine("\nParcel pick up updated successfully!\n");
                                     break;
 
                                 case UpdateOptions.Parcel_Supply_By_Drone:
-                                    Console.WriteLine("Please enter Customer ID");
-                                    int customer_id;
-                                    int.TryParse(Console.ReadLine(), out customer_id);
-                                    Console.WriteLine("Please enter Parcel ID");
-                                    int parcel_id3;
-                                    int.TryParse(Console.ReadLine(), out parcel_id3);
-                                    bLObject.UpdateDeliveryToCustomer(parcel_id3, customer_id);
+                                    Console.WriteLine("Please enter Drone ID");
+                                    int drone_id6;
+                                    int.TryParse(Console.ReadLine(), out drone_id6);
+                                    bLObject.UpdateParcelSupplyByDrone(drone_id6);
                                     Console.WriteLine("\nParcel updated to customer successfully!\n");
                                     break;
 

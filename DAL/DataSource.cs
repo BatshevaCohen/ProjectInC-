@@ -106,7 +106,7 @@ namespace DalObject
                         Weight = RandomEnumValue<WeightCategories>(),
                         Priority = RandomEnumValue<Priorities>(),
                         DroneID = r.Next(1000, 5000),
-                        Requested = myDateTime(),
+                        create = myDateTime(),
                         Scheduled = myDateTime(),
                         PickedUp = myDateTime(),
                         Delivered = myDateTime()

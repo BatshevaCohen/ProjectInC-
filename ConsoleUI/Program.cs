@@ -165,7 +165,7 @@ namespace ConsoleUI
                                 p.ReceiverId = id_Ptarget;
                                 p.Weight = (WeightCategories)weight_P;
                                 p.Priority = (Priorities)priority_P;
-                                p.Requested = requested_P;
+                                p.create = requested_P;
                                 p.DroneID = id_Pdrone;
 
                                 dalobject.AddParcel(p);

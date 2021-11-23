@@ -44,7 +44,7 @@ namespace IBL.BO
             // only if the drone is available for shipping
             if (drone.Status == IDAL.DO.DroneStatuses.Available)
             {
-                var parcels = dalo.ShowParcelList().Where(p => p.Requested == null);
+                var parcels = dalo.ShowParcelList().Where(p => p.create == null);
                 // list parcels ordered by priority and weight
                 var orderedParcels = from parcel in parcels
                                      orderby parcel.Priority descending, parcel.Weight ascending

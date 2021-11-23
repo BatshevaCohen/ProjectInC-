@@ -21,67 +21,30 @@ namespace IBL.BO
         {
             dalo = new DalObject.DalObject();//Access to the layer DAL
             drones = new List<DroneToList>();
-           // dal = new DalObject.DalObject();
+           
         }
 
-        
-        
-        //UPDATE:
-        public void UpdateDroneName(int id, string model)
-        {
-            dalo.UpdateNameOfDrone(id, model);
-        }
-        
-        //sending drone to charge
-        public void UpdateChargeDrone(int droneId)
-        {
-            IDAL.DO.Station station = new IDAL.DO.Station();
-            DroneToList dronel = drones.Find(x => x.Id == droneId); //finds the drone by the recived ID
-            if (dronel.droneStatuses == DroneStatuses.Available) //if the drone is available- it can be sent for charging
-            {
-                List<Distanse> disStationFromDrone = dalo.MinimumDistance(dronel.location.Longitude, dronel.location.Latitude).ToList();//list of the distances from the drone to every station
-                double min = 9999999;
-                int idS, counter = 0;
-                bool flag = false;
-                int sized = disStationFromDrone.Count; //number of distances in the list
-                while (!flag && counter <= sized) //goes over the list
-                {
-                    foreach (Distanse item in disStationFromDrone)
-                    {
-                        if (item.distance <= min) //to find the station with the minimum distance from the drone
-                        {
-                            min = item.distance;
-                            idS = item.id;
-                        }
-                        station = dalo.GetBaseStation(item.id);
-                        if (station.ChargeSlots > 0) //if there is an available charging spot in the station
-                        {
-                            if (dronel.battery > min * 10 / 100) //only if there is enough battery
-                            {
-                                flag = true;
-                                //function to update Battery, drone mode drone location
-                                updateDtoneAndStation(droneId, station.Id, min);
-                            }
 
-                        }
-                        counter++;
-                        disStationFromDrone.Remove(item);
-                    }
-                }
-            }
-        }
+
+        //UPDATE
+        //public void UpdateDroneName(int id, string model)
+        //{
+        //    dalo.UpdateNameOfDrone(id, model);
+        //}
+
+      
         public void updateDtoneAndStation(int droneId,int stationId,double minDistance )
         {
             //update for the way to the station
             DroneToList dronel = drones.Find(x => x.Id == droneId); //finds the drone by its ID
             IDAL.DO.Station station = new IDAL.DO.Station();
-            station = dalo.GetBaseStation(stationId); //finds the station by its ID
+            station = dalo.GetStation(stationId); //finds the station by its ID
             dronel.droneStatuses = DroneStatuses.Maintenance; //update the drone to charging status
             dronel.location.Latitude = station.Latitude; //update the drone's location to the charging station location - latitude
             dronel.location.Longitude = station.Longitude; //update the drone's location to the charging station location - longitudw
             double droneBattery = minDistance * 10 / 100;
             dronel.battery = droneBattery;
-            dalo.UpdateChargeSlots(station.Id);
+            dalo.UpdateChargeSpots(station.Id);
             DroneInCharging droneInCharging = new DroneInCharging();
             droneInCharging.battery = droneBattery;
             droneInCharging.Id = droneId;
@@ -111,19 +74,42 @@ namespace IBL.BO
             dronel.droneStatuses = DroneStatuses.Available;
 
         }
-        public void UpdateParcelToDrone(int droneId, int drone_id)
-        {
+        //public void UpdateParcelToDrone(int droneId, int drone_id)
+        //{
 
-        }
+        //}
         public void UpdatePickUpParcelByDrone(int droneId)
         {
-
+            //רק רחפן המבצע משלוח של חבילה ששויכה אליו אבל עוד לא  נאספה יוכל לאסוף אותו
+            Drone drone = GetDrone(droneId);
+            IDAL.DO.Parcel p = dalo.GetParcelByDroneId(droneId);
+            if(p.create<=DateTime.MinValue)//the parcel was PickUp
+            {
+                throw new Exception("the parcel was PickUp ");
+            }
+            else
+            { 
+                IDAL.DO.Customer c= dalo.updateBatteryAndLocationDrone(droneId, p.SenderId,drone.Location.Longitude,drone.Location.Latitude);
+                drone.Location.Latitude = c.Latitude;
+                drone.Location.Latitude = c.Longitude;
+                //לא בטוחה 
+                p.PickedUp = DateTime.Now;
+            }
         }
         public void UpdateParcelSupplyByDrone(int droneId)
         {
+          IDAL.DO.Drone drone=  dalo.GetDrone(droneId);
+          IDAL.DO.Parcel p = dalo.GetParcelByDroneId(droneId);
+            if(!(p.create <= DateTime.MinValue&&p.Delivered>=DateTime.MinValue))
+            {
+                throw new Exception("the parcel Delivered ");
+            }
+            else
+            {
 
+            }
         }
-        //SHOW:
+        //SHOW:.
         BO.Station GetStation(int requestedId)
         {
             throw new NotImplementedException();

@@ -39,8 +39,10 @@ namespace IDAL
         void UpdateStetion(int StationId, string name, int charging_spots);
         void UpdateCustumer(int custumerId, string name, string phon);
         IEnumerable<Distanse> MinimumDistance(double lang,double lati);
-
+        
         void UpdateChargeSpots(int stationId);
         double[] PowerRequest();
+        Parcel GetParcelByDroneId(int DroneId);
+        Customer updateBatteryAndLocationDrone(int droneId,int senderId, double longt, double lanti);
     }
 }

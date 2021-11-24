@@ -134,7 +134,9 @@ namespace IBL.BO
             //finds the drone by its ID
             DroneToList dronel = drones.Find(x => x.Id == droneID); 
             Station station = new Station();
-            //only a drone that was in charging could be discharge
+            //only a drone that was in charging c
+           
+            //ould be discharge
             if (dronel.droneStatuses == DroneStatuses.Maintenance) 
             {
                 double droneLocationLatitude = dronel.location.Latitude;

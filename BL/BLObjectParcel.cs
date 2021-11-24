@@ -20,9 +20,9 @@ namespace IBL.BO
         {
             parcel.Id = ++(DalObject.DO.DataSource.OrdinalNumber); //static serial number for parcel id
             parcel.ParcelCreationTime = DateTime.Now;
-            parcel.AssignmentToParcelTime = ZeroTime;
-            parcel.CollectionTime = ZeroTime;
-            parcel.SupplyTime = ZeroTime;
+            parcel.AssignmentToParcelTime = DateTime.MinValue;
+            parcel.CollectionTime = DateTime.MinValue;
+            parcel.SupplyTime = DateTime.MinValue;
             parcel.DroneInParcel = null;
             IDAL.DO.Parcel p = new IDAL.DO.Parcel();
 

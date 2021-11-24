@@ -229,7 +229,7 @@ namespace ConsoleUI_BL
 
                                 int Id_S;
                                 int.TryParse(Console.ReadLine(), out Id_S);
-                                Console.WriteLine(dalobject.GetBaseStation(Id_S));
+                                Console.WriteLine(bLObject.GetBaseStation(Id_S));
                                 break;
                             case EntityOptions.Drone:
                                 int Id_D;

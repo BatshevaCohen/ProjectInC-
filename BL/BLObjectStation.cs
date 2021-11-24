@@ -45,9 +45,9 @@ namespace IBL.BO
         /// <param name="requestedId"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        Station IBL.GetStation(int stationID)
+        Station GetStation1(int stationID)
         {
-            dalo.GetStetion(stationID);
+           return
         }
         /// <summary>
         /// Show LIST of stations

@@ -11,6 +11,7 @@ namespace IDAL
             public WeightCategories MaxWeight { get; set; }
             public double Battery { get; set; } //charging level
             public DroneStatuses Status { get; set; }
+
             public override string ToString()
             {
                 String result = "";

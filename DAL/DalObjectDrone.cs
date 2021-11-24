@@ -92,7 +92,7 @@ namespace DalObject
             }
             if (flag == false)
             {
-                throw new Exception("couldn't find station by drones location");/////////////////לעשות חריגה שלא קיים מיקום תחנה לרחפן
+                throw new Exception("couldn't find station by drones location");//לעשות חריגה שלא קיים מיקום תחנה לרחפן
             }
         }
         /// <summary>
@@ -126,6 +126,7 @@ namespace DalObject
             Customer customer = DataSource.customer.Find(x => x.Id == senderId);
             double  dis = (customer.Longitude - longt) * (customer.Longitude - longt) + (customer.Latitude - lang) * (customer.Latitude - lang);
             dis = Math.Sqrt(dis);
+            //לשאול את שיראל
             drone.Battery -= drone.Battery * 0.1;
             return customer;
 

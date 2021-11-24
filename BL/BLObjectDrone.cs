@@ -126,8 +126,11 @@ namespace IBL.BO
         /// <param name="droneID"></param>
         /// <param name="chargingTime"></param>
         /// <exception cref="Exception"></exception>
-        public void DischargeDrone(int droneID, double chargingTime)
+        public void DischargeDrone(int droneID, TimeSpan chargingTime)
         {
+            // save dVal in second
+            double dVal = (chargingTime.TotalMilliseconds)*1000;
+ 
             //finds the drone by its ID
             DroneToList dronel = drones.Find(x => x.Id == droneID); 
             Station station = new Station();
@@ -147,7 +150,7 @@ namespace IBL.BO
             {
                 throw new Exception("drone can't be discharged");
             }
-            dronel.battery += chargingTime * dalo.PowerRequest()[4];
+            dronel.battery += dVal * dalo.PowerRequest()[4];
             dronel.droneStatuses = DroneStatuses.Available;
         }
 

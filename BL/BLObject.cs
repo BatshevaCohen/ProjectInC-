@@ -51,29 +51,29 @@ namespace IBL.BO
             Station s = new Station();
             s.droneInChargings.Add(droneInCharging);
         }
-        public void UpdateDichargeDrone(int droneID, double chargingTime)
-        {
-            DroneToList dronel = drones.Find(x => x.Id == droneID); 
-            Station station = new Station();
-            if (dronel.droneStatuses == DroneStatuses.Maintenance) //only a drone that was in charging could be discharge
-            {
-                double droneLocationLatitude = dronel.location.Latitude;
-                double droneLocationLongitude = dronel.location.Longitude;
-                dalo.DischargeDrone(droneID, droneLocationLatitude, droneLocationLongitude);
-                DroneInCharging droneInCharge = new DroneInCharging();
-                droneInCharge = station.droneInChargings.Find(x => x.Id == droneID); //find the drone in charging
-                station.droneInChargings.Remove(droneInCharge); //remove the drone frome the list of droneInChargings
+        //public void UpdateDichargeDrone(int droneID, double chargingTime)
+        //{
+        //    DroneToList dronel = drones.Find(x => x.Id == droneID); 
+        //    Station station = new Station();
+        //    if (dronel.droneStatuses == DroneStatuses.Maintenance) //only a drone that was in charging could be discharge
+        //    {
+        //        double droneLocationLatitude = dronel.location.Latitude;
+        //        double droneLocationLongitude = dronel.location.Longitude;
+        //        dalo.DischargeDrone(droneID, droneLocationLatitude, droneLocationLongitude);
+        //        DroneInCharging droneInCharge = new DroneInCharging();
+        //        droneInCharge = station.droneInChargings.Find(x => x.Id == droneID); //find the drone in charging
+        //        station.droneInChargings.Remove(droneInCharge); //remove the drone frome the list of droneInChargings
 
 
-            }
-            else
-            {
-                throw new Exception("drone can't be discharged");
-            }
-            dronel.battery += chargingTime * dalo.PowerRequest()[4];
-            dronel.droneStatuses = DroneStatuses.Available;
+        //    }
+        //    else
+        //    {
+        //        throw new Exception("drone can't be discharged");
+        //    }
+        //    dronel.battery += chargingTime * dalo.PowerRequest()[4];
+        //    dronel.droneStatuses = DroneStatuses.Available;
 
-        }
+        //}
         //public void UpdateParcelToDrone(int droneId, int drone_id)
         //{
 

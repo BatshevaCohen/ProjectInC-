@@ -180,8 +180,8 @@ namespace ConsoleUI_BL
                                     Console.WriteLine("Please enter Drone ID");
                                     int.TryParse(Console.ReadLine(), out drone_id5);
                                     Console.WriteLine("enter the time of charging");
-                                    int TimeOfCharging;
-                                    int.TryParse(Console.ReadLine(), out TimeOfCharging);
+                                    TimeSpan TimeOfCharging;
+                                    TimeSpan.TryParse(Console.ReadLine(), out TimeOfCharging);
                                     bLObject.DischargeDrone(drone_id5, TimeOfCharging);
                                     Console.WriteLine("\nDrone updated to- discharge successfully!\n");
                                     break;

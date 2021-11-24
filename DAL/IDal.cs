@@ -48,5 +48,6 @@ namespace IDAL
         Customer updateBatteryAndLocationDrone(int droneId,int senderId, double longt, double lanti);
 
         //SHOW  FUNCTION
+
     }
 }

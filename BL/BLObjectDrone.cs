@@ -26,11 +26,7 @@ namespace IBL.BO
             d.Model = drone.Model;
             d.MaxWeight = (WeightCategories)drone.Weight;
             dalo.AddDrone(d);
-
-
             dalo.UpdateDroneToStation(stationId, d);
-
-
 
             throw new NotImplementedException();
         }
@@ -155,7 +151,25 @@ namespace IBL.BO
             dronel.battery += dVal * dalo.PowerRequest()[4];
             dronel.droneStatuses = DroneStatuses.Available;
         }
-
+        /// <summary>
+        /// Get drone by ID
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        BO.Drone GetDrone(int droneId)
+        {
+            throw new NotImplementedException();
+        }
+        /// <summary>
+        /// Show LIST of drones
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public List<Drone> ShowDroneList()
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

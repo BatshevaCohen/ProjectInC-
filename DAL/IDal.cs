@@ -17,7 +17,7 @@ namespace IDAL
         void DischargeDrone(int drone_id, TimeSpan s);
         void DroneException(int id, string errMsg);
         Customer FindCustomer(int customerID);
-        Station FindStetion(int stationID);
+        Station GetStetion(int stationID);
         Drone FindDrone(int DroneID);
         Station GetStation(int id);
         Customer GetCustomer(int IDc);

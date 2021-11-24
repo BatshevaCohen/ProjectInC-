@@ -27,6 +27,8 @@ namespace IBL.BO
             dalo.AddStation(s);//send the new station to DAL 
             throw new NotImplementedException();
         }
+
+
         /// <summary>
         /// Update station
         /// </summary>
@@ -37,5 +39,34 @@ namespace IBL.BO
         {
             dalo.UpdateStetion(id, name, charging_spots);
         }
+        /// <summary>
+        /// Get station by ID
+        /// </summary>
+        /// <param name="requestedId"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        Station IBL.GetStation(int stationID)
+        {
+            dalo.GetStetion(stationID);
+        }
+        /// <summary>
+        /// Show LIST of stations
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public List<Station> ShowStationList()
+        {
+            throw new NotImplementedException();
+        }
+        /// <summary>
+        /// Show LIST of chargeable stations
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public List<Station> ShowChargeableStationList()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

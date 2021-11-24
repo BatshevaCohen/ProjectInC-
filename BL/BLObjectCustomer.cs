@@ -43,5 +43,14 @@ namespace IBL.BO
         {
 
         }
+        /// <summary>
+        /// Show LIST of customers
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public List<Customer> ShowCustomerList()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -19,7 +19,7 @@ namespace IBL.BO
         void UpdateChargeDrone(int id);
         void UpdateParcelToDrone(int droneId);
         void UpdateParcelPickUpByDrone(int droneId);
-        void UpdateParcelSupplyByDrone(int droneId);
+        void UpdateParcelSuppliedByDrone(int droneId);
         //SHOW:
         Station GetStation(int requestedId);
         Drone GetDrone(int droneId);

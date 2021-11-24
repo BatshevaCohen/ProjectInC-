@@ -119,14 +119,8 @@ namespace DalObject
             Station station = DataSource.Stations.Find(x => x.Id == StationId);
             station.ChargeSlots = drone.Id;
         }
-        ///// <summary>
-        ///// 
-        ///// </summary>
-        ///// <param name="droneId"></param>
-        ///// <param name="senderId"></param>
-        ///// <param name="longitude"></param>
-        ///// <param name="latitude"></param>
-        ///// <returns></returns> Customer 
+        
+
         //public Customer updateBatteryAndLocationDrone(int droneId,int senderId,double longitude,double latitude)
         //{
         //    //and return custumer to update the dtone location like the custumer

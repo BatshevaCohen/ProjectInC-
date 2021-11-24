@@ -18,12 +18,12 @@ namespace DalObject
         /// <returns></returns>
         public void AddDrone(Drone d)
         {
-            if (DataSource.drones.Exists(drone => drone.Id == d.Id))
+            if (DataSource.Drones.Exists(drone => drone.Id == d.Id))
             {
                 throw new DroneException($"ID {d.Id} already exists!!");
             }
             else
-                DataSource.drones.Add(d);
+                DataSource.Drones.Add(d);
         }
         /// <summary>
         /// Update name of drone
@@ -32,7 +32,7 @@ namespace DalObject
         /// <param name="model"></param>
         public void UpdateNameOfDrone(int id, string model)
         {
-            Drone drone = DataSource.drones.Find(x => x.Id == id);
+            Drone drone = DataSource.Drones.Find(x => x.Id == id);
             drone.Model = model;
         }
         /// <summary>
@@ -41,11 +41,11 @@ namespace DalObject
         /// <param name="id"></param>
         public Drone GetDrone(int id)
         {
-            if (!DataSource.drones.Exists(item => item.Id == id))
+            if (!DataSource.Drones.Exists(item => item.Id == id))
             {
                 throw new DroneException($"ID: {id} does not exist!!");
             }
-            return DataSource.drones.First(c => c.Id == id);
+            return DataSource.Drones.First(c => c.Id == id);
         }
         /// <summary>
         /// view lists functions for Drone
@@ -53,7 +53,7 @@ namespace DalObject
         public IEnumerable<Drone> ShowDroneList()
         {
             List<Drone> DroneList = new List<Drone>();
-            foreach (Drone element in DataSource.drones)
+            foreach (Drone element in DataSource.Drones)
             {
                 DroneList.Add(element);
             }
@@ -66,7 +66,7 @@ namespace DalObject
         /// <returns></returns>
         public Drone FindDrone(int droneId)
         {
-            return DataSource.drones.Find(x => x.Id == droneId);
+            return DataSource.Drones.Find(x => x.Id == droneId);
         }
         /// <summary>
         /// discharge drone
@@ -78,7 +78,7 @@ namespace DalObject
         public void DischargeDrone(int droneID, double droneLatitude, double droneLongitude)
         {
             bool flag = false;
-            Drone d = DataSource.drones.Find(x => x.Id == droneID);
+            Drone d = DataSource.Drones.Find(x => x.Id == droneID);
             Station s;
             foreach (Station item in Stations) //finds the station
             {
@@ -102,7 +102,7 @@ namespace DalObject
         /// <param name="station_id"></param>
         public void UpdateDroneToCharge(int drone_id, int station_id)
         {
-            Drone d = DataSource.drones.Find(x => x.Id == drone_id);
+            Drone d = DataSource.Drones.Find(x => x.Id == drone_id);
             DroneCharge droneCharge = new DroneCharge();
             droneCharge.DroneId = drone_id;
             Station s = DataSource.Stations.Find(x => x.Id == station_id);
@@ -119,17 +119,21 @@ namespace DalObject
             Station station = DataSource.Stations.Find(x => x.Id == StationId);
             station.ChargeSlots = drone.Id;
         }
-       public Customer updateBatteryAndLocationDrone(int droneId,int senderId,double longt,double lang)
-        {
-            //and return custumer to update the dtone location like the custumer
-            Drone drone = DataSource.drones.Find(x => x.Id == droneId);
-            Customer customer = DataSource.customer.Find(x => x.Id == senderId);
-            double  dis = (customer.Longitude - longt) * (customer.Longitude - longt) + (customer.Latitude - lang) * (customer.Latitude - lang);
-            dis = Math.Sqrt(dis);
-            //לשאול את שיראל
-            drone.Battery -= drone.Battery * 0.1;
-            return customer;
+        
 
-        }
+        //public Customer updateBatteryAndLocationDrone(int droneId,int senderId,double longitude,double latitude)
+        //{
+        //    //and return custumer to update the dtone location like the custumer
+
+        //    //finds the drone by its ID
+        //    Drone drone = DataSource.Drones.Find(x => x.Id == droneId);
+        //    //finds the customer by its ID
+        //    Customer customer = DataSource.Customer.Find(x => x.Id == senderId);
+        //    //calculate the distance from the sender to the drone
+        //    double distance= CalculateDistance(customer.Longitude, customer.Latitude, longitude, latitude);
+        //    // for each KM - 1% of the battery
+        //    drone.Battery -= distance * 0.01;
+        //    return customer;
+        //}        
     }
 }

@@ -199,7 +199,7 @@ namespace ConsoleUI_BL
                                     Console.WriteLine("Please enter Drone ID");
                                     int drone_id2;
                                     int.TryParse(Console.ReadLine(), out drone_id2);
-                                    bLObject.UpdatePickUpParcelByDrone(drone_id2);
+                                    bLObject.UpdateParcelPickUpByDrone(drone_id2);
                                     Console.WriteLine("\nParcel pick up updated successfully!\n");
                                     break;
 
@@ -207,7 +207,7 @@ namespace ConsoleUI_BL
                                     Console.WriteLine("Please enter Drone ID");
                                     int drone_id6;
                                     int.TryParse(Console.ReadLine(), out drone_id6);
-                                    bLObject.UpdateParcelSupplyByDrone(drone_id6);
+                                    bLObject.UpdateParcelSuppliedByDrone(drone_id6);
                                     Console.WriteLine("\nParcel updated to customer successfully!\n");
                                     break;
 

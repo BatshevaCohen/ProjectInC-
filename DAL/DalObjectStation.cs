@@ -56,12 +56,12 @@ namespace DalObject
         /// <returns></returns>
         public IEnumerable<Station> ShowStationList()
         {
-            List<Station> baseStationList = new List<Station>();
+            List<Station> stationList = new List<Station>();
             foreach (Station element in DataSource.Stations)
             {
-                baseStationList.Add(element);
+                stationList.Add(element);
             }
-            return baseStationList;
+            return stationList;
         }
         /// <summary>
         ///  shows base stations with available charging spots
@@ -85,15 +85,6 @@ namespace DalObject
         {
             Station station = DataSource.Stations.Find(x => x.Id == stationId);
             station.ChargeSlots--;
-        }
-        /// <summary>
-        /// find station by ID
-        /// </summary>
-        /// <param name="stationID"></param>
-        /// <returns></returns
-        public Station FindStetion(int stationID)
-        {
-            return DataSource.Stations.Find(x => x.Id == stationID);
         }
     }
 }

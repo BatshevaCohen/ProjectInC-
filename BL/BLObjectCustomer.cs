@@ -37,5 +37,20 @@ namespace IBL.BO
         {
             dalo.UpdateCustumer(id, name, phone);
         }
+        //יש לאכלס את רשימת החבילות שהלקוח שולח ואת רשימת BL- שימו לב שב
+        //החבילות שהלקוח מקבל
+        public Customer GetCustomer(int IDc)
+        {
+
+        }
+        /// <summary>
+        /// Show LIST of customers
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public List<Customer> ShowCustomerList()
+        {
+            throw new NotImplementedException();
+        }
     }
 }

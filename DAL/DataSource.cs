@@ -16,10 +16,10 @@ namespace DalObject
             /// database of DO entities
             /// </summary>
             public static int OrdinalNumber = 1000000;
-            internal static List<Drone> drones = new List<Drone>(2);
+            internal static List<Drone> Drones = new List<Drone>(2);
             internal static List<Station> Stations = new List<Station>(5);
-            internal static List<Customer> customer = new List<Customer>(100);
-            internal static List<Parcel> parcels = new List<Parcel>(1000);
+            internal static List<Customer> Customer = new List<Customer>(100);
+            internal static List<Parcel> Parcels = new List<Parcel>(1000);
 
             static Random r = new Random();
 
@@ -53,7 +53,7 @@ namespace DalObject
                 //adding drones
                 for (int i = 1; i <= 5; i++)
                 {
-                    drones.Add(new Drone()
+                    Drones.Add(new Drone()
                     {
                         Id = i * 1000,
                         Model = arrDroneModel[i - 1],
@@ -78,7 +78,7 @@ namespace DalObject
                 //adding customers
                 for (int i = 0; i < 10; i++)
                 {
-                    customer.Add(new Customer()
+                    Customer.Add(new Customer()
                     {
                         Id = i,
                         Name = arrClientFirstName[i],
@@ -98,7 +98,7 @@ namespace DalObject
                         targetId = r.Next(1, 10);
                     } while (targetId == senderId);
 
-                    parcels.Add(new Parcel()
+                    Parcels.Add(new Parcel()
                     {
                         Id = ++OrdinalNumber,    //serial number
                         SenderId = senderId,

@@ -10,5 +10,17 @@ namespace IBL.BO
     {
         public int Id { get; set; }
         public String Name { get; set; }
+        /// <summary>
+        /// ToString
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            String result = "";
+            result += $"Customer ID is: {Id}, \n";
+            result += $"Customer name is {Name}, \n";
+            
+            return result;
+        }
     }
 }

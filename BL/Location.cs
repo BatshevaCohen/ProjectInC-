@@ -10,5 +10,17 @@ namespace IBL.BO
     {
         public double Latitude { get; set; }
         public double Longitude { get; set; }
+        /// <summary>
+        /// ToString
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            String result = "";
+            result += $"Latitude is: {Latitude}, \n";
+            result += $"Longitude is: {Longitude}, \n";
+
+            return result;
+        }
     }
 }

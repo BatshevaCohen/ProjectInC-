@@ -86,5 +86,6 @@ namespace DalObject
             Station station = DataSource.Stations.Find(x => x.Id == stationId);
             station.ChargeSlots--;
         }
+        
     }
 }

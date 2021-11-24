@@ -15,5 +15,22 @@ namespace IBL.BO
         public DroneStatuses DroneStatuses { get; set; }
         public ParcelInTransfer ParcelInTransfer { get; set; }
         public Location Location { get; set; }
+        /// <summary>
+        /// ToString
+        /// </summary>
+        /// <returns></returns>
+        public override string ToString()
+        {
+            String result = "";
+            result += $"ID is {Id}, \n";
+            result += $"Model is {Model}, \n";
+            result += $"Drone weight is {Weight}, \n";
+            result += $"Battery precent is: {Battery}, \n";
+            result += $"Drone status is: {DroneStatuses}, \n";
+            result += $"Drone's parcel in transfer is: {ParcelInTransfer}, \n";
+            result += $"Drone's location is: {Location}, \n";
+
+            return result;
+        }
     }
 }

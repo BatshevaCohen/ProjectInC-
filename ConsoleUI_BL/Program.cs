@@ -199,7 +199,7 @@ namespace ConsoleUI_BL
                                     Console.WriteLine("Please enter Drone ID");
                                     int drone_id2;
                                     int.TryParse(Console.ReadLine(), out drone_id2);
-                                    bLObject.UpdatePickUpParcelByDrone(drone_id2);
+                                    bLObject.UpdateParcelPickUpByDrone(drone_id2);
                                     Console.WriteLine("\nParcel pick up updated successfully!\n");
                                     break;
 

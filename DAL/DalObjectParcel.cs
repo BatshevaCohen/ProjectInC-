@@ -18,12 +18,12 @@ namespace DalObject
         /// <returns></returns>
         public void AddParcel(Parcel p)
         {
-            if (DataSource.parcels.Exists(parcel => parcel.Id == p.Id))
+            if (DataSource.Parcels.Exists(parcel => parcel.Id == p.Id))
             {
                 throw new ParcelException($"ID {p.Id} already exists!!");
             }
             else
-                DataSource.parcels.Add(p);
+                DataSource.Parcels.Add(p);
         }
         /// <summary>
         /// view function for Parcel with id
@@ -32,11 +32,11 @@ namespace DalObject
         public Parcel GetParcel(int id)
         {
 
-            if (!DataSource.parcels.Exists(item => item.Id == id))
+            if (!DataSource.Parcels.Exists(item => item.Id == id))
             {
                 throw new ParcelException($"ID: {id} does not exist!!");
             };
-            return DataSource.parcels.First(c => c.Id == id);
+            return DataSource.Parcels.First(c => c.Id == id);
         }
         /// <summary>
         /// view lists functions for Parcel
@@ -44,7 +44,7 @@ namespace DalObject
         public IEnumerable<Parcel> ShowParcelList()
         {
             List<Parcel> ParcelList = new List<Parcel>();
-            foreach (Parcel element in DataSource.parcels)
+            foreach (Parcel element in DataSource.Parcels)
             {
                 ParcelList.Add(element);
             }
@@ -57,7 +57,7 @@ namespace DalObject
         public IEnumerable<Parcel> ShowNonAssociatedParcelList()
         {
             List<Parcel> NonAssociatedParcelList = new List<Parcel>();
-            foreach (Parcel element in DataSource.parcels)
+            foreach (Parcel element in DataSource.Parcels)
             {
                 if (element.DroneID == 0)
                     NonAssociatedParcelList.Add(element);
@@ -81,7 +81,7 @@ namespace DalObject
                 throw new ParcelException($"Couldn't attribute drone {drone_id} to parcel", pex);
             }
 
-            Drone drone = DataSource.drones.Find(x => x.Id == drone_id); //finds the drone by its ID
+            Drone drone = DataSource.Drones.Find(x => x.Id == drone_id); //finds the drone by its ID
             if (drone.Id == 0)
             {
                 throw new DroneException($"noo drone found");
@@ -97,8 +97,8 @@ namespace DalObject
         /// <param name="drone_id"></param>
         public void UpdateParcelPickedupByDrone(int parcel_id, int drone_id)
         {
-            Parcel p = DataSource.parcels.Find(x => x.Id == parcel_id);
-            Drone d = DataSource.drones.Find(x => x.Id == drone_id);
+            Parcel p = DataSource.Parcels.Find(x => x.Id == parcel_id);
+            Drone d = DataSource.Drones.Find(x => x.Id == drone_id);
             p.PickedUp = DateTime.Now;
             //d.Status = DroneStatuses.Shipping;
         }
@@ -109,12 +109,12 @@ namespace DalObject
         /// <param name="customer_id"></param>
         public void UpdateDeliveryToCustomer(int parcel_id, int customer_id)
         {
-            Parcel p = DataSource.parcels.Find(x => x.Id == parcel_id);
+            Parcel p = DataSource.Parcels.Find(x => x.Id == parcel_id);
             p.Delivered = DateTime.Now;
         }
         public Parcel GetParcelByDroneId(int DroneId)
         {
-            Parcel p = DataSource.parcels.Find(x => x.Id == DroneId);
+            Parcel p = DataSource.Parcels.Find(x => x.Id == DroneId);
             return p;
         }
 

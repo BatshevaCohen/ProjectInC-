@@ -19,23 +19,19 @@ namespace IBL.BO
         static Random r = new Random();
         public BLObject()
         {
-            dalo = new DalObject.DalObject();//Access to the layer DAL
+            //Access to the layer DAL
+            dalo = new DalObject.DalObject();
             drones = new List<DroneToList>();
            
         }
-
-
-
-        //UPDATE
-        //public void UpdateDroneName(int id, string model)
-        //{
-        //    dalo.UpdateNameOfDrone(id, model);
-        //}
-
-      
-        public void updateDtoneAndStation(int droneId,int stationId,double minDistance )
+        /// <summary>
+        /// Update for the way to the station
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <param name="stationId"></param>
+        /// <param name="minDistance"></param>
+        public void UpdateDroneAndStation(int droneId,int stationId,double minDistance )
         {
-            //update for the way to the station
             //finds the drone by its ID
             DroneToList dronel = drones.Find(x => x.Id == droneId);
             IDAL.DO.Station station = new IDAL.DO.Station();
@@ -56,41 +52,57 @@ namespace IBL.BO
             Station s = new Station();
             s.droneInChargings.Add(droneInCharging);
         }
-      
-        public void UpdatePickUpParcelByDrone(int droneId)
+        /// <summary>
+        /// Updete that the parcel has picked up by a drone
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <exception cref="Exception"></exception>
+        public void UpdateParcelPickUpByDrone(int droneId)
         {
-            //רק רחפן המבצע משלוח של חבילה ששויכה אליו אבל עוד לא  נאספה יוכל לאסוף אותו
+            //the drone collect a parcel only if the parcel has been assigned to it and haven't picked up yet
             Drone drone = GetDrone(droneId);
-            IDAL.DO.Parcel p = dalo.GetParcelByDroneId(droneId);
+            IDAL.DO.Parcel parcel = dalo.GetParcelByDroneId(droneId);
             //check if the parcel was assigned
-            if (p.Scheduled != DateTime.MinValue)
+            if (parcel.Scheduled != DateTime.MinValue)
             {
                 throw new Exception("the parcel wasn't assigned to the drone!");
             }
             //check if the parcel was picked up
-            if (p.PickedUp != DateTime.MinValue)
+            if (parcel.PickedUp != DateTime.MinValue)
             {
                 throw new Exception("the parcel was picked up already!");
             }
             else
-            { 
-                IDAL.DO.Customer c= dalo.updateBatteryAndLocationDrone(droneId, p.SenderId,drone.Location.Longitude,drone.Location.Latitude);
-                drone.Location.Latitude = c.Latitude;
-                drone.Location.Latitude = c.Longitude;
-                p.PickedUp = DateTime.Now;
+            {
+                //finds the sender (-the customer) by its ID
+                Customer customer= GetCustomer(parcel.SenderId);
+                //calculate the distance frome the current location of the drone- to the customer
+                double distance = dalo.CalculateDistance(customer.Location.Longitude, customer.Location.Latitude, drone.Location.Longitude, drone.Location.Latitude);
+                //update the location of the drone to where the sender is (sender's location)
+                drone.Location.Latitude = customer.Location.Latitude;
+                drone.Location.Latitude = customer.Location.Longitude;
+                // for each KM - 1% of the battery
+                drone.Battery -= distance * 0.01;
+                //update the pick up time to the current time
+                parcel.PickedUp = DateTime.Now;
             }
         }
+        /// <summary>
+        /// Update that the parcel supplied to the reciver (by the drone)
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <exception cref="Exception"></exception>
         public void UpdateParcelSupplyByDrone(int droneId)
         {
          
             IDAL.DO.Parcel parcel = dalo.GetParcelByDroneId(droneId);
             //check if the parcel was picked up
-            if (p.PickedUp == DateTime.MinValue)
+            if (parcel.PickedUp == DateTime.MinValue)
             {
                 throw new Exception("the parcel wasn't picked up yet!");
             }
             //check if the parcel was delivered
-            if (p.Delivered != DateTime.MinValue)
+            if (parcel.Delivered != DateTime.MinValue)
             {
                 throw new Exception("the parcel delivered already!");
             }
@@ -105,26 +117,22 @@ namespace IBL.BO
                 reciverL = parcelInTransfer.SupplyTarget;
                 // the distance that the drone have drove
                 double distanse = dalo.CalculateDistance(senderL.Longitude, senderL.Latitude, reciverL.Longitude, reciverL.Latitude);
-                // for each KM - 1% of the battery
+                //for each KM - 1% of the battery
                 d.Battery -= distanse * 0.01;
                 // update drone's location to the supply target's location
                 d.Location = parcelInTransfer.SupplyTarget;
-                // changing the drone's status to be available
+                //changing the drone's status to be available
                 d.DroneStatuses = DroneStatuses.Available;
-                // update the supply time
+                //update the supply time
                 parcel.Delivered = DateTime.Now;
             }
         }
-        //SHOW:.
+        //SHOW:
         BO.Station GetStation(int requestedId)
         {
             throw new NotImplementedException();
         }
         BO.Drone GetDrone(int droneId)
-        {
-            throw new NotImplementedException();
-        }
-        Customer GetCustomer(int customerId)
         {
             throw new NotImplementedException();
         }

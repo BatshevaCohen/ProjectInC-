@@ -19,12 +19,12 @@ namespace DalObject
         /// <returns></returns>
         public void AddCustomer(Customer c)
         {
-            if (DataSource.customer.Exists(client => client.Id == c.Id))
+            if (DataSource.Customer.Exists(client => client.Id == c.Id))
             {
                 throw new CustomerException($"ID {c.Id} already exists!!");
             }
             else
-                DataSource.customer.Add(c);
+                DataSource.Customer.Add(c);
         }
         /// <summary>
         /// update customee
@@ -34,43 +34,34 @@ namespace DalObject
         /// <param name="phone"></param>
         public void UpdateCustumer(int custumerId, string name, string phone)
         {
-            Customer customer = DataSource.customer.Find(x => x.Id == custumerId);
+            Customer customer = DataSource.Customer.Find(x => x.Id == custumerId);
             customer.Id = custumerId;
             customer.Name = name;
             customer.Phone = phone;
         }
         /// <summary>
-        /// view function for Customer by id
+        /// Get Customer by id
         /// </summary>
         /// <param name="id"></param>
         public Customer GetCustomer(int IDc)
         {
-            if (!DataSource.customer.Exists(item => item.Id == IDc))
+            if (!DataSource.Customer.Exists(item => item.Id == IDc))
             {
                 throw new CustomerException($"ID: {IDc} does not exist!!");
             }
-            return DataSource.customer.First(c => c.Id == IDc);
+            return DataSource.Customer.First(c => c.Id == IDc);
         }
         /// <summary>
-        /// view lists functions for Customer
+        /// Show list of Customers
         /// </summary>
         public IEnumerable<Customer> ShowCustomerList()
         {
             List<Customer> CustomerList = new List<Customer>();
-            foreach (Customer element in DataSource.customer)
+            foreach (Customer element in DataSource.Customer)
             {
                 CustomerList.Add(element);
             }
             return CustomerList;
-        }
-        /// <summary>
-        /// find customer by ID
-        /// </summary>
-        /// <param name="customerID"></param>
-        /// <returns></returns>
-        public Customer FindCustomer(int customerID)
-        {
-            return DataSource.customer.Find(x => x.Id == customerID);
         }
     }
 }

@@ -24,6 +24,7 @@ namespace IDAL
         Drone GetDrone(int id);
         Parcel GetParcel(int id);
         void ParcelException(int id, string errMsg, Severity severity);
+        //SHOW LISTS:
         IEnumerable<Station> ShowStationList();
         IEnumerable<Station> ShowChargeableBaseStationList();
         IEnumerable<Station> ShowChargeableStationList();

@@ -100,6 +100,25 @@ namespace DalObject
             throw new NotImplementedException();
         }
 
+        public void DischargeDrone(int drone_id, TimeSpan s)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Customer FindCustomer(int customerID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Station GetStetion(int stationID)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Customer updateBatteryAndLocationDrone(int droneId, int senderId, double longt, double lanti)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

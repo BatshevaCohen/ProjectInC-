@@ -234,7 +234,7 @@ namespace ConsoleUI_BL
                                 bLObject.GetStation(Id_S).ToString();
                                 break;
                             case EntityOptions.Drone:
-                                int Id_D;
+                                int Id_D;//hh
                                 int.TryParse(Console.ReadLine(), out Id_D);
                                 Console.WriteLine(bLObject.GetDrone(Id_D));
                                 break;

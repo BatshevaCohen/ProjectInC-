@@ -34,19 +34,22 @@ namespace DalObject
         }
 
         /// <summary>
-        /// Looking for the most base with upcoming vacancies
+        /// Looking for the closest station with available charging spots
         /// </summary>
-        public IEnumerable<Distanse> MinimumDistance(double lang, double lati)
+        /// <param name="longitude"></param>
+        /// <param name="latitude"></param>
+        /// <returns></returns>
+        public IEnumerable<Distanse> MinimumDistance(double longitude, double latitude)
         {
             List<Distanse> listDis = new List<Distanse>();
             foreach (Station element in DataSource.Stations)
             {
                 Distanse distanse = new Distanse();
                 double dis = 0;
-                dis = (element.Longitude - lang) * (element.Longitude - lang) + (element.Latitude - lang) * (element.Latitude - lang);
+                dis = (element.Longitude - longitude) * (element.Longitude - longitude) + (element.Latitude - longitude) * (element.Latitude - longitude);
                 dis = Math.Sqrt(dis);
-                distanse.id = element.Id;
-                distanse.distance = dis;
+                distanse.Id = element.Id;
+                distanse.Distance = dis;
 
                 listDis.Add(distanse);
             }

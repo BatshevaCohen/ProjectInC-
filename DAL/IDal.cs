@@ -45,6 +45,8 @@ namespace IDAL
         //Adds an organ to the list of droneCharge
         void UpdateAddDroneToCharge(int dronId, int stationId);
         void UpdateRemoveDroneToCharge(int dronId, int stationId);
+        //return DronInCharge of the station
+        List<DroneCharge> GetListOfDronInCharge(int stationId);
         IEnumerable<Distanse> MinimumDistance(double lang,double lati);
         
         void UpdateChargeSpots(int stationId);

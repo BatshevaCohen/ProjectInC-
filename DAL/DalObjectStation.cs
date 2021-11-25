@@ -107,5 +107,22 @@ namespace DalObject
         {
             throw new NotImplementedException();
         }
+        /// <summary>
+        /// The function recives station ID and returns all of the drones that are charging in that station
+        /// </summary>
+        /// <param name="stationId"></param>
+        /// <returns></returns>
+        public List<DroneCharge> GetListOfDronInCharge(int stationId)
+        {
+            List<DroneCharge> newDroneCharges = new List<DroneCharge>();
+            foreach (DroneCharge item in DataSource.DroneCharges)
+            {
+                if(item.StationId==stationId)
+                {
+                    newDroneCharges.Add(item);
+                }
+            }
+            return newDroneCharges;
+        }
     }
 }

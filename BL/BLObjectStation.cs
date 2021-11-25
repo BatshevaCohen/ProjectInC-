@@ -54,7 +54,17 @@ namespace IBL.BO
             station.Location.Latitude = s.Latitude;
             station.Location.Longitude = s.Longitude;
             station.AvailableChargingSpots = s.ChargeSlots;
-            //לא לשכוח להתיחס לרשימה 
+            //list of drone and 
+            List<DroneCharge> droneCharges= dalo.GetListOfDronInCharge(stationID);
+            foreach (DroneCharge item in droneCharges)
+            {
+                DroneInCharging droneInCharging = new DroneInCharging();
+                droneInCharging.Id = item.DroneId;
+                DroneToList droneToList = drones.Find(x => x.Id == item.DroneId);
+                droneInCharging.Battery = droneToList.Battery;
+                station.droneInChargings.Add(droneInCharging);
+            }
+            
             return station;
         }
         /// <summary>

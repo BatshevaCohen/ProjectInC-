@@ -22,7 +22,7 @@ namespace IBL.BO
         void UpdateParcelSuppliedByDrone(int droneId);
         //SHOW:
         Station GetStation(int requestedId);
-        Drone GetDrone(int droneId);
+        Drone GetDroneBL(int droneId);
         Customer GetCustomer(int customerId);
         Parcel GetParcel(int parcelId);
         //SHOW LIST:

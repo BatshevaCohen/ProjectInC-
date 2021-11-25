@@ -20,6 +20,7 @@ namespace DalObject
             internal static List<Station> Stations = new List<Station>(5);
             internal static List<Customer> Customer = new List<Customer>(100);
             internal static List<Parcel> Parcels = new List<Parcel>(1000);
+            internal static List<DroneCharge> DroneCharges = new List<DroneCharge>();
 
             static Random r = new Random();
 

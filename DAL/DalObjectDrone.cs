@@ -69,13 +69,58 @@ namespace DalObject
             return DataSource.Drones.Find(x => x.Id == droneId);
         }
         /// <summary>
+        /// send a drone to charge
+        /// </summary>
+        /// <param name="droneId">the drone to send to charge</param>
+        /// <param name="stationId">the station to send it to charge</param>
+        public void SendDroneToBaseCharge(int droneId, int stationId)
+        {
+            Drone drone = GetDrone(droneId);
+            Station station = GetStation(stationId);
+            DataSource.Stations.Remove(station);
+
+            DataSource.DroneCharges.Add(new DroneCharge
+            {
+                DroneId = drone.Id,
+                StationId = station.Id
+            });
+            station.ChargeSlots--;
+
+            DataSource.Stations.Add(station);
+        }
+        /// <summary>
+        /// release a drone from charge
+        /// </summary>
+        /// <param name="droneId">the id of the drone to release</param>
+        public void ReleaseDroneFromCharging(int droneId)
+        {
+            Drone drone = GetDrone(droneId);
+            DataSource.Drones.Remove(drone);
+
+            DroneCharge droneCharge = DataSource.DroneCharges.Find(x => x.DroneId == droneId);
+            //if (droneCharge.DroneId != droneId)
+            //    throw new IdNotFoundException(droneId, "Station charge");
+
+            int stationId = droneCharge.StationId;  //
+            Station station = GetStation(stationId);
+            DataSource.Stations.Remove(station);
+
+            station.ChargeSlots++;
+            
+
+            DataSource.Stations.Add(station);
+            DataSource.Drones.Add(drone);
+            DataSource.DroneCharges.Remove(droneCharge);
+
+        }
+        /// <summary>
         /// discharge drone
         /// </summary>
         /// <param name="droneID"></param>
         /// <param name="droneLatitude"></param>
         /// <param name="droneLongitude"></param>
         /// <exception cref="Exception"></exception>
-        public void DischargeDrone(int droneID, double droneLatitude, double droneLongitude)
+        public void DischargeDroneByLocation(int droneID, double droneLatitude, double droneLongitude)
         {
             bool flag = false;
             Drone d = DataSource.Drones.Find(x => x.Id == droneID);
@@ -95,20 +140,7 @@ namespace DalObject
                 throw new Exception("couldn't find station by drones location");//לעשות חריגה שלא קיים מיקום תחנה לרחפן
             }
         }
-        /// <summary>
-        ///  charge drone
-        /// </summary>
-        /// <param name="drone_id"></param>
-        /// <param name="station_id"></param>
-        public void UpdateDroneToCharge(int drone_id, int station_id)
-        {
-            Drone d = DataSource.Drones.Find(x => x.Id == drone_id);
-            DroneCharge droneCharge = new DroneCharge();
-            droneCharge.DroneId = drone_id;
-            Station s = DataSource.Stations.Find(x => x.Id == station_id);
-            droneCharge.StationId = station_id;
-            s.ChargeSlots--;
-        }
+       
         /// <summary>
         /// Put the drone in the station for the initial charging- uodate only the station, the drone update is in the BL
         /// </summary>
@@ -119,21 +151,5 @@ namespace DalObject
             Station station = DataSource.Stations.Find(x => x.Id == StationId);
             station.ChargeSlots = drone.Id;
         }
-        
-
-        //public Customer updateBatteryAndLocationDrone(int droneId,int senderId,double longitude,double latitude)
-        //{
-        //    //and return custumer to update the dtone location like the custumer
-
-        //    //finds the drone by its ID
-        //    Drone drone = DataSource.Drones.Find(x => x.Id == droneId);
-        //    //finds the customer by its ID
-        //    Customer customer = DataSource.Customer.Find(x => x.Id == senderId);
-        //    //calculate the distance from the sender to the drone
-        //    double distance= CalculateDistance(customer.Longitude, customer.Latitude, longitude, latitude);
-        //    // for each KM - 1% of the battery
-        //    drone.Battery -= distance * 0.01;
-        //    return customer;
-        //}        
     }
 }

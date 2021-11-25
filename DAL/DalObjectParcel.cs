@@ -118,6 +118,10 @@ namespace DalObject
             return p;
         }
 
+        public void DischargeDrone(int drone_id, double longt, double latit)
+        {
+            throw new NotImplementedException();
+        }
     }
  
 }

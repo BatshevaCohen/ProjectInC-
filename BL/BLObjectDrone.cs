@@ -109,12 +109,12 @@ namespace IBL.BO
             dronel.Location.Longitude = station.Longitude; 
             double droneBattery = minDistance * 10 / 100;
             dronel.Battery = droneBattery;
+            //עידכון עמדות טעינה פנוייות 
             dalo.UpdateChargeSpots(station.Id);
-            DroneInCharging droneInCharging = new DroneInCharging();
-            droneInCharging.Battery = droneBattery;
-            droneInCharging.Id = droneId;
-            Station s = new Station();
-            s.droneInChargings.Add(droneInCharging);
+            //הוספת מופע לרשימת הרחפנים בטעינה
+            dalo.UpdateAddDroneToCharge(droneId, station.Id);
+
+ 
         }
         /// <summary>
         /// Discharge drone
@@ -137,12 +137,12 @@ namespace IBL.BO
             {
                 double droneLocationLatitude = dronel.Location.Latitude;
                 double droneLocationLongitude = dronel.Location.Longitude;
-                dalo.DischargeDrone(droneID, droneLocationLatitude, droneLocationLongitude);
+                dalo.DischargeDroneByLocation(droneID, droneLocationLatitude, droneLocationLongitude);
                 DroneInCharging droneInCharge = new DroneInCharging();
                 //find the drone in charging
                 droneInCharge = station.droneInChargings.Find(x => x.Id == droneID);
-                //remove the drone frome the list of droneInChargings
-                station.droneInChargings.Remove(droneInCharge); 
+                //remove the drone frome the list of droneChargings
+                dalo.UpdateRemoveDroneToCharge(droneID, station.Id);
             }
             else
             {
@@ -170,6 +170,26 @@ namespace IBL.BO
         {
             throw new NotImplementedException();
         }
+        /// <summary>
+        /// Imports the drone from the data layer and prints a drone from a logical entity
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public Drone AddDroneBL(int droneId)
+        {
+            IDAL.DO.Drone d = dalo.GetDrone(droneId);
+            Drone drone = new Drone();
+            drone.Id = d.Id;
+            drone.Model = d.Model;
+            drone.Battery = d.Battery;
+            drone.DroneStatuses = (DroneStatuses)d.Status;
+            drone.Weight = (Weight)d.MaxWeight;
+            //to find the locations drone---
+           DroneToList droneToList= drones.Find(x => x.Id == droneId);
+            drone.Location = droneToList.Location;
+            //drone.ParcelInTransfer =??????;
+            return drone;
+        }
     }
-
+        
 }

@@ -26,7 +26,7 @@ namespace IBL.BO
             result += $"Customer phone number is: {Phone}, \n";
             result += $"Customer Location is: {Location}, \n";
             result += $"List of parcels from the sender: {SentParcels}, \n";
-            result += $"List of parcels to the reciver: {SentParcels}, \n";
+            result += $"List of parcels to the reciver: {ReceiveParcels}, \n";
             
             return result;
         }

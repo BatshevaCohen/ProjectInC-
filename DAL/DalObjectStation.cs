@@ -86,6 +86,26 @@ namespace DalObject
             Station station = DataSource.Stations.Find(x => x.Id == stationId);
             station.ChargeSlots--;
         }
-        
+        public void UpdateAddDroneToCharge(int dronId, int stationId)
+        {
+            DroneCharge droneCharge = new DroneCharge();
+            droneCharge.DroneId = dronId;
+            droneCharge.StationId = stationId;
+            //הוספת מופע לרשימה
+            DataSource.DroneCharges.Add(droneCharge);
+        }
+       public  void UpdateRemoveDroneToCharge(int dronId, int stationId)
+        {
+            DroneCharge droneCharge = new DroneCharge();
+            droneCharge.DroneId = dronId;
+            droneCharge.StationId = stationId;
+            //מחיקת מופע לרשימה
+            DataSource.DroneCharges.Remove(droneCharge);
+        }
+
+        public Station FindStetion(int stationID)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

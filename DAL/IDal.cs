@@ -38,9 +38,13 @@ namespace IDAL
         void UpdateParcelPickedupByDrone(int parcel_id, int drone_id);
         void UpdateParcelToDrone(int parcel_id, int drone_id);
         void UpdateDroneToStation(int StationId,Drone drone);
+        void DischargeDroneByLocation(int droneID, double droneLatitude, double droneLongitude);
         void UpdateNameOfDrone(int DroneId, string model);
         void UpdateStetion(int StationId, string name, int charging_spots);
         void UpdateCustumer(int custumerId, string name, string phon);
+        //Adds an organ to the list of droneCharge
+        void UpdateAddDroneToCharge(int dronId, int stationId);
+        void UpdateRemoveDroneToCharge(int dronId, int stationId);
         IEnumerable<Distanse> MinimumDistance(double lang,double lati);
         
         void UpdateChargeSpots(int stationId);

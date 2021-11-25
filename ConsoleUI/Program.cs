@@ -228,7 +228,7 @@ namespace ConsoleUI
                                     dalobject.ShowStationList();
                                     int station_id;
                                     int.TryParse(Console.ReadLine(), out station_id);
-                                    dalobject.UpdateDroneToCharge(drone_id4, station_id);
+                                    dalobject.SendDroneToBaseCharge(drone_id4, station_id);//*******
                                     Console.WriteLine("\nDrone updated to- charge status successfully!\n");
                                     break;
 
@@ -237,9 +237,7 @@ namespace ConsoleUI
                                     int drone_id5;
                                     int.TryParse(Console.ReadLine(), out drone_id5);
                                     Console.WriteLine("choose a station for charging");
-                                    int station_id_discharge;
-                                    int.TryParse(Console.ReadLine(), out station_id_discharge);
-                                    dalobject.DischargeDrone(drone_id5, station_id_discharge);
+                                    dalobject.ReleaseDroneFromCharging(drone_id5);//****
                                     Console.WriteLine("\nDrone updated to- discharge status successfully!\n");
                                     break;
 
@@ -299,21 +297,22 @@ namespace ConsoleUI
                                     break;
                             // prints the list of the drones
                             case ListOptions.Drone:
-                                List<Drone> DroneList = new List<Drone>();
+                               
+                                IEnumerable<Drone> DroneList;
                                 DroneList = dalobject.ShowDroneList();
                                 foreach (Drone element in DroneList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;
                             // prints the list of the customers
                             case ListOptions.Custumer:
-                                List<Customer> CustomerList = new List<Customer>();
+                                IEnumerable<Customer> CustomerList;
                                 CustomerList = dalobject.ShowCustomerList();
                                 foreach (Customer element in CustomerList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;
                             // prints the list of the parcels
                             case ListOptions.Parcel:
-                                List<Parcel> ParcelList = new List<Parcel>();
+                                IEnumerable<Parcel> ParcelList;
                                 ParcelList = dalobject.ShowParcelList();
                                 foreach (Parcel element in ParcelList) //prints the elements in the list
                                     Console.WriteLine(element);

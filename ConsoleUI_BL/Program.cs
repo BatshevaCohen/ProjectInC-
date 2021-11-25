@@ -230,12 +230,13 @@ namespace ConsoleUI_BL
                                 int Id_S;
                                 int.TryParse(Console.ReadLine(), out Id_S);
                                 Console.WriteLine("enter dron id");
-                                bLObject.GetStation1(Id_S);
+                                //  Station GetStation(int requestedId);
+                                bLObject.GetStation(Id_S).ToString();
                                 break;
                             case EntityOptions.Drone:
                                 int Id_D;
                                 int.TryParse(Console.ReadLine(), out Id_D);
-                                Console.WriteLine(dalobject.GetDrone(Id_D));
+                                Console.WriteLine(bLObject.AddDroneBL(Id_D));
                                 break;
                             case EntityOptions.Custumer:
                                 int Id_C;

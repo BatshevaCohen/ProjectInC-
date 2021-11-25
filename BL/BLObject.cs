@@ -25,30 +25,7 @@ namespace IBL.BO
            
         }
 
-        //כבר יש פונקציות כאלה- לבדוק!!
-        /////////////////////////////////////////////////////////////////////////////
-        BO.Station GetStation(int requestedId)
-        {
-            throw new NotImplementedException();
-        }
-
-        Drone IBL.GetDrone(int droneId)
-        {
-            throw new NotImplementedException();
-        }
-
-        Customer IBL.GetCustomer(int customerId)
-        {
-            throw new NotImplementedException();
-        }
-
-        Parcel IBL.GetParcel(int parcelId)
-        {
-            throw new NotImplementedException();
-        }
-        /////////////////////////////////////////////////////////////////////////////////////////////
-        
-
+      
         public void UpdateDeliveryToCustomer(int parcel_id3, int customer_id)
         {
             throw new NotImplementedException();

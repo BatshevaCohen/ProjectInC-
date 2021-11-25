@@ -172,5 +172,20 @@ namespace IBL.BO
         {
             throw new NotImplementedException();
         }
+
+        Station IBL.GetStation(int requestedId)
+        {
+            throw new NotImplementedException();
+        }
+
+        Drone IBL.GetDrone(int droneId)
+        {
+            throw new NotImplementedException();
+        }
+
+        Parcel IBL.GetParcel(int parcelId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

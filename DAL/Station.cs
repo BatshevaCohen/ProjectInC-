@@ -27,10 +27,7 @@ namespace IDAL
                 return result;
             }
 
-            public static implicit operator List<object>(Station v)
-            {
-                throw new NotImplementedException();
-            }
+        
         }
     }
 

@@ -45,9 +45,17 @@ namespace IBL.BO
         /// <param name="requestedId"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        Station GetStation1(int stationID)
+       public Station GetStation(int stationID)
         {
-           return
+           IDAL.DO.Station s= dalo.GetStation(stationID);
+            Station station = new Station();
+            station.Name = s.Name;
+            station.Id = s.Id;
+            station.Location.Latitude = s.Latitude;
+            station.Location.Longitude = s.Longitude;
+            station.AvailableChargingSpots = s.ChargeSlots;
+            //לא לשכוח להתיחס לרשימה 
+            return station;
         }
         /// <summary>
         /// Show LIST of stations

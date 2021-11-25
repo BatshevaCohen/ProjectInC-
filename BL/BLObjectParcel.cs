@@ -128,7 +128,7 @@ namespace IBL.BO
                 Drone d = drone1.Find(x => x.Id == droneId);
                 //finds the parcel in transfer
                 ParcelInTransfer parcelInTransfer = d.ParcelInTransfer;
-                senderL = parcelInTransfer.collecting;
+                senderL = parcelInTransfer.Collecting;
                 reciverL = parcelInTransfer.SupplyTarget;
                 // the distance that the drone have drove
                 double distanse = dalo.CalculateDistance(senderL.Longitude, senderL.Latitude, reciverL.Longitude, reciverL.Latitude);

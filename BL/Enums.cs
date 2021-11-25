@@ -19,7 +19,7 @@
         Picked,
         Delivered
     }
-    public enum ParcelStatusBool
+    public enum ParcelTransferStatus
     {
         WaitingToBePickedUp,
         OnTheWayToDestination

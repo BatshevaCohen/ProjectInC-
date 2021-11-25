@@ -13,7 +13,10 @@ namespace IDAL
             public double Longitude { get; set; }
             public double Latitude { get; set; }
 
-
+            /// <summary>
+            /// ToString
+            /// </summary>
+            /// <returns></returns>
             public override string ToString()
             {
                 String result = "";

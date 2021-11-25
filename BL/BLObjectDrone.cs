@@ -179,11 +179,11 @@ namespace IBL.BO
                 IDAL.DO.Parcel parcel = dalo.GetParcelInTransferByDroneId(droneId);
                 ParcelInTransfer parcelInTransfer = new ParcelInTransfer();
                 parcelInTransfer.Id = parcel.Id;
-                parcelInTransfer.sender.Id = parcel.SenderId;
-                parcelInTransfer.sender.Id = parcel.SenderId;
-                parcelInTransfer.priority = (Priority)parcel.Priority;
-                parcelInTransfer.weight = (Weight)parcel.Weight;
-                parcelInTransfer.parcelStatusBool = ParcelStatusBool.OnTheWayToDestination;
+                parcelInTransfer.Sender.Id = parcel.SenderId;
+                parcelInTransfer.Sender.Id = parcel.SenderId;
+                parcelInTransfer.Priority = (Priority)parcel.Priority;
+                parcelInTransfer.Weight = (Weight)parcel.Weight;
+                parcelInTransfer.parcelStatusBool = ParcelTransferStatus.OnTheWayToDestination;
                 
             }
 

@@ -157,9 +157,36 @@ namespace IBL.BO
         /// <param name="droneId"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        BO.Drone GetDrone(int droneId)
+        public Drone GetDrone(int droneId)
         {
-            throw new NotImplementedException();
+            IDAL.DO.Drone d = dalo.GetDrone(droneId);
+            Drone drone = new Drone();
+            drone.Id = d.Id;
+            drone.Model = d.Model;
+            drone.Battery = d.Battery;
+            drone.DroneStatuses = (DroneStatuses)d.Status;
+            drone.Weight = (Weight)d.MaxWeight;
+            //to find the locations drone---
+            DroneToList droneToList = drones.Find(x => x.Id == droneId);
+            drone.Location = droneToList.Location;
+            if (drone.DroneStatuses != DroneStatuses.Shipping)
+            {
+                return drone;
+            }
+            else
+            {
+                //Package data in transfer mode 
+                IDAL.DO.Parcel parcel = dalo.GetParcelInTransferByDroneId(droneId);
+                ParcelInTransfer parcelInTransfer = new ParcelInTransfer();
+                parcelInTransfer.Id = parcel.Id;
+                parcelInTransfer.sender.Id = parcel.SenderId;
+                parcelInTransfer.sender.Id = parcel.SenderId;
+                parcelInTransfer.priority = (Priority)parcel.Priority;
+                parcelInTransfer.weight = (Weight)parcel.Weight;
+                parcelInTransfer.parcelStatusBool = ParcelStatusBool.OnTheWayToDestination;
+                
+            }
+
         }
         /// <summary>
         /// Show LIST of drones
@@ -175,21 +202,6 @@ namespace IBL.BO
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        public Drone AddDroneBL(int droneId)
-        {
-            IDAL.DO.Drone d = dalo.GetDrone(droneId);
-            Drone drone = new Drone();
-            drone.Id = d.Id;
-            drone.Model = d.Model;
-            drone.Battery = d.Battery;
-            drone.DroneStatuses = (DroneStatuses)d.Status;
-            drone.Weight = (Weight)d.MaxWeight;
-            //to find the locations drone---
-           DroneToList droneToList= drones.Find(x => x.Id == droneId);
-            drone.Location = droneToList.Location;
-            //drone.ParcelInTransfer =??????;
-            return drone;
-        }
-    }
+       
         
 }

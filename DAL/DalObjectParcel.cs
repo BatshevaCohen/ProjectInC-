@@ -117,6 +117,17 @@ namespace DalObject
             Parcel p = DataSource.Parcels.Find(x => x.Id == DroneId);
             return p;
         }
+        /// <summary>
+        /// Search for the package in delivery mode
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <returns></returns>
+        public  Parcel GetParcelInTransferByDroneId(int droneId)
+        {
+            Parcel p = DataSource.Parcels.Find(x => x.Id == droneId);
+            return p;
+        }
+
 
         public void DischargeDrone(int drone_id, double longt, double latit)
         {

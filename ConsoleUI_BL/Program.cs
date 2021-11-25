@@ -236,7 +236,7 @@ namespace ConsoleUI_BL
                             case EntityOptions.Drone:
                                 int Id_D;
                                 int.TryParse(Console.ReadLine(), out Id_D);
-                                Console.WriteLine(bLObject.AddDroneBL(Id_D));
+                                Console.WriteLine(bLObject.GetDrone(Id_D));
                                 break;
                             case EntityOptions.Custumer:
                                 int Id_C;

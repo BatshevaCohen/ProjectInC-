@@ -48,7 +48,8 @@ namespace IDAL
         //return DronInCharge of the station
         List<DroneCharge> GetListOfDronInCharge(int stationId);
         IEnumerable<Distanse> MinimumDistance(double lang,double lati);
-        
+        Parcel GetParcelInTransferByDroneId(int droneId);
+
         void UpdateChargeSpots(int stationId);
         double[] PowerRequest();
         Parcel GetParcelByDroneId(int DroneId);

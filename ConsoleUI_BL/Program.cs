@@ -241,12 +241,12 @@ namespace ConsoleUI_BL
                             case EntityOptions.Custumer:
                                 int Id_C;
                                 int.TryParse(Console.ReadLine(), out Id_C);
-                                Console.WriteLine(dalobject.GetCustomer(Id_C));
+                                Console.WriteLine(bLObject.GetCustomer(Id_C));
                                 break;
                             case EntityOptions.Parcel:
                                 int Id_P;
                                 int.TryParse(Console.ReadLine(), out Id_P);
-                                Console.WriteLine(dalobject.GetParcel(Id_P));
+                                Console.WriteLine(bLObject.GetParcel(Id_P));
                                 break;
                             case EntityOptions.Exit:
                                 DalObject.DalObject.Exit();

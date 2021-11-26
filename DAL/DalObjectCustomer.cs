@@ -51,6 +51,7 @@ namespace DalObject
             }
             return DataSource.Customer.First(c => c.Id == IDc);
         }
+
         /// <summary>
         /// Show list of Customers
         /// </summary>

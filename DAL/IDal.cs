@@ -23,6 +23,7 @@ namespace IDAL
         Customer GetCustomer(int IDc);
         Drone GetDrone(int id);
         Parcel GetParcel(int id);
+       
         void ParcelException(int id, string errMsg, Severity severity);
         //SHOW LISTS:
         IEnumerable<Station> ShowStationList();
@@ -47,6 +48,10 @@ namespace IDAL
         void UpdateRemoveDroneToCharge(int dronId, int stationId);
         //return DronInCharge of the station
         List<DroneCharge> GetListOfDronInCharge(int stationId);
+        //List of packages that belong to the customer sender
+        List<Parcel> GetListOfParcelSending(int id);
+        //List of packages that belong to the customer reciever
+        List<Parcel> GetListOfParcelRecirver(int id);
         IEnumerable<Distanse> MinimumDistance(double lang,double lati);
         Parcel GetParcelInTransferByDroneId(int droneId);
 

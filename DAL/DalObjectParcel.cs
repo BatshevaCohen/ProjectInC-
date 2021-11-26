@@ -133,6 +133,32 @@ namespace DalObject
         {
             throw new NotImplementedException();
         }
+        public List<Parcel> GetListOfParcelSending(int id)
+        {
+            List<Parcel> Listparcels = new List<Parcel>();
+            foreach (Parcel item in DataSource.Parcels)
+            {
+                if(item.SenderId==id)
+                {
+                    Listparcels.Add(item);
+                }
+            }
+            return Listparcels;
+        }
+        public List<Parcel> GetListOfParcelRecirver(int id)
+        {
+            List<Parcel> Recieverparcels = new List<Parcel>();
+            foreach (Parcel item in DataSource.Parcels)
+            {
+                if (item.ReceiverId == id)
+                {
+                    Recieverparcels.Add(item);
+                }
+            }
+            return Recieverparcels;
+        }
     }
- 
+   
 }
+ 
+

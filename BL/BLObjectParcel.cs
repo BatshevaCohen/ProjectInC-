@@ -142,7 +142,22 @@ namespace IBL.BO
                 parcel.Delivered = DateTime.Now;
             }
         }
-
+        public Parcel GetParcel(int parcelId)
+        {
+            IDAL.DO.Parcel p = dalo.GetParcel(parcelId);
+            Parcel parcel = new Parcel();
+            parcel.Id = p.Id;
+            parcel.Resiver.Id = p.SenderId;
+            parcel.Sender.Id = p.ReceiverId;
+            parcel.Priority = (Priority)p.Priority;
+            parcel.Weight = (Weight)p.Weight;
+            parcel.AssignmentToParcelTime = (DateTime)p.Delivered;
+            parcel.ParcelCreationTime = (DateTime)p.create;
+            parcel.SupplyTime = (DateTime)p.Scheduled;
+            parcel.CollectionTime = (DateTime)p.PickedUp;
+            //////////////////////////////////////////////////חסר נתון 
+            return parcel;
+        }
 
         /// <summary>
         /// Get parcel by ID
@@ -174,11 +189,6 @@ namespace IBL.BO
         }
 
         Station IBL.GetStation(int requestedId)
-        {
-            throw new NotImplementedException();
-        }
-
-        Drone IBL.GetDrone(int droneId)
         {
             throw new NotImplementedException();
         }

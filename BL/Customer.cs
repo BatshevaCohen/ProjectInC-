@@ -12,8 +12,8 @@ namespace IBL.BO
         public String Name { get; set; }
         public String Phone { get; set; }
         public Location Location { get; set; }
-        public List<ParcelCustomer> SentParcels { get; set; }
-        public List<ParcelCustomer> ReceiveParcels { get; set; }
+        public List<ParcelCustomer> SentParcels { get; set; }//List of packages of the sender
+        public List<ParcelCustomer> ReceiveParcels { get; set; }//List of packages of the reciver
         /// <summary>
         /// ToString
         /// </summary>

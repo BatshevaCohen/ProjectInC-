@@ -49,7 +49,7 @@ namespace IBL.BO
             //finds the drone by the recived ID
             DroneToList dronel = drones.Find(x => x.Id == droneId);
             //if the drone is available- it can be sent for charging
-            if (dronel.DroneStatuses == DroneStatuses.Available) 
+            if (dronel.DroneStatuses == DroneStatuses.Available)
             {
                 List<Distanse> disStationFromDrone = dalo.MinimumDistance(dronel.Location.Longitude, dronel.Location.Latitude).ToList();//list of the distances from the drone to every station
                 double min = 9999999;
@@ -58,22 +58,22 @@ namespace IBL.BO
                 //number of distances in the list
                 int sized = disStationFromDrone.Count;
                 //goes over the list
-                while (!flag && counter <= sized) 
+                while (!flag && counter <= sized)
                 {
                     foreach (Distanse item in disStationFromDrone)
                     {
                         //to find the station with the minimum distance from the drone
-                        if (item.distance <= min) 
+                        if (item.distance <= min)
                         {
                             min = item.distance;
                             idS = item.id;
                         }
                         station = dalo.GetStation(item.id);
                         //if there is an available charging spot in the station
-                        if (station.ChargeSlots > 0) 
+                        if (station.ChargeSlots > 0)
                         {
                             //only if there is enough battery
-                            if (dronel.Battery > min * 10 / 100) 
+                            if (dronel.Battery > min * 10 / 100)
                             {
                                 flag = true;
                                 //function to update Battery, drone mode drone location
@@ -106,7 +106,7 @@ namespace IBL.BO
             //update the drone's location to the charging station location - latitude
             dronel.Location.Latitude = station.Latitude;
             //update the drone's location to the charging station location - longitudw
-            dronel.Location.Longitude = station.Longitude; 
+            dronel.Location.Longitude = station.Longitude;
             double droneBattery = minDistance * 10 / 100;
             dronel.Battery = droneBattery;
             //עידכון עמדות טעינה פנוייות 
@@ -114,7 +114,7 @@ namespace IBL.BO
             //הוספת מופע לרשימת הרחפנים בטעינה
             dalo.UpdateAddDroneToCharge(droneId, station.Id);
 
- 
+
         }
         /// <summary>
         /// Discharge drone
@@ -125,15 +125,15 @@ namespace IBL.BO
         public void DischargeDrone(int droneID, TimeSpan chargingTime)
         {
             // save dVal in second
-            double dVal = (chargingTime.TotalMilliseconds)*1000;
- 
+            double dVal = (chargingTime.TotalMilliseconds) * 1000;
+
             //finds the drone by its ID
-            DroneToList dronel = drones.Find(x => x.Id == droneID); 
+            DroneToList dronel = drones.Find(x => x.Id == droneID);
             Station station = new Station();
             //only a drone that was in charging c
-           
+
             //ould be discharge
-            if (dronel.DroneStatuses == DroneStatuses.Maintenance) 
+            if (dronel.DroneStatuses == DroneStatuses.Maintenance)
             {
                 double droneLocationLatitude = dronel.Location.Latitude;
                 double droneLocationLongitude = dronel.Location.Longitude;
@@ -183,10 +183,17 @@ namespace IBL.BO
                 parcelInTransfer.Sender.Id = parcel.SenderId;
                 parcelInTransfer.Priority = (Priority)parcel.Priority;
                 parcelInTransfer.Weight = (Weight)parcel.Weight;
-                parcelInTransfer.parcelStatusBool = ParcelTransferStatus.OnTheWayToDestination;
-                
+                parcelInTransfer.ParcelTransferStatus = ParcelTransferStatus.OnTheWayToDestination;
+                Customer customer_Sender = GetCustomer(parcel.SenderId);
+                Customer customer_Reciever = GetCustomer(parcel.ReceiverId);
+                parcelInTransfer.Collecting = customer_Sender.Location;
+                parcelInTransfer.SupplyTarget = customer_Reciever.Location;
+                double distance = dalo.CalculateDistance(parcelInTransfer.Collecting.Latitude, parcelInTransfer.Collecting.Longitude,
+                     parcelInTransfer.SupplyTarget.Latitude, parcelInTransfer.SupplyTarget.Longitude);
+                parcelInTransfer.TransportDistance = distance;
+                drone.ParcelInTransfer = parcelInTransfer;
             }
-
+            return drone;
         }
         /// <summary>
         /// Show LIST of drones
@@ -202,6 +209,7 @@ namespace IBL.BO
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-       
-        
+
+
+    }
 }

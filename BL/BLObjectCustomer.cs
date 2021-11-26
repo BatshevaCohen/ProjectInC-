@@ -41,7 +41,74 @@ namespace IBL.BO
         //החבילות שהלקוח מקבל
         public Customer GetCustomer(int IDc)
         {
+            IDAL.DO.Customer c = dalo.GetCustomer(IDc);
+            Customer customer = new Customer();
+            customer.Id = c.Id;
+            customer.Name = c.Name;
+            customer.Phone = c.Phone;
+            customer.Location.Latitude = c.Latitude;
+            customer.Location.Longitude = c.Longitude;
 
+            //Packages that the sending customer has
+
+            List<IDAL.DO.Parcel> parcelSendin = dalo.GetListOfParcelSending(customer.Id);
+            List<IDAL.DO.Parcel> parcelReciever = dalo.GetListOfParcelRecirver(customer.Id);
+           
+            foreach (IDAL.DO.Parcel item in parcelSendin)
+            {
+                ParcelCustomer parcelCustomer = new ParcelCustomer();
+                parcelCustomer.Id = item.Id;
+                parcelCustomer.Priority = (Priority)item.Priority;
+                parcelCustomer.Weight = (Weight)item.Weight;
+                if(item.create==DateTime.MinValue)
+                {
+                    parcelCustomer.ParcelStatus = ParcelStatus.Created;
+                }
+                if (item.Delivered == DateTime.MinValue)
+                {
+                    parcelCustomer.ParcelStatus = ParcelStatus.Delivered;
+                }
+                if (item.PickedUp == DateTime.MinValue)
+                {
+                    parcelCustomer.ParcelStatus = ParcelStatus.Picked;
+                }
+                if (item.Scheduled == DateTime.MinValue)
+                {
+                    parcelCustomer.ParcelStatus = ParcelStatus.Assigned;
+                }
+                parcelCustomer.CustomerInParcel.Id = customer.Id;
+                parcelCustomer.CustomerInParcel.Name = customer.Name;
+                //add Details of the sending customer
+                customer.SentParcels.Add(parcelCustomer);
+            }
+            foreach (IDAL.DO.Parcel item in parcelReciever)
+            {
+                ParcelCustomer parcelCustomer = new ParcelCustomer();
+                parcelCustomer.Id = item.Id;
+                parcelCustomer.Priority = (Priority)item.Priority;
+                parcelCustomer.Weight = (Weight)item.Weight;
+                if (item.create == DateTime.MinValue)
+                {
+                    parcelCustomer.ParcelStatus = ParcelStatus.Created;
+                }
+                if (item.Delivered == DateTime.MinValue)
+                {
+                    parcelCustomer.ParcelStatus = ParcelStatus.Delivered;
+                }
+                if (item.PickedUp == DateTime.MinValue)
+                {
+                    parcelCustomer.ParcelStatus = ParcelStatus.Picked;
+                }
+                if (item.Scheduled == DateTime.MinValue)
+                {
+                    parcelCustomer.ParcelStatus = ParcelStatus.Assigned;
+                }
+                parcelCustomer.CustomerInParcel.Id = customer.Id;
+                parcelCustomer.CustomerInParcel.Name = customer.Name;
+                //add Details of the rciever customer
+                customer.ReceiveParcels.Add(parcelCustomer);
+            }
+            return customer;
         }
         /// <summary>
         /// Show LIST of customers
@@ -54,3 +121,4 @@ namespace IBL.BO
         }
     }
 }
+//זה בשביל החבילה 

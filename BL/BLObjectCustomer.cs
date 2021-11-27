@@ -115,10 +115,82 @@ namespace IBL.BO
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public List<Customer> ShowCustomerList()
+        public IEnumerable<Customer> ShowCustomerList()
         {
-            throw new NotImplementedException();
+            List<Customer> customersList = new List<Customer>();
+            var custumers = dalo.ShowCustomerList();
+            foreach (var item in custumers)
+            {
+                Customer customer = new Customer();
+                customer.Id = item.Id;
+                customer.Name = item.Name;
+                customer.Phone = item.Phone;
+                customer.Location.Latitude = item.Latitude;
+                customer.Location.Longitude = item.Longitude;
+
+                //Packages that the sending customer has
+
+                List<IDAL.DO.Parcel> parcelSendin = dalo.GetListOfParcelSending(customer.Id);
+                List<IDAL.DO.Parcel> parcelReciever = dalo.GetListOfParcelRecirver(customer.Id);
+
+                foreach (IDAL.DO.Parcel item1 in parcelSendin)
+                {
+                    ParcelCustomer parcelCustomer = new ParcelCustomer();
+                    parcelCustomer.Id = item.Id;
+                    parcelCustomer.Priority = (Priority)item1.Priority;
+                    parcelCustomer.Weight = (Weight)item1.Weight;
+                    if (item1.create == DateTime.MinValue)
+                    {
+                        parcelCustomer.ParcelStatus = ParcelStatus.Created;
+                    }
+                    if (item1.Delivered == DateTime.MinValue)
+                    {
+                        parcelCustomer.ParcelStatus = ParcelStatus.Delivered;
+                    }
+                    if (item1.PickedUp == DateTime.MinValue)
+                    {
+                        parcelCustomer.ParcelStatus = ParcelStatus.Picked;
+                    }
+                    if (item1.Scheduled == DateTime.MinValue)
+                    {
+                        parcelCustomer.ParcelStatus = ParcelStatus.Assigned;
+                    }
+                    parcelCustomer.CustomerInParcel.Id = customer.Id;
+                    parcelCustomer.CustomerInParcel.Name = customer.Name;
+                    //add Details of the sending customer
+                    customer.SentParcels.Add(parcelCustomer);
+                }
+                foreach (IDAL.DO.Parcel item2 in parcelReciever)
+                {
+                    ParcelCustomer parcelCustomer = new ParcelCustomer();
+                    parcelCustomer.Id = item.Id;
+                    parcelCustomer.Priority = (Priority)item2.Priority;
+                    parcelCustomer.Weight = (Weight)item2.Weight;
+                    if (item2.create == DateTime.MinValue)
+                    {
+                        parcelCustomer.ParcelStatus = ParcelStatus.Created;
+                    }
+                    if (item2.Delivered == DateTime.MinValue)
+                    {
+                        parcelCustomer.ParcelStatus = ParcelStatus.Delivered;
+                    }
+                    if (item2.PickedUp == DateTime.MinValue)
+                    {
+                        parcelCustomer.ParcelStatus = ParcelStatus.Picked;
+                    }
+                    if (item2.Scheduled == DateTime.MinValue)
+                    {
+                        parcelCustomer.ParcelStatus = ParcelStatus.Assigned;
+                    }
+                    parcelCustomer.CustomerInParcel.Id = customer.Id;
+                    parcelCustomer.CustomerInParcel.Name = customer.Name;
+                    //add Details of the rciever customer
+                    customer.ReceiveParcels.Add(parcelCustomer);
+                    customersList.Add(customer);
+                }
+               
+            }
+            return customersList;
         }
     }
 }
-//זה בשביל החבילה 

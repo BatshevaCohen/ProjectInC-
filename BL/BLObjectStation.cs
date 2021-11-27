@@ -24,8 +24,10 @@ namespace IBL.BO
             s.Id = station.Id;
             s.Longitude = station.Location.Longitude;
             s.Latitude = station.Location.Latitude;
+           
             dalo.AddStation(s);//send the new station to DAL 
-            throw new NotImplementedException();
+
+            
         }
 
 
@@ -72,9 +74,32 @@ namespace IBL.BO
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public List<Station> ShowStationList()
+        public IEnumerable<Station> ShowStationList()
         {
-            throw new NotImplementedException();
+            List<Station> stationList = new List<Station>();
+            var stations = dalo.ShowStationList();
+            foreach (IDAL.DO.Station item in stations)
+            {
+                Station station = new Station();
+                station.Id = item.Id;
+                station.Location.Latitude = item.Latitude;
+                station.Location.Longitude = item.Longitude;
+                station.AvailableChargingSpots = item.ChargeSlots;
+                //list of drone and 
+                List<DroneCharge> droneCharges = dalo.GetListOfDronInCharge(station.Id);
+                foreach (DroneCharge item1 in droneCharges)
+                {
+                    DroneInCharging droneInCharging = new DroneInCharging();
+                    droneInCharging.Id = item1.DroneId;
+                    DroneToList droneToList = drones.Find(x => x.Id == item1.DroneId);
+                    droneInCharging.Battery = droneToList.Battery;
+                    station.droneInChargings.Add(droneInCharging);
+                }
+
+                stationList.Add(station);
+            }
+            return stationList;
+            
         }
         /// <summary>
         /// Show LIST of chargeable stations
@@ -83,7 +108,40 @@ namespace IBL.BO
         /// <exception cref="NotImplementedException"></exception>
         public List<Station> ShowChargeableStationList()
         {
-            throw new NotImplementedException();
+            List<Station> stationListWithAvailableChargingSpots = new List<Station>();
+            var stations = dalo.ShowStationList();
+            foreach (IDAL.DO.Station item in stations)
+            {
+                if(item.ChargeSlots>0)
+                {
+
+                    Station station = new Station();
+                    station.Id = item.Id;
+                    station.Location.Latitude = item.Latitude;
+                    station.Location.Longitude = item.Longitude;
+                    station.AvailableChargingSpots = item.ChargeSlots;
+                    //list of drone and 
+                    List<DroneCharge> droneCharges = dalo.GetListOfDronInCharge(station.Id);
+                    foreach (DroneCharge item1 in droneCharges)
+                    {
+                        DroneInCharging droneInCharging = new DroneInCharging();
+                        droneInCharging.Id = item1.DroneId;
+                        DroneToList droneToList = drones.Find(x => x.Id == item1.DroneId);
+                        droneInCharging.Battery = droneToList.Battery;
+                        station.droneInChargings.Add(droneInCharging);
+                    }
+
+                    stationListWithAvailableChargingSpots.Add(station);
+                }
+               
+
+
+            }
+            return stationListWithAvailableChargingSpots;
+        
+
+        
+                throw new NotImplementedException();
         }
 
         public Drone GetDroneBL(int droneId)

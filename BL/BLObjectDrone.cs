@@ -183,7 +183,7 @@ namespace IBL.BO
                 parcelInTransfer.Priority = (Priority)parcel.Priority;
                 parcelInTransfer.Weight = (Weight)parcel.Weight;
                 parcelInTransfer.ParcelTransferStatus = ParcelTransferStatus.OnTheWayToDestination;
-
+                drone.ParcelInTransfer = parcelInTransfer;
             }
             return drone;
         }
@@ -192,10 +192,67 @@ namespace IBL.BO
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public List<Drone> ShowDroneList()
+        public IEnumerable<Drone> ShowDroneList()
+        {
+            var droness = dalo.ShowDroneList();
+            List<Drone> droneList = new List<Drone>();
+            foreach (var item in droneList)
+            {
+
+                Drone drone = new Drone();
+                drone.Id = item.Id;
+                drone.Model = item.Model;
+                drone.Battery = item.Battery;
+                drone.DroneStatuses = item.DroneStatuses;
+                drone.Weight = item.Weight;
+                //to find the locations drone---
+                DroneToList droneToList = drones.Find(x => x.Id == item.Id);
+                drone.Location = droneToList.Location;
+                if (drone.DroneStatuses != DroneStatuses.Shipping)
+                {
+                    droneList.Add(drone);
+                    return droneList ;
+                }
+                else
+                {
+                    //Package data in transfer mode 
+                    IDAL.DO.Parcel parcel = dalo.GetParcelInTransferByDroneId(drone.Id);
+                    ParcelInTransfer parcelInTransfer = new ParcelInTransfer();
+                    parcelInTransfer.Id = parcel.Id;
+                    parcelInTransfer.Sender.Id = parcel.SenderId;
+                    parcelInTransfer.Sender.Id = parcel.SenderId;
+                    parcelInTransfer.Priority = (Priority)parcel.Priority;
+                    parcelInTransfer.Weight = (Weight)parcel.Weight;
+                    parcelInTransfer.ParcelTransferStatus = ParcelTransferStatus.OnTheWayToDestination;
+                    drone.ParcelInTransfer = parcelInTransfer;
+                }
+                droneList.Add(drone);
+                return droneList;
+            }
+           
+            throw new NotImplementedException();
+        }
+
+        List<Station> IBL.ShowStationList()
         {
             throw new NotImplementedException();
         }
+
+        List<Drone> IBL.ShowDroneList()
+        {
+            throw new NotImplementedException();
+        }
+
+        List<Customer> IBL.ShowCustomerList()
+        {
+            throw new NotImplementedException();
+        }
+
+        List<Parcel> IBL.ShowParcelList()
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// Imports the drone from the data layer and prints a drone from a logical entity
         /// </summary>

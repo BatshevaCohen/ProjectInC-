@@ -235,17 +235,17 @@ namespace ConsoleUI_BL
                             case EntityOptions.Drone:
                                 int Id_D;//hh
                                 int.TryParse(Console.ReadLine(), out Id_D);
-                                Console.WriteLine(bLObject.GetDrone(Id_D));
+                                Console.WriteLine(bLObject.GetDrone(Id_D).ToString());
                                 break;
                             case EntityOptions.Custumer:
                                 int Id_C;
                                 int.TryParse(Console.ReadLine(), out Id_C);
-                                Console.WriteLine(bLObject.GetCustomer(Id_C));
+                                Console.WriteLine(bLObject.GetCustomer(Id_C).ToString());
                                 break;
                             case EntityOptions.Parcel:
                                 int Id_P;
                                 int.TryParse(Console.ReadLine(), out Id_P);
-                                Console.WriteLine(bLObject.GetParcel(Id_P));
+                                Console.WriteLine(bLObject.GetParcel(Id_P).ToString());
                                 break;
                             case EntityOptions.Exit:
                                 DalObject.DalObject.Exit();
@@ -262,56 +262,50 @@ namespace ConsoleUI_BL
                         {
                             // prints the list of the base stations
                             case ListOptions.BaseStation:
-                                List<Station> BaseStationList = new List<Station>();
-                                BaseStationList = dalobject.ShowStationList();
+                                IEnumerable<Station> BaseStationList;
+                                BaseStationList = bLObject.ShowStationList();
                                 foreach (Station element in BaseStationList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;
                             // prints the list of the drones
                             case ListOptions.Drone:
-                                List<Drone> DroneList = new List<Drone>();
-                                DroneList = dalobject.ShowDroneList();
+                                IEnumerable<Drone> DroneList;
+                                DroneList = bLObject.ShowDroneList();
                                 foreach (Drone element in DroneList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;
                             // prints the list of the customers
                             case ListOptions.Custumer:
-                                List<Customer> CustomerList = new List<Customer>();
-                                CustomerList = dalobject.ShowCustomerList();
+                                IEnumerable<Customer> CustomerList;
+                                CustomerList = bLObject.ShowCustomerList();
                                 foreach (Customer element in CustomerList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;
                             // prints the list of the parcels
                             case ListOptions.Parcel:
-                                List<Parcel> ParcelList = new List<Parcel>();
-                                ParcelList = dalobject.ShowParcelList();
+                                IEnumerable<Parcel> ParcelList;
+                                ParcelList = bLObject.ShowParcelList();
                                 foreach (Parcel element in ParcelList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;
                             // prints the list of the stations that available for charging
                             case ListOptions.AvailbleChagingStation:
-                                List<Station> ChargeableBaseStationList = new List<Station>();
-                                ChargeableBaseStationList = (List<Station>)dalobject.ShowChargeableStationList();
+                                IEnumerable<Station> ChargeableBaseStationList;
+                                ChargeableBaseStationList =bLObject.ShowChargeableStationList();
                                 foreach (Station element in ChargeableBaseStationList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;
                             // prints the list of the non associated parcel
                             case ListOptions.UnAsignementParcel:
-                                dalobject.ShowNonAssociatedParcelList();
-                                List<Parcel> NonAssociatedParcelList = new List<Parcel>();
-                                NonAssociatedParcelList = dalobject.ShowNonAssociatedParcelList();
+                                bLObject.ShowNonAssociatedParcelList();
+                                List<Parcel> NonAssociatedParcelList;
+                                NonAssociatedParcelList = bLObject.ShowNonAssociatedParcelList();
                                 foreach (Parcel element in NonAssociatedParcelList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;
-                            case ListOptions.Exit:
-                                DalObject.DalObject.Exit();
-                                break;
+                           
                         }
                         break;
-                            // Exit
-                            case DistanceOptions.Exit:
-                                DalObject.DalObject.Exit();
-                                break;
                     case MenuOptions.Exit:
                         break;
                 }

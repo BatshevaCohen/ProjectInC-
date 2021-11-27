@@ -142,6 +142,11 @@ namespace IBL.BO
                 parcel.Delivered = DateTime.Now;
             }
         }
+        /// <summary>
+        /// View of parcel from bl
+        /// </summary>
+        /// <param name="parcelId"></param>
+        /// <returns></returns>
         public Parcel GetParcel(int parcelId)
         {
             IDAL.DO.Parcel p = dalo.GetParcel(parcelId);
@@ -155,7 +160,16 @@ namespace IBL.BO
             parcel.ParcelCreationTime = (DateTime)p.create;
             parcel.SupplyTime = (DateTime)p.Scheduled;
             parcel.CollectionTime = (DateTime)p.PickedUp;
-            //////////////////////////////////////////////////חסר נתון 
+            //If the parcel has already been associated-שוייכה
+            //update DroneInParcel
+            if (parcel.CollectionTime != DateTime.MinValue)
+            {
+                DroneToList droneToList = drones.Find(x => x.Id == p.DroneID);
+                parcel.DroneInParcel.Id = p.Id;
+                parcel.DroneInParcel.Battery = droneToList.Battery;
+                parcel.DroneInParcel.Location = droneToList.Location;
+               
+            }
             return parcel;
         }
 
@@ -171,8 +185,35 @@ namespace IBL.BO
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public List<Parcel> ShowParcelList()
+        public IEnumerable<Parcel> ShowParcelList()
         {
+            var parcels = dalo.ShowParcelList();
+            List<Parcel> parcelList = new List<Parcel>();
+            foreach (IDAL.DO.Parcel item in parcels)
+            { 
+                Parcel parcel = new Parcel();
+                parcel.Id = item.Id;
+                parcel.Resiver.Id = item.SenderId;
+                parcel.Sender.Id = item.ReceiverId;
+                parcel.Priority = (Priority)item.Priority;
+                parcel.Weight = (Weight)item.Weight;
+                parcel.AssignmentToParcelTime = (DateTime)item.Delivered;
+                parcel.ParcelCreationTime = (DateTime)item.create;
+                parcel.SupplyTime = (DateTime)item.Scheduled;
+                parcel.CollectionTime = (DateTime)item.PickedUp;
+                //If the parcel has already been associated-שוייכה
+                //update DroneInParcel
+                if (parcel.CollectionTime != DateTime.MinValue)
+                {
+                    DroneToList droneToList = drones.Find(x => x.Id == item.DroneID);
+                    DroneInParcel droneInParcel = new DroneInParcel();
+                    droneInParcel.Id = item.Id;
+                    droneInParcel.Battery = droneToList.Battery;
+                    droneInParcel.Location = droneToList.Location;
+                    parcel.DroneInParcel = droneInParcel;
+                }
+                return parcelList;
+            }
             throw new NotImplementedException();
         }
         /// <summary>
@@ -182,13 +223,31 @@ namespace IBL.BO
         /// <exception cref="NotImplementedException"></exception>
         public List<Parcel> ShowNonAssociatedParcelList()
         {
+            var parcels = dalo.ShowParcelList();
+            List<Parcel> parcelListNotAssociated = new List<Parcel>();
+            foreach (IDAL.DO.Parcel item in parcels)
+            {
+                if (item.PickedUp != DateTime.MinValue)
+                {
+                    Parcel parcel = new Parcel();
+                    parcel.Id = item.Id;
+                    parcel.Resiver.Id = item.ReceiverId;
+                    parcel.Sender.Id = item.SenderId;
+                    parcel.Priority = (Priority)item.Priority;
+                    parcel.Weight = (Weight)item.Weight;
+                    parcel.AssignmentToParcelTime = (DateTime)item.Delivered;
+                    parcel.ParcelCreationTime = (DateTime)item.create;
+                    parcel.SupplyTime = (DateTime)item.Scheduled;
+                    parcel.CollectionTime = (DateTime)item.PickedUp;
+                    parcelListNotAssociated.Add(parcel);
+                }
+            }
+            return parcelListNotAssociated;
+
             throw new NotImplementedException();
         }
 
-        Station IBL.GetStation(int requestedId)
-        {
-            throw new NotImplementedException();
-        }
+       
 
         Parcel IBL.GetParcel(int parcelId)
         {

@@ -57,7 +57,7 @@ namespace IBL.BO
                 // only if ID exists
                 if (customer.Id != 0)
                 {
-                    DroneToList dr = drones.Find(d => d.Id == droneId);
+                    DroneToList dr = dronesL.Find(d => d.Id == droneId);
                     dr.Location = new Location { Latitude = customer.Latitude, Longitude = customer.Longitude };
 
                     dalo.UpdateParcelToDrone(theParcel.Id, droneId);

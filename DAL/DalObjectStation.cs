@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Accord.Math;
 using DalObject.DO;
 using IDAL;
 using IDAL.DO;
@@ -39,7 +40,7 @@ namespace DalObject
             station.Id = StationId;
         }
         /// <summary>
-        /// view function for Station
+        /// View Station
         /// </summary>
         /// <param name="id"></param>
         public Station GetStation(int id)
@@ -51,7 +52,7 @@ namespace DalObject
             return DataSource.Stations.First(c => c.Id == id);
         }
         /// <summary>
-        /// view lists functions for BaseStation
+        /// View Station List
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Station> ShowStationList()
@@ -86,6 +87,11 @@ namespace DalObject
             Station station = DataSource.Stations.Find(x => x.Id == stationId);
             station.ChargeSlots--;
         }
+        /// <summary>
+        /// Charge drone and update the station
+        /// </summary>
+        /// <param name="dronId"></param>
+        /// <param name="stationId"></param>
         public void UpdateAddDroneToCharge(int dronId, int stationId)
         {
             DroneCharge droneCharge = new DroneCharge();
@@ -94,7 +100,12 @@ namespace DalObject
             //הוספת מופע לרשימה
             DataSource.DroneCharges.Add(droneCharge);
         }
-       public  void UpdateRemoveDroneToCharge(int dronId, int stationId)
+        /// <summary>
+        /// Uncharge drone and update the station
+        /// </summary>
+        /// <param name="dronId"></param>
+        /// <param name="stationId"></param>
+        public void UpdateRemoveDroneToCharge(int dronId, int stationId)
         {
             DroneCharge droneCharge = new DroneCharge();
             droneCharge.DroneId = dronId;
@@ -103,6 +114,12 @@ namespace DalObject
             DataSource.DroneCharges.Remove(droneCharge);
         }
 
+        /// <summary>
+        /// Find station by its ID
+        /// </summary>
+        /// <param name="stationID"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public Station FindStetion(int stationID)
         {
             throw new NotImplementedException();
@@ -123,6 +140,29 @@ namespace DalObject
                 }
             }
             return newDroneCharges;
+        }
+
+        //credit to Tzivya RotLevy:
+        /// <summary>
+        /// Finds the closest station to the customer
+        /// </summary>
+        /// <param name="senderLatitude"></param>
+        /// <param name="senderLongitude"></param>
+        /// <returns></returns>
+        public Station GetClosestStation(double latitude, double longitude)
+        {
+            Station result = default;
+            double distance = double.MaxValue;
+            foreach (var item in DataSource.Stations)
+            {
+                double dist = Tools.Utis.DistanceCalculation(latitude, longitude, item.Latitude, item.Longitude);
+                if (dist < distance)
+                {
+                    distance = dist;
+                    result = item;
+                }
+            }
+            return result;
         }
     }
 }

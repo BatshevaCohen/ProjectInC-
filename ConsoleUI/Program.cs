@@ -228,7 +228,7 @@ namespace ConsoleUI
                                     dalobject.ShowStationList();
                                     int station_id;
                                     int.TryParse(Console.ReadLine(), out station_id);
-                                    dalobject.SendDroneToBaseCharge(drone_id4, station_id);//*******
+                                    dalobject.SendDroneToCharge(drone_id4, station_id);//*******
                                     Console.WriteLine("\nDrone updated to- charge status successfully!\n");
                                     break;
 

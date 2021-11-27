@@ -14,7 +14,7 @@ namespace IBL.BO
     public partial class BLObject : IBL
     {
         public IDAL.IDal dalo;
-        public List<DroneToList> drones;
+        public List<DroneToList> dronesL;
         public List<Drone> drone1;
         static Random r = new Random();
 
@@ -22,7 +22,7 @@ namespace IBL.BO
         {
             //Access to the layer DAL
             dalo = new DalObject.DalObject();
-            drones = new List<DroneToList>();
+            dronesL = new List<DroneToList>();
 
         }
 
@@ -78,18 +78,25 @@ namespace IBL.BO
                     //יש לעדכן מצב סוללה:
                     //מצב סוללה יוגרל בין טעינה מינימלית שתאפשר לרחפן לבצע את המשלוח ולהגיע לטעינה לתחנה הקרובה ליעד המשלוח לבין טעינה מלאה
                     /////////////////////
+                    int minBattery; //minimum battery the drone needs for the delivery
+                    droneBl.Battery = r.Next(minBattery, 100);
                 }
-                // else- the drone is not in delivery status
+                //else- the drone is not in delivery status
                 else
                 {
                     droneBl.DroneStatuses = (DroneStatuses)r.Next(2); //Maintenance or Available
+                    // if the drone is on Maintenance status
                     if (droneBl.DroneStatuses == DroneStatuses.Maintenance)
                     {
-                        ////////////////////
-                        //TO DO:
-                        //מיקומו יוגרל בין תחנות התחנות הקיימות
-                        ////////////////////
-
+                        List<Station> stations = ShowStationList();
+                        int index = r.Next(stations.Count());
+                        //random station from all the stations
+                        Station station = stations[index];
+                        droneBl.Location = new Location
+                        {
+                            Latitude = station.Location.Latitude,
+                            Longitude = station.Location.Longitude
+                        };
 
                         // battery is random between 0% to 20%
                         droneBl.Battery = r.Next(0, 21);
@@ -98,14 +105,22 @@ namespace IBL.BO
                     // else- if the drone is available
                     else if (droneBl.DroneStatuses == DroneStatuses.Available)
                     {
+                        IEnumerable<IDAL.DO.Customer> customer = dalo.ShowCustomerList();
+                        customer.ToList();
+                        //צריך לבדוק איזה לקוחות כבר סופקו להם חבילות
+
                         /////////////////////////
                         //TO DO:
                         //מיקומו יוגרל בין לקוחות שיש חבילות שסופקו להם
                         // מצב סוללה יוגרל בין טעינה מינימלית שתאפשר לו להגיע לתחנה הקרובה לטעינה לבין טעינה מלאה
                         ///////////////////////
+
+                        //minimum battery the drone needs for the delivery
+                        int minBattery; 
+                        droneBl.Battery = r.Next(minBattery, 100);
                     }
                 }
-                dronesToList.Add(droneBl);
+                dronesL.Add(droneBl);
             }
         }
     }

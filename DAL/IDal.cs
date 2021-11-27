@@ -59,6 +59,7 @@ namespace IDAL
         double[] PowerRequest();
         Parcel GetParcelByDroneId(int DroneId);
         Customer updateBatteryAndLocationDrone(int droneId,int senderId, double longt, double lanti);
+        Station GetClosestStation(double latitude, double longitude);
 
         //SHOW  FUNCTION
 

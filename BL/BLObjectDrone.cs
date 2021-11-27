@@ -47,7 +47,7 @@ namespace IBL.BO
         {
             IDAL.DO.Station station = new IDAL.DO.Station();
             //finds the drone by the recived ID
-            DroneToList dronel = drones.Find(x => x.Id == droneId);
+            DroneToList dronel = dronesL.Find(x => x.Id == droneId);
             //if the drone is available- it can be sent for charging
             if (dronel.DroneStatuses == DroneStatuses.Available)
             {
@@ -96,7 +96,7 @@ namespace IBL.BO
         {
             //update for the way to the station
             //finds the drone by its ID
-            DroneToList dronel = drones.Find(x => x.Id == droneId);
+            DroneToList dronel = dronesL.Find(x => x.Id == droneId);
             IDAL.DO.Station station = new IDAL.DO.Station();
             //finds the station by its ID
             station = dalo.GetStation(stationId);
@@ -127,7 +127,7 @@ namespace IBL.BO
             double dVal = (chargingTime.TotalMilliseconds) * 1000;
 
             //finds the drone by its ID
-            DroneToList dronel = drones.Find(x => x.Id == droneID);
+            DroneToList dronel = dronesL.Find(x => x.Id == droneID);
             Station station = new Station();
             //only a drone that was in charging c
 
@@ -166,7 +166,7 @@ namespace IBL.BO
             drone.DroneStatuses = (DroneStatuses)d.Status;
             drone.Weight = (Weight)d.MaxWeight;
             //to find the locations drone---
-            DroneToList droneToList = drones.Find(x => x.Id == droneId);
+            DroneToList droneToList = dronesL.Find(x => x.Id == droneId);
             drone.Location = droneToList.Location;
             if (drone.DroneStatuses != DroneStatuses.Shipping)
             {

@@ -69,11 +69,11 @@ namespace DalObject
             return DataSource.Drones.Find(x => x.Id == droneId);
         }
         /// <summary>
-        /// send a drone to charge
+        /// Send a drone to charge
         /// </summary>
         /// <param name="droneId">the drone to send to charge</param>
         /// <param name="stationId">the station to send it to charge</param>
-        public void SendDroneToBaseCharge(int droneId, int stationId)
+        public void SendDroneToCharge(int droneId, int stationId)
         {
             Drone drone = GetDrone(droneId);
             Station station = GetStation(stationId);

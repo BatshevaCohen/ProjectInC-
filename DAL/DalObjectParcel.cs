@@ -87,7 +87,7 @@ namespace DalObject
                 throw new DroneException($"noo drone found");
             }
             parcel.DroneID = drone.Id;
-            parcel.Scheduled = DateTime.Now;
+            parcel.Assigned = DateTime.Now;
             //d.Status = DroneStatuses.Shipping;
         }
         /// <summary>
@@ -110,7 +110,7 @@ namespace DalObject
         public void UpdateDeliveryToCustomer(int parcel_id, int customer_id)
         {
             Parcel p = DataSource.Parcels.Find(x => x.Id == parcel_id);
-            p.Delivered = DateTime.Now;
+            p.Supplied = DateTime.Now;
         }
         public Parcel GetParcelByDroneId(int DroneId)
         {

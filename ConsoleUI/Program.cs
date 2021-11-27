@@ -148,16 +148,16 @@ namespace ConsoleUI
                                     DateTime.TryParse(Console.ReadLine(), out pickedUp_P);
                                     DateTime delivary_P;
                                     DateTime.TryParse(Console.ReadLine(), out delivary_P);
-                                    p.Scheduled = steduled_P;
+                                    p.Assigned = steduled_P;
                                     p.PickedUp = pickedUp_P;
-                                    p.Delivered = delivary_P;
+                                    p.Supplied = delivary_P;
 
                                 }
                                 catch
                                 {
-                                    p.Scheduled = DateTime.Now;
+                                    p.Assigned = DateTime.Now;
                                     p.PickedUp = DateTime.Now;
-                                    p.Delivered = DateTime.Now;
+                                    p.Supplied = DateTime.Now;
                                 }
 
                                 p.Id = id_P;
@@ -165,7 +165,7 @@ namespace ConsoleUI
                                 p.ReceiverId = id_Ptarget;
                                 p.Weight = (WeightCategories)weight_P;
                                 p.Priority = (Priorities)priority_P;
-                                p.create = requested_P;
+                                p.Create = requested_P;
                                 p.DroneID = id_Pdrone;
 
                                 dalobject.AddParcel(p);
@@ -228,7 +228,7 @@ namespace ConsoleUI
                                     dalobject.ShowStationList();
                                     int station_id;
                                     int.TryParse(Console.ReadLine(), out station_id);
-                                    dalobject.SendDroneToBaseCharge(drone_id4, station_id);//*******
+                                    dalobject.SendDroneToCharge(drone_id4, station_id);//*******
                                     Console.WriteLine("\nDrone updated to- charge status successfully!\n");
                                     break;
 

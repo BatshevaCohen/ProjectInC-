@@ -62,7 +62,7 @@ namespace IBL.BO
             {
                 DroneInCharging droneInCharging = new DroneInCharging();
                 droneInCharging.Id = item.DroneId;
-                DroneToList droneToList = drones.Find(x => x.Id == item.DroneId);
+                DroneToList droneToList = dronesL.Find(x => x.Id == item.DroneId);
                 droneInCharging.Battery = droneToList.Battery;
                 station.droneInChargings.Add(droneInCharging);
             }

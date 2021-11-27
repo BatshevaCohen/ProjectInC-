@@ -9,7 +9,7 @@ namespace IBL.BO
     {
         //ADD:
         void AddStation(Station station);
-        int AddDrone(Drone drone, int stationId);
+        void AddDrone(Drone drone, int stationId);
         void AddCustomer(Customer customer);
         void AddParcel(Parcel parcel);
         //UPDATE:

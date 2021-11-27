@@ -19,7 +19,7 @@ namespace IBL.BO
         /// <param name="stationId"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public int AddDrone(Drone drone, int stationId)
+        public void AddDrone(Drone drone, int stationId)
         {
             IDAL.DO.Drone d = new IDAL.DO.Drone();
             d.Id = drone.Id;

@@ -12,10 +12,10 @@ namespace IDAL
             public WeightCategories Weight { get; set; }
             public Priorities Priority { get; set; }
             public  int DroneID { get; set; }
-            public DateTime? create { get; set; }//Time to create a package for the sender
-            public DateTime? Scheduled { get; set; }//Time to assign the package to the glider
-            public DateTime? PickedUp { get; set; }//Time to pick up the package from the sender
-            public DateTime? Delivered { get; set; }//Time of arrival of the package to the recipient
+            public DateTime? Create { get; set; } //Time to create a package for the sender
+            public DateTime? Assigned { get; set; } //Time to assign the package to the drone
+            public DateTime? PickedUp { get; set; } //Time to pick up the package from the sender
+            public DateTime? Supplied { get; set; } //Time of arrival of the package to the recipient
    
             public override string ToString()
             {
@@ -26,10 +26,10 @@ namespace IDAL
                 result += $"Package weight is {Weight}, \n";
                 result += $"Priority is {Priority}, \n";
                 result += $"Quadocopter ID is {DroneID}, \n";
-                result += $"Creating package time is {create}, \n";
-                result += $"Package to quadocopter affiliation time is {Scheduled}, \n";
+                result += $"Creating package time is {Create}, \n";
+                result += $"Package to quadocopter affiliation time is {Assigned}, \n";
                 result += $"Collecting package time is {PickedUp}, \n";
-                result += $"Client reciving time is {Delivered}, \n";
+                result += $"Client reciving time is {Supplied}, \n";
 
                 return result;
             }

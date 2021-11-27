@@ -44,7 +44,7 @@ namespace IBL.BO
             // only if the drone is available for shipping
             if (drone.Status == IDAL.DO.DroneStatuses.Available)
             {
-                var parcels = dalo.ShowParcelList().Where(p => p.create == null);
+                var parcels = dalo.ShowParcelList().Where(p => p.Create == null);
                 // list parcels ordered by priority and weight
                 var orderedParcels = from parcel in parcels
                                      orderby parcel.Priority descending, parcel.Weight ascending
@@ -78,7 +78,7 @@ namespace IBL.BO
             Drone drone = GetDrone(droneId);
             IDAL.DO.Parcel parcel = dalo.GetParcelByDroneId(droneId);
             //check if the parcel was assigned
-            if (parcel.Scheduled != DateTime.MinValue)
+            if (parcel.Assigned != DateTime.MinValue)
             {
                 throw new Exception("the parcel wasn't assigned to the drone!");
             }
@@ -117,7 +117,7 @@ namespace IBL.BO
                 throw new Exception("the parcel wasn't picked up yet!");
             }
             //check if the parcel was delivered
-            if (parcel.Delivered != DateTime.MinValue)
+            if (parcel.Supplied != DateTime.MinValue)
             {
                 throw new Exception("the parcel delivered already!");
             }
@@ -139,7 +139,7 @@ namespace IBL.BO
                 //changing the drone's status to be available
                 d.DroneStatuses = DroneStatuses.Available;
                 //update the supply time
-                parcel.Delivered = DateTime.Now;
+                parcel.Supplied = DateTime.Now;
             }
         }
         public Parcel GetParcel(int parcelId)
@@ -151,9 +151,9 @@ namespace IBL.BO
             parcel.Sender.Id = p.ReceiverId;
             parcel.Priority = (Priority)p.Priority;
             parcel.Weight = (Weight)p.Weight;
-            parcel.AssignmentToParcelTime = (DateTime)p.Delivered;
-            parcel.ParcelCreationTime = (DateTime)p.create;
-            parcel.SupplyTime = (DateTime)p.Scheduled;
+            parcel.AssignmentToParcelTime = (DateTime)p.Supplied;
+            parcel.ParcelCreationTime = (DateTime)p.Create;
+            parcel.SupplyTime = (DateTime)p.Assigned;
             parcel.CollectionTime = (DateTime)p.PickedUp;
             //////////////////////////////////////////////////חסר נתון 
             return parcel;

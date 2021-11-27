@@ -12,6 +12,7 @@ namespace IBL.BO
         int AddDrone(Drone drone, int stationId);
         void AddCustomer(Customer customer);
         void AddParcel(Parcel parcel);
+        int AddDroneToList(DroneToList drone);
         //UPDATE:
         void UpdateDroneName(int id, string model);
         void UpdateStetion(int id, string name, int charging_spots);

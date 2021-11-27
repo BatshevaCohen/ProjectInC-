@@ -8,8 +8,8 @@ namespace DalObject
 {
    public class Distanse
     {
-        public int id { get; set; }
-        public double distance { get; set; }
-        public  bool status { get; set; }
+        public int Id { get; set; }
+        public double Distance { get; set; }
+        public  bool Status { get; set; }
     }
 }

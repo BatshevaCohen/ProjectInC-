@@ -165,10 +165,7 @@ namespace IBL.BO
         /// <param name="parcelId"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        Parcel GetParcel(int parcelId)
-        {
-            throw new NotImplementedException();
-        }
+       
         /// <summary>
         /// Show LIST of parcels
         /// </summary>

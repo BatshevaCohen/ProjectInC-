@@ -86,5 +86,9 @@ namespace IBL.BO
             throw new NotImplementedException();
         }
 
+        public Drone GetDroneBL(int droneId)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

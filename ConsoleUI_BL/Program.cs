@@ -11,7 +11,6 @@ namespace ConsoleUI_BL
 {
     class Program
     {
-     
         enum MenuOptions { Add = 1, Update, Show_One, Show_List, Exit }
         enum EntityOptions { BaseStation = 1, Drone, Custumer, Parcel, Exit }
         enum UpdateOptions { Drone_Name = 1, Stetion_Details, Customer_Details, Charge, Discharge, AssignParcelToDrone, Pickedup, Parcel_Supply_By_Drone, Exit }
@@ -313,7 +312,6 @@ namespace ConsoleUI_BL
                             case DistanceOptions.Exit:
                                 DalObject.DalObject.Exit();
                                 break;
-                        break;
                     case MenuOptions.Exit:
                         break;
                 }

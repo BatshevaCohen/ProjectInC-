@@ -63,12 +63,12 @@ namespace IBL.BO
                     foreach (Distanse item in disStationFromDrone)
                     {
                         //to find the station with the minimum distance from the drone
-                        if (item.distance <= min)
+                        if (item.Distance <= min)
                         {
-                            min = item.distance;
-                            idS = item.id;
+                            min = item.Distance;
+                            idS = item.Id;
                         }
-                        station = dalo.GetStation(item.id);
+                        station = dalo.GetStation(item.Id);
                         //if there is an available charging spot in the station
                         if (station.ChargeSlots > 0)
                         {
@@ -79,7 +79,6 @@ namespace IBL.BO
                                 //function to update Battery, drone mode drone location
                                 updateDroneToStation(droneId, station.Id, min);
                             }
-
                         }
                         counter++;
                         disStationFromDrone.Remove(item);
@@ -184,14 +183,7 @@ namespace IBL.BO
                 parcelInTransfer.Priority = (Priority)parcel.Priority;
                 parcelInTransfer.Weight = (Weight)parcel.Weight;
                 parcelInTransfer.ParcelTransferStatus = ParcelTransferStatus.OnTheWayToDestination;
-                Customer customer_Sender = GetCustomer(parcel.SenderId);
-                Customer customer_Reciever = GetCustomer(parcel.ReceiverId);
-                parcelInTransfer.Collecting = customer_Sender.Location;
-                parcelInTransfer.SupplyTarget = customer_Reciever.Location;
-                double distance = dalo.CalculateDistance(parcelInTransfer.Collecting.Latitude, parcelInTransfer.Collecting.Longitude,
-                     parcelInTransfer.SupplyTarget.Latitude, parcelInTransfer.SupplyTarget.Longitude);
-                parcelInTransfer.TransportDistance = distance;
-                drone.ParcelInTransfer = parcelInTransfer;
+
             }
             return drone;
         }
@@ -210,6 +202,5 @@ namespace IBL.BO
         /// <param name="id"></param>
         /// <returns></returns>
 
-
-    }
+    }       
 }

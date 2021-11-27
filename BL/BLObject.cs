@@ -22,15 +22,15 @@ namespace IBL.BO
             //Access to the layer DAL
             dalo = new DalObject.DalObject();
             drones = new List<DroneToList>();
-           
+
         }
 
-      
+
         public void UpdateDeliveryToCustomer(int parcel_id3, int customer_id)
         {
             throw new NotImplementedException();
         }
 
-        
+
     }
 }

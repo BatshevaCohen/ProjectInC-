@@ -139,11 +139,11 @@ namespace IBL.BO
                     parcelCustomer.Id = item.Id;
                     parcelCustomer.Priority = (Priority)item1.Priority;
                     parcelCustomer.Weight = (Weight)item1.Weight;
-                    if (item1.create == DateTime.MinValue)
+                    if (item1.Create == DateTime.MinValue)
                     {
                         parcelCustomer.ParcelStatus = ParcelStatus.Created;
                     }
-                    if (item1.Delivered == DateTime.MinValue)
+                    if (item1.Supplied == DateTime.MinValue)
                     {
                         parcelCustomer.ParcelStatus = ParcelStatus.Delivered;
                     }
@@ -151,7 +151,7 @@ namespace IBL.BO
                     {
                         parcelCustomer.ParcelStatus = ParcelStatus.Picked;
                     }
-                    if (item1.Scheduled == DateTime.MinValue)
+                    if (item1.Supplied == DateTime.MinValue)
                     {
                         parcelCustomer.ParcelStatus = ParcelStatus.Assigned;
                     }
@@ -166,11 +166,11 @@ namespace IBL.BO
                     parcelCustomer.Id = item.Id;
                     parcelCustomer.Priority = (Priority)item2.Priority;
                     parcelCustomer.Weight = (Weight)item2.Weight;
-                    if (item2.create == DateTime.MinValue)
+                    if (item2.Create == DateTime.MinValue)
                     {
                         parcelCustomer.ParcelStatus = ParcelStatus.Created;
                     }
-                    if (item2.Delivered == DateTime.MinValue)
+                    if (item2.Supplied == DateTime.MinValue)
                     {
                         parcelCustomer.ParcelStatus = ParcelStatus.Delivered;
                     }
@@ -178,7 +178,7 @@ namespace IBL.BO
                     {
                         parcelCustomer.ParcelStatus = ParcelStatus.Picked;
                     }
-                    if (item2.Scheduled == DateTime.MinValue)
+                    if (item2.Assigned == DateTime.MinValue)
                     {
                         parcelCustomer.ParcelStatus = ParcelStatus.Assigned;
                     }

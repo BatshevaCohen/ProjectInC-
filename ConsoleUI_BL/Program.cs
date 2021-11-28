@@ -21,7 +21,7 @@ namespace ConsoleUI_BL
             MenuOptions menuOptions;
             EntityOptions entityOptions;
             UpdateOptions updateOptions;
-            IBL.BO.BLObject bLObject = new IBL.BO.BLObject();//constractor BLObject
+            IBL.BO.BLObject bLObject = new();//constractor BLObject
             do
             {
                 Console.WriteLine("WELCOME!");
@@ -38,7 +38,7 @@ namespace ConsoleUI_BL
                         {
                             //add a new station
                             case EntityOptions.BaseStation:
-                                IBL.BO.Station s = new Station();
+                                IBL.BO.Station s = new ();
                                 Console.WriteLine("Please insert ID, StationName (string), longitude, latitude, and charging level ");
                                 int id_S;
                                 int.TryParse(Console.ReadLine(), out id_S);
@@ -53,7 +53,7 @@ namespace ConsoleUI_BL
                                 s.Location.Latitude = latitude;
                                 int Position;
                                 int.TryParse(Console.ReadLine(), out Position);
-                                List<Drone> droneList= new List<Drone>();
+                                List<Drone> droneList = new() { };
                                 s.AvailableChargingSpots = Position;
                                 bLObject.AddStation(s);
                                 Console.WriteLine("\nBase station added successfully! \n");
@@ -68,10 +68,12 @@ namespace ConsoleUI_BL
                                 int.TryParse(Console.ReadLine(), out weight);
                                 int.TryParse(Console.ReadLine(), out stationId);
 
-                                Drone d = new Drone();
-                                d.Id = id_D;
-                                d.Model = model;
-                                d.Weight = (Weight)weight;
+                                Drone d = new()
+                                {
+                                    Id = id_D,
+                                    Model = model,
+                                    Weight = (Weight)weight
+                                };
 
                                 bLObject.AddDrone(d, stationId);
                                 Console.WriteLine("\nDrone added successfully! \n");
@@ -86,12 +88,14 @@ namespace ConsoleUI_BL
                                 Console.WriteLine("enter phone number");
                                 string phone_C = Console.ReadLine();
                                 Console.WriteLine("enter longitude and latitude");
-                              
 
-                                Customer c = new Customer();
-                                c.Id = id_C;
-                                c.Name = name_C;
-                                c.Phone = phone_C;
+
+                                Customer c = new()
+                                {
+                                    Id = id_C,
+                                    Name = name_C,
+                                    Phone = phone_C
+                                };
                                 bLObject.AddCustomer(c);
                                 Console.WriteLine("\nCustomer added successfully! \n");
                                 break;
@@ -106,8 +110,8 @@ namespace ConsoleUI_BL
                                 int.TryParse(Console.ReadLine(), out weight_P);
                                 Console.WriteLine("Please enter parcel priority: 1-Regular, 2-Fast, 3-Emergency");
                                 int.TryParse(Console.ReadLine(), out priority_P);
-                                
-                                Parcel p = new Parcel();
+
+                                Parcel p = new() { };
                                 p.Sender.Id = id_Psender;
                                 p.Resiver.Id = id_Reciver;
                                 p.Weight = (Weight)weight_P;

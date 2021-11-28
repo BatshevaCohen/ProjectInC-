@@ -24,7 +24,7 @@ namespace IBL.BO
             parcel.CollectionTime = DateTime.MinValue;
             parcel.SupplyTime = DateTime.MinValue;
             parcel.DroneInParcel = null;
-            IDAL.DO.Parcel p = new IDAL.DO.Parcel();
+            IDAL.DO.Parcel p = new() { };
 
             p.Id = parcel.Id;
             p.SenderId = parcel.Sender.Id;
@@ -150,7 +150,7 @@ namespace IBL.BO
         public Parcel GetParcel(int parcelId)
         {
             IDAL.DO.Parcel p = dalo.GetParcel(parcelId);
-            Parcel parcel = new Parcel();
+            Parcel parcel = new() { };
             parcel.Id = p.Id;
             parcel.Resiver.Id = p.SenderId;
             parcel.Sender.Id = p.ReceiverId;
@@ -173,13 +173,7 @@ namespace IBL.BO
             return parcel;
         }
 
-        /// <summary>
-        /// Get parcel by ID
-        /// </summary>
-        /// <param name="parcelId"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-       
+        
         /// <summary>
         /// Show LIST of parcels
         /// </summary>
@@ -188,10 +182,10 @@ namespace IBL.BO
         public IEnumerable<Parcel> ShowParcelList()
         {
             var parcels = dalo.ShowParcelList();
-            List<Parcel> parcelList = new List<Parcel>();
+            List<Parcel> parcelList = new() { };
             foreach (IDAL.DO.Parcel item in parcels)
             { 
-                Parcel parcel = new Parcel();
+                Parcel parcel = new() { };
                 parcel.Id = item.Id;
                 parcel.Resiver.Id = item.SenderId;
                 parcel.Sender.Id = item.ReceiverId;
@@ -206,7 +200,7 @@ namespace IBL.BO
                 if (parcel.CollectionTime != DateTime.MinValue)
                 {
                     DroneToList droneToList = dronesL.Find(x => x.Id == item.DroneID);
-                    DroneInParcel droneInParcel = new DroneInParcel();
+                    DroneInParcel droneInParcel = new() { };
                     droneInParcel.Id = item.Id;
                     droneInParcel.Battery = droneToList.Battery;
                     droneInParcel.Location = droneToList.Location;
@@ -224,12 +218,12 @@ namespace IBL.BO
         public List<Parcel> ShowNonAssociatedParcelList()
         {
             var parcels = dalo.ShowParcelList();
-            List<Parcel> parcelListNotAssociated = new List<Parcel>();
+            List<Parcel> parcelListNotAssociated = new ();
             foreach (IDAL.DO.Parcel item in parcels)
             {
                 if (item.PickedUp != DateTime.MinValue)
                 {
-                    Parcel parcel = new Parcel();
+                    Parcel parcel = new() { };
                     parcel.Id = item.Id;
                     parcel.Resiver.Id = item.ReceiverId;
                     parcel.Sender.Id = item.SenderId;
@@ -247,8 +241,13 @@ namespace IBL.BO
             throw new NotImplementedException();
         }
 
-       
 
+        /// <summary>
+        /// Get parcel by ID
+        /// </summary>
+        /// <param name="parcelId"></param>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         Parcel IBL.GetParcel(int parcelId)
         {
             throw new NotImplementedException();

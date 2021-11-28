@@ -69,7 +69,7 @@ namespace IBL.BO
 
             }
             else
-                throw new NotImplementedException();
+                throw new Exception("drone can not be released");
         }
         /// <summary>
         /// Updete that the parcel has picked up by a drone

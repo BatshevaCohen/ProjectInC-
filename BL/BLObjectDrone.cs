@@ -84,11 +84,20 @@ namespace IBL.BO
                                 updateDroneToStation(droneId, station.Id, min);
                             }
                         }
+                        else
+                        {
+                            throw new Exception("Does not exist an available charging spot in the station!");
+                        }
                         counter++;
                         disStationFromDrone.Remove(item);
                     }
                 }
+                if(flag==false)
+                {
+                    throw new Exception("drone can not be sent for charging! ");
+                }
             }
+           
         }
         /// <summary>
         /// Update drone to station

@@ -149,21 +149,21 @@ namespace DalObject
         /// <param name="senderLatitude"></param>
         /// <param name="senderLongitude"></param>
         /// <returns></returns>
-        public Station GetClosestStation(double latitude, double longitude)
-        {
-            Station result = default;
-            double distance = double.MaxValue;
-            foreach (var item in DataSource.Stations)
-            {
-                double dist = Tools.Utis.DistanceCalculation(latitude, longitude, item.Latitude, item.Longitude);
-                if (dist < distance)
-                {
-                    distance = dist;
-                    result = item;
-                }
-            }
-            return result;
-        }
+        //public Station GetClosestStation(double latitude, double longitude)
+        //{
+        //    Station result = default;
+        //    double distance = double.MaxValue;
+        //    foreach (var item in DataSource.Stations)
+        //    {
+        //        double dist = Tools.Utils.DistanceCalculation(latitude, longitude, item.Latitude, item.Longitude);
+        //        if (dist < distance)
+        //        {
+        //            distance = dist;
+        //            result = item;
+        //        }
+        //    }
+        //    return result;
+        //}
 
         public void UpdateDroneToCharge(int drone_id, int station_id)
         {

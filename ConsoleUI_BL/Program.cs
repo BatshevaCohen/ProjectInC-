@@ -185,7 +185,14 @@ namespace ConsoleUI_BL
                                     Console.WriteLine("Please enter Drone ID");
                                     int drone_id4;
                                     int.TryParse(Console.ReadLine(), out drone_id4);
-                                    bLObject.UpdateChargeDrone(drone_id4);
+                                    try
+                                    {
+                                        bLObject.UpdateChargeDrone(drone_id4);
+                                    }
+                                    catch(Exception ex)
+                                    {
+                                        Console.WriteLine(ex);
+                                    }
                                     Console.WriteLine("\nDrone updated to- charge status successfully!\n");
                                     break;
 
@@ -195,7 +202,16 @@ namespace ConsoleUI_BL
                                     Console.WriteLine("enter the time of charging");
                                     TimeSpan TimeOfCharging;
                                     TimeSpan.TryParse(Console.ReadLine(), out TimeOfCharging);
-                                    bLObject.DischargeDrone(drone_id5, TimeOfCharging);
+                                    try
+                                    {
+                                        bLObject.DischargeDrone(drone_id5, TimeOfCharging);
+                                    }
+
+                                    catch (Exception ex)
+                                    {
+                                        Console.WriteLine(ex);
+                                    }
+
                                     Console.WriteLine("\nDrone updated to- discharge successfully!\n");
                                     break;
 
@@ -204,7 +220,15 @@ namespace ConsoleUI_BL
                                     Console.WriteLine("Please enter Drone ID");
                                     int drone_id;
                                     int.TryParse(Console.ReadLine(), out drone_id);
-                                    bLObject.UpdateParcelToDrone(drone_id);
+                                    try
+                                    {
+                                        bLObject.UpdateParcelToDrone(drone_id);
+                                    }
+
+                                    catch (Exception ex)
+                                    {
+                                        Console.WriteLine(ex);
+                                    }
                                     Console.WriteLine("\nParcel updated to drone successfully!\n");
                                     break;
 
@@ -212,7 +236,17 @@ namespace ConsoleUI_BL
                                     Console.WriteLine("Please enter Drone ID");
                                     int drone_id2;
                                     int.TryParse(Console.ReadLine(), out drone_id2);
-                                    bLObject.UpdateParcelPickUpByDrone(drone_id2);
+                                    try
+                                    {
+
+
+                                        bLObject.UpdateParcelPickUpByDrone(drone_id2);
+                                    }
+
+                                    catch (Exception ex)
+                                    {
+                                        Console.WriteLine(ex);
+                                    }
                                     Console.WriteLine("\nParcel pick up updated successfully!\n");
                                     break;
 
@@ -220,7 +254,15 @@ namespace ConsoleUI_BL
                                     Console.WriteLine("Please enter Drone ID");
                                     int drone_id6;
                                     int.TryParse(Console.ReadLine(), out drone_id6);
-                                    bLObject.UpdateParcelSuppliedByDrone(drone_id6);
+                                    try
+                                    {
+                                        bLObject.UpdateParcelSuppliedByDrone(drone_id6);
+                                    }
+
+                                    catch (Exception ex)
+                                    {
+                                        Console.WriteLine(ex);
+                                    }
                                     Console.WriteLine("\nParcel updated to customer successfully!\n");
                                     break;
 

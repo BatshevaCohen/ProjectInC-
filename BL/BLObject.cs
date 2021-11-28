@@ -22,6 +22,7 @@ namespace IBL.BO
         {
             //Access to the layer DAL
             dalo = new DalObject.DalObject();
+
             dronesL = new List<DroneToList>();
 
         }
@@ -125,3 +126,16 @@ namespace IBL.BO
         }
     }
 }
+
+
+/*
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ 
+ */

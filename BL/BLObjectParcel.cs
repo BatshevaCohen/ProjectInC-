@@ -18,7 +18,11 @@ namespace IBL.BO
         /// <param name="parcel"></param>
         public void AddParcel(Parcel parcel)
         {
-            parcel.Id = ++(DalObject.DO.DataSource.OrdinalNumber); //static serial number for parcel id
+            if (parcel.Id < 1)
+            {
+                throw new NegativeNumberExeption(parcel.Id, "id cannot be negative");
+            }
+            parcel.Id = ++(DataSource.OrdinalNumber); //static serial number for parcel id
             parcel.ParcelCreationTime = DateTime.Now;
             parcel.AssignmentToParcelTime = DateTime.MinValue;
             parcel.CollectionTime = DateTime.MinValue;
@@ -125,6 +129,7 @@ namespace IBL.BO
             {
                 Location senderL, reciverL;
                 //finds the drone
+
                 Drone d = drone1.Find(x => x.Id == droneId);
                 //finds the parcel in transfer
                 ParcelInTransfer parcelInTransfer = d.ParcelInTransfer;

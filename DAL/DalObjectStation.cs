@@ -164,5 +164,10 @@ namespace DalObject
             }
             return result;
         }
+
+        public void UpdateDroneToCharge(int drone_id, int station_id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

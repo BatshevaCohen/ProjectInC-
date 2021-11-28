@@ -19,6 +19,10 @@ namespace IBL.BO
         /// <exception cref="NotImplementedException"></exception>
         public void AddStation(Station station)
         {
+            if(station.Id<1)
+            {
+                throw new NegativeNumberExeption(station.Id, "id cannot be negative");
+            }
             IDAL.DO.Station s = new IDAL.DO.Station();
             s.Name = station.Name;
             s.Id = station.Id;
@@ -91,7 +95,7 @@ namespace IBL.BO
                 {
                     DroneInCharging droneInCharging = new DroneInCharging();
                     droneInCharging.Id = item1.DroneId;
-                    DroneToList droneToList = drones.Find(x => x.Id == item1.DroneId);
+                    DroneToList droneToList = dronesL.Find(x => x.Id == item1.DroneId);
                     droneInCharging.Battery = droneToList.Battery;
                     station.droneInChargings.Add(droneInCharging);
                 }
@@ -126,7 +130,7 @@ namespace IBL.BO
                     {
                         DroneInCharging droneInCharging = new DroneInCharging();
                         droneInCharging.Id = item1.DroneId;
-                        DroneToList droneToList = drones.Find(x => x.Id == item1.DroneId);
+                        DroneToList droneToList = dronesL.Find(x => x.Id == item1.DroneId);
                         droneInCharging.Battery = droneToList.Battery;
                         station.droneInChargings.Add(droneInCharging);
                     }

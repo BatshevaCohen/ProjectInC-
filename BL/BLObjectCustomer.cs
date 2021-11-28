@@ -19,6 +19,10 @@ namespace IBL.BO
         /// <exception cref="NotImplementedException"></exception>
         public void AddCustomer(Customer customer)
         {
+            if (customer.Id < 1)
+            {
+                throw new NegativeNumberExeption(customer.Id, "id cannot be negative");
+            }
             IDAL.DO.Customer c = new IDAL.DO.Customer();
             c.Id = customer.Id;
             c.Name = customer.Name;

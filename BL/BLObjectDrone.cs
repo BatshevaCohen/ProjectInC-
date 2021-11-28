@@ -21,6 +21,10 @@ namespace IBL.BO
         /// <exception cref="NotImplementedException"></exception>
         public void AddDrone(Drone drone, int stationId)
         {
+            if(drone.Id<1)
+            {
+                throw new NegativeNumberExeption(drone.Id, "id cannot be negative");
+            }
             IDAL.DO.Drone d = new IDAL.DO.Drone();
             d.Id = drone.Id;
             d.Model = drone.Model;

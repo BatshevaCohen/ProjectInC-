@@ -38,24 +38,33 @@ namespace ConsoleUI_BL
                         {
                             //add a new station
                             case EntityOptions.BaseStation:
-                                IBL.BO.Station s = new Station();
+                                Station s = new Station();
                                 Console.WriteLine("Please insert ID, StationName (string), longitude, latitude, and charging level ");
-                                int id_S;
-                                int.TryParse(Console.ReadLine(), out id_S);
+                        
+                                    int id_S;
+                                    int.TryParse(Console.ReadLine(), out id_S);
+                                    string StationName = Console.ReadLine();
+                                    double longitude;
+                                    double.TryParse(Console.ReadLine(), out longitude);
+                                    double latitude;
+                                    double.TryParse(Console.ReadLine(), out latitude);
+                                    int Position;
+                                    int.TryParse(Console.ReadLine(), out Position);
+                               
                                 s.Id = id_S;
-                                string StationName = Console.ReadLine();
                                 s.Name = StationName;
-                                double longitude;
-                                double.TryParse(Console.ReadLine(), out longitude);
-                                double latitude;
-                                double.TryParse(Console.ReadLine(), out latitude);
+                                s.AvailableChargingSpots = Position;
                                 s.Location.Longitude = longitude;
                                 s.Location.Latitude = latitude;
-                                int Position;
-                                int.TryParse(Console.ReadLine(), out Position);
-                                List<Drone> droneList= new List<Drone>();
-                                s.AvailableChargingSpots = Position;
-                                bLObject.AddStation(s);
+                                try
+                                {
+                                    bLObject.AddStation(s);
+                                    
+                                }
+                                catch(Exception ex)
+                                {
+                                    Console.WriteLine(ex);
+                                }
                                 Console.WriteLine("\nBase station added successfully! \n");
                                 break;
                             //add a new drone
@@ -72,8 +81,14 @@ namespace ConsoleUI_BL
                                 d.Id = id_D;
                                 d.Model = model;
                                 d.Weight = (Weight)weight;
-
-                                bLObject.AddDrone(d, stationId);
+                                try
+                                {
+                                    bLObject.AddDrone(d, stationId);
+                                }
+                                catch(Exception ex)
+                                {
+                                    Console.WriteLine(ex);
+                                }
                                 Console.WriteLine("\nDrone added successfully! \n");
                                 break;
                             //add a new customer
@@ -92,7 +107,14 @@ namespace ConsoleUI_BL
                                 c.Id = id_C;
                                 c.Name = name_C;
                                 c.Phone = phone_C;
-                                bLObject.AddCustomer(c);
+                                try
+                                {
+                                    bLObject.AddCustomer(c);
+                                }
+                                catch(Exception ex)
+                                {
+                                    Console.WriteLine(ex);
+                                }
                                 Console.WriteLine("\nCustomer added successfully! \n");
                                 break;
                             //add a new parcel

@@ -16,29 +16,27 @@ namespace DalObject
             /// database of DO entities
             /// </summary>
             public static int OrdinalNumber = 1000000;
-            internal static List<Drone> Drones = new List<Drone>(2);
-            internal static List<Station> Stations = new List<Station>(5);
-            internal static List<Customer> Customer = new List<Customer>(100);
-            internal static List<Parcel> Parcels = new List<Parcel>(1000);
-            internal static List<DroneCharge> DroneCharges = new List<DroneCharge>();
+            internal static List<Drone> Drones = new(2) { };
+            internal static List<Station> Stations = new(5) { };
+            internal static List<Customer> Customer = new(100) { };
+            internal static List<Parcel> Parcels = new(1000) { };
+            internal static List<DroneCharge> DroneCharges = new() { };
 
-            static Random r = new Random();
+            static Random r = new() { };
 
             public static object Station { get; set; }
 
-            internal class config
+            internal class Config
             {
-                
-
                 internal static double Light { get => 10;}
                 internal static double Available { get => 0; }
                 internal static double Medium { get => 50; }
                 internal static double Heavy { get => 150; }
                 internal static double ChargingRate { get => 10.25; }
             }
-            public static DateTime myDateTime()
+            public static DateTime MyDateTime()
             {
-                DateTime myDateTime = new DateTime(r.Next(0, 60), 0);
+                DateTime myDateTime = new(r.Next(0, 60), 0) { };
                 return myDateTime;
             }
             /// <summary>
@@ -107,10 +105,10 @@ namespace DalObject
                         Weight = RandomEnumValue<WeightCategories>(),
                         Priority = RandomEnumValue<Priorities>(),
                         DroneID = r.Next(1000, 5000),
-                        Create = myDateTime(),
-                        Assigned = myDateTime(),
-                        PickedUp = myDateTime(),
-                        Supplied = myDateTime()
+                        Create = MyDateTime(),
+                        Assigned = MyDateTime(),
+                        PickedUp = MyDateTime(),
+                        Supplied = MyDateTime()
                     });
                 }
             }

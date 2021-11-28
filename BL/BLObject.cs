@@ -16,7 +16,7 @@ namespace IBL.BO
         public IDAL.IDal dalo;
         public List<DroneToList> dronesL;
         public List<Drone> drone1;
-        static Random r = new Random();
+        static Random r = new() { };
 
         public BLObject()
         {
@@ -79,7 +79,9 @@ namespace IBL.BO
                     //יש לעדכן מצב סוללה:
                     //מצב סוללה יוגרל בין טעינה מינימלית שתאפשר לרחפן לבצע את המשלוח ולהגיע לטעינה לתחנה הקרובה ליעד המשלוח לבין טעינה מלאה
                     /////////////////////
-                    int minBattery; //minimum battery the drone needs for the delivery
+                    
+                    //minimum battery the drone needs for the delivery
+                    int minBattery; 
                     droneBl.Battery = r.Next(minBattery, 100);
                 }
                 //else- the drone is not in delivery status

@@ -21,15 +21,15 @@ namespace DalObject
         {
             DataSource.Initialize();
         }
-
+        
         public double[] PowerRequest()
         {
             double[] arr = new double[5];
-            arr[0] = DataSource.config.Available;
-            arr[1] = DataSource.config.Heavy;
-            arr[2] = DataSource.config.Light;
-            arr[3] = DataSource.config.Medium;
-            arr[4] = DataSource.config.ChargingRate;
+            arr[0] = DataSource.Config.Available;
+            arr[1] = DataSource.Config.Heavy;
+            arr[2] = DataSource.Config.Light;
+            arr[3] = DataSource.Config.Medium;
+            arr[4] = DataSource.Config.ChargingRate;
             return arr;
         }
 
@@ -41,11 +41,11 @@ namespace DalObject
         /// <returns></returns>
         public IEnumerable<Distanse> MinimumDistance(double longitude, double latitude)
         {
-            List<Distanse> listDis = new List<Distanse>();
+            List<Distanse> listDis = new() { };
             foreach (Station element in DataSource.Stations)
             {
-                Distanse distanse = new Distanse();
-                double dis = 0;
+                Distanse distanse = new() { };
+                double dis;
                 dis = (element.Longitude - longitude) * (element.Longitude - longitude) + (element.Latitude - longitude) * (element.Latitude - longitude);
                 dis = Math.Sqrt(dis);
                 distanse.Id = element.Id;

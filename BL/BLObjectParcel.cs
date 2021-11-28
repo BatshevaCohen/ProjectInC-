@@ -164,7 +164,7 @@ namespace IBL.BO
             //update DroneInParcel
             if (parcel.CollectionTime != DateTime.MinValue)
             {
-                DroneToList droneToList = drones.Find(x => x.Id == p.DroneID);
+                DroneToList droneToList = dronesL.Find(x => x.Id == p.DroneID);
                 parcel.DroneInParcel.Id = p.Id;
                 parcel.DroneInParcel.Battery = droneToList.Battery;
                 parcel.DroneInParcel.Location = droneToList.Location;
@@ -197,15 +197,15 @@ namespace IBL.BO
                 parcel.Sender.Id = item.ReceiverId;
                 parcel.Priority = (Priority)item.Priority;
                 parcel.Weight = (Weight)item.Weight;
-                parcel.AssignmentToParcelTime = (DateTime)item.Delivered;
-                parcel.ParcelCreationTime = (DateTime)item.create;
-                parcel.SupplyTime = (DateTime)item.Scheduled;
+                parcel.AssignmentToParcelTime = (DateTime)item.Supplied;
+                parcel.ParcelCreationTime = (DateTime)item.Create;
+                parcel.SupplyTime = (DateTime)item.Assigned;
                 parcel.CollectionTime = (DateTime)item.PickedUp;
                 //If the parcel has already been associated-שוייכה
                 //update DroneInParcel
                 if (parcel.CollectionTime != DateTime.MinValue)
                 {
-                    DroneToList droneToList = drones.Find(x => x.Id == item.DroneID);
+                    DroneToList droneToList = dronesL.Find(x => x.Id == item.DroneID);
                     DroneInParcel droneInParcel = new DroneInParcel();
                     droneInParcel.Id = item.Id;
                     droneInParcel.Battery = droneToList.Battery;
@@ -235,9 +235,9 @@ namespace IBL.BO
                     parcel.Sender.Id = item.SenderId;
                     parcel.Priority = (Priority)item.Priority;
                     parcel.Weight = (Weight)item.Weight;
-                    parcel.AssignmentToParcelTime = (DateTime)item.Delivered;
-                    parcel.ParcelCreationTime = (DateTime)item.create;
-                    parcel.SupplyTime = (DateTime)item.Scheduled;
+                    parcel.AssignmentToParcelTime = (DateTime)item.Supplied;
+                    parcel.ParcelCreationTime = (DateTime)item.Create;
+                    parcel.SupplyTime = (DateTime)item.Assigned;
                     parcel.CollectionTime = (DateTime)item.PickedUp;
                     parcelListNotAssociated.Add(parcel);
                 }

@@ -128,9 +128,8 @@ namespace IBL.BO
             else
             {
                 Location senderL, reciverL;
-                //finds the drone
-
-                Drone d = drone1.Find(x => x.Id == droneId);
+                //finds the drone frome layer bl
+                Drone d = GetDrone(droneId);
                 //finds the parcel in transfer
                 ParcelInTransfer parcelInTransfer = d.ParcelInTransfer;
                 senderL = parcelInTransfer.Collecting;

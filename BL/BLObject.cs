@@ -15,7 +15,7 @@ namespace IBL.BO
     {
         public IDAL.IDal dalo;
         public List<DroneToList> dronesL;
-        public List<Drone> drone1;
+       // public List<Drone> drone1;
         static Random r = new() { };
 
         public BLObject()

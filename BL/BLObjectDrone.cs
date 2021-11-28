@@ -206,7 +206,7 @@ namespace IBL.BO
                 drone.DroneStatuses = item.DroneStatuses;
                 drone.Weight = item.Weight;
                 //to find the locations drone---
-                DroneToList droneToList = drones.Find(x => x.Id == item.Id);
+                DroneToList droneToList = dronesL.Find(x => x.Id == item.Id);
                 drone.Location = droneToList.Location;
                 if (drone.DroneStatuses != DroneStatuses.Shipping)
                 {

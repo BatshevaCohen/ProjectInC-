@@ -88,7 +88,7 @@ namespace IBL.BO
                     // if the drone is on Maintenance status
                     if (droneBl.DroneStatuses == DroneStatuses.Maintenance)
                     {
-                        List<Station> stations = ShowStationList();
+                        List<Station> stations = (List<Station>)ShowStationList();
                         int index = r.Next(stations.Count());
                         //random station from all the stations
                         Station station = stations[index];

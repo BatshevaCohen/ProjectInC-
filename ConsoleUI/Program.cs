@@ -60,7 +60,7 @@ namespace ConsoleUI
                                 s.Longitude = longitude;
                                 s.ChargeSlots = Position;
                                 dalobject.AddStation(s);
-                                Console.WriteLine("\nBase station added successfully! \n");
+                                Console.WriteLine("\nStation added successfully! \n");
                                 break;
                             // add a new drone
                             case EntityOptions.Drone:
@@ -250,7 +250,7 @@ namespace ConsoleUI
 
                     // show options
                     case MenuOptions.Show_One:
-                        Console.WriteLine("View item options: \n 1- base station \n 2- Drone\n 3- Custumer\n 4- Parcel\n 5- Exit\n");
+                        Console.WriteLine("View item options: \n 1- Station \n 2- Drone\n 3- Custumer\n 4- Parcel\n 5- Exit\n");
                         entityOptions = (EntityOptions)int.Parse(Console.ReadLine());
                         Console.WriteLine($"Enter a requested {entityOptions} id");
                         switch (entityOptions)
@@ -289,7 +289,7 @@ namespace ConsoleUI
                         ListOptions listOptions = (ListOptions)int.Parse(Console.ReadLine());
                         switch (listOptions)
                         {
-                            // prints the list of the base stations
+                            // prints the list of the stations
                             case ListOptions.BaseStation:
                                 IEnumerable<Station> BaseStationList = dalobject.ShowStationList();
                                 foreach (Station element in BaseStationList) //prints the elements in the list

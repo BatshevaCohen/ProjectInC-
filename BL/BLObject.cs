@@ -21,7 +21,6 @@ namespace IBL.BO
         {
             //Access to the layer DAL
             dalo = new DalObject.DalObject();
-
             dronesL = new List<DroneToList>();
 
         }
@@ -101,12 +100,12 @@ namespace IBL.BO
                     if (droneBL.DroneStatuses == DroneStatuses.Maintenance)
                     {
                         //Its location will be drawn between the purchasing stations
-                        List<IDAL.DO.Station> baseStations = dalo.ShowStationList().ToList();
-                        int index = r.Next(0, baseStations.Count());
+                        List<IDAL.DO.Station> stations = dalo.ShowStationList().ToList();
+                        int index = r.Next(0, stations.Count());
                         droneBL.Location = new()
                         {
-                            Latitude = baseStations[index].Latitude,
-                            Longitude = baseStations[index].Longitude
+                            Latitude = stations[index].Latitude,
+                            Longitude = stations[index].Longitude
                         };
 
                         droneBL.Battery = r.Next(0, 21);

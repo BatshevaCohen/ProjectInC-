@@ -11,7 +11,6 @@ namespace DalObject
     {
         public class DataSource
         {
-
             /// <summary>
             /// database of DO entities
             /// </summary>
@@ -24,7 +23,7 @@ namespace DalObject
 
             static Random r = new() { };
 
-            public static object Station { get; set; }
+            //public static object Station { get; set; }
 
             internal class Config
             {

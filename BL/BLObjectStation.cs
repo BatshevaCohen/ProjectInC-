@@ -46,34 +46,38 @@ namespace IBL.BO
         {
             dalo.UpdateStetion(id, name, charging_spots);
         }
+
         /// <summary>
         /// Get station by ID
         /// </summary>
         /// <param name="requestedId"></param>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-       public Station GetStation(int stationID)
+        public Station GetStation(int stationID)
         {
-           IDAL.DO.Station s= dalo.GetStation(stationID);
-            Station station = new Station();
-            station.Name = s.Name;
-            station.Id = s.Id;
+            IDAL.DO.Station s= dalo.GetStation(stationID);
+            Station station = new()
+            {
+                Name = s.Name,
+                Id = s.Id,
+                AvailableChargingSpots = s.ChargeSlots
+            };
             station.Location.Latitude = s.Latitude;
             station.Location.Longitude = s.Longitude;
-            station.AvailableChargingSpots = s.ChargeSlots;
+
             //list of drone and 
             List<DroneCharge> droneCharges= dalo.GetListOfDronInCharge(stationID);
             foreach (DroneCharge item in droneCharges)
             {
-                DroneInCharging droneInCharging = new DroneInCharging();
+                DroneInCharging droneInCharging = new();
                 droneInCharging.Id = item.DroneId;
                 DroneToList droneToList = dronesL.Find(x => x.Id == item.DroneId);
                 droneInCharging.Battery = droneToList.Battery;
                 station.droneInChargings.Add(droneInCharging);
             }
-            
             return station;
         }
+
         /// <summary>
         /// Show LIST of stations
         /// </summary>
@@ -81,20 +85,22 @@ namespace IBL.BO
         /// <exception cref="NotImplementedException"></exception>
         public IEnumerable<Station> ShowStationList()
         {
-            List<Station> stationList = new List<Station>();
+            List<Station> stationList = new();
             var stations = dalo.ShowStationList();
             foreach (IDAL.DO.Station item in stations)
             {
-                Station station = new Station();
-                station.Id = item.Id;
+                Station station = new()
+                {
+                    Id = item.Id,
+                    AvailableChargingSpots = item.ChargeSlots
+                };
                 station.Location.Latitude = item.Latitude;
                 station.Location.Longitude = item.Longitude;
-                station.AvailableChargingSpots = item.ChargeSlots;
-                //list of drone and 
-                List<DroneCharge> droneCharges = dalo.GetListOfDronInCharge(station.Id);
+            //list of drone and 
+            List<DroneCharge> droneCharges = dalo.GetListOfDronInCharge(station.Id);
                 foreach (DroneCharge item1 in droneCharges)
                 {
-                    DroneInCharging droneInCharging = new DroneInCharging();
+                    DroneInCharging droneInCharging = new();
                     droneInCharging.Id = item1.DroneId;
                     DroneToList droneToList = dronesL.Find(x => x.Id == item1.DroneId);
                     droneInCharging.Battery = droneToList.Battery;
@@ -113,23 +119,25 @@ namespace IBL.BO
         /// <exception cref="NotImplementedException"></exception>
         public List<Station> ShowChargeableStationList()
         {
-            List<Station> stationListWithAvailableChargingSpots = new List<Station>();
+            List<Station> stationListWithAvailableChargingSpots = new();
             var stations = dalo.ShowStationList();
             foreach (IDAL.DO.Station item in stations)
             {
-                if(item.ChargeSlots>0)
+                if (item.ChargeSlots > 0)
                 {
 
-                    Station station = new Station();
-                    station.Id = item.Id;
+                    Station station = new()
+                    {
+                        Id = item.Id,
+                        AvailableChargingSpots = item.ChargeSlots
+                    };
                     station.Location.Latitude = item.Latitude;
                     station.Location.Longitude = item.Longitude;
-                    station.AvailableChargingSpots = item.ChargeSlots;
                     //list of drone and 
                     List<DroneCharge> droneCharges = dalo.GetListOfDronInCharge(station.Id);
                     foreach (DroneCharge item1 in droneCharges)
                     {
-                        DroneInCharging droneInCharging = new DroneInCharging();
+                        DroneInCharging droneInCharging = new();
                         droneInCharging.Id = item1.DroneId;
                         DroneToList droneToList = dronesL.Find(x => x.Id == item1.DroneId);
                         droneInCharging.Battery = droneToList.Battery;

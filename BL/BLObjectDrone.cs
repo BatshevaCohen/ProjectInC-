@@ -7,6 +7,7 @@ using DalObject;
 using DalObject.DO;
 using IBL.BO;
 using IDAL.DO;
+using NuGet.Protocol.Plugins;
 
 namespace IBL.BO
 {
@@ -55,6 +56,11 @@ namespace IBL.BO
         /// <param name="model"></param>
         public void UpdateDroneName(int id, string model)
         {
+            //if the recived ID does not exist
+            if (!dronesL.Exists(item => item.Id == id))
+            {
+                throw new DronelIdException(id, $"Drone ID: {id} Does not exist!!");
+            }
             dalo.UpdateNameOfDrone(id, model);
         }
         /// <summary>
@@ -63,7 +69,7 @@ namespace IBL.BO
         /// <param name="droneId"></param>
         public void UpdateChargeDrone(int droneId)
         {
-            IDAL.DO.Station station = new IDAL.DO.Station();
+            IDAL.DO.Station station = new();
             //finds the drone by the recived ID
             DroneToList dronel = dronesL.Find(x => x.Id == droneId);
             //if the drone is available- it can be sent for charging
@@ -124,7 +130,7 @@ namespace IBL.BO
             //update for the way to the station
             //finds the drone by its ID
             DroneToList dronel = dronesL.Find(x => x.Id == droneId);
-            IDAL.DO.Station station = new IDAL.DO.Station();
+            IDAL.DO.Station station = new();
             //finds the station by its ID
             station = dalo.GetStation(stationId);
             //update the drone to charging status
@@ -155,7 +161,7 @@ namespace IBL.BO
 
             //finds the drone by its ID
             DroneToList dronel = dronesL.Find(x => x.Id == droneID);
-            Station station = new Station();
+            Station station = new();
             //only a drone that was in charging c
 
             //ould be discharge
@@ -164,7 +170,7 @@ namespace IBL.BO
                 double droneLocationLatitude = dronel.Location.Latitude;
                 double droneLocationLongitude = dronel.Location.Longitude;
                 dalo.DischargeDroneByLocation(droneID, droneLocationLatitude, droneLocationLongitude);
-                DroneInCharging droneInCharge = new DroneInCharging();
+                DroneInCharging droneInCharge = new();
                 //find the drone in charging
                 droneInCharge = station.droneInChargings.Find(x => x.Id == droneID);
                 //remove the drone frome the list of droneChargings
@@ -186,7 +192,7 @@ namespace IBL.BO
         public Drone GetDrone(int droneId)
         {
             IDAL.DO.Drone d = dalo.GetDrone(droneId);
-            Drone drone = new Drone();
+            Drone drone = new();
             drone.Id = d.Id;
             drone.Model = d.Model;
             drone.Battery = d.Battery;
@@ -203,13 +209,15 @@ namespace IBL.BO
             {
                 //Package data in transfer mode 
                 IDAL.DO.Parcel parcel = dalo.GetParcelInTransferByDroneId(droneId);
-                ParcelInTransfer parcelInTransfer = new ParcelInTransfer();
-                parcelInTransfer.Id = parcel.Id;
+                ParcelInTransfer parcelInTransfer = new()
+                {
+                    Id = parcel.Id,
+                    Priority = (Priority)parcel.Priority,
+                    Weight = (Weight)parcel.Weight,
+                    ParcelTransferStatus = ParcelTransferStatus.OnTheWayToDestination
+                };
                 parcelInTransfer.Sender.Id = parcel.SenderId;
                 parcelInTransfer.Sender.Id = parcel.SenderId;
-                parcelInTransfer.Priority = (Priority)parcel.Priority;
-                parcelInTransfer.Weight = (Weight)parcel.Weight;
-                parcelInTransfer.ParcelTransferStatus = ParcelTransferStatus.OnTheWayToDestination;
                 drone.ParcelInTransfer = parcelInTransfer;
             }
             return drone;
@@ -222,11 +230,11 @@ namespace IBL.BO
         public IEnumerable<Drone> ShowDroneList()
         {
             var droness = dalo.ShowDroneList();
-            List<Drone> droneList = new List<Drone>();
+            List<Drone> droneList = new();
             foreach (var item in droneList)
             {
 
-                Drone drone = new Drone();
+                Drone drone = new();
                 drone.Id = item.Id;
                 drone.Model = item.Model;
                 drone.Battery = item.Battery;
@@ -238,19 +246,21 @@ namespace IBL.BO
                 if (drone.DroneStatuses != DroneStatuses.Shipping)
                 {
                     droneList.Add(drone);
-                    return droneList ;
+                    return droneList;
                 }
                 else
                 {
                     //Package data in transfer mode 
                     IDAL.DO.Parcel parcel = dalo.GetParcelInTransferByDroneId(drone.Id);
-                    ParcelInTransfer parcelInTransfer = new ParcelInTransfer();
-                    parcelInTransfer.Id = parcel.Id;
+                    ParcelInTransfer parcelInTransfer = new()
+                    {
+                        Id = parcel.Id,
+                        Priority = (Priority)parcel.Priority,
+                        Weight = (Weight)parcel.Weight,
+                        ParcelTransferStatus = ParcelTransferStatus.OnTheWayToDestination
+                    };
                     parcelInTransfer.Sender.Id = parcel.SenderId;
                     parcelInTransfer.Sender.Id = parcel.SenderId;
-                    parcelInTransfer.Priority = (Priority)parcel.Priority;
-                    parcelInTransfer.Weight = (Weight)parcel.Weight;
-                    parcelInTransfer.ParcelTransferStatus = ParcelTransferStatus.OnTheWayToDestination;
                     drone.ParcelInTransfer = parcelInTransfer;
                 }
                 droneList.Add(drone);
@@ -260,25 +270,6 @@ namespace IBL.BO
             throw new NotImplementedException();
         }
 
-        List<Station> IBL.ShowStationList()
-        {
-            throw new NotImplementedException();
-        }
-
-        List<Drone> IBL.ShowDroneList()
-        {
-            throw new NotImplementedException();
-        }
-
-        List<Customer> IBL.ShowCustomerList()
-        {
-            throw new NotImplementedException();
-        }
-
-        List<Parcel> IBL.ShowParcelList()
-        {
-            throw new NotImplementedException();
-        }
 
         /// <summary>
         /// Imports the drone from the data layer and prints a drone from a logical entity

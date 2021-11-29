@@ -6,7 +6,6 @@ using DalObject;
 using System.Collections.Generic;
 
 
-
 namespace ConsoleUI_BL
 {
     class Program
@@ -21,7 +20,7 @@ namespace ConsoleUI_BL
             MenuOptions menuOptions;
             EntityOptions entityOptions;
             UpdateOptions updateOptions;
-            IBL.BO.BLObject bLObject = new();//constractor BLObject
+            IBL.BO.BLObject bLObject = new(); //constractor BLObject
             do
             {
                 Console.WriteLine("WELCOME!");
@@ -29,7 +28,7 @@ namespace ConsoleUI_BL
                 menuOptions = (MenuOptions)int.Parse(Console.ReadLine());
                 switch (menuOptions)
                 {
-                    //adding options
+                    //ADD options
                     case MenuOptions.Add:
                         Console.WriteLine("Adding option:\n 1- Station,\n 2- Drone,\n 3- Custumer,\n 4- Parcel,\n 5- Exit");
 
@@ -39,7 +38,7 @@ namespace ConsoleUI_BL
                             //add station
                             case EntityOptions.Station:
                                 IBL.BO.Station s = new IBL.BO.Station();
-                                Console.WriteLine("Please insert ID, StationName (string), longitude, latitude, and charging level ");
+                                Console.WriteLine("Please insert ID, Station name (string), longitude, latitude, and charging level ");
                                 int id_S, Position;
                                 double longitude = 0, latitude = 0;
                                 int.TryParse(Console.ReadLine(), out id_S);
@@ -66,7 +65,7 @@ namespace ConsoleUI_BL
 
                             //add drone
                             case EntityOptions.Drone:
-                                Console.WriteLine("please enter ID, Model (string), Weight category and Station ID for the drone's initial charging");
+                                Console.WriteLine("Please enter ID, Model (string), Weight category and Station ID for the drone's initial charging");
                                 int id_D, weight, stationId;
                                 int.TryParse(Console.ReadLine(), out id_D);
                                 string model = Console.ReadLine();
@@ -80,8 +79,14 @@ namespace ConsoleUI_BL
                                     Model = model,
                                     Weight = (Weight)weight
                                 };
-
-                                bLObject.AddDrone(d, stationId);
+                                try
+                                {
+                                    bLObject.AddDrone(d, stationId);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine(ex);
+                                }
                                 Console.WriteLine("\nDrone added successfully! \n");
                                 break;
 
@@ -97,7 +102,6 @@ namespace ConsoleUI_BL
                                 Console.WriteLine("enter longitude and latitude");
                                 double.TryParse(Console.ReadLine(), out longitude_C);
                                 double.TryParse(Console.ReadLine(), out latitude_C);
-
                                 Customer c = new()
                                 {
                                     Id = id_C,
@@ -106,8 +110,14 @@ namespace ConsoleUI_BL
                                 };
                                 c.Location.Longitude = longitude_C;
                                 c.Location.Latitude = latitude_C;
-
-                                bLObject.AddCustomer(c);
+                                try
+                                {
+                                    bLObject.AddCustomer(c);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine(ex);
+                                }
                                 Console.WriteLine("\nCustomer added successfully! \n");
                                 break;
 
@@ -130,8 +140,14 @@ namespace ConsoleUI_BL
                                 };
                                 p.Sender.Id = id_Psender;
                                 p.Resiver.Id = id_Reciver;
-
-                                bLObject.AddParcel(p);
+                                try
+                                {
+                                    bLObject.AddParcel(p);
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine(ex);
+                                }
                                 Console.WriteLine("\nParcel added successfully! \n");
                                 break;
 
@@ -142,11 +158,11 @@ namespace ConsoleUI_BL
                         }
                         break;
 
-                    //update functions
+                    //UPDATE functions
                     case MenuOptions.Update:
                         {
                             //enum UpdateOptions { Drone_Name = 1, Stetion_Details, Customer_Details, Charge, Discharge, Assignement, Pickedup, Parcel_Supply_By_Drone, Exit }
-                            Console.WriteLine("Updating option:\n 1-Drone's name,\n 2-Station details,\n 3-Customer details,\n 4-Send drone to charge,\n 5-Discharge drone,\n 6-Parcel to drone,\n 7-Parcel pickedup by drone,\n 8-Parcel supply by drone,\n 9- Exit");
+                            Console.WriteLine("Updating option:\n 1- Drone's name,\n 2- Station details,\n 3- Customer details,\n 4- Send drone to charge,\n 5- Discharge drone,\n 6- Assign parcel to drone,\n 7- Update parcel pickedup by drone,\n 8- Parcel supplied by drone,\n 9- Exit");
                             updateOptions = (UpdateOptions)int.Parse(Console.ReadLine());
                             switch (updateOptions)
                             {
@@ -156,10 +172,18 @@ namespace ConsoleUI_BL
                                     Console.WriteLine("Please enter Drone ID");
                                     int.TryParse(Console.ReadLine(), out drone_id5);
                                     Console.WriteLine("Please enter new name for the drone:");
-                                   string name = Console.ReadLine();
-                                    bLObject.UpdateDroneName(drone_id5, name);
+                                    string name = Console.ReadLine();
+                                    try
+                                    {
+                                        bLObject.UpdateDroneName(drone_id5, name);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Console.WriteLine(ex);
+                                    }
                                     Console.WriteLine("Drone's name updated successfully!");
                                     break;
+
                                 //update station details:
                                 case UpdateOptions.Stetion_Details:
                                     int station_id, charging_spots;
@@ -170,7 +194,14 @@ namespace ConsoleUI_BL
                                     station_name = Console.ReadLine();
                                     Console.WriteLine("Enter number of charging spots:");
                                     int.TryParse(Console.ReadLine(), out charging_spots);
-                                    bLObject.UpdateStetion(station_id, station_name, charging_spots);
+                                    try
+                                    {
+                                        bLObject.UpdateStetion(station_id, station_name, charging_spots);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Console.WriteLine(ex);
+                                    }
                                     Console.WriteLine("Station updated successfully!");
                                     break;
 
@@ -183,8 +214,16 @@ namespace ConsoleUI_BL
                                     nameCustumer = Console.ReadLine();
                                     Console.WriteLine("Enter Phon's custumer:");
                                     phonCustumer= Console.ReadLine();
-                                    bLObject.UpdateCustomer(Customer_id, nameCustumer, phonCustumer);
+                                    try
+                                    {
+                                        bLObject.UpdateCustomer(Customer_id, nameCustumer, phonCustumer);
+                                    }
+                                    catch (Exception ex)
+                                    {
+                                        Console.WriteLine(ex);
+                                    }
                                     break;
+
                                 //send drone to Charge
                                 case UpdateOptions.Charge:
                                     Console.WriteLine("Please enter Drone ID");
@@ -198,26 +237,24 @@ namespace ConsoleUI_BL
                                     {
                                         Console.WriteLine(ex);
                                     }
-                                    Console.WriteLine("\nDrone updated to- charge status successfully!\n");
+                                    Console.WriteLine("\nDrone sent to charge successfully!\n");
                                     break;
-
-                                case UpdateOptions.Discharge://release
+                                //Discharge drone
+                                case UpdateOptions.Discharge:
                                     Console.WriteLine("Please enter Drone ID");
                                     int.TryParse(Console.ReadLine(), out drone_id5);
-                                    Console.WriteLine("enter the time of charging");
+                                    Console.WriteLine("Please enter the time of charging");
                                     TimeSpan TimeOfCharging;
                                     TimeSpan.TryParse(Console.ReadLine(), out TimeOfCharging);
                                     try
                                     {
                                         bLObject.DischargeDrone(drone_id5, TimeOfCharging);
                                     }
-
                                     catch (Exception ex)
                                     {
                                         Console.WriteLine(ex);
                                     }
-
-                                    Console.WriteLine("\nDrone updated to- discharge successfully!\n");
+                                    Console.WriteLine("\nDrone discharged successfully!\n");
                                     break;
 
 
@@ -229,7 +266,6 @@ namespace ConsoleUI_BL
                                     {
                                         bLObject.UpdateParcelToDrone(drone_id);
                                     }
-
                                     catch (Exception ex)
                                     {
                                         Console.WriteLine(ex);
@@ -260,7 +296,6 @@ namespace ConsoleUI_BL
                                     {
                                         bLObject.UpdateParcelSuppliedByDrone(drone_id6);
                                     }
-
                                     catch (Exception ex)
                                     {
                                         Console.WriteLine(ex);
@@ -275,36 +310,70 @@ namespace ConsoleUI_BL
                             break;
                         }
 
-                    // show options
+                    // View options
                     case MenuOptions.Show_One:
-                        Console.WriteLine("View item options: \n 1- base station \n 2- Drone\n 3- Custumer\n 4- Parcel\n 5- Exit\n");
+                        Console.WriteLine("View item options: \n 1- Station \n 2- Drone\n 3- Custumer\n 4- Parcel\n 5- Exit\n");
                         entityOptions = (EntityOptions)int.Parse(Console.ReadLine());
                         Console.WriteLine($"Enter a requested {entityOptions} id");
                         switch (entityOptions)
                         {
+                            //Show station
                             case EntityOptions.Station:
-
                                 int Id_S;
                                 int.TryParse(Console.ReadLine(), out Id_S);
-                                Console.WriteLine("enter dron id");
-                                //  Station GetStation(int requestedId);
-                                bLObject.GetStation(Id_S).ToString();
+                                Console.WriteLine("Please enter drone id");
+                                try
+                                {
+                                    bLObject.GetStation(Id_S).ToString();
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine(ex);
+                                }
                                 break;
+
+                            //Show drone
                             case EntityOptions.Drone:
-                                int Id_D;//hh
+                                int Id_D;
                                 int.TryParse(Console.ReadLine(), out Id_D);
-                                Console.WriteLine(bLObject.GetDrone(Id_D).ToString());
+                                try
+                                {
+                                    bLObject.GetDrone(Id_D).ToString();
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine(ex);
+                                }
                                 break;
+
+                            //Show customer
                             case EntityOptions.Custumer:
                                 int Id_C;
                                 int.TryParse(Console.ReadLine(), out Id_C);
-                                Console.WriteLine(bLObject.GetCustomer(Id_C).ToString());
+                                try
+                                {
+                                    bLObject.GetCustomer(Id_C).ToString();
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine(ex);
+                                }
                                 break;
+
+                            //Show parcel
                             case EntityOptions.Parcel:
                                 int Id_P;
                                 int.TryParse(Console.ReadLine(), out Id_P);
-                                Console.WriteLine(bLObject.GetParcel(Id_P).ToString());
+                                try
+                                {
+                                    bLObject.GetParcel(Id_P).ToString();
+                                }
+                                catch (Exception ex)
+                                {
+                                    Console.WriteLine(ex);
+                                }
                                 break;
+                            //EXIT:
                             case EntityOptions.Exit:
                                 DalObject.DalObject.Exit();
                                 break;
@@ -312,48 +381,49 @@ namespace ConsoleUI_BL
                         int requestion;
                         int.TryParse(Console.ReadLine(), out requestion);
                         break;
-                    // show_list options
+
+                    //Show List:
                     case MenuOptions.Show_List:
-                        Console.WriteLine(" List options:\n 1- BaseStation  \n 2- Drone \n 3- Custumer\n 4- Parcel\n 5- UnAsignementParcel\n 6- AvailbleChagingStation\n 7- Exit \n");
+                        Console.WriteLine(" List options:\n 1- Station  \n 2- Drone \n 3- Custumer\n 4- Parcel\n 5- UnAsignementParcel\n 6- AvailbleChagingStation\n 7- Exit \n");
                         ListOptions listOptions = (ListOptions)int.Parse(Console.ReadLine());
                         switch (listOptions)
                         {
-                            // prints the list of the base stations
+                            //Prints the list of the stations
                             case ListOptions.Station:
                                 IEnumerable<Station> BaseStationList;
                                 BaseStationList = bLObject.ShowStationList();
                                 foreach (Station element in BaseStationList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;
-                            // prints the list of the drones
+                            //Prints the list of the drones
                             case ListOptions.Drone:
                                 IEnumerable<Drone> DroneList;
                                 DroneList = bLObject.ShowDroneList();
                                 foreach (Drone element in DroneList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;
-                            // prints the list of the customers
+                            //Prints the list of the customers
                             case ListOptions.Custumer:
                                 IEnumerable<Customer> CustomerList;
                                 CustomerList = bLObject.ShowCustomerList();
                                 foreach (Customer element in CustomerList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;
-                            // prints the list of the parcels
+                            //Prints the list of the parcels
                             case ListOptions.Parcel:
                                 IEnumerable<Parcel> ParcelList;
                                 ParcelList = bLObject.ShowParcelList();
                                 foreach (Parcel element in ParcelList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;
-                            // prints the list of the stations that available for charging
+                            //Prints the list of the stations that available for charging
                             case ListOptions.AvailbleChagingStation:
                                 IEnumerable<Station> ChargeableBaseStationList;
                                 ChargeableBaseStationList =bLObject.ShowChargeableStationList();
                                 foreach (Station element in ChargeableBaseStationList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;
-                            // prints the list of the non associated parcel
+                            //Prints the list of the non associated parcel
                             case ListOptions.UnAsignementParcel:
                                 bLObject.ShowNonAssociatedParcelList();
                                 List<Parcel> NonAssociatedParcelList;
@@ -361,7 +431,6 @@ namespace ConsoleUI_BL
                                 foreach (Parcel element in NonAssociatedParcelList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;
-                           
                         }
                         break;
                     case MenuOptions.Exit:
@@ -372,8 +441,8 @@ namespace ConsoleUI_BL
             while (menuOptions != MenuOptions.Exit);
         }
             static void Main(string[] args)
-        {
+            {
             ShowMenu();
-        }
+            }
     }
 }

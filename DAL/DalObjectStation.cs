@@ -57,7 +57,7 @@ namespace DalObject
         /// <returns></returns>
         public List<Station> ShowStationList()
         {
-            List<Station> stationList = new List<Station>();
+            List<Station> stationList = new();
             foreach (Station element in DataSource.Stations)
             {
                 stationList.Add(element);
@@ -65,12 +65,12 @@ namespace DalObject
             return stationList;
         }
         /// <summary>
-        ///  shows base stations with available charging spots
+        ///  shows stations with available charging spots
         /// </summary>
         /// <returns></returns>
         public IEnumerable<Station> ShowChargeableBaseStationList()
         {
-            List<Station> ChargeableBaseStationList = new List<Station>();
+            List<Station> ChargeableBaseStationList = new ();
             foreach (Station element in DataSource.Stations)
             {
                 if (element.ChargeSlots > 0)
@@ -94,10 +94,12 @@ namespace DalObject
         /// <param name="stationId"></param>
         public void UpdateAddDroneToCharge(int dronId, int stationId)
         {
-            DroneCharge droneCharge = new DroneCharge();
-            droneCharge.DroneId = dronId;
-            droneCharge.StationId = stationId;
-            //הוספת מופע לרשימה
+            DroneCharge droneCharge = new()
+            {
+                DroneId = dronId,
+                StationId = stationId
+            };
+            //Add new drone to the list
             DataSource.DroneCharges.Add(droneCharge);
         }
         /// <summary>
@@ -107,9 +109,11 @@ namespace DalObject
         /// <param name="stationId"></param>
         public void UpdateRemoveDroneToCharge(int dronId, int stationId)
         {
-            DroneCharge droneCharge = new DroneCharge();
-            droneCharge.DroneId = dronId;
-            droneCharge.StationId = stationId;
+            DroneCharge droneCharge = new()
+            {
+                DroneId = dronId,
+                StationId = stationId
+            };
             //מחיקת מופע לרשימה
             DataSource.DroneCharges.Remove(droneCharge);
         }
@@ -131,7 +135,7 @@ namespace DalObject
         /// <returns></returns>
         public List<DroneCharge> GetListOfDronInCharge(int stationId)
         {
-            List<DroneCharge> newDroneCharges = new List<DroneCharge>();
+            List<DroneCharge> newDroneCharges = new ();
             foreach (DroneCharge item in DataSource.DroneCharges)
             {
                 if(item.StationId==stationId)
@@ -143,12 +147,12 @@ namespace DalObject
         }
 
         /// <summary>
-        /// A function that returns a minimum distance between a point and a base station
+        /// A function that returns a minimum distance between a point and a station
         /// </summary>
         /// <param name="senderLattitude">Lattitude of sender</param>
         /// <param name="senderLongitude">longitude of sender</param>
-        /// <param name="flag">Optional field for selecting a nearby base station flag = false or available nearby base station flag = true</param>
-        /// <returns>Base station closest to the point</returns>
+        /// <param name="flag">Optional field for selecting a nearby station flag = false or available nearby station flag = true</param>
+        /// <returns>Station closest to the point</returns>
         public Station GetClosestStation(double senderLattitude, double senderLongitude)
         {
             bool flag = false;
@@ -181,15 +185,11 @@ namespace DalObject
             return station;
         }
 
-        public void UpdateDroneToCharge(int drone_id, int station_id)
-        {
-            throw new NotImplementedException();
-        }
         /// <summary>
-        /// A function that calculates the distance between a customer's location and a base station for charging
+        /// A function that calculates the distance between a customer's location and a station for charging
         /// </summary>
         /// <param name="targetId">target Id</param>
-        /// <returns>Minimum distance to the nearest base station</returns>
+        /// <returns>Minimum distance to the nearest station</returns>
         public double GetDistanceBetweenLocationAndClosestBaseStation(int Reciverid)
         {
             double minDistance = 1000000000000;

@@ -16,7 +16,8 @@ namespace IBL.BO
         /// Add customer
         /// </summary>
         /// <param name="customer"></param>
-        /// <exception cref="NotImplementedException"></exception>
+        /// <
+        /// cref="NotImplementedException"></exception>
         public void AddCustomer(Customer customer)
         {
             // Customer ID must be 9 digits
@@ -60,7 +61,7 @@ namespace IBL.BO
         public Customer GetCustomer(int IDc)
         {
             IDAL.DO.Customer c = dalo.GetCustomer(IDc);
-            Customer customer = new Customer();
+            Customer customer = new();
             customer.Id = c.Id;
             customer.Name = c.Name;
             customer.Phone = c.Phone;
@@ -74,7 +75,7 @@ namespace IBL.BO
            
             foreach (IDAL.DO.Parcel item in parcelSendin)
             {
-                ParcelCustomer parcelCustomer = new ParcelCustomer();
+                ParcelCustomer parcelCustomer = new ();
                 parcelCustomer.Id = item.Id;
                 parcelCustomer.Priority = (Priority)item.Priority;
                 parcelCustomer.Weight = (Weight)item.Weight;
@@ -101,10 +102,12 @@ namespace IBL.BO
             }
             foreach (IDAL.DO.Parcel item in parcelReciever)
             {
-                ParcelCustomer parcelCustomer = new ParcelCustomer();
-                parcelCustomer.Id = item.Id;
-                parcelCustomer.Priority = (Priority)item.Priority;
-                parcelCustomer.Weight = (Weight)item.Weight;
+                ParcelCustomer parcelCustomer = new()
+                {
+                    Id = item.Id,
+                    Priority = (Priority)item.Priority,
+                    Weight = (Weight)item.Weight
+                };
                 if (item.Create == DateTime.MinValue)
                 {
                     parcelCustomer.ParcelStatus = ParcelStatus.Created;
@@ -135,14 +138,16 @@ namespace IBL.BO
         /// <exception cref="NotImplementedException"></exception>
         public IEnumerable<Customer> ShowCustomerList()
         {
-            List<Customer> customersList = new List<Customer>();
+            List<Customer> customersList = new();
             var custumers = dalo.ShowCustomerList();
             foreach (var item in custumers)
             {
-                Customer customer = new Customer();
-                customer.Id = item.Id;
-                customer.Name = item.Name;
-                customer.Phone = item.Phone;
+                Customer customer = new()
+                {
+                    Id = item.Id,
+                    Name = item.Name,
+                    Phone = item.Phone
+                };
                 customer.Location.Latitude = item.Latitude;
                 customer.Location.Longitude = item.Longitude;
 
@@ -153,10 +158,12 @@ namespace IBL.BO
 
                 foreach (IDAL.DO.Parcel item1 in parcelSendin)
                 {
-                    ParcelCustomer parcelCustomer = new ParcelCustomer();
-                    parcelCustomer.Id = item.Id;
-                    parcelCustomer.Priority = (Priority)item1.Priority;
-                    parcelCustomer.Weight = (Weight)item1.Weight;
+                    ParcelCustomer parcelCustomer = new()
+                    {
+                        Id = item.Id,
+                        Priority = (Priority)item1.Priority,
+                        Weight = (Weight)item1.Weight
+                    };
                     if (item1.Create == DateTime.MinValue)
                     {
                         parcelCustomer.ParcelStatus = ParcelStatus.Created;
@@ -180,10 +187,12 @@ namespace IBL.BO
                 }
                 foreach (IDAL.DO.Parcel item2 in parcelReciever)
                 {
-                    ParcelCustomer parcelCustomer = new ParcelCustomer();
-                    parcelCustomer.Id = item.Id;
-                    parcelCustomer.Priority = (Priority)item2.Priority;
-                    parcelCustomer.Weight = (Weight)item2.Weight;
+                    ParcelCustomer parcelCustomer = new()
+                    {
+                        Id = item.Id,
+                        Priority = (Priority)item2.Priority,
+                        Weight = (Weight)item2.Weight
+                    };
                     if (item2.Create == DateTime.MinValue)
                     {
                         parcelCustomer.ParcelStatus = ParcelStatus.Created;

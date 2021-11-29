@@ -17,7 +17,8 @@ namespace IBL.BO
         {
         }
         /// <summary>
-        /// ID is too long or too short (4-9 digits)
+        /// Exception- ID is too long or too short (4-9 digits)
+        /// Exception- Drone ID does not exist
         /// </summary>
         /// <param name="id"></param>
         /// <param name="v"></param>

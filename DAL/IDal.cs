@@ -58,7 +58,7 @@ namespace IDAL
         void UpdateChargeSpots(int stationId);
         double[] PowerRequest();
         Parcel GetParcelByDroneId(int DroneId);
-        Customer updateBatteryAndLocationDrone(int droneId,int senderId, double longt, double lanti);
+        Customer UpdateBatteryAndLocationDrone(int droneId,int senderId, double longt, double lanti);
         Station GetClosestStation(double latitude, double longitude);
         double[] PowerConsumptionRequest();
         double GetDistanceBetweenLocationAndClosestBaseStation(int Reciverid);

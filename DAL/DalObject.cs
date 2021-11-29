@@ -15,13 +15,13 @@ namespace DalObject
     /// </summary>
     public partial class DalObject : IDal
     {
-      //  private IEnumerable<Station> Stations;
+        //  private IEnumerable<Station> Stations;
 
         public DalObject()
         {
             DataSource.Initialize();
         }
-        
+
         public double[] PowerRequest()
         {
             double[] arr = new double[5];
@@ -77,56 +77,5 @@ namespace DalObject
         {
             return 0;
         }
-
-        public IEnumerable<Station> ShowChargeableStationList()
-        {
-            throw new NotImplementedException();
-        }
-
-        public void StationException(int id, string errMsg)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void CustomerException(int id, string errMsg, Severity severity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void ParcelException(int id, string errMsg, Severity severity)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DroneException(int id, string errMsg)
-        {
-            throw new NotImplementedException();
-        }
-
-        public void DischargeDrone(int drone_id, TimeSpan s)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Customer FindCustomer(int customerID)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Station GetStetion(int stationID)
-        {
-            throw new NotImplementedException();
-        }
-
-        public Customer updateBatteryAndLocationDrone(int droneId, int senderId, double longt, double lanti)
-        {
-            throw new NotImplementedException();
-        }
-
-        IEnumerable<Station> IDal.ShowStationList()
-        {
-            throw new NotImplementedException();
-        }
     }
-
 }

@@ -57,12 +57,13 @@ namespace DalObject
         /// </summary>
         public IEnumerable<Customer> ShowCustomerList()
         {
-            List<Customer> CustomerList = new List<Customer>();
+            List<Customer> CustomerList = new();
             foreach (Customer element in DataSource.Customer)
             {
                 CustomerList.Add(element);
             }
             return CustomerList;
         }
+
     }
 }

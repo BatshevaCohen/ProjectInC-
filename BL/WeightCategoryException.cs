@@ -17,7 +17,7 @@ namespace IBL.BO
         {
         }
         /// <summary>
-        /// Ecxeption- weight category ust be between 1-3
+        /// Exception- weight category ust be between 1-3
         /// </summary>
         /// <param name="weight"></param>
         /// <param name="v"></param>

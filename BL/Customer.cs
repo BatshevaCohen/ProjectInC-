@@ -14,6 +14,7 @@ namespace IBL.BO
         public Location Location { get; set; }
         public List<ParcelCustomer> SentParcels { get; set; }//List of packages of the sender
         public List<ParcelCustomer> ReceiveParcels { get; set; }//List of packages of the reciver
+
         /// <summary>
         /// ToString
         /// </summary>

@@ -18,9 +18,15 @@ namespace IBL.BO
         /// <param name="parcel"></param>
         public void AddParcel(Parcel parcel)
         {
-            if (parcel.Id < 1)
+            //Parcel ID must be 7-10 digits
+            if (parcel.Id < 1000000 || parcel.Id >= 1000000000)
             {
-                throw new NegativeNumberExeption(parcel.Id, "id cannot be negative");
+                throw new ParcelIdExeption(parcel.Id, "Parcel ID must be 7-10 digits");
+            }
+            //Parcel's priority should be between 1-3
+            if ((int)parcel.Priority < 1 || (int)parcel.Priority > 3)
+            {
+                throw new PriorityException(parcel.Priority, "Parcel's priority should be between 1-3");
             }
             parcel.Id = ++(DataSource.OrdinalNumber); //static serial number for parcel id
             parcel.ParcelCreationTime = DateTime.Now;
@@ -28,13 +34,14 @@ namespace IBL.BO
             parcel.CollectionTime = DateTime.MinValue;
             parcel.SupplyTime = DateTime.MinValue;
             parcel.DroneInParcel = null;
-            IDAL.DO.Parcel p = new() { };
-
-            p.Id = parcel.Id;
-            p.SenderId = parcel.Sender.Id;
-            p.ReceiverId = parcel.Resiver.Id;
-            p.Weight = (WeightCategories)parcel.Weight;
-            p.Priority = (Priorities)parcel.Priority;
+            IDAL.DO.Parcel p = new()
+            {
+                Id = parcel.Id,
+                SenderId = parcel.Sender.Id,
+                ReceiverId = parcel.Resiver.Id,
+                Weight = (WeightCategories)parcel.Weight,
+                Priority = (Priorities)parcel.Priority,
+            };
             dalo.AddParcel(p);
         }
         /// <summary>

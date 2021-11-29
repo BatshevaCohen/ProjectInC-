@@ -12,9 +12,9 @@ namespace ConsoleUI_BL
     class Program
     {
         enum MenuOptions { Add = 1, Update, Show_One, Show_List, Exit }
-        enum EntityOptions { BaseStation = 1, Drone, Custumer, Parcel, Exit }
+        enum EntityOptions { Station = 1, Drone, Custumer, Parcel, Exit }
         enum UpdateOptions { Drone_Name = 1, Stetion_Details, Customer_Details, Charge, Discharge, AssignParcelToDrone, Pickedup, Parcel_Supply_By_Drone, Exit }
-        enum ListOptions { BaseStation = 1, Drone, Custumer, Parcel, UnAsignementParcel, AvailbleChagingStation, Exit }
+        enum ListOptions { Station = 1, Drone, Custumer, Parcel, UnAsignementParcel, AvailbleChagingStation, Exit }
 
         private static void ShowMenu()
         {
@@ -25,59 +25,55 @@ namespace ConsoleUI_BL
             do
             {
                 Console.WriteLine("WELCOME!");
-                Console.WriteLine("option:\n 1- Add,\n 2- Update,\n 3- Show_One,\n 4- Show_List,\n 5- Exit,\n");
+                Console.WriteLine("Option:\n 1- Add,\n 2- Update,\n 3- Show_One,\n 4- Show_List,\n 5- Exit,\n");
                 menuOptions = (MenuOptions)int.Parse(Console.ReadLine());
                 switch (menuOptions)
                 {
                     //adding options
                     case MenuOptions.Add:
-                        Console.WriteLine("Adding option:\n 1-BaseStation,\n 2-Drone,\n 3-Custumer,\n 4-Parcel,\n 5-Exit");
+                        Console.WriteLine("Adding option:\n 1- Station,\n 2- Drone,\n 3- Custumer,\n 4- Parcel,\n 5- Exit");
 
                         entityOptions = (EntityOptions)int.Parse(Console.ReadLine());
                         switch (entityOptions)
                         {
-                            //add a new station
-                            case EntityOptions.BaseStation:
-                                IBL.BO.Station s = new ();
+                            //add station
+                            case EntityOptions.Station:
+                                IBL.BO.Station s = new IBL.BO.Station();
                                 Console.WriteLine("Please insert ID, StationName (string), longitude, latitude, and charging level ");
-                                int id_S;
+                                int id_S, Position;
+                                double longitude = 0, latitude = 0;
                                 int.TryParse(Console.ReadLine(), out id_S);
                                 s.Id = id_S;
                                 string StationName = Console.ReadLine();
                                 s.Name = StationName;
-                                double longitude;
                                 double.TryParse(Console.ReadLine(), out longitude);
-                                double latitude;
-                                double.TryParse(Console.ReadLine(), out latitude);
                                 s.Location.Longitude = longitude;
+                                double.TryParse(Console.ReadLine(), out latitude);
                                 s.Location.Latitude = latitude;
-                                int Position;
                                 int.TryParse(Console.ReadLine(), out Position);
                                 List<Drone> droneList = new() { };
                                 s.AvailableChargingSpots = Position;
-                                s.Location.Longitude = longitude;
-                                s.Location.Latitude = latitude;
                                 try
                                 {
                                     bLObject.AddStation(s);
-                                    
                                 }
-                                catch(Exception ex)
+                                catch (Exception ex)
                                 {
                                     Console.WriteLine(ex);
                                 }
-                                Console.WriteLine("\nBase station added successfully! \n");
+                                Console.WriteLine("\nStation added successfully! \n");
                                 break;
-                            //add a new drone
+
+                            //add drone
                             case EntityOptions.Drone:
-                                Console.WriteLine("please enter ID, Model (string), Weight category and Number of station for initial charging");
+                                Console.WriteLine("please enter ID, Model (string), Weight category and Station ID for the drone's initial charging");
                                 int id_D, weight, stationId;
                                 int.TryParse(Console.ReadLine(), out id_D);
                                 string model = Console.ReadLine();
                                 Console.WriteLine("enter WeightCategories 1-Light 2-Medium, 3-Heavy");
                                 int.TryParse(Console.ReadLine(), out weight);
+                                Console.WriteLine("enter Station ID for the drone's initial charging");
                                 int.TryParse(Console.ReadLine(), out stationId);
-
                                 Drone d = new()
                                 {
                                     Id = id_D,
@@ -88,31 +84,37 @@ namespace ConsoleUI_BL
                                 bLObject.AddDrone(d, stationId);
                                 Console.WriteLine("\nDrone added successfully! \n");
                                 break;
-                            //add a new customer
+
+                            //add customer
                             case EntityOptions.Custumer:
-                                Console.WriteLine("please enter Customer ID, Name, Phone number, Longitude and Latitude");
+                                Console.WriteLine("Please enter Customer ID, Name, Phone number, Longitude and Latitude");
                                 int id_C;
+                                double longitude_C, latitude_C;
                                 int.TryParse(Console.ReadLine(), out id_C);
                                 string name_C = Console.ReadLine();
-                                //נצטרך לבדוק תקינות של מס טלפון
-                                Console.WriteLine("enter phone number");
+                                Console.WriteLine("enter phone number in format ***-*******");
                                 string phone_C = Console.ReadLine();
                                 Console.WriteLine("enter longitude and latitude");
-
+                                double.TryParse(Console.ReadLine(), out longitude_C);
+                                double.TryParse(Console.ReadLine(), out latitude_C);
 
                                 Customer c = new()
                                 {
                                     Id = id_C,
                                     Name = name_C,
-                                    Phone = phone_C
+                                    Phone = phone_C,
                                 };
+                                c.Location.Longitude = longitude_C;
+                                c.Location.Latitude = latitude_C;
+
                                 bLObject.AddCustomer(c);
                                 Console.WriteLine("\nCustomer added successfully! \n");
                                 break;
+
                             //add a new parcel
                             case EntityOptions.Parcel:
-                                Console.WriteLine("Please enter the sender's ID");
                                 int id_Psender, id_Reciver, weight_P, priority_P;
+                                Console.WriteLine("Please enter the sender's ID");
                                 int.TryParse(Console.ReadLine(), out id_Psender);
                                 Console.WriteLine("Please enter target ID");
                                 int.TryParse(Console.ReadLine(), out id_Reciver);
@@ -121,11 +123,14 @@ namespace ConsoleUI_BL
                                 Console.WriteLine("Please enter parcel priority: 1-Regular, 2-Fast, 3-Emergency");
                                 int.TryParse(Console.ReadLine(), out priority_P);
 
-                                Parcel p = new() { };
+                                Parcel p = new()
+                                {
+                                    Weight = (Weight)weight_P,
+                                    Priority = (Priority)priority_P
+                                };
                                 p.Sender.Id = id_Psender;
                                 p.Resiver.Id = id_Reciver;
-                                p.Weight = (Weight)weight_P;
-                                p.Priority = (Priority)priority_P;
+
                                 bLObject.AddParcel(p);
                                 Console.WriteLine("\nParcel added successfully! \n");
                                 break;
@@ -277,7 +282,7 @@ namespace ConsoleUI_BL
                         Console.WriteLine($"Enter a requested {entityOptions} id");
                         switch (entityOptions)
                         {
-                            case EntityOptions.BaseStation:
+                            case EntityOptions.Station:
 
                                 int Id_S;
                                 int.TryParse(Console.ReadLine(), out Id_S);
@@ -314,7 +319,7 @@ namespace ConsoleUI_BL
                         switch (listOptions)
                         {
                             // prints the list of the base stations
-                            case ListOptions.BaseStation:
+                            case ListOptions.Station:
                                 IEnumerable<Station> BaseStationList;
                                 BaseStationList = bLObject.ShowStationList();
                                 foreach (Station element in BaseStationList) //prints the elements in the list

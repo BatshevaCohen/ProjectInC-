@@ -19,19 +19,20 @@ namespace IBL.BO
         /// <exception cref="NotImplementedException"></exception>
         public void AddStation(Station station)
         {
-            if(station.Id<1)
+            //station ID sould be 5 - 6 digits
+            if (station.Id < 10000 || station.Id >= 1000000)
             {
-                throw new NegativeNumberExeption(station.Id, "id cannot be negative");
+                throw new StationIdException(station.Id, "station ID sould be 5-6 digits");
             }
-            IDAL.DO.Station s = new IDAL.DO.Station();
-            s.Name = station.Name;
-            s.Id = station.Id;
-            s.Longitude = station.Location.Longitude;
-            s.Latitude = station.Location.Latitude;
+            IDAL.DO.Station s = new()
+            {
+                Name = station.Name,
+                Id = station.Id,
+                Longitude = station.Location.Longitude,
+                Latitude = station.Location.Latitude
+            };
            
             dalo.AddStation(s);//send the new station to DAL 
-
-            
         }
 
 

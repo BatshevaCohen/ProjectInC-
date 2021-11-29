@@ -21,19 +21,33 @@ namespace IBL.BO
         /// <exception cref="NotImplementedException"></exception>
         public void AddDrone(Drone drone, int stationId)
         {
-            if(drone.Id<1)
+            //ID is less than 4 digits or more than 9 digits
+            if (drone.Id < 1000 || drone.Id > 999999999)
             {
-                throw new NegativeNumberExeption(drone.Id, "id cannot be negative");
+                throw new DronelIdException(drone.Id, "Drone ID must be between 4 to 9 digits");
             }
-            IDAL.DO.Drone d = new IDAL.DO.Drone();
-            d.Id = drone.Id;
-            d.Model = drone.Model;
-            d.MaxWeight = (WeightCategories)drone.Weight;
+            //Weight category must be between 1-3
+            if ((double)drone.Weight < 1 || (double)drone.Weight > 3)
+            {
+                throw new WeightCategoryException(drone.Weight, "Weight category must be between 1-3");
+            }
+            //station ID should be 5-6 digits
+            if(stationId<10000||stationId>=1000000)
+            {
+                throw new StationIdException(stationId, "Station ID should be 5 to 6 digits");
+            }
+            IDAL.DO.Drone d = new()
+            {
+                Id = drone.Id,
+                Model = drone.Model,
+                MaxWeight = (WeightCategories)drone.Weight
+            };
             dalo.AddDrone(d);
             dalo.UpdateDroneToStation(stationId, d);
 
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
         }
+
         /// <summary>
         /// Update drone's name
         /// </summary>

@@ -54,7 +54,7 @@ namespace DalObject
                 {
                     Drones.Add(new Drone()
                     {
-                        Id = i * 1000,
+                        Id = i * 1000, //4-9 digits
                         Model = arrDroneModel[i - 1],
                         MaxWeight = RandomEnumValue<WeightCategories>(),
                         //Battery = r.Next(0, 100),
@@ -67,7 +67,7 @@ namespace DalObject
                 {
                     Stations.Add(new Station()
                     {
-                        Id = r.Next(20000, 100000),
+                        Id = r.Next(10000, 100000), //5-6 digits
                         Name = arrStation[i - 1],
                         ChargeSlots = r.Next(1, 100),
                         Longitude = r.Next(-180, 179) + r.NextDouble(),
@@ -92,6 +92,7 @@ namespace DalObject
                     //choose two different ids for sender and target from Customer's id
                     int senderId = r.Next(1, 10);
                     int targetId;
+                    // the sender can't be the reciver
                     do
                     {
                         targetId = r.Next(1, 10);

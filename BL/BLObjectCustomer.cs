@@ -19,17 +19,31 @@ namespace IBL.BO
         /// <exception cref="NotImplementedException"></exception>
         public void AddCustomer(Customer customer)
         {
-            if (customer.Id < 1)
+            // Customer ID must be 9 digits
+            if (customer.Id < 100000000 || customer.Id >= 1000000000)
             {
-                throw new NegativeNumberExeption(customer.Id, "id cannot be negative");
+                throw new CustomerIdExeption(customer.Id, "Customer ID must be 9 digits");
             }
-            IDAL.DO.Customer c = new IDAL.DO.Customer();
-            c.Id = customer.Id;
-            c.Name = customer.Name;
-            c.Phone = customer.Phone;
+            // Phone number is 10 digits (or 9 digits- for a telephone at home) + one "-"
+            if (customer.Phone.Length != 10 && customer.Phone.Length != 11)
+            {
+                throw new PhoneException(customer.Phone, "Phone number is ilegal!");
+            }
+            // Phone number should start with a 0
+            if (customer.Phone[0] != '0')
+            {
+                throw new PhoneException(customer.Phone, "Phone number should start with a 0");
+            }
+            IDAL.DO.Customer c = new()
+            {
+                Id = customer.Id,
+                Name = customer.Name,
+                Phone = customer.Phone,
+                Longitude = customer.Location.Longitude,
+                Latitude = customer.Location.Latitude
+            };
+           
             dalo.AddCustomer(c);
-
-            throw new NotImplementedException();
         }
         /// <summary>
         /// Update customer

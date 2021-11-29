@@ -151,5 +151,16 @@ namespace DalObject
             Station station = DataSource.Stations.Find(x => x.Id == StationId);
             station.ChargeSlots = drone.Id;
         }
+        /// <summary>
+        /// Method of applying drone power
+        /// </summary>
+        /// <returns>An array of the amount of power consumption of a drone for each situation</returns>
+        public double[] PowerConsumptionRequest()
+        {
+            double[] result = {DataSource.Config.Light, DataSource.Config.Heavy,
+                DataSource.Config.Medium, DataSource.Config.Heavy,
+                DataSource.Config.ChargingRate };
+            return result;
+        }
     }
 }

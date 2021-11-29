@@ -55,7 +55,7 @@ namespace DalObject
         /// View Station List
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Station> ShowStationList()
+        public List<Station> ShowStationList()
         {
             List<Station> stationList = new List<Station>();
             foreach (Station element in DataSource.Stations)
@@ -142,32 +142,67 @@ namespace DalObject
             return newDroneCharges;
         }
 
-        //credit to Tzivya RotLevy:
         /// <summary>
-        /// Finds the closest station to the customer
+        /// A function that returns a minimum distance between a point and a base station
         /// </summary>
-        /// <param name="senderLatitude"></param>
-        /// <param name="senderLongitude"></param>
-        /// <returns></returns>
-        //public Station GetClosestStation(double latitude, double longitude)
-        //{
-        //    Station result = default;
-        //    double distance = double.MaxValue;
-        //    foreach (var item in DataSource.Stations)
-        //    {
-        //        double dist = Tools.Utils.DistanceCalculation(latitude, longitude, item.Latitude, item.Longitude);
-        //        if (dist < distance)
-        //        {
-        //            distance = dist;
-        //            result = item;
-        //        }
-        //    }
-        //    return result;
-        //}
+        /// <param name="senderLattitude">Lattitude of sender</param>
+        /// <param name="senderLongitude">longitude of sender</param>
+        /// <param name="flag">Optional field for selecting a nearby base station flag = false or available nearby base station flag = true</param>
+        /// <returns>Base station closest to the point</returns>
+        public Station GetClosestStation(double senderLattitude, double senderLongitude)
+        {
+            bool flag = false;
+            double minDistance = 1000000000000;
+            Station station = new();
+            if (!flag)
+            {
+                foreach (var s in DataSource.Stations)
+                {
+                    double dictance = Math.Sqrt(Math.Pow(s.Latitude - senderLattitude, 2) + Math.Pow(s.Longitude - senderLongitude, 2));
+                    if (minDistance > dictance)
+                    {
+                        minDistance = dictance;
+                        station = s;
+                    }
+                }
+            }
+            else
+            {
+                foreach (var s in DataSource.Stations.Where(s => s.ChargeSlots > 0))
+                {
+                    double dictance = Math.Sqrt(Math.Pow(s.Latitude - senderLattitude, 2) + Math.Pow(s.Longitude - senderLongitude, 2));
+                    if (minDistance > dictance)
+                    {
+                        minDistance = dictance;
+                        station = s;
+                    }
+                }
+            }
+            return station;
+        }
 
         public void UpdateDroneToCharge(int drone_id, int station_id)
         {
             throw new NotImplementedException();
+        }
+        /// <summary>
+        /// A function that calculates the distance between a customer's location and a base station for charging
+        /// </summary>
+        /// <param name="targetId">target Id</param>
+        /// <returns>Minimum distance to the nearest base station</returns>
+        public double GetDistanceBetweenLocationAndClosestBaseStation(int Reciverid)
+        {
+            double minDistance = 1000000000000;
+            Customer target = GetCustomer(Reciverid);
+            foreach (var s in DataSource.Stations)
+            {
+                double dictance = Math.Sqrt(Math.Pow(s.Latitude - target.Latitude, 2) + Math.Pow(s.Longitude - target.Longitude, 2));
+                if (minDistance > dictance)
+                {
+                    minDistance = dictance;
+                }
+            }
+            return minDistance;
         }
     }
 }

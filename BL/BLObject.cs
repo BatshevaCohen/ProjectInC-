@@ -15,7 +15,6 @@ namespace IBL.BO
     {
         public IDAL.IDal dalo;
         public List<DroneToList> dronesL;
-        // public List<Drone> drone1;
         static Random r = new() { };
 
         public BLObject()
@@ -27,109 +26,117 @@ namespace IBL.BO
 
         }
 
-      
 
-            /// <summary>
-            /// Initialize constractor for drone
-            /// </summary>
-            /// <param name="drones"></param>
-            private void DronesInitialize(List<IDAL.DO.Drone> drones)
+
+        private void DronesInitialize(List<IDAL.DO.Drone> drones)
+        {
+            //find A package that has not yet been delivered but the drone has already been associated
+            List<IDAL.DO.Parcel> parcels = dalo.ShowParcelList().ToList();
+            DroneToList droneBL;
+
+            foreach (var droneDL in drones)
             {
-                List<IDAL.DO.Parcel> parcels = dalo.ShowParcelList().ToList();
-                DroneToList droneBl;
-                foreach (var droneDal in drones)
+                droneBL = new DroneToList()
                 {
-                    droneBl = new DroneToList()
+                    Id = droneDL.Id,
+                    Model = droneDL.Model,
+                    Weight = (Weight)droneDL.MaxWeight
+                };
+                List<IDAL.DO.Parcel> parcelList = parcels.FindAll(p => p.DroneID == droneBL.Id);
+
+                if (parcels != null) //If there is a package that has not yet been delivered but the drone has already been associated
+                {
+                    droneBL.DroneStatuses = DroneStatuses.Shipping;
+                    //If the package was associated but not collected
+                    foreach (var p in parcels.Where(p => p.PickedUp == DateTime.MinValue))
                     {
-                        Id = droneDal.Id,
-                        Model = droneDal.Model,
-                        Weight = (Weight)droneDal.MaxWeight
-                    };
-
-                    List<IDAL.DO.Parcel> parcelList = parcels.FindAll(p => p.DroneID == droneBl.Id);
-
-                    // parcel have been assigned (to drone) bat have not supplied
-                    if (parcelList.Exists(p => p.Supplied == DateTime.MinValue))
-                    {
-                        // the drone is currently on shipping status
-                        droneBl.DroneStatuses = DroneStatuses.Shipping;
-                        // for each parcel that have been assigned but have not picked up
-                        foreach (var item in parcelList.Where(item => item.PickedUp == DateTime.MinValue))
+                        // The location of the drone will be at the station closest to the sender
+                        int senderId = p.SenderId;
+                        double senderLattitude = dalo.GetCustomer(senderId).Latitude;
+                        double senderLongitude = dalo.GetCustomer(senderId).Longitude;
+                        //מרחק בין 2 תחנות הנמוך ביותר
+                        IDAL.DO.Station st = dalo.GetClosestStation(senderLattitude, senderLongitude);
+                        droneBL.Location = new Location
                         {
-                            int senderId = item.SenderId;
-                            double senderLatitude = dalo.GetCustomer(senderId).Latitude;
-                            double senderLongitude = dalo.GetCustomer(senderId).Longitude;
-                            // the location will be in the closest station (to the sender)
-                            IDAL.DO.Station st = dalo.GetClosestStation(senderLatitude, senderLongitude);
-                            droneBl.Location = new Location { Latitude = st.Latitude, Longitude = st.Longitude };
-                        }
-                        //picked up (by the drone) but wasn't supplied
-                        foreach (var item in parcelList.Where(item => item.PickedUp != DateTime.MinValue && item.Supplied == DateTime.MinValue))
-                        {
-                            int senderId = item.SenderId;
-                            double senderLatitude = dalo.GetCustomer(senderId).Latitude;
-                            double senderLongitude = dalo.GetCustomer(senderId).Longitude;
-                            // the drone's location is the sender's location
-                            droneBl.Location = new Location
-                            {
-                                Latitude = senderLatitude,
-                                Longitude = senderLongitude
-                            };
-                        }
-                        //////////////////////
-                        //TO DO:
-                        //יש לעדכן מצב סוללה:
-                        //מצב סוללה יוגרל בין טעינה מינימלית שתאפשר לרחפן לבצע את המשלוח ולהגיע לטעינה לתחנה הקרובה ליעד המשלוח לבין טעינה מלאה
-                        /////////////////////
-
-                        //minimum battery the drone needs for the delivery
-                        int minBattery;
-                        droneBl.Battery = r.Next(minBattery, 100);
+                            Latitude = st.Latitude,
+                            Longitude = st.Longitude
+                        };
+                        droneBL.Battery = r.Next(0, 101);
                     }
-                    //else- the drone is not in delivery status
-                    else
+                    //If the package has been collected but has not yet been delivered
+                    foreach (var p in parcels.Where(p => p.PickedUp != DateTime.MinValue && p.Supplied == DateTime.MinValue))
                     {
-                        droneBl.DroneStatuses = (DroneStatuses)r.Next(2); //Maintenance or Available
-                        // if the drone is on Maintenance status
-                        if (droneBl.DroneStatuses == DroneStatuses.Maintenance)
+                        //The location of the drone will be at the location of the sender
+                        int senderId = p.SenderId;
+                        double senderLattitude = dalo.GetCustomer(senderId).Latitude;
+                        double senderLongitude = dalo.GetCustomer(senderId).Longitude;
+                        IDAL.DO.Station st = dalo.GetClosestStation(senderLattitude, senderLongitude);
+                        droneBL.Location = new Location
                         {
-                            List<Station> stations = (List<Station>)ShowStationList();
-                            int index = r.Next(stations.Count());
-                            //random station from all the stations
-                            Station station = stations[index];
-                            droneBl.Location = new Location
-                            {
-                                Latitude = station.Location.Latitude,
-                                Longitude = station.Location.Longitude
-                            };
+                            Latitude = st.Latitude,
+                            Longitude = st.Longitude
+                        };
 
-                            // battery is random between 0% to 20%
-                            droneBl.Battery = r.Next(0, 21);
-                        }
-
-                        // else- if the drone is available
-                        else if (droneBl.DroneStatuses == DroneStatuses.Available)
+                        double distance = dalo.GetDistanceBetweenLocationsOfParcels(p.SenderId, p.ReceiverId)
+                            + dalo.GetDistanceBetweenLocationAndClosestBaseStation(p.ReceiverId);
+                        switch (p.Weight)
                         {
-                            IEnumerable<IDAL.DO.Customer> customer = dalo.ShowCustomerList();
-                            customer.ToList();
-                            //צריך לבדוק איזה לקוחות כבר סופקו להם חבילות
-
-                            /////////////////////////
-                            //TO DO:
-                            //מיקומו יוגרל בין לקוחות שיש חבילות שסופקו להם
-                            // מצב סוללה יוגרל בין טעינה מינימלית שתאפשר לו להגיע לתחנה הקרובה לטעינה לבין טעינה מלאה
-                            ///////////////////////
-
-                            //minimum battery the drone needs for the delivery
-                            int minBattery;
-                            droneBl.Battery = r.Next(minBattery, 100);
+                            case IDAL.DO.WeightCategories.Light:
+                                droneBL.Battery = r.Next((int)(distance * dalo.PowerConsumptionRequest()[1] + 1), 101);
+                                break;
+                            case IDAL.DO.WeightCategories.Medium:
+                                droneBL.Battery = r.Next((int)(distance * dalo.PowerConsumptionRequest()[2] + 1), 101);
+                                break;
+                            case IDAL.DO.WeightCategories.Heavy:
+                                droneBL.Battery = r.Next((int)(distance * dalo.PowerConsumptionRequest()[3] + 1), 101);
+                                break;
+                            default:
+                                break;
                         }
                     }
-                    dronesL.Add(droneBl);
                 }
+                else //the drone is not in delivery
+                {
+                    droneBL.DroneStatuses = (DroneStatuses)r.Next(2); //Maintenance or Available
+                    if (droneBL.DroneStatuses == DroneStatuses.Maintenance)
+                    {
+                        //Its location will be drawn between the purchasing stations
+                        List<IDAL.DO.Station> baseStations = dalo.ShowStationList().ToList();
+                        int index = r.Next(0, baseStations.Count());
+                        droneBL.Location = new()
+                        {
+                            Latitude = baseStations[index].Latitude,
+                            Longitude = baseStations[index].Longitude
+                        };
+
+                        droneBL.Battery = r.Next(0, 21);
+                    }
+                    else if (droneBL.DroneStatuses == DroneStatuses.Available)
+                    {
+                        //Its location will be raffled off among customers who have packages provided to them
+                        List<IDAL.DO.Parcel> parcelsDelivered = parcels.FindAll(p => p.Supplied != DateTime.MinValue);
+                        int index = r.Next(0, parcelsDelivered.Count());
+                        droneBL.Location = new()
+                        {
+                            Latitude = dalo.GetCustomer(parcelsDelivered[index].ReceiverId).Latitude,
+                            Longitude = dalo.GetCustomer(parcelsDelivered[index].ReceiverId).Longitude
+                        };
+                        // Battery mode will be recharged between a minimal charge that will allow it to reach the station closest to charging and a full charge
+                        double distance = dalo.GetDistanceBetweenLocationAndClosestBaseStation(parcelsDelivered[index].ReceiverId);
+                        droneBL.Battery = r.Next((int)(distance * dalo.PowerConsumptionRequest()[0] + 1), 101);
+                    }
+                }
+                dronesL.Add(droneBL);
             }
         }
+
     }
+}
 
 
 
+
+
+ 
+ 
+ 

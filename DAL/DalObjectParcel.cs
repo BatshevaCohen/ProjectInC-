@@ -157,6 +157,27 @@ namespace DalObject
             }
             return Recieverparcels;
         }
+        /// <summary>
+        /// A function that calculates the distance between two points on the map
+        /// </summary>
+        /// <param name="senderId">sender Id</param>
+        /// <param name="targetId">target Id</param>
+        /// <returns>Returns a distance between two points</returns>
+        public double GetDistanceBetweenLocationsOfParcels(int senderId, int targetId)
+        {
+            double minDistance = 1000000000000;
+            Customer sender = GetCustomer(senderId);
+            Customer target = GetCustomer(targetId);
+            foreach (var s in DataSource.Stations)
+            {
+                double dictance = Math.Sqrt(Math.Pow(sender.Latitude - target.Latitude, 2) + Math.Pow(sender.Longitude - target.Longitude, 2));
+                if (minDistance > dictance)
+                {
+                    minDistance = dictance;
+                }
+            }
+            return minDistance;
+        }
     }
    
 }

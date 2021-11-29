@@ -60,7 +60,9 @@ namespace IDAL
         Parcel GetParcelByDroneId(int DroneId);
         Customer updateBatteryAndLocationDrone(int droneId,int senderId, double longt, double lanti);
         Station GetClosestStation(double latitude, double longitude);
-
+        double[] PowerConsumptionRequest();
+        double GetDistanceBetweenLocationAndClosestBaseStation(int Reciverid);
+        double GetDistanceBetweenLocationsOfParcels(int senderId, int targetId);
         //SHOW  FUNCTION
 
     }

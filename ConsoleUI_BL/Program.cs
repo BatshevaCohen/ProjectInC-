@@ -372,19 +372,6 @@ namespace ConsoleUI_BL
             static void Main(string[] args)
         {
             ShowMenu();
-            ////FROM ELIEZER
-            //Customer customer;
-            //Console.WriteLine("Please enter customer ID");
-            //int id;
-            //int.TryParse(Console.ReadLine(), out id);
-            //try
-            //{
-            //    customer = bl.GetCustomer(id);
-            //}
-            //catch (CustomerException exception)
-            //{
-            //    Console.WriteLine(exception.Message);
-            //}
         }
     }
 }

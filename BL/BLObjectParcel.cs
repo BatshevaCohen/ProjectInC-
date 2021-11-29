@@ -28,6 +28,11 @@ namespace IBL.BO
             {
                 throw new PriorityException(parcel.Priority, "Parcel's priority should be between 1-3");
             }
+            // Sender ID can't be like Reciver ID
+            if (parcel.Sender.Id == parcel.Resiver.Id)
+            {
+                throw new CustomerIdExeption(parcel.Sender.Id, "Sender ID can't be like Reciver ID");
+            }
             parcel.Id = ++(DataSource.OrdinalNumber); //static serial number for parcel id
             parcel.ParcelCreationTime = DateTime.Now;
             parcel.AssignmentToParcelTime = DateTime.MinValue;

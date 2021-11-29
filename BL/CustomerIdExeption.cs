@@ -18,6 +18,7 @@ namespace IBL.BO
         }
         /// <summary>
         /// Exception- Customer ID must be 9 digits
+        /// Exception- Sender ID can't be like Reciver ID
         /// </summary>
         /// <param name="id"></param>
         /// <param name="v"></param>

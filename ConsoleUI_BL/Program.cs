@@ -237,12 +237,9 @@ namespace ConsoleUI_BL
                                     int drone_id2;
                                     int.TryParse(Console.ReadLine(), out drone_id2);
                                     try
-                                    {
-
-
+                                    { 
                                         bLObject.UpdateParcelPickUpByDrone(drone_id2);
                                     }
-
                                     catch (Exception ex)
                                     {
                                         Console.WriteLine(ex);

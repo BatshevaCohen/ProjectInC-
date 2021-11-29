@@ -15,7 +15,7 @@ namespace DalObject
     /// </summary>
     public partial class DalObject : IDal
     {
-        private IEnumerable<Station> Stations;
+      //  private IEnumerable<Station> Stations;
 
         public DalObject()
         {
@@ -119,6 +119,11 @@ namespace DalObject
         }
 
         public Customer updateBatteryAndLocationDrone(int droneId, int senderId, double longt, double lanti)
+        {
+            throw new NotImplementedException();
+        }
+
+        IEnumerable<Station> IDal.ShowStationList()
         {
             throw new NotImplementedException();
         }

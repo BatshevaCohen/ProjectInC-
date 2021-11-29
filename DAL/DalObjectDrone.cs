@@ -125,7 +125,7 @@ namespace DalObject
             bool flag = false;
             Drone d = DataSource.Drones.Find(x => x.Id == droneID);
             Station s;
-            foreach (Station item in Stations) //finds the station
+            foreach (Station item in DataSource.Stations) //finds the station
             {
                 if (item.Latitude == droneLatitude && item.Longitude == droneLongitude)
                 {

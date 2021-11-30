@@ -92,7 +92,7 @@ namespace IBL.BO
                 //number of distances in the list
                 int sized = disStationFromDrone.Count;
                 //goes over the list
-                while (!flag && counter <= sized)
+                while (flag==false && counter <= sized)
                 {
                     foreach (Distanse item in disStationFromDrone)
                     {
@@ -119,6 +119,7 @@ namespace IBL.BO
                         counter++;
                         disStationFromDrone.Remove(item);
                     }
+
                 }
                 if (flag == false)
                 {

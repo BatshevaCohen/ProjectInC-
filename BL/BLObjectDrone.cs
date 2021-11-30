@@ -228,8 +228,12 @@ namespace IBL.BO
                     Weight = (Weight)parcel.Weight,
                     ParcelTransferStatus = ParcelTransferStatus.OnTheWayToDestination
                 };
-                parcelInTransfer.Sender.Id = parcel.SenderId;
-                parcelInTransfer.Sender.Id = parcel.SenderId;
+                parcelInTransfer.Sender = new()
+                {
+                    Id = parcel.SenderId,
+                };
+                
+               
                 drone.ParcelInTransfer = parcelInTransfer;
             }
             return drone;
@@ -243,22 +247,21 @@ namespace IBL.BO
         {
             var droness = dalo.ShowDroneList();
             List<Drone> droneList = new();
-            foreach (var item in droneList)
+            foreach (var item in droness)
             {
-
                 Drone drone = new();
                 drone.Id = item.Id;
                 drone.Model = item.Model;
                 drone.Battery = item.Battery;
-                drone.DroneStatuses = item.DroneStatuses;
-                drone.Weight = item.Weight;
+                drone.DroneStatuses = (DroneStatuses)item.Status;
+                drone.Weight = (Weight)item.MaxWeight;
                 //to find the locations drone---
                 DroneToList droneToList = dronesL.Find(x => x.Id == item.Id);
                 drone.Location = droneToList.Location;
                 if (drone.DroneStatuses != DroneStatuses.Shipping)
                 {
                     droneList.Add(drone);
-                    return droneList;
+                    
                 }
                 else
                 {
@@ -274,8 +277,9 @@ namespace IBL.BO
                     parcelInTransfer.Sender.Id = parcel.SenderId;
                     parcelInTransfer.Sender.Id = parcel.SenderId;
                     drone.ParcelInTransfer = parcelInTransfer;
+                    droneList.Add(drone);
                 }
-                droneList.Add(drone);
+                
                
             }
 

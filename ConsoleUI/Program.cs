@@ -48,6 +48,7 @@ namespace ConsoleUI
                                 string StationName = Console.ReadLine();
                                 s.Name = StationName;
                                 double longitude;
+                                
                                 double.TryParse(Console.ReadLine(), out longitude);
                                 double latitude;
                                 double.TryParse(Console.ReadLine(), out latitude);

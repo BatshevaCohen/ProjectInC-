@@ -10,7 +10,7 @@ using IDAL.DO;
 
 namespace IBL.BO
 {
-    public partial class BLObject : IBL
+    public partial class BLObject
     {
         /// <summary>
         /// Add customer

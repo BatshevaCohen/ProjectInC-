@@ -7,6 +7,7 @@ using DalObject.DO;
 using IDAL;
 using IDAL.DO;
 //
+
 namespace DalObject
 {
 
@@ -15,7 +16,7 @@ namespace DalObject
     /// </summary>
     public partial class DalObject : IDal
     {
-        //  private IEnumerable<Station> Stations;
+       
 
         public DalObject()
         {

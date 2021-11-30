@@ -37,20 +37,22 @@ namespace ConsoleUI_BL
                         {
                             //add station
                             case EntityOptions.Station:
-                                IBL.BO.Station s = new IBL.BO.Station();
+                                Station s = new Station();
                                 Console.WriteLine("Please insert ID, Station name (string), longitude, latitude, and charging level ");
                                 int id_S, Position;
-                                double longitude = 0, latitude = 0;
+                                double longitude, latitude;
                                 int.TryParse(Console.ReadLine(), out id_S);
                                 s.Id = id_S;
                                 string StationName = Console.ReadLine();
                                 s.Name = StationName;
                                 double.TryParse(Console.ReadLine(), out longitude);
+                                s.Location = new Location();
                                 s.Location.Longitude = longitude;
                                 double.TryParse(Console.ReadLine(), out latitude);
+                               
                                 s.Location.Latitude = latitude;
                                 int.TryParse(Console.ReadLine(), out Position);
-                                List<Drone> droneList = new() { };
+                                //List<Drone> droneList = new() { };
                                 s.AvailableChargingSpots = Position;
                                 try
                                 {

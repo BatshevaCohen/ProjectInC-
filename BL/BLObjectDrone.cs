@@ -11,7 +11,7 @@ using NuGet.Protocol.Plugins;
 
 namespace IBL.BO
 {
-    public partial class BLObject : IBL
+    public partial class BLObject 
     {
         /// <summary>
         /// Add drone

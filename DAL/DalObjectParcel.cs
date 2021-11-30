@@ -9,7 +9,7 @@ using IDAL.DO;
 
 namespace DalObject
 {
-    public partial class DalObject : IDal
+    public partial class DalObject 
     {
         /// <summary>
         /// add parcel to the parcels list

@@ -10,7 +10,7 @@ using IDAL.DO;
 
 namespace DalObject
 {
-    public partial class DalObject : IDal
+    public partial class DalObject 
     {
         /// <summary>
         /// add Station to the stations list
@@ -204,5 +204,7 @@ namespace DalObject
             }
             return minDistance;
         }
+
+       
     }
 }

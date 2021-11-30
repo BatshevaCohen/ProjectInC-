@@ -145,10 +145,11 @@ namespace DalObject
         /// </summary>
         /// <param name="StationId"></param>
         /// <param name="drone"></param>
-        public void UpdateDroneToStation(int StationId, Drone drone)
+        public Station UpdateDroneToStation(int StationId, Drone drone)
         {
             Station station = DataSource.Stations.Find(x => x.Id == StationId);
-            station.ChargeSpots = drone.Id;
+            station.ChargeSpots -= 1;
+            return station;
         }
         /// <summary>
         /// Method of applying drone power

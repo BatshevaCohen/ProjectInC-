@@ -22,15 +22,15 @@ namespace IBL.BO
             //Access to the layer DAL
             dalo = new DalObject.DalObject();
             dronesL = new List<DroneToList>();
-           
-            DronesInitialize();
+            var Drones = dalo.ShowDroneList();
+            DronesInitialize(Drones);
 
         }
         /// <summary>
         /// Constractor for drones initializing
         /// </summary>
         /// <param name="drones"></param>
-        public void DronesInitialize(List<IDAL.DO.Drone> drones)
+        public void DronesInitialize(IEnumerable<IDAL.DO.Drone> drones)
         {
             //find A package that has not yet been delivered but the drone has already been associated
             List<IDAL.DO.Parcel> parcels = dalo.ShowParcelList().ToList();
@@ -132,6 +132,7 @@ namespace IBL.BO
             }
         }
 
+        
     }
 }
 

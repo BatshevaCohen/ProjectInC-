@@ -80,8 +80,18 @@ namespace ConsoleUI_BL
                                 {
                                     Id = id_D,
                                     Model = model,
-                                    Weight = (Weight)weight
+                                    Weight = (Weight)weight,
+                                    DroneStatuses=DroneStatuses.Available,
+                                    
+
                                 };
+                                d.ParcelInTransfer = new()
+                                {
+                                    Id = 0,
+                                };
+
+
+
                                 try
                                 {
                                     bLObject.AddDrone(d, stationId);
@@ -111,8 +121,12 @@ namespace ConsoleUI_BL
                                     Name = name_C,
                                     Phone = phone_C,
                                 };
-                                c.Location.Longitude = longitude_C;
-                                c.Location.Latitude = latitude_C;
+                                c.Location = new()
+                                {
+                                    Longitude = longitude_C,
+                                    Latitude = latitude_C,
+                        };
+                               
                                 try
                                 {
                                     bLObject.AddCustomer(c);
@@ -140,9 +154,18 @@ namespace ConsoleUI_BL
                                 {
                                     Weight = (Weight)weight_P,
                                     Priority = (Priority)priority_P
+                                    
                                 };
-                                p.Sender.Id = id_Psender;
-                                p.Resiver.Id = id_Reciver;
+                                p.Sender = new CustomerInParcel()
+                                {
+                                    Id = id_Psender,
+                                };
+                                p.Resiver = new CustomerInParcel()
+                                {
+                                    Id = id_Reciver,
+                                };
+                              
+                               
                                 try
                                 {
                                     bLObject.AddParcel(p);

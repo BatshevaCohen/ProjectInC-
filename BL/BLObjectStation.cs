@@ -29,9 +29,11 @@ namespace IBL.BO
                 Name = station.Name,
                 Id = station.Id,
                 Longitude = station.Location.Longitude,
-                Latitude = station.Location.Latitude
+                Latitude = station.Location.Latitude,
+                ChargeSpots = station.AvailableChargingSpots,
+                
             };
-           
+          
             dalo.AddStation(s);//send the new station to DAL 
         }
 

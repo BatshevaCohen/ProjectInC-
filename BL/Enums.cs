@@ -26,7 +26,7 @@
     }
     public enum DroneStatuses
     {
-        Available = 1,
+        Available=1 ,
         Maintenance,
         Shipping
     }

@@ -46,7 +46,8 @@ namespace IDAL
         void UpdateDeliveryToCustomer(int parcel_id, int customer_id);
         void UpdateParcelPickedupByDrone(int parcel_id, int drone_id);
         void UpdateParcelToDrone(int parcel_id, int drone_id);
-        void UpdateDroneToStation(int StationId, Drone drone);
+        //return the station in order to update the locations drone 
+        Station UpdateDroneToStation(int StationId, Drone drone);
         void UpdateNameOfDrone(int DroneId, string model);
         void UpdateStetion(int StationId, string name, int charging_spots);
         void UpdateCustumer(int custumerId, string name, string phon);

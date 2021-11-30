@@ -33,6 +33,9 @@ namespace IBL.BO
         IEnumerable<Parcel> ShowNonAssociatedParcelList();
         IEnumerable<Station> ShowChargeableStationList();
 
+        //void AddDroneToList(Drone drone, Station station);
+
+
 
     }
 }

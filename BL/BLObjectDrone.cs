@@ -33,20 +33,29 @@ namespace IBL.BO
                 throw new WeightCategoryException(drone.Weight, "Weight category must be between 1-3");
             }
             //station ID should be 5-6 digits
-            if(stationId<10000||stationId>=1000000)
+            if (stationId < 10000 || stationId >= 1000000)
             {
                 throw new StationIdException(stationId, "Station ID should be 5 to 6 digits");
             }
+
             IDAL.DO.Drone d = new()
             {
                 Id = drone.Id,
                 Model = drone.Model,
-                MaxWeight = (WeightCategories)drone.Weight
+                MaxWeight = (WeightCategories)drone.Weight,
+                Battery = r.Next(20, 40),
             };
-            dalo.AddDrone(d);
-            dalo.UpdateDroneToStation(stationId, d);
 
-            //throw new NotImplementedException();
+            //get Station to update Location, 
+            IDAL.DO.Station station = new IDAL.DO.Station();
+            station = dalo.UpdateDroneToStation(stationId, d);
+
+            dalo.AddDrone(d);
+            
+            AddDroneToList(drone, station);
+            DroneToList droneToList = dronesL.Find(x => x.Id == drone.Id);
+            droneToList.Battery = d.Battery;
+            droneToList.DroneStatuses = DroneStatuses.Maintenance;
         }
 
         /// <summary>
@@ -71,11 +80,12 @@ namespace IBL.BO
         {
             IDAL.DO.Station station = new();
             //finds the drone by the recived ID
+            
             DroneToList dronel = dronesL.Find(x => x.Id == droneId);
             //if the drone is available- it can be sent for charging
             if (dronel.DroneStatuses == DroneStatuses.Available)
             {
-                List<Distanse> disStationFromDrone = dalo.MinimumDistance(dronel.Location.Longitude, dronel.Location.Latitude).ToList();//list of the distances from the drone to every station
+                List<Distanse> disStationFromDrone = dalo.MinimumDistance(dronel.Location.Longitude, dronel.Location.Latitude);//list of the distances from the drone to every station
                 double min = 9999999;
                 int idS, counter = 0;
                 bool flag = false;
@@ -92,6 +102,7 @@ namespace IBL.BO
                             min = item.Distance;
                             idS = item.Id;
                         }
+                    
                         station = dalo.GetStation(item.Id);
                         //if there is an available charging spot in the station
                         if (station.ChargeSpots > 0)
@@ -104,20 +115,20 @@ namespace IBL.BO
                                 UpdateDroneToStation(droneId, station.Id, min);
                             }
                         }
-                        else
-                        {
-                            throw new Exception("Does not exist an available charging spot in the station!");
-                        }
+                   
                         counter++;
                         disStationFromDrone.Remove(item);
                     }
                 }
-                if(flag==false)
+                if (flag == false)
                 {
                     throw new Exception("drone can not be sent for charging! ");
                 }
             }
-           
+            else
+            {
+                throw new Exception("drone can not be sent for charging its in Maintenance ! ");
+            }
         }
         /// <summary>
         /// Update drone to station

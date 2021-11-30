@@ -21,10 +21,15 @@ namespace IBL.BO
         public override string ToString()
         {
             String result = "";
-            result += $"station ID is {Id}, \n";
-            result += $"name station is: {Name}, \n";
-            result += $"num of AvailableChargingSpots is {Location}, \n";
-            result += $"list of droneInChargings {droneInChargings}, \n";
+            result += $"Station ID is {Id}, \n";
+            result += $"Name: {Name}, \n";
+            result += $"Location:\n{Location}";
+            result += $"Number of Available charging spots in the station: {AvailableChargingSpots}, \n";
+            result += $"List of drones in charging: \n";
+            foreach (DroneInCharging item in droneInChargings)
+            {
+                result += $"{item}, \n";
+            }
             return result;
         }
 

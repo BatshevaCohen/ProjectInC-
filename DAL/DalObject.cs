@@ -40,9 +40,9 @@ namespace DalObject
         /// <param name="longitude"></param>
         /// <param name="latitude"></param>
         /// <returns></returns>
-        public IEnumerable<Distanse> MinimumDistance(double longitude, double latitude)
+        public List<Distanse> MinimumDistance(double longitude, double latitude)
         {
-            List<Distanse> listDis = new() { };
+            List<Distanse> listDis= new List<Distanse>();
             foreach (Station element in DataSource.Stations)
             {
                 Distanse distanse = new() { };

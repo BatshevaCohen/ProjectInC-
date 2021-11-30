@@ -26,12 +26,12 @@ namespace IBL.BO
         Customer GetCustomer(int customerId);
         Parcel GetParcel(int parcelId);
         //SHOW LIST:
-        List<Station> ShowStationList();
-        List<Drone> ShowDroneList();
-        List<Customer> ShowCustomerList();
-        List<Parcel> ShowParcelList();
-        List<Parcel> ShowNonAssociatedParcelList();
-        List<Station> ShowChargeableStationList();
+        IEnumerable<Station> ShowStationList();
+        IEnumerable<Drone> ShowDroneList();
+        IEnumerable<Customer> ShowCustomerList();
+        IEnumerable<Parcel> ShowParcelList();
+        IEnumerable<Parcel> ShowNonAssociatedParcelList();
+        IEnumerable<Station> ShowChargeableStationList();
 
 
     }

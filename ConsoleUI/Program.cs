@@ -59,7 +59,7 @@ namespace ConsoleUI
                                 s.Name = StationName;
                                 s.Latitude = latitude;
                                 s.Longitude = longitude;
-                                s.ChargeSlots = Position;
+                                s.ChargeSpots = Position;
                                 dalobject.AddStation(s);
                                 Console.WriteLine("\nStation added successfully! \n");
                                 break;
@@ -364,7 +364,7 @@ namespace ConsoleUI
                                 Console.WriteLine("Please enter customer ID");
                                 int customerID;
                                 int.TryParse(Console.ReadLine(), out customerID);
-                                Customer c = dalobject.FindCustomer(customerID); //finds the customer by his ID
+                                Customer c = dalobject.GetCustomer(customerID); //finds the customer by his ID
                                 double distance_customer = dalobject.CalculateDistance(longitudeCoor, latitudeCoor, c.Latitude, c.Latitude);
                                 Console.WriteLine($"The distance between your coordination and the customer is: {distance_customer}");
                                 break;

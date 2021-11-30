@@ -45,6 +45,7 @@ namespace DalObject
         /// <param name="id"></param>
         public Customer GetCustomer(int IDc)
         {
+            //if ID does not exist for customer
             if (!DataSource.Customer.Exists(item => item.Id == IDc))
             {
                 throw new CustomerException($"ID: {IDc} does not exist!!");

@@ -35,7 +35,7 @@ namespace DalObject
         public void UpdateStetion(int StationId, string name, int charging_spots)
         {
             Station station = DataSource.Stations.Find(x => x.Id == StationId);
-            station.ChargeSlots = charging_spots;
+            station.ChargeSpots = charging_spots;
             station.Name = name;
             station.Id = StationId;
         }
@@ -55,7 +55,7 @@ namespace DalObject
         /// View Station List
         /// </summary>
         /// <returns></returns>
-        public List<Station> ShowStationList()
+        public IEnumerable<Station> ShowStationList()
         {
             List<Station> stationList = new();
             foreach (Station element in DataSource.Stations)
@@ -68,12 +68,12 @@ namespace DalObject
         ///  shows stations with available charging spots
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Station> ShowChargeableBaseStationList()
+        public IEnumerable<Station> ShowChargeableStationList()
         {
             List<Station> ChargeableBaseStationList = new ();
             foreach (Station element in DataSource.Stations)
             {
-                if (element.ChargeSlots > 0)
+                if (element.ChargeSpots > 0)
                     ChargeableBaseStationList.Add(element);
             }
             return ChargeableBaseStationList;
@@ -85,7 +85,7 @@ namespace DalObject
         public void UpdateChargeSpots(int stationId)
         {
             Station station = DataSource.Stations.Find(x => x.Id == stationId);
-            station.ChargeSlots--;
+            station.ChargeSpots--;
         }
         /// <summary>
         /// Charge drone and update the station
@@ -172,7 +172,7 @@ namespace DalObject
             }
             else
             {
-                foreach (var s in DataSource.Stations.Where(s => s.ChargeSlots > 0))
+                foreach (var s in DataSource.Stations.Where(s => s.ChargeSpots > 0))
                 {
                     double dictance = Math.Sqrt(Math.Pow(s.Latitude - senderLattitude, 2) + Math.Pow(s.Longitude - senderLongitude, 2));
                     if (minDistance > dictance)

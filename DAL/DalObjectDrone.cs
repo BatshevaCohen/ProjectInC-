@@ -84,7 +84,7 @@ namespace DalObject
                 DroneId = drone.Id,
                 StationId = station.Id
             });
-            station.ChargeSlots--;
+            station.ChargeSpots--;
 
             DataSource.Stations.Add(station);
         }
@@ -105,9 +105,8 @@ namespace DalObject
             Station station = GetStation(stationId);
             DataSource.Stations.Remove(station);
 
-            station.ChargeSlots++;
+            station.ChargeSpots++;
             
-
             DataSource.Stations.Add(station);
             DataSource.Drones.Add(drone);
             DataSource.DroneCharges.Remove(droneCharge);
@@ -131,7 +130,7 @@ namespace DalObject
                 {
                     flag = true;
                     s = item;
-                    s.ChargeSlots++;
+                    s.ChargeSpots++;
                     break;
                 }
             }
@@ -149,7 +148,7 @@ namespace DalObject
         public void UpdateDroneToStation(int StationId, Drone drone)
         {
             Station station = DataSource.Stations.Find(x => x.Id == StationId);
-            station.ChargeSlots = drone.Id;
+            station.ChargeSpots = drone.Id;
         }
         /// <summary>
         /// Method of applying drone power

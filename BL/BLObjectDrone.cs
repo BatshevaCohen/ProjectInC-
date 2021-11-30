@@ -94,14 +94,14 @@ namespace IBL.BO
                         }
                         station = dalo.GetStation(item.Id);
                         //if there is an available charging spot in the station
-                        if (station.ChargeSlots > 0)
+                        if (station.ChargeSpots > 0)
                         {
                             //only if there is enough battery
                             if (dronel.Battery > min * 10 / 100)
                             {
                                 flag = true;
                                 //function to update Battery, drone mode drone location
-                                updateDroneToStation(droneId, station.Id, min);
+                                UpdateDroneToStation(droneId, station.Id, min);
                             }
                         }
                         else
@@ -125,7 +125,7 @@ namespace IBL.BO
         /// <param name="droneId"></param>
         /// <param name="stationId"></param>
         /// <param name="minDistance"></param>
-        public void updateDroneToStation(int droneId, int stationId, double minDistance)
+        public void UpdateDroneToStation(int droneId, int stationId, double minDistance)
         {
             //update for the way to the station
             //finds the drone by its ID

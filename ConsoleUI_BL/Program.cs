@@ -21,6 +21,7 @@ namespace ConsoleUI_BL
             EntityOptions entityOptions;
             UpdateOptions updateOptions;
             IBL.BO.BLObject bLObject = new(); //constractor BLObject
+           
             do
             {
                 Console.WriteLine("WELCOME!");
@@ -38,7 +39,7 @@ namespace ConsoleUI_BL
                             //add station
                             case EntityOptions.Station:
                                 Station s = new Station();
-                                Console.WriteLine("Please insert ID, Station name (string), longitude, latitude, and charging level ");
+                                Console.WriteLine("Please insert ID (5-6 digits), Station name (string), longitude, latitude, and charging level ");
                                 int id_S, Position;
                                 double longitude, latitude;
                                 int.TryParse(Console.ReadLine(), out id_S);
@@ -67,7 +68,7 @@ namespace ConsoleUI_BL
 
                             //add drone
                             case EntityOptions.Drone:
-                                Console.WriteLine("Please enter ID, Model (string), Weight category and Station ID for the drone's initial charging");
+                                Console.WriteLine("Please enter ID (4-9 difits), Model (string), Weight category and Station ID for the drone's initial charging");
                                 int id_D, weight, stationId;
                                 int.TryParse(Console.ReadLine(), out id_D);
                                 string model = Console.ReadLine();
@@ -94,7 +95,7 @@ namespace ConsoleUI_BL
 
                             //add customer
                             case EntityOptions.Custumer:
-                                Console.WriteLine("Please enter Customer ID, Name, Phone number, Longitude and Latitude");
+                                Console.WriteLine("Please enter Customer ID (9 digits), Name, Phone number, Longitude and Latitude");
                                 int id_C;
                                 double longitude_C, latitude_C;
                                 int.TryParse(Console.ReadLine(), out id_C);
@@ -316,17 +317,16 @@ namespace ConsoleUI_BL
                     case MenuOptions.Show_One:
                         Console.WriteLine("View item options: \n 1- Station \n 2- Drone\n 3- Custumer\n 4- Parcel\n 5- Exit\n");
                         entityOptions = (EntityOptions)int.Parse(Console.ReadLine());
-                        Console.WriteLine($"Enter a requested {entityOptions} id");
+                        Console.WriteLine($"Please enter {entityOptions} ID");
                         switch (entityOptions)
                         {
                             //Show station
                             case EntityOptions.Station:
                                 int Id_S;
                                 int.TryParse(Console.ReadLine(), out Id_S);
-                                Console.WriteLine("Please enter drone id");
                                 try
                                 {
-                                    bLObject.GetStation(Id_S).ToString();
+                                    Console.WriteLine(bLObject.GetStation(Id_S));
                                 }
                                 catch (Exception ex)
                                 {
@@ -428,8 +428,7 @@ namespace ConsoleUI_BL
                             //Prints the list of the non associated parcel
                             case ListOptions.UnAsignementParcel:
                                 bLObject.ShowNonAssociatedParcelList();
-                                List<Parcel> NonAssociatedParcelList;
-                                NonAssociatedParcelList = bLObject.ShowNonAssociatedParcelList();
+                                IEnumerable<Parcel> NonAssociatedParcelList = bLObject.ShowNonAssociatedParcelList();
                                 foreach (Parcel element in NonAssociatedParcelList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;
@@ -444,6 +443,7 @@ namespace ConsoleUI_BL
         }
             static void Main(string[] args)
             {
+           
             ShowMenu();
             }
     }

@@ -68,9 +68,9 @@ namespace DalObject
                     {
                         Id = r.Next(10000, 100000), //5-6 digits
                         Name = arrStation[i - 1],
-                        ChargeSlots = r.Next(1, 100),
+                        ChargeSpots = r.Next(1, 100),
                         Longitude = r.Next(-180, 179) + r.NextDouble(),
-                        Latitude = r.Next(-90, 89) + r.NextDouble()
+                        Latitude = r.Next(-90, 89) + r.NextDouble(),
                     });
                 }
                 //adding customers

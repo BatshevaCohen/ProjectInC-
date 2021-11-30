@@ -9,7 +9,7 @@ namespace IDAL
         {
             public int Id { get; set; }
             public string Name { get; set; }
-            public int ChargeSlots { get; set; }
+            public int ChargeSpots { get; set; }
             public double Longitude { get; set; }
             public double Latitude { get; set; }
 
@@ -25,7 +25,7 @@ namespace IDAL
                 //---BONOS OPTION---
                 result += $"Latitude is {Longitude}, \n Sexagesimal angle: {SexagesimalAngle.FromDouble(Latitude)}\n";
                 result += $"Longitude is {Latitude}, \n Sexagesimal angle: {SexagesimalAngle.FromDouble(Longitude)}\n";
-                result += $"Charge level is {ChargeSlots}, \n";
+                result += $"Number of available charging spots: {ChargeSpots}, \n";
 
                 return result;
             }

@@ -231,7 +231,7 @@ namespace IBL.BO
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public List<Parcel> ShowNonAssociatedParcelList()
+        public IEnumerable<Parcel> ShowNonAssociatedParcelList()
         {
             var parcels = dalo.ShowParcelList();
             List<Parcel> parcelListNotAssociated = new ();
@@ -253,20 +253,6 @@ namespace IBL.BO
                 }
             }
             return parcelListNotAssociated;
-
-            throw new NotImplementedException();
-        }
-
-
-        /// <summary>
-        /// Get parcel by ID
-        /// </summary>
-        /// <param name="parcelId"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        Parcel IBL.GetParcel(int parcelId)
-        {
-            throw new NotImplementedException();
         }
     }
 }

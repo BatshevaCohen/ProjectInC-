@@ -276,10 +276,10 @@ namespace IBL.BO
                     drone.ParcelInTransfer = parcelInTransfer;
                 }
                 droneList.Add(drone);
-                return droneList;
+               
             }
-           
-            throw new NotImplementedException();
+
+            return droneList;
         }
 
 

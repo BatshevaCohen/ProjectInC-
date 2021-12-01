@@ -112,6 +112,11 @@ namespace DalObject
             Parcel p = DataSource.Parcels.Find(x => x.Id == parcel_id);
             p.Supplied = DateTime.Now;
         }
+        /// <summary>
+        /// Get Parce lBy DroneIds parcel
+        /// </summary>
+        /// <param name="DroneId"></param>
+        /// <returns></returns>
         public Parcel GetParcelByDroneId(int DroneId)
         {
             Parcel p = DataSource.Parcels.Find(x => x.Id == DroneId);

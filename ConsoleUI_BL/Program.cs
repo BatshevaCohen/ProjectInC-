@@ -63,7 +63,7 @@ namespace ConsoleUI_BL
                                 }
                                 catch (Exception ex)
                                 {
-                                    Console.WriteLine(ex);
+                                    Console.WriteLine(ex.Message);
                                     break;
                                 }
                                 Console.WriteLine("\nStation added successfully! \n");
@@ -97,7 +97,7 @@ namespace ConsoleUI_BL
                                 }
                                 catch (Exception ex)
                                 {
-                                    Console.WriteLine(ex);
+                                    Console.WriteLine(ex.Message);
                                     break;
                                 }
                                 Console.WriteLine("\nDrone added successfully! \n");
@@ -133,7 +133,7 @@ namespace ConsoleUI_BL
                                 }
                                 catch (Exception ex)
                                 {
-                                    Console.WriteLine(ex);
+                                    Console.WriteLine(ex.Message);
                                     break;
                                 }
                                 Console.WriteLine("\nCustomer added successfully! \n");
@@ -172,7 +172,7 @@ namespace ConsoleUI_BL
                                 }
                                 catch (Exception ex)
                                 {
-                                    Console.WriteLine(ex);
+                                    Console.WriteLine(ex.Message);
                                     break;
                                 }
                                 Console.WriteLine("\nParcel added successfully! \n");
@@ -206,7 +206,7 @@ namespace ConsoleUI_BL
                                     }
                                     catch (Exception ex)
                                     {
-                                        Console.WriteLine(ex);
+                                        Console.WriteLine(ex.Message);
                                         break;
                                     }
                                     Console.WriteLine("Drone's name updated successfully!");
@@ -228,7 +228,7 @@ namespace ConsoleUI_BL
                                     }
                                     catch (Exception ex)
                                     {
-                                        Console.WriteLine(ex);
+                                        Console.WriteLine(ex.Message);
                                         break;
                                     }
                                     Console.WriteLine("Station updated successfully!");
@@ -249,7 +249,7 @@ namespace ConsoleUI_BL
                                     }
                                     catch (Exception ex)
                                     {
-                                        Console.WriteLine(ex);
+                                        Console.WriteLine(ex.Message);
                                         break;
                                     }
                                     break;
@@ -265,7 +265,7 @@ namespace ConsoleUI_BL
                                     }
                                     catch(Exception ex)
                                     {
-                                        Console.WriteLine(ex);
+                                        Console.WriteLine(ex.Message);
                                         break;
                                     }
                                     Console.WriteLine("\nDrone sent to charge successfully!\n");
@@ -283,7 +283,7 @@ namespace ConsoleUI_BL
                                     }
                                     catch (Exception ex)
                                     {
-                                        Console.WriteLine(ex);
+                                        Console.WriteLine(ex.Message);
                                         break;
                                     }
                                     Console.WriteLine("\nDrone discharged successfully!\n");
@@ -300,7 +300,7 @@ namespace ConsoleUI_BL
                                     }
                                     catch (Exception ex)
                                     {
-                                        Console.WriteLine(ex);
+                                        Console.WriteLine(ex.Message);
                                         break;
                                     }
                                     Console.WriteLine("\nParcel updated to drone successfully!\n");
@@ -316,7 +316,7 @@ namespace ConsoleUI_BL
                                     }
                                     catch (Exception ex)
                                     {
-                                        Console.WriteLine(ex);
+                                        Console.WriteLine(ex.Message);
                                         break;
                                     }
                                     Console.WriteLine("\nParcel pick up updated successfully!\n");
@@ -332,7 +332,7 @@ namespace ConsoleUI_BL
                                     }
                                     catch (Exception ex)
                                     {
-                                        Console.WriteLine(ex);
+                                        Console.WriteLine(ex.Message);
                                         break;
                                     }
                                     Console.WriteLine("\nParcel updated to customer successfully!\n");
@@ -362,7 +362,7 @@ namespace ConsoleUI_BL
                                 }
                                 catch (Exception ex)
                                 {
-                                    Console.WriteLine(ex);
+                                    Console.WriteLine(ex.Message);
                                     break;
                                 }
                                 break;
@@ -377,7 +377,7 @@ namespace ConsoleUI_BL
                                 }
                                 catch (Exception ex)
                                 {
-                                    Console.WriteLine(ex);
+                                    Console.WriteLine(ex.Message);
                                 }
                                 break;
 
@@ -391,7 +391,7 @@ namespace ConsoleUI_BL
                                 }
                                 catch (Exception ex)
                                 {
-                                    Console.WriteLine(ex);
+                                    Console.WriteLine(ex.Message);
                                 }
                                 break;
 
@@ -405,7 +405,7 @@ namespace ConsoleUI_BL
                                 }
                                 catch (Exception ex)
                                 {
-                                    Console.WriteLine(ex);
+                                    Console.WriteLine(ex.Message);
                                 }
                                 break;
                             //EXIT:

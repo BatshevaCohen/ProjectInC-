@@ -7,65 +7,269 @@ namespace IDAL
 {
     public interface IDal
     {
+        #region ADD:
+        /// <summary>
+        /// Add Customer
+        /// </summary>
+        /// <param name="c"></param>
         void AddCustomer(Customer c);
+        /// <summary>
+        /// Add Drone
+        /// </summary>
+        /// <param name="d"></param>
         void AddDrone(Drone d);
+        /// <summary>
+        /// Add Parcel
+        /// </summary>
+        /// <param name="p"></param>
         void AddParcel(Parcel p);
+        /// <summary>
+        /// Add Station
+        /// </summary>
+        /// <param name="s"></param>
         void AddStation(Station s);
+        /// <summary>
+        /// BONUS- Return the distance betwin 2 point
+        /// </summary>
+        /// <param name="longitude1"></param>
+        /// <param name="latitude1"></param>
+        /// <param name="longitude2"></param>
+        /// <param name="latitude2"></param>
+        /// <returns></returns>
         double CalculateDistance(double longitude1, double latitude1, double longitude2, double latitude2);
+        /// <summary>
+        /// send drone to charging
+        /// </summary>
+        /// <param name="drone_id"></param>
+        /// <param name="longt"></param>
+        /// <param name="latit"></param>
         void DischargeDrone(int drone_id, double longt,double latit);
-        void ReleaseDroneFromCharging(int droneId);       
-        
-        Station GetStation(int id);
-        Customer GetCustomer(int IDc);
-        Drone GetDrone(int id);
-        Parcel GetParcel(int id);
-       
-        //SHOW LISTS:
-        IEnumerable<Station> ShowStationList();
-        IEnumerable<Station> ShowChargeableStationList();
-        IEnumerable<Customer> ShowCustomerList();
-        IEnumerable<Drone> ShowDroneList();
-        IEnumerable<Parcel> ShowNonAssociatedParcelList();
-        IEnumerable<Parcel> ShowParcelList();
-        
-        //Adds an organ to the list of droneCharge
-        void UpdateAddDroneToCharge(int dronId, int stationId);
-        void UpdateRemoveDroneToCharge(int dronId, int stationId);
-        //return DronInCharge of the station
-        List<DroneCharge> GetListOfDronInCharge(int stationId);
-        //List of packages that belong to the customer sender
-        List<Parcel> GetListOfParcelSending(int id);
-        //List of packages that belong to the customer reciever
-        List<Parcel> GetListOfParcelRecirver(int id);
-        List<Distanse> MinimumDistance(double lang,double lati);
-        Parcel GetParcelInTransferByDroneId(int droneId);
+        /// <summary>
+        /// send drone to release from charging
+        /// </summary>
+        /// <param name="droneId"></param>
+        void ReleaseDroneFromCharging(int droneId);
+        #endregion
 
-        //UPDATE
+        #region Get by ID:
+
+        /// <summary>
+        /// Get Station by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Station GetStation(int id);
+
+        /// <summary>
+        /// Get Customer by id
+        /// </summary>
+        /// <param name="IDc"></param>
+        /// <returns></returns>
+        Customer GetCustomer(int IDc);
+
+        /// <summary>
+        /// Get Drone by drone
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Drone GetDrone(int id);
+
+        /// <summary>
+        /// Get Parcel by id
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        Parcel GetParcel(int id);
+
+        /// <summary>
+        /// The function recives station ID and returns all of the drones that are charging in that station
+        /// </summary>
+        /// <param name="stationId"></param>
+        /// <returns></returns>
+        List<DroneCharge> GetListOfDronInCharge(int stationId);
+
+        /// <summary>
+        /// List of packages that belong to the customer sender
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        List<Parcel> GetListOfParcelSending(int id);
+
+        /// <summary>
+        /// List of packages that belong to the customer reciever
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        List<Parcel> GetListOfParcelRecirver(int id);
+
+        /// <summary>
+        /// Search for the package in delivery mode
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <returns></returns>
+        
+        Parcel GetParcelInTransferByDroneId(int droneId);
+        /// <summary>
+        ///  Get Parce lBy DroneIds parcel
+        /// </summary>
+        /// <param name="DroneId"></param>
+        /// <returns></returns>
+        Parcel GetParcelByDroneId(int DroneId);
+        /// <summary>
+        /// A function that calculates the distance between a customer's location and a base station for charging
+        /// </summary>
+        /// <param name="Reciverid"></param>
+        /// <returns></returns
+        double GetDistanceBetweenLocationAndClosestBaseStation(int Reciverid);
+
+        /// <summary>
+        ///  A function that calculates the distance between two points on the map
+        /// </summary>
+        /// <param name="senderId"></param>
+        /// <param name="targetId"></param>
+        /// <returns></returns>
+        double GetDistanceBetweenLocationsOfParcels(int senderId, int targetId);
+        #endregion
+
+        #region  SHOW LISTS:
+        /// <summary>
+        /// Show Station List
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Station> ShowStationList();
+        /// <summary>
+        /// shows stations with available charging spots
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Station> ShowChargeableStationList();
+
+        /// <summary>
+        /// Show Customer List
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Customer> ShowCustomerList();
+
+        /// <summary>
+        /// Show Drone List
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Drone> ShowDroneList();
+
+        /// <summary>
+        ///  shows the list of packages that haven't been associated to a drone
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Parcel> ShowNonAssociatedParcelList();
+
+        /// <summary>
+        /// Show Parcel List
+        /// </summary>
+        /// <returns></returns>
+        IEnumerable<Parcel> ShowParcelList();
+
+        #endregion
+
+        #region Update:
+        /// <summary>
+        ///  Adds an organ to the list of droneCharge
+        /// </summary>
+        /// <param name="dronId"></param>
+        /// <param name="stationId"></param>
+        void UpdateAddDroneToCharge(int dronId, int stationId);
+
+        /// <summary>
+        /// Uncharge drone and update the station
+        /// </summary>
+        /// <param name="dronId"></param>
+        /// <param name="stationId"></param>
+        void UpdateRemoveDroneToCharge(int dronId, int stationId);
+
+        /// <summary>
+        /// Looking for the closest station with available charging spots
+        /// </summary>
+        /// <param name="lang"></param>
+        /// <param name="lati"></param>
+        /// <returns></returns>
+        List<Distanse> MinimumDistance(double lang, double lati);
+
+        /// <summary>
+        /// discharge drone
+        /// </summary>
+        /// <param name="droneID"></param>
+        /// <param name="droneLatitude"></param>
+        /// <param name="droneLongitude"></param>
         void DischargeDroneByLocation(int droneID, double droneLatitude, double droneLongitude);
+
+        /// <summary>
+        ///  Update parcel delivered to Customer
+        /// </summary>
+        /// <param name="parcel_id"></param>
+        /// <param name="customer_id"></param>
         void UpdateDeliveryToCustomer(int parcel_id, int customer_id);
+
+        /// <summary>
+        ///  Update parcel delivered to Customer
+        /// </summary>
+        /// <param name="parcel_id"></param>
+        /// <param name="drone_id"></param>
         void UpdateParcelPickedupByDrone(int parcel_id, int drone_id);
+        /// <summary>
+        /// update function: parcel to drone by id
+        /// </summary>
+        /// <param name="parcel_id"></param>
+        /// <param name="drone_id"></param>
         void UpdateParcelToDrone(int parcel_id, int drone_id);
-        //return the station in order to update the locations drone 
+
+        /// <summary>
+        /// return the station in order to update the locations drone 
+        /// </summary>
+        /// <param name="StationId"></param>
+        /// <returns></returns>
         Station UpdateStationChargingSpots(int StationId);
+        /// <summary>
+        /// Update name of drone
+        /// </summary>
+        /// <param name="DroneId"></param>
+        /// <param name="model"></param>
         void UpdateNameOfDrone(int DroneId, string model);
+        /// <summary>
+        /// Update station data
+        /// </summary>
+        /// <param name="StationId"></param>
+        /// <param name="name"></param>
+        /// <param name="charging_spots"></param>
         void UpdateStetion(int StationId, string name, int charging_spots);
+        /// <summary>
+        /// Update custumer data
+        /// </summary>
+        /// <param name="custumerId"></param>
+        /// <param name="name"></param>
+        /// <param name="phon"></param>
         void UpdateCustumer(int custumerId, string name, string phon);
 
-
+        /// <summary>
+        /// Update station ChargeSpots
+        /// </summary>
+        /// <param name="stationId"></param>
         void UpdateChargeSpots(int stationId);
+        /// <summary>
+        /// Method of applying drone power
+        /// </summary>
+        /// <returns></returns>
         double[] PowerRequest();
-        Parcel GetParcelByDroneId(int DroneId);
+        /// <summary>
+        ///get the min destance station
+        /// </summary>
+        /// <param name="latitude"></param>
+        /// <param name="longitude"></param>
+        /// <returns></returns>
         Station GetClosestStation(double latitude, double longitude);
+        /// <summary>
+        /// Method of applying drone power
+        /// </summary>
+        /// <returns></returns>
         double[] PowerConsumptionRequest();
-        double GetDistanceBetweenLocationAndClosestBaseStation(int Reciverid);
-        double GetDistanceBetweenLocationsOfParcels(int senderId, int targetId);
-        //SHOW  FUNCTION
-
-
-        //void StationException(int id, string errMsg);
-        //void DroneException(int id, string errMsg);
-        //void CustomerException(int id, string errMsg, Severity severity);
-        //void ParcelException(int id, string errMsg, Severity severity);
+        #endregion
 
     }
 }

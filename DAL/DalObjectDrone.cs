@@ -106,7 +106,6 @@ namespace DalObject
         }
         /// <summary>
         /// discharge drone
-        /// </summary>
         /// <param name="droneID"></param>
         /// <param name="droneLatitude"></param>
         /// <param name="droneLongitude"></param>

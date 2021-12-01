@@ -38,23 +38,26 @@ namespace ConsoleUI_BL
                         {
                             //add station
                             case EntityOptions.Station:
-                                Station s = new Station();
-                                Console.WriteLine("Please insert ID (5-6 digits), Station name (string), longitude, latitude, and charging level ");
+                                Console.WriteLine("Please insert ID (5-6 digits), Station name (string), longitude, latitude, and number of available charging spots");
                                 int id_S, Position;
                                 double longitude, latitude;
                                 int.TryParse(Console.ReadLine(), out id_S);
-                                s.Id = id_S;
                                 string StationName = Console.ReadLine();
-                                s.Name = StationName;
                                 double.TryParse(Console.ReadLine(), out longitude);
-                                s.Location = new Location();
-                                s.Location.Longitude = longitude;
                                 double.TryParse(Console.ReadLine(), out latitude);
-                               
-                                s.Location.Latitude = latitude;
                                 int.TryParse(Console.ReadLine(), out Position);
-                                //List<Drone> droneList = new() { };
-                                s.AvailableChargingSpots = Position;
+                                Station s = new()
+                                {
+                                    Id = id_S,
+                                    Name = StationName,
+                                    AvailableChargingSpots = Position,
+                                };
+                                s.Location = new()
+                                {
+                                    Longitude = longitude,
+                                    Latitude = latitude
+                                };
+
                                 try
                                 {
                                     bLObject.AddStation(s);
@@ -81,16 +84,12 @@ namespace ConsoleUI_BL
                                     Id = id_D,
                                     Model = model,
                                     Weight = (Weight)weight,
-                                    DroneStatuses=DroneStatuses.Available,
-                                    
-
+                                    DroneStatuses=DroneStatuses.Maintenance, //when added a drone it goes to initial charging
                                 };
                                 d.ParcelInTransfer = new()
                                 {
                                     Id = 0,
                                 };
-
-
 
                                 try
                                 {
@@ -165,7 +164,6 @@ namespace ConsoleUI_BL
                                 {
                                     Id = id_Reciver,
                                 };
-                              
                                
                                 try
                                 {
@@ -290,7 +288,7 @@ namespace ConsoleUI_BL
                                     Console.WriteLine("\nDrone discharged successfully!\n");
                                     break;
 
-
+                                //asiign parcel to drone
                                 case UpdateOptions.AssignParcelToDrone:
                                     Console.WriteLine("Please enter Drone ID");
                                     int drone_id;
@@ -306,7 +304,7 @@ namespace ConsoleUI_BL
                                     }
                                     Console.WriteLine("\nParcel updated to drone successfully!\n");
                                     break;
-
+                                //update that the parcel was picked up by the drone
                                 case UpdateOptions.Pickedup:
                                     Console.WriteLine("Please enter Drone ID");
                                     int drone_id2;
@@ -322,7 +320,7 @@ namespace ConsoleUI_BL
                                     }
                                     Console.WriteLine("\nParcel pick up updated successfully!\n");
                                     break;
-
+                                //update the parcel have supplied
                                 case UpdateOptions.Parcel_Supply_By_Drone:
                                     Console.WriteLine("Please enter Drone ID");
                                     int drone_id6;
@@ -338,7 +336,7 @@ namespace ConsoleUI_BL
                                     }
                                     Console.WriteLine("\nParcel updated to customer successfully!\n");
                                     break;
-
+                                //EXIT
                                 case UpdateOptions.Exit:
                                     DalObject.DalObject.Exit();
                                     break;
@@ -414,8 +412,8 @@ namespace ConsoleUI_BL
                                 DalObject.DalObject.Exit();
                                 break;
                         }
-                        int requestion;
-                        int.TryParse(Console.ReadLine(), out requestion);
+                        //int requestion;
+                        //int.TryParse(Console.ReadLine(), out requestion);
                         break;
 
                     //Show List:
@@ -431,6 +429,7 @@ namespace ConsoleUI_BL
                                 foreach (Station element in BaseStationList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;
+
                             //Prints the list of the drones
                             case ListOptions.Drone:
                                 IEnumerable<Drone> DroneList;
@@ -438,6 +437,7 @@ namespace ConsoleUI_BL
                                 foreach (Drone element in DroneList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;
+
                             //Prints the list of the customers
                             case ListOptions.Custumer:
                                 IEnumerable<Customer> CustomerList;
@@ -445,6 +445,7 @@ namespace ConsoleUI_BL
                                 foreach (Customer element in CustomerList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;
+
                             //Prints the list of the parcels
                             case ListOptions.Parcel:
                                 IEnumerable<Parcel> ParcelList;
@@ -452,6 +453,7 @@ namespace ConsoleUI_BL
                                 foreach (Parcel element in ParcelList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;
+
                             //Prints the list of the stations that available for charging
                             case ListOptions.AvailbleChagingStation:
                                 IEnumerable<Station> ChargeableBaseStationList;
@@ -459,6 +461,7 @@ namespace ConsoleUI_BL
                                 foreach (Station element in ChargeableBaseStationList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;
+
                             //Prints the list of the non associated parcel
                             case ListOptions.UnAsignementParcel:
                                 bLObject.ShowNonAssociatedParcelList();
@@ -468,6 +471,7 @@ namespace ConsoleUI_BL
                                 break;
                         }
                         break;
+                    //EXIT
                     case MenuOptions.Exit:
                         break;
                 }

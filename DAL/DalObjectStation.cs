@@ -204,7 +204,5 @@ namespace DalObject
             }
             return minDistance;
         }
-
-       
     }
 }

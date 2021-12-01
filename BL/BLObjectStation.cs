@@ -31,12 +31,9 @@ namespace IBL.BO
                 Longitude = station.Location.Longitude,
                 Latitude = station.Location.Latitude,
                 ChargeSpots = station.AvailableChargingSpots,
-                
             };
-          
             dalo.AddStation(s);//send the new station to DAL 
         }
-
 
         /// <summary>
         /// Update station
@@ -70,7 +67,6 @@ namespace IBL.BO
                 Latitude = s.Latitude,
                 Longitude = s.Longitude
             };
-            
             //list of drone and 
             List<DroneCharge> droneCharges= dalo.GetListOfDronInCharge(stationID);
             foreach (DroneCharge item in droneCharges)
@@ -98,16 +94,15 @@ namespace IBL.BO
                 Station station = new()
                 {
                     Id = item.Id,
+                    Name = item.Name,
                     AvailableChargingSpots = item.ChargeSpots
                 };
-                Location location = new()
+                station.Location = new()
                 {
                     Latitude = item.Latitude,
                     Longitude = item.Longitude
                 };
-                station.Location = location;
-
-            //list of drone and 
+            //list of drones that are currently charging in the station 
             List<DroneCharge> droneCharges = dalo.GetListOfDronInCharge(station.Id);
                 foreach (DroneCharge item1 in droneCharges)
                 {
@@ -120,8 +115,8 @@ namespace IBL.BO
                 stationList.Add(station);
             }
             return stationList;
-            
         }
+
         /// <summary>
         /// Show LIST of chargeable stations
         /// </summary>
@@ -156,6 +151,26 @@ namespace IBL.BO
                 }
             }
             return stationListWithAvailableChargingSpots;
+        }
+
+        /// <summary>
+        /// Add drone to the list of drines that are currantly charging in the station
+        /// and also UPDATE the number of available charging spots in the station
+        /// </summary>
+        /// <param name="stationId"></param>
+        /// <param name="droneId"></param>
+        public void UpdateStationListDroneInCharge(int stationId, int droneId)
+        {
+            Station station = GetStation(stationId);
+            Drone drone = GetDrone(droneId);
+            DroneInCharging droneInCharging = new()
+            {
+                Id = drone.Id,
+                Battery = drone.Battery
+            };
+            station.droneInChargings.Add(droneInCharging);
+            //update the number of available charging spots in the station
+            station.AvailableChargingSpots--;
         }
 
         public Drone GetDroneBL(int droneId)

@@ -15,7 +15,6 @@ namespace IDAL
         void DischargeDrone(int drone_id, double longt,double latit);
         void ReleaseDroneFromCharging(int droneId);       
         
-        Drone FindDrone(int DroneID);
         Station GetStation(int id);
         Customer GetCustomer(int IDc);
         Drone GetDrone(int id);
@@ -47,7 +46,7 @@ namespace IDAL
         void UpdateParcelPickedupByDrone(int parcel_id, int drone_id);
         void UpdateParcelToDrone(int parcel_id, int drone_id);
         //return the station in order to update the locations drone 
-        Station UpdateDroneToStation(int StationId, Drone drone);
+        Station UpdateStationChargingSpots(int StationId);
         void UpdateNameOfDrone(int DroneId, string model);
         void UpdateStetion(int StationId, string name, int charging_spots);
         void UpdateCustumer(int custumerId, string name, string phon);

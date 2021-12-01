@@ -59,15 +59,7 @@ namespace DalObject
             }
             return DroneList;
         }
-        /// <summary>
-        /// find drone by ID
-        /// </summary>
-        /// <param name="droneId"></param>
-        /// <returns></returns>
-        public Drone FindDrone(int droneId)
-        {
-            return DataSource.Drones.Find(x => x.Id == droneId);
-        }
+       
         /// <summary>
         /// Send a drone to charge
         /// </summary>
@@ -141,11 +133,11 @@ namespace DalObject
         }
        
         /// <summary>
-        /// Put the drone in the station for the initial charging- uodate only the station, the drone update is in the BL
+        /// Update the station to have one less spot for charging (because we sent a drone to charg there)
         /// </summary>
         /// <param name="StationId"></param>
         /// <param name="drone"></param>
-        public Station UpdateDroneToStation(int StationId, Drone drone)
+        public Station UpdateStationChargingSpots(int StationId)
         {
             Station station = DataSource.Stations.Find(x => x.Id == StationId);
             station.ChargeSpots -= 1;

@@ -44,13 +44,16 @@ namespace IBL.BO
                 Model = drone.Model,
                 MaxWeight = (WeightCategories)drone.Weight,
                 Battery = r.Next(20, 40),
+                Status= IDAL.DO.DroneStatuses.Maintenance //when added a new drone it goes to initial charging
             };
-
             //get Station to update Location, 
-            IDAL.DO.Station station = new IDAL.DO.Station();
-            station = dalo.UpdateDroneToStation(stationId, d);
+            IDAL.DO.Station station = dalo.GetStation(stationId);
 
-            dalo.AddDrone(d);
+            //adds the drone to the "DroneInCharge" list,
+            //and also UPDATE the number of available charging spots in the station
+            UpdateStationListDroneInCharge(stationId, d.Id);
+
+            dalo.AddDrone(d); //adds the drone to the dal object
             
             AddDroneToList(drone, station);
             DroneToList droneToList = dronesL.Find(x => x.Id == drone.Id);

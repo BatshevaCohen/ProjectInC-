@@ -8,12 +8,14 @@ namespace IBL.BO
 {
     public partial class BLObject
     {
-
-
+        /// <summary>
+        /// Add drone to list
+        /// </summary>
+        /// <param name="drone"></param>
+        /// <param name="station"></param>
         public void AddDroneToList(Drone drone,IDAL.DO.Station station)
         {
-
-            DroneToList droneToList = new DroneToList()
+            DroneToList droneToList = new()
             {
                 Id = drone.Id,
                 Model = drone.Model,
@@ -21,7 +23,7 @@ namespace IBL.BO
                 DroneStatuses = drone.DroneStatuses,
                 Weight = drone.Weight,
             };
-            droneToList.Location = new Location()
+            droneToList.Location = new()
             {
                 Latitude = station.Latitude,
                 Longitude=station.Longitude,

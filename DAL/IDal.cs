@@ -198,7 +198,7 @@ namespace IDAL
         /// <param name="droneID"></param>
         /// <param name="droneLatitude"></param>
         /// <param name="droneLongitude"></param>
-        void DischargeDroneByLocation(int droneID, double droneLatitude, double droneLongitude);
+        Station DischargeDroneByLocation(int droneID, double droneLatitude, double droneLongitude);
 
         /// <summary>
         ///  Update parcel delivered to Customer

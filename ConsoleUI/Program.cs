@@ -348,7 +348,7 @@ namespace ConsoleUI
                                 Console.WriteLine("Please enter station ID");
                                 int stationID;
                                 int.TryParse(Console.ReadLine(), out stationID);
-                                Station s = dalobject.FindStetion(stationID); //finds the station by its ID
+                                Station s = dalobject.GetStation(stationID); //finds the station by its ID
                                 double distance_station = dalobject.CalculateDistance(longitudeCoor, latitudeCoor, s.Longitude, s.Latitude);
                                 Console.WriteLine($"The distance between your coordination and the station is: {distance_station}");
                                 break;

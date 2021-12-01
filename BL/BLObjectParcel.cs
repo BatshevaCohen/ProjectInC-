@@ -116,6 +116,8 @@ namespace IBL.BO
                 drone.Battery -= distance * 0.01;
                 //update the pick up time to the current time
                 parcel.PickedUp = DateTime.Now;
+                AddDroneToList(drone, customer.Location.Latitude, customer.Location.Longitude);
+
             }
         }
         /// <summary>

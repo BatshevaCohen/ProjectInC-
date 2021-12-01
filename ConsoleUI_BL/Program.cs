@@ -84,7 +84,7 @@ namespace ConsoleUI_BL
                                     Id = id_D,
                                     Model = model,
                                     Weight = (Weight)weight,
-                                    DroneStatuses=DroneStatuses.Available, //when added a drone it goes to initial charging
+                                    DroneStatuses=DroneStatuses.Maintenance, 
                                 };
                                 d.ParcelInTransfer = new()
                                 {

@@ -129,11 +129,14 @@ namespace IBL.BO
                     }
                 }
                 dronesL.Add(droneBL);
+               
             }
+            
         }
 
-        
+       
     }
+
 }
 
 

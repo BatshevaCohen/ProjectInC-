@@ -110,7 +110,7 @@ namespace DalObject
         /// <param name="droneLatitude"></param>
         /// <param name="droneLongitude"></param>
         /// <exception cref="Exception"></exception>
-        public void DischargeDroneByLocation(int droneID, double droneLatitude, double droneLongitude)
+        public Station DischargeDroneByLocation(int droneID, double droneLatitude, double droneLongitude)
         {
             bool flag = false;
             Drone d = DataSource.Drones.Find(x => x.Id == droneID);
@@ -122,13 +122,14 @@ namespace DalObject
                     flag = true;
                     s = item;
                     s.ChargeSpots++;
-                    break;
+                    return s;
                 }
+             
             }
-            if (flag == false)
-            {
+            
                 throw new Exception("couldn't find station by drones location");//לעשות חריגה שלא קיים מיקום תחנה לרחפן
-            }
+            
+            
         }
        
         /// <summary>

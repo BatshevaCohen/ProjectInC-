@@ -11,7 +11,7 @@ using NuGet.Protocol.Plugins;
 
 namespace IBL.BO
 {
-    public partial class BLObject 
+    public partial class BLObject
     {
         /// <summary>
         /// Add drone
@@ -44,15 +44,16 @@ namespace IBL.BO
                 Model = drone.Model,
                 MaxWeight = (WeightCategories)drone.Weight,
                 Battery = r.Next(20, 40),
+                Status= IDAL.DO.DroneStatuses.Maintenance //when added a new drone it goes to initial charging
             };
 
             //get Station to update Location
             IDAL.DO.Station station = dalo.GetStation(stationId);
             drone.Battery = d.Battery;
-            AddDroneToList(drone, station);
-            UpdateChargeDrone(d.Id);
             dalo.AddDrone(d); //adds the drone to the dal object
-            
+            AddDroneToList(drone, station.Latitude,station.Longitude);
+            dalo.UpdateChargeSpots(station.Id);
+            dalo.UpdateAddDroneToCharge(drone.Id, station.Id);
         }
 
         /// <summary>
@@ -69,6 +70,12 @@ namespace IBL.BO
             }
             dalo.UpdateNameOfDrone(id, model);
         }
+
+        
+        
+
+        
+
         /// <summary>
         /// Charging drone
         /// </summary>
@@ -112,9 +119,10 @@ namespace IBL.BO
                                 UpdateDroneToStation(droneId, station.Id, min);
                             }
                         }
-                   
                         counter++;
                         disStationFromDrone.Remove(item);
+                        if (flag)
+                            break;
                     }
 
                 }
@@ -144,11 +152,10 @@ namespace IBL.BO
             station = dalo.GetStation(stationId);
             //update the drone to charging status
             dronel.DroneStatuses = DroneStatuses.Maintenance;
-            //update the drone's location to the charging station location - latitude
+            //update the drone's location to the charging station location - latitude and longitude
             dronel.Location.Latitude = station.Latitude;
-            //update the drone's location to the charging station location - longitudw
             dronel.Location.Longitude = station.Longitude;
-            double droneBattery = minDistance * 10 / 100;
+            double droneBattery = minDistance * 0.1;
             dronel.Battery = droneBattery;
             //עידכון עמדות טעינה פנוייות 
             dalo.UpdateChargeSpots(station.Id);
@@ -166,11 +173,11 @@ namespace IBL.BO
         public void DischargeDrone(int droneID, TimeSpan chargingTime)
         {
             // save dVal in second
-            double dVal = (chargingTime.TotalMilliseconds) * 1000;
+            double dVal = (chargingTime.TotalMilliseconds) / 1000;
 
             //finds the drone by its ID
             DroneToList dronel = dronesL.Find(x => x.Id == droneID);
-            Station station = new();
+            IDAL.DO.Station station = new();
             //only a drone that was in charging c
 
             //ould be discharge
@@ -178,10 +185,11 @@ namespace IBL.BO
             {
                 double droneLocationLatitude = dronel.Location.Latitude;
                 double droneLocationLongitude = dronel.Location.Longitude;
-                dalo.DischargeDroneByLocation(droneID, droneLocationLatitude, droneLocationLongitude);
+                station = dalo.DischargeDroneByLocation(droneID, droneLocationLatitude, droneLocationLongitude);
                 DroneInCharging droneInCharge = new();
-                //find the drone in charging
-                droneInCharge = station.droneInChargings.Find(x => x.Id == droneID);
+                ////find the drone in charging
+                //droneInCharge = station.droneInChargings.Find(x => x.Id == droneID);
+
                 //remove the drone frome the list of droneChargings
                 dalo.UpdateRemoveDroneToCharge(droneID, station.Id);
             }

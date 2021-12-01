@@ -13,7 +13,7 @@ namespace IBL.BO
         /// </summary>
         /// <param name="drone"></param>
         /// <param name="station"></param>
-        public void AddDroneToList(Drone drone,IDAL.DO.Station station)
+        public void AddDroneToList(Drone drone,double latitude, double longitude)
         {
             DroneToList droneToList = new()
             {
@@ -25,8 +25,8 @@ namespace IBL.BO
             };
             droneToList.Location = new()
             {
-                Latitude = station.Latitude,
-                Longitude=station.Longitude,
+                Latitude = latitude,
+                Longitude= longitude,
             };
             if (drone.ParcelInTransfer.Id != 0)
             {

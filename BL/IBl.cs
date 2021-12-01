@@ -35,6 +35,8 @@ namespace IBL.BO
         #endregion
 
         #region Update:
+
+
         /// <summary>
         /// Update drone's name
         /// </summary>

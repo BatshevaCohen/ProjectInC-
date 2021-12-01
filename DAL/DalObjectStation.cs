@@ -85,13 +85,11 @@ namespace DalObject
         public void UpdateChargeSpots(int stationId)
         {
             Station station = DataSource.Stations.Find(x => x.Id == stationId);
+            DataSource.Stations.Remove(station);
             station.ChargeSpots--;
+            DataSource.Stations.Add(station);
         }
-        /// <summary>
-        /// Charge drone and update the station
-        /// </summary>
-        /// <param name="dronId"></param>
-        /// <param name="stationId"></param>
+
         public void UpdateAddDroneToCharge(int dronId, int stationId)
         {
             DroneCharge droneCharge = new()
@@ -119,16 +117,6 @@ namespace DalObject
             DataSource.DroneCharges.Remove(droneCharge);
         }
 
-        /// <summary>
-        /// Find station by its ID
-        /// </summary>
-        /// <param name="stationID"></param>
-        /// <returns></returns>
-        /// <exception cref="NotImplementedException"></exception>
-        public Station FindStetion(int stationID)
-        {
-            throw new NotImplementedException();
-        }
         /// <summary>
         /// The function recives station ID and returns all of the drones that are charging in that station
         /// </summary>

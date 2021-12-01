@@ -46,15 +46,15 @@ namespace IBL.BO
                 Battery = r.Next(20, 40),
                 Status= IDAL.DO.DroneStatuses.Maintenance //when added a new drone it goes to initial charging
             };
-            //get Station to update Location, 
+            //get Station to update Location
             IDAL.DO.Station station = dalo.GetStation(stationId);
+
+            dalo.AddDrone(d); //adds the drone to the dal object
 
             //adds the drone to the "DroneInCharge" list,
             //and also UPDATE the number of available charging spots in the station
             UpdateStationListDroneInCharge(stationId, d.Id);
 
-            dalo.AddDrone(d); //adds the drone to the dal object
-            
             AddDroneToList(drone, station);
             DroneToList droneToList = dronesL.Find(x => x.Id == drone.Id);
             droneToList.Battery = d.Battery;
@@ -207,15 +207,16 @@ namespace IBL.BO
         public Drone GetDrone(int droneId)
         {
             IDAL.DO.Drone d = dalo.GetDrone(droneId);
-            Drone drone = new();
-            drone.Id = d.Id;
-            drone.Model = d.Model;
-            drone.Battery = d.Battery;
-            drone.DroneStatuses = (DroneStatuses)d.Status;
-            drone.Weight = (Weight)d.MaxWeight;
+            Drone drone = new()
+            {
+                Id = d.Id,
+                Model = d.Model,
+                Battery = d.Battery,
+                DroneStatuses = (DroneStatuses)d.Status,
+                Weight = (Weight)d.MaxWeight
+            };
             //to find the locations drone---
             DroneToList droneToList = dronesL.Find(x => x.Id == droneId);
-            drone.Location = droneToList.Location;
             if (drone.DroneStatuses != DroneStatuses.Shipping)
             {
                 return drone;

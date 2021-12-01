@@ -57,7 +57,6 @@ namespace ConsoleUI_BL
                                     Longitude = longitude,
                                     Latitude = latitude
                                 };
-
                                 try
                                 {
                                     bLObject.AddStation(s);

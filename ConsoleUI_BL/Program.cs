@@ -65,6 +65,7 @@ namespace ConsoleUI_BL
                                 catch (Exception ex)
                                 {
                                     Console.WriteLine(ex);
+                                    break;
                                 }
                                 Console.WriteLine("\nStation added successfully! \n");
                                 break;
@@ -98,6 +99,7 @@ namespace ConsoleUI_BL
                                 catch (Exception ex)
                                 {
                                     Console.WriteLine(ex);
+                                    break;
                                 }
                                 Console.WriteLine("\nDrone added successfully! \n");
                                 break;
@@ -372,7 +374,7 @@ namespace ConsoleUI_BL
                                 int.TryParse(Console.ReadLine(), out Id_D);
                                 try
                                 {
-                                    bLObject.GetDrone(Id_D).ToString();
+                                    Console.WriteLine(bLObject.GetDrone(Id_D));
                                 }
                                 catch (Exception ex)
                                 {
@@ -386,7 +388,7 @@ namespace ConsoleUI_BL
                                 int.TryParse(Console.ReadLine(), out Id_C);
                                 try
                                 {
-                                    bLObject.GetCustomer(Id_C).ToString();
+                                    Console.WriteLine(bLObject.GetCustomer(Id_C).ToString());
                                 }
                                 catch (Exception ex)
                                 {
@@ -400,7 +402,7 @@ namespace ConsoleUI_BL
                                 int.TryParse(Console.ReadLine(), out Id_P);
                                 try
                                 {
-                                    bLObject.GetParcel(Id_P).ToString();
+                                  Console.WriteLine(  bLObject.GetParcel(Id_P).ToString());
                                 }
                                 catch (Exception ex)
                                 {

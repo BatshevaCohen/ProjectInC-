@@ -65,8 +65,12 @@ namespace IBL.BO
             customer.Id = c.Id;
             customer.Name = c.Name;
             customer.Phone = c.Phone;
-            customer.Location.Latitude = c.Latitude;
-            customer.Location.Longitude = c.Longitude;
+            customer.Location = new()
+            {
+                Latitude = c.Latitude,
+                Longitude = c.Longitude,
+            };
+           
 
             //Packages that the sending customer has
 
@@ -95,9 +99,14 @@ namespace IBL.BO
                 {
                     parcelCustomer.ParcelStatus = ParcelStatus.Assigned;
                 }
-                parcelCustomer.CustomerInParcel.Id = customer.Id;
-                parcelCustomer.CustomerInParcel.Name = customer.Name;
+                parcelCustomer.CustomerInParcel = new()
+                {
+                    Id = customer.Id,
+                    Name = customer.Name,
+                };
+                
                 //add Details of the sending customer
+                customer.SentParcels = new();
                 customer.SentParcels.Add(parcelCustomer);
             }
             foreach (IDAL.DO.Parcel item in parcelReciever)
@@ -124,9 +133,14 @@ namespace IBL.BO
                 {
                     parcelCustomer.ParcelStatus = ParcelStatus.Assigned;
                 }
-                parcelCustomer.CustomerInParcel.Id = customer.Id;
-                parcelCustomer.CustomerInParcel.Name = customer.Name;
+                parcelCustomer.CustomerInParcel = new()
+                {
+                    Id = customer.Id,
+                    Name = customer.Name,
+                };
+
                 //add Details of the rciever customer
+                customer.ReceiveParcels = new();
                 customer.ReceiveParcels.Add(parcelCustomer);
             }
             return customer;
@@ -152,7 +166,7 @@ namespace IBL.BO
                 {
                     Latitude = item.Latitude,
                     Longitude = item.Longitude,
-            };
+                };
                
 
                 //Packages that the sending customer has
@@ -194,6 +208,8 @@ namespace IBL.BO
                     //add Details of the sending customer
                     customer.SentParcels = new();
                     customer.SentParcels.Add(parcelCustomer);
+              
+                    
                 }
                 foreach (IDAL.DO.Parcel item2 in parcelReciever)
                 {

@@ -35,7 +35,7 @@ namespace IBL.BO
             //station ID should be 5-6 digits
             if (stationId < 10000 || stationId >= 1000000)
             {
-                throw new StationIdException(stationId, "Station ID should be 5 to 6 digits");
+                throw new StationException(stationId, "Station ID should be 5 to 6 digits");
             }
 
             IDAL.DO.Drone d = new()

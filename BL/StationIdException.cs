@@ -4,34 +4,39 @@ using System.Runtime.Serialization;
 namespace IBL.BO
 {
     [Serializable]
-    internal class StationIdException : Exception
+    internal class StationException : Exception
     {
-        private int stationId;
-        private string v;
+        private int id;
+        private string errMsg;
 
-        public StationIdException()
+        public StationException()
         {
         }
 
-        public StationIdException(string message) : base(message)
+        public StationException(string message) : base(message)
         {
+
         }
         /// <summary>
-        /// Exception- station ID sould be 5-6 digits
+        /// קורא לפונקציה שמקבלת סטרינג ואז זה יעבור כהודעה
         /// </summary>
-        /// <param name="stationId"></param>
-        /// <param name="v"></param>
-        public StationIdException(int stationId, string v)
+        /// <param name="id"></param>
+        /// <param name="errMsg"></param>
+        public StationException(int id, string errMsg) : this(string.Format("{0} {1}", id, errMsg))
         {
-            this.stationId = stationId;
-            this.v = v;
+            this.id = id;
+            this.errMsg = errMsg;
+        }
+        /// <summary>
+        ///
+        /// </summary>
+        /// <param name="message"></param>
+        /// <param name="innerException"></param>
+        public StationException(string message, Exception innerException) : base(message, innerException)
+        {
         }
 
-        public StationIdException(string message, Exception innerException) : base(message, innerException)
-        {
-        }
-
-        protected StationIdException(SerializationInfo info, StreamingContext context) : base(info, context)
+        protected StationException(SerializationInfo info, StreamingContext context) : base(info, context)
         {
         }
     }

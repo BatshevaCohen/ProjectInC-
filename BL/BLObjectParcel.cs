@@ -203,8 +203,15 @@ namespace IBL.BO
             { 
                 Parcel parcel = new() { };
                 parcel.Id = item.Id;
-                parcel.Resiver.Id = item.SenderId;
-                parcel.Sender.Id = item.ReceiverId;
+                parcel.Resiver = new()
+                {
+                    Id = item.SenderId,
+                };
+                parcel.Sender = new()
+                {
+                    Id = item.ReceiverId,
+                };
+                
                 parcel.Priority = (Priority)item.Priority;
                 parcel.Weight = (Weight)item.Weight;
                 parcel.AssignmentToParcelTime = (DateTime)item.Supplied;
@@ -219,12 +226,18 @@ namespace IBL.BO
                     DroneInParcel droneInParcel = new() { };
                     droneInParcel.Id = item.Id;
                     droneInParcel.Battery = droneToList.Battery;
-                    droneInParcel.Location = droneToList.Location;
+                    droneInParcel.Location = new()
+                    {
+                        Latitude = droneToList.Location.Latitude,
+                        Longitude = droneToList.Location.Longitude,
+
+                    };
+                   
                     parcel.DroneInParcel = droneInParcel;
                 }
-                return parcelList;
+               
             }
-            throw new NotImplementedException();
+            return parcelList;
         }
         /// <summary>
         /// Show LIST of NON ASSOCIATED parsels

@@ -22,7 +22,7 @@ namespace IBL.BO
             //station ID sould be 5 - 6 digits
             if (station.Id < 10000 || station.Id >= 1000000)
             {
-                throw new StationIdException(station.Id, "station ID sould be 5-6 digits");
+                throw new StationException(station.Id, "station ID sould be 5-6 digits");
             }
             IDAL.DO.Station s = new()
             {

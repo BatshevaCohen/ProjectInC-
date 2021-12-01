@@ -100,6 +100,7 @@ namespace DalObject
                 StationId = stationId
             };
             //Add new drone to the list
+            DataSource.DroneCharges = new();
             DataSource.DroneCharges.Add(droneCharge);
         }
         /// <summary>

@@ -35,6 +35,9 @@ namespace IBL.BO
         #endregion
 
         #region Update:
+
+        void UpdateFirstChargeDrone(int droneId, int stationId);
+
         /// <summary>
         /// Update drone's name
         /// </summary>

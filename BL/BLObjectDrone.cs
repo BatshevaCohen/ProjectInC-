@@ -11,7 +11,7 @@ using NuGet.Protocol.Plugins;
 
 namespace IBL.BO
 {
-    public partial class BLObject 
+    public partial class BLObject
     {
         /// <summary>
         /// Add drone
@@ -44,21 +44,15 @@ namespace IBL.BO
                 Model = drone.Model,
                 MaxWeight = (WeightCategories)drone.Weight,
                 Battery = r.Next(20, 40),
-                Status= IDAL.DO.DroneStatuses.Maintenance //when added a new drone it goes to initial charging
+                Status = IDAL.DO.DroneStatuses.Available //when added a new drone it goes to initial charging
             };
+
             //get Station to update Location
             IDAL.DO.Station station = dalo.GetStation(stationId);
-
+            drone.Battery = d.Battery;
             dalo.AddDrone(d); //adds the drone to the dal object
-
-            //adds the drone to the "DroneInCharge" list,
-            //and also UPDATE the number of available charging spots in the station
-            UpdateStationListDroneInCharge(stationId, d.Id);
-
             AddDroneToList(drone, station);
-            DroneToList droneToList = dronesL.Find(x => x.Id == drone.Id);
-            droneToList.Battery = d.Battery;
-            droneToList.DroneStatuses = DroneStatuses.Maintenance;
+            UpdateFirstChargeDrone(d.Id,station.Id);
         }
 
         /// <summary>
@@ -75,6 +69,40 @@ namespace IBL.BO
             }
             dalo.UpdateNameOfDrone(id, model);
         }
+
+
+        public void UpdateFirstChargeDrone(int droneId, int stationId)
+        {
+            IDAL.DO.Station station = new();
+            //finds the drone by the recived ID
+
+            DroneToList dronel = dronesL.Find(x => x.Id == droneId);
+            //if the drone is available- it can be sent for charging
+
+
+            station = dalo.GetStation(stationId);
+            //if there is an available charging spot in the station
+            if (station.ChargeSpots > 0)
+            {
+                double dis = dalo.CalculateDistance(station.Longitude, station.Latitude, dronel.Location.Longitude, dronel.Location.Latitude);
+                //only if there is enough battery
+                if (dronel.Battery > dis * 10 / 100)
+                {
+
+                    //function to update Battery, drone mode drone location
+                    UpdateDroneToStation(droneId, station.Id, dis);
+                }
+                else
+                    throw new Exception("the battary is not enough to go to the station!");
+            }
+           else
+                throw new Exception("the Charge Spots are full !");
+        }
+
+   
+
+        
+
         /// <summary>
         /// Charging drone
         /// </summary>
@@ -118,9 +146,10 @@ namespace IBL.BO
                                 UpdateDroneToStation(droneId, station.Id, min);
                             }
                         }
-                   
                         counter++;
                         disStationFromDrone.Remove(item);
+                        if (flag)
+                            break;
                     }
 
                 }
@@ -150,11 +179,10 @@ namespace IBL.BO
             station = dalo.GetStation(stationId);
             //update the drone to charging status
             dronel.DroneStatuses = DroneStatuses.Maintenance;
-            //update the drone's location to the charging station location - latitude
+            //update the drone's location to the charging station location - latitude and longitude
             dronel.Location.Latitude = station.Latitude;
-            //update the drone's location to the charging station location - longitudw
             dronel.Location.Longitude = station.Longitude;
-            double droneBattery = minDistance * 10 / 100;
+            double droneBattery = minDistance * 0.1;
             dronel.Battery = droneBattery;
             //עידכון עמדות טעינה פנוייות 
             dalo.UpdateChargeSpots(station.Id);

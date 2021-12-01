@@ -12,6 +12,10 @@ namespace IDAL
             public double Battery { get; set; } //charging level
             public DroneStatuses Status { get; set; }
 
+            /// <summary>
+            /// ToString
+            /// </summary>
+            /// <returns></returns>
             public override string ToString()
             {
                 String result = "";

@@ -242,12 +242,11 @@ namespace IBL.BO
                 {
                     Id = parcel.SenderId,
                 };
-                
-               
                 drone.ParcelInTransfer = parcelInTransfer;
             }
             return drone;
         }
+
         /// <summary>
         /// Show LIST of drones
         /// </summary>
@@ -255,6 +254,7 @@ namespace IBL.BO
         /// <exception cref="NotImplementedException"></exception>
         public IEnumerable<DroneToList> ShowDroneList()
         {
+            //drone list from the DAL
             var droness = dalo.ShowDroneList();
             List<DroneToList> droneList = new();
             foreach (var item in droness)
@@ -281,13 +281,5 @@ namespace IBL.BO
             }
             return droneList;
         }
-
-
-        /// <summary>
-        /// Imports the drone from the data layer and prints a drone from a logical entity
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-
     }       
 }

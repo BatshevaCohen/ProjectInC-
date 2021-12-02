@@ -169,16 +169,18 @@ namespace IBL.BO
         public Parcel GetParcel(int parcelId)
         {
             IDAL.DO.Parcel p = dalo.GetParcel(parcelId);
-            Parcel parcel = new() { };
-            parcel.Id = p.Id;
-            parcel.Resiver.Id = p.SenderId;
-            parcel.Sender.Id = p.ReceiverId;
-            parcel.Priority = (Priority)p.Priority;
-            parcel.Weight = (Weight)p.Weight;
-            parcel.AssignmentToParcelTime = (DateTime)p.Supplied;
-            parcel.ParcelCreationTime = (DateTime)p.Create;
-            parcel.SupplyTime = (DateTime)p.Assigned;
-            parcel.CollectionTime = (DateTime)p.PickedUp;
+            Parcel parcel = new()
+            {
+                Id = p.Id,
+                Priority = (Priority)p.Priority,
+                Weight = (Weight)p.Weight,
+                AssignmentToParcelTime = (DateTime)p.Supplied,
+                ParcelCreationTime = (DateTime)p.Create,
+                SupplyTime = (DateTime)p.Assigned,
+                CollectionTime = (DateTime)p.PickedUp
+            };
+            parcel.Resiver.Id = p.ReceiverId;
+            parcel.Sender.Id = p.SenderId;
             //If the parcel has already been associated-שוייכה
             //update DroneInParcel
             if (parcel.CollectionTime != DateTime.MinValue)
@@ -201,33 +203,19 @@ namespace IBL.BO
             var parcels = dalo.ShowParcelList();
             List<ParcelToList> parcelList = new() { };
             foreach (IDAL.DO.Parcel item in parcels)
-            { 
-                ParcelToList parcelTL = new();
-                parcelTL.Id = item.Id;
+            {
                 //find the parcel in the BL-- in order to find the raciver and the sender's name
                 Parcel parcel = GetParcel(item.Id);
-                parcelTL.ReciverName = parcel.Resiver.Name;
-                parcelTL.SenderName=parcel.Sender.Name;
-                parcelTL.Weight = (Weight)item.Weight;
-                parcelTL.Priority = (Priority)item.Priority;
-
-                
-                //If the parcel has already been associated-שוייכה
-                //update DroneInParcel
-                if (parcelTL.CollectionTime != DateTime.MinValue)
+                ParcelToList parcelTL = new()
                 {
-                    DroneToList droneToList = dronesL.Find(x => x.Id == item.DroneID);
-                    DroneInParcel droneInParcel = new() { };
-                    droneInParcel.Id = item.Id;
-                    droneInParcel.Battery = droneToList.Battery;
-                    droneInParcel.Location = new()
-                    {
-                        Latitude = droneToList.Location.Latitude,
-                        Longitude = droneToList.Location.Longitude,
-
-                    };
-                    parcelTL.DroneInParcel = droneInParcel;
-                }
+                    Id = item.Id,
+                    ReciverName = parcel.Resiver.Name,
+                    SenderName = parcel.Sender.Name,
+                    Weight = (Weight)item.Weight,
+                    Priority = (Priority)item.Priority,
+                    ParcelStatus= FindParcelStatus(item)
+                };
+                parcelList.Add(parcelTL);
             }
             return parcelList;
         }

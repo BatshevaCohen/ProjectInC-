@@ -449,9 +449,9 @@ namespace ConsoleUI_BL
 
                             //Prints the list of the parcels
                             case ListOptions.Parcel:
-                                IEnumerable<Parcel> ParcelList;
+                                IEnumerable<ParcelToList> ParcelList;
                                 ParcelList = bLObject.ShowParcelList();
-                                foreach (Parcel element in ParcelList) //prints the elements in the list
+                                foreach (ParcelToList element in ParcelList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;
 

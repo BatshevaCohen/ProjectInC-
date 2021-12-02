@@ -68,6 +68,8 @@ namespace IBL.BO
             {
                 throw new DronelIdException(id, $"Drone ID: {id} Does not exist!!");
             }
+            //update BL drone to list 
+            dronesL.Find(item => item.Id == id).Model = model;
             dalo.UpdateNameOfDrone(id, model);
         }
 
@@ -187,9 +189,10 @@ namespace IBL.BO
                 double droneLocationLongitude = dronel.Location.Longitude;
                 station = dalo.DischargeDroneByLocation(droneID, droneLocationLatitude, droneLocationLongitude);
                 DroneInCharging droneInCharge = new();
-                ////find the drone in charging
-                //droneInCharge = station.droneInChargings.Find(x => x.Id == droneID);
-
+                dronel.Battery += dVal * dalo.PowerRequest()[4];
+                dronesL.Remove(dronel);
+                dronel.DroneStatuses = DroneStatuses.Available;
+                dronesL.Add(dronel);
                 //remove the drone frome the list of droneChargings
                 dalo.UpdateRemoveDroneToCharge(droneID, station.Id);
             }
@@ -197,8 +200,7 @@ namespace IBL.BO
             {
                 throw new Exception("drone can't be discharged");
             }
-            dronel.Battery += dVal * dalo.PowerRequest()[4];
-            dronel.DroneStatuses = DroneStatuses.Available;
+            
         }
         /// <summary>
         /// Get drone by ID

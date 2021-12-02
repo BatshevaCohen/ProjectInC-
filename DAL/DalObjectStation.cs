@@ -35,9 +35,10 @@ namespace DalObject
         public void UpdateStetion(int StationId, string name, int charging_spots)
         {
             Station station = DataSource.Stations.Find(x => x.Id == StationId);
+            DataSource.Stations.Remove(station);
             station.ChargeSpots = charging_spots;
             station.Name = name;
-            station.Id = StationId;
+            DataSource.Stations.Add(station);
         }
         /// <summary>
         /// View Station
@@ -115,6 +116,10 @@ namespace DalObject
             };
             //מחיקת מופע לרשימה
             DataSource.DroneCharges.Remove(droneCharge);
+            Drone d= DataSource.Drones.Find(x => x.Id == dronId);
+            DataSource.Drones.Remove(d);
+            d.Status = DroneStatuses.Available;
+            DataSource.Drones.Add(d);
         }
 
         /// <summary>

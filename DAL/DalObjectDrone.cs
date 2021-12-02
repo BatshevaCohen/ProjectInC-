@@ -33,7 +33,9 @@ namespace DalObject
         public void UpdateNameOfDrone(int id, string model)
         {
             Drone drone = DataSource.Drones.Find(x => x.Id == id);
+            DataSource.Drones.Remove(drone);
             drone.Model = model;
+            DataSource.Drones.Add(drone);
         }
         /// <summary>
         /// view function for Drone

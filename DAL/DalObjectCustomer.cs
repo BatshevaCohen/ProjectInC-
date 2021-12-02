@@ -35,9 +35,10 @@ namespace DalObject
         public void UpdateCustumer(int custumerId, string name, string phone)
         {
             Customer customer = DataSource.Customer.Find(x => x.Id == custumerId);
-            customer.Id = custumerId;
+            DataSource.Customer.Remove(customer);
             customer.Name = name;
             customer.Phone = phone;
+            DataSource.Customer.Add(customer);
         }
         /// <summary>
         /// Get Customer by id

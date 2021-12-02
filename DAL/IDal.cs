@@ -214,11 +214,11 @@ namespace IDAL
         /// <param name="drone_id"></param>
         void UpdateParcelPickedupByDrone(int parcel_id, int drone_id);
         /// <summary>
-        /// update function: parcel to drone by id
+        /// update function: parcel to drone by id and return true if the parcel found
         /// </summary>
         /// <param name="parcel_id"></param>
         /// <param name="drone_id"></param>
-        void UpdateParcelToDrone(int parcel_id, int drone_id);
+        int UpdateParcelToDrone(int parcel_id, int drone_id);
 
         /// <summary>
         /// return the station in order to update the locations drone 

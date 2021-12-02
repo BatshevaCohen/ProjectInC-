@@ -69,7 +69,7 @@ namespace DalObject
         /// </summary>
         /// <param name="parcel_id"></param>
         /// <param name="drone_id"></param>
-        public void UpdateParcelToDrone(int parcel_id, int drone_id)
+        public int UpdateParcelToDrone(int parcel_id, int drone_id)
         {
             Parcel parcel = default;
             try
@@ -88,7 +88,9 @@ namespace DalObject
             }
             parcel.DroneID = drone.Id;
             parcel.Assigned = DateTime.Now;
-            //d.Status = DroneStatuses.Shipping;
+            return parcel.Id;
+            
+            
         }
         /// <summary>
         /// Update function for parcel

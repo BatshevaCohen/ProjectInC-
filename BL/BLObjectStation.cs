@@ -110,32 +110,17 @@ namespace IBL.BO
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public IEnumerable<Station> ShowChargeableStationList()
+        public IEnumerable<StationToList> ShowChargeableStationList()
         {
-            List<Station> stationListWithAvailableChargingSpots = new();
-            var stations = dalo.ShowStationList();
-            foreach (IDAL.DO.Station item in stations)
+            List<StationToList> stationListWithAvailableChargingSpots = new();
+            var stations = ShowStationList();
+            foreach (StationToList item in stations)
             {
-                if (item.ChargeSpots > 0)
+                //if there are available charging spots at the station
+                if (item.AvailableChargingSpots > 0)
                 {
-                    Station station = new()
-                    {
-                        Id = item.Id,
-                        AvailableChargingSpots = item.ChargeSpots
-                    };
-                    station.Location.Latitude = item.Latitude;
-                    station.Location.Longitude = item.Longitude;
-                    //list of drone and 
-                    List<DroneCharge> droneCharges = dalo.GetListOfDronInCharge(station.Id);
-                    foreach (DroneCharge item1 in droneCharges)
-                    {
-                        DroneInCharging droneInCharging = new();
-                        droneInCharging.Id = item1.DroneId;
-                        DroneToList droneToList = dronesL.Find(x => x.Id == item1.DroneId);
-                        droneInCharging.Battery = droneToList.Battery;
-                        station.droneInChargings.Add(droneInCharging);
-                    }
-                    stationListWithAvailableChargingSpots.Add(station);
+                    StationToList stationTL = item;
+                    stationListWithAvailableChargingSpots.Add(stationTL);
                 }
             }
             return stationListWithAvailableChargingSpots;

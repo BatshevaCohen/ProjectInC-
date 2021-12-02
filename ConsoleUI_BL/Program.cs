@@ -455,19 +455,19 @@ namespace ConsoleUI_BL
                                     Console.WriteLine(element);
                                 break;
 
-                            //Prints the list of the stations that available for charging
-                            case ListOptions.AvailbleChagingStation:
-                                IEnumerable<Station> ChargeableBaseStationList;
-                                ChargeableBaseStationList =bLObject.ShowChargeableStationList();
-                                foreach (Station element in ChargeableBaseStationList) //prints the elements in the list
-                                    Console.WriteLine(element);
-                                break;
-
                             //Prints the list of the non associated parcel
                             case ListOptions.UnAsignementParcel:
                                 bLObject.ShowNonAssociatedParcelList();
-                                IEnumerable<Parcel> NonAssociatedParcelList = bLObject.ShowNonAssociatedParcelList();
-                                foreach (Parcel element in NonAssociatedParcelList) //prints the elements in the list
+                                IEnumerable<ParcelToList> NonAssociatedParcelList = bLObject.ShowNonAssociatedParcelList();
+                                foreach (ParcelToList element in NonAssociatedParcelList) //prints the elements in the list
+                                    Console.WriteLine(element);
+                                break;
+
+                            //Prints the list of the stations that available for charging
+                            case ListOptions.AvailbleChagingStation:
+                                IEnumerable<StationToList> ChargeableBaseStationList;
+                                ChargeableBaseStationList = bLObject.ShowChargeableStationList();
+                                foreach (StationToList element in ChargeableBaseStationList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;
                         }

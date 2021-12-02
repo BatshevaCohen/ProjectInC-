@@ -270,6 +270,7 @@ namespace IBL.BO
                 //to find the locations of the drone
                 DroneToList droneToList = dronesL.Find(x => x.Id == item.Id);
                 droneTL.Location = droneToList.Location;
+
                 //finds the parcel in transfer ID
                 Drone drone =GetDrone(item.Id);
                 if (drone.ParcelInTransfer != null)

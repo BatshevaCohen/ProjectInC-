@@ -84,7 +84,7 @@ namespace IBL.BO
         IEnumerable<StationToList> ShowStationList();
         IEnumerable<DroneToList> ShowDroneList();
         IEnumerable<CustomerToList> ShowCustomerList();
-        IEnumerable<Parcel> ShowParcelList();
+        IEnumerable<ParcelToList> ShowParcelList();
         IEnumerable<Parcel> ShowNonAssociatedParcelList();
         IEnumerable<Station> ShowChargeableStationList();
 

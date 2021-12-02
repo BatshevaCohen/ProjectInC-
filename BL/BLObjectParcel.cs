@@ -196,32 +196,25 @@ namespace IBL.BO
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public IEnumerable<Parcel> ShowParcelList()
+        public IEnumerable<ParcelToList> ShowParcelList()
         {
             var parcels = dalo.ShowParcelList();
-            List<Parcel> parcelList = new() { };
+            List<ParcelToList> parcelList = new() { };
             foreach (IDAL.DO.Parcel item in parcels)
             { 
-                Parcel parcel = new() { };
-                parcel.Id = item.Id;
-                parcel.Resiver = new()
-                {
-                    Id = item.SenderId,
-                };
-                parcel.Sender = new()
-                {
-                    Id = item.ReceiverId,
-                };
+                ParcelToList parcelTL = new();
+                parcelTL.Id = item.Id;
+                //find the parcel in the BL-- in order to find the raciver and the sender's name
+                Parcel parcel = GetParcel(item.Id);
+                parcelTL.ReciverName = parcel.Resiver.Name;
+                parcelTL.SenderName=parcel.Sender.Name;
+                parcelTL.Weight = (Weight)item.Weight;
+                parcelTL.Priority = (Priority)item.Priority;
+
                 
-                parcel.Priority = (Priority)item.Priority;
-                parcel.Weight = (Weight)item.Weight;
-                parcel.AssignmentToParcelTime = (DateTime)item.Supplied;
-                parcel.ParcelCreationTime = (DateTime)item.Create;
-                parcel.SupplyTime = (DateTime)item.Assigned;
-                parcel.CollectionTime = (DateTime)item.PickedUp;
                 //If the parcel has already been associated-שוייכה
                 //update DroneInParcel
-                if (parcel.CollectionTime != DateTime.MinValue)
+                if (parcelTL.CollectionTime != DateTime.MinValue)
                 {
                     DroneToList droneToList = dronesL.Find(x => x.Id == item.DroneID);
                     DroneInParcel droneInParcel = new() { };
@@ -233,7 +226,7 @@ namespace IBL.BO
                         Longitude = droneToList.Location.Longitude,
 
                     };
-                    parcel.DroneInParcel = droneInParcel;
+                    parcelTL.DroneInParcel = droneInParcel;
                 }
             }
             return parcelList;

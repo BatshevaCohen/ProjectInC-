@@ -43,7 +43,7 @@ namespace IBL.BO
         /// <param name="charging_spots"></param>
         public void UpdateStetion(int id, string name, int charging_spots)
         {
-            //להוסיף אקספשן
+           
             dalo.UpdateStetion(id, name, charging_spots);
         }
 

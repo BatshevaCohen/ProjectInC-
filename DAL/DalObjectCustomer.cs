@@ -27,13 +27,17 @@ namespace DalObject
                 DataSource.Customer.Add(c);
         }
         /// <summary>
-        /// update customee
+        /// update customee name and phone---
         /// </summary>
         /// <param name="custumerId"></param>
         /// <param name="name"></param>
         /// <param name="phone"></param>
         public void UpdateCustumer(int custumerId, string name, string phone)
         {
+            if (!DataSource.Customer.Exists(x => x.Id == custumerId))
+            {
+                throw new Exception($"custumer {custumerId} is not exite!!");
+            }
             Customer customer = DataSource.Customer.Find(x => x.Id == custumerId);
             DataSource.Customer.Remove(customer);
             customer.Name = name;

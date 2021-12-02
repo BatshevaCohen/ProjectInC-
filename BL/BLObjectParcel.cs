@@ -179,16 +179,19 @@ namespace IBL.BO
                 SupplyTime = (DateTime)p.Assigned,
                 CollectionTime = (DateTime)p.PickedUp
             };
-            parcel.Resiver.Id = p.ReceiverId;
-            parcel.Sender.Id = p.SenderId;
+
+            IDAL.DO.Customer custumerSender = dalo.GetCustomer(p.SenderId);
+            IDAL.DO.Customer custumerReceiver =  dalo.GetCustomer(p.ReceiverId);
+            parcel.Sender = new() { Id = custumerSender.Id, Name = custumerSender.Name };
+            parcel.Resiver = new() { Id = custumerReceiver.Id, Name = custumerReceiver.Name };
+
             //If the parcel has already been associated-שוייכה
             //update DroneInParcel
-            if (parcel.CollectionTime != DateTime.MinValue)
+            if (parcel.CollectionTime == DateTime.MinValue)
             {
                 DroneToList droneToList = dronesL.Find(x => x.Id == p.DroneID);
-                parcel.DroneInParcel.Id = p.Id;
-                parcel.DroneInParcel.Battery = droneToList.Battery;
-                parcel.DroneInParcel.Location = droneToList.Location;
+                parcel.DroneInParcel = new() { Id = p.Id, Battery = droneToList.Battery, Location = droneToList.Location };
+               
             }
             return parcel;
         }

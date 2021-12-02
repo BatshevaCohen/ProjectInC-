@@ -406,6 +406,7 @@ namespace ConsoleUI_BL
                                 catch (Exception ex)
                                 {
                                     Console.WriteLine(ex.Message);
+
                                 }
                                 break;
                             //EXIT:
@@ -413,8 +414,7 @@ namespace ConsoleUI_BL
                                 DalObject.DalObject.Exit();
                                 break;
                         }
-                        //int requestion;
-                        //int.TryParse(Console.ReadLine(), out requestion);
+                       
                         break;
 
                     //Show List:

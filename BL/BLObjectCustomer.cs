@@ -56,8 +56,7 @@ namespace IBL.BO
         {
             dalo.UpdateCustumer(id, name, phone);
         }
-        //יש לאכלס את רשימת החבילות שהלקוח שולח ואת רשימת BL- שימו לב שב
-        //החבילות שהלקוח מקבל
+      
         public Customer GetCustomer(int IDc)
         {
             IDAL.DO.Customer c = dalo.GetCustomer(IDc);
@@ -239,8 +238,3 @@ namespace IBL.BO
         }
     }
 }
-/*
- 
- 
- 
- */

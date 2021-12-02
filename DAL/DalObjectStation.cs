@@ -34,6 +34,10 @@ namespace DalObject
         /// <param name="charging_spots"></param>
         public void UpdateStetion(int StationId, string name, int charging_spots)
         {
+            if (!DataSource.Stations.Exists(x => x.Id == StationId))
+            {
+                throw new Exception($"station id {StationId} dose not exit!");
+            }
             Station station = DataSource.Stations.Find(x => x.Id == StationId);
             DataSource.Stations.Remove(station);
             station.ChargeSpots = charging_spots;

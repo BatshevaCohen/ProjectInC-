@@ -224,25 +224,17 @@ namespace IBL.BO
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public IEnumerable<Parcel> ShowNonAssociatedParcelList()
+        public IEnumerable<ParcelToList> ShowNonAssociatedParcelList()
         {
-            var parcels = dalo.ShowParcelList();
-            List<Parcel> parcelListNotAssociated = new ();
-            foreach (IDAL.DO.Parcel item in parcels)
+            var parcels = ShowParcelList();
+            List<ParcelToList> parcelListNotAssociated = new ();
+            foreach (ParcelToList item in parcels)
             {
-                if (item.PickedUp != DateTime.MinValue)
+                //parcel created but did not assigned
+                if (item.ParcelStatus == ParcelStatus.Created)
                 {
-                    Parcel parcel = new() { };
-                    parcel.Id = item.Id;
-                    parcel.Resiver.Id = item.ReceiverId;
-                    parcel.Sender.Id = item.SenderId;
-                    parcel.Priority = (Priority)item.Priority;
-                    parcel.Weight = (Weight)item.Weight;
-                    parcel.AssignmentToParcelTime = (DateTime)item.Supplied;
-                    parcel.ParcelCreationTime = (DateTime)item.Create;
-                    parcel.SupplyTime = (DateTime)item.Assigned;
-                    parcel.CollectionTime = (DateTime)item.PickedUp;
-                    parcelListNotAssociated.Add(parcel);
+                    ParcelToList parcelTL = item;
+                    parcelListNotAssociated.Add(parcelTL);
                 }
             }
             return parcelListNotAssociated;

@@ -85,33 +85,21 @@ namespace IBL.BO
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public IEnumerable<Station> ShowStationList()
+        public IEnumerable<StationToList> ShowStationList()
         {
-            List<Station> stationList = new();
+            List<StationToList> stationList = new();
             var stations = dalo.ShowStationList();
             foreach (IDAL.DO.Station item in stations)
             {
-                Station station = new()
+                StationToList station = new()
                 {
                     Id = item.Id,
                     Name = item.Name,
                     AvailableChargingSpots = item.ChargeSpots
                 };
-                station.Location = new()
-                {
-                    Latitude = item.Latitude,
-                    Longitude = item.Longitude
-                };
-            //list of drones that are currently charging in the station 
-            List<DroneCharge> droneCharges = dalo.GetListOfDronInCharge(station.Id);
-                foreach (DroneCharge item1 in droneCharges)
-                {
-                    DroneInCharging droneInCharging = new();
-                    droneInCharging.Id = item1.DroneId;
-                    DroneToList droneToList = dronesL.Find(x => x.Id == item1.DroneId);
-                    droneInCharging.Battery = droneToList.Battery;
-                    station.droneInChargings.Add(droneInCharging);
-                }
+                //list of drones that are currently charging in the station 
+                List<DroneCharge> droneCharges = dalo.GetListOfDronInCharge(station.Id);
+                station.UnavailableChargingSpots= droneCharges.Count;
                 stationList.Add(station);
             }
             return stationList;

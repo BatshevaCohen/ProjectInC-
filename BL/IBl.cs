@@ -81,7 +81,7 @@ namespace IBL.BO
         #endregion
 
         #region Show Lists:
-        IEnumerable<Station> ShowStationList();
+        IEnumerable<StationToList> ShowStationList();
         IEnumerable<Drone> ShowDroneList();
         IEnumerable<CustomerToList> ShowCustomerList();
         IEnumerable<Parcel> ShowParcelList();

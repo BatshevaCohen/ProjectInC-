@@ -425,9 +425,9 @@ namespace ConsoleUI_BL
                         {
                             //Prints the list of the stations
                             case ListOptions.Station:
-                                IEnumerable<Station> BaseStationList;
-                                BaseStationList = bLObject.ShowStationList();
-                                foreach (Station element in BaseStationList) //prints the elements in the list
+                                IEnumerable<StationToList> StationList;
+                                StationList = bLObject.ShowStationList();
+                                foreach (StationToList element in StationList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;
 

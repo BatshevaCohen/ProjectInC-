@@ -9,7 +9,7 @@ namespace IBL.BO
     public class StationToList
     {
         public int Id { get; set; }
-        public String StationName { get; set; }
+        public String Name { get; set; }
         public int AvailableChargingSpots { get; set; } // the number of available charging spots
         public int UnavailableChargingSpots { get; set; } // the number of unavailable charging spots
         /// <summary>
@@ -20,7 +20,7 @@ namespace IBL.BO
         {
             String result = "";
             result += $"Station ID is: {Id}, \n";
-            result += $"Station name is {StationName}, \n";
+            result += $"Station name is {Name}, \n";
             result += $"The number of available charging spots is: {AvailableChargingSpots}, \n";
             result += $"The number of unavailable charging spots is: {UnavailableChargingSpots}, \n";
             

@@ -89,11 +89,11 @@ namespace IBL.BO
                 }
                 if (item.Supplied == DateTime.MinValue)
                 {
-                    parcelCustomer.ParcelStatus = ParcelStatus.Delivered;
+                    parcelCustomer.ParcelStatus = ParcelStatus.Supplied;
                 }
                 if (item.PickedUp == DateTime.MinValue)
                 {
-                    parcelCustomer.ParcelStatus = ParcelStatus.Picked;
+                    parcelCustomer.ParcelStatus = ParcelStatus.PickedUp;
                 }
                 if (item.Assigned == DateTime.MinValue)
                 {
@@ -123,11 +123,11 @@ namespace IBL.BO
                 }
                 if (item.Supplied == DateTime.MinValue)
                 {
-                    parcelCustomer.ParcelStatus = ParcelStatus.Delivered;
+                    parcelCustomer.ParcelStatus = ParcelStatus.Supplied;
                 }
                 if (item.PickedUp == DateTime.MinValue)
                 {
-                    parcelCustomer.ParcelStatus = ParcelStatus.Picked;
+                    parcelCustomer.ParcelStatus = ParcelStatus.PickedUp;
                 }
                 if (item.Assigned == DateTime.MinValue)
                 {
@@ -150,9 +150,11 @@ namespace IBL.BO
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public IEnumerable<Customer> ShowCustomerList()
+        public IEnumerable<CustomerToList> ShowCustomerList()
         {
-            List<Customer> customersList = new();
+            List<CustomerToList> customerList = new();
+            int sentAndProvided = 0, sentNOTProvided = 0, parcelRecived = 0, parcelOnItsWay = 0;
+            //get the list of CUSTOMERS from the dalobject (we need to return CustomerToList)
             var custumers = dalo.ShowCustomerList();
             foreach (var item in custumers)
             {
@@ -162,19 +164,12 @@ namespace IBL.BO
                     Name = item.Name,
                     Phone = item.Phone
                 };
-                customer.Location = new()
-                {
-                    Latitude = item.Latitude,
-                    Longitude = item.Longitude,
-                };
-               
-
-                //Packages that the sending customer has
-
-                List<IDAL.DO.Parcel> parcelSendin = dalo.GetListOfParcelSending(customer.Id);
-                List<IDAL.DO.Parcel> parcelReciever = dalo.GetListOfParcelRecirver(customer.Id);
-
-                foreach (IDAL.DO.Parcel item1 in parcelSendin)
+                //Number of packages that the customer have sent and recived
+                List<IDAL.DO.Parcel> parcelSent = dalo.GetListOfParcelSending(customer.Id);
+                List<IDAL.DO.Parcel> parcelRecieved = dalo.GetListOfParcelRecirver(customer.Id);
+                
+                //parcel at customer- SENT parcels
+                foreach (IDAL.DO.Parcel item1 in parcelSent)
                 {
                     ParcelCustomer parcelCustomer = new()
                     {
@@ -182,36 +177,28 @@ namespace IBL.BO
                         Priority = (Priority)item1.Priority,
                         Weight = (Weight)item1.Weight
                     };
-                    if (item1.Create == DateTime.MinValue)
-                    {
-                        parcelCustomer.ParcelStatus = ParcelStatus.Created;
-                    }
-                    if (item1.Supplied == DateTime.MinValue)
-                    {
-                        parcelCustomer.ParcelStatus = ParcelStatus.Delivered;
-                    }
-                    if (item1.PickedUp == DateTime.MinValue)
-                    {
-                        parcelCustomer.ParcelStatus = ParcelStatus.Picked;
-                    }
-                    if (item1.Supplied == DateTime.MinValue)
-                    {
-                        parcelCustomer.ParcelStatus = ParcelStatus.Assigned;
-                    }
+                    //finds the parcel status
+                    parcelCustomer.ParcelStatus = FindParcelStatus(item1);
+                    //counts the number of parcels that sent and provided/not provided
+                    if (parcelCustomer.ParcelStatus == ParcelStatus.Supplied)
+                        sentAndProvided++;
+                    else if (parcelCustomer.ParcelStatus != ParcelStatus.Supplied)
+                        sentNOTProvided++;
+
+                    //customer in parcel- SENDER
                     parcelCustomer.CustomerInParcel = new()
                     {
                          Id = customer.Id,
                          Name=customer.Name,
                     };
 
-
-                    //add Details of the sending customer
+                    //add Details of the SENDER
                     customer.SentParcels = new();
                     customer.SentParcels.Add(parcelCustomer);
-              
-                    
                 }
-                foreach (IDAL.DO.Parcel item2 in parcelReciever)
+
+                //parcel at customer- parcels RECIVED
+                foreach (IDAL.DO.Parcel item2 in parcelRecieved)
                 {
                     ParcelCustomer parcelCustomer = new()
                     {
@@ -219,39 +206,36 @@ namespace IBL.BO
                         Priority = (Priority)item2.Priority,
                         Weight = (Weight)item2.Weight
                     };
-                    if (item2.Create == DateTime.MinValue)
-                    {
-                        parcelCustomer.ParcelStatus = ParcelStatus.Created;
-                    }
-                    if (item2.Supplied == DateTime.MinValue)
-                    {
-                        parcelCustomer.ParcelStatus = ParcelStatus.Delivered;
-                    }
-                    if (item2.PickedUp == DateTime.MinValue)
-                    {
-                        parcelCustomer.ParcelStatus = ParcelStatus.Picked;
-                    }
-                    if (item2.Assigned == DateTime.MinValue)
-                    {
-                        parcelCustomer.ParcelStatus = ParcelStatus.Assigned;
-                    }
-
+                    //finds the parcel status
+                    parcelCustomer.ParcelStatus = FindParcelStatus(item2);
+                    if (parcelCustomer.ParcelStatus == ParcelStatus.Supplied)
+                        parcelRecived++;
+                    else if (parcelCustomer.ParcelStatus != ParcelStatus.Supplied)
+                        parcelOnItsWay++;
+                    //customer in parcel- RECIVER
                     parcelCustomer.CustomerInParcel = new()
                     {
                         Id = customer.Id,
                         Name=customer.Name,
                     };
 
-
                     //add Details of the rciever customer
                     customer.ReceiveParcels = new();
-
                     customer.ReceiveParcels.Add(parcelCustomer);
-                    customersList.Add(customer);
                 }
-               
+                CustomerToList customerToList = new()
+                {
+                    Id = customer.Id,
+                    Name = customer.Name,
+                    Phone = customer.Phone,
+                    SentAndProvidedParcels = sentAndProvided,
+                    SentButNOTProvidedParcels = sentNOTProvided,
+                    RecivedParcels = parcelRecived,
+                    ParcelsOnTheWay = parcelOnItsWay
+                };
+                customerList.Add(customerToList);
             }
-            return customersList;
+            return customerList;
         }
     }
 }

@@ -78,7 +78,6 @@ namespace IBL.BO
 
                     dalo.UpdateParcelToDrone(theParcel.Id, droneId);
                 }
-
             }
             else
                 throw new Exception("drone can not be released");
@@ -117,7 +116,6 @@ namespace IBL.BO
                 //update the pick up time to the current time
                 parcel.PickedUp = DateTime.Now;
                 AddDroneToList(drone, customer.Location.Latitude, customer.Location.Longitude);
-
             }
         }
         /// <summary>
@@ -127,7 +125,6 @@ namespace IBL.BO
         /// <exception cref="Exception"></exception>
         public void UpdateParcelSuppliedByDrone(int droneId)
         {
-
             IDAL.DO.Parcel parcel = dalo.GetParcelByDroneId(droneId);
             //check if the parcel was picked up
             if (parcel.PickedUp == DateTime.MinValue)
@@ -186,11 +183,9 @@ namespace IBL.BO
                 parcel.DroneInParcel.Id = p.Id;
                 parcel.DroneInParcel.Battery = droneToList.Battery;
                 parcel.DroneInParcel.Location = droneToList.Location;
-               
             }
             return parcel;
         }
-
         
         /// <summary>
         /// Show LIST of parcels
@@ -234,10 +229,8 @@ namespace IBL.BO
                         Longitude = droneToList.Location.Longitude,
 
                     };
-                   
                     parcel.DroneInParcel = droneInParcel;
                 }
-               
             }
             return parcelList;
         }
@@ -268,6 +261,32 @@ namespace IBL.BO
                 }
             }
             return parcelListNotAssociated;
+        }
+
+        public ParcelStatus FindParcelStatus(IDAL.DO.Parcel parcel)
+        {
+            ParcelStatus parcelStatus = ParcelStatus.Created;
+            //the parcel was created but have not assigned to the drone
+            if (parcel.Assigned == DateTime.MinValue && parcel.Create != DateTime.MinValue)
+            {
+                parcelStatus = ParcelStatus.Created;
+            }
+            //the parcel was assigned to drone but have not picked up by it yet
+            if (parcel.Assigned != DateTime.MinValue && parcel.PickedUp == DateTime.MinValue)
+            {
+                parcelStatus = ParcelStatus.Assigned;
+            }
+            //the parcel was PickedUp by the drone but have not Supplied to the reciver yet
+            if (parcel.Supplied == DateTime.MinValue && parcel.PickedUp != DateTime.MinValue)
+            {
+                parcelStatus = ParcelStatus.PickedUp;
+            }
+            //the parcel supplied to the reciver
+            if (parcel.Supplied != DateTime.MinValue)
+            {
+                parcelStatus = ParcelStatus.Supplied;
+            }
+            return parcelStatus;
         }
     }
 }

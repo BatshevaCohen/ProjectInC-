@@ -441,9 +441,9 @@ namespace ConsoleUI_BL
 
                             //Prints the list of the customers
                             case ListOptions.Custumer:
-                                IEnumerable<Customer> CustomerList;
+                                IEnumerable<CustomerToList> CustomerList;
                                 CustomerList = bLObject.ShowCustomerList();
-                                foreach (Customer element in CustomerList) //prints the elements in the list
+                                foreach (CustomerToList element in CustomerList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;
 

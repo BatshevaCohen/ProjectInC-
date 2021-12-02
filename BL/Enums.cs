@@ -16,8 +16,8 @@
     {
         Created = 1,
         Assigned,
-        Picked,
-        Delivered
+        PickedUp,
+        Supplied
     }
     public enum ParcelTransferStatus
     {

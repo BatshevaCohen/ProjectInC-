@@ -83,7 +83,7 @@ namespace IBL.BO
         #region Show Lists:
         IEnumerable<Station> ShowStationList();
         IEnumerable<Drone> ShowDroneList();
-        IEnumerable<Customer> ShowCustomerList();
+        IEnumerable<CustomerToList> ShowCustomerList();
         IEnumerable<Parcel> ShowParcelList();
         IEnumerable<Parcel> ShowNonAssociatedParcelList();
         IEnumerable<Station> ShowChargeableStationList();
@@ -98,7 +98,8 @@ namespace IBL.BO
         #endregion
 
 
-       
+        ParcelStatus FindParcelStatus(IDAL.DO.Parcel parcel);
+
 
 
 

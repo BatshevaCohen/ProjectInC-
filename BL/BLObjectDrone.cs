@@ -234,12 +234,11 @@ namespace IBL.BO
                 {
                     Id = parcel.SenderId,
                 };
-                
-               
                 drone.ParcelInTransfer = parcelInTransfer;
             }
             return drone;
         }
+
         /// <summary>
         /// Show LIST of drones
         /// </summary>
@@ -247,6 +246,7 @@ namespace IBL.BO
         /// <exception cref="NotImplementedException"></exception>
         public IEnumerable<DroneToList> ShowDroneList()
         {
+            //drone list from the DAL
             var droness = dalo.ShowDroneList();
             List<DroneToList> droneList = new();
             foreach (var item in droness)
@@ -259,23 +259,22 @@ namespace IBL.BO
                     Battery = item.Battery,
                     DroneStatuses = (DroneStatuses)item.Status,
                 };
-                //to find the locations of the drone
-                DroneToList droneToList = dronesL.Find(x => x.Id == item.Id);
-                droneTL.Location = droneToList.Location;
-                //finds the parcel in transfer ID
-                Drone drone =GetDrone(item.Id);
-                droneTL.ParcelNumberTransferred = drone.ParcelInTransfer.Id;
+                //location
+                DroneToList droneBL = dronesL.Find(x => x.Id == item.Id);
+                droneTL.Location = droneBL.Location;
+
+                
+
+
+                //////finds the parcel in transfer ID
+                ////Drone drone =GetDrone(item.Id);
+                ////if (drone.ParcelInTransfer != null)
+                ////    droneTL.ParcelNumberTransferred = drone.ParcelInTransfer.Id;
+
+
                 droneList.Add(droneTL);
             }
             return droneList;
         }
-
-
-        /// <summary>
-        /// Imports the drone from the data layer and prints a drone from a logical entity
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-
     }       
 }

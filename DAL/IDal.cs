@@ -199,7 +199,11 @@ namespace IDAL
         /// <param name="droneLatitude"></param>
         /// <param name="droneLongitude"></param>
         Station DischargeDroneByLocation(int droneID, double droneLatitude, double droneLongitude);
-
+        /// <summary>
+        /// update the Battry of the Drone in layer data sourse
+        /// </summary>
+        /// <param name="dronId"></param>
+        void updateBatteryDrone(int dronId,double dis);
         /// <summary>
         ///  Update parcel delivered to Customer
         /// </summary>
@@ -264,6 +268,7 @@ namespace IDAL
         /// <param name="longitude"></param>
         /// <returns></returns>
         Station GetClosestStation(double latitude, double longitude);
+
         /// <summary>
         /// Method of applying drone power
         /// </summary>

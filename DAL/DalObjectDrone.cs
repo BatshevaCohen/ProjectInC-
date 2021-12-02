@@ -114,24 +114,23 @@ namespace DalObject
         /// <exception cref="Exception"></exception>
         public Station DischargeDroneByLocation(int droneID, double droneLatitude, double droneLongitude)
         {
-            bool flag = false;
+           
             Drone d = DataSource.Drones.Find(x => x.Id == droneID);
-            Station s;
+            Station s=new Station();
             foreach (Station item in DataSource.Stations) //finds the station
             {
                 if (item.Latitude == droneLatitude && item.Longitude == droneLongitude)
                 {
-                    flag = true;
+                    DataSource.Stations.Remove(s);
                     s = item;
                     s.ChargeSpots++;
+                    DataSource.Stations.Add(s);
                     return s;
                 }
              
             }
             
-                throw new Exception("couldn't find station by drones location");//לעשות חריגה שלא קיים מיקום תחנה לרחפן
-            
-            
+                throw new Exception("couldn't find station by drones location");
         }
        
         /// <summary>
@@ -155,6 +154,13 @@ namespace DalObject
                 DataSource.Config.Medium, DataSource.Config.Heavy,
                 DataSource.Config.ChargingRate };
             return result;
+        }
+        public void updateBatteryDrone(int id, double dis)
+        {
+            Drone d = DataSource.Drones.Find(x => x.Id == id);
+            DataSource.Drones.Remove(d);
+            d.Battery -= dis * 0.01;
+            DataSource.Drones.Add(d);
         }
     }
 }

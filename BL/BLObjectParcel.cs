@@ -113,13 +113,13 @@ namespace IBL.BO
                 //calculate the distance frome the current location of the drone- to the customer
                 double distance = dalo.CalculateDistance(customer.Location.Longitude, customer.Location.Latitude, drone.Location.Longitude, drone.Location.Latitude);
                 //update the location of the drone to where the sender is (sender's location)
-                drone.Location.Latitude = customer.Location.Latitude;
-                drone.Location.Latitude = customer.Location.Longitude;
+                dronesL.Find(x=>x.Id==droneId).Location.Latitude= customer.Location.Latitude;
+                dronesL.Find(x => x.Id == droneId).Location.Longitude = customer.Location.Longitude;
                 // for each KM - 1% of the battery
-                drone.Battery -= distance * 0.01;
+                dronesL.Find(x => x.Id == droneId).Battery-= distance * 0.01; 
                 //update the pick up time to the current time
                 parcel.PickedUp = DateTime.Now;
-                AddDroneToList(drone, customer.Location.Latitude, customer.Location.Longitude);
+                dalo.updateBatteryDrone( droneId, distance);
             }
         }
         /// <summary>

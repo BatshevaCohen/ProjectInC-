@@ -93,14 +93,14 @@ namespace DalObject
 
         public void UpdateAddDroneToCharge(int dronId, int stationId)
         {
-            DroneCharge droneCharge = new()
+            
+            DataSource.DroneCharges.Add(new DroneCharge()
             {
                 DroneId = dronId,
                 StationId = stationId
-            };
-            //Add new drone to the list
-            DataSource.DroneCharges = new();
-            DataSource.DroneCharges.Add(droneCharge);
+            });
+                
+           
         }
         /// <summary>
         /// Uncharge drone and update the station

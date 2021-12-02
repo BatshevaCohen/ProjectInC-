@@ -53,7 +53,15 @@ namespace IBL.BO
             dalo.AddDrone(d); //adds the drone to the dal object
             AddDroneToList(drone, station.Latitude,station.Longitude);
             dalo.UpdateChargeSpots(station.Id);
-            dalo.UpdateAddDroneToCharge(drone.Id, station.Id);
+            if(station.ChargeSpots>0)
+            {
+                dalo.UpdateAddDroneToCharge(drone.Id, station.Id);
+            }
+            else
+            {
+                throw new Exception("there are not availble ChargeSpots!");
+            }
+            
         }
 
         /// <summary>
@@ -264,7 +272,11 @@ namespace IBL.BO
                 droneTL.Location = droneToList.Location;
                 //finds the parcel in transfer ID
                 Drone drone =GetDrone(item.Id);
-                droneTL.ParcelNumberTransferred = drone.ParcelInTransfer.Id;
+                if (drone.ParcelInTransfer != null)
+                {
+                    droneTL.ParcelNumberTransferred = drone.ParcelInTransfer.Id;
+                }
+                
                 droneList.Add(droneTL);
             }
             return droneList;

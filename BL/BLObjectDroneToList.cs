@@ -32,6 +32,8 @@ namespace IBL.BO
             {
                 droneToList.ParcelNumberTransferred = drone.ParcelInTransfer.Id;
             }
+            else
+                droneToList.ParcelNumberTransferred = 0;
             dronesL.Add(droneToList);
         }
            public void UpdateNumOfTransferDroneToList(int parcelId)

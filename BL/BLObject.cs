@@ -126,8 +126,11 @@ namespace IBL.BO
                         // Battery mode will be recharged between a minimal charge that will allow it to reach the station closest to charging and a full charge
                         double distance = dalo.GetDistanceBetweenLocationAndClosestBaseStation(parcelsDelivered[index].ReceiverId);
                         droneBL.Battery = r.Next((int)(distance * dalo.PowerConsumptionRequest()[0] + 1), 101);
+
+                        droneBL.ParcelNumberTransferred= 0;
                     }
                 }
+
                 dronesL.Add(droneBL);
                
             }

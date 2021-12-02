@@ -7,7 +7,7 @@ namespace IBL.BO
 {
     public interface IBL
     {
-        #region Ddd:
+        #region Add:
         /// <summary>
         /// Add Station
         /// </summary>
@@ -82,7 +82,7 @@ namespace IBL.BO
 
         #region Show Lists:
         IEnumerable<StationToList> ShowStationList();
-        IEnumerable<Drone> ShowDroneList();
+        IEnumerable<DroneToList> ShowDroneList();
         IEnumerable<CustomerToList> ShowCustomerList();
         IEnumerable<Parcel> ShowParcelList();
         IEnumerable<Parcel> ShowNonAssociatedParcelList();
@@ -92,7 +92,7 @@ namespace IBL.BO
 
         #region Get by ID;
         Station GetStation(int requestedId);
-        Drone GetDroneBL(int droneId);
+        Drone GetDrone(int droneId);
         Customer GetCustomer(int customerId);
         Parcel GetParcel(int parcelId);
         #endregion

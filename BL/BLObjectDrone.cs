@@ -73,11 +73,6 @@ namespace IBL.BO
             dalo.UpdateNameOfDrone(id, model);
         }
 
-        
-        
-
-        
-
         /// <summary>
         /// Charging drone
         /// </summary>
@@ -126,7 +121,6 @@ namespace IBL.BO
                         if (flag)
                             break;
                     }
-
                 }
                 if (flag == false)
                 {
@@ -138,6 +132,7 @@ namespace IBL.BO
                 throw new Exception("drone can not be sent for charging its is not Available ! ");
             }
         }
+
         /// <summary>
         /// Update drone to station
         /// </summary>
@@ -163,9 +158,8 @@ namespace IBL.BO
             dalo.UpdateChargeSpots(station.Id);
             //הוספת מופע לרשימת הרחפנים בטעינה
             dalo.UpdateAddDroneToCharge(droneId, station.Id);
-
-
         }
+
         /// <summary>
         /// Discharge drone
         /// </summary>
@@ -200,8 +194,8 @@ namespace IBL.BO
             {
                 throw new Exception("drone can't be discharged");
             }
-            
         }
+
         /// <summary>
         /// Get drone by ID
         /// </summary>
@@ -251,46 +245,28 @@ namespace IBL.BO
         /// </summary>
         /// <returns></returns>
         /// <exception cref="NotImplementedException"></exception>
-        public IEnumerable<Drone> ShowDroneList()
+        public IEnumerable<DroneToList> ShowDroneList()
         {
             var droness = dalo.ShowDroneList();
-            List<Drone> droneList = new();
+            List<DroneToList> droneList = new();
             foreach (var item in droness)
             {
-                Drone drone = new();
-                drone.Id = item.Id;
-                drone.Model = item.Model;
-                drone.Battery = item.Battery;
-                drone.DroneStatuses = (DroneStatuses)item.Status;
-                drone.Weight = (Weight)item.MaxWeight;
-                //to find the locations drone---
+                DroneToList droneTL = new()
+                {
+                    Id = item.Id,
+                    Model = item.Model,
+                    Weight = (Weight)item.MaxWeight,
+                    Battery = item.Battery,
+                    DroneStatuses = (DroneStatuses)item.Status,
+                };
+                //to find the locations of the drone
                 DroneToList droneToList = dronesL.Find(x => x.Id == item.Id);
-                drone.Location = droneToList.Location;
-                if (drone.DroneStatuses != DroneStatuses.Shipping)
-                {
-                    droneList.Add(drone);
-                    
-                }
-                else
-                {
-                    //Package data in transfer mode 
-                    IDAL.DO.Parcel parcel = dalo.GetParcelInTransferByDroneId(drone.Id);
-                    ParcelInTransfer parcelInTransfer = new()
-                    {
-                        Id = parcel.Id,
-                        Priority = (Priority)parcel.Priority,
-                        Weight = (Weight)parcel.Weight,
-                        ParcelTransferStatus = ParcelTransferStatus.OnTheWayToDestination
-                    };
-                    parcelInTransfer.Sender.Id = parcel.SenderId;
-                    parcelInTransfer.Sender.Id = parcel.SenderId;
-                    drone.ParcelInTransfer = parcelInTransfer;
-                    droneList.Add(drone);
-                }
-                
-               
+                droneTL.Location = droneToList.Location;
+                //finds the parcel in transfer ID
+                Drone drone =GetDrone(item.Id);
+                droneTL.ParcelNumberTransferred = drone.ParcelInTransfer.Id;
+                droneList.Add(droneTL);
             }
-
             return droneList;
         }
 

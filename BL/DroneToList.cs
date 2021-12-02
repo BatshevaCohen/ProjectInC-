@@ -23,12 +23,12 @@ namespace IBL.BO
         public override string ToString()
         {
             String result = "";
-            result += $"Drone ID is {Id}, \n";
-            result += $"Drone Model is {Model}, \n";
-            result += $"Drone weight is {Weight}, \n";
+            result += $"Drone ID is: {Id}, \n";
+            result += $"Drone Model is: {Model}, \n";
+            result += $"Drone weight is: {Weight}, \n";
             result += $"Battery precent is: {Battery}, \n";
-            result += $"Drone status is {DroneStatuses}, \n";
-            result += $"Drone location is {Location}, \n";
+            result += $"Drone status is: {DroneStatuses}, \n";
+            result += $"Location: {Location} \n";
             //only if there is parcel in transfer
             if(ParcelNumberTransferred!=0)
                 result += $"Parcel's number in transfer {ParcelNumberTransferred}, \n";

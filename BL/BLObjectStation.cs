@@ -160,10 +160,5 @@ namespace IBL.BO
             //update the number of available charging spots in the station
             station.AvailableChargingSpots--;
         }
-
-        public Drone GetDroneBL(int droneId)
-        {
-            throw new NotImplementedException();
-        }
     }
 }

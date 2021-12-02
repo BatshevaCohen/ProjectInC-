@@ -433,9 +433,9 @@ namespace ConsoleUI_BL
 
                             //Prints the list of the drones
                             case ListOptions.Drone:
-                                IEnumerable<Drone> DroneList;
+                                IEnumerable<DroneToList> DroneList;
                                 DroneList = bLObject.ShowDroneList();
-                                foreach (Drone element in DroneList) //prints the elements in the list
+                                foreach (DroneToList element in DroneList) //prints the elements in the list
                                     Console.WriteLine(element);
                                 break;
 

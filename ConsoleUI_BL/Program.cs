@@ -406,7 +406,6 @@ namespace ConsoleUI_BL
                                 catch (Exception ex)
                                 {
                                     Console.WriteLine(ex.Message);
-
                                 }
                                 break;
                             //EXIT:

@@ -56,6 +56,7 @@ namespace DalObject
             }
             return DataSource.Stations.First(c => c.Id == id);
         }
+
         /// <summary>
         /// View Station List
         /// </summary>
@@ -105,15 +106,13 @@ namespace DalObject
 
         public void UpdateAddDroneToCharge(int dronId, int stationId)
         {
-            
             DataSource.DroneCharges.Add(new DroneCharge()
             {
                 DroneId = dronId,
                 StationId = stationId
             });
-                
-           
         }
+
         /// <summary>
         /// Uncharge drone and update the station
         /// </summary>

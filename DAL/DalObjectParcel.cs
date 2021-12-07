@@ -31,7 +31,6 @@ namespace DalObject
         /// <param name="id"></param>
         public Parcel GetParcel(int id)
         {
-
             if (!DataSource.Parcels.Exists(item => item.Id == id))
             {
                 throw new ParcelException($"ID: {id} does not exist!!");
@@ -41,14 +40,18 @@ namespace DalObject
         /// <summary>
         /// view lists functions for Parcel
         /// </summary>
-        public IEnumerable<Parcel> ShowParcelList()
+        public IEnumerable<Parcel> ShowParcelList(Func<Parcel, bool> predicate = null)
         {
-            List<Parcel> ParcelList = new List<Parcel>();
-            foreach (Parcel element in DataSource.Parcels)
+            if (predicate == null)
             {
-                ParcelList.Add(element);
+                List<Parcel> ParcelList = new List<Parcel>();
+                foreach (Parcel element in DataSource.Parcels)
+                {
+                    ParcelList.Add(element);
+                }
+                return ParcelList;
             }
-            return ParcelList;
+            return DataSource.Parcels.Where(predicate).ToList();
         }
         /// <summary>
         /// shows the list of packages that haven't been associated to a drone

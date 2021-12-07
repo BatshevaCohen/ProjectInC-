@@ -142,25 +142,19 @@ namespace IDAL
         /// Show Customer List
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Customer> ShowCustomerList(Func<Station, bool> predicate = null);
+        IEnumerable<Customer> ShowCustomerList(Func<Customer, bool> predicate = null);
 
         /// <summary>
         /// Show Drone List
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Drone> ShowDroneList(Func<Station, bool> predicate = null);
-
-        ///// <summary>
-        /////  shows the list of packages that haven't been associated to a drone
-        ///// </summary>
-        ///// <returns></returns>
-        //IEnumerable<Parcel> ShowNonAssociatedParcelList();
+        IEnumerable<Drone> ShowDroneList(Func<Drone, bool> predicate = null);
 
         /// <summary>
         /// Show Parcel List
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Parcel> ShowParcelList(Func<Station, bool> predicate = null);
+        IEnumerable<Parcel> ShowParcelList(Func<Parcel, bool> predicate = null);
 
         #endregion
 

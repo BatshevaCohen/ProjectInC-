@@ -61,9 +61,9 @@ namespace DalObject
         /// <summary>
         /// Show list of Customers
         /// </summary>
-        public IEnumerable<Customer> ShowCustomerList(Func<Customer,bool>predicat = null)
+        public IEnumerable<Customer> ShowCustomerList(Func<Customer,bool> predicate = null)
         {
-            if (predicat == null)
+            if (predicate == null)
             {
                 List<Customer> CustomerList = new();
                 foreach (Customer element in DataSource.Customer)

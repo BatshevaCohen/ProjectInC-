@@ -61,7 +61,6 @@ namespace IBL.BO
             {
                 throw new Exception("there are not availble ChargeSpots!");
             }
-            
         }
 
         /// <summary>
@@ -277,7 +276,6 @@ namespace IBL.BO
                 {
                     droneTL.ParcelNumberTransferred = drone.ParcelInTransfer.Id;
                 }
-                
                 droneList.Add(droneTL);
             }
             return droneList;

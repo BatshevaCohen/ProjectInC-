@@ -60,29 +60,37 @@ namespace DalObject
         /// View Station List
         /// </summary>
         /// <returns></returns>
-        public IEnumerable<Station> ShowStationList()
+        public IEnumerable<Station> ShowStationList(Func<Station, bool> predicate = null)
         {
-            List<Station> stationList = new();
-            foreach (Station element in DataSource.Stations)
+            if (predicate == null)
             {
-                stationList.Add(element);
+                List<Station> stationList = new();
+                foreach (Station element in DataSource.Stations)
+                {
+                    stationList.Add(element);
+                }
+                return stationList;
             }
-            return stationList;
+            return DataSource.Stations.Where(predicate).ToList();
         }
-        /// <summary>
-        ///  shows stations with available charging spots
-        /// </summary>
-        /// <returns></returns>
-        public IEnumerable<Station> ShowChargeableStationList()
-        {
-            List<Station> ChargeableBaseStationList = new ();
-            foreach (Station element in DataSource.Stations)
-            {
-                if (element.ChargeSpots > 0)
-                    ChargeableBaseStationList.Add(element);
-            }
-            return ChargeableBaseStationList;
-        }
+
+        ///// <summary>
+        /////  shows stations with available charging spots
+        ///// </summary>
+        ///// <returns></returns>
+        //public IEnumerable<Station> ShowChargeableStationList()
+        //{
+        //    List<Station> ChargeableBaseStationList = new ();
+        //    foreach (Station element in DataSource.Stations)
+        //    {
+        //        if (element.ChargeSpots > 0)
+        //            ChargeableBaseStationList.Add(element);
+        //    }
+        //    return ChargeableBaseStationList;
+        //}
+
+
+
         /// <summary>
         /// updates the number of available charging spots
         /// </summary>

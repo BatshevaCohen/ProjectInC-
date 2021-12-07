@@ -136,12 +136,13 @@ namespace IDAL
         /// Show Station List
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Station> ShowStationList();
-        /// <summary>
-        /// shows stations with available charging spots
-        /// </summary>
-        /// <returns></returns>
-        IEnumerable<Station> ShowChargeableStationList();
+        IEnumerable<Station> ShowStationList(Func<Station, bool> predicate = null);
+
+        ///// <summary>
+        ///// shows stations with available charging spots
+        ///// </summary>
+        ///// <returns></returns>
+        //IEnumerable<Station> ShowChargeableStationList();
 
         /// <summary>
         /// Show Customer List

@@ -50,7 +50,7 @@ namespace IBL.BO
                 {
                     droneBL.DroneStatuses = DroneStatuses.Shipping;
                     //If the package was associated but not collected
-                    foreach (var p in parcels.Where(p => p.PickedUp == DateTime.MinValue))
+                    foreach (var p in parcels.Where(p => p.PickedUp ==DateTime.MinValue))
                     {
                         // The location of the drone will be at the station closest to the sender
                         int senderId = p.SenderId;

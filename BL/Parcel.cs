@@ -14,10 +14,10 @@ namespace IBL.BO
         public Weight Weight { get; set; } //wheight category
         public Priority Priority { get; set; } // parcel's priority
         public DroneInParcel DroneInParcel { get; set; }
-        public DateTime ParcelCreationTime { get; set; } // the time of the parcel's creation
-        public DateTime AssignmentToParcelTime { get; set; } // the time when the parcel have assigned
-        public DateTime CollectionTime { get; set; } // percel's collection time
-        public DateTime SupplyTime { get; set; } //parcel's supply time
+        public DateTime? ParcelCreationTime { get; set; } // the time of the parcel's creation
+        public DateTime? AssignmentToParcelTime { get; set; } // the time when the parcel have assigned
+        public DateTime? CollectionTime { get; set; } // percel's collection time
+        public DateTime? SupplyTime { get; set; } //parcel's supply time
         /// <summary>
         /// ToString
         /// </summary>

@@ -61,14 +61,19 @@ namespace DalObject
         /// <summary>
         /// Show list of Customers
         /// </summary>
-        public IEnumerable<Customer> ShowCustomerList()
+        public IEnumerable<Customer> ShowCustomerList(Func<Customer,bool>predicat = null)
         {
-            List<Customer> CustomerList = new();
-            foreach (Customer element in DataSource.Customer)
+            if (predicat == null)
             {
-                CustomerList.Add(element);
+                List<Customer> CustomerList = new();
+                foreach (Customer element in DataSource.Customer)
+                {
+                    CustomerList.Add(element);
+                }
+                return CustomerList;
             }
-            return CustomerList;
+            else
+                return DataSource.Customer.Where(predicate).ToList();
         }
 
     }

@@ -52,14 +52,20 @@ namespace DalObject
         /// <summary>
         /// view lists functions for Drone
         /// </summary>
-        public IEnumerable<Drone> ShowDroneList()
+        public IEnumerable<Drone> ShowDroneList(Func<Drone ,bool> predicate = null)
         {
-            List<Drone> DroneList = new List<Drone>();
-            foreach (Drone element in DataSource.Drones)
+            if (predicate == null)
             {
-                DroneList.Add(element);
+                List<Drone> DroneList = new List<Drone>();
+                foreach (Drone element in DataSource.Drones)
+                {
+                    DroneList.Add(element);
+                }
+
+                return DroneList;
             }
-            return DroneList;
+            else
+                return DataSource.Drones.Where(predicate).ToList();
         }
        
         /// <summary>

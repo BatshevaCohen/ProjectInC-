@@ -44,7 +44,7 @@ namespace DalObject
         {
             if (predicate == null)
             {
-                List<Parcel> ParcelList = new List<Parcel>();
+                List<Parcel> ParcelList = new();
                 foreach (Parcel element in DataSource.Parcels)
                 {
                     ParcelList.Add(element);
@@ -59,7 +59,7 @@ namespace DalObject
         /// <returns></returns>
         public IEnumerable<Parcel> ShowNonAssociatedParcelList()
         {
-            List<Parcel> NonAssociatedParcelList = new List<Parcel>();
+            List<Parcel> NonAssociatedParcelList = new();
             foreach (Parcel element in DataSource.Parcels)
             {
                 if (element.DroneID == 0)
@@ -145,7 +145,7 @@ namespace DalObject
         }
         public List<Parcel> GetListOfParcelSending(int id)
         {
-            List<Parcel> Listparcels = new List<Parcel>();
+            List<Parcel> Listparcels = new();
             foreach (Parcel item in DataSource.Parcels)
             {
                 if(item.SenderId==id)
@@ -157,7 +157,7 @@ namespace DalObject
         }
         public List<Parcel> GetListOfParcelRecirver(int id)
         {
-            List<Parcel> Recieverparcels = new List<Parcel>();
+            List<Parcel> Recieverparcels = new();
             foreach (Parcel item in DataSource.Parcels)
             {
                 if (item.ReceiverId == id)

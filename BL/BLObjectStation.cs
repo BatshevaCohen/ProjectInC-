@@ -112,14 +112,20 @@ namespace IBL.BO
         /// <exception cref="NotImplementedException"></exception>
         public IEnumerable<StationToList> ShowChargeableStationList()
         {
-            List<StationToList> stationListWithAvailableChargingSpots = new();
-            var stations = ShowStationList();
-            foreach (StationToList item in stations)
+            List<StationToList> stationListWithAvailableChargingSpots = new List<StationToList>();
+            IEnumerable<IDAL.DO.Station> stations = dalo.ShowStationList(x => x.ChargeSpots > 0);
+            foreach (var item in stations)
             {
                 //if there are available charging spots at the station
-                if (item.AvailableChargingSpots > 0)
+                if (item.ChargeSpots > 0)
                 {
-                    StationToList stationTL = item;
+                    StationToList stationTL = new()
+                    {
+                        Id = item.Id,
+                        Name = item.Name,
+                        UnavailableChargingSpots = GetStation(item.Id).droneInChargings.Count(),
+                        AvailableChargingSpots = item.ChargeSpots - (GetStation(item.Id).droneInChargings.Count())
+                    };
                     stationListWithAvailableChargingSpots.Add(stationTL);
                 }
             }

@@ -10,7 +10,7 @@ using IDAL.DO;
 
 namespace IBL.BO
 {
-    public partial class BLObject 
+    public partial class BLObject
     {
         /// <summary>
         /// Add station
@@ -43,7 +43,7 @@ namespace IBL.BO
         /// <param name="charging_spots"></param>
         public void UpdateStetion(int id, string name, int charging_spots)
         {
-           
+
             dalo.UpdateStetion(id, name, charging_spots);
         }
 
@@ -68,7 +68,7 @@ namespace IBL.BO
                 Longitude = s.Longitude
             };
             //list of drone and 
-            List<DroneCharge> droneCharges= dalo.GetListOfDronInCharge(stationID);
+            List<DroneCharge> droneCharges = dalo.GetListOfDronInCharge(stationID);
             foreach (DroneCharge item in droneCharges)
             {
                 DroneInCharging droneInCharging = new();
@@ -99,7 +99,7 @@ namespace IBL.BO
                 };
                 //list of drones that are currently charging in the station 
                 List<DroneCharge> droneCharges = dalo.GetListOfDronInCharge(station.Id);
-                station.UnavailableChargingSpots= droneCharges.Count;
+                station.UnavailableChargingSpots = droneCharges.Count;
                 stationList.Add(station);
             }
             return stationList;
@@ -116,18 +116,14 @@ namespace IBL.BO
             IEnumerable<IDAL.DO.Station> stations = dalo.ShowStationList(x => x.ChargeSpots > 0);
             foreach (var item in stations)
             {
-                //if there are available charging spots at the station
-                if (item.ChargeSpots > 0)
+                StationToList stationTL = new()
                 {
-                    StationToList stationTL = new()
-                    {
-                        Id = item.Id,
-                        Name = item.Name,
-                        UnavailableChargingSpots = GetStation(item.Id).droneInChargings.Count(),
-                        AvailableChargingSpots = item.ChargeSpots - (GetStation(item.Id).droneInChargings.Count())
-                    };
-                    stationListWithAvailableChargingSpots.Add(stationTL);
-                }
+                    Id = item.Id,
+                    Name = item.Name,
+                    UnavailableChargingSpots = GetStation(item.Id).droneInChargings.Count(),
+                    AvailableChargingSpots = item.ChargeSpots - (GetStation(item.Id).droneInChargings.Count())
+                };
+                stationListWithAvailableChargingSpots.Add(stationTL);
             }
             return stationListWithAvailableChargingSpots;
         }

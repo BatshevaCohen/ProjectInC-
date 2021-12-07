@@ -10,7 +10,7 @@ using IDAL.DO;
 
 namespace IBL.BO
 {
-    public partial class BLObject 
+    public partial class BLObject
     {
         /// <summary>
         /// Add parcel
@@ -76,16 +76,16 @@ namespace IBL.BO
                     DroneToList dr = dronesL.Find(d => d.Id == droneId);
                     dr.Location = new Location { Latitude = customer.Latitude, Longitude = customer.Longitude };
                     //Update and return parcel if the parcel found
-                     int parcelINTransfer= dalo.UpdateParcelToDrone(theParcel.Id, droneId);
+                    int parcelINTransfer = dalo.UpdateParcelToDrone(theParcel.Id, droneId);
                     {
                         dronesL.Find(x => x.Id == droneId).ParcelNumberTransferred = parcelINTransfer;
                     }
-
                 }
             }
             else
                 throw new Exception("drone can not be released");
         }
+
         /// <summary>
         /// Updete that the parcel has picked up by a drone
         /// </summary>
@@ -113,15 +113,16 @@ namespace IBL.BO
                 //calculate the distance frome the current location of the drone- to the customer
                 double distance = dalo.CalculateDistance(customer.Location.Longitude, customer.Location.Latitude, drone.Location.Longitude, drone.Location.Latitude);
                 //update the location of the drone to where the sender is (sender's location)
-                dronesL.Find(x=>x.Id==droneId).Location.Latitude= customer.Location.Latitude;
+                dronesL.Find(x => x.Id == droneId).Location.Latitude = customer.Location.Latitude;
                 dronesL.Find(x => x.Id == droneId).Location.Longitude = customer.Location.Longitude;
                 // for each KM - 1% of the battery
-                dronesL.Find(x => x.Id == droneId).Battery-= distance * 0.01; 
+                dronesL.Find(x => x.Id == droneId).Battery -= distance * 0.01;
                 //update the pick up time to the current time
                 parcel.PickedUp = DateTime.Now;
-                dalo.updateBatteryDrone( droneId, distance);
+                dalo.updateBatteryDrone(droneId, distance);
             }
         }
+
         /// <summary>
         /// Update that the parcel supplied to the reciver (by the drone)
         /// </summary>
@@ -161,6 +162,7 @@ namespace IBL.BO
                 parcel.Supplied = DateTime.Now;
             }
         }
+
         /// <summary>
         /// View of parcel from bl
         /// </summary>
@@ -181,7 +183,7 @@ namespace IBL.BO
             };
 
             IDAL.DO.Customer custumerSender = dalo.GetCustomer(p.SenderId);
-            IDAL.DO.Customer custumerReceiver =  dalo.GetCustomer(p.ReceiverId);
+            IDAL.DO.Customer custumerReceiver = dalo.GetCustomer(p.ReceiverId);
             parcel.Sender = new() { Id = custumerSender.Id, Name = custumerSender.Name };
             parcel.Resiver = new() { Id = custumerReceiver.Id, Name = custumerReceiver.Name };
 
@@ -191,11 +193,10 @@ namespace IBL.BO
             {
                 DroneToList droneToList = dronesL.Find(x => x.Id == p.DroneID);
                 parcel.DroneInParcel = new() { Id = p.Id, Battery = droneToList.Battery, Location = droneToList.Location };
-               
             }
             return parcel;
         }
-        
+
         /// <summary>
         /// Show LIST of parcels
         /// </summary>
@@ -216,12 +217,13 @@ namespace IBL.BO
                     SenderName = parcel.Sender.Name,
                     Weight = (Weight)item.Weight,
                     Priority = (Priority)item.Priority,
-                    ParcelStatus= FindParcelStatus(item)
+                    ParcelStatus = FindParcelStatus(item)
                 };
                 parcelList.Add(parcelTL);
             }
             return parcelList;
         }
+
         /// <summary>
         /// Show LIST of NON ASSOCIATED parsels
         /// </summary>
@@ -229,20 +231,32 @@ namespace IBL.BO
         /// <exception cref="NotImplementedException"></exception>
         public IEnumerable<ParcelToList> ShowNonAssociatedParcelList()
         {
-            var parcels = ShowParcelList();
-            List<ParcelToList> parcelListNotAssociated = new ();
-            foreach (ParcelToList item in parcels)
+            IEnumerable<IDAL.DO.Parcel> parcels = dalo.ShowParcelList(x => x.Create != DateTime.MinValue);
+            List<ParcelToList> parcelListNotAssociated = new();
+            foreach (var item in parcels)
             {
-                //parcel created but did not assigned
-                if (item.ParcelStatus == ParcelStatus.Created)
+                ParcelToList parcelTL = new();
+                // only if the parcel created and did not assign
+                if (item.Assigned == DateTime.MinValue)
                 {
-                    ParcelToList parcelTL = item;
-                    parcelListNotAssociated.Add(parcelTL);
+                    Parcel parcel = GetParcel(item.Id);
+                    parcelTL.Id = item.Id;
+                    parcelTL.ReciverName = parcel.Resiver.Name;
+                    parcelTL.SenderName = parcel.Sender.Name;
+                    parcelTL.Weight = (Weight)item.Weight;
+                    parcelTL.Priority = (Priority)item.Priority;
+                    parcelTL.ParcelStatus = FindParcelStatus(item);
                 }
+                parcelListNotAssociated.Add(parcelTL);
             }
             return parcelListNotAssociated;
         }
 
+        /// <summary>
+        /// the function recive a parcel and return its shipping status
+        /// </summary>
+        /// <param name="parcel"></param>
+        /// <returns></returns>
         public ParcelStatus FindParcelStatus(IDAL.DO.Parcel parcel)
         {
             ParcelStatus parcelStatus = ParcelStatus.Created;

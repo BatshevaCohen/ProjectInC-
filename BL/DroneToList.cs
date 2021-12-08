@@ -10,7 +10,7 @@ namespace IBL.BO
     {
         public int Id { get; set; }
         // public string model { get; set; }
-        public string Model { get; internal set; }
+        public string Model { get; set; }
         public Weight Weight { get; set; }
         public double Battery { get; set; }
         public DroneStatuses DroneStatuses { get; set; }

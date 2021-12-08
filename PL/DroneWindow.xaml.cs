@@ -19,9 +19,27 @@ namespace PL
     /// </summary>
     public partial class DroneWindow : Window
     {
+        IBL.BO.Drone drone;
         public DroneWindow()
         {
+            drone = new IBL.BO.Drone();
+            DataContext = drone;
             InitializeComponent();
+        }
+
+        public DroneWindow(IBL.BO.Drone drone)
+        {
+            this.drone = drone;
+            DataContext = drone;
+            InitializeComponent();
+        }
+
+        //public Skimmer Skimmer { get => drone; }
+
+        private void btnShow_Click(object sender, RoutedEventArgs e)
+        {
+            String msg = drone.ToString();
+            MessageBox.Show(msg);
         }
     }
 }

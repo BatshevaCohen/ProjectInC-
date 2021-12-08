@@ -13,6 +13,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using IBL;
+using IBL.BO;
 
 namespace PL
 {
@@ -32,6 +33,16 @@ namespace PL
         {
             DroneListWindow wnd=new DroneListWindow(myBL);
             wnd.Show();
+        }
+
+        private void btnAddDrone_Click(object sender, RoutedEventArgs e)
+        {
+            DroneWindow wnd = new DroneWindow();
+            bool? result = wnd.ShowDialog();
+            if(result != null)
+            {
+                MessageBox.Show(wnd.Drone.ToString());
+            }
         }
     }
 }

@@ -14,6 +14,7 @@
             </Grid.ColumnDefinitions>
             <Button x:Name="btnShowDronesList" Content="Show Drones List" FontSize="22"
                     HorizontalAlignment="Stretch" Margin="80" VerticalAlignment="Stretch" Click="btnShowDronesList_Click"/>
+            <Button x:Name="btnAddDrone" Grid.Column="1" Content="Add drone" HorizontalAlignment="Stretch" Margin="80" VerticalAlignment="Stretch" Height="137" Width="200" Click="btnAddDrone_Click"/>
         </Grid>
 
     </Grid>

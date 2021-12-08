@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IBL.BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,6 +26,7 @@ namespace PL
             drone = new IBL.BO.Drone();
             DataContext = drone;
             InitializeComponent();
+            droneStatusComboBox.ItemsSource = Enum.GetValues(typeof(IBL.BO.DroneStatuses));
         }
 
         public DroneWindow(IBL.BO.Drone drone)
@@ -34,7 +36,7 @@ namespace PL
             InitializeComponent();
         }
 
-        //public Skimmer Skimmer { get => drone; }
+        public Drone Drone { get => drone; }
 
         private void btnShow_Click(object sender, RoutedEventArgs e)
         {

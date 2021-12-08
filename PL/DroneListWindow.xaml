@@ -11,6 +11,22 @@
             <RowDefinition Height="50*"/>
             <RowDefinition Height="400*"/>
         </Grid.RowDefinitions>
+        <Grid Name="UpGrid" Grid.Row="0"
+              HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="auto" Height="auto">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions >
+            <ComboBox Name="comboStatusSelector" Grid.Column="1" ToolTip="Choose a status" 
+                      HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" SelectionChanged="comboStatusSelector_SelectionChanged"/>
+            <TextBox x:Name="txtTBD" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TBD" VerticalAlignment="Center" Width="120"/>
+        </Grid>
+        <ListView Grid.Row="1" x:Name="DronesListView" Margin="0,0,0,20">
+            
+            
+        </ListView>
 
     </Grid>
 </Window>

@@ -19,13 +19,18 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
+            <Label x:Name="lblTBD" Content="StatusLable" HorizontalAlignment="Center" ToolTip="Choose a stetus"
+                   Grid.Column="0" VerticalAlignment="Center" Width="120"/>
             <ComboBox Name="comboStatusSelector" Grid.Column="1" ToolTip="Choose a status" 
                       HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" SelectionChanged="comboStatusSelector_SelectionChanged"/>
-            <TextBox x:Name="txtTBD" HorizontalAlignment="Center" TextWrapping="Wrap" Text="TBD" VerticalAlignment="Center" Width="120"/>
+            <Label x:Name="lblTBD2" Content="WeightLable" Grid.Column="2" ToolTip="Choose weight category"
+                   HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
+            <ComboBox x:Name="comboWeghitSelector" Grid.Column="3" ToolTip="Choose weight category"
+                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="comboWeightSelector_SelectionChanged"/>
         </Grid>
         <ListView Grid.Row="1" x:Name="DronesListView" Margin="0,0,0,20">
-            
-            
+
+
         </ListView>
 
     </Grid>

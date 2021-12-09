@@ -81,12 +81,19 @@ namespace PL
             this.bL = bl;
             InitializeComponent();
             comboStatusSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.DroneStatuses));
+            comboWeghitSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.Weight));
         }
 
         private void comboStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DroneStatuses droneStatuses = (DroneStatuses)comboStatusSelector.SelectedItem;
             this.DronesListView.ItemsSource = fakeList.Where(x => x.DroneStatuses == droneStatuses);
+        }
+
+        private void comboWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Weight weight = (Weight)comboWeghitSelector.SelectedItem;
+            this.DronesListView.ItemsSource= fakeList.Where(x => x.Weight == weight);
         }
     }
 }

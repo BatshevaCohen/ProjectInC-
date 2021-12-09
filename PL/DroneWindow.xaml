@@ -29,7 +29,7 @@
             <Label VerticalAlignment="Center" Grid.Row="3" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Drone Model:"/>
             <TextBox x:Name="droneModelTextBox" Width="120" VerticalAlignment="Center" Text="{Binding SkimmerModel, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
             <Label VerticalAlignment="Center" Grid.Row="4" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Drone Status:"/>
-            <ComboBox x:Name="droneStatusComboBox" Width="120" VerticalAlignment="Center" Grid.Row="4" Margin="3"  Height="Auto" HorizontalAlignment="Left"
+            <ComboBox x:Name="droneStatusComboBox" VerticalAlignment="Center" Grid.Row="4" Margin="3,0,3,0"  Height="Auto"
                       DisplayMemberPath="DroneStatus" Grid.Column="1">
                 <ComboBox.ItemsPanel>
                     <ItemsPanelTemplate>

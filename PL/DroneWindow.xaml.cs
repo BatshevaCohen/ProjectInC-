@@ -34,6 +34,7 @@ namespace PL
             this.drone = drone;
             DataContext = drone;
             InitializeComponent();
+            droneStatusComboBox.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
         }
 
         public Drone Drone { get => drone; }

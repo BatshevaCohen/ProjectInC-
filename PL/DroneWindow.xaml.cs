@@ -27,6 +27,7 @@ namespace PL
             DataContext = drone;
             InitializeComponent();
             droneStatusComboBox.ItemsSource = Enum.GetValues(typeof(IBL.BO.DroneStatuses));
+            droneWeightComboBox.ItemsSource = Enum.GetValues(typeof(IBL.BO.Weight));
         }
 
         public DroneWindow(IBL.BO.Drone drone)

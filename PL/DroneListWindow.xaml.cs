@@ -88,5 +88,11 @@ namespace PL
             DroneStatuses droneStatuses = (DroneStatuses)comboStatusSelector.SelectedItem;
             this.DronesListView.ItemsSource = fakeList.Where(x => x.DroneStatuses == droneStatuses);
         }
+
+        private void comboWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            Weight weight= (Weight)comboWeghitSelector.SelectedItem;
+            this.DronesListView.ItemsSource= fakeList.Where((x) => x.Weight == weight);
+        }
     }
 }

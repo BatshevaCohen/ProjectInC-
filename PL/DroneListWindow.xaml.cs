@@ -21,79 +21,49 @@ namespace PL
     /// </summary>
     public partial class DroneListWindow : Window
     {
-        List<IBL.BO.DroneToList> fakeList = new List<DroneToList>()
-        {
-            new DroneToList()
-            {
-                 Id = 3000,
-                 Model = "BBTT67H",
-                 Battery = 0.50,
-                 DroneStatuses = DroneStatuses.Available,
-                 ParcelNumberTransferred = 0,
-                 Location = new Location{ Latitude=32,  Longitude=31},
-                 Weight = Weight.Heavy
-            },
-            new DroneToList()
-            {
-                 Id = 45000,
-                 Model = "ExDrone2",
-                 Battery = 0.50,
-                 DroneStatuses = DroneStatuses.Maintenance,
-                 ParcelNumberTransferred = 0,
-                 Location = new Location{ Latitude=32,  Longitude=31},
-                 Weight = Weight.Light
-            },
-            new DroneToList()
-            {
-                 Id = 4000,
-                 Model = "ExDrone3",
-                 Battery = 0.50,
-                 DroneStatuses = DroneStatuses.Available,
-                 ParcelNumberTransferred = 0,
-                 Location = new Location{ Latitude=32,  Longitude=31},
-                 Weight = Weight.Heavy
-            },
-            new DroneToList()
-            {
-                 Id = 5000,
-                 Model = "ExDrone4",
-                 Battery = 0.50,
-                 DroneStatuses = DroneStatuses.Available,
-                 ParcelNumberTransferred = 0,
-                 Location = new Location{ Latitude=32,  Longitude=31},
-                 Weight = Weight.Heavy
-            },
-            new DroneToList()
-            {
-                 Id = 5500,
-                 Model = "ExDrone5",
-                 Battery = 0.50,
-                 DroneStatuses = DroneStatuses.Available,
-                 ParcelNumberTransferred = 0,
-                 Location = new Location{ Latitude=32,  Longitude=31},
-                 Weight = Weight.Heavy
-            },
-        };
+       
 
         IBL.BO.IBL bL;
         public DroneListWindow(IBL.BO.IBL bl)
         {
             this.bL = bl;
             InitializeComponent();
-            comboStatusSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.DroneStatuses));
-            comboWeghitSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.Weight));
+            comboStatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
+            comboWeghitSelector.ItemsSource = Enum.GetValues(typeof(Weight));
         }
 
         private void comboStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             DroneStatuses droneStatuses = (DroneStatuses)comboStatusSelector.SelectedItem;
-            this.DronesListView.ItemsSource = fakeList.Where(x => x.DroneStatuses == droneStatuses);
+            this.DronesListView.ItemsSource = bL.ShowDroneList().Where(x => x.DroneStatuses == droneStatuses);
         }
 
         private void comboWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             Weight weight = (Weight)comboWeghitSelector.SelectedItem;
-            this.DronesListView.ItemsSource= fakeList.Where(x => x.Weight == weight);
+            this.DronesListView.ItemsSource = bL.ShowDroneList().Where(x => x.Weight == weight);
+        }
+        //private void btnAddDrone_Click(object sender, RoutedEventArgs e)
+        //{
+        //    DroneWindow wnd = new DroneWindow();
+        //    bool? result = wnd.ShowDialog();
+        //    if (result != null)
+        //    {
+        //        MessageBox.Show(wnd.Drone.ToString());
+        //    }
+        //}
+        private void btnAddDrone_Click(object sender, RoutedEventArgs e)
+        {
+            DroneWindow wnd = new DroneWindow();
+            bool? result = wnd.ShowDialog();
+            if (result != null)
+            {
+                MessageBox.Show(wnd.Drone.ToString());
+            }
+        }
+            private void closeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -9,12 +9,10 @@
     <Grid>
         <Grid>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
+               
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnShowDronesList" Content="Show Drones List" FontSize="22"
-                    HorizontalAlignment="Stretch" Margin="80" VerticalAlignment="Stretch" Click="btnShowDronesList_Click"/>
-            <Button x:Name="btnAddDrone" Grid.Column="1" Content="Add drone" HorizontalAlignment="Stretch" Margin="80" VerticalAlignment="Stretch" Height="137" Width="200" Click="btnAddDrone_Click"/>
+            <Button x:Name="btnShowDronesList" Content="Show Drones List" FontSize="22" Margin="80,80,80,287" Click="btnShowDronesList_Click"/>
+
         </Grid>
 
     </Grid>

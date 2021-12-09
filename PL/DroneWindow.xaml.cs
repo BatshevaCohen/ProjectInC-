@@ -26,16 +26,18 @@ namespace PL
             drone = new IBL.BO.Drone();
             DataContext = drone;
             InitializeComponent();
-            droneStatusComboBox.ItemsSource = Enum.GetValues(typeof(IBL.BO.DroneStatuses));
-            droneWeightComboBox.ItemsSource = Enum.GetValues(typeof(IBL.BO.Weight));
+            droneWeightComboBox.ItemsSource = Enum.GetValues(typeof(Weight));
+            droneStatusComboBox.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
         }
 
         public DroneWindow(IBL.BO.Drone drone)
         {
+            drone = new IBL.BO.Drone();
             this.drone = drone;
             DataContext = drone;
             InitializeComponent();
-            droneStatusComboBox.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
+            droneWeightComboBox.ItemsSource = Enum.GetValues(typeof(Weight));
+            
         }
 
         public Drone Drone { get => drone; }

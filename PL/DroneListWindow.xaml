@@ -14,24 +14,46 @@
         <Grid Name="UpGrid" Grid.Row="0"
               HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="auto" Height="auto">
             <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="0.4*"/>
                 <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="0.4*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <Label x:Name="lblTBD" Content="StatusLable" HorizontalAlignment="Center" ToolTip="Choose a stetus"
-                   Grid.Column="0" VerticalAlignment="Center" Width="120"/>
+            <Label x:Name="lblTBD" Content="Status" HorizontalAlignment="Center" ToolTip="Choose a stetus"
+                   Grid.Column="0" VerticalAlignment="Center"/>
             <ComboBox Name="comboStatusSelector" Grid.Column="1" ToolTip="Choose a status" 
                       HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" SelectionChanged="comboStatusSelector_SelectionChanged"/>
-            <Label x:Name="lblTBD2" Content="WeightLable" Grid.Column="2" ToolTip="Choose weight category"
-                   HorizontalAlignment="Center" VerticalAlignment="Center" Width="120"/>
+            <Label x:Name="lblTBD2" Content="Weight" Grid.Column="2" ToolTip="Choose weight category"
+                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <ComboBox x:Name="comboWeghitSelector" Grid.Column="3" ToolTip="Choose weight category"
                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="comboWeightSelector_SelectionChanged"/>
+            <Button x:Name="btnADDdrone" Content="Add"  Grid.Column="4"  Click="btnAddDrone_Click"/> 
+            <Button Content="close" Click="closeButton_Click"  Grid.Column="5" />
         </Grid>
-        <ListView Grid.Row="1" x:Name="DronesListView" Margin="0,0,0,20">
 
 
-        </ListView>
+        <WrapPanel RenderTransformOrigin="0.5,0.5">
+            <WrapPanel.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform/>
+                    <SkewTransform/>
+                    <RotateTransform Angle="-0.12"/>
+                    <TranslateTransform/>
+                </TransformGroup>
+            </WrapPanel.RenderTransform>
+            <Button Content="Close windowe"
+ Width="120"
+ Height="30">
+                <Button.RenderTransform>
+                    <TranslateTransform X="660"
+ Y="390" />
+                </Button.RenderTransform>
+            </Button>
+        </WrapPanel>
 
+        <ListView Name="DronesListView" Grid.Row="1"></ListView>
     </Grid>
+
 </Window>

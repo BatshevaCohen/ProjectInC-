@@ -35,14 +35,7 @@ namespace PL
             wnd.Show();
         }
 
-        private void btnAddDrone_Click(object sender, RoutedEventArgs e)
-        {
-            DroneWindow wnd = new DroneWindow();
-            bool? result = wnd.ShowDialog();
-            if(result != null)
-            {
-                MessageBox.Show(wnd.Drone.ToString());
-            }
-        }
+       
+        
     }
 }

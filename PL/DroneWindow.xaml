@@ -30,7 +30,8 @@
             <TextBox x:Name="droneModelTextBox" Width="120" VerticalAlignment="Center" Text="{Binding SkimmerModel, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="3" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
             <Label VerticalAlignment="Center" Grid.Row="4" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Drone Status:"/>
             <ComboBox x:Name="droneStatusComboBox" Width="120" VerticalAlignment="Center" Grid.Row="4" Margin="3"  Height="Auto" HorizontalAlignment="Left"
-                      DisplayMemberPath="DroneStatus" Grid.Column="1" SelectionChanged="droneStatusComboBox_SelectionChanged"/>
+                      DisplayMemberPath="DroneStatus" Grid.Column="1"/>
+
             <Label VerticalAlignment="Center" Grid.Row="5" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Weight Category:"/>
             <ComboBox x:Name="droneWeightComboBox" Grid.Column="1" HorizontalAlignment="Left" Margin="3,0,0,0" Grid.Row="5" VerticalAlignment="Center" Width="120"/>
             <Label VerticalAlignment="Center" Grid.Row="6" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Latitude:"/>

@@ -43,15 +43,7 @@ namespace PL
             Weight weight = (Weight)comboWeghitSelector.SelectedItem;
             this.DronesListView.ItemsSource = bL.ShowDroneList().Where(x => x.Weight == weight);
         }
-        //private void btnAddDrone_Click(object sender, RoutedEventArgs e)
-        //{
-        //    DroneWindow wnd = new DroneWindow();
-        //    bool? result = wnd.ShowDialog();
-        //    if (result != null)
-        //    {
-        //        MessageBox.Show(wnd.Drone.ToString());
-        //    }
-        //}
+        
         private void btnAddDrone_Click(object sender, RoutedEventArgs e)
         {
             DroneWindow wnd = new DroneWindow();
@@ -64,6 +56,13 @@ namespace PL
             private void closeButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void DronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            // DroneWindow wnd = new DroneWindow();
+            DroneInActionView diav = new DroneInActionView();
+            bool? result = diav.ShowDialog();
         }
     }
 }

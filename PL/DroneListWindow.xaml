@@ -31,9 +31,9 @@
                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="comboWeightSelector_SelectionChanged"/>
             <Button x:Name="btnADDdrone" Content="Add"  Grid.Column="4"  Click="btnAddDrone_Click"/> 
             <Button Content="close" Click="closeButton_Click"  Grid.Column="5" />
+            <ListBox SelectedItem="listBox_SelectionChanged"></ListBox>
         </Grid>
-
-
+        
         <WrapPanel RenderTransformOrigin="0.5,0.5">
             <WrapPanel.RenderTransform>
                 <TransformGroup>
@@ -53,7 +53,9 @@
             </Button>
         </WrapPanel>
 
-        <ListView Name="DronesListView" Grid.Row="1"></ListView>
+        <ListView Name="DronesListView" Grid.Row="1" MouseDoubleClick="DronesListView_MouseDoubleClick"></ListView>
     </Grid>
+   
+         
 
 </Window>

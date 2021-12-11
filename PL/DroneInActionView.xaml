@@ -7,10 +7,6 @@
         mc:Ignorable="d"
         Title="DroneInActionView" Height="450" Width="800">
     <Grid>
-        <WrapPanel>
-            <ListBox x:Name="listBox"
- SelectionMode="Single"
- SelectionChanged="listBox_SelectionChanged" />
-        </WrapPanel>
-    </Grid>
+            <ListBox x:Name="listBox"  SelectionMode="Single"  />
+     </Grid>
 </Window>

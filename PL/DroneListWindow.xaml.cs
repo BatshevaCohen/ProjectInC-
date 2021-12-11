@@ -59,9 +59,23 @@ namespace PL
         }
 
         private void DronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        { 
-            DroneInActionView diav = new DroneInActionView();
-            bool? result =diav.ShowDialog();
+        {
+            
+            IBL.BO.DroneToList? droneToList = DronesListView.SelectedItem as IBL.BO.DroneToList;
+            if (droneToList != null)
+            {
+                //MessageBox.Show(droneToList.ToString());
+                // DroneInActionView diav = new DroneInActionView(droneToList);
+                // bool? result =diav.ShowDialog();
+                DroneWindow wnd = new DroneWindow(droneToList);
+               
+                bool? result = wnd.ShowDialog();
+                if (result != null)
+                {
+                    MessageBox.Show(wnd.Drone.ToString());
+                }
+            }
         }
+
     }
 }

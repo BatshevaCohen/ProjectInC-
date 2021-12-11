@@ -1,4 +1,5 @@
-﻿using System;
+﻿using IBL.BO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,19 +20,19 @@ namespace PL
     /// </summary>
     public partial class DroneInActionView : Window
     {
+        private DroneToList? droneToList;
+
         public DroneInActionView()
         {
             InitializeComponent();
         }
-        public string MyData { get; set; }
 
-        private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        public DroneInActionView(DroneToList droneToList)
         {
-            foreach (var selectedItem in listBox.SelectedItems)
-            {
-                
-            }
+            this.droneToList = droneToList;
+            InitializeComponent();
         }
+
     }
 }
 

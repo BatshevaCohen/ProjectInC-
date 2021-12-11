@@ -23,11 +23,15 @@ namespace PL
         {
             InitializeComponent();
         }
+        public string MyData { get; set; }
+
         private void listBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             foreach (var selectedItem in listBox.SelectedItems)
             {
+                
             }
         }
     }
 }
+

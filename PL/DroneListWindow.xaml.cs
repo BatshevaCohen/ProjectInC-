@@ -53,16 +53,15 @@ namespace PL
                 MessageBox.Show(wnd.Drone.ToString());
             }
         }
-            private void closeButton_Click(object sender, RoutedEventArgs e)
+        private void closeButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
         private void DronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            // DroneWindow wnd = new DroneWindow();
+        { 
             DroneInActionView diav = new DroneInActionView();
-            bool? result = diav.ShowDialog();
+            bool? result =diav.ShowDialog();
         }
     }
 }

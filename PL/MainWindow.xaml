@@ -11,7 +11,7 @@
             <Grid.ColumnDefinitions>
                
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnShowDronesList" Content="Show Drones List" FontSize="22" Margin="80,80,80,287" Click="btnShowDronesList_Click"/>
+            <Button x:Name="btnShowDronesList" Content="Show Drones List" FontSize="22" Margin="80,80,101,287" Click="btnShowDronesList_Click"/>
 
         </Grid>
 

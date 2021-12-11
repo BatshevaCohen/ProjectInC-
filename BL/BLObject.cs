@@ -24,7 +24,6 @@ namespace IBL.BO
             dronesL = new List<DroneToList>();
             var Drones = dalo.ShowDroneList();
             DronesInitialize(Drones);
-
         }
         /// <summary>
         /// Constractor for drones initializing
@@ -130,22 +129,8 @@ namespace IBL.BO
                         droneBL.ParcelNumberTransferred= 0;
                     }
                 }
-
                 dronesL.Add(droneBL);
-               
             }
-            
         }
-
-       
     }
-
 }
-
-
-
-
-
- 
- 
- 

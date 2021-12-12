@@ -14,23 +14,23 @@
         <Grid Name="UpGrid" Grid.Row="0"
               HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="auto" Height="auto">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="1*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="0.5*"/>
+                <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions >
-            <Label x:Name="lblTBD" Content="Status" HorizontalAlignment="Center" ToolTip="Choose a stetus"
-                   Grid.Column="0" VerticalAlignment="Center"/>
+            <Label x:Name="lblTBD" Content="status" Grid.Column="0" ToolTip="Choose a stetus"
+                HorizontalAlignment="Center"  VerticalAlignment="Center"/>
             <ComboBox Name="comboStatusSelector" Grid.Column="1" ToolTip="Choose a status" 
                       HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" SelectionChanged="comboStatusSelector_SelectionChanged"/>
-            <Label x:Name="lblTBD2" Content="Weight" Grid.Column="2" ToolTip="Choose weight category"
+            <Label x:Name="lblTBD2" Content="weight"  Grid.Column="2" ToolTip="Choose weight category"
                    HorizontalAlignment="Center" VerticalAlignment="Center"/>
             <ComboBox x:Name="comboWeghitSelector" Grid.Column="3" ToolTip="Choose weight category"
                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="comboWeightSelector_SelectionChanged"/>
-            <Button x:Name="btnADDdrone" Content="Add"  Grid.Column="4"  Click="btnAddDrone_Click"/> 
-            <Button Content="close" Click="closeButton_Click"  Grid.Column="5" />
+            <Button x:Name="btnADDdrone" Content="Add"  Grid.Column="4"  Click="btnAddDrone_Click"/>
+            <Button Content="close" Background="Blue" Foreground="White" Click="closeButton_Click"  Grid.Column="5" />
             <ListBox SelectedItem="listBox_SelectionChanged"></ListBox>
         </Grid>
         
@@ -50,7 +50,7 @@
             </Button>
         </WrapPanel>
 
-        <ListView Name="DronesListView" Grid.Row="1" MouseDoubleClick="DronesListView_MouseDoubleClick"></ListView>
+        <ListView Name="DronesListView" Grid.Row="2" MouseDoubleClick="DronesListView_MouseDoubleClick"></ListView>
     </Grid>
    
          

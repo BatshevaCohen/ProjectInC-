@@ -20,25 +20,22 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-                
+
             </Grid.ColumnDefinitions >
             <Label x:Name="lblTBD" Content="status" Grid.Column="0" ToolTip="Choose a stetus"
-                HorizontalAlignment="Center"  VerticalAlignment="Center"/>
+                HorizontalAlignment="Center"  VerticalAlignment="Center" FontSize="18"/>
             <ComboBox Name="comboStatusSelector" Grid.Column="1" ToolTip="Choose a status" 
                       HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" SelectionChanged="comboStatusSelector_SelectionChanged"/>
             <Label x:Name="lblTBD2" Content="weight"  Grid.Column="2" ToolTip="Choose weight category"
-                   HorizontalAlignment="Center" VerticalAlignment="Center"/>
+                   HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
             <ComboBox x:Name="comboWeghitSelector" Grid.Column="3" ToolTip="Choose weight category"
                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="comboWeightSelector_SelectionChanged"/>
-            <Button x:Name="btnADDdrone" Content="Add"  Grid.Column="4"  Click="btnAddDrone_Click"/>
-            <Button Content="close" Background="Blue" Foreground="White" Click="closeButton_Click"  Grid.Column="5" />
+            <Button x:Name="btnADDdrone" Content="Add"  Grid.Column="4"  Click="btnAddDrone_Click" FontSize="18"/>
+            <Button Content="close" Background="Blue" Foreground="White" Click="closeButton_Click"  Grid.Column="5" FontSize="18" />
             <ListBox SelectedItem="listBox_SelectionChanged" Grid.Column="5" Margin="0,66,0,-66"></ListBox>
         </Grid>
-        
-         <ListView Name="DronesListView" Grid.Row="2" MouseDoubleClick="DronesListView_MouseDoubleClick"></ListView>
-       
+
+        <ListView Name="DronesListView" Grid.Row="2" MouseDoubleClick="DronesListView_MouseDoubleClick"></ListView>
+
     </Grid>
-
-    
-
 </Window>

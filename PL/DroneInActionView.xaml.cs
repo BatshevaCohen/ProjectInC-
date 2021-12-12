@@ -30,8 +30,6 @@ namespace PL
             drone = new IBL.BO.Drone();
             DataContext = drone;
             InitializeComponent();
-            droneWeightComboBox.ItemsSource = Enum.GetValues(typeof(Weight));
-            droneStatusComboBox.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
         }
         public DroneInActionView(DroneToList droneToList)
         {

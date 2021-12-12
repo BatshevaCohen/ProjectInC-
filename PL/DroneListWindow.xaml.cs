@@ -37,6 +37,7 @@ namespace PL
 
         private void comboWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+
             Weight weight = (Weight)comboWeghitSelector.SelectedItem;
             this.DronesListView.ItemsSource = bL.ShowDroneList().Where(x => x.Weight == weight);
         }

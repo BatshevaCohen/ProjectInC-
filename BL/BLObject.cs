@@ -43,6 +43,7 @@ namespace IBL.BO
                     Model = droneDL.Model,
                     Weight = (Weight)droneDL.MaxWeight
                 };
+                
                 List<IDAL.DO.Parcel> parcelList = parcels.FindAll(p => p.DroneID == droneBL.Id);
 
                 if (parcels != null) //If there is a package that has not yet been delivered but the drone has already been associated
@@ -130,7 +131,11 @@ namespace IBL.BO
                     }
                 }
                 dronesL.Add(droneBL);
+                
             }
+            
         }
+        
     }
+
 }

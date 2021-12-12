@@ -20,6 +20,7 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
+                
             </Grid.ColumnDefinitions >
             <Label x:Name="lblTBD" Content="status" Grid.Column="0" ToolTip="Choose a stetus"
                 HorizontalAlignment="Center"  VerticalAlignment="Center"/>
@@ -31,28 +32,13 @@
                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="comboWeightSelector_SelectionChanged"/>
             <Button x:Name="btnADDdrone" Content="Add"  Grid.Column="4"  Click="btnAddDrone_Click"/>
             <Button Content="close" Background="Blue" Foreground="White" Click="closeButton_Click"  Grid.Column="5" />
-            <ListBox SelectedItem="listBox_SelectionChanged"></ListBox>
+            <ListBox SelectedItem="listBox_SelectionChanged" Grid.Column="5" Margin="0,66,0,-66"></ListBox>
         </Grid>
         
-        <WrapPanel RenderTransformOrigin="0.5,0.5">
-            <WrapPanel.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform/>
-                    <RotateTransform Angle="-0.12"/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </WrapPanel.RenderTransform>
-            <Button Content="Close windowe" Width="120" Height="30">
-                <Button.RenderTransform>
-                    <TranslateTransform X="660" Y="390" />
-                </Button.RenderTransform>
-            </Button>
-        </WrapPanel>
-
-        <ListView Name="DronesListView" Grid.Row="2" MouseDoubleClick="DronesListView_MouseDoubleClick"></ListView>
+         <ListView Name="DronesListView" Grid.Row="2" MouseDoubleClick="DronesListView_MouseDoubleClick"></ListView>
+       
     </Grid>
-   
-         
+
+    
 
 </Window>

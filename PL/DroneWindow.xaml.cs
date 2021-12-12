@@ -39,26 +39,24 @@ namespace PL
             DataContext = drone;
             InitializeComponent();
             droneWeightComboBox.ItemsSource = Enum.GetValues(typeof(Weight));
-            
+            droneStatusComboBox.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
         }
-
+       
         public DroneWindow(DroneToList droneToList)
         {
-
             this.droneToList = droneToList;
             drone = new IBL.BO.Drone()
             {
                 Id = droneToList.Id,
                 Battery = droneToList.Battery,
                 Model = droneToList.Model,
-                Weight = droneToList.Weight,
                 DroneStatuses = droneToList.DroneStatuses,
+                Weight = droneToList.Weight,
             };
             DataContext = drone;
             InitializeComponent();
             droneWeightComboBox.ItemsSource = Enum.GetValues(typeof(Weight));
             droneStatusComboBox.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
-
         }
 
         public Drone Drone { get => drone; }
@@ -67,6 +65,10 @@ namespace PL
         {
             String msg = drone.ToString();
             MessageBox.Show(msg);
+        }
+        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
         }
     }
 }

@@ -13,7 +13,6 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using IBL;
 using IBL.BO;
-
 namespace PL
 {
     /// <summary>
@@ -21,8 +20,6 @@ namespace PL
     /// </summary>
     public partial class DroneListWindow : Window
     {
-       
-
         IBL.BO.IBL bL;
         public DroneListWindow(IBL.BO.IBL bl)
         {
@@ -60,22 +57,13 @@ namespace PL
 
         private void DronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            
+
             IBL.BO.DroneToList? droneToList = DronesListView.SelectedItem as IBL.BO.DroneToList;
             if (droneToList != null)
             {
-                //MessageBox.Show(droneToList.ToString());
-                // DroneInActionView diav = new DroneInActionView(droneToList);
-                // bool? result =diav.ShowDialog();
-                DroneWindow wnd = new DroneWindow(droneToList);
-               
+                DroneInActionView wnd = new DroneInActionView(droneToList);
                 bool? result = wnd.ShowDialog();
-                if (result != null)
-                {
-                    MessageBox.Show(wnd.Drone.ToString());
-                }
             }
         }
-
     }
 }

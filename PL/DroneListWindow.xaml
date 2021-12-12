@@ -14,9 +14,9 @@
         <Grid Name="UpGrid" Grid.Row="0"
               HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="auto" Height="auto">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition Width="0.5*"/>
                 <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="0.4*"/>
+                <ColumnDefinition Width="0.5*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
@@ -43,12 +43,9 @@
                     <TranslateTransform/>
                 </TransformGroup>
             </WrapPanel.RenderTransform>
-            <Button Content="Close windowe"
- Width="120"
- Height="30">
+            <Button Content="Close windowe" Width="120" Height="30">
                 <Button.RenderTransform>
-                    <TranslateTransform X="660"
- Y="390" />
+                    <TranslateTransform X="660" Y="390" />
                 </Button.RenderTransform>
             </Button>
         </WrapPanel>

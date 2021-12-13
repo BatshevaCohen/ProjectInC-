@@ -23,6 +23,9 @@ namespace PL
         IBL.BO.Drone drone;
         private DroneToList? droneToList;
 
+        /// <summary>
+        /// the view of the window
+        /// </summary>
         public DroneWindow()
         {
             drone = new IBL.BO.Drone();
@@ -66,7 +69,8 @@ namespace PL
             String msg = drone.ToString();
             MessageBox.Show(msg);
         }
-        private void ListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        
+        private void droneStatusComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
         }

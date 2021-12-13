@@ -13,9 +13,6 @@
             </Grid.ColumnDefinitions>
             <Button x:Name="btnShowDronesList" Content="Show Drones List" FontSize="22" Margin="90,307,105,60" Click="btnShowDronesList_Click"/>
 
-                <Grid.Background>
-                <ImageBrush ImageSource="C:\Users\shire\Downloads\images (3).jpg"/>
-                </Grid.Background>
         </Grid>
 
     </Grid>

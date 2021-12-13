@@ -48,13 +48,13 @@
             <Label VerticalAlignment="Center" Grid.Row="7" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Longitude:"/>
             <TextBox x:Name="longitudeTextBox" Width="120" VerticalAlignment="Center" Text="{Binding Location.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="7" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1" IsEnabled="False"/>
         </Grid>
-        <Button x:Name="btnDroneToDelivery" Content="Drone to delivery"  HorizontalAlignment="Left" Margin="388,170,0,0" VerticalAlignment="Top" Height="90" Width="98" />
+        <Button x:Name="btnDroneToDelivery" Content="Drone to delivery"  HorizontalAlignment="Left" Margin="388,170,0,0" VerticalAlignment="Top" Height="90" Width="98" Click="btnDroneToDelivery_Click" />
         <Button x:Name="btnUpdateDrone" Content="Update drone" HorizontalAlignment="Left" Margin="388,45,0,0" VerticalAlignment="Top" Height="90" Width="98" 
                 Click="btnUpdateDrone_Click"/>
         <Button x:Name="btnDroneToCharge"  Content="Sending to charging" HorizontalAlignment="Left" Margin="524,45,0,0" VerticalAlignment="Top" Height="90" Width="114" Click="btnDroneToCharge_Click"/>
-        <Button x:Name="btnCollectParcel" Content="Parcel collection" HorizontalAlignment="Left" Margin="524,0,0,0" VerticalAlignment="Center" Height="90" Width="90"/>
+        <Button x:Name="btnCollectParcel" Content="Parcel collection" HorizontalAlignment="Left" Margin="524,0,0,0" VerticalAlignment="Center" Height="90" Width="90" Click="btnCollectParcel_Click"/>
         <Button x:Name="btnReleaiseToCharge" Content="Releaizse frome charge" HorizontalAlignment="Left" Margin="656,45,0,0" VerticalAlignment="Top" Width="90" Height="90" Click="btnReleaiseToCharge_Click"/>
-        <Button x:Name="btnParcelDelivery" Content="Parcel delivery" HorizontalAlignment="Left" Margin="656,0,0,0" VerticalAlignment="Center" Height="90" Width="90"/>
+        <Button x:Name="btnParcelDelivery" Content="Parcel delivery" HorizontalAlignment="Left" Margin="656,0,0,0" VerticalAlignment="Center" Height="90" Width="90" Click="btnParcelDelivery_Click"/>
         <Button x:Name="btnClose" Content="Close" Click="closeButton_Click"  HorizontalAlignment="Left" Margin="667,379,0,0" VerticalAlignment="Top" Width="108"/>
     </Grid>
 </Window>

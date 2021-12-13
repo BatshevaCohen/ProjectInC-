@@ -7,8 +7,9 @@
         mc:Ignorable="d"
         Title="DroneWindow" Height="450" Width="800">
     <Grid>
-        <Grid x:Name="grid1" VerticalAlignment="Top" Margin="86,36,0,0" HorizontalAlignment="Left">
+        <Grid x:Name="grid1" VerticalAlignment="Top" Margin="86,36,0,0" HorizontalAlignment="Left" Height="254">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -43,14 +44,19 @@
                       Text="{Binding Weight, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Width="120"/>
             <Label VerticalAlignment="Center" Grid.Row="6" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Latitude:"/>
 
-            <TextBox x:Name="latitudeTextBox" Width="120" VerticalAlignment="Center" Text="{Binding Location.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="6" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
+            <TextBox x:Name="latitudeTextBox" Width="120" VerticalAlignment="Bottom" Text="{Binding Location.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="6" Margin="0,0,0,5" Height="23" HorizontalAlignment="Center" Grid.Column="1"/>
             <Label VerticalAlignment="Center" Grid.Row="7" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Longitude:"/>
 
             <TextBox x:Name="longitudeTextBox" Width="120" VerticalAlignment="Center" Text="{Binding Location.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="7" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1" UndoLimit="99"/>
 
+            <Label Content="Station for charge:" HorizontalAlignment="Left" Margin="3" Grid.Row="8" VerticalAlignment="Top"/>
+            <ComboBox x:Name="stationsComboBox" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="3" Width="120"
+                      Text="{Binding Stations, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
+
 
         </Grid>
-        <Button x:Name="btnShow" Content="Button" HorizontalAlignment="Left" Margin="518,202,0,0" VerticalAlignment="Top" Width="75" Click="btnShow_Click"/>
+        <Button x:Name="btnShow" Content="Show drone details" HorizontalAlignment="Left" Margin="507,36,0,0" VerticalAlignment="Top" Width="136" Click="btnShow_Click" Height="44"/>
+        <Button x:Name="btnAddDrone" Content="אישור" HorizontalAlignment="Left" Margin="507,185,0,0" VerticalAlignment="Top" Height="55" Width="100" Click="btnAddDrone_Click"/>
 
     </Grid>
 </Window>

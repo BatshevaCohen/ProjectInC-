@@ -35,7 +35,7 @@
             <ListBox SelectedItem="listBox_SelectionChanged" Grid.Column="5" Margin="0,66,0,-66"></ListBox>
         </Grid>
 
-        <ListView Name="DronesListView" Grid.Row="2" MouseDoubleClick="DronesListView_MouseDoubleClick"></ListView>
+        <ListView Name="DronesListView" Grid.Row="2" Binding.SourceUpdated="DronesListView_SourceUpdated" MouseDoubleClick="DronesListView_MouseDoubleClick"></ListView>
 
     </Grid>
 </Window>

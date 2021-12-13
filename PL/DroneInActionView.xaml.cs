@@ -12,6 +12,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using Microsoft.VisualBasic;
+
 
 namespace PL
 {
@@ -21,7 +23,7 @@ namespace PL
     public partial class DroneInActionView : Window
     {
         //  private DroneToList? droneToList;
-
+        IBL.BO.IBL myBL = new IBL.BO.BLObject();
         IBL.BO.Drone drone;
         private DroneToList? droneToList;
 
@@ -52,9 +54,39 @@ namespace PL
         {
             this.Close();
         }
-        private void UpdateButton_Click(object sender, RoutedEventArgs e)
+        
+        /// <summary>
+        /// update drone's name
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnUpdateDrone_Click(object sender, RoutedEventArgs e)
         {
-           
+            myBL.UpdateDroneName(Int32.Parse(idTextBox.Text), droneModelTextBox.Text);
+            MessageBox.Show("Drone updated seccessfuly!");
+
+        }
+
+        /// <summary>
+        /// send drone to charge
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnDroneToCharge_Click(object sender, RoutedEventArgs e)
+        {
+            myBL.UpdateChargeDrone(Int32.Parse(idTextBox.Text));
+            MessageBox.Show("Drone sent to charge seccessfuly!");
+        }
+        /// <summary>
+        /// discharge drone
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnReleaiseToCharge_Click(object sender, RoutedEventArgs e)
+        {
+            //input box- so the user will insert the charging time
+            TimeSpan chargingTime = TimeSpan.Parse(Interaction.InputBox("Please enter time of charging", "Time of charging", ""));
+            myBL.DischargeDrone(Int32.Parse(idTextBox.Text), chargingTime);
         }
     }
 }

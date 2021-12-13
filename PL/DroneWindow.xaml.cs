@@ -1,4 +1,5 @@
 ﻿using IBL.BO;
+using IBL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +16,13 @@ using System.Windows.Shapes;
 
 namespace PL
 {
+
     /// <summary>
     /// Interaction logic for DroneWindow.xaml
     /// </summary>
     public partial class DroneWindow : Window
     {
+        IBL.BO.IBL myBL = new IBL.BO.BLObject();
         IBL.BO.Drone drone;
         private DroneToList? droneToList;
 
@@ -33,6 +36,14 @@ namespace PL
             InitializeComponent();
             droneWeightComboBox.ItemsSource = Enum.GetValues(typeof(Weight));
             droneStatusComboBox.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
+
+            IEnumerable<StationToList> listStationToList = myBL.ShowStationList();
+            List<int> stationIDs= new();
+            foreach (StationToList station in listStationToList)
+            {
+                stationIDs.Add(station.Id);
+            }
+            stationsComboBox.ItemsSource = stationIDs;
         }
 
         public DroneWindow(IBL.BO.Drone drone)
@@ -43,8 +54,10 @@ namespace PL
             InitializeComponent();
             droneWeightComboBox.ItemsSource = Enum.GetValues(typeof(Weight));
             droneStatusComboBox.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
+            stationsComboBox.ItemsSource = myBL.ShowStationList();
+
         }
-       
+
         public DroneWindow(DroneToList droneToList)
         {
             this.droneToList = droneToList;
@@ -74,6 +87,42 @@ namespace PL
         private void droneStatusComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
+        }
+        /// <summary>
+        /// adds the drone to the BL
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAddDrone_Click(object sender, RoutedEventArgs e)
+        {
+
+            int stationId = 12345; ////////////////?????????
+
+
+            Drone drone = new Drone()
+            {
+                Id = Int32.Parse(idTextBox.Text),
+                Model= droneModelTextBox.Text,
+                Battery = Int32.Parse(batteryPrecentTextBox.Text),
+                DroneStatuses= (DroneStatuses)droneStatusComboBox.SelectedItem,
+                Weight = (Weight)droneWeightComboBox.SelectedItem,
+            };
+            drone.Location = new Location()
+            {
+                Latitude = double.Parse(latitudeTextBox.Text),
+                Longitude = double.Parse(longitudeTextBox.Text)
+            };
+            drone.ParcelInTransfer = new()
+            { 
+                Id = 0 
+            };
+            myBL.AddDrone(drone, stationId);
+
+            MessageBox.Show("Drone added seccessfuly!");
+
+
+            //לעשות פונקציה שמאפסת את כל השדות לאחר הוספת הרחפן
+            idTextBox.Text = "";
         }
     }
 }

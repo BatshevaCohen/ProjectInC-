@@ -256,32 +256,6 @@ namespace IBL.BO
             List<DroneToList> dronestl = new List<DroneToList>(dronesL);
             return dronestl;
 
-            //drone list from the DAL
-        //    var droness = dalo.ShowDroneList();
-        //    List<DroneToList> droneList = new();
-        //    foreach (var item in droness)
-        //    {
-        //        DroneToList droneTL = new()
-        //        {
-        //            Id = item.Id,
-        //            Model = item.Model,
-        //            Weight = (Weight)item.MaxWeight,
-        //            Battery = item.Battery,
-        //            DroneStatuses = (DroneStatuses)item.Status,
-        //        };
-        //        //to find the locations of the drone
-        //        DroneToList droneToList = dronesL.Find(x => x.Id == item.Id);
-        //        droneTL.Location = droneToList.Location;
-
-        //        //finds the parcel in transfer ID
-        //        Drone drone =GetDrone(item.Id);
-        //        if (drone.ParcelInTransfer != null)
-        //        {
-        //            droneTL.ParcelNumberTransferred = drone.ParcelInTransfer.Id;
-        //        }
-        //        droneList.Add(droneTL);
-        //    }
-        //    return droneList;
         }
     }       
 }

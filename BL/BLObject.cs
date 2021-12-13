@@ -46,7 +46,7 @@ namespace IBL.BO
                 
                 List<IDAL.DO.Parcel> parcelList = parcels.FindAll(p => p.DroneID == droneBL.Id);
 
-                if (parcels != null) //If there is a package that has not yet been delivered but the drone has already been associated
+                if (parcelList.Count != 0) //If there is a package that has not yet been delivered but the drone has already been associated
                 {
                     droneBL.DroneStatuses = DroneStatuses.Shipping;
                     //If the package was associated but not collected
@@ -99,7 +99,7 @@ namespace IBL.BO
                 }
                 else //the drone is not in delivery
                 {
-                    droneBL.DroneStatuses = (DroneStatuses)r.Next(2); //Maintenance or Available
+                    droneBL.DroneStatuses = (DroneStatuses)r.Next(1,3); //Maintenance or Available
                     if (droneBL.DroneStatuses == DroneStatuses.Maintenance)
                     {
                         //Its location will be drawn between the purchasing stations
@@ -125,9 +125,12 @@ namespace IBL.BO
                         };
                         // Battery mode will be recharged between a minimal charge that will allow it to reach the station closest to charging and a full charge
                         double distance = dalo.GetDistanceBetweenLocationAndClosestBaseStation(parcelsDelivered[index].ReceiverId);
-                        droneBL.Battery = r.Next((int)(distance * dalo.PowerConsumptionRequest()[0] + 1), 101);
 
-                        droneBL.ParcelNumberTransferred= 0;
+                        // זה זמניייייייייייי השורה הזאת עשתה חריגה 
+                        droneBL.Battery = 30;
+                       //  droneBL.Battery = r.Next((int)(distance * dalo.PowerConsumptionRequest()[0] + 1), 101);
+
+                       
                     }
                 }
                 dronesL.Add(droneBL);

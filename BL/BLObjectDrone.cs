@@ -134,9 +134,9 @@ namespace IBL.BO
                     throw new Exception("drone can not be sent for charging! ");
                 }
             }
-            else
+            else if (dronel.DroneStatuses != DroneStatuses.Available)
             {
-                throw new Exception("drone can not be sent for charging its is not Available ! ");
+                throw new Exception("drone can not be sent for charging it is not Available ! ");
             }
         }
 

@@ -64,6 +64,12 @@ namespace IBL.BO
         /// </summary>
         /// <param name="id"></param>
         void UpdateChargeDrone(int id);
+        /// <summary>
+        /// discharge drone
+        /// </summary>
+        /// <param name="droneID"></param>
+        /// <param name="chargingTime"></param>
+        void DischargeDrone(int droneID, TimeSpan chargingTime);
 
         /// <summary>
         /// Update parcel to drone

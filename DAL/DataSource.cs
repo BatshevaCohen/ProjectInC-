@@ -73,6 +73,15 @@ namespace DalObject
                         Latitude = r.Next(-90, 89) + r.NextDouble(),
                     });
                 }
+                Stations.Add(new Station()
+                {
+                    Id = 12345,
+                    Name = "miki",
+                    ChargeSpots = 10,
+                    Longitude = 33.3,
+                    Latitude = 44.4
+                });
+
                 //adding customers
                 for (int i = 0; i < 10; i++)
                 {

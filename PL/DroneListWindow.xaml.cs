@@ -66,5 +66,10 @@ namespace PL
                 bool? result = wnd.ShowDialog();
             }
         }
+
+        private void DronesListView_SourceUpdated(object sender, DataTransferEventArgs e)
+        {
+
+        }
     }
 }

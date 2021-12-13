@@ -15,6 +15,7 @@ namespace IBL.BO
         public DroneStatuses DroneStatuses { get; set; }
         public ParcelInTransfer ParcelInTransfer { get; set; }
         public Location Location { get; set; }
+
         /// <summary>
         /// ToString
         /// </summary>

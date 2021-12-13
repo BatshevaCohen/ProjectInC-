@@ -118,10 +118,12 @@ namespace IBL.BO
                         //Its location will be raffled off among customers who have packages provided to them
                         List<IDAL.DO.Parcel> parcelsDelivered = parcels.FindAll(p => p.Supplied != DateTime.MinValue);
                         int index = r.Next(0, parcelsDelivered.Count());
+                        IDAL.DO.Customer customer=  dalo.GetCustomer(parcelsDelivered[index].ReceiverId);
                         droneBL.Location = new()
                         {
-                            Latitude = dalo.GetCustomer(parcelsDelivered[index].ReceiverId).Latitude,
-                            Longitude = dalo.GetCustomer(parcelsDelivered[index].ReceiverId).Longitude
+                          
+                            Latitude = customer.Latitude,
+                            Longitude = customer.Longitude
                         };
                         // Battery mode will be recharged between a minimal charge that will allow it to reach the station closest to charging and a full charge
                         double distance = dalo.GetDistanceBetweenLocationAndClosestBaseStation(parcelsDelivered[index].ReceiverId);

@@ -57,7 +57,7 @@ namespace DalObject
                         Model = arrDroneModel[i - 1],
                         MaxWeight = RandomEnumValue<WeightCategories>(),
                         Battery = r.Next(0, 100),
-                        Status = RandomEnumValue<DroneStatuses>()
+                        //Status = RandomEnumValue<DroneStatuses>()
                     });
                 }
                 

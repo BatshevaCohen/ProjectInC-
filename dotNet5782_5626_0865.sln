@@ -18,7 +18,14 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL", "BL\BL.csproj", "{07A9
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleUI_BL", "ConsoleUI_BL\ConsoleUI_BL.csproj", "{D9603448-78FB-433F-9B10-EDE61BE7A003}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PL", "PL\PL.csproj", "{2542CEEA-B836-4907-9788-6B1D8EE8883E}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{2542CEEA-B836-4907-9788-6B1D8EE8883E}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{37BF73F2-7A9C-49C3-BA5B-1B613F508D9D}"
+	ProjectSection(SolutionItems) = preProject
+		..\..\..\..\Downloads\download.jpg = ..\..\..\..\Downloads\download.jpg
+		..\..\..\..\Downloads\images (1).jpg = ..\..\..\..\Downloads\images (1).jpg
+		..\..\..\..\Downloads\images (3).jpg = ..\..\..\..\Downloads\images (3).jpg
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +65,7 @@ Global
 		{F97199CE-0A32-4B84-8216-9470488FF249} = {8D4F67EE-B3AD-4098-B480-A547070728B2}
 		{07A946DB-9F0B-40CC-90ED-A4EA71291A0B} = {8D4F67EE-B3AD-4098-B480-A547070728B2}
 		{D9603448-78FB-433F-9B10-EDE61BE7A003} = {8D4F67EE-B3AD-4098-B480-A547070728B2}
+		{37BF73F2-7A9C-49C3-BA5B-1B613F508D9D} = {8D4F67EE-B3AD-4098-B480-A547070728B2}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D6E4C400-EF72-4CEF-979D-5225C40EC379}

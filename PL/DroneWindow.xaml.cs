@@ -55,7 +55,6 @@ namespace PL
             droneWeightComboBox.ItemsSource = Enum.GetValues(typeof(Weight));
             droneStatusComboBox.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             stationsComboBox.ItemsSource = myBL.ShowStationList();
-
         }
 
         public DroneWindow(DroneToList droneToList)

@@ -52,6 +52,7 @@ namespace PL
                 Model = droneToList.Model, 
                 DroneStatuses = droneToList.DroneStatuses,
                 Weight = droneToList.Weight,
+                Location=droneToList.Location
             };
             DataContext = drone;
             InitializeComponent();

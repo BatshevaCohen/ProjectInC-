@@ -41,11 +41,11 @@ namespace PL
                 Model = droneToList.Model,
                 DroneStatuses = droneToList.DroneStatuses,
                 Weight = droneToList.Weight,
+                Location=droneToList.Location,
             };
             DataContext = drone;
             InitializeComponent();
-            droneWeightComboBox.ItemsSource = Enum.GetValues(typeof(Weight));
-            droneStatusComboBox.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
+          
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)

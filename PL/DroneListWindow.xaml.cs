@@ -26,7 +26,7 @@ namespace PL
             this.bL = bl;
             InitializeComponent();
             comboStatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
-            comboWeghitSelector.ItemsSource = Enum.GetValues(typeof(Weight));
+            comboWeghitSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.Weight)) ;
         }
 
         private void comboStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)

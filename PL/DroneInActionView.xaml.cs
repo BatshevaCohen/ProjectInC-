@@ -15,13 +15,14 @@ using System.Windows.Shapes;
 
 namespace PL
 {
+    
     /// <summary>
     /// Interaction logic for DroneInActionView.xaml
     /// </summary>
     public partial class DroneInActionView : Window
     {
         //  private DroneToList? droneToList;
-
+        IBL.BO.IBL myBL;
         IBL.BO.Drone drone;
         private DroneToList? droneToList;
 
@@ -54,7 +55,6 @@ namespace PL
         }
         private void UpdateButton_Click(object sender, RoutedEventArgs e)
         {
-           
         }
     }
 }

@@ -121,9 +121,18 @@ namespace PL
         {
             if (droneStatusTxtBox.Text == "Available")
             {
-                myBL.UpdateParcelToDrone(Int32.Parse(idTextBox.Text));
-                MessageBox.Show("Drone sent to delivery seccessfuly!");
-                droneStatusTxtBox.Text = "Shipping";
+                try
+                {
+                    myBL.UpdateParcelToDrone(Int32.Parse(idTextBox.Text));
+                    MessageBox.Show("Drone sent to delivery seccessfuly!");
+                    droneStatusTxtBox.Text = "Shipping";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+               
+                
             }
             else
                 MessageBox.Show("Can't send drone to delivery");
@@ -133,11 +142,14 @@ namespace PL
         {
             Drone drone = myBL.GetDrone(Int32.Parse(idTextBox.Text));
             //only if the drone is on Maintenance status and the parcel have not been collected yet
-            if (droneStatusTxtBox.Text == "Shipping" && drone.ParcelInTransfer.ParcelTransferStatus==ParcelTransferStatus.WaitingToBePickedUp)
+            if (drone.ParcelInTransfer != null)
             {
-                myBL.UpdateParcelPickUpByDrone(Int32.Parse(idTextBox.Text));
-                MessageBox.Show("Drone pick up the parcel seccessfully!");
-                droneStatusTxtBox.Text = "Shipping";
+                if (droneStatusTxtBox.Text == "Shipping" && drone.ParcelInTransfer.ParcelTransferStatus == ParcelTransferStatus.WaitingToBePickedUp)
+                {
+                    myBL.UpdateParcelPickUpByDrone(Int32.Parse(idTextBox.Text));
+                    MessageBox.Show("Drone pick up the parcel seccessfully!");
+                    droneStatusTxtBox.Text = "Shipping";
+                }
             }
             else
                 MessageBox.Show("Can't send drone to pickup parcel");
@@ -150,11 +162,14 @@ namespace PL
         /// <param name="e"></param>
         private void btnParcelDelivery_Click(object sender, RoutedEventArgs e)
         {
-            if (droneStatusTxtBox.Text == "Shipping" && drone.ParcelInTransfer.ParcelTransferStatus == ParcelTransferStatus.OnTheWayToDestination)
+            if (drone.ParcelInTransfer != null)
             {
-                myBL.UpdateParcelSuppliedByDrone(Int32.Parse(idTextBox.Text));
-                MessageBox.Show("Drone pick up the parcel seccessfully!");
-                droneStatusTxtBox.Text = "Available";
+                if (droneStatusTxtBox.Text == "Shipping" && drone.ParcelInTransfer.ParcelTransferStatus == ParcelTransferStatus.OnTheWayToDestination)
+                {
+                    myBL.UpdateParcelSuppliedByDrone(Int32.Parse(idTextBox.Text));
+                    MessageBox.Show("Drone pick up the parcel seccessfully!");
+                    droneStatusTxtBox.Text = "Available";
+                }
             }
             else
                 MessageBox.Show("Can't supply parcel by the drone");

@@ -49,7 +49,7 @@ namespace PL
             {
                 Id = droneToList.Id,
                 Battery = droneToList.Battery,
-                Model = droneToList.Model,
+                Model = droneToList.Model, 
                 DroneStatuses = droneToList.DroneStatuses,
                 Weight = droneToList.Weight,
             };

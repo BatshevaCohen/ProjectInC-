@@ -42,6 +42,7 @@ namespace IBL.BO
                     Id = droneDL.Id,
                     Model = droneDL.Model,
                     Weight = (Weight)droneDL.MaxWeight
+                    
                 };
                 
                 List<IDAL.DO.Parcel> parcelList = parcels.FindAll(p => p.DroneID == droneBL.Id);

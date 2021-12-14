@@ -98,10 +98,9 @@ namespace DalObject
             DataSource.Drones.Remove(drone);
 
             DroneCharge droneCharge = DataSource.DroneCharges.Find(x => x.DroneId == droneId);
-            //if (droneCharge.DroneId != droneId)
-            //    throw new IdNotFoundException(droneId, "Station charge");
+           
 
-            int stationId = droneCharge.StationId;  //
+            int stationId = droneCharge.StationId;  
             Station station = GetStation(stationId);
             DataSource.Stations.Remove(station);
 

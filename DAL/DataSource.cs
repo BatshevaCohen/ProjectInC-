@@ -28,7 +28,7 @@ namespace DalObject
             internal class Config
             {
                 internal static double Light { get => 10;}
-                internal static double Available { get => 0; }
+                internal static double Available { get => 1; }
                 internal static double Medium { get => 50; }
                 internal static double Heavy { get => 150; }
                 internal static double ChargingRate { get => 10.25; }
@@ -53,12 +53,12 @@ namespace DalObject
                 {
                     Drones.Add(new Drone()
                     {
-                        Id = i * 1000, //4-9 digits
+                        Id =1000*i, //4-9 digit
                         Model = arrDroneModel[i - 1],
                         MaxWeight = RandomEnumValue<WeightCategories>(),
                         Battery = r.Next(0, 100),
                         Status = RandomEnumValue<DroneStatuses>(),
-                });
+                    }) ;
                 }
                 
                 //adding stations

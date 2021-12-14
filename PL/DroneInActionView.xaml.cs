@@ -131,8 +131,6 @@ namespace PL
                 {
                     MessageBox.Show(ex.Message);
                 }
-               
-                
             }
             else
                 MessageBox.Show("Can't send drone to delivery");

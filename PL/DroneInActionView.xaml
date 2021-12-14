@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="DroneInActionView" Height="450" Width="800">
     <Grid>
-        <Grid x:Name="grid1" VerticalAlignment="Top" Margin="86,36,0,0" HorizontalAlignment="Left">
+        <Grid x:Name="grid1" VerticalAlignment="Top" Margin="31,26,0,0" HorizontalAlignment="Left">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -48,13 +48,13 @@
             <Label VerticalAlignment="Center" Grid.Row="7" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Longitude:"/>
             <TextBox x:Name="longitudeTextBox" Width="120" VerticalAlignment="Center" Text="{Binding Location.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="7" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1" IsEnabled="False"/>
         </Grid>
-        <Button x:Name="btnDroneToDelivery" Content="Drone to delivery"  HorizontalAlignment="Left" Margin="388,170,0,0" VerticalAlignment="Top" Height="90" Width="98" Click="btnDroneToDelivery_Click" />
-        <Button x:Name="btnUpdateDrone" Content="Update drone" HorizontalAlignment="Left" Margin="388,45,0,0" VerticalAlignment="Top" Height="90" Width="98" 
+        <Button x:Name="btnDroneToDelivery" Content="Drone to delivery"  HorizontalAlignment="Left" Margin="306,224,0,0" VerticalAlignment="Top" Height="133" Width="138" Click="btnDroneToDelivery_Click" />
+        <Button x:Name="btnUpdateDrone" Content="Update drone" HorizontalAlignment="Left" Margin="306,54,0,0" VerticalAlignment="Top" Height="126" Width="138" 
                 Click="btnUpdateDrone_Click"/>
-        <Button x:Name="btnDroneToCharge"  Content="Sending to charging" HorizontalAlignment="Left" Margin="524,45,0,0" VerticalAlignment="Top" Height="90" Width="114" Click="btnDroneToCharge_Click"/>
-        <Button x:Name="btnCollectParcel" Content="Parcel collection" HorizontalAlignment="Left" Margin="524,0,0,0" VerticalAlignment="Center" Height="90" Width="90" Click="btnCollectParcel_Click"/>
-        <Button x:Name="btnReleaiseToCharge" Content="Releaizse frome charge" HorizontalAlignment="Left" Margin="656,45,0,0" VerticalAlignment="Top" Width="90" Height="90" Click="btnReleaiseToCharge_Click"/>
-        <Button x:Name="btnParcelDelivery" Content="Parcel delivery" HorizontalAlignment="Left" Margin="656,0,0,0" VerticalAlignment="Center" Height="90" Width="90" Click="btnParcelDelivery_Click"/>
-        <Button x:Name="btnClose" Content="Close" Click="closeButton_Click"  HorizontalAlignment="Left" Margin="667,379,0,0" VerticalAlignment="Top" Width="108"/>
+        <Button x:Name="btnDroneToCharge"  Content="Sending to charging" HorizontalAlignment="Left" Margin="481,54,0,0" VerticalAlignment="Top" Height="126" Width="133" Click="btnDroneToCharge_Click"/>
+        <Button x:Name="btnCollectParcel" Content="Parcel collection" HorizontalAlignment="Left" Margin="481,224,0,0" VerticalAlignment="Top" Height="133" Width="133" Click="btnCollectParcel_Click"/>
+        <Button x:Name="btnReleaiseToCharge" Content="Releaizse frome charge" HorizontalAlignment="Left" Margin="656,54,0,0" VerticalAlignment="Top" Width="134" Height="126" Click="btnReleaiseToCharge_Click"/>
+        <Button x:Name="btnParcelDelivery" Content="Parcel delivery" HorizontalAlignment="Left" Margin="656,224,0,0" VerticalAlignment="Top" Height="133" Width="134" Click="btnParcelDelivery_Click"/>
+        <Button x:Name="btnClose" Content="Close" Click="closeButton_Click"  HorizontalAlignment="Left" Margin="669,391,0,0" VerticalAlignment="Top" Width="108"/>
     </Grid>
 </Window>

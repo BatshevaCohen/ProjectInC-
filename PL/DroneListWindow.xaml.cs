@@ -62,7 +62,9 @@ namespace PL
             IBL.BO.DroneToList? droneToList = DronesListView.SelectedItem as IBL.BO.DroneToList;
             if (droneToList != null)
             {
-                DroneInActionView wnd = new DroneInActionView(droneToList);
+
+                DroneInActionView wnd = new DroneInActionView(droneToList,bL);
+
                 bool? result = wnd.ShowDialog();
             }
         }

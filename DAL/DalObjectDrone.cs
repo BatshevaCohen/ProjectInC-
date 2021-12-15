@@ -47,7 +47,7 @@ namespace DalObject
             {
                 throw new DroneException($"ID: {id} does not exist!!");
             }
-            return DataSource.Drones.First(c => c.Id == id);
+            return DataSource.Drones.Find(c => c.Id == id);
         }
         /// <summary>
         /// view lists functions for Drone

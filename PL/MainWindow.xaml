@@ -5,13 +5,16 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="900">
+        Title="MainWindow" Height="400" Width="450"
+        AllowsTransparency="True"
+        WindowStartupLocation="CenterScreen">
+
     <Grid>
         <Grid>
             <Grid.ColumnDefinitions>
 
             </Grid.ColumnDefinitions>
-            <Button x:Name="btnShowDronesList" Content="Drone List View" FontSize="72" Click="btnShowDronesList_Click" FontFamily="Brush Script MT" BorderBrush="#FFA49AC6" Margin="131,43,202,152">
+            <Button x:Name="btnShowDronesList" Content="Drone List View" FontSize="72" Click="btnShowDronesList_Click" FontFamily="Brush Script MT" BorderBrush="#FFA49AC6" Margin="140,146,141,174">
                 <Button.Background>
                     <LinearGradientBrush EndPoint="0.1,1" StartPoint="0.8,0">
                     </LinearGradientBrush>
@@ -21,4 +24,5 @@
         </Grid>
 
     </Grid>
+    
 </Window>

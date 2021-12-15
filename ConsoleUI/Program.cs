@@ -78,7 +78,7 @@ namespace ConsoleUI
                                     Id = id_D,
                                     Model = model,
                                     MaxWeight = (WeightCategories)Weight,
-                                    Status= (DroneStatuses)status,
+                                  //  Status= (DroneStatuses)status,
                                     Battery = battery
                                 };
                                 dalobject.AddDrone(d);

@@ -23,19 +23,25 @@ namespace PL
     /// </summary>
     public partial class DroneInActionView : Window
     {
+        
         //  private DroneToList? droneToList;
-        IBL.BO.IBL myBL = new IBL.BO.BLObject();
+       // IBL.BO.IBL myBL = new IBL.BO.BLObject();
         IBL.BO.Drone drone;
         private DroneToList? droneToList;
 
-        public DroneInActionView()
+        //public DroneInActionView()
+        //{
+
+        //    drone = new IBL.BO.Drone();
+        //    DataContext = drone;
+        //    InitializeComponent();
+        //}
+        IBL.BO.IBL mybl;
+        public DroneInActionView(DroneToList droneToList , IBL.BO.IBL bL)
         {
-            drone = new IBL.BO.Drone();
-            DataContext = drone;
-            InitializeComponent();
-        }
-        public DroneInActionView(DroneToList droneToList)
-        {
+            
+            mybl = bL;
+
             this.droneToList = droneToList;
             drone = new IBL.BO.Drone()
             {
@@ -63,12 +69,13 @@ namespace PL
         /// <param name="e"></param>
         private void btnUpdateDrone_Click(object sender, RoutedEventArgs e)
         {
-            String droneName = myBL.GetDrone(Int32.Parse(idTextBox.Text)).Model;
+            
+            String droneName = mybl.GetDrone(Int32.Parse(idTextBox.Text)).Model;
             string newName = droneModelTextBox.Text;
             //only if the name has changed by the user
             if (droneName != droneModelTextBox.Text)
             {
-                myBL.UpdateDroneName(Int32.Parse(idTextBox.Text), droneModelTextBox.Text);
+                mybl.UpdateDroneName(Int32.Parse(idTextBox.Text), droneModelTextBox.Text);
                 MessageBox.Show("Drone updated seccessfuly!");
                 droneModelTextBox.Text = newName;
             }
@@ -85,12 +92,20 @@ namespace PL
         {
             if (droneStatusTxtBox.Text == "Available")
             {
-                myBL.UpdateChargeDrone(Int32.Parse(idTextBox.Text));
-                MessageBox.Show("Drone sent to charge seccessfuly!");
-                droneStatusTxtBox.Text = "Maintenance";
+                try
+                {
+
+                    mybl.ShowDroneList();
+                    mybl.UpdateChargeDrone(Int32.Parse(idTextBox.Text));
+                    MessageBox.Show("Drone sent to charge seccessfuly!");
+                    droneStatusTxtBox.Text = "Maintenance";
+                }
+               catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
             }
-            else
-                MessageBox.Show("Drone can't be sent to charge!");
         }
         /// <summary>
         /// discharge drone
@@ -103,10 +118,10 @@ namespace PL
             {
                 //input box- so the user will insert the charging time
                 TimeSpan chargingTime = TimeSpan.Parse(Interaction.InputBox("Please enter time of charging", "Time of charging", ""));
-                myBL.DischargeDrone(Int32.Parse(idTextBox.Text), chargingTime);
+                mybl.DischargeDrone(Int32.Parse(idTextBox.Text), chargingTime);
                 MessageBox.Show("Drone discharged seccessfuly!");
                 droneStatusTxtBox.Text = "Available";
-                batteryStatusTextBox.Text = myBL.GetDrone(Int32.Parse(idTextBox.Text)).Battery.ToString();
+                batteryStatusTextBox.Text = mybl.GetDrone(Int32.Parse(idTextBox.Text)).Battery.ToString();
             }
             else
                 MessageBox.Show("Drone can't be discharged!");
@@ -123,7 +138,7 @@ namespace PL
             {
                 try
                 {
-                    myBL.UpdateParcelToDrone(Int32.Parse(idTextBox.Text));
+                    mybl.UpdateParcelToDrone(Int32.Parse(idTextBox.Text));
                     MessageBox.Show("Drone sent to delivery seccessfuly!");
                     droneStatusTxtBox.Text = "Shipping";
                 }
@@ -138,13 +153,14 @@ namespace PL
 
         private void btnCollectParcel_Click(object sender, RoutedEventArgs e)
         {
-            Drone drone = myBL.GetDrone(Int32.Parse(idTextBox.Text));
-            //only if the drone is on Maintenance status and the parcel have not been collected yet
+            Drone drone = mybl.GetDrone(Int32.Parse(idTextBox.Text));
+            //only if the drone is on Maintenance
+            //and the parcel have not been collected yet
             if (drone.ParcelInTransfer != null)
             {
                 if (droneStatusTxtBox.Text == "Shipping" && drone.ParcelInTransfer.ParcelTransferStatus == ParcelTransferStatus.WaitingToBePickedUp)
                 {
-                    myBL.UpdateParcelPickUpByDrone(Int32.Parse(idTextBox.Text));
+                    mybl.UpdateParcelPickUpByDrone(Int32.Parse(idTextBox.Text));
                     MessageBox.Show("Drone pick up the parcel seccessfully!");
                     droneStatusTxtBox.Text = "Shipping";
                 }
@@ -164,7 +180,7 @@ namespace PL
             {
                 if (droneStatusTxtBox.Text == "Shipping" && drone.ParcelInTransfer.ParcelTransferStatus == ParcelTransferStatus.OnTheWayToDestination)
                 {
-                    myBL.UpdateParcelSuppliedByDrone(Int32.Parse(idTextBox.Text));
+                    mybl.UpdateParcelSuppliedByDrone(Int32.Parse(idTextBox.Text));
                     MessageBox.Show("Drone pick up the parcel seccessfully!");
                     droneStatusTxtBox.Text = "Available";
                 }

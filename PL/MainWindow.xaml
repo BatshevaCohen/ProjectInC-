@@ -3,27 +3,27 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="400" Width="450"
+        Title="MainWindow" Height="300" Width="450"
         AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None">
 
 
     <Grid>
-        <Grid>
-            <Grid.ColumnDefinitions>
+        <Image Source="images (3).jpg" Stretch="Fill"/>
 
-            </Grid.ColumnDefinitions>
-            <Button x:Name="btnShowDronesList" Content="Drone List View" FontSize="72" Click="btnShowDronesList_Click" FontFamily="Brush Script MT" BorderBrush="#FFA49AC6" Margin="140,146,141,174">
-                <Button.Background>
-                    <LinearGradientBrush EndPoint="0.1,1" StartPoint="0.8,0">
-                    </LinearGradientBrush>
-                </Button.Background>
-            </Button>
-
-        </Grid>
+        <Button
+        x:Name="btnShowDronesList"
+        Style="{StaticResource MaterialDesignPaperButton}"
+        ToolTip="Show drone list"
+        Content="Show drone list" 
+        FontFamily="Brush Script MT" 
+        FontSize="20"
+        BorderBrush="#FFA49AC6"
+        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Margin="35,223,207,45" Click="btnShowDronesList_Click" />
 
     </Grid>
     

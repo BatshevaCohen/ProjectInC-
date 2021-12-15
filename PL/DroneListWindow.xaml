@@ -6,10 +6,121 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="DroneListWindow" Height="450" Width="800">
+
     <Grid Name="MainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <Grid Name="LeftGrid" Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid Name="LeftUpperGrid" Grid.Column="0">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="76*"/>
+                    <RowDefinition Height="141*"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="23*"/>
+                    <ColumnDefinition Width="57*"/>
+                </Grid.ColumnDefinitions>
+
+                <Label 
+                    x:Name="lblTBD" 
+                    Content="status" 
+                    ToolTip="Choose a stetus"
+                    HorizontalAlignment="Center"  
+                    VerticalAlignment="Top" 
+                    FontSize="18" 
+                    Margin="0,26,0,0" Height="32" Width="54"/>
+
+                <Button
+                    x:Name="ClearStatus"
+                    Content="Clear"
+                    Grid.Column="1"
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    HorizontalAlignment="Right"
+                    Click="ClearStatusComboBox_Click" Margin="0,33,10,11" Width="64" />
+
+                <ComboBox
+                    x:Name="comboStatusSelector"
+                    Grid.Column="1"
+                    ToolTip="Choose a status"
+                    Style="{StaticResource MaterialDesignFilledComboBox}"
+                    IsEnabled="{Binding IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"
+                    SelectionChanged="comboStatusSelector_SelectionChanged" Margin="0,10,85,0"/>
+
+                <Label 
+                    x:Name="lblTBD2" 
+                    Content="weight"
+                    Grid.Row="1"
+                    ToolTip="Choose weight category"
+                    HorizontalAlignment="Center" 
+                    VerticalAlignment="Top" 
+                    FontSize="18" Margin="0,15,0,0"/>
+
+                <ComboBox 
+                    x:Name="comboWeghitSelector" 
+                    Grid.Column="1"
+                    ToolTip="Choose weight category"
+                    Style="{StaticResource MaterialDesignFilledComboBox}"
+                    IsEnabled="{Binding IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"
+                    SelectionChanged="comboWeightSelector_SelectionChanged" Margin="0,76,85,85" Grid.RowSpan="2"/>
+
+                <Button
+                    x:Name="ClearWeight"
+                    Content="Clear"
+                    Grid.Column="1"
+                    Grid.Row="1"
+                    Style="{StaticResource MaterialDesignFlatButton}"
+                    HorizontalAlignment="Right"
+                    Click="ClearWeightComboBox_Click" Margin="0,17,10,92" Width="64" />
+
+
+                <Button 
+                    x:Name="btnADDdrone" 
+                    Content="Add a new drone"  
+                    Grid.Row="1"
+                    Click="btnAddDrone_Click" 
+                    FontSize="18" Margin="10,85,213,24" Grid.ColumnSpan="2"/>
+
+                <Button 
+                    Content="close" 
+                    Grid.Row="1"
+                    Background="Blue" 
+                    Foreground="White" 
+                    Click="closeButton_Click"  
+                    Grid.Column="1" 
+                    FontSize="18" Margin="85,85,10,24" />
+
+            </Grid>
+            <!--<ListBox 
+                    SelectedItem="listBox_SelectionChanged" 
+                    Margin="419,0,-388,12" 
+                    Grid.RowSpan="2"/>-->
+
+            <ListView 
+                Name="DronesListView" 
+                MouseDoubleClick="DronesListView_MouseDoubleClick" 
+                Margin="400,0,-400,0" 
+                Grid.RowSpan="2"/>
+
+
+        </Grid>
+
+    </Grid>
+
+
+
+
+
+    <!--<Grid Name="MainGrid">
         <Grid.RowDefinitions>
-            <RowDefinition Height="50*"/>
-            <RowDefinition Height="400*"/>
+            <RowDefinition Height="100*"/>
+            <RowDefinition Height="350*"/>
         </Grid.RowDefinitions>
         <Grid Name="UpGrid" Grid.Row="0"
               HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="auto" Height="auto">
@@ -20,22 +131,37 @@
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
                 <ColumnDefinition Width="*"/>
-
             </Grid.ColumnDefinitions >
+    
             <Label x:Name="lblTBD" Content="status" Grid.Column="0" ToolTip="Choose a stetus"
                 HorizontalAlignment="Center"  VerticalAlignment="Center" FontSize="18"/>
-            <ComboBox Name="comboStatusSelector" Grid.Column="1" ToolTip="Choose a status" 
-                      HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" SelectionChanged="comboStatusSelector_SelectionChanged"/>
+
+            <StackPanel Grid.Column="1">
+                <ComboBox
+                    x:Name="comboStatusSelector"
+                    ToolTip="Choose a status"
+                    Style="{StaticResource MaterialDesignFilledComboBox}"
+                    IsEnabled="{Binding IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"
+                    Width="130"
+                    SelectionChanged="comboStatusSelector_SelectionChanged"/>
+            </StackPanel>
+
+
+
+
+            -->
+    <!--<ComboBox Name="comboStatusSelector" Grid.Column="1" ToolTip="Choose a status" 
+                      HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" SelectionChanged="comboStatusSelector_SelectionChanged"/>-->
+    <!--
+
+
             <Label x:Name="lblTBD2" Content="weight"  Grid.Column="2" ToolTip="Choose weight category"
                    HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
             <ComboBox x:Name="comboWeghitSelector" Grid.Column="3" ToolTip="Choose weight category"
                       HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="comboWeightSelector_SelectionChanged"/>
-            <Button x:Name="btnADDdrone" Content="Add"  Grid.Column="4"  Click="btnAddDrone_Click" FontSize="18"/>
-            <Button Content="close" Background="Blue" Foreground="White" Click="closeButton_Click"  Grid.Column="5" FontSize="18" />
-            <ListBox SelectedItem="listBox_SelectionChanged" Grid.Column="5" Margin="0,66,0,-66"></ListBox>
+            
         </Grid>
 
-        <ListView Name="DronesListView" Grid.Row="2" Binding.SourceUpdated="DronesListView_SourceUpdated" MouseDoubleClick="DronesListView_MouseDoubleClick"></ListView>
-
-    </Grid>
+        
+    </Grid>-->
 </Window>

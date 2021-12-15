@@ -58,7 +58,6 @@ namespace PL
 
         private void DronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
             IBL.BO.DroneToList? droneToList = DronesListView.SelectedItem as IBL.BO.DroneToList;
             if (droneToList != null)
             {
@@ -69,9 +68,36 @@ namespace PL
             }
         }
 
-        private void DronesListView_SourceUpdated(object sender, DataTransferEventArgs e)
+        /// <summary>
+        /// clear status comboBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClearStatusComboBox_Click(object sender, RoutedEventArgs e)
+        {
+            comboStatusSelector.Text = "";
+        }
+
+        /// <summary>
+        /// clear weight comboBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClearWeightComboBox_Click(object sender, RoutedEventArgs e)
         {
 
         }
+
+
+
+        //private void DronesListView_SourceUpdated(object sender, DataTransferEventArgs e)
+        //{
+
+        //}
+
+        //private void ClearFilledComboBox_Click(object sender, RoutedEventArgs e)
+        //{
+        //    comboStatusSelector.Items.Clear();
+        //}
     }
 }

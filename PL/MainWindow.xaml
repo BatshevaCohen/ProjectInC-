@@ -7,7 +7,9 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="400" Width="450"
         AllowsTransparency="True"
-        WindowStartupLocation="CenterScreen">
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None">
+
 
     <Grid>
         <Grid>

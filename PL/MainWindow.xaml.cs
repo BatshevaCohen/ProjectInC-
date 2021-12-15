@@ -15,6 +15,7 @@ using System.Windows.Shapes;
 using IBL;
 using IBL.BO;
 
+
 namespace PL
 {
     /// <summary>
@@ -33,9 +34,6 @@ namespace PL
         {
             DroneListWindow wnd=new DroneListWindow(myBL);
             wnd.Show();
-        }
-
-       
-        
+        }        
     }
 }

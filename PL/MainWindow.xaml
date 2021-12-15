@@ -7,24 +7,27 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="MainWindow" Height="300" Width="450"
-        AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="None">
+        WindowStyle="SingleBorderWindow">
 
 
     <Grid>
-        <Image Source="images (3).jpg" Stretch="Fill"/>
+        <Image 
+            Source="images (3).jpg" 
+            Stretch="Uniform"/>
+
 
         <Button
-        x:Name="btnShowDronesList"
-        Style="{StaticResource MaterialDesignPaperButton}"
-        ToolTip="Show drone list"
-        Content="Show drone list" 
-        FontFamily="Brush Script MT" 
-        FontSize="20"
-        BorderBrush="#FFA49AC6"
-        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Margin="35,223,207,45" Click="btnShowDronesList_Click" />
+            x:Name="btnShowDronesList"
+            Style="{StaticResource MaterialDesignPaperButton}"
+            ToolTip="Show drone list"
+            Content="Show drone list" 
+            FontFamily="Brush Script MT" 
+            FontSize="20"
+            BorderBrush="#FFA49AC6"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
+            Click="btnShowDronesList_Click" Margin="55,200,190,52" RenderTransformOrigin="0.496,0.532"/>
 
     </Grid>
-    
+
 </Window>

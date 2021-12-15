@@ -65,6 +65,7 @@ namespace PL
                 DroneInActionView wnd = new DroneInActionView(droneToList,bL);
 
                 bool? result = wnd.ShowDialog();
+                
             }
         }
 

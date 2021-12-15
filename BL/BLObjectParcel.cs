@@ -56,15 +56,17 @@ namespace IBL.BO
         /// <exception cref="NotImplementedException"></exception>
         public void UpdateParcelToDrone(int droneId)
         {
+           DroneToList droneTL= dronesL.Find(x => x.Id == droneId);
             IDAL.DO.Drone drone = dalo.GetDrone(droneId);
+            
             // only if the drone is available for shipping
-            if (drone.Status == IDAL.DO.DroneStatuses.Available)
+            if (droneTL.DroneStatuses == DroneStatuses.Available)
             {
                 var parcels = dalo.ShowParcelList().Where(p => p.Create == null);
                 // list parcels ordered by priority and weight
                 var orderedParcels = from parcel in parcels
                                      orderby parcel.Priority descending, parcel.Weight ascending
-                                     where parcel.Weight <= drone.MaxWeight
+                                     where parcel.Weight<=drone.MaxWeight
                                      select parcel;
                 // choose the first parcel from the list of parcels
                 var theParcel = orderedParcels.FirstOrDefault();
@@ -80,6 +82,10 @@ namespace IBL.BO
                     {
                         dronesL.Find(x => x.Id == droneId).ParcelNumberTransferred = parcelINTransfer;
                     }
+                }
+                else
+                {
+                    throw new Exception("customer does not exist!");
                 }
             }
             else

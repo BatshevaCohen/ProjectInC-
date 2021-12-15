@@ -23,19 +23,9 @@ namespace PL
     /// </summary>
     public partial class DroneInActionView : Window
     {
-        
-        //  private DroneToList? droneToList;
-       // IBL.BO.IBL myBL = new IBL.BO.BLObject();
+      
         IBL.BO.Drone drone;
         private DroneToList? droneToList;
-
-        //public DroneInActionView()
-        //{
-
-        //    drone = new IBL.BO.Drone();
-        //    DataContext = drone;
-        //    InitializeComponent();
-        //}
         IBL.BO.IBL mybl;
         public DroneInActionView(DroneToList droneToList , IBL.BO.IBL bL)
         {
@@ -81,6 +71,7 @@ namespace PL
             }
             else
                 MessageBox.Show("Please update the drone's name");
+        
         }
 
         /// <summary>
@@ -99,6 +90,11 @@ namespace PL
                     mybl.UpdateChargeDrone(Int32.Parse(idTextBox.Text));
                     MessageBox.Show("Drone sent to charge seccessfuly!");
                     droneStatusTxtBox.Text = "Maintenance";
+                    btnDroneToCharge.Visibility = Visibility.Hidden;
+                    btnCollectParcel.Visibility = Visibility.Hidden;
+                    btnDroneToDelivery.Visibility = Visibility.Hidden;
+                    btnReleaiseToCharge.Visibility = Visibility.Visible;
+                    btnParcelDelivery.Visibility = Visibility.Hidden;
                 }
                catch (Exception ex)
                 {
@@ -118,13 +114,25 @@ namespace PL
             {
                 //input box- so the user will insert the charging time
                 TimeSpan chargingTime = TimeSpan.Parse(Interaction.InputBox("Please enter time of charging", "Time of charging", ""));
-                mybl.DischargeDrone(Int32.Parse(idTextBox.Text), chargingTime);
-                MessageBox.Show("Drone discharged seccessfuly!");
-                droneStatusTxtBox.Text = "Available";
-                batteryStatusTextBox.Text = mybl.GetDrone(Int32.Parse(idTextBox.Text)).Battery.ToString();
+                try
+                {
+                    mybl.DischargeDrone(Int32.Parse(idTextBox.Text), chargingTime);
+                    MessageBox.Show("Drone discharged seccessfuly!");
+                    droneStatusTxtBox.Text = "Available";
+                    batteryStatusTextBox.Text = mybl.GetDrone(Int32.Parse(idTextBox.Text)).Battery.ToString();
+
+                    btnDroneToCharge.Visibility = Visibility.Visible;
+                    btnDroneToDelivery.Visibility = Visibility.Visible;
+                    btnReleaiseToCharge.Visibility = Visibility.Hidden;
+                    btnCollectParcel.Visibility = Visibility.Hidden;
+                    btnParcelDelivery.Visibility = Visibility.Hidden;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
-            else
-                MessageBox.Show("Drone can't be discharged!");
+           
         }
 
         /// <summary>
@@ -141,6 +149,11 @@ namespace PL
                     mybl.UpdateParcelToDrone(Int32.Parse(idTextBox.Text));
                     MessageBox.Show("Drone sent to delivery seccessfuly!");
                     droneStatusTxtBox.Text = "Shipping";
+                    btnDroneToCharge.Visibility = Visibility.Hidden;
+                    btnDroneToDelivery.Visibility = Visibility.Hidden;
+                    btnReleaiseToCharge.Visibility = Visibility.Hidden;
+                    btnCollectParcel.Visibility = Visibility.Visible;
+                    btnParcelDelivery.Visibility = Visibility.Visible;
                 }
                 catch (Exception ex)
                 {
@@ -153,6 +166,7 @@ namespace PL
 
         private void btnCollectParcel_Click(object sender, RoutedEventArgs e)
         {
+          
             Drone drone = mybl.GetDrone(Int32.Parse(idTextBox.Text));
             //only if the drone is on Maintenance
             //and the parcel have not been collected yet
@@ -163,6 +177,12 @@ namespace PL
                     mybl.UpdateParcelPickUpByDrone(Int32.Parse(idTextBox.Text));
                     MessageBox.Show("Drone pick up the parcel seccessfully!");
                     droneStatusTxtBox.Text = "Shipping";
+                    
+                    btnDroneToCharge.Visibility = Visibility.Hidden;
+                    btnDroneToDelivery.Visibility = Visibility.Hidden;
+                    btnReleaiseToCharge.Visibility = Visibility.Hidden;
+                    btnCollectParcel.Visibility = Visibility.Visible;
+                    btnParcelDelivery.Visibility = Visibility.Visible;
                 }
             }
             else
@@ -183,10 +203,52 @@ namespace PL
                     mybl.UpdateParcelSuppliedByDrone(Int32.Parse(idTextBox.Text));
                     MessageBox.Show("Drone pick up the parcel seccessfully!");
                     droneStatusTxtBox.Text = "Available";
+                    btnDroneToCharge.Visibility = Visibility.Visible;
+                    btnDroneToDelivery.Visibility = Visibility.Hidden;
+                    btnReleaiseToCharge.Visibility = Visibility.Hidden;
+                    btnCollectParcel.Visibility = Visibility.Visible;
+                    btnParcelDelivery.Visibility = Visibility.Hidden;
+
                 }
             }
             else
                 MessageBox.Show("Can't supply parcel by the drone");
+        }
+        private void Window_Loaded(object sender, RoutedEventArgs e)
+        {
+            if(droneStatusTxtBox.Text=="Available")
+            {
+                btnDroneToCharge.Visibility = Visibility.Visible;
+                btnDroneToDelivery.Visibility = Visibility.Visible;
+                btnReleaiseToCharge.Visibility = Visibility.Hidden;
+                btnCollectParcel.Visibility = Visibility.Hidden;
+                btnParcelDelivery.Visibility = Visibility.Hidden;
+            }
+            else if (droneStatusTxtBox.Text == "Maintenance")
+            {
+                btnDroneToCharge.Visibility = Visibility.Hidden;
+                btnDroneToDelivery.Visibility = Visibility.Hidden;
+                btnReleaiseToCharge.Visibility = Visibility.Visible;
+                btnCollectParcel.Visibility = Visibility.Hidden;
+                btnParcelDelivery.Visibility = Visibility.Hidden;
+            }
+            // the drone status in shipping
+            else if(droneStatusTxtBox.Text == "shipping" && drone.ParcelInTransfer.ParcelTransferStatus == ParcelTransferStatus.OnTheWayToDestination)
+            {
+                btnDroneToCharge.Visibility = Visibility.Visible;
+                btnDroneToDelivery.Visibility = Visibility.Visible;
+                btnReleaiseToCharge.Visibility = Visibility.Hidden;
+                btnCollectParcel.Visibility = Visibility.Hidden;
+                btnParcelDelivery.Visibility = Visibility.Hidden;
+            }
+            else if (droneStatusTxtBox.Text == "shipping" && drone.ParcelInTransfer.ParcelTransferStatus == ParcelTransferStatus.WaitingToBePickedUp)
+            {
+                btnDroneToCharge.Visibility = Visibility.Hidden;
+                btnDroneToDelivery.Visibility = Visibility.Hidden;
+                btnReleaiseToCharge.Visibility = Visibility.Hidden;
+                btnCollectParcel.Visibility = Visibility.Visible;
+                btnParcelDelivery.Visibility = Visibility.Visible;
+            }
         }
     }
 }

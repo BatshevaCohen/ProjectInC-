@@ -189,14 +189,13 @@ namespace IBL.BO
                 // the distance that the drone have drove
                 double distanse = dalo.CalculateDistance(senderL.Longitude, senderL.Latitude, reciverL.Longitude, reciverL.Latitude);
                 //for each KM - 1% of the battery
-                d.Battery -= distanse * 0.01;
+                dalo.updateBatteryDrone(d.Id, distanse);
                 // update drone's location to the supply target's location
-                d.Location = parcelInTransfer.SupplyTargetLocation;
+                dronesL.Find(x => x.Id == d.Id).Location = parcelInTransfer.SupplyTargetLocation;
                 //changing the drone's status to be available
-                d.DroneStatuses = DroneStatuses.Available;
+                dronesL.Find(x => x.Id == d.Id).DroneStatuses = DroneStatuses.Available;
                 //update the supply time
                 parcel.Supplied = DateTime.Now;
-                
             }
         }
 

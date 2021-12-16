@@ -13,13 +13,11 @@
 
     <Grid>
 
-        <!--<Grid.Background>
-            <ImageBrush ImageSource="C:\Users\shire\source\repos\shirelk\dotNet5782_5626_0865\images\images (3).jpg" 
-                        Stretch="Fill"
-                        AlignmentY="Top" 
-                        AlignmentX="Center"/>
-        </Grid.Background>-->
-        
+        <Image 
+            Source="Images/MainWinPic.jpg"
+            Stretch="Fill"
+            Opacity="0.85"/>
+
         <Button 
             x:Name="btnShowDronesList"
             ToolTip="Show drone list"

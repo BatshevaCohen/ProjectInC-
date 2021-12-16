@@ -3,14 +3,250 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="DroneInActionView" Height="700" Width="1000" Loaded="Window_Loaded">
-    
+
     <Grid>
-        <Grid Name="ShowDrone" Visibility="Collapsed">
-            <Grid x:Name="UpdateGrid" Visibility="Collapsed" VerticalAlignment="Top" Margin="65,65,0,0" HorizontalAlignment="Left">
+        <Grid 
+            Name="ShowDrone" 
+            Visibility="Visible" Margin="0,0,10,0">
+
+            <Grid 
+                x:Name="UpdateGrid" 
+                Visibility="Collapsed" 
+                VerticalAlignment="Top" 
+                Margin="65,65,0,0" 
+                HorizontalAlignment="Left">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                </Grid.RowDefinitions>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="Auto"/>
+                </Grid.ColumnDefinitions>
+                <Label 
+                    VerticalAlignment="Center" 
+                    Grid.Row="0" 
+                    Margin="3" 
+                    HorizontalAlignment="Left" 
+                    Grid.Column="0" 
+                    Content="Battery Status:"/>
+                <TextBox 
+                    x:Name="batteryStatusTextBox" 
+                    Width="120" 
+                    VerticalAlignment="Center" 
+                    Text="{Binding Battery, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                    Grid.Row="0" 
+                    Margin="3" 
+                    Height="23" 
+                    HorizontalAlignment="Left" 
+                    Grid.Column="1" 
+                    IsEnabled="False"/>
+                <Label 
+                    VerticalAlignment="Center" 
+                    Grid.Row="1" 
+                    Margin="3" 
+                    HorizontalAlignment="Left" 
+                    Grid.Column="0" 
+                    Content="Id:"/>
+                <TextBox 
+                    x:Name="idTextBox" 
+                    Width="120" 
+                    VerticalAlignment="Center" 
+                    Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                    Grid.Row="1" 
+                    Margin="3" 
+                    Height="23" 
+                    HorizontalAlignment="Left" 
+                    Grid.Column="1" 
+                    IsEnabled="False"/>
+                <Label 
+                    VerticalAlignment="Center" 
+                    Grid.Row="3" 
+                    Margin="3" 
+                    HorizontalAlignment="Left" 
+                    Grid.Column="0" 
+                    Content="Drone Model:"/>
+                <TextBox 
+                    x:Name="droneModelTextBox" 
+                    Width="120" 
+                    VerticalAlignment="Center"  
+                    Text="{Binding Model, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  
+                    Grid.Row="3" 
+                    Margin="3" 
+                    Height="23" 
+                    HorizontalAlignment="Left" 
+                    Grid.Column="1"/>
+                <Label 
+                    VerticalAlignment="Center" 
+                    Grid.Row="4" 
+                    Margin="3" 
+                    HorizontalAlignment="Left" 
+                    Grid.Column="0" 
+                    Content="Drone Status:"/>
+                <TextBox 
+                    x:Name="droneStatusTxtBox" 
+                    Width="120" 
+                    VerticalAlignment="Center" 
+                    Text="{Binding DroneStatuses, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                    Grid.Row="4" 
+                    Margin="3"  
+                    Height="Auto" 
+                    HorizontalAlignment="Left" 
+                    Grid.Column="1" 
+                    IsEnabled="False"/>
+                <Label 
+                    VerticalAlignment="Center" 
+                    Grid.Row="5" 
+                    Margin="3" 
+                    HorizontalAlignment="Left" 
+                    Grid.Column="0" 
+                    Content="Weight Category:"/>
+                <TextBox 
+                    x:Name="droneWeightTxtBox" 
+                    Grid.Column="1" 
+                    HorizontalAlignment="Left" 
+                    Margin="3,0,0,0" 
+                    Text="{Binding Weight, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                    Grid.Row="5" 
+                    VerticalAlignment="Center" 
+                    Width="120" 
+                    IsEnabled="False"/>
+                <Label 
+                    VerticalAlignment="Center" 
+                    Grid.Row="6" 
+                    Margin="3" 
+                    HorizontalAlignment="Left" 
+                    Grid.Column="0" 
+                    Content="Latitude:"/>
+                <TextBox 
+                    x:Name="latitudeTextBox" 
+                    Width="120" 
+                    VerticalAlignment="Center" 
+                    Text="{Binding Location.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                    Grid.Row="6" 
+                    Margin="3" 
+                    Height="23" 
+                    HorizontalAlignment="Left" 
+                    Grid.Column="1" 
+                    IsEnabled="False"/>
+                <Label 
+                    Content="Longitude:"
+                    VerticalAlignment="Center" 
+                    Grid.Row="7" 
+                    Margin="3" 
+                    HorizontalAlignment="Left" 
+                    Grid.Column="0"/>
+                <TextBox 
+                    x:Name="longitudeTextBox" 
+                    Width="120" 
+                    VerticalAlignment="Center" 
+                    Text="{Binding Location.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                    Grid.Row="7" 
+                    Margin="3" 
+                    Height="23" 
+                    HorizontalAlignment="Left" 
+                    Grid.Column="1" 
+                    IsEnabled="False"/>
+            </Grid>
+
+            <Button 
+                x:Name="btnDroneToDelivery" 
+                Content="Drone to delivery" 
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                materialDesign:ButtonAssist.CornerRadius="25"
+                HorizontalAlignment="Center" 
+                Margin="0,182,0,0" 
+                VerticalAlignment="Top" 
+                Width="182" 
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                Click="btnDroneToDelivery_Click" Height="60" />
+            <Button 
+                x:Name="btnUpdateDrone" 
+                Content="Update drone" 
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                materialDesign:ButtonAssist.CornerRadius="25"
+                HorizontalAlignment="Center" 
+                Margin="0,26,0,0" 
+                VerticalAlignment="Top" 
+                Height="60" 
+                Width="180" 
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                Click="btnUpdateDrone_Click"/>
+            <Button 
+                x:Name="btnDroneToCharge"  
+                Content="Sending to charging" 
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                materialDesign:ButtonAssist.CornerRadius="25"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                HorizontalAlignment="Center" 
+                Margin="0,104,0,0" 
+                VerticalAlignment="Top" 
+                Height="60" Width="180" 
+                Click="btnDroneToCharge_Click"/>
+            <Button 
+                x:Name="btnCollectParcel" 
+                Content="Parcel collection" 
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                materialDesign:ButtonAssist.CornerRadius="25"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                HorizontalAlignment="Center" 
+                Margin="0,104,0,0" 
+                VerticalAlignment="Top" 
+                Height="60" 
+                Width="181" 
+                Click="btnCollectParcel_Click"/>
+            <Button 
+                x:Name="btnReleaiseToCharge" 
+                Content="Releaizse frome charge" 
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                materialDesign:ButtonAssist.CornerRadius="25"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                HorizontalAlignment="Center" 
+                Margin="0,104,0,0" 
+                VerticalAlignment="Top" 
+                Width="180" 
+                Height="60" 
+                Click="btnReleaiseToCharge_Click"/>
+            <Button 
+                x:Name="btnParcelDelivery" 
+                Content="Parcel delivery"
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                materialDesign:ButtonAssist.CornerRadius="25"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                HorizontalAlignment="Center" 
+                Margin="0,104,0,0" 
+                VerticalAlignment="Top" 
+                Height="60" 
+                Width="180" 
+                Click="btnParcelDelivery_Click"/>
+            <Button 
+                x:Name="btnClose" 
+                Content="Close" 
+                Background="#da2d2d"
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                materialDesign:ButtonAssist.CornerRadius="25"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                Click="closeButton_Click"  
+                HorizontalAlignment="Center" 
+                VerticalAlignment="Center" 
+                Width="108"
+                />
+        </Grid>
+
+
+        <Grid x:Name="AddGrid" Visibility="Collapsed" VerticalAlignment="Top" Margin="86,36,0,0" HorizontalAlignment="Left" Height="254">
             <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -24,91 +260,38 @@
                 <ColumnDefinition Width="Auto"/>
                 <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
-            <Label VerticalAlignment="Center" Grid.Row="0" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Battery Status:"/>
-            <TextBox x:Name="batteryStatusTextBox" Width="120" VerticalAlignment="Center" Text="{Binding Battery, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="0" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1" IsEnabled="False"/>
-            <Label VerticalAlignment="Center" Grid.Row="1" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Id:"/>
-            <TextBox x:Name="idTextBox" Width="120" VerticalAlignment="Center" Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="1" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1" IsEnabled="False"/>
-            <Label VerticalAlignment="Center" Grid.Row="3" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Drone Model:"/>
+            <Label Content="Id:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="3" HorizontalAlignment="Left"/>
+            <TextBox x:Name="idTextBox1" Grid.Row="0" Grid.Column="1" Width="120" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3" Height="23" 
+                     Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
 
-            <TextBox x:Name="droneModelTextBox" Width="120" VerticalAlignment="Center"  
-                     Text="{Binding Model, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  
-                     Grid.Row="3" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1"/>
+            <Label Content="Drone Model:" Grid.Row="1" Grid.Column="0" Margin="3"  VerticalAlignment="Center" HorizontalAlignment="Left" />
+            <TextBox x:Name="droneModelTextBox1" Grid.Row="1" Grid.Column="1" Width="120" VerticalAlignment="Center" Margin="3" Height="23" HorizontalAlignment="Left"/>
+
+            <Label VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Margin="3" HorizontalAlignment="Left" Content="Battery Precent:"/>
+            <TextBox x:Name="batteryPrecentTextBox" Grid.Row="2"  Grid.Column="1" Width="120" VerticalAlignment="Center" Margin="3" Height="23" HorizontalAlignment="Left"
+                     Text="{Binding Battery, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
 
             <Label VerticalAlignment="Center" Grid.Row="4" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Drone Status:"/>
 
-            <TextBox x:Name="droneStatusTxtBox" Width="120" VerticalAlignment="Center" 
-                     Text="{Binding DroneStatuses, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                     Grid.Row="4" Margin="3"  Height="Auto" HorizontalAlignment="Left" Grid.Column="1" IsEnabled="False"/>
-
-            <Label VerticalAlignment="Center" Grid.Row="5" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Weight Category:"/>
-            <TextBox x:Name="droneWeightTxtBox" Grid.Column="1" HorizontalAlignment="Left" Margin="3,0,0,0" 
-                     Text="{Binding Weight, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                     Grid.Row="5" VerticalAlignment="Center" Width="120" IsEnabled="False"/>
-           
-            <Label VerticalAlignment="Center" Grid.Row="6" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Latitude:"/>
-            <TextBox x:Name="latitudeTextBox" Width="120" VerticalAlignment="Center" Text="{Binding Location.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="6" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1" IsEnabled="False"/>
-            <Label VerticalAlignment="Center" Grid.Row="7" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Longitude:"/>
-            <TextBox x:Name="longitudeTextBox" Width="120" VerticalAlignment="Center" Text="{Binding Location.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="7" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1" IsEnabled="False"/>
-            </Grid>
-            <Button x:Name="btnDroneToDelivery" Content="Drone to delivery"  HorizontalAlignment="Left" Margin="548,262,0,0" VerticalAlignment="Top" Height="231" Width="251" Click="btnDroneToDelivery_Click" />
-            <Button x:Name="btnUpdateDrone" Content="Update drone" HorizontalAlignment="Center" Margin="0,26,0,0" VerticalAlignment="Top" Height="216" Width="228" 
-                Click="btnUpdateDrone_Click"/>
-            <Button x:Name="btnDroneToCharge"  Content="Sending to charging" HorizontalAlignment="Left" Margin="710,26,0,0" VerticalAlignment="Top" Height="216" Width="225" Click="btnDroneToCharge_Click"/>
-            <Button x:Name="btnCollectParcel" Content="Parcel collection" HorizontalAlignment="Left" Margin="710,26,0,0" VerticalAlignment="Top" Height="216" Width="225" Click="btnCollectParcel_Click"/>
-            <Button x:Name="btnReleaiseToCharge" Content="Releaizse frome charge" HorizontalAlignment="Left" Margin="710,26,0,0" VerticalAlignment="Top" Width="225" Height="216" Click="btnReleaiseToCharge_Click"/>
-            <Button x:Name="btnParcelDelivery" Content="Parcel delivery" HorizontalAlignment="Left" Margin="710,26,0,0" VerticalAlignment="Top" Height="216" Width="225" Click="btnParcelDelivery_Click"/>
-            <Button x:Name="btnClose" Content="Close" Click="closeButton_Click"  HorizontalAlignment="Left" Margin="882,442,0,0" VerticalAlignment="Top" Width="108"/>
-        </Grid>
-
-
-        <Grid x:Name="AddGrid" Visibility="Collapsed" VerticalAlignment="Top" Margin="86,36,0,0" HorizontalAlignment="Left" Height="254">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
-        <Label Content="Id:" Grid.Row="0" Grid.Column="0" VerticalAlignment="Center" Margin="3" HorizontalAlignment="Left"/>
-        <TextBox x:Name="idTextBox1" Grid.Row="0" Grid.Column="1" Width="120" VerticalAlignment="Center" HorizontalAlignment="Left" Margin="3" Height="23" 
-                     Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
-
-        <Label Content="Drone Model:" Grid.Row="1" Grid.Column="0" Margin="3"  VerticalAlignment="Center" HorizontalAlignment="Left" />
-        <TextBox x:Name="droneModelTextBox1" Grid.Row="1" Grid.Column="1" Width="120" VerticalAlignment="Center" Margin="3" Height="23" HorizontalAlignment="Left"/>
-
-        <Label VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Margin="3" HorizontalAlignment="Left" Content="Battery Precent:"/>
-        <TextBox x:Name="batteryPrecentTextBox" Grid.Row="2"  Grid.Column="1" Width="120" VerticalAlignment="Center" Margin="3" Height="23" HorizontalAlignment="Left"
-                     Text="{Binding Battery, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
-
-        <Label VerticalAlignment="Center" Grid.Row="4" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Drone Status:"/>
-
-        <ComboBox x:Name="droneStatusComboBox" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="3" Height="Auto" 
+            <ComboBox x:Name="droneStatusComboBox" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="3" Height="Auto" 
                       Text="{Binding DroneStatuses, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Width="120" />
-        <Label VerticalAlignment="Center" Grid.Row="5" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Weight Category:"/>
+            <Label VerticalAlignment="Center" Grid.Row="5" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Weight Category:"/>
 
-        <ComboBox x:Name="droneWeightComboBox" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="3,0,0,0" 
+            <ComboBox x:Name="droneWeightComboBox" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="3,0,0,0" 
                       Text="{Binding Weight, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Width="120"/>
-        <Label VerticalAlignment="Center" Grid.Row="6" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Latitude:"/>
+            <Label VerticalAlignment="Center" Grid.Row="6" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Latitude:"/>
 
-        <TextBox x:Name="latitudeTextBox1" Width="120" VerticalAlignment="Bottom" Text="{Binding Location.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="6" Margin="0,0,0,5" Height="23" HorizontalAlignment="Center" Grid.Column="1"/>
-        <Label VerticalAlignment="Center" Grid.Row="7" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Longitude:"/>
+            <TextBox x:Name="latitudeTextBox1" Width="120" VerticalAlignment="Bottom" Text="{Binding Location.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="6" Margin="0,0,0,5" Height="23" HorizontalAlignment="Center" Grid.Column="1"/>
+            <Label VerticalAlignment="Center" Grid.Row="7" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Longitude:"/>
 
-        <TextBox x:Name="longitudeTextBox1" Width="120" VerticalAlignment="Center" Text="{Binding Location.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="7" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1" UndoLimit="99"/>
+            <TextBox x:Name="longitudeTextBox1" Width="120" VerticalAlignment="Center" Text="{Binding Location.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="7" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1" UndoLimit="99"/>
 
-        <Label Content="Station for charge:" HorizontalAlignment="Left" Margin="3" Grid.Row="8" VerticalAlignment="Top"/>
-        <ComboBox x:Name="stationsComboBox" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="3" Width="120"
+            <Label Content="Station for charge:" HorizontalAlignment="Left" Margin="3" Grid.Row="8" VerticalAlignment="Top"/>
+            <ComboBox x:Name="stationsComboBox" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="3" Width="120"
                       Text="{Binding Stations, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
 
 
-    </Grid>
+        </Grid>
     </Grid>
 
 </Window>

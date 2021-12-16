@@ -29,6 +29,11 @@ namespace PL
             comboWeghitSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.Weight));
         }
 
+        /// <summary>
+        /// Combo box for drone status selecting
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (comboStatusSelector.SelectedItem != null)
@@ -36,9 +41,13 @@ namespace PL
                 DroneStatuses droneStatuses = (DroneStatuses)comboStatusSelector.SelectedItem;
                 this.DronesListView.ItemsSource = bL.ShowDroneList().Where(x => x.DroneStatuses == droneStatuses);
             }
-            
         }
 
+        /// <summary>
+        /// Combo box for weight selecting
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void comboWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             if (comboWeghitSelector.SelectedItem != null)
@@ -48,16 +57,31 @@ namespace PL
             }
         }
 
+        /// <summary>
+        /// Add drone button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddDrone_Click(object sender, RoutedEventArgs e)
         {
             new DroneInActionView(this, bL).Show();
         }
 
+        /// <summary>
+        ///  Close button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
 
+        /// <summary>
+        /// double-clicking on one of the drones on the list
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             IBL.BO.DroneToList? droneToList = DronesListView.SelectedItem as IBL.BO.DroneToList;
@@ -68,7 +92,7 @@ namespace PL
         }
 
         /// <summary>
-        /// clear status comboBox
+        /// Clear the status comboBox and the listView of the drones
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -79,15 +103,14 @@ namespace PL
         }
 
         /// <summary>
-        /// clear weight comboBox
+        /// Clear the weight comboBox and the listView of the drones
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void ClearWeightComboBox_Click(object sender, RoutedEventArgs e)
         {
-
+            comboWeghitSelector.Text = "";
+            DronesListView.ItemsSource = null;
         }
-
- 
     }
 }

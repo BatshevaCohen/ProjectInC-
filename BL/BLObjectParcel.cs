@@ -50,7 +50,7 @@ namespace IBL.BO
             dalo.AddParcel(p);
         }
         /// <summary>
-        /// Update parcel to drone
+        /// Assign parcel to drone
         /// </summary>
         /// <param name="droneId"></param>
         /// <exception cref="NotImplementedException"></exception>
@@ -114,23 +114,48 @@ namespace IBL.BO
             }
             else
             {
-                //finds the sender (-the customer) by its ID
-                Customer customer = GetCustomer(parcel.SenderId);
+                //finds the sender and the reciver (-the customer) by its ID
+                Customer sender = GetCustomer(parcel.SenderId);
+                Customer reciver = GetCustomer(parcel.ReceiverId);
                 //calculate the distance frome the current location of the drone- to the customer
-                double distance = dalo.CalculateDistance(customer.Location.Longitude, customer.Location.Latitude, drone.Location.Longitude, drone.Location.Latitude);
+                double distance = dalo.CalculateDistance(sender.Location.Longitude, sender.Location.Latitude, drone.Location.Longitude, drone.Location.Latitude);
                 //update the location of the drone to where the sender is (sender's location)
-                dronesL.Find(x => x.Id == droneId).Location.Latitude = customer.Location.Latitude;
-                dronesL.Find(x => x.Id == droneId).Location.Longitude = customer.Location.Longitude;
+                dronesL.Find(x => x.Id == droneId).Location.Latitude = sender.Location.Latitude;
+                dronesL.Find(x => x.Id == droneId).Location.Longitude = sender.Location.Longitude;
                 // for each KM - 1% of the battery
                 dronesL.Find(x => x.Id == droneId).Battery -= distance * 0.01;
                 //update the pick up time to the current time
                 parcel.PickedUp = DateTime.Now;
                 dalo.updateBatteryDrone(droneId, distance);
+                //update the ParcelInTransfer
                 drone.ParcelInTransfer = new()
                 {
-                    ParcelTransferStatus = ParcelTransferStatus.WaitingToBePickedUp
+                    Id = parcel.Id,
+                    ParcelTransferStatus = ParcelTransferStatus.WaitingToBePickedUp,
+                    Priority = (Priority)parcel.Priority,
+                    Weight = (Weight)parcel.Weight,
+                    TransportDistance = distance,
                 };
-                
+                drone.ParcelInTransfer.Sender = new()
+                {
+                    Id = sender.Id,
+                    Name = sender.Name,
+                };
+                drone.ParcelInTransfer.Reciver = new()
+                {
+                    Id = reciver.Id,
+                    Name = reciver.Name
+                };
+                drone.ParcelInTransfer.CollectingLocation = new()
+                {
+                    Longitude = sender.Location.Longitude,
+                    Latitude = sender.Location.Latitude,
+                };
+                drone.ParcelInTransfer.SupplyTargetLocation = new()
+                {
+                    Longitude = reciver.Location.Longitude,
+                    Latitude = reciver.Location.Latitude,
+                };
             }
         }
 
@@ -159,14 +184,14 @@ namespace IBL.BO
                 Drone d = GetDrone(droneId);
                 //finds the parcel in transfer
                 ParcelInTransfer parcelInTransfer = d.ParcelInTransfer;
-                senderL = parcelInTransfer.Collecting;
-                reciverL = parcelInTransfer.SupplyTarget;
+                senderL = parcelInTransfer.CollectingLocation;
+                reciverL = parcelInTransfer.SupplyTargetLocation;
                 // the distance that the drone have drove
                 double distanse = dalo.CalculateDistance(senderL.Longitude, senderL.Latitude, reciverL.Longitude, reciverL.Latitude);
                 //for each KM - 1% of the battery
                 d.Battery -= distanse * 0.01;
                 // update drone's location to the supply target's location
-                d.Location = parcelInTransfer.SupplyTarget;
+                d.Location = parcelInTransfer.SupplyTargetLocation;
                 //changing the drone's status to be available
                 d.DroneStatuses = DroneStatuses.Available;
                 //update the supply time

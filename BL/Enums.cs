@@ -21,7 +21,7 @@
     }
     public enum ParcelTransferStatus
     {
-        WaitingToBePickedUp,
+        WaitingToBePickedUp = 1,
         OnTheWayToDestination
     }
     public enum DroneStatuses

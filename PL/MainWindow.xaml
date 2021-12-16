@@ -7,9 +7,8 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="MainWindow" Height="300" Width="450"
-        AllowsTransparency="True"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="None">
+        WindowStyle="SingleBorderWindow">
 
 
     <Grid>
@@ -23,7 +22,7 @@
         FontFamily="Brush Script MT" 
         FontSize="20"
         BorderBrush="#FFA49AC6"
-        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Margin="35,223,207,45" Click="btnShowDronesList_Click" />
+        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Margin="17,210,225,42" Click="btnShowDronesList_Click" />
 
     </Grid>
     

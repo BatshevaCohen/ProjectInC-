@@ -91,14 +91,6 @@ namespace PL
 
 
 
-        //private void DronesListView_SourceUpdated(object sender, DataTransferEventArgs e)
-        //{
-
-        //}
-
-        //private void ClearFilledComboBox_Click(object sender, RoutedEventArgs e)
-        //{
-        //    comboStatusSelector.Items.Clear();
-        //}
+       
     }
 }

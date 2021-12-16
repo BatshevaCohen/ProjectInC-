@@ -70,7 +70,11 @@ namespace PL
                 droneModelTextBox.Text = newName;
             }
             else
+            {
                 MessageBox.Show("Please update the drone's name");
+               
+                
+            }
         
         }
 
@@ -172,7 +176,7 @@ namespace PL
             //and the parcel have not been collected yet
             if (drone.ParcelInTransfer != null)
             {
-                if (droneStatusTxtBox.Text == "Shipping" && drone.ParcelInTransfer.ParcelTransferStatus == ParcelTransferStatus.WaitingToBePickedUp)
+                if (droneStatusTxtBox.Text == "Shipping" && drone.ParcelInTransfer!=null)
                 {
                     mybl.UpdateParcelPickUpByDrone(Int32.Parse(idTextBox.Text));
                     MessageBox.Show("Drone pick up the parcel seccessfully!");
@@ -198,7 +202,7 @@ namespace PL
         {
             if (drone.ParcelInTransfer != null)
             {
-                if (droneStatusTxtBox.Text == "Shipping" && drone.ParcelInTransfer.ParcelTransferStatus == ParcelTransferStatus.OnTheWayToDestination)
+                if (droneStatusTxtBox.Text == "Shipping" && drone.ParcelInTransfer != null)
                 {
                     mybl.UpdateParcelSuppliedByDrone(Int32.Parse(idTextBox.Text));
                     MessageBox.Show("Drone pick up the parcel seccessfully!");
@@ -216,7 +220,9 @@ namespace PL
         }
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            if(droneStatusTxtBox.Text=="Available")
+            Parcel p = mybl.GetParcelByDroneId(drone.Id);
+
+            if (droneStatusTxtBox.Text=="Available")
             {
                 btnDroneToCharge.Visibility = Visibility.Visible;
                 btnDroneToDelivery.Visibility = Visibility.Visible;
@@ -233,15 +239,16 @@ namespace PL
                 btnParcelDelivery.Visibility = Visibility.Hidden;
             }
             // the drone status in shipping
-            else if(droneStatusTxtBox.Text == "shipping" && drone.ParcelInTransfer.ParcelTransferStatus == ParcelTransferStatus.OnTheWayToDestination)
+          
+            else if(droneStatusTxtBox.Text == "shipping" && drone.ParcelInTransfer != null&&p.CollectionTime!=DateTime.MinValue)
             {
-                btnDroneToCharge.Visibility = Visibility.Visible;
-                btnDroneToDelivery.Visibility = Visibility.Visible;
+                btnDroneToCharge.Visibility = Visibility.Hidden;
+                btnDroneToDelivery.Visibility = Visibility.Hidden;
                 btnReleaiseToCharge.Visibility = Visibility.Hidden;
-                btnCollectParcel.Visibility = Visibility.Hidden;
-                btnParcelDelivery.Visibility = Visibility.Hidden;
+                btnCollectParcel.Visibility = Visibility.Visible;
+                btnParcelDelivery.Visibility = Visibility.Visible;
             }
-            else if (droneStatusTxtBox.Text == "shipping" && drone.ParcelInTransfer.ParcelTransferStatus == ParcelTransferStatus.WaitingToBePickedUp)
+            else if (droneStatusTxtBox.Text == "shipping" && drone.ParcelInTransfer != null&&p.CollectionTime==DateTime.MinValue)
             {
                 btnDroneToCharge.Visibility = Visibility.Hidden;
                 btnDroneToDelivery.Visibility = Visibility.Hidden;

@@ -289,5 +289,33 @@ namespace IBL.BO
             }
             return parcelStatus;
         }
+        public Parcel GetParcelByDroneId(int droneId)
+        {
+           IDAL.DO.Parcel p= dalo.GetParcelByDroneId(droneId);
+            Parcel par = new Parcel();
+            par.Id = p.Id;
+            par.ParcelCreationTime = p.Create;
+            par.Priority = (Priority)p.Priority;
+            par.Weight = (Weight)p.Weight;
+            par.SupplyTime = p.Supplied;
+            par.CollectionTime = p.PickedUp;
+            par.ParcelCreationTime = p.Create;
+            par.AssignmentToParcelTime= p.Assigned; ;
+            IDAL.DO.Customer sender=  dalo.GetCustomer(p.SenderId);
+            IDAL.DO.Customer reciver = dalo.GetCustomer(p.ReceiverId);
+            par.Resiver = new()
+            {
+                Id = reciver.Id,
+                Name=reciver.Name
+            };
+
+            par.Sender = new()
+            {
+                Id = sender.Id,
+                Name = sender.Name
+            };
+            
+            return par;
+        }
     }
 }

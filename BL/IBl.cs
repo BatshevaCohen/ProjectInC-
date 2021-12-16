@@ -101,6 +101,7 @@ namespace IBL.BO
         Drone GetDrone(int droneId);
         Customer GetCustomer(int customerId);
         Parcel GetParcel(int parcelId);
+        Parcel GetParcelByDroneId(int droneId);
         #endregion
 
 

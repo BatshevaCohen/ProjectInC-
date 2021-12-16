@@ -26,7 +26,7 @@ namespace PL
             this.bL = bl;
             InitializeComponent();
             comboStatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
-            comboWeghitSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.Weight)) ;
+            comboWeghitSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.Weight));
         }
 
         private void comboStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -41,7 +41,7 @@ namespace PL
             Weight weight = (Weight)comboWeghitSelector.SelectedItem;
             this.DronesListView.ItemsSource = bL.ShowDroneList().Where(x => x.Weight == weight);
         }
-        
+
         private void btnAddDrone_Click(object sender, RoutedEventArgs e)
         {
             DroneWindow wnd = new DroneWindow();
@@ -62,10 +62,10 @@ namespace PL
             if (droneToList != null)
             {
 
-                DroneInActionView wnd = new DroneInActionView(droneToList,bL);
+                DroneInActionView wnd = new DroneInActionView(droneToList, bL);
 
                 bool? result = wnd.ShowDialog();
-                
+
             }
         }
 
@@ -88,5 +88,7 @@ namespace PL
         {
 
         }
+
+ 
     }
 }

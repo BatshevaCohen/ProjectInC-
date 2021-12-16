@@ -6,24 +6,33 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="MainWindow" Height="300" Width="450"
+        Title="MainWindow" Height="600" Width="700"
         WindowStartupLocation="CenterScreen"
         WindowStyle="SingleBorderWindow">
 
 
     <Grid>
-        <Image Source="images (3).jpg" Stretch="Fill"/>
 
-        <Button
-        x:Name="btnShowDronesList"
-        Style="{StaticResource MaterialDesignPaperButton}"
-        ToolTip="Show drone list"
-        Content="Show drone list" 
-        FontFamily="Brush Script MT" 
-        FontSize="20"
-        BorderBrush="#FFA49AC6"
-        IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" Margin="17,210,225,42" Click="btnShowDronesList_Click" />
+        <Grid.Background>
+            <ImageBrush ImageSource="C:\Users\shire\source\repos\shirelk\dotNet5782_5626_0865\images\images (3).jpg" 
+                        Stretch="Fill"
+                        AlignmentY="Top" 
+                        AlignmentX="Center"/>
+        </Grid.Background>
+        
+        <Button 
+            x:Name="btnShowDronesList"
+            ToolTip="Show drone list"
+            Content="Show drone list"  
+            FontFamily="Brush Script MT"
+            FontSize="30"
+            Style="{StaticResource MaterialDesignPaperButton}"
+            HorizontalAlignment="Center" 
+            Margin="0,463,0,0" 
+            VerticalAlignment="Top"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
+            Click="btnShowDronesList_Click" Height="58" Width="280"/>
 
     </Grid>
-    
+
 </Window>

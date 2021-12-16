@@ -146,7 +146,7 @@ namespace IBL.BO
             droneTo.DroneStatuses = DroneStatuses.Shipping;
             droneTo.Model = "DFGHJ56";
             droneTo.Weight = Weight.Medium;
-            droneTo.ParcelNumberTransferred = 98765;
+            droneTo.ParcelNumberTransferred = 111111;
             
             droneTo.Location=new()
             {

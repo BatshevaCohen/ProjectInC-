@@ -121,7 +121,21 @@ namespace DalObject
                         PickedUp = MyDateTime(),
                         Supplied = MyDateTime()
                     });
+                    
                 }
+                Parcels.Add(new Parcel()
+                {
+                    Id = 111111,    //serial number
+                    SenderId = r.Next(1, 10),
+                    ReceiverId = r.Next(1, 10),
+                    Weight = RandomEnumValue<WeightCategories>(),
+                    Priority = RandomEnumValue<Priorities>(),
+                    DroneID = 123456,
+                    Create = MyDateTime(),
+                    Assigned = MyDateTime(),
+                    PickedUp = MyDateTime(),
+                    Supplied = MyDateTime()
+                });
             }
             /// <summary>
             /// function for random enums

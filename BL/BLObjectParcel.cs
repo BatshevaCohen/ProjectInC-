@@ -126,7 +126,11 @@ namespace IBL.BO
                 //update the pick up time to the current time
                 parcel.PickedUp = DateTime.Now;
                 dalo.updateBatteryDrone(droneId, distance);
-                drone.ParcelInTransfer.ParcelTransferStatus = ParcelTransferStatus.WaitingToBePickedUp;
+                drone.ParcelInTransfer = new()
+                {
+                    ParcelTransferStatus = ParcelTransferStatus.WaitingToBePickedUp
+                };
+                
             }
         }
 
@@ -167,6 +171,7 @@ namespace IBL.BO
                 d.DroneStatuses = DroneStatuses.Available;
                 //update the supply time
                 parcel.Supplied = DateTime.Now;
+                
             }
         }
 

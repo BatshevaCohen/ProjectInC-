@@ -77,7 +77,7 @@ namespace DalObject
             Parcel parcel = default;
             try
             {
-                parcel = GetParcel(parcel_id); //finds the parcel by its ID
+                parcel = GetParcel(parcel_id); 
             }
             catch (ParcelException pex)
             {
@@ -124,7 +124,7 @@ namespace DalObject
         /// <returns></returns>
         public Parcel GetParcelByDroneId(int DroneId)
         {
-            Parcel p = DataSource.Parcels.Find(x => x.Id == DroneId);
+            Parcel p = DataSource.Parcels.Find(x => x.DroneID == DroneId);
             return p;
         }
         /// <summary>

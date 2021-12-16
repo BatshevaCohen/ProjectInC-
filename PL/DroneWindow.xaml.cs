@@ -64,11 +64,33 @@ namespace PL
             {
                 Id = droneToList.Id,
                 Battery = droneToList.Battery,
-                Model = droneToList.Model, 
+                Model = droneToList.Model,
                 DroneStatuses = droneToList.DroneStatuses,
                 Weight = droneToList.Weight,
-                Location=droneToList.Location
+                Location = droneToList.Location,
+                 
+
             };
+            if (droneToList.ParcelNumberTransferred != 0)
+            {
+                Parcel parcel = myBL.GetParcelByDroneId(droneToList.Id);
+
+                drone.ParcelInTransfer = new()
+                {
+                    Id = droneToList.ParcelNumberTransferred,
+                    Priority = parcel.Priority,
+                    
+                };
+                // אם היא סופקה אך איננה שוייכה
+                if (parcel.CollectionTime != DateTime.MinValue && parcel.SupplyTime == DateTime.MinValue) 
+                    drone.ParcelInTransfer.ParcelTransferStatus = ParcelTransferStatus.WaitingToBePickedUp;
+                //בזמן משלוח
+                if(parcel.CollectionTime == DateTime.MinValue && parcel.SupplyTime != DateTime.MinValue)
+                    drone.ParcelInTransfer.ParcelTransferStatus = ParcelTransferStatus.OnTheWayToDestination;
+
+
+
+            }
             DataContext = drone;
             InitializeComponent();
             droneWeightComboBox.ItemsSource = Enum.GetValues(typeof(Weight));

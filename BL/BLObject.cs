@@ -139,31 +139,31 @@ namespace IBL.BO
                 dronesL.Add(droneBL);
                 
             }
-            DroneToList droneTo = new DroneToList();
+            //DroneToList droneTo = new DroneToList();
 
-            droneTo.Battery = 99;
-            droneTo.Id = 123456;
-            droneTo.DroneStatuses = DroneStatuses.Shipping;
-            droneTo.Model = "DFGHJ56";
-            droneTo.Weight = Weight.Medium;
-            droneTo.ParcelNumberTransferred = 111111;
+            //droneTo.Battery = 99;
+            //droneTo.Id = 123456;
+            //droneTo.DroneStatuses = DroneStatuses.Shipping;
+            //droneTo.Model = "DFGHJ56";
+            //droneTo.Weight = Weight.Medium;
+            //droneTo.ParcelNumberTransferred = 111111;
             
-            droneTo.Location=new()
-            {
-                Latitude = 43,
-                Longitude = -32,
-            };
-            dronesL.Add(droneTo);
-            IDAL.DO.Drone d = new()
-            {
-                Battery = 99,
-                Id = 123456,
+            //droneTo.Location=new()
+            //{
+            //    Latitude = 43,
+            //    Longitude = -32,
+            //};
+            //dronesL.Add(droneTo);
+            //IDAL.DO.Drone d = new()
+            //{
+            //    Battery = 99,
+            //    Id = 123456,
 
-                Model = "DFGHJ56",
-                MaxWeight = WeightCategories.Medium,
+            //    Model = "DFGHJ56",
+            //    MaxWeight = WeightCategories.Medium,
                 
-            };
-            dalo.AddDrone(d);
+            //};
+            //dalo.AddDrone(d);
         }
         
     }

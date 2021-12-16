@@ -136,6 +136,7 @@ namespace DalObject
                     PickedUp = MyDateTime(),
                     Supplied = MyDateTime()
                 });
+
             }
             /// <summary>
             /// function for random enums

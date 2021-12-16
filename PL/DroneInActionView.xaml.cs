@@ -41,6 +41,7 @@ namespace PL
                 DroneStatuses = droneToList.DroneStatuses,
                 Weight = droneToList.Weight,
                 Location=droneToList.Location,
+                
             };
             DataContext = drone;
             InitializeComponent();
@@ -71,10 +72,7 @@ namespace PL
             }
             else
             {
-                
                 MessageBox.Show("Please update the drone's name");
-               
-                
             }
         
         }
@@ -120,7 +118,7 @@ namespace PL
             {
                 //input box- so the user will insert the charging time
                 TimeSpan chargingTime = TimeSpan.Parse(Interaction.InputBox("Please enter time of charging", "Time of charging", ""));
-               
+                
                 try
                 {
                     mybl.DischargeDrone(Int32.Parse(idTextBox.Text), chargingTime);
@@ -243,7 +241,7 @@ namespace PL
             }
             // the drone status in shipping
           
-            else if(droneStatusTxtBox.Text == "shipping" && drone.ParcelInTransfer.Id != 0 && p.CollectionTime!=DateTime.MinValue)
+            else if(droneStatusTxtBox.Text == "shipping" && p.CollectionTime!=DateTime.MinValue)
             {
                 btnDroneToCharge.Visibility = Visibility.Hidden;
                 btnDroneToDelivery.Visibility = Visibility.Hidden;
@@ -251,7 +249,7 @@ namespace PL
                 btnCollectParcel.Visibility = Visibility.Visible;
                 btnParcelDelivery.Visibility = Visibility.Visible;
             }
-            else if (droneStatusTxtBox.Text == "shipping" && drone.ParcelInTransfer.Id != 0  && p.CollectionTime==DateTime.MinValue)
+            else if (droneStatusTxtBox.Text == "shipping" && p.CollectionTime==DateTime.MinValue)
             {
                 btnDroneToCharge.Visibility = Visibility.Hidden;
                 btnDroneToDelivery.Visibility = Visibility.Hidden;

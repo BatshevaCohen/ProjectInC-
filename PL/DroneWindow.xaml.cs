@@ -29,7 +29,7 @@ namespace PL
         /// <summary>
         /// the view of the window
         /// </summary>
-        public DroneWindow()
+        public DroneWindow(DroneListWindow droneListWindow)
         {
             drone = new IBL.BO.Drone();
             DataContext = drone;

@@ -27,11 +27,32 @@ namespace PL
         IBL.BO.Drone drone;
         private DroneToList? droneToList;
         IBL.BO.IBL mybl;
-        public DroneInActionView(DroneToList droneToList , IBL.BO.IBL bL)
-        {
-            
-            mybl = bL;
 
+        public DroneInActionView(DroneListWindow droneListWindow, IBL.BO.IBL bL)
+        {
+            InitializeComponent();
+            drone = new IBL.BO.Drone();
+            DataContext = drone;
+            AddGrid.Visibility = Visibility.Visible;
+           
+            droneWeightComboBox.ItemsSource = Enum.GetValues(typeof(Weight));
+            droneStatusComboBox.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
+            mybl = bL;
+            IEnumerable<StationToList> listStationToList = mybl.ShowStationList();
+            List<int> stationIDs = new();
+            foreach (StationToList station in listStationToList)
+            {
+                stationIDs.Add(station.Id);
+            }
+            stationsComboBox.ItemsSource = stationIDs;
+        }
+
+        public DroneInActionView(DroneToList droneToList , IBL.BO.IBL bL, DroneListWindow droneListWindow)
+        {
+            InitializeComponent();
+            mybl = bL;
+            UpdateGrid.Visibility = Visibility.Visible;
+            ShowDrone.Visibility = Visibility.Visible;
             this.droneToList = droneToList;
             drone = new IBL.BO.Drone()
             {
@@ -40,11 +61,16 @@ namespace PL
                 Model = droneToList.Model,
                 DroneStatuses = droneToList.DroneStatuses,
                 Weight = droneToList.Weight,
-                Location=droneToList.Location,
+                Location = new Location()
+                {
+                    Latitude=droneToList.Location.Latitude,
+                    Longitude=droneToList.Location.Longitude
+                }
+               
                 
             };
             DataContext = drone;
-            InitializeComponent();
+            
           
         }
 

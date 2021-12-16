@@ -31,26 +31,28 @@ namespace PL
 
         private void comboStatusSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DroneStatuses droneStatuses = (DroneStatuses)comboStatusSelector.SelectedItem;
-            this.DronesListView.ItemsSource = bL.ShowDroneList().Where(x => x.DroneStatuses == droneStatuses);
+            if (comboStatusSelector.SelectedItem != null)
+            {
+                DroneStatuses droneStatuses = (DroneStatuses)comboStatusSelector.SelectedItem;
+                this.DronesListView.ItemsSource = bL.ShowDroneList().Where(x => x.DroneStatuses == droneStatuses);
+            }
+            
         }
 
         private void comboWeightSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-
-            Weight weight = (Weight)comboWeghitSelector.SelectedItem;
-            this.DronesListView.ItemsSource = bL.ShowDroneList().Where(x => x.Weight == weight);
+            if (comboWeghitSelector.SelectedItem != null)
+            {
+                Weight weight = (Weight)comboWeghitSelector.SelectedItem;
+                this.DronesListView.ItemsSource = bL.ShowDroneList().Where(x => x.Weight == weight);
+            }
         }
 
         private void btnAddDrone_Click(object sender, RoutedEventArgs e)
         {
-            DroneWindow wnd = new DroneWindow();
-            bool? result = wnd.ShowDialog();
-            if (result != null)
-            {
-                MessageBox.Show(wnd.Drone.ToString());
-            }
+            new DroneInActionView(this, bL).Show();
         }
+
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -61,11 +63,7 @@ namespace PL
             IBL.BO.DroneToList? droneToList = DronesListView.SelectedItem as IBL.BO.DroneToList;
             if (droneToList != null)
             {
-
-                DroneInActionView wnd = new DroneInActionView(droneToList, bL);
-
-                bool? result = wnd.ShowDialog();
-
+                new DroneInActionView(droneToList, bL, this).Show();
             }
         }
 
@@ -77,6 +75,7 @@ namespace PL
         private void ClearStatusComboBox_Click(object sender, RoutedEventArgs e)
         {
             comboStatusSelector.Text = "";
+            DronesListView.ItemsSource = null;
         }
 
         /// <summary>

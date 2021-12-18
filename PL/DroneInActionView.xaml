@@ -15,10 +15,10 @@
 
             <Grid 
                 x:Name="UpdateGrid" 
-                Visibility="Collapsed" 
+                Visibility="Visible" 
                 VerticalAlignment="Top" 
-                Margin="65,65,0,0" 
-                HorizontalAlignment="Left">
+                Margin="38,65,0,0" 
+                HorizontalAlignment="Left" Height="609" Width="267">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -28,12 +28,18 @@
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+                    <RowDefinition Height="Auto"/>
+
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="Auto"/>
                     <ColumnDefinition Width="Auto"/>
                 </Grid.ColumnDefinitions>
                 <Label 
+                    
                     VerticalAlignment="Center" 
                     Grid.Row="0" 
                     Margin="3" 
@@ -157,6 +163,25 @@
                     HorizontalAlignment="Left" 
                     Grid.Column="1" 
                     IsEnabled="False"/>
+                <Label Content="Parcel In Transfer:" RenderTransformOrigin="0.596,8.757" Height="30" Margin="3,0,-28,-32" VerticalAlignment="Bottom" Grid.Row="11" Grid.ColumnSpan="2" FontWeight="Bold" Background="White"/>
+                <Label Content="Parcels id:"  RenderTransformOrigin="0.800,9.757" Grid.ColumnSpan="2" Height="30" Margin="3,0,132,-62" VerticalAlignment="Bottom" Grid.Row="11"/>
+                <TextBox x:Name="parcelIdTextBox" 
+                         Width="120"
+                         VerticalAlignment="Center" 
+                         Text="{Binding ParcelInTransfer.id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                         Grid.Row="7"
+                         Grid.Column="1"
+                         TextWrapping="Wrap"
+                         Margin="3,62,3,-62" />
+                <Label Content=" Weight:" RenderTransformOrigin="0.800,9.757" Height="30" Margin="-5,0,18,-94" VerticalAlignment="Bottom" Grid.Row="11"/>
+                <TextBox Text="{Binding ParcelInTransfer.Weight, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" TextWrapping="Wrap" TextChanged="TextBox_TextChanged" Margin="3,64,-2,-84" Grid.Row="11" Grid.Column="1"/>
+                <Label Content="Priority" Margin="0,99,134,-129" Grid.Row="11" Grid.ColumnSpan="2"/>
+                <Label Content="Supply Target&#xD;&#xA; longtitud:" Margin="0,262,6,-292" Grid.Row="11"/>
+                <TextBox 
+                    x:Name="suplyTargetLongtitud"
+                    Text="{Binding drone.ParcelInTransfer.SupplyTargetLocation.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                   TextWrapping="Wrap" Width="120" Grid.Column="1" Margin="8,282,-2,-302" Grid.Row="11"/>
+
             </Grid>
 
             <Button 
@@ -237,10 +262,60 @@
                 materialDesign:ButtonAssist.CornerRadius="25"
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                 Click="closeButton_Click"  
-                HorizontalAlignment="Center" 
-                VerticalAlignment="Center" 
-                Width="108"
-                />
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Width="108" Margin="840,618,0,0" />
+
+            <TextBox Text="{Binding ParcelInTransfer.Priority, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                     x:Name="priorityTextBox"
+                     TextWrapping="Wrap" Margin="154,375,712,279"/>
+            <Label Content="Parcel status:" Margin="38,409,868,247"/>
+            <TextBox 
+                x:Name="statusTextBox"
+                Text="{Binding ParcelInTransfer.ParcelTransferStatus, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                     TextWrapping="Wrap" Margin="154,410,712,241"/>
+            <Label Content="Supply Target&#xD;&#xA; latitude" Margin="38,467,818,158"/>
+            <TextBox Text="{Binding  ParcelInTransfer.SupplyTargetLocation.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  TextWrapping="Wrap" Margin="154,480,712,171"/>
+            <Label Content="Collecting &#xD;&#xA;Latitude:" Margin="310,467,550,171"/>
+            <TextBox 
+                x:Name="collectionLatitudTextBox"
+                Text="{Binding ParcelInTransfer.CollectingLocation.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                TextWrapping="Wrap" Width="120" Margin="440,480,430,175"/>
+            <Label Content="Collecting &#xD;&#xA;Longitude" Margin="310,541,530,69"/>
+            <TextBox 
+                x:Name="collctingLocationTextBox"
+                 Text="{Binding  drone.ParcelInTransfer.CollectingLocation.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                TextWrapping="Wrap" Width="120" Margin="445,541,425,106"/>
+            <Label Content="Resiver name:" Margin="310,324,558,324"/>
+            <TextBox
+                x:Name="ReciverNameTextBox"
+                
+                Text="{Binding  ParcelInTransfer.Reciver.Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                TextWrapping="Wrap" Margin="432,306,425,342"/>
+            <Label Content="Reciver id:" Margin="310,358,566,290"/>
+            <TextBox
+                x:Name="ReciverIdTextBox"
+                Text="{Binding  ParcelInTransfer.Reciver.Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                TextWrapping="Wrap" Width="120" Margin="435,358,435,302"/>
+            <Label Content="Sender name:" Margin="310,382,545,256"/>
+            <TextBox
+                x:Name="SenderNameTextBox"
+                Text="{Binding  ParcelInTransfer.Sender.Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                TextWrapping="Wrap" Width="120" Margin="435,387,435,268"/>
+            <Label Content="Sender id:" Margin="308,421,556,227"/>
+            <TextBox
+                x:Name="SenderIdTextBox"
+                 Text="{Binding  ParcelInTransfer.Sender.Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                TextWrapping="Wrap" Width="120" Margin="435,434,435,227"/>
+            <Label Content="Distance:" Margin="604,556,283,106"/>
+            <TextBox 
+                x:Name="DistanceTextBox"
+               Text="{Binding ParcelInTransfer.TransportDistance, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                TextWrapping="Wrap" Width="120" Margin="707,548,163,98"/>
+
+
+
+
         </Grid>
 
 

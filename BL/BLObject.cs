@@ -31,6 +31,7 @@ namespace IBL.BO
         /// <param name="drones"></param>
         public void DronesInitialize(IEnumerable<IDAL.DO.Drone> drones)
         {
+            
             //find A package that has not yet been delivered but the drone has already been associated
             List<IDAL.DO.Parcel> parcels = dalo.ShowParcelList().ToList();
             DroneToList droneBL;
@@ -139,33 +140,39 @@ namespace IBL.BO
                 dronesL.Add(droneBL);
                 
             }
-            //DroneToList droneTo = new DroneToList();
+            DroneToList droneTo = new DroneToList();
 
-            //droneTo.Battery = 99;
-            //droneTo.Id = 123456;
-            //droneTo.DroneStatuses = DroneStatuses.Shipping;
-            //droneTo.Model = "DFGHJ56";
-            //droneTo.Weight = Weight.Medium;
-            //droneTo.ParcelNumberTransferred = 111111;
-            
-            //droneTo.Location=new()
-            //{
-            //    Latitude = 43,
-            //    Longitude = -32,
-            //};
-            //dronesL.Add(droneTo);
-            //IDAL.DO.Drone d = new()
-            //{
-            //    Battery = 99,
-            //    Id = 123456,
+            droneTo.Battery = 99;
+            droneTo.Id = 123456;
+            droneTo.DroneStatuses = DroneStatuses.Shipping;
+            droneTo.Model = "DFGHJ56";
+            droneTo.Weight = Weight.Medium;
+            droneTo.ParcelNumberTransferred = 111111;
 
-            //    Model = "DFGHJ56",
-            //    MaxWeight = WeightCategories.Medium,
-                
-            //};
-            //dalo.AddDrone(d);
+            droneTo.Location = new()
+            {
+                Latitude = 43,
+                Longitude = -32,
+            };
+            dronesL.Add(droneTo);
+            IDAL.DO.Drone d = new()
+            {
+                Battery = 99,
+                Id = 123456,
+
+                Model = "DFGHJ56",
+                MaxWeight = WeightCategories.Medium,
+
+            };
+            dalo.AddDrone(d);
         }
-        
+
+
+        public double CalculateDistance(double longitude1, double latitude1, double longitude2, double latitude2)
+        {
+          double dis=  dalo.CalculateDistance(longitude1, latitude1, longitude2, latitude2);
+            return dis;
+        }
     }
 
 }

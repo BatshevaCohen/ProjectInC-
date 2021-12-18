@@ -61,14 +61,66 @@ namespace PL
                 Model = droneToList.Model,
                 DroneStatuses = droneToList.DroneStatuses,
                 Weight = droneToList.Weight,
+
                 Location = new Location()
                 {
-                    Latitude=droneToList.Location.Latitude,
-                    Longitude=droneToList.Location.Longitude
+                    Latitude = droneToList.Location.Latitude,
+                    Longitude = droneToList.Location.Longitude
                 }
-               
                 
             };
+            if(droneToList.ParcelNumberTransferred!=0)
+            {
+                Parcel parcel = mybl.GetParcelByDroneId(drone.Id);
+                drone.ParcelInTransfer= new()
+                {
+                    Id = parcel.Id,
+                    Weight = parcel.Weight,
+                    Priority = parcel.Priority
+
+                };
+                if (parcel.CollectionTime != DateTime.MinValue)
+                {
+                    drone.ParcelInTransfer.ParcelTransferStatus = ParcelTransferStatus.WaitingToBePickedUp; 
+
+                }
+                if(parcel.CollectionTime==DateTime.MinValue&&parcel.SupplyTime!=DateTime.MinValue)
+                {
+                    drone.ParcelInTransfer.ParcelTransferStatus = ParcelTransferStatus.OnTheWayToDestination;
+                }
+                Customer customerReciver = mybl.GetCustomer(parcel.Resiver.Id);
+                Customer customerSender = mybl.GetCustomer(parcel.Sender.Id);
+                drone.ParcelInTransfer.SupplyTargetLocation = new()
+                {
+                    Latitude = customerSender.Location.Latitude,
+                    Longitude= customerSender.Location.Longitude,
+                };
+              
+                drone.ParcelInTransfer.CollectingLocation = new()
+                {
+                    Latitude= customerReciver.Location.Latitude,
+                    Longitude = customerReciver.Location.Longitude,
+                };
+                drone.ParcelInTransfer.Reciver = new()
+                {
+                   Id= customerReciver.Id,
+                   Name=customerReciver.Name,
+                };
+                drone.ParcelInTransfer.Sender = new()
+                {
+                    Id = customerReciver.Id,
+                    Name = customerReciver.Name,
+                };
+                double distance=  mybl.CalculateDistance(customerReciver.Location.Longitude, customerReciver.Location.Latitude,
+                customerSender.Location.Longitude, customerSender.Location.Latitude);
+                drone.ParcelInTransfer.TransportDistance = distance;
+            }
+            else
+            {
+               //להחביא את כל הפקדים הקשורים לחבילה
+            }
+           
+           
             DataContext = drone;
             
           
@@ -283,6 +335,11 @@ namespace PL
                 btnCollectParcel.Visibility = Visibility.Visible;
                 btnParcelDelivery.Visibility = Visibility.Visible;
             }
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
     }
 }

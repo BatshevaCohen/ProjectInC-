@@ -107,7 +107,7 @@ namespace IBL.BO
 
         ParcelStatus FindParcelStatus(IDAL.DO.Parcel parcel);
 
-
+       double CalculateDistance(double longitude1, double latitude1, double longitude2, double latitude2);
 
 
     }

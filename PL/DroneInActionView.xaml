@@ -86,7 +86,7 @@
                     Height="23" 
                     HorizontalAlignment="Left" 
                     Grid.Column="1"/>
-                <Label 
+               <Label 
                     VerticalAlignment="Center" 
                     Grid.Row="4" 
                     Margin="3" 
@@ -104,7 +104,7 @@
                     HorizontalAlignment="Left" 
                     Grid.Column="1" 
                     IsEnabled="False"/>
-                <Label 
+               <Label 
                     VerticalAlignment="Center" 
                     Grid.Row="5" 
                     Margin="3" 
@@ -120,8 +120,8 @@
                     Grid.Row="5" 
                     VerticalAlignment="Center" 
                     Width="120" 
-                    IsEnabled="False"/>
-                <Label 
+                     IsEnabled="False"/>
+               <Label 
                     VerticalAlignment="Center" 
                     Grid.Row="6" 
                     Margin="3" 
@@ -244,7 +244,7 @@
         </Grid>
 
 
-        <Grid x:Name="AddGrid" Visibility="Collapsed" VerticalAlignment="Top" Margin="86,36,0,0" HorizontalAlignment="Left" Height="254">
+        <Grid x:Name="AddGrid" Visibility="Visible" VerticalAlignment="Top" Margin="86,36,0,0" HorizontalAlignment="Left" Height="254">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -273,8 +273,17 @@
 
             <Label VerticalAlignment="Center" Grid.Row="4" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Drone Status:"/>
 
-            <ComboBox x:Name="droneStatusComboBox" Grid.Column="1" Grid.Row="4" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="3" Height="Auto" 
-                      Text="{Binding DroneStatuses, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Width="120" />
+            <ComboBox x:Name="droneStatusComboBox" 
+                      Text="Maintenance"
+                      Grid.Column="1" 
+                      Grid.Row="4" 
+                      HorizontalAlignment="Left" 
+                      VerticalAlignment="Center" 
+                      Margin="3" 
+                      Height="Auto" 
+                       IsEnabled="False"
+                      Width="120"/>
+            <!--Text="{ Binding DroneStatuses, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"--> 
             <Label VerticalAlignment="Center" Grid.Row="5" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Weight Category:"/>
 
             <ComboBox x:Name="droneWeightComboBox" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="3,0,0,0" 

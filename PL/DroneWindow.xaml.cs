@@ -49,6 +49,7 @@ namespace PL
         public DroneWindow(IBL.BO.Drone drone)
         {
             drone = new IBL.BO.Drone();
+            drone.DroneStatuses = DroneStatuses.Maintenance;
             this.drone = drone;
             DataContext = drone;
             InitializeComponent();

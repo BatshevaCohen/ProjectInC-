@@ -28,13 +28,19 @@ namespace PL
         private DroneToList? droneToList;
         IBL.BO.IBL mybl;
 
+        /// <summary>
+        /// Add drone window
+        /// </summary>
+        /// <param name="droneListWindow"></param>
+        /// <param name="bL"></param>
         public DroneInActionView(DroneListWindow droneListWindow, IBL.BO.IBL bL)
         {
             InitializeComponent();
             drone = new IBL.BO.Drone();
             DataContext = drone;
             AddGrid.Visibility = Visibility.Visible;
-           
+
+
             droneWeightComboBox.ItemsSource = Enum.GetValues(typeof(Weight));
             droneStatusComboBox.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             mybl = bL;
@@ -47,6 +53,12 @@ namespace PL
             stationsComboBox.ItemsSource = stationIDs;
         }
 
+        /// <summary>
+        /// Update drone
+        /// </summary>
+        /// <param name="droneToList"></param>
+        /// <param name="bL"></param>
+        /// <param name="droneListWindow"></param>
         public DroneInActionView(DroneToList droneToList , IBL.BO.IBL bL, DroneListWindow droneListWindow)
         {
             InitializeComponent();
@@ -72,6 +84,7 @@ namespace PL
             if(droneToList.ParcelNumberTransferred!=0)
             {
                 Parcel parcel = mybl.GetParcelByDroneId(drone.Id);
+                ParcelInTransfer_Grid.Visibility = Visibility.Visible;
                 drone.ParcelInTransfer= new()
                 {
                     Id = parcel.Id,
@@ -117,10 +130,12 @@ namespace PL
             }
             else
             {
-               //להחביא את כל הפקדים הקשורים לחבילה
+                ParcelInTransfer_Grid.Visibility = Visibility.Collapsed;
+
+                //להחביא את כל הפקדים הקשורים לחבילה
             }
-           
-           
+
+
             DataContext = drone;
             
           
@@ -138,7 +153,6 @@ namespace PL
         /// <param name="e"></param>
         private void btnUpdateDrone_Click(object sender, RoutedEventArgs e)
         {
-            
             String droneName = mybl.GetDrone(Int32.Parse(idTextBox.Text)).Model;
             string newName = droneModelTextBox.Text;
             //only if the name has changed by the user
@@ -152,7 +166,6 @@ namespace PL
             {
                 MessageBox.Show("Please update the drone's name");
             }
-        
         }
 
         /// <summary>
@@ -166,7 +179,6 @@ namespace PL
             {
                 try
                 {
-
                     mybl.ShowDroneList();
                     mybl.UpdateChargeDrone(Int32.Parse(idTextBox.Text));
                     MessageBox.Show("Drone sent to charge seccessfuly!");
@@ -181,7 +193,6 @@ namespace PL
                 {
                     MessageBox.Show(ex.Message);
                 }
-
             }
         }
         

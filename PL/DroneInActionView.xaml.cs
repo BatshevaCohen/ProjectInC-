@@ -42,7 +42,7 @@ namespace PL
 
 
             droneWeightComboBox.ItemsSource = Enum.GetValues(typeof(Weight));
-            droneStatusComboBox.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
+            AddDroneStatusComboBox.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             mybl = bL;
             IEnumerable<StationToList> listStationToList = mybl.ShowStationList();
             List<int> stationIDs = new();

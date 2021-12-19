@@ -11,11 +11,11 @@
     <Grid>
         <Grid 
             Name="ShowDrone" 
-            Visibility="Visible" Margin="0,0,10,0">
+            Visibility="Collapsed" Margin="0,0,10,0">
 
             <Grid 
                 x:Name="UpdateGrid" 
-                Visibility="Visible" 
+                Visibility="Collapsed" 
                 VerticalAlignment="Top" 
                 Margin="31,36,0,0" 
                 HorizontalAlignment="Left" Height="224" Width="267">
@@ -172,6 +172,7 @@
                 Width="182" 
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                 Click="btnDroneToDelivery_Click" Height="60" />
+
             <Button 
                 x:Name="btnUpdateDrone" 
                 Content="Update drone" 
@@ -229,7 +230,7 @@
                 Margin="0,104,0,0" 
                 VerticalAlignment="Top" 
                 Height="60" 
-                Width="180" 
+                Width="182" 
                 Click="btnParcelDelivery_Click"/>
             <Button 
                 x:Name="btnClose" 
@@ -242,7 +243,9 @@
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
                 Width="108" Margin="840,630,0,0" />
-            <Label Content=""/>
+
+
+
 
         </Grid>
 

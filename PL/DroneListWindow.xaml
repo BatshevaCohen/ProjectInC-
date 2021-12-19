@@ -9,11 +9,18 @@
         Title="DroneListWindow" Height="625" Width="1000">
 
     <Grid Name="MainGrid">
+
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="*"/>
             <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
 
+        <Image 
+            Source="Images/purple background.jpg"
+            Stretch="Fill"
+            Opacity="0.5"
+            Grid.ColumnSpan="2"/>
+        
         <Grid Name="LeftGrid" Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>

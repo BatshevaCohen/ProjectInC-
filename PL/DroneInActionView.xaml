@@ -6,18 +6,24 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"        
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DroneInActionView" Height="700" Width="1000" Loaded="Window_Loaded">
+        Title="DroneInActionView" Height="700" Width="800" Loaded="Window_Loaded">
 
-    <Grid>
+    <Grid >
+
+        <Image 
+            Source="Images/purple background.jpg"
+            Stretch="Fill"
+            Opacity="0.5"/>
+        
         <Grid 
             Name="ShowDrone" 
-            Visibility="Collapsed" Margin="0,0,10,0">
+            Visibility="Visible" Margin="10,-10,10,10">
 
             <Grid 
                 x:Name="UpdateGrid" 
-                Visibility="Collapsed" 
+                Visibility="Visible" 
                 VerticalAlignment="Top" 
-                Margin="31,36,0,0" 
+                Margin="31,61,0,0" 
                 HorizontalAlignment="Left" Height="224" Width="267">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
@@ -166,72 +172,66 @@
                 Content="Drone to delivery" 
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="25"
-                HorizontalAlignment="Center" 
-                Margin="0,182,0,0" 
+                HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
                 Width="182" 
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                Click="btnDroneToDelivery_Click" Height="60" />
+                Click="btnDroneToDelivery_Click" Height="60" Margin="461,464,0,0" />
 
             <Button 
                 x:Name="btnUpdateDrone" 
                 Content="Update drone" 
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="25"
-                HorizontalAlignment="Center" 
-                Margin="0,26,0,0" 
+                HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
                 Height="60" 
                 Width="180" 
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                Click="btnUpdateDrone_Click"/>
+                Click="btnUpdateDrone_Click" Margin="31,464,0,0"/>
             <Button 
                 x:Name="btnDroneToCharge"  
                 Content="Sending to charging" 
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="25"
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                HorizontalAlignment="Center" 
-                Margin="0,104,0,0" 
+                HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
                 Height="60" Width="180" 
-                Click="btnDroneToCharge_Click"/>
+                Click="btnDroneToCharge_Click" Margin="244,464,0,0"/>
             <Button 
                 x:Name="btnCollectParcel" 
                 Content="Parcel collection" 
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="25"
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                HorizontalAlignment="Center" 
-                Margin="0,104,0,0" 
+                HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
                 Height="60" 
-                Width="181" 
-                Click="btnCollectParcel_Click"/>
+                Width="182" 
+                Click="btnCollectParcel_Click" Margin="243,464,0,0"/>
             <Button 
                 x:Name="btnReleaiseToCharge" 
                 Content="Releaizse frome charge" 
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="25"
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                HorizontalAlignment="Center" 
-                Margin="0,104,0,0" 
+                HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
                 Width="180" 
                 Height="60" 
-                Click="btnReleaiseToCharge_Click"/>
+                Click="btnReleaiseToCharge_Click" Margin="244,464,0,0"/>
             <Button 
                 x:Name="btnParcelDelivery" 
                 Content="Parcel delivery"
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="25"
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                HorizontalAlignment="Center" 
-                Margin="0,104,0,0" 
+                HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
                 Height="60" 
                 Width="182" 
-                Click="btnParcelDelivery_Click"/>
+                Click="btnParcelDelivery_Click" Margin="243,464,0,0"/>
             <Button 
                 x:Name="btnClose" 
                 Content="Close" 
@@ -242,16 +242,13 @@
                 Click="closeButton_Click"  
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
-                Width="108" Margin="840,630,0,0" />
-
-
-
+                Width="108" Margin="280,569,0,0" />
 
         </Grid>
 
         <Grid x:Name="ParcelInTransfer_Grid"
-             Visibility="Collapsed"                 
-              Margin="79,262,692,40">
+             Visibility="Visible"                 
+              Margin="368,12,177,260">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -270,15 +267,15 @@
 
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="85*"/>
-                <ColumnDefinition Width="146*"/>
+                <ColumnDefinition Width="96*"/>
+                <ColumnDefinition Width="133*"/>
             </Grid.ColumnDefinitions>
 
             <Label Content="Parcel in transfer" 
                    HorizontalAlignment="Left" 
                    Grid.ColumnSpan="2"
                    Margin="42,0,0,0" 
-                   VerticalAlignment="Center"/>
+                   VerticalAlignment="Center" Height="24" Width="96"/>
 
             <Label Content="Parcel ID:" 
                    HorizontalAlignment="Left"
@@ -291,32 +288,50 @@
                 HorizontalAlignment="Left" 
                 TextWrapping="Wrap"
                 VerticalAlignment="Top" 
-                Width="120" Margin="30,29,0,0" Grid.RowSpan="2"/>
-            <Label Content="Parcel weight:" Margin="0,3,0,0" Grid.Row="2" HorizontalAlignment="Center" Width="84"/>
+                Width="120" 
+                Margin="30,29,0,0" 
+                Grid.RowSpan="2" 
+                Height="25"/>
+            <Label Content="Parcel weight:" 
+                   Margin="0,3,0,0" 
+                   Grid.Row="2" 
+                   HorizontalAlignment="Left" 
+                   Width="84"/>
             <TextBox x:Name="parcelWeightTextBox"
-                Text="{Binding ParcelInTransfer.Weight, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
-                     TextWrapping="Wrap" Grid.Column="1" Margin="30,0,0,27" Grid.Row="2" Grid.RowSpan="2"/>
-            <Label Content="parcel priority:" Margin="0,27,0,3" Grid.RowSpan="2" Grid.Row="2"/>
+                     Text="{Binding ParcelInTransfer.Weight, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                     TextWrapping="Wrap" 
+                     Grid.Column="1" 
+                     Margin="30,0,0,27" 
+                     Grid.Row="2" 
+                     Grid.RowSpan="2"/>
+            <Label Content="parcel priority:" 
+                   Margin="0,27,0,3" 
+                   Grid.RowSpan="2" 
+                   Grid.Row="2"/>
             <TextBox x:Name="parcelPriorityTextBox"
-               Text="{Binding ParcelInTransfer.Priority, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
-                     TextWrapping="Wrap" Grid.Column="1" Margin="30,26,0,0" Grid.RowSpan="2" Grid.Row="2"/>
+                    Text="{Binding ParcelInTransfer.Priority, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                    TextWrapping="Wrap" 
+                     Grid.Column="1" 
+                     Margin="30,26,0,29" 
+                     Grid.RowSpan="3" 
+                     Grid.Row="2"/>
             <Label Content="Parcel status:" Margin="0,27,5,2" Grid.RowSpan="2" Grid.Row="3"/>
             <TextBox x:Name="ParcelStatusTextBox"
               Text="{Binding ParcelInTransfer.ParcelTransferStatus, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                      TextWrapping="Wrap" Grid.Column="1" Margin="30,27,0,1" Grid.RowSpan="2" Grid.Row="3"/>
-            <Label Content="Sender id:" Margin="0,0,5,0" Grid.Row="5"/>
+            <Label Content="Sender id:" Margin="0,29,5,29" Grid.Row="4" Grid.RowSpan="3"/>
             <TextBox x:Name="SenderIdTextBox"
                Text="{Binding ParcelInTransfer.Sender.Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                      TextWrapping="Wrap" Grid.Column="1" Margin="30,26,0,3" Grid.RowSpan="2" Grid.Row="4"/>
             <Label Content="Sender name:" Margin="0,27,0,3" Grid.RowSpan="2" Grid.Row="5"/>
             <TextBox x:Name="SenderNameTextBox"
                Text="{Binding ParcelInTransfer.Sender.Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
-                     TextWrapping="Wrap" Grid.Column="1" Margin="30,29,0,29" Grid.RowSpan="3" Grid.Row="5"/>
-            <Label Content="Reciver id:" Margin="0,0,2,0" Grid.Row="7"/>
+                     TextWrapping="Wrap" Grid.Column="1" Margin="30,29,0,0" Grid.RowSpan="2" Grid.Row="5"/>
+            <Label Content="Reciver id:" Margin="0,29,2,0" Grid.Row="6" Grid.RowSpan="2"/>
             <TextBox x:Name="ReciverIdTextBox"
                Text="{Binding ParcelInTransfer.Reciver.Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                      TextWrapping="Wrap" Grid.Column="1" Margin="30,27,0,3" Grid.Row="6" Grid.RowSpan="2"/>
-            <Label Content="Reciver name:" Margin="0,29,0,0" Grid.RowSpan="2" Grid.Row="7"/>
+            <Label Content="Reciver name:" Margin="0,29,0,29" Grid.RowSpan="3" Grid.Row="7"/>
             <TextBox x:Name="ReciverNameTextBox"
                 Text="{Binding ParcelInTransfer.Reciver.Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                      TextWrapping="Wrap" Grid.Column="1" Margin="30,2,0,27" Grid.RowSpan="2" Grid.Row="8"/>
@@ -324,18 +339,18 @@
             <TextBox x:Name="LatitudeSenderTextBox"
                 Text="{Binding ParcelInTransfer.CollectingLocation.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                      TextWrapping="Wrap" Grid.Column="1" Margin="30,29,0,29" Grid.RowSpan="3" Grid.Row="8"/>
-            <Label Content="Longitude S. :" Grid.Row="10"/>
+            <Label Content="Longitude S. :" Grid.Row="9" Margin="0,29,0,29" Grid.RowSpan="3"/>
             <TextBox x:Name="LongitudeSendeTextBox"
                  Text="{Binding ParcelInTransfer.CollectingLocation.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
-                     TextWrapping="Wrap" Grid.Column="1" Margin="30,0,0,29" Grid.RowSpan="2" Grid.Row="10"/>
+                     TextWrapping="Wrap" Grid.Column="1" Margin="30,29,0,29" Grid.RowSpan="3" Grid.Row="9"/>
             <Label Content="Latitude R. :" Margin="1,29,0,29" Grid.RowSpan="3" Grid.Row="10"/>
             <TextBox x:Name="LatitudeReciverTextBox"
               Text="{Binding ParcelInTransfer.SupplyTargetLocation.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                      TextWrapping="Wrap" Grid.Column="1" Margin="30,29,0,1" Grid.RowSpan="2" Grid.Row="10"/>
-            <Label Content="Longutude R. :" Margin="0,0,2,1" Grid.Row="12"/>
+            <Label Content="Longutude R. :" Margin="0,29,2,1" Grid.Row="11" Grid.RowSpan="2"/>
             <TextBox x:Name="LongitudeReciverTextBox"
                 Text="{Binding ParcelInTransfer.SupplyTargetLocation.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
-                     TextWrapping="Wrap" Grid.Column="1" Margin="30,28,0,0" Grid.RowSpan="2" Grid.Row="11"/>
+                     TextWrapping="Wrap" Grid.Column="1" Margin="30,28,0,29" Grid.RowSpan="3" Grid.Row="11"/>
             <Label Content="Didtance:" Margin="-2,0,2,0" Grid.Row="13"/>
             <TextBox x:Name="DistanceTextBox"
               Text="{Binding ParcelInTransfer.TransportDistance, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"

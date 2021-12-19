@@ -40,7 +40,7 @@ namespace PL
             DataContext = drone;
             AddGrid.Visibility = Visibility.Visible;
             btnAddDrone.Visibility = Visibility.Visible;
-
+            btnAddDrone_cencel.Visibility = Visibility.Visible;
 
             droneWeightComboBox.ItemsSource = Enum.GetValues(typeof(Weight));
             AddDroneStatusComboBox.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
@@ -52,6 +52,7 @@ namespace PL
                 stationIDs.Add(station.Id);
             }
             stationsComboBox.ItemsSource = stationIDs;
+            droneListWindow.DronesListView.Items.Refresh();
         }
 
         /// <summary>
@@ -132,14 +133,8 @@ namespace PL
             else
             {
                 ParcelInTransfer_Grid.Visibility = Visibility.Collapsed;
-
-                //להחביא את כל הפקדים הקשורים לחבילה
             }
-
-
             DataContext = drone;
-
-
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
@@ -162,7 +157,6 @@ namespace PL
                 mybl.UpdateDroneName(Int32.Parse(idTextBox.Text), droneModelTextBox.Text);
                 MessageBox.Show("Drone updated seccessfuly!");
                 droneModelTextBox.Text = newName;
-                
             }
             else
             {
@@ -369,12 +363,11 @@ namespace PL
         private void btnAddDrone_Click(object sender, RoutedEventArgs e)
         {
 
-            int stationId = 12345; ////////////////?????????
+            int stationId = Int32.Parse(stationsComboBox.Text);  // = 12345;
 
 
             Drone drone = new Drone()
             {
-
                 Id = Int32.Parse(idTextBox.Text),
                 Model = droneModelTextBox.Text,
                 Battery = Int32.Parse(batteryPrecentTextBox.Text),
@@ -390,15 +383,21 @@ namespace PL
             {
                 Id = 0
             };
+
             mybl.AddDrone(drone, stationId);
 
             MessageBox.Show("Drone added seccessfuly!");
+            this.Close();
+        }
 
-
-            //לעשות פונקציה שמאפסת את כל השדות לאחר הוספת הרחפן
-            idTextBox.Text = "";
-
-
+        /// <summary>
+        /// cenceling the adding of the drone by closing the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAddDrone_cencel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

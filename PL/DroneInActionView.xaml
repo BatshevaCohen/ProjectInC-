@@ -359,7 +359,7 @@
 
         </Grid>
 
-        <Grid x:Name="AddGrid" Visibility="Collapsed" VerticalAlignment="Top" Margin="41,51,0,0" HorizontalAlignment="Left" Height="198">
+        <Grid x:Name="AddGrid" Visibility="Visible" VerticalAlignment="Top" Margin="41,51,0,0" HorizontalAlignment="Left" Height="198">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -379,11 +379,27 @@
                      Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
 
             <Label Content="Drone Model:" Grid.Row="1" Grid.Column="0" Margin="3"  VerticalAlignment="Center" HorizontalAlignment="Left" />
-            <TextBox x:Name="droneModelTextBox1" Grid.Row="1" Grid.Column="1" Width="120" VerticalAlignment="Center" Margin="3" Height="23" HorizontalAlignment="Left"/>
+            <TextBox 
+                x:Name="droneModelTextBox1" 
+                Text="{Binding Model, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                Grid.Row="1" 
+                Grid.Column="1" 
+                Width="120" 
+                VerticalAlignment="Center" 
+                Margin="3" 
+                Height="23" 
+                HorizontalAlignment="Left"/>
 
             <Label VerticalAlignment="Center" Grid.Row="2" Grid.Column="0" Margin="3" HorizontalAlignment="Left" Content="Battery Precent:"/>
-            <TextBox x:Name="batteryPrecentTextBox" Grid.Row="2"  Grid.Column="1" Width="120" VerticalAlignment="Center" Margin="3" Height="23" HorizontalAlignment="Left"
-                     Text="{Binding Battery, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" />
+            <TextBox x:Name="batteryPrecentTextBox" 
+                     Grid.Row="2"  
+                     Grid.Column="1" 
+                     Width="120" 
+                     VerticalAlignment="Center" 
+                     Margin="3" Height="23" 
+                     HorizontalAlignment="Left"
+                     IsEnabled="False"
+                     Text="{Binding Battery, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"/>
 
             <Label VerticalAlignment="Center" Grid.Row="4" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Drone Status:"/>
 
@@ -412,15 +428,27 @@
         </Grid>
         <Button 
                 x:Name="btnAddDrone" 
-                Content="אישור" 
+                Content="Add" 
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="25"
                 HorizontalAlignment="Left" 
-                Margin="121,362,0,0" 
+                Margin="81,374,0,0" 
                 VerticalAlignment="Top" 
                 Height="55" Width="100" 
                 Visibility="Collapsed"
                 Click="btnAddDrone_Click"/>
+        <Button 
+            x:Name="btnAddDrone_cencel" 
+            Content="Cencel" 
+            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            materialDesign:ButtonAssist.CornerRadius="25"
+            HorizontalAlignment="Left" 
+            Margin="205,374,0,0" 
+            VerticalAlignment="Top" 
+            Height="55" Width="100" 
+            Visibility="Collapsed"
+            Background="Red"
+            Click="btnAddDrone_cencel_Click"/>
 
     </Grid>
 

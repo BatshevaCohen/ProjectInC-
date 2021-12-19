@@ -1,4 +1,5 @@
 ﻿using IBL.BO;
+using IBL;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,7 +18,6 @@ using Microsoft.VisualBasic;
 
 namespace PL
 {
-    
     /// <summary>
     /// Interaction logic for DroneInActionView.xaml
     /// </summary>
@@ -39,6 +39,7 @@ namespace PL
             drone = new IBL.BO.Drone();
             DataContext = drone;
             AddGrid.Visibility = Visibility.Visible;
+            btnAddDrone.Visibility = Visibility.Visible;
 
 
             droneWeightComboBox.ItemsSource = Enum.GetValues(typeof(Weight));
@@ -352,6 +353,43 @@ namespace PL
         {
 
         }
+
+            /// <summary>
+            /// adds the drone to the BL
+            /// </summary>
+            /// <param name="sender"></param>
+            /// <param name="e"></param>
+            private void btnAddDrone_Click(object sender, RoutedEventArgs e)
+            {
+
+                int stationId = 12345; ////////////////?????????
+
+
+                Drone drone = new Drone()
+                {
+                    Id = Int32.Parse(idTextBox.Text),
+                    Model = droneModelTextBox.Text,
+                    Battery = Int32.Parse(batteryPrecentTextBox.Text),
+                    DroneStatuses = DroneStatuses.Maintenance,
+                    Weight = (Weight)droneWeightComboBox.SelectedItem,
+                };
+                drone.Location = new Location()
+                {
+                    Latitude = double.Parse(latitudeTextBox.Text),
+                    Longitude = double.Parse(longitudeTextBox.Text)
+                };
+                drone.ParcelInTransfer = new()
+                {
+                    Id = 0
+                };
+                mybl.AddDrone(drone, stationId);
+
+                MessageBox.Show("Drone added seccessfuly!");
+
+
+                //לעשות פונקציה שמאפסת את כל השדות לאחר הוספת הרחפן
+                idTextBox.Text = "";
+            }
+        }
     }
-}
 

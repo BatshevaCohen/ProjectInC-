@@ -389,12 +389,13 @@ namespace PL
                     Id = 0
                 };
                 mybl.AddDrone(drone, stationId);
-
+                
                 MessageBox.Show("Drone added seccessfuly!");
 
 
                 //לעשות פונקציה שמאפסת את כל השדות לאחר הוספת הרחפן
                 idTextBox.Text = "";
+
             }
         }
     }

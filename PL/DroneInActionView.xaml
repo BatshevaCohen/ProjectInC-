@@ -359,7 +359,7 @@
 
         </Grid>
 
-        <Grid x:Name="AddGrid" Visibility="Collapsed" VerticalAlignment="Top" Margin="41,51,0,0" HorizontalAlignment="Left" Height="254">
+        <Grid x:Name="AddGrid" Visibility="Collapsed" VerticalAlignment="Top" Margin="41,51,0,0" HorizontalAlignment="Left" Height="198">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -368,8 +368,7 @@
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="Auto"/>
@@ -404,12 +403,6 @@
 
             <ComboBox x:Name="droneWeightComboBox" Grid.Column="1" Grid.Row="5" HorizontalAlignment="Left" VerticalAlignment="Center" Margin="3,0,0,0" 
                       Text="{Binding Weight, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Width="120"/>
-            <Label VerticalAlignment="Center" Grid.Row="6" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Latitude:"/>
-
-            <TextBox x:Name="latitudeTextBox1" Width="120" VerticalAlignment="Bottom" Text="{Binding Location.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="6" Margin="0,0,0,5" Height="23" HorizontalAlignment="Center" Grid.Column="1"/>
-            <Label VerticalAlignment="Center" Grid.Row="7" Margin="3" HorizontalAlignment="Left" Grid.Column="0" Content="Longitude:"/>
-
-            <TextBox x:Name="longitudeTextBox1" Width="120" VerticalAlignment="Center" Text="{Binding Location.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" Grid.Row="7" Margin="3" Height="23" HorizontalAlignment="Left" Grid.Column="1" UndoLimit="99"/>
 
             <Label Content="Station for charge:" HorizontalAlignment="Left" Margin="3" Grid.Row="8" VerticalAlignment="Top"/>
             <ComboBox x:Name="stationsComboBox" Grid.Column="1" Grid.Row="8" HorizontalAlignment="Left" VerticalAlignment="Top" Margin="3" Width="120"

@@ -23,7 +23,7 @@ namespace PL
     /// </summary>
     public partial class DroneInActionView : Window
     {
-      
+
         IBL.BO.Drone drone;
         private DroneToList? droneToList;
         IBL.BO.IBL mybl;
@@ -60,7 +60,7 @@ namespace PL
         /// <param name="droneToList"></param>
         /// <param name="bL"></param>
         /// <param name="droneListWindow"></param>
-        public DroneInActionView(DroneToList droneToList , IBL.BO.IBL bL, DroneListWindow droneListWindow)
+        public DroneInActionView(DroneToList droneToList, IBL.BO.IBL bL, DroneListWindow droneListWindow)
         {
             InitializeComponent();
             mybl = bL;
@@ -80,13 +80,13 @@ namespace PL
                     Latitude = droneToList.Location.Latitude,
                     Longitude = droneToList.Location.Longitude
                 }
-                
+
             };
-            if(droneToList.ParcelNumberTransferred!=0)
+            if (droneToList.ParcelNumberTransferred != 0)
             {
                 Parcel parcel = mybl.GetParcelByDroneId(drone.Id);
                 ParcelInTransfer_Grid.Visibility = Visibility.Visible;
-                drone.ParcelInTransfer= new()
+                drone.ParcelInTransfer = new()
                 {
                     Id = parcel.Id,
                     Weight = parcel.Weight,
@@ -95,10 +95,10 @@ namespace PL
                 };
                 if (parcel.CollectionTime != DateTime.MinValue)
                 {
-                    drone.ParcelInTransfer.ParcelTransferStatus = ParcelTransferStatus.WaitingToBePickedUp; 
+                    drone.ParcelInTransfer.ParcelTransferStatus = ParcelTransferStatus.WaitingToBePickedUp;
 
                 }
-                if(parcel.CollectionTime==DateTime.MinValue&&parcel.SupplyTime!=DateTime.MinValue)
+                if (parcel.CollectionTime == DateTime.MinValue && parcel.SupplyTime != DateTime.MinValue)
                 {
                     drone.ParcelInTransfer.ParcelTransferStatus = ParcelTransferStatus.OnTheWayToDestination;
                 }
@@ -107,25 +107,25 @@ namespace PL
                 drone.ParcelInTransfer.SupplyTargetLocation = new()
                 {
                     Latitude = customerSender.Location.Latitude,
-                    Longitude= customerSender.Location.Longitude,
+                    Longitude = customerSender.Location.Longitude,
                 };
-              
+
                 drone.ParcelInTransfer.CollectingLocation = new()
                 {
-                    Latitude= customerReciver.Location.Latitude,
+                    Latitude = customerReciver.Location.Latitude,
                     Longitude = customerReciver.Location.Longitude,
                 };
                 drone.ParcelInTransfer.Reciver = new()
                 {
-                   Id= customerReciver.Id,
-                   Name=customerReciver.Name,
+                    Id = customerReciver.Id,
+                    Name = customerReciver.Name,
                 };
                 drone.ParcelInTransfer.Sender = new()
                 {
                     Id = customerReciver.Id,
                     Name = customerReciver.Name,
                 };
-                double distance=  mybl.CalculateDistance(customerReciver.Location.Longitude, customerReciver.Location.Latitude,
+                double distance = mybl.CalculateDistance(customerReciver.Location.Longitude, customerReciver.Location.Latitude,
                 customerSender.Location.Longitude, customerSender.Location.Latitude);
                 drone.ParcelInTransfer.TransportDistance = distance;
             }
@@ -138,15 +138,15 @@ namespace PL
 
 
             DataContext = drone;
-            
-          
+
+
         }
 
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }
-        
+
         /// <summary>
         /// update drone's name
         /// </summary>
@@ -162,6 +162,7 @@ namespace PL
                 mybl.UpdateDroneName(Int32.Parse(idTextBox.Text), droneModelTextBox.Text);
                 MessageBox.Show("Drone updated seccessfuly!");
                 droneModelTextBox.Text = newName;
+                
             }
             else
             {
@@ -190,13 +191,13 @@ namespace PL
                     btnReleaiseToCharge.Visibility = Visibility.Visible;
                     btnParcelDelivery.Visibility = Visibility.Hidden;
                 }
-               catch (Exception ex)
+                catch (Exception ex)
                 {
                     MessageBox.Show(ex.Message);
                 }
             }
         }
-        
+
         /// <summary>
         /// discharge drone
         /// </summary>
@@ -208,7 +209,7 @@ namespace PL
             {
                 //input box- so the user will insert the charging time
                 TimeSpan chargingTime = TimeSpan.Parse(Interaction.InputBox("Please enter time of charging", "Time of charging", ""));
-                
+
                 try
                 {
                     mybl.DischargeDrone(Int32.Parse(idTextBox.Text), chargingTime);
@@ -227,7 +228,7 @@ namespace PL
                     MessageBox.Show(ex.Message);
                 }
             }
-           
+
         }
 
         /// <summary>
@@ -261,18 +262,18 @@ namespace PL
 
         private void btnCollectParcel_Click(object sender, RoutedEventArgs e)
         {
-          
+
             Drone drone = mybl.GetDrone(Int32.Parse(idTextBox.Text));
             //only if the drone is on Maintenance
             //and the parcel have not been collected yet
             if (drone.ParcelInTransfer != null)
             {
-                if (droneStatusTxtBox.Text == "Shipping" && drone.ParcelInTransfer!=null)
+                if (droneStatusTxtBox.Text == "Shipping" && drone.ParcelInTransfer != null)
                 {
                     mybl.UpdateParcelPickUpByDrone(Int32.Parse(idTextBox.Text));
                     MessageBox.Show("Drone pick up the parcel seccessfully!");
                     droneStatusTxtBox.Text = "Shipping";
-                    
+
                     btnDroneToCharge.Visibility = Visibility.Hidden;
                     btnDroneToDelivery.Visibility = Visibility.Hidden;
                     btnReleaiseToCharge.Visibility = Visibility.Hidden;
@@ -306,7 +307,7 @@ namespace PL
                         btnCollectParcel.Visibility = Visibility.Visible;
                         btnParcelDelivery.Visibility = Visibility.Hidden;
                     }
-                    catch(Exception ex)
+                    catch (Exception ex)
                     {
                         MessageBox.Show(ex.Message);
                     }
@@ -319,7 +320,7 @@ namespace PL
         {
             Parcel p = mybl.GetParcelByDroneId(drone.Id);
 
-            if (droneStatusTxtBox.Text=="Available")
+            if (droneStatusTxtBox.Text == "Available")
             {
                 btnDroneToCharge.Visibility = Visibility.Visible;
                 btnDroneToDelivery.Visibility = Visibility.Visible;
@@ -336,8 +337,8 @@ namespace PL
                 btnParcelDelivery.Visibility = Visibility.Hidden;
             }
             // the drone status in shipping
-          
-            else if(droneStatusTxtBox.Text == "shipping" && drone.ParcelInTransfer.Id != 0 && p.CollectionTime!=DateTime.MinValue)
+
+            else if (droneStatusTxtBox.Text == "shipping" && drone.ParcelInTransfer.Id != 0 && p.CollectionTime != DateTime.MinValue)
             {
                 btnDroneToCharge.Visibility = Visibility.Hidden;
                 btnDroneToDelivery.Visibility = Visibility.Hidden;
@@ -345,7 +346,7 @@ namespace PL
                 btnCollectParcel.Visibility = Visibility.Visible;
                 btnParcelDelivery.Visibility = Visibility.Visible;
             }
-            else if (droneStatusTxtBox.Text == "shipping" && drone.ParcelInTransfer.Id!=0 && p.CollectionTime==DateTime.MinValue)
+            else if (droneStatusTxtBox.Text == "shipping" && drone.ParcelInTransfer.Id != 0 && p.CollectionTime == DateTime.MinValue)
             {
                 btnDroneToCharge.Visibility = Visibility.Hidden;
                 btnDroneToDelivery.Visibility = Visibility.Hidden;
@@ -360,43 +361,45 @@ namespace PL
 
         }
 
-            /// <summary>
-            /// adds the drone to the BL
-            /// </summary>
-            /// <param name="sender"></param>
-            /// <param name="e"></param>
-            private void btnAddDrone_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// adds the drone to the BL
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAddDrone_Click(object sender, RoutedEventArgs e)
+        {
+
+            int stationId = 12345; ////////////////?????????
+
+
+            Drone drone = new Drone()
             {
 
-                int stationId = 12345; ////////////////?????????
+                Id = Int32.Parse(idTextBox.Text),
+                Model = droneModelTextBox.Text,
+                Battery = Int32.Parse(batteryPrecentTextBox.Text),
+                DroneStatuses = DroneStatuses.Maintenance,
+                Weight = (Weight)droneWeightComboBox.SelectedItem,
+            };
+            //drone.Location = new();
+
+            //drone.Location.Latitude = Convert.ToDouble(latitudeTextBox.Text);
+            //drone.Location.Longitude = Convert.ToDouble(longitudeTextBox.Text);
+
+            drone.ParcelInTransfer = new()
+            {
+                Id = 0
+            };
+            mybl.AddDrone(drone, stationId);
+
+            MessageBox.Show("Drone added seccessfuly!");
 
 
-                Drone drone = new Drone()
-                {
-                    Id = Int32.Parse(idTextBox.Text),
-                    Model = droneModelTextBox.Text,
-                    Battery = Int32.Parse(batteryPrecentTextBox.Text),
-                    DroneStatuses = DroneStatuses.Maintenance,
-                    Weight = (Weight)droneWeightComboBox.SelectedItem,
-                };
-                drone.Location = new Location()
-                {
-                    Latitude = double.Parse(latitudeTextBox.Text),
-                    Longitude = double.Parse(longitudeTextBox.Text)
-                };
-                drone.ParcelInTransfer = new()
-                {
-                    Id = 0
-                };
-                mybl.AddDrone(drone, stationId);
-                
-                MessageBox.Show("Drone added seccessfuly!");
+            //לעשות פונקציה שמאפסת את כל השדות לאחר הוספת הרחפן
+            idTextBox.Text = "";
 
 
-                //לעשות פונקציה שמאפסת את כל השדות לאחר הוספת הרחפן
-                idTextBox.Text = "";
-
-            }
         }
     }
+}
 

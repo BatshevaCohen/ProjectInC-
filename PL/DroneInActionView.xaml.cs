@@ -294,15 +294,21 @@ namespace PL
             {
                 if (droneStatusTxtBox.Text == "Shipping" && drone.ParcelInTransfer != null)
                 {
-                    mybl.UpdateParcelSuppliedByDrone(Int32.Parse(idTextBox.Text));
-                    MessageBox.Show("Drone pick up the parcel seccessfully!");
-                    droneStatusTxtBox.Text = "Available";
-                    btnDroneToCharge.Visibility = Visibility.Visible;
-                    btnDroneToDelivery.Visibility = Visibility.Hidden;
-                    btnReleaiseToCharge.Visibility = Visibility.Hidden;
-                    btnCollectParcel.Visibility = Visibility.Visible;
-                    btnParcelDelivery.Visibility = Visibility.Hidden;
-
+                    try
+                    {
+                        mybl.UpdateParcelSuppliedByDrone(Int32.Parse(idTextBox.Text));
+                        MessageBox.Show("Drone pick up the parcel seccessfully!");
+                        droneStatusTxtBox.Text = "Available";
+                        btnDroneToCharge.Visibility = Visibility.Visible;
+                        btnDroneToDelivery.Visibility = Visibility.Hidden;
+                        btnReleaiseToCharge.Visibility = Visibility.Hidden;
+                        btnCollectParcel.Visibility = Visibility.Visible;
+                        btnParcelDelivery.Visibility = Visibility.Hidden;
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
                 }
             }
             else

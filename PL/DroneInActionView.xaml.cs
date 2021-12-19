@@ -330,7 +330,7 @@ namespace PL
             }
             // the drone status in shipping
           
-            else if(droneStatusTxtBox.Text == "shipping" && p.CollectionTime!=DateTime.MinValue)
+            else if(droneStatusTxtBox.Text == "shipping" && drone.ParcelInTransfer.Id != 0 && p.CollectionTime!=DateTime.MinValue)
             {
                 btnDroneToCharge.Visibility = Visibility.Hidden;
                 btnDroneToDelivery.Visibility = Visibility.Hidden;
@@ -338,7 +338,7 @@ namespace PL
                 btnCollectParcel.Visibility = Visibility.Visible;
                 btnParcelDelivery.Visibility = Visibility.Visible;
             }
-            else if (droneStatusTxtBox.Text == "shipping" && p.CollectionTime==DateTime.MinValue)
+            else if (droneStatusTxtBox.Text == "shipping" && drone.ParcelInTransfer.Id!=0 && p.CollectionTime==DateTime.MinValue)
             {
                 btnDroneToCharge.Visibility = Visibility.Hidden;
                 btnDroneToDelivery.Visibility = Visibility.Hidden;

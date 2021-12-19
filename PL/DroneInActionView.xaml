@@ -11,11 +11,11 @@
     <Grid>
         <Grid 
             Name="ShowDrone" 
-            Visibility="Collapsed" Margin="0,0,10,0">
+            Visibility="Visible" Margin="0,0,10,0">
 
             <Grid 
                 x:Name="UpdateGrid" 
-                Visibility="Collapsed" 
+                Visibility="Visible" 
                 VerticalAlignment="Top" 
                 Margin="31,36,0,0" 
                 HorizontalAlignment="Left" Height="224" Width="267">
@@ -241,14 +241,16 @@
                 Click="closeButton_Click"  
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
-                Width="108" Margin="840,618,0,0" />
+                Width="108" Margin="840,630,0,0" />
+            <Label Content=""/>
 
         </Grid>
 
         <Grid x:Name="ParcelInTransfer_Grid"
              Visibility="Collapsed"                 
-              Margin="38,302,733,0">
+              Margin="79,262,692,40">
             <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -276,20 +278,68 @@
                    VerticalAlignment="Center"/>
 
             <Label Content="Parcel ID:" 
-                   HorizontalAlignment="Left" 
-                   Grid.Row="1"
+                   HorizontalAlignment="Left"
                    Grid.Column="0"
-                   VerticalAlignment="Top" Height="28" Width="117"/>
+                   VerticalAlignment="Top" Height="28" Width="74" Margin="0,29,0,0" Grid.RowSpan="2"/>
             <TextBox 
                 x:Name="ParcelIdTxt"
-                Text="{Binding ParcelInTransfer.Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                Grid.Row="1"
+                Text="{Binding ParcelInTransfer.Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                 Grid.Column="1" 
-                HorizontalAlignment="Center" 
+                HorizontalAlignment="Left" 
                 TextWrapping="Wrap"
                 VerticalAlignment="Top" 
-                Width="120"/>
-            <Label Content="Label" HorizontalAlignment="Left" Margin="74,29,0,0" Grid.Row="2" VerticalAlignment="Top"/>
+                Width="120" Margin="30,29,0,0" Grid.RowSpan="2"/>
+            <Label Content="Parcel weight:" Margin="0,3,0,0" Grid.Row="2" HorizontalAlignment="Center" Width="84"/>
+            <TextBox x:Name="parcelWeightTextBox"
+                Text="{Binding ParcelInTransfer.Weight, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                     TextWrapping="Wrap" Grid.Column="1" Margin="30,0,0,27" Grid.Row="2" Grid.RowSpan="2"/>
+            <Label Content="parcel priority:" Margin="0,27,0,3" Grid.RowSpan="2" Grid.Row="2"/>
+            <TextBox x:Name="parcelPriorityTextBox"
+               Text="{Binding ParcelInTransfer.Priority, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                     TextWrapping="Wrap" Grid.Column="1" Margin="30,26,0,0" Grid.RowSpan="2" Grid.Row="2"/>
+            <Label Content="Parcel status:" Margin="0,27,5,2" Grid.RowSpan="2" Grid.Row="3"/>
+            <TextBox x:Name="ParcelStatusTextBox"
+              Text="{Binding ParcelInTransfer.ParcelTransferStatus, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                     TextWrapping="Wrap" Grid.Column="1" Margin="30,27,0,1" Grid.RowSpan="2" Grid.Row="3"/>
+            <Label Content="Sender id:" Margin="0,0,5,0" Grid.Row="5"/>
+            <TextBox x:Name="SenderIdTextBox"
+               Text="{Binding ParcelInTransfer.Sender.Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                     TextWrapping="Wrap" Grid.Column="1" Margin="30,26,0,3" Grid.RowSpan="2" Grid.Row="4"/>
+            <Label Content="Sender name:" Margin="0,27,0,3" Grid.RowSpan="2" Grid.Row="5"/>
+            <TextBox x:Name="SenderNameTextBox"
+               Text="{Binding ParcelInTransfer.Sender.Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                     TextWrapping="Wrap" Grid.Column="1" Margin="30,29,0,29" Grid.RowSpan="3" Grid.Row="5"/>
+            <Label Content="Reciver id:" Margin="0,0,2,0" Grid.Row="7"/>
+            <TextBox x:Name="ReciverIdTextBox"
+               Text="{Binding ParcelInTransfer.Reciver.Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                     TextWrapping="Wrap" Grid.Column="1" Margin="30,27,0,3" Grid.Row="6" Grid.RowSpan="2"/>
+            <Label Content="Reciver name:" Margin="0,29,0,0" Grid.RowSpan="2" Grid.Row="7"/>
+            <TextBox x:Name="ReciverNameTextBox"
+                Text="{Binding ParcelInTransfer.Reciver.Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                     TextWrapping="Wrap" Grid.Column="1" Margin="30,2,0,27" Grid.RowSpan="2" Grid.Row="8"/>
+            <Label Content="Latitude S. :" Margin="0,27,0,3" Grid.RowSpan="2" Grid.Row="8"/>
+            <TextBox x:Name="LatitudeSenderTextBox"
+                Text="{Binding ParcelInTransfer.CollectingLocation.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                     TextWrapping="Wrap" Grid.Column="1" Margin="30,29,0,29" Grid.RowSpan="3" Grid.Row="8"/>
+            <Label Content="Longitude S. :" Grid.Row="10"/>
+            <TextBox x:Name="LongitudeSendeTextBox"
+                 Text="{Binding ParcelInTransfer.CollectingLocation.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                     TextWrapping="Wrap" Grid.Column="1" Margin="30,0,0,29" Grid.RowSpan="2" Grid.Row="10"/>
+            <Label Content="Latitude R. :" Margin="1,29,0,29" Grid.RowSpan="3" Grid.Row="10"/>
+            <TextBox x:Name="LatitudeReciverTextBox"
+              Text="{Binding ParcelInTransfer.SupplyTargetLocation.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                     TextWrapping="Wrap" Grid.Column="1" Margin="30,29,0,1" Grid.RowSpan="2" Grid.Row="10"/>
+            <Label Content="Longutude R. :" Margin="0,0,2,1" Grid.Row="12"/>
+            <TextBox x:Name="LongitudeReciverTextBox"
+                Text="{Binding ParcelInTransfer.SupplyTargetLocation.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                     TextWrapping="Wrap" Grid.Column="1" Margin="30,28,0,0" Grid.RowSpan="2" Grid.Row="11"/>
+            <Label Content="Didtance:" Margin="-2,0,2,0" Grid.Row="13"/>
+            <TextBox x:Name="DistanceTextBox"
+              Text="{Binding ParcelInTransfer.TransportDistance, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                     TextWrapping="Wrap" Grid.Column="1" Margin="30,1,-5,1" Grid.Row="13"/>
+
+
+
 
 
 
@@ -305,7 +355,7 @@
 
         </Grid>
 
-        <Grid x:Name="AddGrid" Visibility="Visible" VerticalAlignment="Top" Margin="86,36,0,0" HorizontalAlignment="Left" Height="254">
+        <Grid x:Name="AddGrid" Visibility="Collapsed" VerticalAlignment="Top" Margin="79,8,0,0" HorizontalAlignment="Left" Height="254">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -361,6 +411,7 @@
 
 
         </Grid>
+
     </Grid>
 
 </Window>

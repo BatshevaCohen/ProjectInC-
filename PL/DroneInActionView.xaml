@@ -319,7 +319,7 @@
             <TextBox x:Name="ParcelStatusTextBox"
               Text="{Binding ParcelInTransfer.ParcelTransferStatus, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                      TextWrapping="Wrap" Grid.Column="1" Margin="30,27,0,1" Grid.RowSpan="2" Grid.Row="3" IsEnabled="False"/>
-            <Label Content="Sender id:" Margin="0,29,5,29" Grid.Row="4" Grid.RowSpan="3"/>
+            <Label Content="Sender id:" Margin="0,29,5,29" Grid.Row="4" Grid.RowSpan="3" IsEnabled="False"/>
             <TextBox x:Name="SenderIdTextBox"
                Text="{Binding ParcelInTransfer.Sender.Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                      TextWrapping="Wrap" Grid.Column="1" Margin="30,26,0,3" Grid.RowSpan="2" Grid.Row="4" IsEnabled="False"/>
@@ -359,7 +359,7 @@
 
         </Grid>
 
-        <Grid x:Name="AddGrid" Visibility="Visible" VerticalAlignment="Top" Margin="41,51,0,0" HorizontalAlignment="Left" Height="254">
+        <Grid x:Name="AddGrid" Visibility="Collapsed" VerticalAlignment="Top" Margin="41,51,0,0" HorizontalAlignment="Left" Height="254">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>

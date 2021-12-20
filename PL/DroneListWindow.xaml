@@ -20,7 +20,7 @@
             Stretch="Fill"
             Opacity="0.5"
             Grid.ColumnSpan="2"/>
-        
+
         <Grid Name="LeftGrid" Grid.Column="0">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -127,56 +127,4 @@
         </Grid>
 
     </Grid>
-
-
-
-
-
-    <!--<Grid Name="MainGrid">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="100*"/>
-            <RowDefinition Height="350*"/>
-        </Grid.RowDefinitions>
-        <Grid Name="UpGrid" Grid.Row="0"
-              HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Width="auto" Height="auto">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions >
-    
-            <Label x:Name="lblTBD" Content="status" Grid.Column="0" ToolTip="Choose a stetus"
-                HorizontalAlignment="Center"  VerticalAlignment="Center" FontSize="18"/>
-
-            <StackPanel Grid.Column="1">
-                <ComboBox
-                    x:Name="comboStatusSelector"
-                    ToolTip="Choose a status"
-                    Style="{StaticResource MaterialDesignFilledComboBox}"
-                    IsEnabled="{Binding IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"
-                    Width="130"
-                    SelectionChanged="comboStatusSelector_SelectionChanged"/>
-            </StackPanel>
-
-
-
-
-            -->
-    <!--<ComboBox Name="comboStatusSelector" Grid.Column="1" ToolTip="Choose a status" 
-                      HorizontalAlignment= "Stretch" VerticalAlignment="Stretch" SelectionChanged="comboStatusSelector_SelectionChanged"/>-->
-    <!--
-
-
-            <Label x:Name="lblTBD2" Content="weight"  Grid.Column="2" ToolTip="Choose weight category"
-                   HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18"/>
-            <ComboBox x:Name="comboWeghitSelector" Grid.Column="3" ToolTip="Choose weight category"
-                      HorizontalAlignment="Stretch" VerticalAlignment="Stretch" SelectionChanged="comboWeightSelector_SelectionChanged"/>
-            
-        </Grid>
-
-        
-    </Grid>-->
 </Window>

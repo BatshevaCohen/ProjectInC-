@@ -44,16 +44,16 @@ namespace IBL.BO
                 Model = drone.Model,
                 MaxWeight = (WeightCategories)drone.Weight,
                 Battery = r.Next(20, 40),
-                Status= IDAL.DO.DroneStatuses.Maintenance //when added a new drone it goes to initial charging
+                Status = IDAL.DO.DroneStatuses.Maintenance //when added a new drone it goes to initial charging
             };
 
             //get Station to update Location
             IDAL.DO.Station station = dalo.GetStation(stationId);
             drone.Battery = d.Battery;
             dalo.AddDrone(d); //adds the drone to the dal object
-            AddDroneToList(drone, station.Latitude,station.Longitude);
+            AddDroneToList(drone, station.Latitude, station.Longitude);
             dalo.UpdateChargeSpots(station.Id);
-            if(station.ChargeSpots>0)
+            if (station.ChargeSpots > 0)
             {
                 dalo.UpdateAddDroneToCharge(drone.Id, station.Id);
             }
@@ -88,7 +88,7 @@ namespace IBL.BO
         {
             IDAL.DO.Station station = new();
             //finds the drone by the recived ID
-            
+
             DroneToList dronel = dronesL.Find(x => x.Id == droneId);
             //if the drone is available- it can be sent for charging
             if (dronel.DroneStatuses == DroneStatuses.Available)
@@ -100,7 +100,7 @@ namespace IBL.BO
                 //number of distances in the list
                 int sized = disStationFromDrone.Count;
                 //goes over the list
-                while (flag==false && counter <= sized)
+                while (flag == false && counter <= sized)
                 {
                     foreach (Distanse item in disStationFromDrone)
                     {
@@ -110,7 +110,7 @@ namespace IBL.BO
                             min = item.Distance;
                             idS = item.Id;
                         }
-                    
+
                         station = dalo.GetStation(item.Id);
                         //if there is an available charging spot in the station
                         if (station.ChargeSpots > 0)
@@ -245,7 +245,7 @@ namespace IBL.BO
             }
             return drone;
         }
-      
+
         /// <summary>
         /// Show LIST of drones
         /// </summary>
@@ -257,5 +257,5 @@ namespace IBL.BO
             return dronestl;
 
         }
-    }       
+    }
 }

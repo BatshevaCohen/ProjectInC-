@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DalObject;
-using DalObject.DO;
 using IBL.BO;
-using IDAL.DO;
+using DO;
+using DalApi;
 
 namespace IBL.BO
 {
@@ -24,7 +24,7 @@ namespace IBL.BO
             {
                 throw new StationException(station.Id, "station ID sould be 5-6 digits");
             }
-            IDAL.DO.Station s = new()
+            DO.Station s = new()
             {
                 Name = station.Name,
                 Id = station.Id,
@@ -43,7 +43,6 @@ namespace IBL.BO
         /// <param name="charging_spots"></param>
         public void UpdateStetion(int id, string name, int charging_spots)
         {
-
             dalo.UpdateStetion(id, name, charging_spots);
         }
 
@@ -55,7 +54,7 @@ namespace IBL.BO
         /// <exception cref="NotImplementedException"></exception>
         public Station GetStation(int stationID)
         {
-            IDAL.DO.Station s = dalo.GetStation(stationID);
+            DO.Station s = dalo.GetStation(stationID);
             Station station = new()
             {
                 Name = s.Name,
@@ -89,7 +88,7 @@ namespace IBL.BO
         {
             List<StationToList> stationList = new();
             var stations = dalo.ShowStationList();
-            foreach (IDAL.DO.Station item in stations)
+            foreach (DO.Station item in stations)
             {
                 StationToList station = new()
                 {
@@ -113,7 +112,7 @@ namespace IBL.BO
         public IEnumerable<StationToList> ShowChargeableStationList()
         {
             List<StationToList> stationListWithAvailableChargingSpots = new List<StationToList>();
-            IEnumerable<IDAL.DO.Station> stations = dalo.ShowStationList(x => x.ChargeSpots > 0);
+            IEnumerable<DO.Station> stations = dalo.ShowStationList(x => x.ChargeSpots > 0);
             foreach (var item in stations)
             {
                 StationToList stationTL = new()

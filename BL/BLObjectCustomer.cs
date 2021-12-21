@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DalObject;
-using DalObject.DO;
+using DalObject;
 using IBL.BO;
-using IDAL.DO;
+using DO;
 
 namespace IBL.BO
 {
@@ -35,7 +35,7 @@ namespace IBL.BO
             {
                 throw new PhoneException(customer.Phone, "Phone number should start with a 0");
             }
-            IDAL.DO.Customer c = new()
+            DO.Customer c = new()
             {
                 Id = customer.Id,
                 Name = customer.Name,
@@ -59,7 +59,7 @@ namespace IBL.BO
       
         public Customer GetCustomer(int IDc)
         {
-            IDAL.DO.Customer c = dalo.GetCustomer(IDc);
+            DO.Customer c = dalo.GetCustomer(IDc);
             Customer customer = new();
             customer.Id = c.Id;
             customer.Name = c.Name;
@@ -73,10 +73,10 @@ namespace IBL.BO
 
             //Packages that the sending customer has
 
-            List<IDAL.DO.Parcel> parcelSendin = dalo.GetListOfParcelSending(customer.Id);
-            List<IDAL.DO.Parcel> parcelReciever = dalo.GetListOfParcelRecirver(customer.Id);
+            List<DO.Parcel> parcelSendin = dalo.GetListOfParcelSending(customer.Id);
+            List<DO.Parcel> parcelReciever = dalo.GetListOfParcelRecirver(customer.Id);
            
-            foreach (IDAL.DO.Parcel item in parcelSendin)
+            foreach (DO.Parcel item in parcelSendin)
             {
                 ParcelCustomer parcelCustomer = new ();
                 parcelCustomer.Id = item.Id;
@@ -108,7 +108,7 @@ namespace IBL.BO
                 customer.SentParcels = new();
                 customer.SentParcels.Add(parcelCustomer);
             }
-            foreach (IDAL.DO.Parcel item in parcelReciever)
+            foreach (DO.Parcel item in parcelReciever)
             {
                 ParcelCustomer parcelCustomer = new()
                 {
@@ -164,11 +164,11 @@ namespace IBL.BO
                     Phone = item.Phone
                 };
                 //Number of packages that the customer have sent and recived
-                List<IDAL.DO.Parcel> parcelSent = dalo.GetListOfParcelSending(customer.Id);
-                List<IDAL.DO.Parcel> parcelRecieved = dalo.GetListOfParcelRecirver(customer.Id);
+                List<DO.Parcel> parcelSent = dalo.GetListOfParcelSending(customer.Id);
+                List<DO.Parcel> parcelRecieved = dalo.GetListOfParcelRecirver(customer.Id);
                 
                 //parcel at customer- SENT parcels
-                foreach (IDAL.DO.Parcel item1 in parcelSent)
+                foreach (DO.Parcel item1 in parcelSent)
                 {
                     ParcelCustomer parcelCustomer = new()
                     {
@@ -197,7 +197,7 @@ namespace IBL.BO
                 }
 
                 //parcel at customer- parcels RECIVED
-                foreach (IDAL.DO.Parcel item2 in parcelRecieved)
+                foreach (DO.Parcel item2 in parcelRecieved)
                 {
                     ParcelCustomer parcelCustomer = new()
                     {

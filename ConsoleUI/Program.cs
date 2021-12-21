@@ -1,9 +1,8 @@
 ﻿using System;
-using IDAL;
+using DalApi;
 using DalObject;
-using IDAL.DO;
+using DO;
 using System.Collections.Generic;
-using DalObject.DO;
 using System.Linq;
 //Shirel Kadosh
 //Batsheva Cohen

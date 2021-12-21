@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DalObject;
-using DalObject.DO;
 using IBL.BO;
-using IDAL.DO;
+using DO;
 using NuGet.Protocol.Plugins;
 
 namespace IBL.BO
@@ -38,17 +37,17 @@ namespace IBL.BO
                 throw new StationException(stationId, "Station ID should be 5 to 6 digits");
             }
 
-            IDAL.DO.Drone d = new()
+            DO.Drone d = new()
             {
                 Id = drone.Id,
                 Model = drone.Model,
                 MaxWeight = (WeightCategories)drone.Weight,
                 Battery = r.Next(20, 40),
-                Status = IDAL.DO.DroneStatuses.Maintenance //when added a new drone it goes to initial charging
+                Status = DO.DroneStatuses.Maintenance //when added a new drone it goes to initial charging
             };
 
             //get Station to update Location
-            IDAL.DO.Station station = dalo.GetStation(stationId);
+            DO.Station station = dalo.GetStation(stationId);
             drone.Battery = d.Battery;
             dalo.AddDrone(d); //adds the drone to the dal object
             AddDroneToList(drone, station.Latitude, station.Longitude);
@@ -86,7 +85,7 @@ namespace IBL.BO
         /// <param name="droneId"></param>
         public void UpdateChargeDrone(int droneId)
         {
-            IDAL.DO.Station station = new();
+            DO.Station station = new();
             //finds the drone by the recived ID
 
             DroneToList dronel = dronesL.Find(x => x.Id == droneId);
@@ -151,7 +150,7 @@ namespace IBL.BO
             //update for the way to the station
             //finds the drone by its ID
             DroneToList dronel = dronesL.Find(x => x.Id == droneId);
-            IDAL.DO.Station station = new();
+            DO.Station station = new();
             //finds the station by its ID
             station = dalo.GetStation(stationId);
             //update the drone to charging status
@@ -180,7 +179,7 @@ namespace IBL.BO
 
             //finds the drone by its ID
             DroneToList dronel = dronesL.Find(x => x.Id == droneID);
-            IDAL.DO.Station station = new();
+            DO.Station station = new();
             //only a drone that was in charging c
 
             //ould be discharge
@@ -211,7 +210,7 @@ namespace IBL.BO
         /// <exception cref="NotImplementedException"></exception>
         public Drone GetDrone(int droneId)
         {
-            IDAL.DO.Drone d = dalo.GetDrone(droneId);
+            DO.Drone d = dalo.GetDrone(droneId);
             Drone drone = new()
             {
                 Id = d.Id,
@@ -229,7 +228,7 @@ namespace IBL.BO
             else
             {
                 //Package data in transfer mode 
-                IDAL.DO.Parcel parcel = dalo.GetParcelInTransferByDroneId(droneId);
+                DO.Parcel parcel = dalo.GetParcelInTransferByDroneId(droneId);
                 ParcelInTransfer parcelInTransfer = new()
                 {
                     Id = parcel.Id,

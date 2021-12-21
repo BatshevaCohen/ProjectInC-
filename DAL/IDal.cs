@@ -1,9 +1,10 @@
-﻿using IDAL.DO;
+﻿using DO;
 using DalObject;
 using System.Collections.Generic;
 using System;
+using DalApi;
 
-namespace IDAL
+namespace DalApi
 {
     public interface IDal
     {

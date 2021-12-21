@@ -4,9 +4,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DalObject;
-using DalObject.DO;
 using IBL.BO;
-using IDAL.DO;
+using DO;
 
 namespace IBL.BO
 {
@@ -39,7 +38,7 @@ namespace IBL.BO
             parcel.CollectionTime = DateTime.MinValue;
             parcel.SupplyTime = DateTime.MinValue;
             parcel.DroneInParcel = null;
-            IDAL.DO.Parcel p = new()
+            DO.Parcel p = new()
             {
                 Id = parcel.Id,
                 SenderId = parcel.Sender.Id,
@@ -57,7 +56,7 @@ namespace IBL.BO
         public void UpdateParcelToDrone(int droneId)
         {
            DroneToList droneTL= dronesL.Find(x => x.Id == droneId);
-            IDAL.DO.Drone drone = dalo.GetDrone(droneId);
+            DO.Drone drone = dalo.GetDrone(droneId);
             
             // only if the drone is available for shipping
             if (droneTL.DroneStatuses == DroneStatuses.Available)
@@ -71,7 +70,7 @@ namespace IBL.BO
                 // choose the first parcel from the list of parcels
                 var theParcel = orderedParcels.FirstOrDefault();
                 // finds the customer's location
-                IDAL.DO.Customer customer = dalo.ShowCustomerList().Where(c => c.Id == theParcel.SenderId).FirstOrDefault();
+                DO.Customer customer = dalo.ShowCustomerList().Where(c => c.Id == theParcel.SenderId).FirstOrDefault();
                 // only if ID exists
                 if (customer.Id != 0)
                 {
@@ -101,7 +100,7 @@ namespace IBL.BO
         {
             //the drone collect a parcel only if the parcel has been assigned to it and haven't picked up yet
             Drone drone = GetDrone(droneId);
-            IDAL.DO.Parcel parcel = dalo.GetParcelByDroneId(droneId);
+            DO.Parcel parcel = dalo.GetParcelByDroneId(droneId);
             //check if the parcel was assigned
             if (parcel.Assigned != DateTime.MinValue)
             {
@@ -166,7 +165,7 @@ namespace IBL.BO
         /// <exception cref="Exception"></exception>
         public void UpdateParcelSuppliedByDrone(int droneId)
         {
-            IDAL.DO.Parcel parcel = dalo.GetParcelByDroneId(droneId);
+            DO.Parcel parcel = dalo.GetParcelByDroneId(droneId);
             //check if the parcel was picked up
             if (parcel.PickedUp == DateTime.MinValue)
             {
@@ -206,7 +205,7 @@ namespace IBL.BO
         /// <returns></returns>
         public Parcel GetParcel(int parcelId)
         {
-            IDAL.DO.Parcel p = dalo.GetParcel(parcelId);
+            DO.Parcel p = dalo.GetParcel(parcelId);
             Parcel parcel = new()
             {
                 Id = p.Id,
@@ -218,8 +217,8 @@ namespace IBL.BO
                 CollectionTime = (DateTime)p.PickedUp
             };
 
-            IDAL.DO.Customer custumerSender = dalo.GetCustomer(p.SenderId);
-            IDAL.DO.Customer custumerReceiver = dalo.GetCustomer(p.ReceiverId);
+            DO.Customer custumerSender = dalo.GetCustomer(p.SenderId);
+            DO.Customer custumerReceiver = dalo.GetCustomer(p.ReceiverId);
             parcel.Sender = new() { Id = custumerSender.Id, Name = custumerSender.Name };
             parcel.Resiver = new() { Id = custumerReceiver.Id, Name = custumerReceiver.Name };
 
@@ -242,7 +241,7 @@ namespace IBL.BO
         {
             var parcels = dalo.ShowParcelList();
             List<ParcelToList> parcelList = new() { };
-            foreach (IDAL.DO.Parcel item in parcels)
+            foreach (DO.Parcel item in parcels)
             {
                 //find the parcel in the BL-- in order to find the raciver and the sender's name
                 Parcel parcel = GetParcel(item.Id);
@@ -267,7 +266,7 @@ namespace IBL.BO
         /// <exception cref="NotImplementedException"></exception>
         public IEnumerable<ParcelToList> ShowNonAssociatedParcelList()
         {
-            IEnumerable<IDAL.DO.Parcel> parcels = dalo.ShowParcelList(x => x.Create != DateTime.MinValue);
+            IEnumerable<DO.Parcel> parcels = dalo.ShowParcelList(x => x.Create != DateTime.MinValue);
             List<ParcelToList> parcelListNotAssociated = new();
             foreach (var item in parcels)
             {
@@ -293,7 +292,7 @@ namespace IBL.BO
         /// </summary>
         /// <param name="parcel"></param>
         /// <returns></returns>
-        public ParcelStatus FindParcelStatus(IDAL.DO.Parcel parcel)
+        public ParcelStatus FindParcelStatus(DO.Parcel parcel)
         {
             ParcelStatus parcelStatus = ParcelStatus.Created;
             //the parcel was created but have not assigned to the drone
@@ -320,7 +319,7 @@ namespace IBL.BO
         }
         public Parcel GetParcelByDroneId(int droneId)
         {
-           IDAL.DO.Parcel p= dalo.GetParcelByDroneId(droneId);
+           DO.Parcel p= dalo.GetParcelByDroneId(droneId);
             Parcel par = new Parcel();
             par.Id = p.Id;
             par.ParcelCreationTime = p.Create;
@@ -330,8 +329,8 @@ namespace IBL.BO
             par.CollectionTime = p.PickedUp;
             par.ParcelCreationTime = p.Create;
             par.AssignmentToParcelTime= p.Assigned; ;
-            IDAL.DO.Customer sender=  dalo.GetCustomer(p.SenderId);
-            IDAL.DO.Customer reciver = dalo.GetCustomer(p.ReceiverId);
+            DO.Customer sender=  dalo.GetCustomer(p.SenderId);
+            DO.Customer reciver = dalo.GetCustomer(p.ReceiverId);
             par.Resiver = new()
             {
                 Id = reciver.Id,

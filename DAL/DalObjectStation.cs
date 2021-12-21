@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Accord.Math;
-using DalObject.DO;
-using IDAL;
-using IDAL.DO;
+using DalObject;
+using DalApi;
+using DO;
 
 namespace DalObject
 {

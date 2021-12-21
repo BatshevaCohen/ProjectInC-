@@ -105,7 +105,7 @@ namespace IBL.BO
         #endregion
 
 
-        ParcelStatus FindParcelStatus(IDAL.DO.Parcel parcel);
+        ParcelStatus FindParcelStatus(DO.Parcel parcel);
 
        double CalculateDistance(double longitude1, double latitude1, double longitude2, double latitude2);
 

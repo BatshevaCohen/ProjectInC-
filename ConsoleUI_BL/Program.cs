@@ -1,7 +1,7 @@
 ﻿using System;
 using IBL;
 using IBL.BO;
-using IDAL;
+using DalApi;
 using DalObject;
 using System.Collections.Generic;
 

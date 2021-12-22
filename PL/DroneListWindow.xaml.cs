@@ -12,7 +12,10 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using BlApi;
+using DalApi;
 using BO;
+
+
 namespace PL
 {
     /// <summary>
@@ -20,13 +23,13 @@ namespace PL
     /// </summary>
     public partial class DroneListWindow : Window
     {
-        IBL.BO.IBL bL;
-        public DroneListWindow(IBL.BO.IBL bl)
+        BO.IBL bL;
+        public DroneListWindow(BO.IBL bl)
         {
             this.bL = bl;
             InitializeComponent();
             comboStatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
-            comboWeghitSelector.ItemsSource = Enum.GetValues(typeof(IBL.BO.Weight));
+            comboWeghitSelector.ItemsSource = Enum.GetValues(typeof(BO.Weight));
         }
 
         /// <summary>
@@ -84,7 +87,7 @@ namespace PL
         /// <param name="e"></param>
         private void DronesListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            IBL.BO.DroneToList? droneToList = DronesListView.SelectedItem as IBL.BO.DroneToList;
+            BO.DroneToList? droneToList = DronesListView.SelectedItem as BO.DroneToList;
             if (droneToList != null)
             {
                 new DroneInActionView(droneToList, bL, this).Show();

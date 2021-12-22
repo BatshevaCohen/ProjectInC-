@@ -24,19 +24,19 @@ namespace PL
     public partial class DroneInActionView : Window
     {
 
-        IBL.BO.Drone drone;
+        BO.Drone drone;
         private DroneToList? droneToList;
-        IBL.BO.IBL mybl;
+        BO.IBL mybl;
 
         /// <summary>
         /// Add drone window
         /// </summary>
         /// <param name="droneListWindow"></param>
         /// <param name="bL"></param>
-        public DroneInActionView(DroneListWindow droneListWindow, IBL.BO.IBL bL)
+        public DroneInActionView(DroneListWindow droneListWindow, BO.IBL bL)
         {
             InitializeComponent();
-            drone = new IBL.BO.Drone();
+            drone = new BO.Drone();
             DataContext = drone;
             AddGrid.Visibility = Visibility.Visible;
             btnAddDrone.Visibility = Visibility.Visible;
@@ -61,14 +61,14 @@ namespace PL
         /// <param name="droneToList"></param>
         /// <param name="bL"></param>
         /// <param name="droneListWindow"></param>
-        public DroneInActionView(DroneToList droneToList, IBL.BO.IBL bL, DroneListWindow droneListWindow)
+        public DroneInActionView(DroneToList droneToList, BO.IBL bL, DroneListWindow droneListWindow)
         {
             InitializeComponent();
             mybl = bL;
             UpdateGrid.Visibility = Visibility.Visible;
             ShowDrone.Visibility = Visibility.Visible;
             this.droneToList = droneToList;
-            drone = new IBL.BO.Drone()
+            drone = new BO.Drone()
             {
                 Id = droneToList.Id,
                 Battery = droneToList.Battery,

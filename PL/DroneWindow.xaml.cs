@@ -22,8 +22,8 @@ namespace PL
     /// </summary>
     public partial class DroneWindow : Window
     {
-        IBL.BO.IBL myBL = new IBL.BO.BLObject();
-        IBL.BO.Drone drone;
+        BO.IBL myBL = new BO.BLObject();
+        BO.Drone drone;
         private DroneToList? droneToList;
 
         /// <summary>
@@ -31,7 +31,7 @@ namespace PL
         /// </summary>
         public DroneWindow(DroneListWindow droneListWindow)
         {
-            drone = new IBL.BO.Drone();
+            drone = new BO.Drone();
             DataContext = drone;
             InitializeComponent();
             droneWeightComboBox.ItemsSource = Enum.GetValues(typeof(Weight));
@@ -46,9 +46,9 @@ namespace PL
             stationsComboBox.ItemsSource = stationIDs;
         }
 
-        public DroneWindow(IBL.BO.Drone drone)
+        public DroneWindow(BO.Drone drone)
         {
-            drone = new IBL.BO.Drone();
+            drone = new BO.Drone();
             drone.DroneStatuses = DroneStatuses.Maintenance;
             this.drone = drone;
             DataContext = drone;
@@ -61,7 +61,7 @@ namespace PL
         public DroneWindow(DroneToList droneToList)
         {
             this.droneToList = droneToList;
-            drone = new IBL.BO.Drone()
+            drone = new BO.Drone()
             {
                 Id = droneToList.Id,
                 Battery = droneToList.Battery,

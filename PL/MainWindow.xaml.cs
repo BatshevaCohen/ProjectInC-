@@ -23,10 +23,10 @@ namespace PL
     /// </summary>
     public partial class MainWindow : Window
     {
-        IBL.BO.IBL myBL;
+        BO.IBL myBL;
         public MainWindow()
         {
-            myBL = new IBL.BO.BLObject();
+            myBL = new BO.BLObject();
             InitializeComponent();
            
         }

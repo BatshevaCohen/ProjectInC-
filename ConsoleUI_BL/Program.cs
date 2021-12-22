@@ -20,7 +20,7 @@ namespace ConsoleUI_BL
             MenuOptions menuOptions;
             EntityOptions entityOptions;
             UpdateOptions updateOptions;
-            IBL.BO.BLObject bLObject = new(); //constractor BLObject
+            BO.BLObject bLObject = new(); //constractor BLObject
            
             do
             {

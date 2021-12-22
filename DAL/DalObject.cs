@@ -10,7 +10,6 @@ using DO;
 
 namespace DalObject
 {
-
     /// <summary>
     /// constractor 
     /// </summary>

@@ -8,6 +8,7 @@ using DalObject;
 using DalApi;
 using DO;
 
+
 namespace DalObject
 {
     public partial class DalObject

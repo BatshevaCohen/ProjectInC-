@@ -14,7 +14,7 @@ namespace DalObject
     /// <summary>
     /// constractor 
     /// </summary>
-     internal  partial  class  DalObject : IDal
+     public  partial  class  DalObject : DalApi.IDal
     {
 
         //singelton

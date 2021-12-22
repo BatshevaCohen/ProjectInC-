@@ -1,6 +1,6 @@
 ﻿using System;
-using IBL;
-using IBL.BO;
+using BlApi;
+using BO;
 using DalApi;
 using DalObject;
 using System.Collections.Generic;

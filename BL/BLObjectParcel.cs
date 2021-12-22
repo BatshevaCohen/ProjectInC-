@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DalObject;
-using IBL.BO;
+using BO;
 using DO;
 
-namespace IBL.BO
+namespace BO
 {
     public partial class BLObject
     {

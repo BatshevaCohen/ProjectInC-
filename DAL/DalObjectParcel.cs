@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Accord.Math;
 using DalObject;
 using DalApi;
 using DO;
 
 namespace DalObject
 {
-    public partial class DalObject 
+    public partial class DalObject
     {
         /// <summary>
         /// add parcel to the parcels list
@@ -188,8 +189,5 @@ namespace DalObject
             }
             return minDistance;
         }
-    }
-   
+    }  
 }
- 
-

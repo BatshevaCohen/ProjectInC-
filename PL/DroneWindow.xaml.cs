@@ -21,7 +21,7 @@ namespace PL
     /// </summary>
     public partial class DroneWindow : Window
     {
-        BO.IBL myBL = new BO.BLObject();
+        BO.IBL myBL = BlApi.BlFactory.GetBl();
         BO.Drone drone;
         private DroneToList? droneToList;
 

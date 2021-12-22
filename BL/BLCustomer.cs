@@ -9,7 +9,7 @@ using DO;
 
 namespace BO
 {
-    public partial class BLObject
+    public partial class BL
     {
         /// <summary>
         /// Add customer
@@ -56,6 +56,11 @@ namespace BO
             dalo.UpdateCustumer(id, name, phone);
         }
       
+        /// <summary>
+        /// Get customer by ID
+        /// </summary>
+        /// <param name="IDc"></param>
+        /// <returns></returns>
         public Customer GetCustomer(int IDc)
         {
             DO.Customer c = dalo.GetCustomer(IDc);

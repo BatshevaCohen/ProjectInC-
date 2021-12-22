@@ -9,7 +9,7 @@ using DO;
 
 namespace BO
 {
-    public partial class BLObject
+    public partial class BL
     {
         /// <summary>
         /// Add parcel

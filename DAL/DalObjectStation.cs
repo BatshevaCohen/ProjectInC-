@@ -12,11 +12,6 @@ namespace DalObject
 {
     public partial class DalObject 
     {
-        //singelton
-        internal static IDal Instance;
-
-
-
         /// <summary>
         /// add Station to the stations list
         /// </summary>

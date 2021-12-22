@@ -7,17 +7,20 @@ using DalObject;
 using BO;
 using DO;
 
-//
 
 namespace BO
 {
-    public partial class BLObject : IBL
+    public partial class BL : IBL
     {
         public DalApi.IDal dalo;
         public List<DroneToList> dronesL;
         static Random r = new() { };
 
-        public BLObject()
+        //singelton
+        internal static IBL Instance;
+
+
+        public BL()
         {
             //Access to the layer DAL
             dalo = new DalObject.DalObject();

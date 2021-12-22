@@ -18,10 +18,7 @@ namespace DAL
                     return DalObject.DalObject.Instance;
                 default:
                     throw DO.StationException.IDalNotFound("IDal only have List type",typ);
-            }
-           
+            }  
         }
-
-
     }
 }

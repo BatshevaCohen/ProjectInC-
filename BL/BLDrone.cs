@@ -10,7 +10,7 @@ using NuGet.Protocol.Plugins;
 
 namespace BO
 {
-    public partial class BLObject
+    public partial class BL
     {
         /// <summary>
         /// Add drone

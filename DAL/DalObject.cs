@@ -16,8 +16,19 @@ namespace DalObject
     /// </summary>
      internal  partial  class  DalObject : IDal
     {
-        
 
+        //singelton
+        //internal static IDal Instance;
+
+        static readonly IDal instance= new DalObject();
+
+        internal static IDal Instance { get => instance; }
+
+        static DalObject() { }
+
+        /// <summary>
+        /// Initialize
+        /// </summary>
         public DalObject()
         {
             DataSource.Initialize();

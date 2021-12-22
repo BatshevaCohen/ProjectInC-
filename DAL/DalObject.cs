@@ -14,9 +14,9 @@ namespace DalObject
     /// <summary>
     /// constractor 
     /// </summary>
-    public partial class DalObject : IDal
+     internal  partial  class  DalObject : IDal
     {
-       
+        
 
         public DalObject()
         {

@@ -17,6 +17,12 @@ namespace DO
         {
 
         }
+
+        internal static Exception IDalNotFound(string v, string typ)
+        {
+            throw new NotImplementedException();
+        }
+
         /// <summary>
         /// קורא לפונקציה שמקבלת סטרינג ואז זה יעבור כהודעה
         /// </summary>

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    class ParcelToList
+    public class ParcelToList
     {
         public int Id { get; set; }
         public String SenderName { get; set; } //the name of the customer who sent the parcel

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    partial class BL
+    public partial class BL
     {
         /// <summary>
         /// Add drone to list

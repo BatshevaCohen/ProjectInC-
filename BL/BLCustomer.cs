@@ -9,7 +9,7 @@ using DO;
 
 namespace BO
 {
-    partial class BL
+    public partial class BL
     {
         /// <summary>
         /// Add customer

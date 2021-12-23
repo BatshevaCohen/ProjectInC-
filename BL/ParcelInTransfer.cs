@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    class ParcelInTransfer
+    public class ParcelInTransfer
     {
         public int Id { get; set; }
         public ParcelTransferStatus ParcelTransferStatus { get; set; }

@@ -7,7 +7,7 @@ using BO;
 
 namespace BlApi
 {
-    static class BlFactory
+    public static class BlFactory
     {
         /// <summary>
         /// GetBl- returns BL object

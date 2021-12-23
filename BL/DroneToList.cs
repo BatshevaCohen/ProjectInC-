@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    class DroneToList
+    public class DroneToList
     {
         public int Id { get; set; }
         // public string model { get; set; }

@@ -10,7 +10,7 @@ using DalApi;
 
 namespace BO
 {
-    public partial class BL
+    partial class BL
     {
         /// <summary>
         /// Add station

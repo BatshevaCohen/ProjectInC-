@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    public class Parcel
+    class Parcel
     {
         public int Id { get; set; }
         public CustomerInParcel Sender { get; set; } //the sender of the parcel

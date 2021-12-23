@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BO
 {
-    public class DroneInParcel
+    class DroneInParcel
     {
         public int Id { get; set; }
         public double Battery { get; set; } // battery status

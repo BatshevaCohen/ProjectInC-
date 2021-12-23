@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace BO
 {
-    public interface IBL
+    interface IBL
     {
         #region Add:
         /// <summary>

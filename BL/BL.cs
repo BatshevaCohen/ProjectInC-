@@ -10,7 +10,7 @@ using DO;
 
 namespace BO
 {
-    public partial class BL : IBL
+    partial class BL : IBL
     {
         public DalApi.IDal dalo;
         public List<DroneToList> dronesL;

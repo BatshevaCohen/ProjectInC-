@@ -157,6 +157,7 @@ namespace DalApi
         /// <returns></returns>
         IEnumerable<Parcel> ShowParcelList(Func<Parcel, bool> predicate = null);
 
+        IEnumerable<Parcel> ShowNonAssociatedParcelList();
         #endregion
 
         #region Update:
@@ -265,6 +266,6 @@ namespace DalApi
         /// <returns></returns>
         double[] PowerConsumptionRequest();
         #endregion
-
+        public void SendDroneToCharge(int droneId, int stationId);
     }
 }

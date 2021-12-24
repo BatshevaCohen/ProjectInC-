@@ -5,34 +5,33 @@ using System.Text;
 using System.Threading.Tasks;
 using DalObject;
 using BO;
-using DO;
 
-namespace BO
+namespace BL
 {
-    public partial class BL
+    internal sealed partial class BL : BO.IBL
     {
         /// <summary>
         /// Add parcel
         /// </summary>
         /// <param name="parcel"></param>
-        public void AddParcel(Parcel parcel)
+        public void AddParcel(BO.Parcel parcel)
         {
             //Parcel ID must be 7-10 digits
             if (parcel.Id < 1000000 || parcel.Id >= 1000000000)
             {
-                throw new ParcelIdExeption(parcel.Id, "Parcel ID must be 7-10 digits");
+                throw new BO.ParcelIdExeption(parcel.Id, "Parcel ID must be 7-10 digits");
             }
             //Parcel's priority should be between 1-3
             if ((int)parcel.Priority < 1 || (int)parcel.Priority > 3)
             {
-                throw new PriorityException(parcel.Priority, "Parcel's priority should be between 1-3");
+                throw new BO.PriorityException(parcel.Priority, "Parcel's priority should be between 1-3");
             }
             // Sender ID can't be like Reciver ID
             if (parcel.Sender.Id == parcel.Resiver.Id)
             {
                 throw new CustomerIdExeption(parcel.Sender.Id, "Sender ID can't be like Reciver ID");
             }
-            parcel.Id = ++(DataSource.OrdinalNumber); //static serial number for parcel id
+            //parcel.Id = ++(DataSource.OrdinalNumber); //static serial number for parcel id
             parcel.ParcelCreationTime = DateTime.Now;
             parcel.AssignmentToParcelTime = DateTime.MinValue;
             parcel.CollectionTime = DateTime.MinValue;
@@ -40,11 +39,11 @@ namespace BO
             parcel.DroneInParcel = null;
             DO.Parcel p = new()
             {
-                Id = parcel.Id,
+ //               Id = parcel.Id,
                 SenderId = parcel.Sender.Id,
                 ReceiverId = parcel.Resiver.Id,
-                Weight = (WeightCategories)parcel.Weight,
-                Priority = (Priorities)parcel.Priority,
+                Weight = (DO.WeightCategories)parcel.Weight,
+                Priority = (DO.Priorities)parcel.Priority,
             };
             dalo.AddParcel(p);
         }
@@ -55,7 +54,7 @@ namespace BO
         /// <exception cref="NotImplementedException"></exception>
         public void UpdateParcelToDrone(int droneId)
         {
-           DroneToList droneTL= dronesL.Find(x => x.Id == droneId);
+           DroneToList droneTL= DronesL.Find(x => x.Id == droneId);
             DO.Drone drone = dalo.GetDrone(droneId);
             
             // only if the drone is available for shipping
@@ -74,12 +73,12 @@ namespace BO
                 // only if ID exists
                 if (customer.Id != 0)
                 {
-                    DroneToList dr = dronesL.Find(d => d.Id == droneId);
+                    DroneToList dr = DronesL.Find(d => d.Id == droneId);
                     dr.Location = new Location { Latitude = customer.Latitude, Longitude = customer.Longitude };
                     //Update and return parcel if the parcel found
                     int parcelINTransfer = dalo.UpdateParcelToDrone(theParcel.Id, droneId);
                     {
-                        dronesL.Find(x => x.Id == droneId).ParcelNumberTransferred = parcelINTransfer;
+                        DronesL.Find(x => x.Id == droneId).ParcelNumberTransferred = parcelINTransfer;
                     }
                 }
                 else
@@ -119,10 +118,10 @@ namespace BO
                 //calculate the distance frome the current location of the drone- to the customer
                 double distance = dalo.CalculateDistance(sender.Location.Longitude, sender.Location.Latitude, drone.Location.Longitude, drone.Location.Latitude);
                 //update the location of the drone to where the sender is (sender's location)
-                dronesL.Find(x => x.Id == droneId).Location.Latitude = sender.Location.Latitude;
-                dronesL.Find(x => x.Id == droneId).Location.Longitude = sender.Location.Longitude;
+                DronesL.Find(x => x.Id == droneId).Location.Latitude = sender.Location.Latitude;
+                DronesL.Find(x => x.Id == droneId).Location.Longitude = sender.Location.Longitude;
                 // for each KM - 1% of the battery
-                dronesL.Find(x => x.Id == droneId).Battery -= distance * 0.01;
+                DronesL.Find(x => x.Id == droneId).Battery -= distance * 0.01;
                 //update the pick up time to the current time
                 parcel.PickedUp = DateTime.Now;
                 dalo.updateBatteryDrone(droneId, distance);
@@ -190,9 +189,9 @@ namespace BO
                 //for each KM - 1% of the battery
                 dalo.updateBatteryDrone(d.Id, distanse);
                 // update drone's location to the supply target's location
-                dronesL.Find(x => x.Id == d.Id).Location = parcelInTransfer.SupplyTargetLocation;
+                DronesL.Find(x => x.Id == d.Id).Location = parcelInTransfer.SupplyTargetLocation;
                 //changing the drone's status to be available
-                dronesL.Find(x => x.Id == d.Id).DroneStatuses = DroneStatuses.Available;
+                DronesL.Find(x => x.Id == d.Id).DroneStatuses = DroneStatuses.Available;
                 //update the supply time
                 parcel.Supplied = DateTime.Now;
             }
@@ -226,7 +225,7 @@ namespace BO
             //update DroneInParcel
             if (parcel.CollectionTime == DateTime.MinValue)
             {
-                DroneToList droneToList = dronesL.Find(x => x.Id == p.DroneID);
+                DroneToList droneToList = DronesL.Find(x => x.Id == p.DroneID);
                 parcel.DroneInParcel = new() { Id = p.Id, Battery = droneToList.Battery, Location = droneToList.Location };
             }
             return parcel;

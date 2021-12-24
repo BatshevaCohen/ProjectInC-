@@ -5,25 +5,30 @@ using System.Text;
 using System.Threading.Tasks;
 using DalObject;
 using BO;
-using DO;
+using DalApi;
 
-
-namespace BO
+namespace BL
 {
-    public partial class BL : IBL
+    internal sealed  partial class BL : IBL
     {
-        public DalApi.IDal dalo;
-        public List<DroneToList> dronesL;
+        private DalApi.IDal dalo;
+        private List<DroneToList> dronesL;
         static Random r = new() { };
 
-        //singelton
-        internal static IBL Instance;
+        public List<DroneToList> DronesL { get => dronesL; }
+       
+        #region Singleton
+
+        static BL() { }
+        private static readonly IBL instance = new BL();
+        public static IBL Instance { get => instance; }
+        #endregion Singleton
 
 
-        public BL()
+        private BL()
         {
             //Access to the layer DAL
-            dalo = new DalObject.DalObject();
+            dalo = DalFactory.GetDal();
             dronesL = new List<DroneToList>();
             var Drones = dalo.ShowDroneList();
             DronesInitialize(Drones);
@@ -140,7 +145,7 @@ namespace BO
                        
                     }
                 }
-                dronesL.Add(droneBL);
+                DronesL.Add(droneBL);
                 
             }
             DroneToList droneTo = new DroneToList();
@@ -157,14 +162,14 @@ namespace BO
                 Latitude = 43,
                 Longitude = -32,
             };
-            dronesL.Add(droneTo);
+            DronesL.Add(droneTo);
             DO.Drone d = new()
             {
                 Battery = 99,
                 Id = 123456,
 
                 Model = "DFGHJ56",
-                MaxWeight = WeightCategories.Medium,
+                MaxWeight = DO.WeightCategories.Medium,
 
             };
             dalo.AddDrone(d);

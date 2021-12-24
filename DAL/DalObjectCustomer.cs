@@ -8,9 +8,9 @@ using DalApi;
 using DO;
 
 
-namespace DalObject
+namespace Dal
 {
-    public partial class DalObject 
+    internal sealed  partial class DalObject : DalApi.IDal
     {
         /// <summary>
         /// add Customer to the Customers list

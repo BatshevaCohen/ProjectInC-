@@ -5,11 +5,10 @@ using System.Text;
 using System.Threading.Tasks;
 using DalObject;
 using BO;
-using DO;
 
-namespace BO
+namespace BL
 {
-    public partial class BL
+    internal sealed partial class BL : IBL
     {
         /// <summary>
         /// Add customer

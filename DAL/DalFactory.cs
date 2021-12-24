@@ -6,16 +6,16 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace DAL
+namespace DalApi
 {
    public class DalFactory
     {
-        public static IDal GetDal(string typ)
+        public static IDal GetDal(string typ = "List")
         {
             switch(typ)
             {
                 case "List":
-                    return DalObject.DalObject.Instance;
+                    return Dal.DalObject.Instance;
                 default:
                     throw DO.StationException.IDalNotFound("IDal only have List type",typ);
             }  

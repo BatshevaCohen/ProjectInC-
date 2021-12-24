@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace DO
 {
-    public class DataSource
+    internal class DataSource
     {
         /// <summary>
         /// database of DO entities

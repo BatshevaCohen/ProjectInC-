@@ -30,11 +30,21 @@ namespace PL
             InitializeComponent();
         }
 
+        /// <summary>
+        /// click: show the list of the drones
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnShowDronesList_Click(object sender, RoutedEventArgs e)
         {
             DroneListWindow wnd = new DroneListWindow(myBL);
             wnd.Show();
         }
+        /// <summary>
+        /// click: show the list of the stations
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnShowStationList_Click(object sender, RoutedEventArgs e)
         {
            StationListWindow wnd = new StationListWindow(myBL);

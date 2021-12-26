@@ -52,28 +52,19 @@
             materialDesign:TextFieldAssist.UnderlineBrush="Green"
             Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
             materialDesign:TextFieldAssist.HasClearButton="True"
+            materialDesign:HintAssist.HelperText="At least 8 characters"
             Margin="164,218,164,0"
             VerticalAlignment="Top" 
-            materialDesign:HintAssist.HelperText="At least 8 characters"
             Height="37"/>
 
-        <!--<TextBox 
-            x:Name="PasswordTextBox"
-            materialDesign:HintAssist.Hint="Password"
-            Margin="164,230,164,0"
-            TextWrapping="Wrap" 
-            VerticalAlignment="Top" 
-            materialDesign:HintAssist.HelperText="At least 8 characters"
-            Height="25">
-            <TextBox.Text>
-                <Binding
-                    Path="Password"
-                    UpdateSourceTrigger="PropertyChanged">
-                </Binding>
-            </TextBox.Text>
-        </TextBox>-->
-
-
+        <!--<TextBox x:Name="MyTextBox" Text="{Binding Password, Mode=TwoWay, ElementName=PasswordTextBox}" Visibility="Collapsed" />
+        <CheckBox 
+            x:Name="ShowPasswordCharsCheckBox" 
+            Content="Show password" 
+            Checked="ShowPasswordCharsCheckBox_Checked" 
+            Unchecked="ShowPasswordCharsCheckBox_Unchecked"
+            Margin="270,258,58,333"/>-->
+        
         <Grid>
             <Button
             x:Name="SignInBtn"

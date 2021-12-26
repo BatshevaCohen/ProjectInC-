@@ -25,7 +25,6 @@ namespace PL
         {
             InitializeComponent();
         }
-
         /// <summary>
         /// Sign in button
         /// </summary>

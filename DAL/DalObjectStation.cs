@@ -8,9 +8,9 @@ using DalObject;
 using DalApi;
 using DO;
 
-namespace DalObject
+namespace Dal
 {
-    public partial class DalObject 
+    internal sealed partial class DalObject : DalApi.IDal
     {
         /// <summary>
         /// add Station to the stations list

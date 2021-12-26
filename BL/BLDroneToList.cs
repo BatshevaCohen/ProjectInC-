@@ -3,10 +3,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BO;
 
-namespace BO
+namespace BL
 {
-    public partial class BL
+    internal sealed partial class BL : IBL
     {
         /// <summary>
         /// Add drone to list
@@ -34,7 +35,7 @@ namespace BO
             }
             else
                 droneToList.ParcelNumberTransferred = 0;
-            dronesL.Add(droneToList);
+            DronesL.Add(droneToList);
         }
     }
 }

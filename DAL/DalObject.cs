@@ -8,12 +8,12 @@ using DalApi;
 using DO;
 
 
-namespace DalObject
+namespace Dal
 {
     /// <summary>
     /// constractor 
     /// </summary>
-     public  partial  class  DalObject : DalApi.IDal
+     internal sealed  partial  class  DalObject : DalApi.IDal
     {
 
         //singelton
@@ -28,7 +28,7 @@ namespace DalObject
         /// <summary>
         /// Initialize
         /// </summary>
-        public DalObject()
+        private DalObject()
         {
             DataSource.Initialize();
         }
@@ -77,16 +77,6 @@ namespace DalObject
                     (1 - Math.Cos((longitude2 - longitude1) * p)) / 2;
 
             return 12742 * Math.Asin(Math.Sqrt(a)); // 2 * R; R = 6371 km
-        }
-
-        /// <summary>
-        /// Exit function
-        /// </summary>
-        /// <returns></returns>
-        /// 
-        public static int Exit()
-        {
-            return 0;
         }
     }
 }

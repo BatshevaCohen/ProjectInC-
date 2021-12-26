@@ -5,12 +5,11 @@ using System.Text;
 using System.Threading.Tasks;
 using DalObject;
 using BO;
-using DO;
 using NuGet.Protocol.Plugins;
 
-namespace BO
+namespace BL
 {
-    public partial class BL
+    internal sealed partial class BL : IBL
     {
         /// <summary>
         /// Add drone
@@ -41,7 +40,7 @@ namespace BO
             {
                 Id = drone.Id,
                 Model = drone.Model,
-                MaxWeight = (WeightCategories)drone.Weight,
+                MaxWeight = (DO.WeightCategories)drone.Weight,
                 Battery = r.Next(20, 40),
                 Status = DO.DroneStatuses.Maintenance //when added a new drone it goes to initial charging
             };
@@ -70,12 +69,12 @@ namespace BO
         public void UpdateDroneName(int id, string model)
         {
             //if the recived ID does not exist
-            if (!dronesL.Exists(item => item.Id == id))
+            if (!DronesL.Exists(item => item.Id == id))
             {
                 throw new DronelIdException(id, $"Drone ID: {id} Does not exist!!");
             }
             //update BL drone to list 
-            dronesL.Find(item => item.Id == id).Model = model;
+            DronesL.Find(item => item.Id == id).Model = model;
             dalo.UpdateNameOfDrone(id, model);
         }
 
@@ -88,7 +87,7 @@ namespace BO
             DO.Station station = new();
             //finds the drone by the recived ID
 
-            DroneToList dronel = dronesL.Find(x => x.Id == droneId);
+            DroneToList dronel = DronesL.Find(x => x.Id == droneId);
             //if the drone is available- it can be sent for charging
             if (dronel.DroneStatuses == DroneStatuses.Available)
             {
@@ -149,7 +148,7 @@ namespace BO
         {
             //update for the way to the station
             //finds the drone by its ID
-            DroneToList dronel = dronesL.Find(x => x.Id == droneId);
+            DroneToList dronel = DronesL.Find(x => x.Id == droneId);
             DO.Station station = new();
             //finds the station by its ID
             station = dalo.GetStation(stationId);
@@ -178,7 +177,7 @@ namespace BO
             double dVal = (chargingTime.TotalMilliseconds) / 1000;
 
             //finds the drone by its ID
-            DroneToList dronel = dronesL.Find(x => x.Id == droneID);
+            DroneToList dronel = DronesL.Find(x => x.Id == droneID);
             DO.Station station = new();
             //only a drone that was in charging c
 
@@ -190,9 +189,9 @@ namespace BO
                 station = dalo.DischargeDroneByLocation(droneID, droneLocationLatitude, droneLocationLongitude);
                 DroneInCharging droneInCharge = new();
                 dronel.Battery += dVal * dalo.PowerRequest()[4];
-                dronesL.Remove(dronel);
+                DronesL.Remove(dronel);
                 dronel.DroneStatuses = DroneStatuses.Available;
-                dronesL.Add(dronel);
+                DronesL.Add(dronel);
                 //remove the drone frome the list of droneChargings
                 dalo.UpdateRemoveDroneToCharge(droneID, station.Id);
             }
@@ -220,7 +219,7 @@ namespace BO
                 Weight = (Weight)d.MaxWeight
             };
             //to find the locations drone---
-            DroneToList droneToList = dronesL.Find(x => x.Id == droneId);
+            DroneToList droneToList = DronesL.Find(x => x.Id == droneId);
             if (drone.DroneStatuses != DroneStatuses.Shipping)
             {
                 return drone;
@@ -252,7 +251,7 @@ namespace BO
         /// <exception cref="NotImplementedException"></exception>
         public IEnumerable<DroneToList> ShowDroneList()
         {
-            List<DroneToList> dronestl = new List<DroneToList>(dronesL);
+            List<DroneToList> dronestl = new List<DroneToList>(DronesL);
             return dronestl;
 
         }

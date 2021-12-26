@@ -1,7 +1,6 @@
-﻿using System;
-using DalApi;
-using DalObject;
+﻿using DalApi;
 using DO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 //Shirel Kadosh
@@ -22,7 +21,7 @@ namespace ConsoleUI
             MenuOptions menuOptions;
             EntityOptions entityOptions;
             UpdateOptions updateOptions;
-            DalObject.DalObject dalobject = new();//constractor DalObject
+            IDal dalobject = DalFactory.GetDal(); 
 
             do
             {
@@ -48,7 +47,7 @@ namespace ConsoleUI
                                 double.TryParse(Console.ReadLine(), out longitude);
                                 double.TryParse(Console.ReadLine(), out latitude);
                                 int.TryParse(Console.ReadLine(), out Position);
-                                Station s = new()
+                                Station s = new Station
                                 {
                                     Name = StationName,
                                     Id = id_S,
@@ -162,8 +161,7 @@ namespace ConsoleUI
 
                             // EXIT
                             case EntityOptions.Exit:
-                                DalObject.DalObject.Exit();
-                                break;
+                               break;
                         }
                         break;
 
@@ -230,7 +228,7 @@ namespace ConsoleUI
                                     break;
 
                                 case UpdateOptions.Exit:
-                                    DalObject.DalObject.Exit();
+                           
                                     break;
                             }
                             break;
@@ -268,8 +266,7 @@ namespace ConsoleUI
                                 Console.WriteLine(dalobject.GetParcel(Id_P));
                                 break;
                             //EXIT
-                            case EntityOptions.Exit:
-                                DalObject.DalObject.Exit();
+                            case EntityOptions.Exit:                          
                                 break;
                         }
                         //int requestion;
@@ -325,8 +322,7 @@ namespace ConsoleUI
                                     Console.WriteLine(element);
                                 break;
                             case ListOptions.Exit:
-                                DalObject.DalObject.Exit();
-                                break;
+                                return;                              
                         }
                         break;
                     //--BONUS--: another option that recives coordinates and print the distance from it to a station or a customer
@@ -362,7 +358,7 @@ namespace ConsoleUI
                                 break;
                             // Exit
                             case DistanceOptions.Exit:
-                                DalObject.DalObject.Exit();
+                               
                                 break;
                         }
                         break;

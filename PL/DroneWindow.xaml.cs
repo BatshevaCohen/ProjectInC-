@@ -37,7 +37,7 @@ namespace PL
             droneStatusComboBox.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
 
             IEnumerable<StationToList> listStationToList = myBL.ShowStationList();
-            List<int> stationIDs= new();
+            List<int> stationIDs = new();
             foreach (StationToList station in listStationToList)
             {
                 stationIDs.Add(station.Id);
@@ -68,7 +68,7 @@ namespace PL
                 DroneStatuses = droneToList.DroneStatuses,
                 Weight = droneToList.Weight,
                 Location = droneToList.Location,
-                 
+
 
             };
             if (droneToList.ParcelNumberTransferred != 0)
@@ -79,13 +79,12 @@ namespace PL
                 {
                     Id = droneToList.ParcelNumberTransferred,
                     Priority = parcel.Priority,
-                    
                 };
                 // אם היא סופקה אך איננה שוייכה
-                if (parcel.CollectionTime != DateTime.MinValue && parcel.SupplyTime == DateTime.MinValue) 
+                if (parcel.CollectionTime != DateTime.MinValue && parcel.SupplyTime == DateTime.MinValue)
                     drone.ParcelInTransfer.ParcelTransferStatus = ParcelTransferStatus.WaitingToBePickedUp;
                 //בזמן משלוח
-                if(parcel.CollectionTime == DateTime.MinValue && parcel.SupplyTime != DateTime.MinValue)
+                if (parcel.CollectionTime == DateTime.MinValue && parcel.SupplyTime != DateTime.MinValue)
                     drone.ParcelInTransfer.ParcelTransferStatus = ParcelTransferStatus.OnTheWayToDestination;
 
 
@@ -104,7 +103,7 @@ namespace PL
             String msg = drone.ToString();
             MessageBox.Show(msg);
         }
-        
+
         private void droneStatusComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
 
@@ -123,9 +122,9 @@ namespace PL
             Drone drone = new Drone()
             {
                 Id = Int32.Parse(idTextBox.Text),
-                Model= droneModelTextBox.Text,
+                Model = droneModelTextBox.Text,
                 Battery = Int32.Parse(batteryPrecentTextBox.Text),
-                DroneStatuses= (DroneStatuses)droneStatusComboBox.SelectedItem,
+                DroneStatuses = (DroneStatuses)droneStatusComboBox.SelectedItem,
                 Weight = (Weight)droneWeightComboBox.SelectedItem,
             };
             drone.Location = new Location()
@@ -134,8 +133,8 @@ namespace PL
                 Longitude = double.Parse(longitudeTextBox.Text)
             };
             drone.ParcelInTransfer = new()
-            { 
-                Id = 0 
+            {
+                Id = 0
             };
             myBL.AddDrone(drone, stationId);
 

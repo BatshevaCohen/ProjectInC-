@@ -4,19 +4,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DalObject;
-using BO;
-using DO;
 using DalApi;
+using BO;
 
-namespace BO
+namespace BL
 {
-    public partial class BL
-    {
-        /// <summary>
-        /// Add station
-        /// </summary>
-        /// <param name="station"></param>
-        /// <exception cref="NotImplementedException"></exception>
+    internal sealed partial class BL : BO.IBL
+    {        /// <summary>
+             /// Add station
+             /// </summary>
+             /// <param name="station"></param>
+             /// <exception cref="NotImplementedException"></exception>
         public void AddStation(Station station)
         {
             //station ID sould be 5 - 6 digits
@@ -67,12 +65,12 @@ namespace BO
                 Longitude = s.Longitude
             };
             //list of drone and 
-            List<DroneCharge> droneCharges = dalo.GetListOfDronInCharge(stationID);
-            foreach (DroneCharge item in droneCharges)
+            List<DO.DroneCharge> droneCharges = dalo.GetListOfDronInCharge(stationID);
+            foreach (DO.DroneCharge item in droneCharges)
             {
                 DroneInCharging droneInCharging = new();
                 droneInCharging.Id = item.DroneId;
-                DroneToList droneToList = dronesL.Find(x => x.Id == item.DroneId);
+                DroneToList droneToList = DronesL.Find(x => x.Id == item.DroneId);
                 droneInCharging.Battery = droneToList.Battery;
                 station.droneInChargings.Add(droneInCharging);
             }
@@ -97,7 +95,7 @@ namespace BO
                     AvailableChargingSpots = item.ChargeSpots
                 };
                 //list of drones that are currently charging in the station 
-                List<DroneCharge> droneCharges = dalo.GetListOfDronInCharge(station.Id);
+                List<DO.DroneCharge> droneCharges = dalo.GetListOfDronInCharge(station.Id);
                 station.UnavailableChargingSpots = droneCharges.Count;
                 stationList.Add(station);
             }

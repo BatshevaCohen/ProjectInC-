@@ -7,9 +7,9 @@ using DalObject;
 using DalApi;
 using DO;
 
-namespace DalObject
+namespace Dal
 {
-    public partial class DalObject 
+    internal sealed partial class DalObject : DalApi.IDal
     {
         /// <summary>
         /// add Drone to the drons list
@@ -52,7 +52,7 @@ namespace DalObject
         /// <summary>
         /// view lists functions for Drone
         /// </summary>
-        public IEnumerable<Drone> ShowDroneList(Func<Drone ,bool> predicate = null)
+        public IEnumerable<Drone> ShowDroneList(Func<Drone, bool> predicate = null)
         {
             if (predicate == null)
             {
@@ -67,7 +67,7 @@ namespace DalObject
             else
                 return DataSource.Drones.Where(predicate).ToList();
         }
-       
+
         /// <summary>
         /// Send a drone to charge
         /// </summary>
@@ -98,14 +98,14 @@ namespace DalObject
             DataSource.Drones.Remove(drone);
 
             DroneCharge droneCharge = DataSource.DroneCharges.Find(x => x.DroneId == droneId);
-           
 
-            int stationId = droneCharge.StationId;  
+
+            int stationId = droneCharge.StationId;
             Station station = GetStation(stationId);
             DataSource.Stations.Remove(station);
 
             station.ChargeSpots++;
-            
+
             DataSource.Stations.Add(station);
             DataSource.Drones.Add(drone);
             DataSource.DroneCharges.Remove(droneCharge);
@@ -119,9 +119,9 @@ namespace DalObject
         /// <exception cref="Exception"></exception>
         public Station DischargeDroneByLocation(int droneID, double droneLatitude, double droneLongitude)
         {
-           
+
             Drone d = DataSource.Drones.Find(x => x.Id == droneID);
-            Station s=new Station();
+            Station s = new Station();
             foreach (Station item in DataSource.Stations) //finds the station
             {
                 if (item.Latitude == droneLatitude && item.Longitude == droneLongitude)
@@ -132,12 +132,12 @@ namespace DalObject
                     DataSource.Stations.Add(s);
                     return s;
                 }
-             
+
             }
-            
-                throw new Exception("couldn't find station by drones location");
+
+            throw new Exception("couldn't find station by drones location");
         }
-       
+
         /// <summary>
         /// Update the station to have one less spot for charging (because we sent a drone to charg there)
         /// </summary>

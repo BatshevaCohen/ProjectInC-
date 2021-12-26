@@ -5,25 +5,30 @@ using System.Text;
 using System.Threading.Tasks;
 using DalObject;
 using BO;
-using DO;
+using DalApi;
 
-
-namespace BO
+namespace BL
 {
-    public partial class BL : IBL
+    internal sealed partial class BL : IBL
     {
-        public DalApi.IDal dalo;
-        public List<DroneToList> dronesL;
+        private DalApi.IDal dalo;
+        private List<DroneToList> dronesL;
         static Random r = new() { };
 
-        //singelton
-        internal static IBL Instance;
+        public List<DroneToList> DronesL { get => dronesL; }
+
+        #region Singleton
+
+        static BL() { }
+        private static readonly IBL instance = new BL();
+        public static IBL Instance { get => instance; }
+        #endregion Singleton
 
 
-        public BL()
+        private BL()
         {
             //Access to the layer DAL
-            dalo = new DalObject.DalObject();
+            dalo = DalFactory.GetDal();
             dronesL = new List<DroneToList>();
             var Drones = dalo.ShowDroneList();
             DronesInitialize(Drones);
@@ -34,7 +39,7 @@ namespace BO
         /// <param name="drones"></param>
         public void DronesInitialize(IEnumerable<DO.Drone> drones)
         {
-            
+
             //find A package that has not yet been delivered but the drone has already been associated
             List<DO.Parcel> parcels = dalo.ShowParcelList().ToList();
             DroneToList droneBL;
@@ -46,16 +51,16 @@ namespace BO
                     Id = droneDL.Id,
                     Model = droneDL.Model,
                     Weight = (Weight)droneDL.MaxWeight
-                    
+
                 };
-                
+
                 List<DO.Parcel> parcelList = parcels.FindAll(p => p.DroneID == droneBL.Id);
 
                 if (parcelList.Count != 0) //If there is a package that has not yet been delivered but the drone has already been associated
                 {
                     droneBL.DroneStatuses = DroneStatuses.Shipping;
                     //If the package was associated but not collected
-                    foreach (var p in parcels.Where(p => p.PickedUp ==DateTime.MinValue))
+                    foreach (var p in parcels.Where(p => p.PickedUp == DateTime.MinValue))
                     {
                         // The location of the drone will be at the station closest to the sender
                         int senderId = p.SenderId;
@@ -104,7 +109,7 @@ namespace BO
                 }
                 else //the drone is not in delivery
                 {
-                    droneBL.DroneStatuses = (DroneStatuses)r.Next(1,3); //Maintenance or Available
+                    droneBL.DroneStatuses = (DroneStatuses)r.Next(1, 3); //Maintenance or Available
                     if (droneBL.DroneStatuses == DroneStatuses.Maintenance)
                     {
                         //Its location will be drawn between the purchasing stations
@@ -123,10 +128,10 @@ namespace BO
                         //Its location will be raffled off among customers who have packages provided to them
                         List<DO.Parcel> parcelsDelivered = parcels.FindAll(p => p.Supplied != DateTime.MinValue);
                         int index = r.Next(0, parcelsDelivered.Count());
-                        DO.Customer customer=  dalo.GetCustomer(parcelsDelivered[index].ReceiverId);
+                        DO.Customer customer = dalo.GetCustomer(parcelsDelivered[index].ReceiverId);
                         droneBL.Location = new()
                         {
-                          
+
                             Latitude = customer.Latitude,
                             Longitude = customer.Longitude
                         };
@@ -135,13 +140,13 @@ namespace BO
 
                         // זה זמניייייייייייי השורה הזאת עשתה חריגה 
                         droneBL.Battery = 30;
-                       //  droneBL.Battery = r.Next((int)(distance * dalo.PowerConsumptionRequest()[0] + 1), 101);
+                        //  droneBL.Battery = r.Next((int)(distance * dalo.PowerConsumptionRequest()[0] + 1), 101);
 
-                       
+
                     }
                 }
-                dronesL.Add(droneBL);
-                
+                DronesL.Add(droneBL);
+
             }
             DroneToList droneTo = new DroneToList();
 
@@ -157,14 +162,14 @@ namespace BO
                 Latitude = 43,
                 Longitude = -32,
             };
-            dronesL.Add(droneTo);
+            DronesL.Add(droneTo);
             DO.Drone d = new()
             {
                 Battery = 99,
                 Id = 123456,
 
                 Model = "DFGHJ56",
-                MaxWeight = WeightCategories.Medium,
+                MaxWeight = DO.WeightCategories.Medium,
 
             };
             dalo.AddDrone(d);
@@ -173,7 +178,7 @@ namespace BO
 
         public double CalculateDistance(double longitude1, double latitude1, double longitude2, double latitude2)
         {
-          double dis=  dalo.CalculateDistance(longitude1, latitude1, longitude2, latitude2);
+            double dis = dalo.CalculateDistance(longitude1, latitude1, longitude2, latitude2);
             return dis;
         }
     }

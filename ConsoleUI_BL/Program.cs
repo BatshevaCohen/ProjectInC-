@@ -3,12 +3,13 @@ using BO;
 using DalApi;
 using DalObject;
 using System.Collections.Generic;
-
+using BlApi;
 
 namespace ConsoleUI_BL
 {
     class Program
     {
+       
         enum MenuOptions { Add = 1, Update, Show_One, Show_List, Exit }
         enum EntityOptions { Station = 1, Drone, Custumer, Parcel, Exit }
         enum UpdateOptions { Drone_Name = 1, Stetion_Details, Customer_Details, Charge, Discharge, AssignParcelToDrone, Pickedup, Parcel_Supply_By_Drone, Exit }
@@ -16,11 +17,12 @@ namespace ConsoleUI_BL
 
         private static void ShowMenu()
         {
+            IBL bLObject = BlFactory.GetBl();
             MenuOptions menuOptions;
             EntityOptions entityOptions;
             UpdateOptions updateOptions;
-            BO.BL bLObject = new(); //constractor BLObject
-           
+
+
             do
             {
                 Console.WriteLine("WELCOME!");
@@ -83,7 +85,7 @@ namespace ConsoleUI_BL
                                     Id = id_D,
                                     Model = model,
                                     Weight = (Weight)weight,
-                                    DroneStatuses=DroneStatuses.Maintenance, 
+                                    DroneStatuses = DroneStatuses.Maintenance,
                                 };
                                 d.ParcelInTransfer = new()
                                 {
@@ -124,8 +126,8 @@ namespace ConsoleUI_BL
                                 {
                                     Longitude = longitude_C,
                                     Latitude = latitude_C,
-                        };
-                               
+                                };
+
                                 try
                                 {
                                     bLObject.AddCustomer(c);
@@ -154,7 +156,7 @@ namespace ConsoleUI_BL
                                 {
                                     Weight = (Weight)weight_P,
                                     Priority = (Priority)priority_P
-                                    
+
                                 };
                                 p.Sender = new CustomerInParcel()
                                 {
@@ -164,7 +166,7 @@ namespace ConsoleUI_BL
                                 {
                                     Id = id_Reciver,
                                 };
-                               
+
                                 try
                                 {
                                     bLObject.AddParcel(p);
@@ -179,7 +181,7 @@ namespace ConsoleUI_BL
 
                             // EXIT
                             case EntityOptions.Exit:
-                                DalObject.DalObject.Exit();
+                               
                                 break;
                         }
                         break;
@@ -194,7 +196,7 @@ namespace ConsoleUI_BL
                             {
                                 //update drone's name
                                 case UpdateOptions.Drone_Name:
-                                int  drone_id5;
+                                    int drone_id5;
                                     Console.WriteLine("Please enter Drone ID");
                                     int.TryParse(Console.ReadLine(), out drone_id5);
                                     Console.WriteLine("Please enter new name for the drone:");
@@ -241,7 +243,7 @@ namespace ConsoleUI_BL
                                     Console.WriteLine("Enter new name custumer:");
                                     nameCustumer = Console.ReadLine();
                                     Console.WriteLine("Enter Phon's custumer:");
-                                    phonCustumer= Console.ReadLine();
+                                    phonCustumer = Console.ReadLine();
                                     try
                                     {
                                         bLObject.UpdateCustomer(Customer_id, nameCustumer, phonCustumer);
@@ -262,7 +264,7 @@ namespace ConsoleUI_BL
                                     {
                                         bLObject.UpdateChargeDrone(drone_id4);
                                     }
-                                    catch(Exception ex)
+                                    catch (Exception ex)
                                     {
                                         Console.WriteLine(ex.Message);
                                         break;
@@ -310,7 +312,7 @@ namespace ConsoleUI_BL
                                     int drone_id2;
                                     int.TryParse(Console.ReadLine(), out drone_id2);
                                     try
-                                    { 
+                                    {
                                         bLObject.UpdateParcelPickUpByDrone(drone_id2);
                                     }
                                     catch (Exception ex)
@@ -338,7 +340,7 @@ namespace ConsoleUI_BL
                                     break;
                                 //EXIT
                                 case UpdateOptions.Exit:
-                                    DalObject.DalObject.Exit();
+                                 
                                     break;
                             }
                             break;
@@ -400,7 +402,7 @@ namespace ConsoleUI_BL
                                 int.TryParse(Console.ReadLine(), out Id_P);
                                 try
                                 {
-                                  Console.WriteLine(  bLObject.GetParcel(Id_P).ToString());
+                                    Console.WriteLine(bLObject.GetParcel(Id_P).ToString());
                                 }
                                 catch (Exception ex)
                                 {
@@ -409,10 +411,10 @@ namespace ConsoleUI_BL
                                 break;
                             //EXIT:
                             case EntityOptions.Exit:
-                                DalObject.DalObject.Exit();
+                              
                                 break;
                         }
-                       
+
                         break;
 
                     //Show List:
@@ -478,10 +480,11 @@ namespace ConsoleUI_BL
             }
             while (menuOptions != MenuOptions.Exit);
         }
-            static void Main(string[] args)
-            {
-           
+        static void Main(string[] args)
+        {
+            
             ShowMenu();
-            }
+           
+    }
     }
 }

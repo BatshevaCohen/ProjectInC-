@@ -28,7 +28,6 @@ namespace PL
         {
             myBL = BlFactory.GetBl();
             InitializeComponent();
-           
         }
 
         private void btnShowDronesList_Click(object sender, RoutedEventArgs e)

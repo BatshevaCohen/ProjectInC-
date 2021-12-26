@@ -24,7 +24,21 @@ namespace PL
             InitializeComponent();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
+        /// <summary>
+        /// Sign in button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SignIn_Button_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        /// <summary>
+        /// sign up button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SignUp_Button_Click(object sender, RoutedEventArgs e)
         {
 
         }

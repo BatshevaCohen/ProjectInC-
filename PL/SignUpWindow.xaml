@@ -9,7 +9,7 @@
         Title="Sign up" Height="644" Width="554"
         WindowStartupLocation="CenterScreen"
         WindowStyle="SingleBorderWindow">
-    
+
     <Grid>
         <!--Background-->
         <Image 
@@ -17,25 +17,25 @@
             Stretch="Fill"
             Opacity="0.5"
             Grid.ColumnSpan="2"/>
-        
+
         <Grid x:Name="enterDetailsGrid"
               Visibility="Collapsed">
-        <!--ID icon-->
-        <materialDesign:PackIcon 
+            <!--ID icon-->
+            <materialDesign:PackIcon 
             Kind="Account"             
             Margin="132,111,0,0" 
             Width="27" RenderTransformOrigin="0.5,0.5" 
             Height="30" >
-            <materialDesign:PackIcon.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="0"/>
-                    <RotateTransform/>
-                    <TranslateTransform Y="0"/>
-                </TransformGroup>
-            </materialDesign:PackIcon.RenderTransform>
-        </materialDesign:PackIcon>
-        <TextBox 
+                <materialDesign:PackIcon.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="0"/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="0"/>
+                    </TransformGroup>
+                </materialDesign:PackIcon.RenderTransform>
+            </materialDesign:PackIcon>
+            <TextBox 
             x:Name="FirstNameTextBox"
             materialDesign:HintAssist.Hint="First Name"
             materialDesign:TextFieldAssist.HasClearButton="True"
@@ -44,24 +44,25 @@
             VerticalAlignment="Top" 
             materialDesign:HintAssist.HelperText="Enter letters only" 
             Height="25"
-            MaxLength="20">
-        </TextBox>
-        <!--Person icon-->
-        <materialDesign:PackIcon 
+            MaxLength="20"
+            PreviewTextInput="AlphabetValidationTextBox">
+            </TextBox>
+            <!--Person icon-->
+            <materialDesign:PackIcon 
             Kind="Account"             
             Margin="130,163,0,0" 
             Width="27" RenderTransformOrigin="0.5,0.5" 
             Height="30" >
-            <materialDesign:PackIcon.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="0"/>
-                    <RotateTransform/>
-                    <TranslateTransform Y="0"/>
-                </TransformGroup>
-            </materialDesign:PackIcon.RenderTransform>
-        </materialDesign:PackIcon>
-        <TextBox 
+                <materialDesign:PackIcon.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="0"/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="0"/>
+                    </TransformGroup>
+                </materialDesign:PackIcon.RenderTransform>
+            </materialDesign:PackIcon>
+            <TextBox 
             x:Name="LastNameTextBox"
             materialDesign:HintAssist.Hint="Last Name"
             materialDesign:TextFieldAssist.HasClearButton="True"
@@ -70,15 +71,16 @@
             VerticalAlignment="Top" 
             materialDesign:HintAssist.HelperText="Enter letters only" 
             Height="25"
-            MaxLength="20">
-        </TextBox>
-        <!--ID icon-->
-        <materialDesign:PackIcon 
+            MaxLength="20"
+            PreviewTextInput="AlphabetValidationTextBox">
+            </TextBox>
+            <!--ID icon-->
+            <materialDesign:PackIcon 
             Kind="CardAccountDetailsOutline"
             Margin="130,213,0,0" 
             Width="27" RenderTransformOrigin="0.5,0.5" 
             Height="30"/>
-        <TextBox 
+            <TextBox 
             x:Name="IDTextBox"
             materialDesign:HintAssist.Hint="ID"
             materialDesign:TextFieldAssist.HasClearButton="True"
@@ -87,15 +89,16 @@
             VerticalAlignment="Top" 
             materialDesign:HintAssist.HelperText="9 digits" 
             MaxLength="9"
-            Height="25">
-        </TextBox>
-        <!--Phone icon-->
-        <materialDesign:PackIcon 
+            Height="25"
+            PreviewTextInput="NumberValidationTextBox">
+            </TextBox>
+            <!--Phone icon-->
+            <materialDesign:PackIcon 
             Kind="Phone"
             Margin="130,259,0,0" 
             Width="27" RenderTransformOrigin="0.5,0.5" 
             Height="30"/>
-        <TextBox 
+            <TextBox 
             x:Name="PhoneTextBox"
             materialDesign:HintAssist.Hint="Phone number"
             materialDesign:TextFieldAssist.HasClearButton="True"
@@ -104,14 +107,15 @@
             VerticalAlignment="Top" 
             materialDesign:HintAssist.HelperText="9-10 digits" 
             MaxLength="10"
-            Height="25">
-        </TextBox>
-        <!--Address icon-->
-        <materialDesign:PackIcon Kind="MapMarker"
+            Height="25"
+            PreviewTextInput="NumberValidationTextBox">
+            </TextBox>
+            <!--Address icon-->
+            <materialDesign:PackIcon Kind="MapMarker"
             Margin="130,373,0,0" 
             Width="27" RenderTransformOrigin="0.5,0.5" 
             Height="30"/>
-        <TextBox 
+            <TextBox 
             x:Name="LongitudeTextBox"
             materialDesign:HintAssist.Hint="Longitude"
             materialDesign:TextFieldAssist.HasClearButton="True"
@@ -120,15 +124,16 @@
             VerticalAlignment="Top" 
             materialDesign:HintAssist.HelperText="Numbers only" 
             MaxLength="10"
-            Height="25">
-        </TextBox>
-        <!--Address icon-->
-        <materialDesign:PackIcon 
+            Height="25"
+            PreviewTextInput="DoubleNumberValidationTextBox">
+            </TextBox>
+            <!--Address icon-->
+            <materialDesign:PackIcon 
             Kind="MapMarkerOutline"
             Margin="130,424,0,0" 
             Width="27" RenderTransformOrigin="0.5,0.5" 
             Height="30"/>
-        <TextBox 
+            <TextBox 
             x:Name="LatitudeTextBox"
             materialDesign:HintAssist.Hint="Latitude"
             materialDesign:TextFieldAssist.HasClearButton="True"
@@ -137,40 +142,42 @@
             VerticalAlignment="Top" 
             materialDesign:HintAssist.HelperText="Numbers only" 
             MaxLength="10"
-            Height="25">
-        </TextBox>
+            Height="25"
+            PreviewTextInput="DoubleNumberValidationTextBox">
+            </TextBox>
 
-        <!--Location-->
-        <Label Content="Location:" 
+            <!--Location-->
+            <Label Content="Location:" 
                HorizontalAlignment="Left" 
                Margin="164,314,0,0" 
                VerticalAlignment="Top" 
                Height="31"
                FontSize="15"/>
-        <materialDesign:PackIcon 
+            <materialDesign:PackIcon 
                 Kind="HelpCircleOutline"
                 Margin="129,322,0,0" 
                 Width="30" 
                 RenderTransformOrigin="-0.852,0.435" 
                 Height="30"/>
-        <!--find your location-->
-        <TextBlock Margin="164,344,270,238" RenderTransformOrigin="0.5,0.5">
-            <TextBlock.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform ScaleY="1"/>
-                    <SkewTransform/>
-                    <RotateTransform/>
-                    <TranslateTransform/>
-                </TransformGroup>
-            </TextBlock.RenderTransform>
+            <!--find your location-->
+            <TextBlock Margin="164,344,270,238" RenderTransformOrigin="0.5,0.5"
+                   ToolTip="">
+                <TextBlock.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform ScaleY="1"/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </TextBlock.RenderTransform>
             <Hyperlink NavigateUri="https://www.latlong.net"
                        RequestNavigate="Hyperlink_RequestNavigate">
                 <Hyperlink.Inlines>
                     <Run Text="Find your location"/>
                 </Hyperlink.Inlines>
             </Hyperlink>
-        </TextBlock>
-        <Button
+            </TextBlock>
+            <Button
             x:Name="SignUpFinalBtn"
             Content="Sign Up"
             HorizontalAlignment="Left" 
@@ -205,7 +212,8 @@
                 VerticalAlignment="Top" 
                 materialDesign:HintAssist.HelperText="Enter letters only" 
                 Height="25"
-                MaxLength="10">
+                MaxLength="10"
+                PreviewTextInput="AlphabetValidationTextBox">
             </TextBox>
             <materialDesign:PackIcon 
                 Kind="Key"
@@ -213,17 +221,35 @@
                 Width="27" 
                 RenderTransformOrigin="0.5,0.5" 
                 Height="30"/>
-            <PasswordBox 
+            <!--<PasswordBox 
                 x:Name="ChoosePasswordTextBox"
                 materialDesign:HintAssist.Hint="Choose Password"
                 materialDesign:HintAssist.Foreground="Green"
                 materialDesign:TextFieldAssist.UnderlineBrush="Green"
                 Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
                 materialDesign:TextFieldAssist.HasClearButton="True"
-                materialDesign:HintAssist.HelperText="At least 8 characters"
+                materialDesign:HintAssist.HelperText="At least 5 characters"
                 Margin="164,218,164,0"
                 VerticalAlignment="Top" 
-                Height="37"/>
+                Height="37"/>-->
+            <TextBox 
+                x:Name="ChoosePasswordTextBox"
+                materialDesign:HintAssist.Hint="Choose Password"
+                materialDesign:TextFieldAssist.HasClearButton="True"
+                Margin="164,218,164,0"
+                TextWrapping="Wrap" 
+                VerticalAlignment="Top" 
+                materialDesign:HintAssist.HelperText="At least 5 characters" 
+                Height="25"
+                MaxLength="10"/>
+            <Button
+            x:Name="FinalUserNamePasswordBtn"
+            Content="OK"
+            HorizontalAlignment="Left" 
+            materialDesign:ButtonAssist.CornerRadius="10"
+            Margin="146,339,0,0" 
+            Click="FinalUserNamePassword_Button_Click"
+            VerticalAlignment="Top" Width="266" Height="32"/>
         </Grid>
 
     </Grid>

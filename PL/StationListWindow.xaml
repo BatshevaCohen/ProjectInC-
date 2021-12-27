@@ -36,11 +36,11 @@
 
                 <Label 
                     x:Name="lblTBD" 
-                    Content="Choose a station" 
-                    ToolTip="Choose a stetus"
-                    HorizontalAlignment="Center"  
-                    VerticalAlignment="Center" 
-                    FontSize="18" Height="55" Width="153"/>
+                    Content="Select a list of stations:" 
+                    ToolTip="Select a list of stations:"
+                    HorizontalAlignment="Left"  
+                    VerticalAlignment="Top" 
+                    FontSize="18" Height="51" Width="242" Grid.ColumnSpan="2" Margin="110,53,0,0"/>
 
                 <Button
                     x:Name="ClearStatus"
@@ -48,14 +48,14 @@
                     Style="{StaticResource MaterialDesignFlatButton}"
                     HorizontalAlignment="Left"
                     Click="ClearStatus_Click"
-                    Margin="60,65,0,10" />
+                    Margin="169,57,0,18" Grid.Column="1" />
 
 
 
 
 
 
-               <!-- <Button 
+                <!-- <Button 
                     x:Name="btnADDdrone"
                     Content="Add a new drone" 
                     HorizontalAlignment="Center" 
@@ -76,8 +76,8 @@
                     VerticalAlignment="Top" Width="193" Height="32"/>
                  -->
                 <Button x:Name="btnStationList"
-                    Content="Station List" Grid.Column="1" Click="Station_List_Click" Margin="0,65,38,10"/>
-                <Button Content="Availble charging spote station"  Margin="0,20,38,55" Grid.Column="1" Click="Availble_charging_spote_station_Click"/>
+                    Content="Station List" Click="Station_List_Click" Margin="110,77,148,89" Grid.ColumnSpan="2" Grid.Row="1"/>
+                <Button Content="Availble charging spote station"  Margin="110,14,148,152" Click="Availble_charging_spote_station_Click" Grid.ColumnSpan="2" Grid.Row="1"/>
 
 
             </Grid>
@@ -89,7 +89,7 @@
                 Grid.Column="1" 
                 Margin="550,0,-500,0" 
                 Grid.RowSpan="2"/>
-           
+
 
 
         </Grid>

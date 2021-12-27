@@ -32,6 +32,9 @@ namespace PL
         /// <param name="e"></param>
         private void SignIn_Button_Click(object sender, RoutedEventArgs e)
         {
+           new MainWindow().Show();
+
+
             //TO DO
             //if (UserNameTextBox.Text == "admin" && PasswordTextBox.DataContext.ToString() == "admin")
             //    MainWindow.Show(Admin);

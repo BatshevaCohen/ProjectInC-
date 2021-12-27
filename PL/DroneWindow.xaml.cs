@@ -140,9 +140,6 @@ namespace PL
 
             MessageBox.Show("Drone added seccessfuly!");
 
-
-            //לעשות פונקציה שמאפסת את כל השדות לאחר הוספת הרחפן
-            idTextBox.Text = "";
         }
     }
 }

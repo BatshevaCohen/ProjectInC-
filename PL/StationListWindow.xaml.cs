@@ -43,12 +43,13 @@ namespace PL
         {
             StationsListView.ItemsSource = bL.ShowStationList().ToList();
         }
+
         private void StationListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            BO.Station? station = StationsListView.SelectedItem as BO.Station;
+            StationToList? station = StationsListView.SelectedItem as StationToList;
             if (station != null)
             {
-                new StationInActionView(station, bL,this).Show();
+                new StationInActionView(station, bL, this).Show();
             }
         }
     }

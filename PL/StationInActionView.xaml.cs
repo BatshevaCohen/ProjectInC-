@@ -24,7 +24,7 @@ namespace PL
         {
             InitializeComponent();
         }
-        public StationInActionView(Station station, BO.IBL bL, StationListWindow stationListWindow)
+        public StationInActionView(StationToList station, BO.IBL bL, StationListWindow stationListWindow)
         {
             InitializeComponent();
         }

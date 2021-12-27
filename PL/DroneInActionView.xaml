@@ -17,11 +17,11 @@
 
         <Grid 
             Name="ShowDrone" 
-            Visibility="Collapsed" Margin="10,-10,10,10">
+            Visibility="Visible" Margin="10,-10,10,10">
 
             <Grid 
                 x:Name="UpdateGrid" 
-                Visibility="Collapsed" 
+                Visibility="Visible" 
                 VerticalAlignment="Top" 
                 Margin="31,61,0,0" 
                 HorizontalAlignment="Left" Height="224" Width="267">
@@ -247,7 +247,7 @@
         </Grid>
 
         <Grid x:Name="ParcelInTransfer_Grid"
-             Visibility="Collapsed"                 
+             Visibility="Visible"                 
               Margin="368,12,177,260">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -436,7 +436,7 @@
                 Margin="81,374,0,0" 
                 VerticalAlignment="Top" 
                 Height="55" Width="100" 
-                Visibility="Collapsed"
+                Visibility="Visible"
                 Click="btnAddDrone_Click"/>
         <Button 
             x:Name="btnAddDrone_cencel" 
@@ -447,7 +447,7 @@
             Margin="205,374,0,0" 
             VerticalAlignment="Top" 
             Height="55" Width="100" 
-            Visibility="Collapsed"
+            Visibility="Visible"
             Background="Red"
             Click="btnAddDrone_cencel_Click"/>
 

@@ -23,7 +23,6 @@ namespace BO
             result += $"Station name is {Name}, \n";
             result += $"The number of available charging spots is: {AvailableChargingSpots}, \n";
             result += $"The number of unavailable charging spots is: {UnavailableChargingSpots}, \n";
-            
             return result;
         }
     }

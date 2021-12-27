@@ -6,7 +6,129 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="StationInActionView" Height="450" Width="800">
-    <Grid>
-        
+    <Grid 
+                x:Name="UpdateGrid" 
+                Visibility="Visible" 
+                VerticalAlignment="Top" 
+                Margin="31,61,0,0" 
+                HorizontalAlignment="Left" Height="150" Width="267">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Label 
+                    
+                    VerticalAlignment="Center" 
+                    Grid.Row="0" 
+                    Margin="3" 
+                    HorizontalAlignment="Left" 
+                    Grid.Column="0" 
+                    Content="Station id:"/>
+        <TextBox 
+                    x:Name="stationIdTextBox" 
+                    Width="120" 
+                    VerticalAlignment="Center" 
+                    Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                    Grid.Row="0" 
+                    Margin="3" 
+                    Height="23" 
+                    HorizontalAlignment="Left" 
+                    Grid.Column="1" 
+                    IsEnabled="False"/>
+        <Label 
+                    VerticalAlignment="Center" 
+                    Grid.Row="1" 
+                    Margin="3" 
+                    HorizontalAlignment="Left" 
+                    Grid.Column="0" 
+                    Content="Name:"/>
+        <TextBox 
+                    x:Name="NameTextBox" 
+                    Width="120" 
+                    VerticalAlignment="Center" 
+                    Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                    Grid.Row="1" 
+                    Margin="3" 
+                    Height="23" 
+                    HorizontalAlignment="Left" 
+                    Grid.Column="1" 
+                    IsEnabled="True"/>
+        <Label 
+                    VerticalAlignment="Center" 
+                    Grid.Row="3" 
+                    Margin="3" 
+                    HorizontalAlignment="Left" 
+                    Grid.Column="0" 
+                    Content="Available Charging Spots:"/>
+        <TextBox 
+                    x:Name="AvailableChargingSpotsTextBox" 
+                    Width="120" 
+                    VerticalAlignment="Center"  
+                    Text="{Binding AvailableChargingSpots, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  
+                    Grid.Row="3" 
+                    Margin="3" 
+                    Height="23" 
+                    HorizontalAlignment="Left" 
+                    Grid.Column="1"/>
+
+
+        <Label 
+                    VerticalAlignment="Center" 
+                    Grid.Row="6" 
+                    Margin="3" 
+                    HorizontalAlignment="Left" 
+                    Grid.Column="0" 
+                    Content="Latitude:"/>
+        <TextBox 
+                    x:Name="latitudeTextBox" 
+                    Width="120" 
+                    VerticalAlignment="Center" 
+                    Text="{Binding Location.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                    Grid.Row="6" 
+                    Margin="3" 
+                    Height="23" 
+                    HorizontalAlignment="Left" 
+                    Grid.Column="1" 
+                    IsEnabled="False"/>
+        <Label 
+                    Content="Longitude:"
+                    VerticalAlignment="Center" 
+                    Grid.Row="7" 
+                    Margin="3" 
+                    HorizontalAlignment="Left" 
+                    Grid.Column="0"/>
+        <TextBox 
+                    x:Name="longitudeTextBox" 
+                    Width="120" 
+                    VerticalAlignment="Center" 
+                    Text="{Binding Location.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                    Grid.Row="7" 
+                    Margin="3" 
+                    Height="23" 
+                    HorizontalAlignment="Left" 
+                    Grid.Column="1" 
+                    IsEnabled="False"/>
+        <Grid x:Name="GridDroneInCharging"
+            Grid.ColumnSpan="2" Margin="3,81,3,-182" Grid.Row="7"/>
+       
+
+
     </Grid>
+    
+
+    
+
+
+
 </Window>

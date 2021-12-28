@@ -232,27 +232,22 @@
                     HorizontalAlignment="Left" 
                     Grid.Column="1" 
                     IsEnabled="False"/>
-       
 
-        <Grid/> 
-        <Button
+
+            <Grid/>
+            <Button
             x:Name="btnAddStation"
             Content="Add station"
             Grid.Column="1"
             Margin="266,5,-400,23"
             Click="btnAddeStation_Click" Grid.Row="1" Grid.RowSpan="3"/>
-        <Button
+            <Button
             x:Name="btnUpdateStation"
             Content="Update Station"
             Margin="266,23,-399,5"
             Grid.Row="6" Click="btnUpdateStation_Click" Grid.Column="1" Grid.RowSpan="2"/>
-        
 
+
+        </Grid>
     </Grid>
-    
-
-
-
-
-
 </Window>

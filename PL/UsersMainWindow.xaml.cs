@@ -88,8 +88,22 @@ namespace PL
         /// <param name="e"></param>
         private void SignUp_Button_Click(object sender, RoutedEventArgs e)
         {
-            new SignUpWindow().Show();
+            bool tmpIsMAnager = false;
+            new SignUpWindow(tmpIsMAnager).Show();
             this.Close();
+        }
+
+        /// <summary>
+        /// When enter key pushed then submit to sign in
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SignUp_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                SignIn_Button_Click((object)sender, e);
+            }
         }
 
         ///// <summary>

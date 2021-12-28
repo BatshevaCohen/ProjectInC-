@@ -32,6 +32,14 @@ namespace BO
         /// </summary>
         /// <param name="parcel"></param>
         void AddParcel(Parcel parcel);
+
+        /// <summary>
+        /// Adds User to data
+        /// 
+        /// Throws BOBadUserException
+        /// </summary>
+        /// <param name="tmpUser"></param>
+        void AddUser(User tmpUser);
         #endregion
 
         #region Update:

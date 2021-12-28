@@ -30,5 +30,12 @@
         Maintenance,
         Shipping
     }
-
+    /// <summary>
+    /// permit of user/manager
+    /// </summary>
+    public enum Permit
+    {
+        Admin,
+        User
+    }
 }

@@ -27,4 +27,20 @@ namespace DO
         Severe,
         Terrible
     }
+    /// <summary>
+    /// permit of user/manager
+    /// </summary>
+    public enum Permit 
+    { 
+        Admin, 
+        User 
+    }
+    /// <summary>
+    /// activity of entity
+    /// </summary>
+    public enum Activity 
+    { 
+        On, 
+        Off 
+    }
 }

@@ -11,7 +11,7 @@ namespace BL
 {
     internal sealed partial class BL : IBL
     {
-        private DalApi.IDal dalo;
+        private DalApi.IDal dalo; //access to dal object
         private List<DroneToList> dronesL;
         static Random r = new() { };
 
@@ -146,7 +146,6 @@ namespace BL
                     }
                 }
                 DronesL.Add(droneBL);
-
             }
            
             DroneToList droneTo = new DroneToList();

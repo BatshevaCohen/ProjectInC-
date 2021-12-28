@@ -158,7 +158,7 @@
                     Height="23" 
                     HorizontalAlignment="Left" 
                     Grid.Column="1" 
-                    IsEnabled="False"/>
+                    IsEnabled="True"/>
             <Label 
                     VerticalAlignment="Center" 
                     Grid.Row="1" 
@@ -193,7 +193,8 @@
                     Margin="3" 
                     Height="23" 
                     HorizontalAlignment="Left" 
-                    Grid.Column="1"/>
+                    Grid.Column="1"
+                IsEnabled="True"/>
 
 
             <Label 
@@ -213,7 +214,7 @@
                     Height="23" 
                     HorizontalAlignment="Left" 
                     Grid.Column="1" 
-                    IsEnabled="False"/>
+                    IsEnabled="True"/>
             <Label 
                     Content="Longitude:"
                     VerticalAlignment="Center" 
@@ -231,7 +232,7 @@
                     Height="23" 
                     HorizontalAlignment="Left" 
                     Grid.Column="1" 
-                    IsEnabled="False"/>
+                    IsEnabled="True"/>
 
 
             <Grid/>

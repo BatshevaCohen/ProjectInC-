@@ -374,10 +374,7 @@ namespace PL
                 DroneStatuses = DroneStatuses.Maintenance,
                 Weight = (Weight)droneWeightComboBox.SelectedItem,
             };
-            //drone.Location = new();
-
-            //drone.Location.Latitude = Convert.ToDouble(latitudeTextBox.Text);
-            //drone.Location.Longitude = Convert.ToDouble(longitudeTextBox.Text);
+            
 
             drone.ParcelInTransfer = new()
             {

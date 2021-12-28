@@ -187,7 +187,7 @@
             VerticalAlignment="Top" Width="266" Height="32"/>
         </Grid>
         <Grid x:Name="UserNameAndPassword_Grid"
-              Visibility="Visible">
+              Visibility="Collapsed">
             <!--Person icon-->
             <materialDesign:PackIcon 
             Kind="Account"             

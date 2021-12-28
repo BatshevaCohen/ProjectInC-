@@ -14,6 +14,10 @@ using System.Windows.Shapes;
 using System.Diagnostics;
 using System.Windows.Navigation;
 using System.Text.RegularExpressions;
+using BlApi;
+using DalApi;
+using DO;
+using BO;
 
 
 namespace PL
@@ -23,9 +27,13 @@ namespace PL
     /// </summary>
     public partial class SignUpWindow : Window
     {
+        /// <summary>
+        /// initializing
+        /// </summary>
         public SignUpWindow()
         {
             InitializeComponent();
+            enterDetailsGrid.Visibility = Visibility.Visible;
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -111,11 +119,29 @@ namespace PL
             //only if the username ad password inserted
             if (ChooseUserNameTextBox.Text.Count() != 0 && ChoosePasswordTextBox.Text.Count() != 0)
             {
-                //add the new customer
+                //add the new customer to the BO
+                BO.Customer customer = new BO.Customer()
+                {
+                    Id = Int32.Parse(IDTextBox.Text),
+                    Name = FirstNameTextBox.Text + LastNameTextBox.Text,
+                    Phone = PhoneTextBox.Text,
+                };
+                customer.Location = new BO.Location()
+                {
+                    Longitude = double.Parse(LongitudeTextBox.Text),
+                    Latitude = double.Parse(LatitudeTextBox.Text),
+                };
+                //new customer doesn't have any parcels
+                customer.SentParcels = null;
+                customer.ReceiveParcels = null;
 
                 //keep the username and password in the memory
 
                 //go to sign in page again
+                string username = ChooseUserNameTextBox.Text;
+                string password = ChoosePasswordTextBox.Text;
+                new UsersMainWindow(username, password).Show();
+                this.Close();
             }
             else
                 MessageBox.Show("All fields are required to continue");

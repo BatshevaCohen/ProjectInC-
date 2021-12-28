@@ -25,6 +25,19 @@ namespace PL
         {
             InitializeComponent();
         }
+
+        /// <summary>
+        /// this window opens just after signing up- so the user won't need to insert his username and password again
+        /// </summary>
+        /// <param name="username"></param>
+        /// <param name="password"></param>
+        public UsersMainWindow(string username, string password)
+        {
+            InitializeComponent();
+            this.UserNameTextBox.Text = username;
+            this.PasswordTextBox.Password = password;
+        }
+
         /// <summary>
         /// Sign in button
         /// </summary>
@@ -32,16 +45,40 @@ namespace PL
         /// <param name="e"></param>
         private void SignIn_Button_Click(object sender, RoutedEventArgs e)
         {
-            new MainWindow().Show();
-            this.Close();
+            //the username and password shoouldn't be empty
+            if (AllFieldsRequired())
+            {
+                new MainWindow().Show();
+                this.Close();
+            }
+            else
+                MessageBox.Show("All fields are required to continue");
 
             //TO DO
-            //if (UserNameTextBox.Text == "admin" && PasswordTextBox.DataContext.ToString() == "admin")
-            //    MainWindow.Show(Admin);
-            //else if (UserNameTextBox.Text == "user" && PasswordTextBox.DataContext.ToString() == "user")
-            //    MainWindow.Show(User);
-            //else
-            //    MessageBox.Show("User name or password are not correct!");
+            string userType = "user";
+            if (UserNameTextBox.Text == "admin" && PasswordTextBox.Password.ToString() == "admin")
+            {
+                userType = "admin";
+                MainWindow.Show(userType);
+            }
+            else if (UserNameTextBox.Text == "user" && PasswordTextBox.Password.ToString() == "user")
+            {
+                userType="user";
+                MainWindow.Show(userType);
+            }
+            else
+                MessageBox.Show("User name or password are not correct!");
+        }
+
+        /// <summary>
+        /// checks if all the fileds were filled in
+        /// </summary>
+        /// <returns></returns>
+        private bool AllFieldsRequired()
+        {
+            if (UserNameTextBox.Text.Count() != 0 && PasswordTextBox.Password.Count() != 0)
+                return true;
+            return false;
         }
 
         /// <summary>

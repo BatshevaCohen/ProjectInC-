@@ -18,6 +18,7 @@ namespace DO
         internal static List<Customer> Customer = new(100) { };
         internal static List<Parcel> Parcels = new(1000) { };
         internal static List<DroneCharge> DroneCharges = new() { };
+        public static List<User> userList;
 
         static Random r = new() { };
 

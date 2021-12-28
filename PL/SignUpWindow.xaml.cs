@@ -27,13 +27,19 @@ namespace PL
     /// </summary>
     public partial class SignUpWindow : Window
     {
+
+        bool IsManager; //to now if registration of manger or user
+        public static IBL bl;
+
         /// <summary>
         /// initializing
         /// </summary>
-        public SignUpWindow()
+        public SignUpWindow(bool tmpIsMAnager)
         {
             InitializeComponent();
             enterDetailsGrid.Visibility = Visibility.Visible;
+            IsManager = tmpIsMAnager;
+            bl = BlFactory.GetBl();
         }
 
         private void Hyperlink_RequestNavigate(object sender, RequestNavigateEventArgs e)
@@ -49,14 +55,33 @@ namespace PL
         /// <returns></returns>
         private bool AllFieldsRequired()
         {
-            if (FirstNameTextBox.Text.Count() != 0 && 
-                LastNameTextBox.Text.Count() != 0 && 
-                IDTextBox.Text.Count() != 0 &&
-                PhoneTextBox.Text.Count() != 0 &&
-                LongitudeTextBox.Text.Count() != 0 &&
-                LatitudeTextBox.Text.Count() != 0)
+            if (FirstNameTextBox.Text.Length != 0 && LastNameTextBox.Text.Length != 0)
                 return true;
             return false;
+        }
+
+        /// <summary>
+        /// to reset registration
+        /// </summary>
+        public void Reset()
+        {
+            ChooseUserNameTextBox.Text = "";
+            ChoosePasswordTextBox.Text = "";
+            ConfirmPasswordTextBox.Password = "";
+        }
+
+        /// <summary>
+        /// sign up
+        /// </summary>
+        private void SignUp()
+        {
+            if (AllFieldsRequired())
+            {
+                enterDetailsGrid.Visibility = Visibility.Collapsed;
+                UserNameAndPassword_Grid.Visibility = Visibility.Visible;
+            }
+            else
+                MessageBox.Show("All fields are required to continue");
         }
 
         /// <summary>
@@ -66,13 +91,16 @@ namespace PL
         /// <param name="e"></param>
         private void SignUp_Final_Button_Click(object sender, RoutedEventArgs e)
         {
-            if (AllFieldsRequired())
-            {
-                enterDetailsGrid.Visibility = Visibility.Collapsed;
-                UserNameAndPassword_Grid.Visibility = Visibility.Visible;
-            }
+            if (IDTextBox.Text.Length != 9)
+                MessageBox.Show("ID should have 9 digits");
+            else if (PhoneTextBox.Text.Length < 9 || PhoneTextBox.Text.Length > 10)
+                MessageBox.Show("Incorrect phone number");
+            else if (double.Parse(LongitudeTextBox.Text) < -180 || double.Parse(LongitudeTextBox.Text) > 180)
+                MessageBox.Show("Incorrect Longitude");
+            else if (double.Parse(LatitudeTextBox.Text) < -90 || double.Parse(LongitudeTextBox.Text) > 90)
+                MessageBox.Show("Incorrect Latitude");
             else
-                MessageBox.Show("All fields are required to continue");
+                SignUp();
         }
 
         /// <summary>
@@ -114,12 +142,73 @@ namespace PL
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void FinalUserNamePassword_Button_Click(object sender, RoutedEventArgs e)
+        private void Submit_SignUp_Button_Click(object sender, RoutedEventArgs e)
         {
-            //only if the username ad password inserted
-            if (ChooseUserNameTextBox.Text.Count() != 0 && ChoosePasswordTextBox.Text.Count() != 0)
+            Submition();
+        }
+
+        /// <summary>
+        /// Submition of registration
+        /// checks that fields are full and sends registration to bl
+        /// </summary>
+        private void Submition()
+        {
+            if (ChooseUserNameTextBox.Text.Length == 0)
             {
-                //add the new customer to the BO
+                MessageBox.Show("Enter user name.");
+                ChooseUserNameTextBox.Focus();
+            }
+            if (ChoosePasswordTextBox.Text.Length == 0)
+            {
+                MessageBox.Show("Enter password.");
+                ChoosePasswordTextBox.Focus();
+            }
+            if (ChoosePasswordTextBox.Text.Length < 4)
+            {
+                MessageBox.Show("Password should include at least 4 digits");
+                ChoosePasswordTextBox.Focus();
+            }
+            else if (ConfirmPasswordTextBox.Password.Length == 0)
+            {
+                MessageBox.Show("Confirm your password.");
+                ConfirmPasswordTextBox.Focus();
+            }
+            else if (ChoosePasswordTextBox.Text != ConfirmPasswordTextBox.Password)
+            {
+                MessageBox.Show("Confirm password must be same as password.");
+                ConfirmPasswordTextBox.Focus();
+            }
+            //the username and password are currect
+            else
+            {
+                //keep the username and password in the memory
+                string username = ChooseUserNameTextBox.Text;
+                string password = ChoosePasswordTextBox.Text;
+                BO.User user = new BO.User() //creates new user to register
+                {
+                    UserName = username,
+                    Password = password
+                };
+                if (IsManager)
+                {
+                    user.Permission = BO.Permit.Admin;
+                }
+                else
+                {
+                    user.Permission = BO.Permit.User;
+                }
+                try
+                {
+                    bl.AddUser(user); //registers user
+                    MessageBox.Show("You have Registered successfully.");
+                    Reset();
+                }
+                catch (BO.BOBadUserException exception)
+                {
+                    MessageBox.Show(exception.Message);
+                    Reset();
+                }
+                //add the new customer to the BO layer
                 BO.Customer customer = new BO.Customer()
                 {
                     Id = Int32.Parse(IDTextBox.Text),
@@ -135,16 +224,37 @@ namespace PL
                 customer.SentParcels = null;
                 customer.ReceiveParcels = null;
 
-                //keep the username and password in the memory
-
-                //go to sign in page again
-                string username = ChooseUserNameTextBox.Text;
-                string password = ChoosePasswordTextBox.Text;
+                //go to sign in page again- and doesn't need to fill in the username and password again
                 new UsersMainWindow(username, password).Show();
                 this.Close();
             }
-            else
-                MessageBox.Show("All fields are required to continue");
+        }
+
+
+
+        /// <summary>
+        /// When enter key pushed then submit to sign up
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void SignUp_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                SignUp();
+            }
+        }
+        /// <summary>
+        /// When enter key then submit form
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ChoosePasswordTextBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                Submition();
+            }
         }
     }
 }

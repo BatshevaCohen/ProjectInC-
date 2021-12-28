@@ -57,7 +57,8 @@
             materialDesign:HintAssist.HelperText="At least 8 characters"
             Margin="164,218,164,0"
             VerticalAlignment="Top" 
-            Height="37"/>
+            Height="37"
+            KeyDown="SignIn_KeyDown"/>
 
         <!--<TextBox x:Name="MyTextBox" Text="{Binding Password, Mode=TwoWay, ElementName=PasswordTextBox}" Visibility="Collapsed" />
         <CheckBox 

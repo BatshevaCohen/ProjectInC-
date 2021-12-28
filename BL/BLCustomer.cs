@@ -239,5 +239,10 @@ namespace BL
             }
             return customerList;
         }
+
+        public void AddUser(User tmpUser)
+        {
+            Instance.AddUser(tmpUser);
+        }
     }
 }

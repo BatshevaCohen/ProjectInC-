@@ -32,8 +32,8 @@ namespace PL
         /// <param name="e"></param>
         private void SignIn_Button_Click(object sender, RoutedEventArgs e)
         {
-           new MainWindow().Show();
-
+            new MainWindow().Show();
+            this.Close();
 
             //TO DO
             //if (UserNameTextBox.Text == "admin" && PasswordTextBox.DataContext.ToString() == "admin")
@@ -45,15 +45,14 @@ namespace PL
         }
 
         /// <summary>
-        /// sign up button
+        /// sign up button- open the sign up window
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void SignUp_Button_Click(object sender, RoutedEventArgs e)
         {
-            /////////////////////////////////////
-            ///TO DO-
-            ///Sign up page
+            new SignUpWindow().Show();
+            this.Close();
         }
 
         ///// <summary>

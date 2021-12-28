@@ -6,15 +6,17 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="UsersMainWindow" Height="644" Width="554"
+        Title="Hello" Height="644" Width="554"
         WindowStartupLocation="CenterScreen"
         WindowStyle="SingleBorderWindow">
     <Grid>
+        <!--Background-->
         <Image 
             Source="Images/purple background.jpg"
             Stretch="Fill"
             Opacity="0.5"
             Grid.ColumnSpan="2"/>
+        <!--Person icon-->
         <materialDesign:PackIcon 
             Kind="Account"             
             Margin="132,151,0,0" 

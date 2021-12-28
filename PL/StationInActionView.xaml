@@ -149,7 +149,7 @@
                     Grid.Column="0" 
                     Content="Station id:"/>
             <TextBox 
-                    x:Name="stationIdTextBox" 
+                    x:Name="stationIdTextBoxadd" 
                     Width="120" 
                     VerticalAlignment="Center" 
                     Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
@@ -167,7 +167,7 @@
                     Grid.Column="0" 
                     Content="Name:"/>
             <TextBox 
-                    x:Name="NameTextBox" 
+                    x:Name="NameTextBoxadd" 
                     Width="120" 
                     VerticalAlignment="Center" 
                     Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
@@ -185,7 +185,7 @@
                     Grid.Column="0" 
                     Content="Available Charging Spots:"/>
             <TextBox 
-                    x:Name="AvailableChargingSpotsTextBox" 
+                    x:Name="AvailableChargingSpotsTextBoxadd" 
                     Width="120" 
                     VerticalAlignment="Center"  
                     Text="{Binding AvailableChargingSpots, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  
@@ -204,7 +204,7 @@
                     Grid.Column="0" 
                     Content="Latitude:"/>
             <TextBox 
-                    x:Name="latitudeTextBox" 
+                    x:Name="latitudeTextBoxadd" 
                     Width="120" 
                     VerticalAlignment="Center" 
                     Text="{Binding Location.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
@@ -222,7 +222,7 @@
                     HorizontalAlignment="Left" 
                     Grid.Column="0"/>
             <TextBox 
-                    x:Name="longitudeTextBox" 
+                    x:Name="longitudeTextBoxadd" 
                     Width="120" 
                     VerticalAlignment="Center" 
                     Text="{Binding Location.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 

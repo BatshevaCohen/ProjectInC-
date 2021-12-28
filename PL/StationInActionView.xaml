@@ -10,8 +10,8 @@
                 x:Name="UpdateGrid" 
                 Visibility="Visible" 
                 VerticalAlignment="Top" 
-                Margin="31,61,0,0" 
-                HorizontalAlignment="Left" Height="150" Width="267">
+                Margin="10,10,0,0" 
+                HorizontalAlignment="Left" Height="150" Width="290">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -119,15 +119,23 @@
                     HorizontalAlignment="Left" 
                     Grid.Column="1" 
                     IsEnabled="False"/>
-        <Grid x:Name="GridDroneInCharging"
-            Grid.ColumnSpan="2" Margin="3,81,3,-182" Grid.Row="7"/>
-       
+        <ListBox x:Name="lb" Margin="48,58,-30,-19" Grid.Row="7" Grid.Column="1" >
+           
+                <ListBox.ItemContainerStyle>
+                <Style TargetType="{x:Type ListBoxItem}">
+                    <Setter Property="HorizontalContentAlignment" Value="Left"/>
+                    <Setter Property="VerticalContentAlignment" Value="Center" />
+                </Style>
+            </ListBox.ItemContainerStyle>
+        </ListBox>
+      
+        <ListBox x:Name="lb1" Grid.ColumnSpan="2" HorizontalAlignment="Left" Height="197" Margin="54,58,0,0" Grid.Row="7" VerticalAlignment="Top" Width="105" />
+
+
+
 
 
     </Grid>
-    
-
-    
 
 
 

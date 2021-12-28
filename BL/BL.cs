@@ -148,6 +148,7 @@ namespace BL
                 DronesL.Add(droneBL);
 
             }
+           
             DroneToList droneTo = new DroneToList();
 
             droneTo.Battery = 99;
@@ -170,17 +171,42 @@ namespace BL
 
                 Model = "DFGHJ56",
                 MaxWeight = DO.WeightCategories.Medium,
-
+               
             };
             dalo.AddDrone(d);
-        }
 
+            DO.Drone d1 = new()
+            {
+                Id = 99999,
+                Model = "face",
+                MaxWeight = DO.WeightCategories.Heavy,
+                Battery = 99,
+                Status = DO.DroneStatuses.Maintenance //when added a new drone it goes to initial charging
+            };
+
+            //get Station to update Location
+            DO.Station station = dalo.GetStation(12345);
+           
+            dalo.AddDrone(d1); //adds the drone to the dal object
+            dalo.UpdateChargeSpots(station.Id);
+            if (station.ChargeSpots > 0)
+            {
+                dalo.UpdateAddDroneToCharge(droneTo.Id, station.Id);
+            }
+
+        }
+        
 
         public double CalculateDistance(double longitude1, double latitude1, double longitude2, double latitude2)
         {
             double dis = dalo.CalculateDistance(longitude1, latitude1, longitude2, latitude2);
             return dis;
         }
-    }
+
+
+
+
+      
+}
 
 }

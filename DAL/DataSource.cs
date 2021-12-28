@@ -80,6 +80,7 @@ namespace DO
                 ChargeSpots = 10,
                 Longitude = 33.3,
                 Latitude = 44.4
+                
             });
 
             //adding customers
@@ -121,19 +122,19 @@ namespace DO
                 });
 
             }
-            Parcels.Add(new Parcel()
-            {
-                Id = 111111,    //serial number
-                SenderId = r.Next(1, 10),
-                ReceiverId = r.Next(1, 10),
-                Weight = RandomEnumValue<WeightCategories>(),
-                Priority = RandomEnumValue<Priorities>(),
-                DroneID = 123456,
-                Create = MyDateTime(),
-                Assigned = MyDateTime(),
-                PickedUp = MyDateTime(),
-                Supplied = MyDateTime()
-            });
+            //Parcels.Add(new Parcel()
+            //{
+            //    Id = 111111,    //serial number
+            //    SenderId = r.Next(1, 10),
+            //    ReceiverId = r.Next(1, 10),
+            //    Weight = RandomEnumValue<WeightCategories>(),
+            //    Priority = RandomEnumValue<Priorities>(),
+            //    DroneID = 123456,
+            //    Create = MyDateTime(),
+            //    Assigned = MyDateTime(),
+            //    PickedUp = MyDateTime(),
+            //    Supplied = MyDateTime()
+            //});
 
         }
         /// <summary>

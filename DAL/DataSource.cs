@@ -133,7 +133,7 @@ namespace DO
         private static List<User> CreateUsers()
         {
             List<User> users = new List<User> { };
-            List<string> names = new List<string> { "Yona", "Elyassaf", "Nathi", "Aharon", "David", "Dani", "Oshri", "Eliezer", "Avraham", "Itamar" };
+            List<string> names = new List<string> { "shira", "lea", "rachel", "avraham", "david", "dani", "oshri", "eliezer", "avraham", "itamar" };
             for (int i = 1; i < 11; i++)
             {
                 users.Add(new User { UserName = names[i - 1], Password = "1234", Permission = Permit.User, MyActivity = Activity.On });

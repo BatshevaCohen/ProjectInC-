@@ -51,17 +51,6 @@ namespace PL
         /// <param name="e"></param>
         private void SignIn_Button_Click(object sender, RoutedEventArgs e)
         {
-            //if (AllFieldsRequired())
-            //{
-            //    new MainWindow().Show();
-            //    this.Close();
-            //}
-            //else
-            //    MessageBox.Show("All fields are required in order to continue");
-
-            //TO DO
-
-
             //the username and password shoouldn't be empty
             if (UserNameTextBox.Text.Length == 0)
             {
@@ -73,7 +62,7 @@ namespace PL
                 MessageBox.Show("Enter a Password.");
                 PasswordTextBox.Focus();
             }
-            //username and password are not empty
+            //else- username and password are not empty
             else
             {
                 string name = UserNameTextBox.Text;

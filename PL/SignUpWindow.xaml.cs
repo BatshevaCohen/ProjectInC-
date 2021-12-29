@@ -91,7 +91,37 @@ namespace PL
         /// <param name="e"></param>
         private void SignUp_Final_Button_Click(object sender, RoutedEventArgs e)
         {
-            if (IDTextBox.Text.Length != 9)
+            if(FirstNameTextBox.Text.Length==0)
+            {
+                MessageBox.Show("Please enter name");
+                FirstNameTextBox.Focus();
+            }
+            else if (LastNameTextBox.Text.Length==0)
+            {
+                MessageBox.Show("Please enter last name");
+                LastNameTextBox.Focus();
+            }
+            else if (IDTextBox.Text.Length==0)
+            {
+                MessageBox.Show("Please enter ID");
+                IDTextBox.Focus();
+            }
+            else if (PhoneTextBox.Text.Length==0)
+            {
+                MessageBox.Show("Please enter Phone number");
+                PhoneTextBox.Focus();
+            }
+             else if (LongitudeTextBox.Text.Length==0)
+            {
+                MessageBox.Show("Please enter longitude");
+                LongitudeTextBox.Focus();
+            }
+             else if (LatitudeTextBox.Text.Length==0)
+            {
+                MessageBox.Show("Please enter latitude");
+                LatitudeTextBox.Focus();
+            }
+            else if (IDTextBox.Text.Length != 9)
                 MessageBox.Show("ID should have 9 digits");
             else if (PhoneTextBox.Text.Length < 9 || PhoneTextBox.Text.Length > 10)
                 MessageBox.Show("Incorrect phone number");

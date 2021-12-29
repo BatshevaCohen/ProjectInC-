@@ -8,7 +8,7 @@
         Title="StationInActionView" Height="450" Width="800">
     <Grid 
                 x:Name="UpdateGrid" 
-                Visibility="Visible" 
+                Visibility="Collapsed" 
                 VerticalAlignment="Top" 
                 Margin="10,10,0,0" 
                 HorizontalAlignment="Left" Height="160" Width="290">
@@ -121,7 +121,7 @@
 
         <Grid 
                 x:Name="AddGrid" 
-                Visibility="Visible" 
+                Visibility="Collapsed" 
                 VerticalAlignment="Top" 
                 Margin="10,10,0,0" 
                 HorizontalAlignment="Left" Height="160" Width="290">
@@ -236,16 +236,22 @@
 
 
             <Grid/>
+            
+            
             <Button
+              
             x:Name="btnAddStation"
             Content="Add station"
             Grid.Column="1"
             Margin="266,5,-400,23"
+                 Visibility="Collapsed"
             Click="btnAddeStation_Click" Grid.Row="1" Grid.RowSpan="3"/>
             <Button
+               
             x:Name="btnUpdateStation"
             Content="Update Station"
             Margin="266,23,-399,5"
+                 Visibility="Collapsed"
             Grid.Row="6" Click="btnUpdateStation_Click" Grid.Column="1" Grid.RowSpan="2"/>
 
 

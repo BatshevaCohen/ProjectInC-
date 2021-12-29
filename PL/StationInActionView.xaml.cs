@@ -60,15 +60,23 @@ namespace PL
             {
                 MessageBox.Show("bla bla");
             }
-            btnAddStation.Visibility = Visibility.Visible;
-            btnUpdateStation.Visibility = Visibility.Visible;
+            
+           
             DataContext = station;
+
+        }
+        public StationInActionView(StationListWindow stationListWindow, BO.IBL bL)
+        {
+            InitializeComponent();
+            AddGridStation.Visibility = Visibility.Visible;
+            DataContext = station;
+            stationListWindow.StationsListView.Items.Refresh();
 
         }
 
         private void btnUpdateStation_Click(object sender, RoutedEventArgs e)
         {
-
+            UpdateGrid.Visibility = Visibility.Visible;
             String StationName = mybl.GetStation(Int32.Parse(stationIdTextBox.Text)).Name;
             string newName = stationIdTextBox.Text;
             //only if the name has changed by the user
@@ -86,23 +94,23 @@ namespace PL
 
 
 
-        private void btnAddeStation_Click(object sender, RoutedEventArgs e)
-        {
-            Station station = new Station()
-            {
-                Id = Int32.Parse(stationIdTextBox.Text),
-                Name = (NameTextBox.Text),
-                AvailableChargingSpots = Int32.Parse(AvailableChargingSpotsTextBox.Text),
+        //private void btnAddeStation_Click(object sender, RoutedEventArgs e)
+        //{
+        //    Station station = new Station()
+        //    {
+        //        Id = Int32.Parse(stationIdTextBox.Text),
+        //        Name = (NameTextBox.Text),
+        //        AvailableChargingSpots = Int32.Parse(AvailableChargingSpotsTextBox.Text),
 
 
-            };
-            station.Location = new()
-            {
-                Latitude = double.Parse(latitudeTextBox.Text),
-                Longitude = double.Parse(longitudeTextBox.Text),
-            };
+        //    };
+        //    station.Location = new()
+        //    {
+        //        Latitude = double.Parse(latitudeTextBox.Text),
+        //        Longitude = double.Parse(longitudeTextBox.Text),
+        //    };
 
-            mybl.AddStation(station);
-        }
+        //    mybl.AddStation(station);
+        //}
     }
 }

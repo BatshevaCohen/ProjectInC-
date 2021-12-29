@@ -10,8 +10,8 @@
                 x:Name="UpdateGrid" 
                 Visibility="Collapsed" 
                 VerticalAlignment="Top" 
-                Margin="10,10,0,0" 
-                HorizontalAlignment="Left" Height="160" Width="290">
+                Margin="42,38,0,0" 
+                HorizontalAlignment="Left" Height="90" Width="294">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
@@ -19,8 +19,7 @@
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
             <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+
         </Grid.RowDefinitions>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="Auto"/>
@@ -81,46 +80,9 @@
                     Height="23" 
                     HorizontalAlignment="Left" 
                     Grid.Column="1"/>
-        <Label 
-                    VerticalAlignment="Center" 
-                    Grid.Row="6" 
-                    Margin="3" 
-                    HorizontalAlignment="Left" 
-                    Grid.Column="0" 
-                    Content="Latitude:"/>
-        <TextBox 
-                    x:Name="latitudeTextBox" 
-                    Width="120" 
-                    VerticalAlignment="Center" 
-                    Text="{Binding Location.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                    Grid.Row="6" 
-                    Margin="3" 
-                    Height="23" 
-                    HorizontalAlignment="Left" 
-                    Grid.Column="1" 
-                    IsEnabled="False"/>
-        <Label 
-                    Content="Longitude:"
-                    VerticalAlignment="Center" 
-                    Grid.Row="7" 
-                    Margin="3" 
-                    HorizontalAlignment="Left" 
-                    Grid.Column="0"/>
-        <TextBox 
-                    x:Name="longitudeTextBox" 
-                    Width="120" 
-                    VerticalAlignment="Center" 
-                    Text="{Binding Location.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                    Grid.Row="7" 
-                    Margin="3" 
-                    Height="23" 
-                    HorizontalAlignment="Left" 
-                    Grid.Column="1" 
-                    IsEnabled="False"/>
-
 
         <Grid 
-                x:Name="AddGrid" 
+                x:Name="AddGridStation" 
                 Visibility="Collapsed" 
                 VerticalAlignment="Top" 
                 Margin="10,10,0,0" 
@@ -236,25 +198,7 @@
 
 
             <Grid/>
-            
-            
-            <Button
-              
-            x:Name="btnAddStation"
-            Content="Add station"
-            Grid.Column="1"
-            Margin="266,5,-400,23"
-                 Visibility="Collapsed"
-            Click="btnAddeStation_Click" Grid.Row="1" Grid.RowSpan="3"/>
-            <Button
-               
-            x:Name="btnUpdateStation"
-            Content="Update Station"
-            Margin="266,23,-399,5"
-                 Visibility="Collapsed"
-            Grid.Row="6" Click="btnUpdateStation_Click" Grid.Column="1" Grid.RowSpan="2"/>
-
-
         </Grid>
+        
     </Grid>
 </Window>

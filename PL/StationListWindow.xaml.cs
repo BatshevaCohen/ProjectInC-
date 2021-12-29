@@ -52,5 +52,14 @@ namespace PL
                 new StationInActionView(station, bL, this).Show();
             }
         }
+        /// <summary>
+        /// add station::::::::::::::::::
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnAddStation_Click(object sender, RoutedEventArgs e)
+        {
+            new StationInActionView(this, bL).Show();
+        }
     }
 }

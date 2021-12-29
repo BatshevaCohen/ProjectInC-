@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="StationListWindow" Height="625" Width="1000">
+        Title="StationListWindow" Height="696" Width="957">
     <Grid Name="MainGrid">
 
         <Grid.ColumnDefinitions>
@@ -40,7 +40,7 @@
                     ToolTip="Select a list of stations:"
                     HorizontalAlignment="Left"  
                     VerticalAlignment="Top" 
-                    FontSize="18" Height="51" Width="242" Grid.ColumnSpan="2" Margin="110,53,0,0"/>
+                    FontSize="18" Height="51" Width="242" Grid.ColumnSpan="2" Margin="33,15,0,0" FontWeight="Bold"/>
 
                 <Button
                     x:Name="ClearStatus"
@@ -76,8 +76,8 @@
                     VerticalAlignment="Top" Width="193" Height="32"/>
                  -->
                 <Button x:Name="btnStationList"
-                    Content="Station List" Click="Station_List_Click" Margin="110,77,148,89" Grid.ColumnSpan="2" Grid.Row="1"/>
-                <Button Content="Availble charging spote station"  Margin="110,14,148,152" Click="Availble_charging_spote_station_Click" Grid.ColumnSpan="2" Grid.Row="1"/>
+                    Content="Station List" Click="Station_List_Click" Margin="33,0,224,212" Grid.ColumnSpan="2" Grid.Row="1"/>
+                <Button Content="Availble charging spote station"  Margin="33,64,224,36" Click="Availble_charging_spote_station_Click" Grid.ColumnSpan="2"/>
 
 
             </Grid>
@@ -93,6 +93,9 @@
 
 
         </Grid>
+        <Button x:Name="btnAddStation"
+            Content="Add" Margin="36,254,222,394" Click="btnAddStation_Click"/>
+        <Label Content="To add a station:" Margin="36,198,276,445" FontSize="18" FontWeight="Bold"/>
 
     </Grid>
 </Window>

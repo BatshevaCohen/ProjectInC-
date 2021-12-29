@@ -110,6 +110,14 @@ namespace BO
         Customer GetCustomer(int customerId);
         Parcel GetParcel(int parcelId);
         Parcel GetParcelByDroneId(int droneId);
+        /// <summary>
+        /// Returns User that has that name
+        /// 
+        /// Throws BOBadUserException
+        /// </summary>
+        /// <param name="userName">Name of user</param>
+        /// <returns></returns>
+        User GetUser(string userName);
         #endregion
 
 

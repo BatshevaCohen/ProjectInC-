@@ -121,23 +121,28 @@ namespace DO
                     PickedUp = MyDateTime(),
                     Supplied = MyDateTime()
                 });
-
             }
-            //Parcels.Add(new Parcel()
-            //{
-            //    Id = 111111,    //serial number
-            //    SenderId = r.Next(1, 10),
-            //    ReceiverId = r.Next(1, 10),
-            //    Weight = RandomEnumValue<WeightCategories>(),
-            //    Priority = RandomEnumValue<Priorities>(),
-            //    DroneID = 123456,
-            //    Create = MyDateTime(),
-            //    Assigned = MyDateTime(),
-            //    PickedUp = MyDateTime(),
-            //    Supplied = MyDateTime()
-            //});
 
+            userList = CreateUsers();
         }
+
+        /// <summary>
+        /// create list of all users
+        /// </summary>
+        /// <returns>list of all users</returns>
+        private static List<User> CreateUsers()
+        {
+            List<User> users = new List<User> { };
+            List<string> names = new List<string> { "Yona", "Elyassaf", "Nathi", "Aharon", "David", "Dani", "Oshri", "Eliezer", "Avraham", "Itamar" };
+            for (int i = 1; i < 11; i++)
+            {
+                users.Add(new User { UserName = names[i - 1], Password = "1234", Permission = Permit.User, MyActivity = Activity.On });
+            }
+            users.Add(new User() { UserName = "shirel", Password = "shirel", Permission = Permit.Admin, MyActivity = Activity.On });
+            users.Add(new User() { UserName = "batsheva", Password = "batsheva", Permission = Permit.Admin, MyActivity = Activity.On });
+            return users;
+        }
+
         /// <summary>
         /// function for random enums
         /// from https://stackoverflow.com/questions/3132126/how-do-i-select-a-random-value-from-an-enumeration

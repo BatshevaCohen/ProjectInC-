@@ -12,7 +12,11 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MaterialDesignThemes.Wpf;
-
+using DalApi;
+using DalObject;
+using DO;
+using BO;
+using BlApi;
 
 namespace PL
 {
@@ -21,6 +25,7 @@ namespace PL
     /// </summary>
     public partial class UsersMainWindow : Window
     {
+        BO.IBL bL;
         public UsersMainWindow()
         {
             InitializeComponent();
@@ -45,17 +50,68 @@ namespace PL
         /// <param name="e"></param>
         private void SignIn_Button_Click(object sender, RoutedEventArgs e)
         {
-            //the username and password shoouldn't be empty
-            if (AllFieldsRequired())
-            {
-                new MainWindow().Show();
-                this.Close();
-            }
-            else
-                MessageBox.Show("All fields are required to continue");
+            //if (AllFieldsRequired())
+            //{
+            //    new MainWindow().Show();
+            //    this.Close();
+            //}
+            //else
+            //    MessageBox.Show("All fields are required in order to continue");
 
             //TO DO
-            string userType = "user";
+
+
+            //the username and password shoouldn't be empty
+            if (UserNameTextBox.Text.Length == 0)
+            {
+                MessageBox.Show("Enter a Name.");
+                UserNameTextBox.Focus();
+            }
+            else if (PasswordTextBox.Password.Length == 0)
+            {
+                MessageBox.Show("Enter a Password.");
+                PasswordTextBox.Focus();
+            }
+            //username and password are not empty
+            else
+            {
+                string name = UserNameTextBox.Text;
+                string password = PasswordTextBox.Password;
+                try
+                {
+                    var user = bL.GetUser(name);
+                    if (password == user.Password)
+                    {
+                        if (user.Permission == BO.Permit.User) //checks permit
+                        {
+                            new MainWindow().Show();
+                            Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Sorry! Please enter correct user account");
+                            UserNameTextBox.Clear();
+                            PasswordTextBox.Clear();
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Sorry! Please enter correct Password");
+                        PasswordTextBox.Clear();
+                    }
+                }
+                catch (BO.BOBadUserException)
+                {
+                    MessageBox.Show("Sorry! Please enter existing UserName/Password");
+                    UserNameTextBox.Clear();
+                    PasswordTextBox.Clear();
+                    //errormessage.TextWrapping = TextWrapping.WrapWithOverflow;
+                }
+            }
+
+
+
+        string userType = "user";
             if (UserNameTextBox.Text == "admin" && PasswordTextBox.Password.ToString() == "admin")
             {
                 userType = "admin";
@@ -98,7 +154,7 @@ namespace PL
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void SignUp_KeyDown(object sender, KeyEventArgs e)
+        private void SignIn_KeyDown(object sender, KeyEventArgs e)
         {
             if (e.Key == Key.Enter)
             {

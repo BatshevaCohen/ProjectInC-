@@ -50,6 +50,12 @@ namespace DalApi
         /// </summary>
         /// <param name="droneId"></param>
         void ReleaseDroneFromCharging(int droneId);
+        /// <summary>
+        /// add user
+        /// throw BadUserException
+        /// </summary>
+        /// <param name="tmpUser">user to add</param>
+        void AddUser(User tmpUser);
         #endregion
 
         #region Get by ID:
@@ -130,6 +136,15 @@ namespace DalApi
         /// <param name="targetId"></param>
         /// <returns></returns>
         double GetDistanceBetweenLocationsOfParcels(int senderId, int targetId);
+
+        /// <summary>
+        /// get solid user by his name
+        /// throw BadUserException
+        /// </summary>
+        /// <param name="userName"></param>
+        /// <returns></returns>
+        User GetUser(string userName);
+
         #endregion
 
         #region  SHOW LISTS:
@@ -138,26 +153,38 @@ namespace DalApi
         /// </summary>
         /// <returns></returns>
         IEnumerable<Station> ShowStationList(Func<Station, bool> predicate = null);
-
         /// <summary>
         /// Show Customer List
         /// </summary>
         /// <returns></returns>
         IEnumerable<Customer> ShowCustomerList(Func<Customer, bool> predicate = null);
-
         /// <summary>
         /// Show Drone List
         /// </summary>
         /// <returns></returns>
         IEnumerable<Drone> ShowDroneList(Func<Drone, bool> predicate = null);
-
         /// <summary>
         /// Show Parcel List
         /// </summary>
         /// <returns></returns>
         IEnumerable<Parcel> ShowParcelList(Func<Parcel, bool> predicate = null);
-
+        /// <summary>
+        /// show list of non-associated parcels
+        /// </summary>
+        /// <returns></returns>
         IEnumerable<Parcel> ShowNonAssociatedParcelList();
+        /// <summary>
+        /// get all users
+        /// </summary>
+        /// <returns>IEnumerable implemented by users</returns>
+        IEnumerable<User> GetAllUsers();
+        /// <summary>
+        /// get all users that satisfies the condition
+        /// throw ReadDataException
+        /// </summary>
+        /// <param name="predicate">the condition (bool)</param>
+        /// <returns>IEnumerable implemented by users satisfies the cindition</returns>
+        IEnumerable<User> GetAllUsersBy(Predicate<User> predicate);
         #endregion
 
         #region Update:
@@ -167,14 +194,12 @@ namespace DalApi
         /// <param name="dronId"></param>
         /// <param name="stationId"></param>
         void UpdateAddDroneToCharge(int dronId, int stationId);
-
         /// <summary>
         /// Uncharge drone and update the station
         /// </summary>
         /// <param name="dronId"></param>
         /// <param name="stationId"></param>
         void UpdateRemoveDroneToCharge(int dronId, int stationId);
-
         /// <summary>
         /// Looking for the closest station with available charging spots
         /// </summary>
@@ -182,7 +207,6 @@ namespace DalApi
         /// <param name="lati"></param>
         /// <returns></returns>
         List<Distanse> MinimumDistance(double lang, double lati);
-
         /// <summary>
         /// discharge drone
         /// </summary>
@@ -201,7 +225,6 @@ namespace DalApi
         /// <param name="parcel_id"></param>
         /// <param name="customer_id"></param>
         void UpdateDeliveryToCustomer(int parcel_id, int customer_id);
-
         /// <summary>
         ///  Update parcel delivered to Customer
         /// </summary>
@@ -214,7 +237,6 @@ namespace DalApi
         /// <param name="parcel_id"></param>
         /// <param name="drone_id"></param>
         int UpdateParcelToDrone(int parcel_id, int drone_id);
-
         /// <summary>
         /// return the station in order to update the locations drone 
         /// </summary>
@@ -241,7 +263,6 @@ namespace DalApi
         /// <param name="name"></param>
         /// <param name="phon"></param>
         void UpdateCustumer(int custumerId, string name, string phon);
-
         /// <summary>
         /// Update station ChargeSpots
         /// </summary>
@@ -259,13 +280,31 @@ namespace DalApi
         /// <param name="longitude"></param>
         /// <returns></returns>
         Station GetClosestStation(double latitude, double longitude);
-
         /// <summary>
         /// Method of applying drone power
         /// </summary>
         /// <returns></returns>
         double[] PowerConsumptionRequest();
-        #endregion
+        /// <summary>
+        /// send a drone to charge
+        /// </summary>
+        /// <param name="droneId"></param>
+        /// <param name="stationId"></param>
         public void SendDroneToCharge(int droneId, int stationId);
+        /// <summary>
+        /// update user (delete the old and add the new)
+        /// throw BadUserException
+        /// </summary>
+        /// <param name="userToUpdate">user To Update</param>
+        void UpdateUser(User userToUpdate);
+
+        #endregion
+
+        /// <summary>
+        /// delete user
+        /// throw BadUserException
+        /// </summary>
+        /// <param name="userName">name of user to delete</param>
+        void DeleteUser(string userName);
     }
 }

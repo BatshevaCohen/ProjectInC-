@@ -189,7 +189,7 @@
         </Grid>
 
         <Grid x:Name="UserNameAndPassword_Grid"
-              Visibility="Visible">
+              Visibility="Collapsed">
             <!--Person icon-->
             <materialDesign:PackIcon 
             Kind="Account"             

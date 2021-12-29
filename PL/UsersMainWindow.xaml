@@ -60,14 +60,6 @@
             Height="37"
             KeyDown="SignIn_KeyDown"/>
 
-        <!--<TextBox x:Name="MyTextBox" Text="{Binding Password, Mode=TwoWay, ElementName=PasswordTextBox}" Visibility="Collapsed" />
-        <CheckBox 
-            x:Name="ShowPasswordCharsCheckBox" 
-            Content="Show password" 
-            Checked="ShowPasswordCharsCheckBox_Checked" 
-            Unchecked="ShowPasswordCharsCheckBox_Unchecked"
-            Margin="270,258,58,333"/>-->
-        
         <Grid>
             <Button
             x:Name="SignInBtn"

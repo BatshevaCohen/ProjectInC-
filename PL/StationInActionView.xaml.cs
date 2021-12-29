@@ -34,7 +34,7 @@ namespace PL
             mybl = bL;
             station = new Station();
             this.StationToList = stationToL;
-
+            UpdateGrid.Visibility = Visibility.Visible;
             station = new()
             {
                 Id= stationToL.Id,
@@ -58,9 +58,10 @@ namespace PL
             }
             else
             {
-
                 MessageBox.Show("bla bla");
             }
+            btnAddStation.Visibility = Visibility.Visible;
+            btnUpdateStation.Visibility = Visibility.Visible;
             DataContext = station;
 
         }

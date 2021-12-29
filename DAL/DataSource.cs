@@ -37,6 +37,24 @@ namespace DO
             DateTime myDateTime = new(r.Next(0, 60), 0) { };
             return myDateTime;
         }
+
+        /// <summary>
+        /// create list of all users
+        /// </summary>
+        /// <returns>list of all users</returns>
+        private static List<User> CreateUsers()
+        {
+            List<User> users = new List<User> { };
+            List<string> names = new List<string> { "shira", "lea", "rachel", "avraham", "david", "dani", "oshri", "eliezer", "avraham", "itamar" };
+            for (int i = 1; i < 11; i++)
+            {
+                users.Add(new User { UserName = names[i - 1], Password = "1234", Permission = Permit.User, MyActivity = Activity.On });
+            }
+            users.Add(new User { UserName = "shirel", Password = "shirel", Permission = Permit.Admin, MyActivity = Activity.On });
+            users.Add(new User { UserName = "batsheva", Password = "batsheva", Permission = Permit.Admin, MyActivity = Activity.On });
+            return users;
+        }
+
         /// <summary>
         /// Initialize all the lists
         /// </summary>
@@ -45,7 +63,7 @@ namespace DO
             // names of different entities 
             string[] arrDroneModel = new string[5] { "Drone1", "Drone2", "Drone3", "Drone4", "Drone5" };
             string[] arrStation = new string[2] { "station1", "station2" };
-            string[] arrClientFirstName = new string[10] { "Michael", "Christopher", "Jessica", "Matthew", "Ashley", "Jennifer", "Joshua", "Yoni", "Daniel", "David" };
+            string[] arrClientFirstName = new string[10] { "shira", "lea", "rachel", "avraham", "david", "dani", "oshri", "eliezer", "avraham", "itamar" };
 
             //adding drones
             for (int i = 1; i <= 5; i++)
@@ -56,8 +74,6 @@ namespace DO
                     Model = arrDroneModel[i - 1],
                     MaxWeight = RandomEnumValue<WeightCategories>(),
                     Battery = r.Next(0, 100),
-                    //  Status = RandomEnumValue<DroneStatuses>(),
-
                 });
 
             }
@@ -93,7 +109,14 @@ namespace DO
                     Name = arrClientFirstName[i],
                     Phone = "05" + r.Next(0, 8) + "-" + r.Next(1000000, 9999999),
                     Longitude = r.Next(-180, 179) + r.NextDouble(),
-                    Latitude = r.Next(-90, 89) + r.NextDouble()
+                    Latitude = r.Next(-90, 89) + r.NextDouble(),
+                    User = new User() 
+                    { 
+                        UserName= CreateUsers().ToArray()[i].UserName,
+                        Password= CreateUsers().ToArray()[i].Password,
+                        MyActivity= CreateUsers().ToArray()[i].MyActivity,
+                        Permission= CreateUsers().ToArray()[i].Permission,
+                    }
                 });
             }
             //adding parcels
@@ -124,23 +147,6 @@ namespace DO
             }
 
             userList = CreateUsers();
-        }
-
-        /// <summary>
-        /// create list of all users
-        /// </summary>
-        /// <returns>list of all users</returns>
-        private static List<User> CreateUsers()
-        {
-            List<User> users = new List<User> { };
-            List<string> names = new List<string> { "shira", "lea", "rachel", "avraham", "david", "dani", "oshri", "eliezer", "avraham", "itamar" };
-            for (int i = 1; i < 11; i++)
-            {
-                users.Add(new User { UserName = names[i - 1], Password = "1234", Permission = Permit.User, MyActivity = Activity.On });
-            }
-            users.Add(new User { UserName = "shirel", Password = "shirel", Permission = Permit.Admin, MyActivity = Activity.On });
-            users.Add(new User { UserName = "batsheva", Password = "batsheva", Permission = Permit.Admin, MyActivity = Activity.On });
-            return users;
         }
 
         /// <summary>

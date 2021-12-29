@@ -14,6 +14,7 @@ namespace BO
         public Location Location { get; set; }
         public List<ParcelCustomer> SentParcels { get; set; }//List of packages of the sender
         public List<ParcelCustomer> ReceiveParcels { get; set; }//List of packages of the reciver
+        public User? User { get; set; } //username and password of the customer to the system
 
         /// <summary>
         /// ToString

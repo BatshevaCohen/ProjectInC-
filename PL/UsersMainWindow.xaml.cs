@@ -74,7 +74,12 @@ namespace PL
                     {
                         if (user.Permission == BO.Permit.User) //checks permit
                         {
-                            new MainWindow().Show();
+                            new MainWindow(user.Permission).Show();
+                            Close();
+                        }
+                        else if(user.Permission == BO.Permit.Admin) //user is Admin
+                        {
+                            new MainWindow(user.Permission).Show();
                             Close();
                         }
                         else

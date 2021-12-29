@@ -138,8 +138,8 @@ namespace DO
             {
                 users.Add(new User { UserName = names[i - 1], Password = "1234", Permission = Permit.User, MyActivity = Activity.On });
             }
-            users.Add(new User() { UserName = "shirel", Password = "shirel", Permission = Permit.Admin, MyActivity = Activity.On });
-            users.Add(new User() { UserName = "batsheva", Password = "batsheva", Permission = Permit.Admin, MyActivity = Activity.On });
+            users.Add(new User { UserName = "shirel", Password = "shirel", Permission = Permit.Admin, MyActivity = Activity.On });
+            users.Add(new User { UserName = "batsheva", Password = "batsheva", Permission = Permit.Admin, MyActivity = Activity.On });
             return users;
         }
 

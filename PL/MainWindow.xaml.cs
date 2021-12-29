@@ -20,27 +20,16 @@ namespace PL
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
+    /// main window with user type- "user" or "admin"
+    /// each user type have a different mainWindow show
     /// </summary>
     public partial class MainWindow : Window
     {
         BO.IBL myBL;
-        public MainWindow()
+        public MainWindow(BO.Permit userType)
         {
             myBL = BlFactory.GetBl();
             InitializeComponent();
-        }
-        /// <summary>
-        /// main window with user type- "user" or "admin"
-        /// each user type have a different mainWindow show
-        /// </summary>
-        /// <param name="userType"></param>
-        /// <exception cref="NotImplementedException"></exception>
-        internal static void Show(string userType)
-        {
-            ///////////////
-            //TO DO
-            //////////////////
-            MessageBox.Show("TO DO!!!");
         }
 
         /// <summary>

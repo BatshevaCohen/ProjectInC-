@@ -54,7 +54,7 @@
             materialDesign:TextFieldAssist.UnderlineBrush="Green"
             Style="{StaticResource MaterialDesignFloatingHintPasswordBox}"
             materialDesign:TextFieldAssist.HasClearButton="True"
-            materialDesign:HintAssist.HelperText="At least 8 characters"
+            materialDesign:HintAssist.HelperText="At least 4 characters"
             Margin="164,218,164,0"
             VerticalAlignment="Top" 
             Height="37"

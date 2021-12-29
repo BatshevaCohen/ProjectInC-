@@ -29,6 +29,7 @@ namespace PL
         public UsersMainWindow()
         {
             InitializeComponent();
+            bL= BlFactory.GetBl();
         }
 
         /// <summary>
@@ -111,19 +112,19 @@ namespace PL
 
 
 
-        string userType = "user";
-            if (UserNameTextBox.Text == "admin" && PasswordTextBox.Password.ToString() == "admin")
-            {
-                userType = "admin";
-                MainWindow.Show(userType);
-            }
-            else if (UserNameTextBox.Text == "user" && PasswordTextBox.Password.ToString() == "user")
-            {
-                userType="user";
-                MainWindow.Show(userType);
-            }
-            else
-                MessageBox.Show("User name or password are not correct!");
+        //string userType = "user";
+        //    if (UserNameTextBox.Text == "admin" && PasswordTextBox.Password.ToString() == "admin")
+        //    {
+        //        userType = "admin";
+        //        MainWindow.Show(userType);
+        //    }
+        //    else if (UserNameTextBox.Text == "user" && PasswordTextBox.Password.ToString() == "user")
+        //    {
+        //        userType="user";
+        //        MainWindow.Show(userType);
+        //    }
+        //    else
+        //        MessageBox.Show("User name or password are not correct!");
         }
 
         /// <summary>

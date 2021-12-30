@@ -26,6 +26,21 @@ namespace PL
     public partial class MainWindow : Window
     {
         BO.IBL myBL;
+
+
+        /// <summary>
+        /// TEMPERARY CONSTRACTOR FOR DEBUGGING
+        /// </summary>
+        public MainWindow()
+        {
+            myBL = BlFactory.GetBl();
+            InitializeComponent();
+        }
+
+        /// <summary>
+        /// constractor
+        /// </summary>
+        /// <param name="userType"></param>
         public MainWindow(BO.Permit userType)
         {
             myBL = BlFactory.GetBl();

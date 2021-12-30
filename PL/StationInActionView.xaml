@@ -6,35 +6,40 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="StationInActionView" Height="450" Width="800">
-    <Grid 
-                x:Name="UpdateGrid" 
-                Visibility="Collapsed" 
-                VerticalAlignment="Top" 
-                Margin="42,38,0,0" 
-                HorizontalAlignment="Left" Height="90" Width="294">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition Height="Auto"/>
+    <Grid x:Name="MainGrid">
+        <Image 
+            Source="Images/purple background.jpg"
+            Stretch="Fill"
+            Opacity="0.5"
+            Grid.ColumnSpan="2"/>
+        <Grid 
+        x:Name="UpdateGrid" 
+        Visibility="Visible" 
+        VerticalAlignment="Top" 
+        Margin="42,38,0,0" 
+        HorizontalAlignment="Left" Height="90" Width="294">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="Auto"/>
 
-        </Grid.RowDefinitions>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="Auto"/>
-        </Grid.ColumnDefinitions>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
 
-        <Label 
-                    
+            <Label 
                     VerticalAlignment="Center" 
                     Grid.Row="0" 
                     Margin="3" 
                     HorizontalAlignment="Left" 
                     Grid.Column="0" 
                     Content="Station id:"/>
-        <TextBox 
+            <TextBox 
                     x:Name="stationIdTextBox" 
                     Width="120" 
                     VerticalAlignment="Center" 
@@ -45,14 +50,14 @@
                     HorizontalAlignment="Left" 
                     Grid.Column="1" 
                     IsEnabled="False"/>
-        <Label 
+            <Label 
                     VerticalAlignment="Center" 
                     Grid.Row="1" 
                     Margin="3" 
                     HorizontalAlignment="Left" 
                     Grid.Column="0" 
                     Content="Name:"/>
-        <TextBox 
+            <TextBox 
                     x:Name="NameTextBox" 
                     Width="120" 
                     VerticalAlignment="Center" 
@@ -63,14 +68,14 @@
                     HorizontalAlignment="Left" 
                     Grid.Column="1" 
                     IsEnabled="True"/>
-        <Label 
+            <Label 
                     VerticalAlignment="Center" 
                     Grid.Row="3" 
                     Margin="3" 
                     HorizontalAlignment="Left" 
                     Grid.Column="0" 
                     Content="Available Charging Spots:"/>
-        <TextBox 
+            <TextBox 
                     x:Name="AvailableChargingSpotsTextBox" 
                     Width="120" 
                     VerticalAlignment="Center"  
@@ -80,7 +85,7 @@
                     Height="23" 
                     HorizontalAlignment="Left" 
                     Grid.Column="1"/>
-
+        </Grid>
         <Grid 
                 x:Name="AddGridStation" 
                 Visibility="Collapsed" 
@@ -103,7 +108,6 @@
             </Grid.ColumnDefinitions>
 
             <Label 
-                    
                     VerticalAlignment="Center" 
                     Grid.Row="0" 
                     Margin="3" 
@@ -195,10 +199,7 @@
                     HorizontalAlignment="Left" 
                     Grid.Column="1" 
                     IsEnabled="True"/>
-
-
             <Grid/>
         </Grid>
-        
     </Grid>
 </Window>

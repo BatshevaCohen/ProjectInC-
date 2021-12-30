@@ -17,7 +17,7 @@
             Source="Images/purple background.jpg"
             Stretch="Fill"
             Opacity="0.5"
-            Grid.ColumnSpan="2" Margin="-50,0,0,35"/>
+            Grid.ColumnSpan="2"/>
 
         <Grid Name="LeftGrid" Grid.Column="0">
             <Grid.RowDefinitions>
@@ -30,8 +30,8 @@
                     <RowDefinition Height="141*"/>
                 </Grid.RowDefinitions>
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="221*"/>
-                    <ColumnDefinition Width="279*"/>
+                    <ColumnDefinition Width="261*"/>
+                    <ColumnDefinition Width="218*"/>
                 </Grid.ColumnDefinitions>
 
                 <Label 
@@ -46,9 +46,10 @@
                     x:Name="ClearStatus"
                     Content="Clear"
                     Style="{StaticResource MaterialDesignFlatButton}"
-                    HorizontalAlignment="Left"
+                    HorizontalAlignment="Center"
                     Click="ClearStatus_Click"
-                    Margin="169,57,0,18" Grid.Column="1" />
+                    Margin="0,71,0,29" 
+                    Width="79" Grid.Column="1" />
 
 
 
@@ -75,9 +76,23 @@
                     Click="closeButton_Click"
                     VerticalAlignment="Top" Width="193" Height="32"/>
                  -->
-                <Button x:Name="btnStationList"
-                    Content="Station List" Click="Station_List_Click" Margin="33,0,224,212" Grid.ColumnSpan="2" Grid.Row="1"/>
-                <Button Content="Availble charging spote station"  Margin="33,64,224,36" Click="Availble_charging_spote_station_Click" Grid.ColumnSpan="2"/>
+                <Button 
+                    x:Name="btnStationList"
+                    Content="Station List" 
+                    Click="Station_List_Click" 
+                    Margin="30,71,0,0"
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Top" 
+                    Width="221" 
+                    Height="32"/>
+                <Button 
+                    Content="Availble charging spote station"  
+                    Click="Availble_charging_spote_station_Click"
+                    HorizontalAlignment="Left" 
+                    Margin="33,0,0,0" 
+                    VerticalAlignment="Top" 
+                    Width="221" 
+                    Height="32" Grid.Row="1"/>
 
 
             </Grid>
@@ -90,12 +105,24 @@
                 Margin="550,0,-500,0" 
                 Grid.RowSpan="2"/>
 
-
-
         </Grid>
-        <Button x:Name="btnAddStation"
-            Content="Add" Margin="36,254,222,394" Click="btnAddStation_Click"/>
-        <Label Content="To add a station:" Margin="36,198,276,445" FontSize="18" FontWeight="Bold"/>
+        <Label 
+            Content="To add a station:" 
+            Margin="36,193,222,0" 
+            FontSize="18" 
+            FontWeight="Bold"
+            VerticalAlignment="Top" 
+            Width="221" 
+            Height="56"/>
+        <Button
+            x:Name="btnAddStation"
+            Content="Add" 
+            Margin="36,279,222,0" 
+            Click="btnAddStation_Click"
+            VerticalAlignment="Top" 
+            Width="221" 
+            Height="32"/>
+
 
     </Grid>
 </Window>

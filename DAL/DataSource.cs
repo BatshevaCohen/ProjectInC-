@@ -90,6 +90,7 @@ namespace DO
                     Latitude = r.Next(-90, 89) + r.NextDouble(),
                 });
             }
+            //TEST
             Stations.Add(new Station()
             {
                 Id = 12345,
@@ -99,6 +100,12 @@ namespace DO
                 Latitude = 44.4
                 
             });
+            DroneCharge droneCharge = new()
+            {
+                DroneId = 1000,
+                StationId=12345,
+            };
+            DataSource.DroneCharges.Add(droneCharge);
 
             //adding customers
             for (int i = 0; i < 10; i++)

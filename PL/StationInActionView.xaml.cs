@@ -34,40 +34,49 @@ namespace PL
             mybl = bL;
             station = new Station();
             this.StationToList = stationToL;
+            btnUpdateStation.Visibility = Visibility.Visible;
             UpdateGrid.Visibility = Visibility.Visible;
             station = new()
             {
-                Id= stationToL.Id,
-                Name= stationToL.Name,
-                AvailableChargingSpots=stationToL.AvailableChargingSpots
+                Id = stationToL.Id,
+                Name = stationToL.Name,
+                AvailableChargingSpots = stationToL.AvailableChargingSpots
             };
 
             Location location = mybl.GetStation(stationToL.Id).Location;
-            station.Location = new()
-            {
-                Latitude = location.Latitude,
-                Longitude = location.Longitude
-            };
-            List<DroneInCharging> droneInCharging = mybl.GetStation(stationToL.Id).droneInChargings;
+            //station.Location = new()
+            //{
+            //    Latitude = location.Latitude,
+            //    Longitude = location.Longitude
+            //};
+            station.droneInChargings = mybl.GetStation(stationToL.Id).droneInChargings;
+
             if (station.droneInChargings.Count() > 0)
             {
-                foreach (DroneInCharging item in droneInCharging)
+
+                foreach (DroneInCharging item in station.droneInChargings)
                 {
-                    station.droneInChargings.Add(item);
+                    listVDtoneInCharging.Visibility = Visibility.Visible;
+                    ListViewItem newItem = new ListViewItem();
+                    newItem.Content = item;
+                    listVDtoneInCharging.Items.Add(newItem);
                 }
+
             }
             else
             {
                 MessageBox.Show("bla bla");
             }
-            
-           
+
+
             DataContext = station;
 
         }
         public StationInActionView(StationListWindow stationListWindow, BO.IBL bL)
         {
+            mybl = bL;
             InitializeComponent();
+            btnAddStation.Visibility = Visibility.Visible;
             AddGridStation.Visibility = Visibility.Visible;
             DataContext = station;
             stationListWindow.StationsListView.Items.Refresh();
@@ -76,6 +85,7 @@ namespace PL
 
         private void btnUpdateStation_Click(object sender, RoutedEventArgs e)
         {
+            btnUpdateStation.Visibility = Visibility.Visible;
             UpdateGrid.Visibility = Visibility.Visible;
             String StationName = mybl.GetStation(Int32.Parse(stationIdTextBox.Text)).Name;
             string newName = stationIdTextBox.Text;
@@ -94,23 +104,33 @@ namespace PL
 
 
 
-        //private void btnAddeStation_Click(object sender, RoutedEventArgs e)
-        //{
-        //    Station station = new Station()
-        //    {
-        //        Id = Int32.Parse(stationIdTextBox.Text),
-        //        Name = (NameTextBox.Text),
-        //        AvailableChargingSpots = Int32.Parse(AvailableChargingSpotsTextBox.Text),
+        private void btnAddeStation_Click(object sender, RoutedEventArgs e)
+        {
+
+            Station station = new Station()
+            {
+                Id = Int32.Parse(stationIdTextBoxadd.Text),
+                Name = (NameTextBoxadd.Text),
+                AvailableChargingSpots = Int32.Parse(AvailableChargingSpotsTextBoxadd.Text),
 
 
-        //    };
-        //    station.Location = new()
-        //    {
-        //        Latitude = double.Parse(latitudeTextBox.Text),
-        //        Longitude = double.Parse(longitudeTextBox.Text),
-        //    };
+            };
+            station.Location = new()
+            {
+                Latitude = double.Parse(latitudeTextBoxadd.Text),
+                Longitude = double.Parse(longitudeTextBoxadd.Text),
+            };
+            try
+            {
+                mybl.AddStation(station);
+                this.Close();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+        }
 
-        //    mybl.AddStation(station);
-        //}
+
     }
 }

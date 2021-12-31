@@ -306,5 +306,6 @@ namespace DalApi
         /// </summary>
         /// <param name="userName">name of user to delete</param>
         void DeleteUser(string userName);
+        List<Tuple<int, double>> GetListOfDronInChargeing(int stationId);
     }
 }

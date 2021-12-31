@@ -5,13 +5,19 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="StationInActionView" Height="450" Width="800">
+        Title="StationInActionView" Height="450" Width="708">
     <Grid x:Name="MainGrid">
         <Image 
             Source="Images/purple background.jpg"
             Stretch="Fill"
-            Opacity="0.5"
-            Grid.ColumnSpan="2"/>
+            Opacity="0.5" Margin="0,0,35,0">
+            <Image.OpacityMask>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="Black"/>
+                    <GradientStop Color="White" Offset="1"/>
+                </LinearGradientBrush>
+            </Image.OpacityMask>
+        </Image>
         <Grid 
         x:Name="UpdateGrid" 
         Visibility="Visible" 
@@ -85,13 +91,25 @@
                     Height="23" 
                     HorizontalAlignment="Left" 
                     Grid.Column="1"/>
+            <Button x:Name="btnUpdateStation"
+                Content="Update station"
+                    Grid.ColumnSpan="2"
+                    Margin="74,59,52,-91"
+                    Grid.Row="5"
+                    Visibility="Collapsed"
+                    Click="btnUpdateStation_Click"/>
+           
+            <WrapPanel Grid.ColumnSpan="2" Margin="33,64,3,-139" Grid.Row="5">
+                <ListView  x:Name="listVDtoneInCharging" Margin="24,56,17,-97"  ItemsSource="{Binding DroneInCharging}" Width="212" Height="114" RenderTransformOrigin="0.51,-0.314" />
+            </WrapPanel>
         </Grid>
+
         <Grid 
                 x:Name="AddGridStation" 
                 Visibility="Collapsed" 
                 VerticalAlignment="Top" 
                 Margin="10,10,0,0" 
-                HorizontalAlignment="Left" Height="160" Width="290">
+                HorizontalAlignment="Left" Height="157" Width="307">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>
@@ -117,10 +135,10 @@
             <TextBox 
                     x:Name="stationIdTextBoxadd" 
                     Width="120" 
-                    VerticalAlignment="Center" 
+                    VerticalAlignment="Top" 
                     Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
                     Grid.Row="0" 
-                    Margin="3" 
+                    Margin="117,5,0,0" 
                     Height="23" 
                     HorizontalAlignment="Left" 
                     Grid.Column="1" 
@@ -135,28 +153,27 @@
             <TextBox 
                     x:Name="NameTextBoxadd" 
                     Width="120" 
-                    VerticalAlignment="Center" 
+                    VerticalAlignment="Top" 
                     Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                    Grid.Row="1" 
-                    Margin="3" 
+                    Margin="119,0,0,0" 
                     Height="23" 
                     HorizontalAlignment="Left" 
                     Grid.Column="1" 
-                    IsEnabled="True"/>
+                    IsEnabled="True" Grid.Row="1"/>
             <Label 
-                    VerticalAlignment="Center" 
-                    Grid.Row="3" 
-                    Margin="3" 
+                    VerticalAlignment="Top" 
+                    Grid.Row="1" 
+                    Margin="0,28,0,0" 
                     HorizontalAlignment="Left" 
                     Grid.Column="0" 
-                    Content="Available Charging Spots:"/>
+                    Content="Available Charging Spots:" Grid.ColumnSpan="2" Height="25" Width="144" Grid.RowSpan="3"/>
             <TextBox 
                     x:Name="AvailableChargingSpotsTextBoxadd" 
                     Width="120" 
                     VerticalAlignment="Center"  
                     Text="{Binding AvailableChargingSpots, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  
                     Grid.Row="3" 
-                    Margin="3" 
+                    Margin="117,0,0,0" 
                     Height="23" 
                     HorizontalAlignment="Left" 
                     Grid.Column="1"
@@ -173,10 +190,10 @@
             <TextBox 
                     x:Name="latitudeTextBoxadd" 
                     Width="120" 
-                    VerticalAlignment="Center" 
+                    VerticalAlignment="Top" 
                     Text="{Binding Location.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
                     Grid.Row="6" 
-                    Margin="3" 
+                    Margin="120,2,0,0" 
                     Height="23" 
                     HorizontalAlignment="Left" 
                     Grid.Column="1" 
@@ -191,15 +208,30 @@
             <TextBox 
                     x:Name="longitudeTextBoxadd" 
                     Width="120" 
-                    VerticalAlignment="Center" 
+                    VerticalAlignment="Top" 
                     Text="{Binding Location.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
                     Grid.Row="7" 
-                    Margin="3" 
+                    Margin="120,0,0,0" 
                     Height="23" 
                     HorizontalAlignment="Left" 
                     Grid.Column="1" 
                     IsEnabled="True"/>
             <Grid/>
+
+
         </Grid>
+
+        <Button x:Name="btnAddStation"
+            Content="Add" Margin="116,217,0,185"
+                 Visibility="Collapsed"
+              Style="{StaticResource MaterialDesignRaisedDarkButton}" 
+             
+            HorizontalAlignment="Left" Width="148" 
+              Click="btnAddeStation_Click"
+                />
+
+
     </Grid>
+
+
 </Window>

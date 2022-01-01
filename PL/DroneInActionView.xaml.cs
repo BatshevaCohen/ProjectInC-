@@ -61,7 +61,7 @@ namespace PL
         /// <param name="droneToList"></param>
         /// <param name="bL"></param>
         /// <param name="droneListWindow"></param>
-        public DroneInActionView(DroneToList droneToList, BO.IBL bL, DroneListWindow droneListWindow)
+        public DroneInActionView(DroneToList droneToList, BO.IBL bL, DroneListWindow droneListWindow=null)
         {
             InitializeComponent();
             mybl = bL;

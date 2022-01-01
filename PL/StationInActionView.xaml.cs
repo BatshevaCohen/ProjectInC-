@@ -15,7 +15,6 @@ using BO;
 
 namespace PL
 {
-
     /// <summary>
     /// Interaction logic for StationInActionView.xaml
     /// </summary>
@@ -103,7 +102,6 @@ namespace PL
         }
 
 
-
         private void btnAddeStation_Click(object sender, RoutedEventArgs e)
         {
 
@@ -112,8 +110,6 @@ namespace PL
                 Id = Int32.Parse(stationIdTextBoxadd.Text),
                 Name = (NameTextBoxadd.Text),
                 AvailableChargingSpots = Int32.Parse(AvailableChargingSpotsTextBoxadd.Text),
-
-
             };
             station.Location = new()
             {
@@ -130,7 +126,13 @@ namespace PL
                 MessageBox.Show(ex.Message);
             }
         }
-
-
+        private void StationInActionView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        { 
+            DroneInCharging? droneInCharging = listVDtoneInCharging.SelectedItem as DroneInCharging;
+            if (droneInCharging != null)
+            {
+               // new DroneInActionView(, mybl).Show();
+            }
+        }
     }
 }

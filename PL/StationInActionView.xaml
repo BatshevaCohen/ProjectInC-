@@ -93,14 +93,13 @@
                     Grid.Column="1"/>
             <Button x:Name="btnUpdateStation"
                 Content="Update station"
-                    Grid.ColumnSpan="2"
-                    Margin="74,59,52,-91"
-                    Grid.Row="5"
-                    Visibility="Collapsed"
-                    Click="btnUpdateStation_Click"/>
-           
+                    Margin="233,15,-263,13"
+                    Grid.Row="1"
+                    Visibility="Visible"
+                    Click="btnUpdateStation_Click" Grid.Column="1" Grid.RowSpan="3"/>
+
             <WrapPanel Grid.ColumnSpan="2" Margin="33,64,3,-139" Grid.Row="5">
-                <ListView  x:Name="listVDtoneInCharging" Margin="24,56,17,-97"  ItemsSource="{Binding DroneInCharging}" Width="212" Height="114" RenderTransformOrigin="0.51,-0.314" />
+                <ListView  x:Name="listVDtoneInCharging" Margin="24,56,17,-97"  ItemsSource="{Binding DroneInCharging}" Width="212" Height="114" RenderTransformOrigin="0.51,-0.314" MouseDoubleClick="StationInActionView_MouseDoubleClick" />
             </WrapPanel>
         </Grid>
 

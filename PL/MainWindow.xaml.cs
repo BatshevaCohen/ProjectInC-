@@ -67,5 +67,12 @@ namespace PL
            StationListWindow wnd = new StationListWindow(myBL);
             wnd.Show();
         }
+
+        private void btnShowCustumersList_Click(object sender, RoutedEventArgs e)
+        {
+            CustumerListWindow wnd = new CustumerListWindow(myBL);
+            wnd.Show();
+        }
     }
+    
 }

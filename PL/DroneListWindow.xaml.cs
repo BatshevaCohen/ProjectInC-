@@ -147,7 +147,5 @@ namespace PL
                 new DroneInActionView(droneToList, bL, this).Show();
             }
         }
-
-       
     }
 }

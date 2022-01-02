@@ -21,7 +21,7 @@
 
             <Grid 
                 x:Name="UpdateGrid" 
-                Visibility="Collapsed" 
+                Visibility="Visible" 
                 VerticalAlignment="Top" 
                 Margin="31,61,0,0" 
                 HorizontalAlignment="Left" Height="224" Width="267">
@@ -102,7 +102,7 @@
                     Grid.Column="0" 
                     Content="Drone Status:"/>
                 <ComboBox 
-                    x:Name="droneStatusTxtBox" 
+                    x:Name="droneStatusComboBox" 
                     Width="120" 
                     VerticalAlignment="Center" 
                     Grid.Row="4" 
@@ -247,7 +247,7 @@
         </Grid>
 
         <Grid x:Name="ParcelInTransfer_Grid"
-             Visibility="Collapsed"                 
+             Visibility="Visible"                 
               Margin="368,12,177,260">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
@@ -272,10 +272,11 @@
             </Grid.ColumnDefinitions>
 
             <Label Content="Parcel in transfer" 
+                   FontWeight="Bold"
                    HorizontalAlignment="Left" 
                    Grid.ColumnSpan="2"
                    Margin="42,0,0,0" 
-                   VerticalAlignment="Center" Height="24" Width="96"/>
+                   VerticalAlignment="Center" Height="24" Width="121"/>
 
             <Label Content="Parcel ID:" 
                    HorizontalAlignment="Left"
@@ -319,7 +320,11 @@
             <TextBox x:Name="ParcelStatusTextBox"
               Text="{Binding ParcelInTransfer.ParcelTransferStatus, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                      TextWrapping="Wrap" Grid.Column="1" Margin="30,27,0,1" Grid.RowSpan="2" Grid.Row="3" IsEnabled="False"/>
-            <Label Content="Sender id:" Margin="0,29,5,29" Grid.Row="4" Grid.RowSpan="3" IsEnabled="False"/>
+            <Label 
+                Content="Sender id:" 
+                Margin="0,29,5,29" 
+                Grid.Row="4" 
+                Grid.RowSpan="3"/>
             <TextBox x:Name="SenderIdTextBox"
                Text="{Binding ParcelInTransfer.Sender.Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                      TextWrapping="Wrap" Grid.Column="1" Margin="30,26,0,3" Grid.RowSpan="2" Grid.Row="4" IsEnabled="False"/>

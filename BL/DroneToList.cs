@@ -16,6 +16,7 @@ namespace BO
         public DroneStatuses DroneStatuses { get; set; }
         public Location Location { get; set; }
         public int ParcelNumberTransferred { get; set; }//Parcel number transferred If there is 
+
         /// <summary>
         /// ToString
         /// </summary>

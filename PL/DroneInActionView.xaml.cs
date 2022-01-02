@@ -68,6 +68,7 @@ namespace PL
             UpdateGrid.Visibility = Visibility.Visible;
             ShowDrone.Visibility = Visibility.Visible;
             this.droneToList = droneToList;
+            droneStatusComboBox.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             drone = new BO.Drone()
             {
                 Id = droneToList.Id,
@@ -75,14 +76,13 @@ namespace PL
                 Model = droneToList.Model,
                 DroneStatuses = droneToList.DroneStatuses,
                 Weight = droneToList.Weight,
-
                 Location = new Location()
                 {
                     Latitude = droneToList.Location.Latitude,
                     Longitude = droneToList.Location.Longitude
                 }
-
             };
+            droneStatusComboBox.Text = drone.DroneStatuses.ToString();
             if (droneToList.ParcelNumberTransferred != 0)
             {
                 Parcel parcel = mybl.GetParcelByDroneId(drone.Id);
@@ -92,7 +92,6 @@ namespace PL
                     Id = parcel.Id,
                     Weight = parcel.Weight,
                     Priority = parcel.Priority
-
                 };
                 if (parcel.CollectionTime != DateTime.MinValue)
                 {
@@ -137,6 +136,12 @@ namespace PL
             DataContext = drone;
         }
 
+
+        /// <summary>
+        /// close
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
@@ -171,14 +176,14 @@ namespace PL
         /// <param name="e"></param>
         private void btnDroneToCharge_Click(object sender, RoutedEventArgs e)
         {
-            if (droneStatusTxtBox.Text == "Available")
+            if (droneStatusComboBox.Text == "Available")
             {
                 try
                 {
                     mybl.ShowDroneList();
                     mybl.UpdateChargeDrone(Int32.Parse(idTextBox.Text));
                     MessageBox.Show("Drone sent to charge seccessfuly!");
-                    droneStatusTxtBox.Text = "Maintenance";
+                    droneStatusComboBox.Text = "Maintenance";
                     btnDroneToCharge.Visibility = Visibility.Hidden;
                     btnCollectParcel.Visibility = Visibility.Hidden;
                     btnDroneToDelivery.Visibility = Visibility.Hidden;
@@ -199,7 +204,7 @@ namespace PL
         /// <param name="e"></param>
         private void btnReleaiseToCharge_Click(object sender, RoutedEventArgs e)
         {
-            if (droneStatusTxtBox.Text == "Maintenance")
+            if (droneStatusComboBox.Text == "Maintenance")
             {
                 //input box- so the user will insert the charging time
                 TimeSpan chargingTime = TimeSpan.Parse(Interaction.InputBox("Please enter time of charging", "Time of charging", ""));
@@ -208,7 +213,7 @@ namespace PL
                 {
                     mybl.DischargeDrone(Int32.Parse(idTextBox.Text), chargingTime);
                     MessageBox.Show("Drone discharged seccessfuly!");
-                    droneStatusTxtBox.Text = "Available";
+                    droneStatusComboBox.Text = "Available";
                     batteryStatusTextBox.Text = mybl.GetDrone(Int32.Parse(idTextBox.Text)).Battery.ToString();
 
                     btnDroneToCharge.Visibility = Visibility.Visible;
@@ -232,13 +237,13 @@ namespace PL
         /// <param name="e"></param>
         private void btnDroneToDelivery_Click(object sender, RoutedEventArgs e)
         {
-            if (droneStatusTxtBox.Text == "Available")
+            if (droneStatusComboBox.Text == "Available")
             {
                 try
                 {
                     mybl.UpdateParcelToDrone(Int32.Parse(idTextBox.Text));
                     MessageBox.Show("Drone sent to delivery seccessfuly!");
-                    droneStatusTxtBox.Text = "Shipping";
+                    droneStatusComboBox.Text = "Shipping";
                     btnDroneToCharge.Visibility = Visibility.Hidden;
                     btnDroneToDelivery.Visibility = Visibility.Hidden;
                     btnReleaiseToCharge.Visibility = Visibility.Hidden;
@@ -262,11 +267,11 @@ namespace PL
             //and the parcel have not been collected yet
             if (drone.ParcelInTransfer != null)
             {
-                if (droneStatusTxtBox.Text == "Shipping" && drone.ParcelInTransfer != null)
+                if (droneStatusComboBox.Text == "Shipping" && drone.ParcelInTransfer != null)
                 {
                     mybl.UpdateParcelPickUpByDrone(Int32.Parse(idTextBox.Text));
                     MessageBox.Show("Drone pick up the parcel seccessfully!");
-                    droneStatusTxtBox.Text = "Shipping";
+                    droneStatusComboBox.Text = "Shipping";
 
                     btnDroneToCharge.Visibility = Visibility.Hidden;
                     btnDroneToDelivery.Visibility = Visibility.Hidden;
@@ -288,13 +293,13 @@ namespace PL
         {
             if (drone.ParcelInTransfer != null)
             {
-                if (droneStatusTxtBox.Text == "Shipping" && drone.ParcelInTransfer != null)
+                if (droneStatusComboBox.Text == "Shipping" && drone.ParcelInTransfer != null)
                 {
                     try
                     {
                         mybl.UpdateParcelSuppliedByDrone(Int32.Parse(idTextBox.Text));
                         MessageBox.Show("Drone pick up the parcel seccessfully!");
-                        droneStatusTxtBox.Text = "Available";
+                        droneStatusComboBox.Text = "Available";
                         btnDroneToCharge.Visibility = Visibility.Visible;
                         btnDroneToDelivery.Visibility = Visibility.Hidden;
                         btnReleaiseToCharge.Visibility = Visibility.Hidden;
@@ -314,7 +319,7 @@ namespace PL
         {
             Parcel p = mybl.GetParcelByDroneId(drone.Id);
 
-            if (droneStatusTxtBox.Text == "Available")
+            if (droneStatusComboBox.Text == "Available")
             {
                 btnDroneToCharge.Visibility = Visibility.Visible;
                 btnDroneToDelivery.Visibility = Visibility.Visible;
@@ -322,7 +327,7 @@ namespace PL
                 btnCollectParcel.Visibility = Visibility.Hidden;
                 btnParcelDelivery.Visibility = Visibility.Hidden;
             }
-            else if (droneStatusTxtBox.Text == "Maintenance")
+            else if (droneStatusComboBox.Text == "Maintenance")
             {
                 btnDroneToCharge.Visibility = Visibility.Hidden;
                 btnDroneToDelivery.Visibility = Visibility.Hidden;
@@ -332,7 +337,7 @@ namespace PL
             }
             // the drone status in shipping
 
-            else if (droneStatusTxtBox.Text == "shipping" && drone.ParcelInTransfer.Id != 0 && p.CollectionTime != DateTime.MinValue)
+            else if (droneStatusComboBox.Text == "shipping" && drone.ParcelInTransfer.Id != 0 && p.CollectionTime != DateTime.MinValue)
             {
                 btnDroneToCharge.Visibility = Visibility.Hidden;
                 btnDroneToDelivery.Visibility = Visibility.Hidden;
@@ -340,7 +345,7 @@ namespace PL
                 btnCollectParcel.Visibility = Visibility.Visible;
                 btnParcelDelivery.Visibility = Visibility.Visible;
             }
-            else if (droneStatusTxtBox.Text == "shipping" && drone.ParcelInTransfer.Id != 0 && p.CollectionTime == DateTime.MinValue)
+            else if (droneStatusComboBox.Text == "shipping" && drone.ParcelInTransfer.Id != 0 && p.CollectionTime == DateTime.MinValue)
             {
                 btnDroneToCharge.Visibility = Visibility.Hidden;
                 btnDroneToDelivery.Visibility = Visibility.Hidden;

@@ -159,8 +159,8 @@ namespace BL
 
             droneTo.Location = new()
             {
-                Latitude = 43,
-                Longitude = -32,
+                Latitude = 43.321,
+                Longitude = -32.567,
             };
             DronesL.Add(droneTo);
             DO.Drone d = new()
@@ -170,7 +170,6 @@ namespace BL
 
                 Model = "DFGHJ56",
                 MaxWeight = DO.WeightCategories.Medium,
-               
             };
             dalo.AddDrone(d);
 
@@ -192,20 +191,20 @@ namespace BL
             {
                 dalo.UpdateAddDroneToCharge(droneTo.Id, station.Id);
             }
-
         }
         
-
+        /// <summary>
+        /// calculate the distance between 2 locations
+        /// </summary>
+        /// <param name="longitude1"></param>
+        /// <param name="latitude1"></param>
+        /// <param name="longitude2"></param>
+        /// <param name="latitude2"></param>
+        /// <returns></returns>
         public double CalculateDistance(double longitude1, double latitude1, double longitude2, double latitude2)
         {
             double dis = dalo.CalculateDistance(longitude1, latitude1, longitude2, latitude2);
             return dis;
         }
-
-
-
-
-      
-}
-
+    }
 }

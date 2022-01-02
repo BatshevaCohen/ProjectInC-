@@ -27,6 +27,7 @@ namespace PL
         {
             this.bL = bl;
             InitializeComponent();
+            this.DronesListView.ItemsSource = bL.ShowDroneList();
             comboStatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             comboWeghitSelector.ItemsSource = Enum.GetValues(typeof(BO.Weight));
         }
@@ -43,6 +44,15 @@ namespace PL
                 DroneStatuses droneStatuses = (DroneStatuses)comboStatusSelector.SelectedItem;
                 this.DronesListView.ItemsSource = bL.ShowDroneList().Where(x => x.DroneStatuses == droneStatuses);
             }
+            //if both of the comboboxes are not null
+            if (comboWeghitSelector.SelectedItem != null && comboStatusSelector.SelectedItem != null)
+            {
+                Weight weight = (Weight)comboWeghitSelector.SelectedItem;
+                DroneStatuses droneStatuses = (DroneStatuses)comboStatusSelector.SelectedItem;
+                //the list will show list filterd by WEIGHT and STATUS
+                IEnumerable<DroneToList> dronesView = bL.ShowDroneList().Where(x => x.DroneStatuses == droneStatuses);
+                this.DronesListView.ItemsSource = dronesView.Where(x => x.Weight == weight);
+            }
         }
 
         /// <summary>
@@ -56,6 +66,50 @@ namespace PL
             {
                 Weight weight = (Weight)comboWeghitSelector.SelectedItem;
                 this.DronesListView.ItemsSource = bL.ShowDroneList().Where(x => x.Weight == weight);
+            }
+            //if both of the comboboxes are not null
+            if (comboWeghitSelector.SelectedItem != null && comboStatusSelector.SelectedItem != null)
+            {
+                Weight weight = (Weight)comboWeghitSelector.SelectedItem;
+                DroneStatuses droneStatuses = (DroneStatuses)comboStatusSelector.SelectedItem;
+                //the list will show list filterd by WEIGHT and STATUS
+                IEnumerable<DroneToList> dronesView= bL.ShowDroneList().Where(x => x.DroneStatuses == droneStatuses);
+                this.DronesListView.ItemsSource = dronesView.Where(x => x.Weight == weight);
+            }
+        }
+        /// <summary>
+        /// Clear the status comboBox and the listView of the drones
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClearStatusComboBox_Click(object sender, RoutedEventArgs e)
+        {
+            comboStatusSelector.Text = "";
+            //if both of the combo boxes are empty now
+            if (comboWeghitSelector.SelectedItem == null)
+                this.DronesListView.ItemsSource = bL.ShowDroneList();
+            else    //show filter by weight only
+            {
+                Weight weight = (Weight)comboWeghitSelector.SelectedItem;
+                this.DronesListView.ItemsSource = bL.ShowDroneList().Where(x => x.Weight == weight);
+            }
+        }
+
+        /// <summary>
+        /// Clear the weight comboBox and the listView of the drones
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ClearWeightComboBox_Click(object sender, RoutedEventArgs e)
+        {
+            comboWeghitSelector.Text = "";
+            //if both of the combo boxes are empty now
+            if (comboStatusSelector.SelectedItem == null)
+                this.DronesListView.ItemsSource = bL.ShowDroneList();
+            else    //show filter by status only
+            {
+                DroneStatuses droneStatuses = (DroneStatuses)comboStatusSelector.SelectedItem;
+                this.DronesListView.ItemsSource = bL.ShowDroneList().Where(x => x.DroneStatuses == droneStatuses);
             }
         }
 
@@ -93,26 +147,6 @@ namespace PL
             }
         }
 
-        /// <summary>
-        /// Clear the status comboBox and the listView of the drones
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ClearStatusComboBox_Click(object sender, RoutedEventArgs e)
-        {
-            comboStatusSelector.Text = "";
-            DronesListView.ItemsSource = null;
-        }
-
-        /// <summary>
-        /// Clear the weight comboBox and the listView of the drones
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ClearWeightComboBox_Click(object sender, RoutedEventArgs e)
-        {
-            comboWeghitSelector.Text = "";
-            DronesListView.ItemsSource = null;
-        }
+       
     }
 }

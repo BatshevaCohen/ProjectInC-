@@ -17,6 +17,7 @@ namespace BO
         public Location CollectingLocation { get; set; }
         public Location SupplyTargetLocation { get; set; }
         public Double TransportDistance { get; set; } //the dictance of the transportation
+
         /// <summary>
         /// ToString
         /// </summary>

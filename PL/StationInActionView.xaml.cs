@@ -127,11 +127,29 @@ namespace PL
             }
         }
         private void StationInActionView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        { 
+        {
             DroneInCharging? droneInCharging = listVDtoneInCharging.SelectedItem as DroneInCharging;
             if (droneInCharging != null)
             {
-               // new DroneInActionView(, mybl).Show();
+                Drone d = mybl.GetDrone(droneInCharging.Id);
+                DroneToList droneTo = new DroneToList()
+                {
+
+                    Id = d.Id,
+                    Battery = d.Battery,
+                    Model = d.Model,
+                    DroneStatuses = d.DroneStatuses,
+                    Weight = d.Weight,
+                    ParcelNumberTransferred = 0,
+                };
+                droneTo.Location = new()
+                {
+                    Latitude = d.Location.Latitude,
+                    Longitude = d.Location.Longitude,
+                };
+
+                new DroneInActionView(droneTo, mybl).Show();
+
             }
         }
     }

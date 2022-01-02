@@ -100,7 +100,8 @@
 
             <WrapPanel Grid.ColumnSpan="2" Margin="33,64,3,-139" Grid.Row="5">
                 <ListView  x:Name="listVDtoneInCharging" Margin="24,56,17,-97"  ItemsSource="{Binding DroneInCharging}" Width="212" Height="114" RenderTransformOrigin="0.51,-0.314" MouseDoubleClick="StationInActionView_MouseDoubleClick" />
-            </WrapPanel>
+            </WrapPanel>
+
         </Grid>
 
         <Grid 

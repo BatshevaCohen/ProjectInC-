@@ -123,8 +123,8 @@ namespace BO
 
         ParcelStatus FindParcelStatus(DO.Parcel parcel);
 
-       double CalculateDistance(double longitude1, double latitude1, double longitude2, double latitude2);
+        double CalculateDistance(double longitude1, double latitude1, double longitude2, double latitude2);
 
-
+        List<DroneInCharging> GetDroneInCgargingList(int stationId);
     }
 }

@@ -144,5 +144,11 @@ namespace BL
             //update the number of available charging spots in the station
             station.AvailableChargingSpots--;
         }
+        public List<DroneInCharging> GetDroneInCgargingList(int stationId)
+        {
+            List<DroneInCharging> droneInChargingsList = new List<DroneInCharging>();
+            dalo.GetListOfDronInChargeing(stationId);
+            return droneInChargingsList;
+        }
     }
 }

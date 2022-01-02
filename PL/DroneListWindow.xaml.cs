@@ -143,6 +143,7 @@ namespace PL
             BO.DroneToList? droneToList = DronesListView.SelectedItem as BO.DroneToList;
             if (droneToList != null)
             {
+                //new DroneInActionView(droneToList, bL, this).Show();
                 new DroneInActionView(droneToList, bL, this).Show();
             }
         }

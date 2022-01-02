@@ -150,7 +150,24 @@ namespace Dal
             }
             return newDroneCharges;
         }
-
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="stationId"></param>
+        /// <returns></returns>
+        public List<Tuple<int, double>> GetListOfDronInChargeing(int stationId)
+        {
+            List<Tuple<int, double>> listOnIDandBattery = new List<Tuple<int, double>>();
+            foreach (DroneCharge item in DataSource.DroneCharges)
+            { 
+                if (item.StationId == stationId)
+                {
+                    Drone d = DataSource.Drones.Find(x => x.Id==item.DroneId);
+                    listOnIDandBattery.Add(new Tuple<int, double>(d.Id,d.Battery));
+                }
+            }
+            return listOnIDandBattery;
+        }
         /// <summary>
         /// A function that returns a minimum distance between a point and a station
         /// </summary>

@@ -26,14 +26,14 @@ namespace PL
 
         BO.Drone drone;
         private DroneToList? droneToList;
-        BO.IBL mybl;
+        IBL mybl;
 
         /// <summary>
         /// Add drone window
         /// </summary>
         /// <param name="droneListWindow"></param>
         /// <param name="bL"></param>
-        public DroneInActionView(DroneListWindow droneListWindow, BO.IBL bL)
+        public DroneInActionView(DroneListWindow droneListWindow, IBL bL)
         {
             InitializeComponent();
             drone = new BO.Drone();
@@ -62,7 +62,7 @@ namespace PL
         /// <param name="droneToList"></param>
         /// <param name="bL"></param>
         /// <param name="droneListWindow"></param>
-        public DroneInActionView(DroneToList droneToList, BO.IBL bL, DroneListWindow droneListWindow=null)
+        public DroneInActionView(DroneToList droneToList, IBL bL, DroneListWindow droneListWindow=null)
         {
             InitializeComponent();
             mybl = bL;

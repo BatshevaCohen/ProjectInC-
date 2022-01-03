@@ -15,8 +15,6 @@ using System.Diagnostics;
 using System.Windows.Navigation;
 using System.Text.RegularExpressions;
 using BlApi;
-using DalApi;
-using DO;
 using BO;
 
 

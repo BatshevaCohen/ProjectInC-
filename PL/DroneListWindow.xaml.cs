@@ -11,7 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using DalApi;
+
 using BO;
 using BlApi;
 
@@ -22,8 +22,8 @@ namespace PL
     /// </summary>
     public partial class DroneListWindow : Window
     {
-        BO.IBL bL;
-        public DroneListWindow(BO.IBL bl)
+        IBL bL;
+        public DroneListWindow(IBL bl)
         {
             this.bL = bl;
             InitializeComponent();

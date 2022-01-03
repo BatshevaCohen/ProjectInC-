@@ -2,12 +2,54 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
+    <BaseOutputPath>$(SolutionDir)</BaseOutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <Optimize>False</Optimize>
   </PropertyGroup>
 
   <ItemGroup>
     <Compile Remove="IBL\**" />
     <EmbeddedResource Remove="IBL\**" />
     <None Remove="IBL\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="BLImp\BL.cs" />
+    <Compile Include="BlApi\BlFactory.cs" />
+    <Compile Include="BLImp\BLCustomer.cs" />
+    <Compile Include="BLImp\BLDrone.cs" />
+    <Compile Include="BLImp\BLDroneToList.cs" />
+    <Compile Include="BLImp\BLParcel.cs" />
+    <Compile Include="BLImp\BLStation.cs" />
+    <Compile Include="BLImp\BLUser.cs" />
+    <Compile Include="BO\Customer.cs" />
+    <Compile Include="BO\CustomerIdExeption.cs" />
+    <Compile Include="BO\CustomerInParcel.cs" />
+    <Compile Include="BO\CustomerToList.cs" />
+    <Compile Include="BO\Drone.cs" />
+    <Compile Include="BO\DroneInCharging.cs" />
+    <Compile Include="BO\DroneInParcel.cs" />
+    <Compile Include="BO\DronelIdException.cs" />
+    <Compile Include="BO\DroneToList.cs" />
+    <Compile Include="BO\Enums.cs" />
+    <Compile Include="BO\Exceptions.cs" />
+    <Compile Include="BO\Location.cs" />
+    <Compile Include="BO\Parcel.cs" />
+    <Compile Include="BO\ParcelCustomer.cs" />
+    <Compile Include="BO\ParcelIdExeption.cs" />
+    <Compile Include="BO\ParcelInTransfer.cs" />
+    <Compile Include="BO\ParcelToList.cs" />
+    <Compile Include="BO\PhoneException.cs" />
+    <Compile Include="BO\PriorityException.cs" />
+    <Compile Include="BO\Station.cs" />
+    <Compile Include="BO\StationIdException.cs" />
+    <Compile Include="BO\StationToList.cs" />
+    <Compile Include="BO\User.cs" />
+    <Compile Include="BO\WeightCategoryException.cs" />
+    <Compile Include="BlApi\IBL.cs" />
+    <Compile Include="BLImp\DeepCopyUtilities.cs" />
   </ItemGroup>
 
   <ItemGroup>
@@ -19,7 +61,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\DAL\DAL.csproj" />
+    <ProjectReference Include="..\DalFacade\DalFacade.csproj" />
   </ItemGroup>
 
 </Project>

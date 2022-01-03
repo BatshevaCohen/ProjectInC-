@@ -1,7 +1,6 @@
 ﻿using System;
 using BO;
-using DalApi;
-using DalObject;
+
 using System.Collections.Generic;
 using BlApi;
 

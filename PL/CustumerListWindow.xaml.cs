@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BlApi;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -19,8 +20,8 @@ namespace PL
     /// </summary>
     public partial class CustumerListWindow : Window
     {
-        BO.IBL myBL;
-        public CustumerListWindow(BO.IBL bl)
+        IBL myBL;
+        public CustumerListWindow(IBL bl)
         {
             bl = myBL;
             InitializeComponent();

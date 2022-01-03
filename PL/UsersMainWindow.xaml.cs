@@ -12,9 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MaterialDesignThemes.Wpf;
-using DalApi;
-using DalObject;
-using DO;
 using BO;
 using BlApi;
 
@@ -25,7 +22,7 @@ namespace PL
     /// </summary>
     public partial class UsersMainWindow : Window
     {
-        BO.IBL bL;
+        BlApi.IBL bL;
         public UsersMainWindow()
         {
             InitializeComponent();

@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BlApi;
 using BO;
 
 namespace PL
@@ -20,8 +21,8 @@ namespace PL
     /// </summary>
     public partial class StationListWindow : Window
     {
-        BO.IBL bL;
-        public StationListWindow(BO.IBL bl)
+        IBL bL;
+        public StationListWindow(IBL bl)
         {
             this.bL = bl;
             InitializeComponent();

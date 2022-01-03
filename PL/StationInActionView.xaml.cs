@@ -11,6 +11,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using BlApi;
 using BO;
 
 namespace PL
@@ -22,12 +23,12 @@ namespace PL
     {
         BO.Station station;
         private StationToList? StationToList;
-        BO.IBL mybl;
+        IBL mybl;
         public StationInActionView()
         {
             InitializeComponent();
         }
-        public StationInActionView(StationToList stationToL, BO.IBL bL, StationListWindow stationListWindow)
+        public StationInActionView(StationToList stationToL, IBL bL, StationListWindow stationListWindow)
         {
             InitializeComponent();
             mybl = bL;
@@ -71,7 +72,7 @@ namespace PL
             DataContext = station;
 
         }
-        public StationInActionView(StationListWindow stationListWindow, BO.IBL bL)
+        public StationInActionView(StationListWindow stationListWindow, IBL bL)
         {
             mybl = bL;
             InitializeComponent();

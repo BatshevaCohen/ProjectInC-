@@ -1,4 +1,4 @@
-﻿using DalApi;
+﻿using DLAPI;
 using DO;
 using System;
 using System.Collections.Generic;
@@ -21,7 +21,7 @@ namespace ConsoleUI
             MenuOptions menuOptions;
             EntityOptions entityOptions;
             UpdateOptions updateOptions;
-            IDal dalobject = DalFactory.GetDal(); 
+            IDal dalobject = DalFactory.GetDL(); 
 
             do
             {

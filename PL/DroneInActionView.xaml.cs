@@ -41,7 +41,6 @@ namespace PL
             AddGrid.Visibility = Visibility.Visible;
             btnAddDrone.Visibility = Visibility.Visible;
             btnAddDrone_cencel.Visibility = Visibility.Visible;
-            btnParcelInTransfer.Visibility = Visibility.Collapsed;
 
             droneWeightComboBox.ItemsSource = Enum.GetValues(typeof(Weight));
             AddDroneStatusComboBox.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
@@ -87,7 +86,7 @@ namespace PL
             if (droneToList.ParcelNumberTransferred != 0)
             {
                 Parcel parcel = mybl.GetParcelByDroneId(drone.Id);
-                btnParcelInTransfer.Visibility = Visibility.Visible;
+                ParcelInTransfer_Grid.Visibility = Visibility.Visible;
                 drone.ParcelInTransfer = new()
                 {
                     Id = parcel.Id,
@@ -132,7 +131,7 @@ namespace PL
             }
             else
             {
-                btnParcelInTransfer.Visibility = Visibility.Collapsed;
+                ParcelInTransfer_Grid.Visibility = Visibility.Collapsed;
             }
             DataContext = drone;
         }
@@ -316,13 +315,6 @@ namespace PL
             else
                 MessageBox.Show("Can't supply parcel by the drone");
         }
-
-
-        /// <summary>
-        /// load the window
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Parcel p = mybl.GetParcelByDroneId(drone.Id);
@@ -334,7 +326,6 @@ namespace PL
                 btnReleaiseToCharge.Visibility = Visibility.Hidden;
                 btnCollectParcel.Visibility = Visibility.Hidden;
                 btnParcelDelivery.Visibility = Visibility.Hidden;
-                btnParcelInTransfer.Visibility = Visibility.Collapsed;
             }
             else if (droneStatusComboBox.Text == "Maintenance")
             {
@@ -343,9 +334,9 @@ namespace PL
                 btnReleaiseToCharge.Visibility = Visibility.Visible;
                 btnCollectParcel.Visibility = Visibility.Hidden;
                 btnParcelDelivery.Visibility = Visibility.Hidden;
-                btnParcelInTransfer.Visibility = Visibility.Collapsed;
             }
             // the drone status in shipping
+
             else if (droneStatusComboBox.Text == "shipping" && drone.ParcelInTransfer.Id != 0 && p.CollectionTime != DateTime.MinValue)
             {
                 btnDroneToCharge.Visibility = Visibility.Hidden;
@@ -353,7 +344,6 @@ namespace PL
                 btnReleaiseToCharge.Visibility = Visibility.Hidden;
                 btnCollectParcel.Visibility = Visibility.Visible;
                 btnParcelDelivery.Visibility = Visibility.Visible;
-                btnParcelInTransfer.Visibility = Visibility.Visible;
             }
             else if (droneStatusComboBox.Text == "shipping" && drone.ParcelInTransfer.Id != 0 && p.CollectionTime == DateTime.MinValue)
             {
@@ -362,8 +352,12 @@ namespace PL
                 btnReleaiseToCharge.Visibility = Visibility.Hidden;
                 btnCollectParcel.Visibility = Visibility.Visible;
                 btnParcelDelivery.Visibility = Visibility.Visible;
-                btnParcelInTransfer.Visibility = Visibility.Visible;
             }
+        }
+
+        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
         }
 
         /// <summary>
@@ -373,7 +367,9 @@ namespace PL
         /// <param name="e"></param>
         private void btnAddDrone_Click(object sender, RoutedEventArgs e)
         {
+
             int stationId = Int32.Parse(stationsComboBox.Text);  // = 12345;
+
 
             Drone drone = new Drone()
             {
@@ -384,6 +380,7 @@ namespace PL
                 Weight = (Weight)droneWeightComboBox.SelectedItem,
             };
             
+
             drone.ParcelInTransfer = new()
             {
                 Id = 0
@@ -404,19 +401,6 @@ namespace PL
         {
             this.Close();
         }
-
-        /// <summary>
-        /// show details of the parsel in transfer (if there is)
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void btnParcelInTransfer_Click(object sender, RoutedEventArgs e)
-        {
-            if (droneStatusComboBox.Text == "shipping")
-            {
-                PL.ParcelInTransfer parcelInTrans = new PL.ParcelInTransfer();
-                parcelInTrans.Show();
-            }
-        }
     }
 }
+

@@ -2,38 +2,16 @@
 
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
-    <BaseOutputPath>$(SolutionDir)</BaseOutputPath>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <Optimize>False</Optimize>
-  </PropertyGroup>
-
+	<PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+		<OutputPath>..\bin\</OutputPath>
+		<AppendTargetFrameworkToOutputPath>false</AppendTargetFrameworkToOutputPath>
+		<AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+	</PropertyGroup>
+	
   <ItemGroup>
-    <Compile Include="Cloning.cs" />
-    <Compile Include="DalObject.cs" />
-    <Compile Include="DalObjectCustomer.cs" />
-    <Compile Include="DalObjectDrone.cs" />
-    <Compile Include="DalObjectParcel.cs" />
-    <Compile Include="DalObjectStation.cs" />
-    <Compile Include="DalObjectUser.cs" />
-    <Compile Include="DataSource.cs" />
-    <Compile Include="Properties\Resources.Designer.cs">
-      <DesignTime>True</DesignTime>
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <ProjectReference Include="..\DalFacade\DalFacade.csproj" />
+    <ProjectReference Include="..\DalFacde\DalFacade.csproj" />
   </ItemGroup>
 
 </Project>

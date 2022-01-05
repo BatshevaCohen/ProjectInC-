@@ -14,27 +14,18 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Content Include="Images\light purple background.jpg" />
-    <Content Include="Images\MainWinPic.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Images\purple background.jpg">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-  </ItemGroup>
-
-  <ItemGroup>
-    <PackageReference Include="Config.Net" Version="4.19.0" />
-    <PackageReference Include="MaterialDesignExtensions" Version="3.3.0" />
+    <PackageReference Include="MaterialDesignColors" Version="2.0.4" />
     <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
-    <PackageReference Include="MaterialSkin.2" Version="2.3.1" />
-    <PackageReference Include="Microsoft.NETCore.Targets" Version="5.0.0" />
-    <PackageReference Include="NuGet.Configuration" Version="6.0.0" />
-    <PackageReference Include="NuGet.exe" Version="3.4.3" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\BL\BL.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\light purple background.jpg" />
+    <Resource Include="Images\MainWinPic.jpg" />
+    <Resource Include="Images\purple background.jpg" />
   </ItemGroup>
 
 </Project>

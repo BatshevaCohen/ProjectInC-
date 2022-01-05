@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using BO;
-using DLAPI;
 using BlApi;
+using DalApi;
 
 namespace BL
 {
@@ -20,15 +19,18 @@ namespace BL
 
         #region Singleton
 
-        private static readonly IBL instance = new BL();
+        private static readonly IBL instance;
         public static IBL Instance { get => instance; }
         #endregion Singleton
-
+        static BL()
+        {
+            instance = new BL();
+        }
 
         private BL()
         {
             //Access to the layer DAL
-            dalo = DalFactory.GetDL();
+            dalo = DalFactory.GetDal();
             dronesL = new List<DroneToList>();
             var Drones = dalo.ShowDroneList();
             DronesInitialize(Drones);

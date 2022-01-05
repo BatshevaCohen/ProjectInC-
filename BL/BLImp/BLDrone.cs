@@ -3,11 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using BO;
-using NuGet.Protocol.Plugins;
 using BlApi;
-using DLAPI;
 
 namespace BL
 {
@@ -94,7 +91,7 @@ namespace BL
             if (dronel.DroneStatuses == DroneStatuses.Available)
             {
                 //list of the distances from the drone to every station
-                List<Distance> disStationFromDrone = dalo.MinimumDistance(dronel.Location.Longitude, dronel.Location.Latitude);
+                List<DO.Distance> disStationFromDrone = dalo.MinimumDistance(dronel.Location.Longitude, dronel.Location.Latitude);
                 double min = 9999999;
                 int idS, counter = 0;
                 bool flag = false;
@@ -103,7 +100,7 @@ namespace BL
                 //goes over the list
                 while (flag == false && counter <= sized)
                 {
-                    foreach (Distance item in disStationFromDrone)
+                    foreach (DO.Distance item in disStationFromDrone)
                     {
                         //to find the station with the minimum distance from the drone
                         if (item.Length <= min)

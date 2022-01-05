@@ -8,7 +8,7 @@ namespace DO
         public String Phone { get; set; }
         public double Latitude { get; set; }
         public double Longitude { get; set; }
-        public User? User { get; set; } //username and password of the customer to the system
+        public User User { get; set; } //username and password of the customer to the system
 
         public override string ToString()
         {

@@ -21,9 +21,8 @@ namespace DO
             String result = "";
             result += $"ID is {Id}, \n";
             result += $"Name is {Name}, \n";
-            //---BONOS OPTION---
-            result += $"Latitude is {Longitude}, \n Sexagesimal angle: {SexagesimalAngle.FromDouble(Latitude)}\n";
-            result += $"Longitude is {Latitude}, \n Sexagesimal angle: {SexagesimalAngle.FromDouble(Longitude)}\n";
+            //Location ---BONOS OPTION---
+            result += $"Location is {SexagesimalAngle.FromDouble(Latitude)}, {SexagesimalAngle.FromDouble(Longitude)}\n";
             result += $"Number of available charging spots: {ChargeSpots}, \n";
 
             return result;

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -17,9 +18,7 @@ namespace BO
         public override string ToString()
         {
             String result = "";
-            result += $"    Latitude: {Latitude}, \n";
-            result += $"    Longitude: {Longitude}, \n";
-
+            result += $"Location is: {SexagesimalAngle.FromDouble(Latitude)}, {SexagesimalAngle.FromDouble(Longitude)}\n";
             return result;
         }
     }

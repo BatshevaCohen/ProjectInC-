@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-
 using BO;
 using BlApi;
 
@@ -27,9 +19,17 @@ namespace PL
         {
             this.bL = bl;
             InitializeComponent();
-            this.DronesListView.ItemsSource = bL.ShowDroneList();
+            RefreshDronesListView();
             comboStatusSelector.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             comboWeghitSelector.ItemsSource = Enum.GetValues(typeof(BO.Weight));
+        }
+
+        /// <summary>
+        /// refresh the list view that shows the drones information
+        /// </summary>
+        public void RefreshDronesListView()
+        {
+            this.DronesListView.ItemsSource = bL.ShowDroneList();
         }
 
         /// <summary>
@@ -87,14 +87,14 @@ namespace PL
             comboStatusSelector.Text = "";
             //if both of the combo boxes are empty now
             if (comboWeghitSelector.SelectedItem == null)
-                this.DronesListView.ItemsSource = bL.ShowDroneList();
+                RefreshDronesListView();
             else    //show filter by weight only
             {
                 Weight weight = (Weight)comboWeghitSelector.SelectedItem;
                 this.DronesListView.ItemsSource = bL.ShowDroneList().Where(x => x.Weight == weight);
             }
         }
-
+        
         /// <summary>
         /// Clear the weight comboBox and the listView of the drones
         /// </summary>
@@ -105,7 +105,7 @@ namespace PL
             comboWeghitSelector.Text = "";
             //if both of the combo boxes are empty now
             if (comboStatusSelector.SelectedItem == null)
-                this.DronesListView.ItemsSource = bL.ShowDroneList();
+                RefreshDronesListView();
             else    //show filter by status only
             {
                 DroneStatuses droneStatuses = (DroneStatuses)comboStatusSelector.SelectedItem;
@@ -124,16 +124,6 @@ namespace PL
         }
 
         /// <summary>
-        ///  Close button
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void closeButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
-        /// <summary>
         /// double-clicking on one of the drones on the list
         /// </summary>
         /// <param name="sender"></param>
@@ -146,6 +136,16 @@ namespace PL
                 //new DroneInActionView(droneToList, bL, this).Show();
                 new DroneInActionView(droneToList, bL, this).Show();
             }
+        }
+
+        /// <summary>
+        ///  Close button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void closeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

@@ -130,17 +130,6 @@ namespace PL
             DataContext = drone;
         }
 
-
-        /// <summary>
-        /// close
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void closeButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
-        }
-
         /// <summary>
         /// update drone's name
         /// </summary>
@@ -253,6 +242,11 @@ namespace PL
                 MessageBox.Show("Can't send drone to delivery");
         }
 
+        /// <summary>
+        /// collect parcel by drone
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCollectParcel_Click(object sender, RoutedEventArgs e)
         {
 
@@ -349,11 +343,6 @@ namespace PL
             }
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         /// <summary>
         /// adds the drone to the BL
         /// </summary>
@@ -406,6 +395,16 @@ namespace PL
 
             ParcelInTransferDetails parcelInTransfer= new ParcelInTransferDetails(this);
             parcelInTransfer.Show();
+        }
+
+        /// <summary>
+        /// close
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void closeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
         }
     }
 }

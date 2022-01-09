@@ -6,6 +6,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="DroneListWindow" Height="625" Width="1000">
 
     <Grid Name="MainGrid">
@@ -114,12 +115,11 @@
 
 
             <ListView 
-                Name="DronesListView" 
+                x:Name="DronesListView" 
                 MouseDoubleClick="DronesListView_MouseDoubleClick" 
                 Grid.Column="1" 
                 Margin="550,0,-500,0" 
                 Grid.RowSpan="2"/>
-
 
         </Grid>
 

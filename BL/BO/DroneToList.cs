@@ -29,7 +29,7 @@ namespace BO
             result += $"Drone weight is: {Weight}, \n";
             result += $"Battery precent is: {Battery}, \n";
             result += $"Drone status is: {DroneStatuses}, \n";
-            result += $"Location:\n {Location} ";
+            result += $"{Location} ";
             //only if there is parcel in transfer
             if(ParcelNumberTransferred!=0)
                 result += $"Parcel's number in transfer {ParcelNumberTransferred}, \n";

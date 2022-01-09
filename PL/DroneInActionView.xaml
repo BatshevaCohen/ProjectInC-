@@ -6,7 +6,8 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"        
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
-        Title="DroneInActionView" Height="700" Width="800" Loaded="Window_Loaded">
+        WindowStartupLocation="CenterScreen"
+        Title="DroneInActionView" Height="424" Width="584" Loaded="Window_Loaded">
 
     <Grid >
 
@@ -17,7 +18,7 @@
 
         <Grid 
             Name="ShowDrone" 
-            Visibility="Collapsed" Margin="10,-10,10,10">
+            Visibility="Visible" Margin="10,-10,10,10">
 
             <Grid 
                 x:Name="UpdateGrid" 
@@ -170,18 +171,18 @@
 
             <Button 
                 x:Name="btnDroneToDelivery" 
-                Content="Drone to delivery" 
+                Content="Send drone to delivery" 
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="25"
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
                 Width="182" 
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                Click="btnDroneToDelivery_Click" Height="60" Margin="461,464,0,0" />
+                Click="btnDroneToDelivery_Click" Height="60" Margin="334,225,0,0" />
 
             <Button 
                 x:Name="btnUpdateDrone" 
-                Content="Update drone" 
+                Content="Update drone's name" 
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="25"
                 HorizontalAlignment="Left" 
@@ -189,20 +190,20 @@
                 Height="60" 
                 Width="180" 
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                Click="btnUpdateDrone_Click" Margin="31,464,0,0"/>
+                Click="btnUpdateDrone_Click" Margin="335,61,0,0"/>
             <Button 
                 x:Name="btnDroneToCharge"  
-                Content="Sending to charging" 
+                Content="Send drone to charge" 
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="25"
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
                 Height="60" Width="180" 
-                Click="btnDroneToCharge_Click" Margin="244,464,0,0"/>
+                Click="btnDroneToCharge_Click" Margin="333,143,0,0"/>
             <Button 
                 x:Name="btnCollectParcel" 
-                Content="Parcel collection" 
+                Content="Collect parcel" 
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="25"
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
@@ -210,10 +211,10 @@
                 VerticalAlignment="Top" 
                 Height="60" 
                 Width="182" 
-                Click="btnCollectParcel_Click" Margin="243,464,0,0"/>
+                Click="btnCollectParcel_Click" Margin="332,143,0,0"/>
             <Button 
                 x:Name="btnReleaiseToCharge" 
-                Content="Releaizse frome charge" 
+                Content="Discharge" 
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="25"
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
@@ -221,7 +222,7 @@
                 VerticalAlignment="Top" 
                 Width="180" 
                 Height="60" 
-                Click="btnReleaiseToCharge_Click" Margin="244,464,0,0"/>
+                Click="btnReleaiseToCharge_Click" Margin="333,143,0,0"/>
             <Button 
                 x:Name="btnParcelDelivery" 
                 Content="Parcel delivery"
@@ -232,7 +233,7 @@
                 VerticalAlignment="Top" 
                 Height="60" 
                 Width="182" 
-                Click="btnParcelDelivery_Click" Margin="243,464,0,0"/>
+                Click="btnParcelDelivery_Click" Margin="333,143,0,0"/>
             <Button 
                 x:Name="btnClose" 
                 Content="Close" 
@@ -243,10 +244,22 @@
                 Click="closeButton_Click"  
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
-                Width="108" Margin="280,569,0,0" />
+                Width="108" Margin="371,320,0,0" />
+            <Button 
+                x:Name="btnShowParcelInTrnsfer"
+                Visibility="Collapsed"
+                Content="Parcel details" 
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                materialDesign:ButtonAssist.CornerRadius="25"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Width="182" 
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                Height="60" 
+                Margin="335,225,0,0" Click="btnShowParcelInTrnsfer_Click" />
         </Grid>
 
-        <Grid x:Name="ParcelInTransfer_Grid"
+        <!--<Grid x:Name="ParcelInTransfer_Grid"
              Visibility="Visible"                 
               Margin="368,12,177,260">
             <Grid.RowDefinitions>
@@ -264,8 +277,8 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
-
             </Grid.RowDefinitions>
+            
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="96*"/>
                 <ColumnDefinition Width="133*"/>
@@ -362,7 +375,7 @@
                      TextWrapping="Wrap" Grid.Column="1" Margin="30,1,-5,1" Grid.Row="13" IsEnabled="False"/>
 
 
-        </Grid>
+        </Grid>-->
 
         <Grid x:Name="AddGrid" Visibility="Collapsed" VerticalAlignment="Top" Margin="41,51,0,0" HorizontalAlignment="Left" Height="198">
             <Grid.RowDefinitions>

@@ -7,12 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using Microsoft.VisualBasic;
 
 
@@ -86,7 +80,7 @@ namespace PL
             if (droneToList.ParcelNumberTransferred != 0)
             {
                 Parcel parcel = mybl.GetParcelByDroneId(drone.Id);
-                ParcelInTransfer_Grid.Visibility = Visibility.Visible;
+                btnShowParcelInTrnsfer.Visibility = Visibility.Visible;
                 drone.ParcelInTransfer = new()
                 {
                     Id = parcel.Id,
@@ -131,20 +125,9 @@ namespace PL
             }
             else
             {
-                ParcelInTransfer_Grid.Visibility = Visibility.Collapsed;
+                btnShowParcelInTrnsfer.Visibility = Visibility.Collapsed;
             }
             DataContext = drone;
-        }
-
-
-        /// <summary>
-        /// close
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void closeButton_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
         }
 
         /// <summary>
@@ -259,6 +242,11 @@ namespace PL
                 MessageBox.Show("Can't send drone to delivery");
         }
 
+        /// <summary>
+        /// collect parcel by drone
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCollectParcel_Click(object sender, RoutedEventArgs e)
         {
 
@@ -355,11 +343,6 @@ namespace PL
             }
         }
 
-        private void TextBox_TextChanged(object sender, TextChangedEventArgs e)
-        {
-
-        }
-
         /// <summary>
         /// adds the drone to the BL
         /// </summary>
@@ -398,6 +381,28 @@ namespace PL
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnAddDrone_cencel_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+
+        /// <summary>
+        /// if the drone is shipping- show the parcel details
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnShowParcelInTrnsfer_Click(object sender, RoutedEventArgs e)
+        {
+
+            ParcelInTransferDetails parcelInTransfer= new ParcelInTransferDetails(this);
+            parcelInTransfer.Show();
+        }
+
+        /// <summary>
+        /// close
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void closeButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
         }

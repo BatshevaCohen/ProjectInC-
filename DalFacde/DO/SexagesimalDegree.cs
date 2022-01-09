@@ -59,7 +59,6 @@ namespace DO
         }
 
 
-
         public string ToString(string format)
         {
             switch (format)

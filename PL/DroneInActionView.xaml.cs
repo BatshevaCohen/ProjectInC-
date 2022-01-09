@@ -392,8 +392,8 @@ namespace PL
         /// <param name="e"></param>
         private void btnShowParcelInTrnsfer_Click(object sender, RoutedEventArgs e)
         {
-
-            ParcelInTransferDetails parcelInTransfer= new ParcelInTransferDetails(this);
+            
+            ParcelInTransferDetails parcelInTransfer= new ParcelInTransferDetails(drone.ParcelInTransfer);
             parcelInTransfer.Show();
         }
 

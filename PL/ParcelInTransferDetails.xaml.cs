@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,9 +21,11 @@ namespace PL
     /// </summary>
     public partial class ParcelInTransferDetails : Window
     {
-        public ParcelInTransferDetails(DroneInActionView droneInActionView)
+        public ParcelInTransferDetails(ParcelInTransfer pInT)
         {
+           
             InitializeComponent();
+            DataContext = pInT;
         }
     }
 }

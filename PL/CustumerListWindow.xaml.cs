@@ -48,7 +48,7 @@ namespace PL
         {
             Close();
         }
-        //ParcelsList_MouseDoubleClick
+       
       
     }
 }

@@ -274,7 +274,7 @@
                 </ListView.View>
 
             </ListView>
-            <ListView  x:Name="listVSenderParcel" Visibility="Visible" Margin="85,248,10,188" MouseDoubleClick="ParcelsList_MouseDoubleClick" >
+            <ListView  x:Name="listVSenderParcel" Visibility="Collapsed" Margin="85,248,10,188" MouseDoubleClick="ParcelsList_MouseDoubleClick" >
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="ID"   Width="120" DisplayMemberBinding="{Binding Id}" />

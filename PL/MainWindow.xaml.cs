@@ -59,6 +59,12 @@ namespace PL
             CustumerListWindow wnd = new CustumerListWindow(myBL);
             wnd.Show();
         }
+
+        private void btnShowParcelesList_Click(object sender, RoutedEventArgs e)
+        {
+            ParcelListWindowe wnd = new ParcelListWindowe(myBL);
+            wnd.Show();
+        }
     }
     
 }

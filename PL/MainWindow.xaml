@@ -26,7 +26,7 @@
             FontSize="30"
             Style="{StaticResource MaterialDesignPaperButton}"
             HorizontalAlignment="Left" 
-            Margin="37,255,0,0" 
+            Margin="37,175,0,0" 
             VerticalAlignment="Top"
             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
             Click="btnShowDronesList_Click" Height="58" Width="280"/>
@@ -38,7 +38,7 @@
             FontSize="30"
             Style="{StaticResource MaterialDesignPaperButton}"
             HorizontalAlignment="Left" 
-            Margin="37,343,0,0" 
+            Margin="37,255,0,0" 
             VerticalAlignment="Top"
             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
             Click="btnShowStationList_Click" Height="58" Width="280"/>
@@ -50,10 +50,22 @@
             FontSize="30"
             Style="{StaticResource MaterialDesignPaperButton}"
             HorizontalAlignment="Left" 
-            Margin="37,432,0,0" 
+            Margin="37,341,0,0" 
             VerticalAlignment="Top"
             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
             Click="btnShowCustumersList_Click" Height="58" Width="280"/>
+        <Button 
+            x:Name="btnShowParcelList"
+            ToolTip="Show parcel list"
+            Content="Show parcel list"  
+            FontFamily="Brush Script MT"
+            FontSize="30"
+            Style="{StaticResource MaterialDesignPaperButton}"
+            HorizontalAlignment="Left" 
+            Margin="37,430,0,0" 
+            VerticalAlignment="Top"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
+            Click="btnShowParcelesList_Click" Height="58" Width="280"/>
     </Grid>
 
 </Window>

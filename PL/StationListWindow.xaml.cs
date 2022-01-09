@@ -21,7 +21,7 @@ namespace PL
     /// </summary>
     public partial class StationListWindow : Window
     {
-        IBL bL;
+        BlApi.IBL bL;
         public StationListWindow(IBL bl)
         {
             this.bL = bl;

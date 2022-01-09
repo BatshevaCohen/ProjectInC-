@@ -1,4 +1,5 @@
 ﻿using BlApi;
+using BO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,12 +21,34 @@ namespace PL
     /// </summary>
     public partial class CustumerListWindow : Window
     {
-        IBL myBL;
-        public CustumerListWindow(IBL bl)
+        BlApi.IBL myBL;
+        public CustumerListWindow(BlApi.IBL bl)
         {
-            bl = myBL;
+            myBL = bl;
             InitializeComponent();
+            this.CustumerListView.ItemsSource = myBL.ShowCustomerList();
         }
 
+
+        private void CustomerInActionView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            CustomerToList? cusTL = CustumerListView.SelectedItem as CustomerToList;
+            if (cusTL != null)
+            {
+                new CustumerInActionView(cusTL, myBL, this).Show();
+            }
+        }
+
+        private void btnAddCustumer_Click(object sender, RoutedEventArgs e)
+        {
+            new CustumerInActionView(myBL,this).Show();
+        }
+
+        private void btnAddCustumer_cancel_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
+        //ParcelsList_MouseDoubleClick
+      
     }
 }

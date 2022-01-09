@@ -10,7 +10,7 @@
         <Image 
             Source="Images/purple background.jpg"
             Stretch="Fill"
-            Opacity="0.5" Margin="0,0,35,0">
+            Opacity="0.5">
             <Image.OpacityMask>
                 <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
                     <GradientStop Color="Black"/>
@@ -20,9 +20,9 @@
         </Image>
         <Grid 
         x:Name="UpdateGrid" 
-        Visibility="Visible" 
+        Visibility="Collapsed" 
         VerticalAlignment="Top" 
-        Margin="42,38,0,0" 
+        Margin="36,34,0,0" 
         HorizontalAlignment="Left" Height="90" Width="294">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -98,9 +98,10 @@
                     Visibility="Visible"
                     Click="btnUpdateStation_Click" Grid.Column="1" Grid.RowSpan="3"/>
 
-            <WrapPanel Grid.ColumnSpan="2" Margin="33,64,3,-139" Grid.Row="5">
+            <!--<WrapPanel Grid.ColumnSpan="2" Margin="33,64,3,-139" Grid.Row="5">
                 <ListView  x:Name="listVDtoneInCharging" Margin="24,56,17,-97"  ItemsSource="{Binding DroneInCharging}" Width="212" Height="114" RenderTransformOrigin="0.51,-0.314" MouseDoubleClick="StationInActionView_MouseDoubleClick" />
-            </WrapPanel>
+            </WrapPanel>-->
+
 
         </Grid>
 
@@ -229,6 +230,18 @@
             HorizontalAlignment="Left" Width="148" 
               Click="btnAddeStation_Click"
                 />
+        <ListView  x:Name="listVDtoneInCharging" MouseDoubleClick="StationInActionView_MouseDoubleClick" Margin="36,222,445,90" Visibility="Collapsed">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="ID" Width="110" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="Battery"  Width="110" DisplayMemberBinding="{Binding Battery}"/>
+                </GridView>
+            </ListView.View>
+            <Label Content="Label"/>
+
+
+        </ListView>
+        <Label x:Name="lable_droneincharging" Content="Drones in charging in this station:" Margin="36,175,384,217" Visibility="Collapsed"/>
 
 
     </Grid>

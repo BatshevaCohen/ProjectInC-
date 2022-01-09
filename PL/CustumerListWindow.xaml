@@ -6,7 +6,33 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         Title="CustumerListWindow" Height="450" Width="800">
+
     <Grid>
-        
+        <Image 
+            Source="Images/purple background.jpg"
+            Stretch="Fill"
+            Opacity="0.5"/>
+
+
+
+        <Grid Margin="0,122,0,0">
+
+            <ListView 
+                Name="CustumerListView" 
+                MouseDoubleClick="CustomerInActionView_MouseDoubleClick" 
+                Margin="36,0,31,35"/>
+            <Label Content="                                            Select a custumer to display" Margin="0,-89,237,344" FontFamily="Arial" FontSize="18"/>
+            <Button 
+                x:Name="btnAddCustumer" 
+                Content="Add" 
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+               
+                HorizontalAlignment="Left" 
+                Margin="631,-94,0,0" 
+                VerticalAlignment="Top" 
+                Height="55" Width="100" 
+                Visibility="Visible"
+                Click="btnAddCustumer_Click"/>
+        </Grid>
     </Grid>
 </Window>

@@ -27,12 +27,13 @@ namespace PL
         public StationInActionView()
         {
             InitializeComponent();
+            
         }
         public StationInActionView(StationToList stationToL, IBL bL, StationListWindow stationListWindow)
         {
             InitializeComponent();
             mybl = bL;
-            station = new Station();
+            DataContext = stationToL;
             this.StationToList = stationToL;
             btnUpdateStation.Visibility = Visibility.Visible;
             UpdateGrid.Visibility = Visibility.Visible;
@@ -43,17 +44,13 @@ namespace PL
                 AvailableChargingSpots = stationToL.AvailableChargingSpots
             };
 
-            Location location = mybl.GetStation(stationToL.Id).Location;
-            //station.Location = new()
-            //{
-            //    Latitude = location.Latitude,
-            //    Longitude = location.Longitude
-            //};
+
+
             station.droneInChargings = mybl.GetStation(stationToL.Id).droneInChargings;
 
             if (station.droneInChargings.Count() > 0)
             {
-
+                lable_droneincharging.Visibility = Visibility.Visible;
                 foreach (DroneInCharging item in station.droneInChargings)
                 {
                     listVDtoneInCharging.Visibility = Visibility.Visible;
@@ -65,10 +62,8 @@ namespace PL
             }
             else
             {
-                MessageBox.Show("bla bla");
+                listVDtoneInCharging.Visibility = Visibility.Hidden;
             }
-
-
             DataContext = station;
 
         }
@@ -127,31 +122,28 @@ namespace PL
                 MessageBox.Show(ex.Message);
             }
         }
+
         private void StationInActionView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            DroneInCharging? droneInCharging = listVDtoneInCharging.SelectedItem as DroneInCharging;
-            if (droneInCharging != null)
+            DroneInCharging droneInCharging = listVDtoneInCharging.SelectedItem as DroneInCharging;
+            Drone d = mybl.GetDrone(droneInCharging.Id);
+            DroneToList droneTo = new DroneToList()
             {
-                Drone d = mybl.GetDrone(droneInCharging.Id);
-                DroneToList droneTo = new DroneToList()
-                {
+                Id = d.Id,
+                Battery = d.Battery,
+                Model = d.Model,
+                DroneStatuses = d.DroneStatuses,
+                Weight = d.Weight,
+                ParcelNumberTransferred = 0,
+            };
+            droneTo.Location = new()
+            {
+                Latitude = d.Location.Latitude,
+                Longitude = d.Location.Longitude,
+            };
 
-                    Id = d.Id,
-                    Battery = d.Battery,
-                    Model = d.Model,
-                    DroneStatuses = d.DroneStatuses,
-                    Weight = d.Weight,
-                    ParcelNumberTransferred = 0,
-                };
-                droneTo.Location = new()
-                {
-                    Latitude = d.Location.Latitude,
-                    Longitude = d.Location.Longitude,
-                };
-
-                new DroneInActionView(droneTo, mybl).Show();
-
-            }
+            new DroneInActionView(droneTo, mybl).Show();
         }
+
     }
 }

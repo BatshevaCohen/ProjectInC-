@@ -20,11 +20,11 @@ namespace BO
         public override string ToString()
         {
             String result = "";
-            result += $"Parcel ID is: {Id}, \n";
-            result += $"The parcel's weight is: {Weight}, \n";
-            result += $"The parcel's priority is: {Priority}, \n";
-            result += $"The parcel's status is: {ParcelStatus}, \n";
-            result += $"The details of the customer of this parcel: {CustomerInParcel}, \n";
+            result += $" {Id}, ";
+            result += $" {Weight}, ";
+            result += $" {Priority}, ";
+            result += $"{ParcelStatus}, ";
+            result += $"{CustomerInParcel}, ";
 
             return result;
         }

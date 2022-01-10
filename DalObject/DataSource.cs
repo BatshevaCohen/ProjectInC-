@@ -50,8 +50,8 @@ namespace DAL
             {
                 users.Add(new User { UserName = names[i - 1], Password = "1234", Permission = Permit.User, MyActivity = Activity.On });
             }
-            users.Add(new User { UserName = "shirel", Password = "shirel", Permission = Permit.Admin, MyActivity = Activity.On });
-            users.Add(new User { UserName = "batsheva", Password = "batsheva", Permission = Permit.Admin, MyActivity = Activity.On });
+            users.Add(new User { UserName = "shirel", Password = "sh1234", Permission = Permit.Admin, MyActivity = Activity.On });
+            users.Add(new User { UserName = "batsheva", Password = "bt1234", Permission = Permit.Admin, MyActivity = Activity.On });
             return users;
         }
 
@@ -130,12 +130,12 @@ namespace DAL
             for (int i = 1; i <= 10; i++)
             {
                 //choose two different ids for sender and target from Customer's id
-                int senderId = r.Next(1, 10);
+                int senderId = r.Next(100000000, 99999999);
                 int targetId;
                 // the sender can't be the reciver
                 do
                 {
-                    targetId = r.Next(1, 10);
+                    targetId = r.Next(100000000, 99999999);
                 } while (targetId == senderId);
 
                 Parcels.Add(new Parcel()
@@ -145,12 +145,14 @@ namespace DAL
                     ReceiverId = targetId,
                     Weight = RandomEnumValue<WeightCategories>(),
                     Priority = RandomEnumValue<Priorities>(),
-                    DroneID = r.Next(1000, 5000),
+                    //DroneID = 494449494,
                     Create = MyDateTime(),
                     Assigned = MyDateTime(),
                     PickedUp = MyDateTime(),
                     Supplied = MyDateTime()
                 });
+                
+
             }
 
             userList = CreateUsers();

@@ -28,20 +28,20 @@ namespace PL
             this.ParcelListView.ItemsSource = myBL.ShowParcelList();
         }
 
+        private void ParcelListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            ParcelToList? parTL = ParcelListView.SelectedItem as ParcelToList;
+            if (parTL != null)
+            {
+                new ParcelInActionView(parTL, myBL, this).Show();
+            }
+        }
+
+        private void btnAddParcel_Click(object sender, RoutedEventArgs e)
+        {
+            new ParcelInActionView( myBL).Show();
+        }
+
        
-
-        //private void ParcelInActionView_MouseDoubleClick(object sender, SelectionChangedEventArgs e)
-        //{
-            
-        //}
-
-        //private void ParcelListView_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        //{
-        //    ParcelToList? parTL = ParcelListView.SelectedItem as ParcelToList;
-        //    if (parTL != null)
-        //    {
-        //        new ParcelInActionView(parTL, myBL, this).Show();
-        //    }
-        //}
     }
 }

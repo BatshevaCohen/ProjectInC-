@@ -124,11 +124,11 @@
                 <TextBox 
                     x:Name="droneWeightTxtBox" 
                     Grid.Column="1" 
-                    HorizontalAlignment="Left" 
-                    Margin="3,0,0,0" 
+                    HorizontalAlignment="Center" 
+                    Margin="0,4,0,0" 
                     Text="{Binding Weight, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
                     Grid.Row="5" 
-                    VerticalAlignment="Center" 
+                    VerticalAlignment="Top" 
                     Width="120" 
                      IsEnabled="False"/>
                 <Label 

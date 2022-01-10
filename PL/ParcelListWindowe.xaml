@@ -12,13 +12,22 @@
             Source="Images/purple background.jpg"
             Stretch="Fill"
             Opacity="0.5"/>
+        <Button 
+                x:Name="btnAddParcel"  
+                Content="Add parcel" 
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Height="60" Width="180" 
+                Click="btnAddParcel_Click" Margin="86,61,0,0"/>
         <Grid  Margin="451,10,0,0">
 
             <ListView 
                 Name="ParcelListView" 
                 
-                Margin="10,0,0,0"/>
-           
+                Margin="5,0,5,0" SelectionChanged="ParcelListView_SelectionChanged"/>
+
         </Grid>
     </Grid>
 </Window>

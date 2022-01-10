@@ -40,7 +40,7 @@ namespace BL
             parcel.DroneInParcel = null;
             DO.Parcel p = new()
             {
- //               Id = parcel.Id,
+                //               Id = parcel.Id,
                 SenderId = parcel.Sender.Id,
                 ReceiverId = parcel.Resiver.Id,
                 Weight = (DO.WeightCategories)parcel.Weight,
@@ -55,9 +55,9 @@ namespace BL
         /// <exception cref="NotImplementedException"></exception>
         public void UpdateParcelToDrone(int droneId)
         {
-           DroneToList droneTL= DronesL.Find(x => x.Id == droneId);
+            DroneToList droneTL = DronesL.Find(x => x.Id == droneId);
             DO.Drone drone = dalo.GetDrone(droneId);
-            
+
             // only if the drone is available for shipping
             if (droneTL.DroneStatuses == DroneStatuses.Available)
             {
@@ -65,7 +65,7 @@ namespace BL
                 // list parcels ordered by priority and weight
                 var orderedParcels = from parcel in parcels
                                      orderby parcel.Priority descending, parcel.Weight ascending
-                                     where parcel.Weight<=drone.MaxWeight
+                                     where parcel.Weight <= drone.MaxWeight
                                      select parcel;
                 // choose the first parcel from the list of parcels
                 var theParcel = orderedParcels.FirstOrDefault();
@@ -214,17 +214,39 @@ namespace BL
                 AssignmentToParcelTime = (DateTime)p.Supplied,
                 ParcelCreationTime = (DateTime)p.Create,
                 SupplyTime = (DateTime)p.Assigned,
-                CollectionTime = (DateTime)p.PickedUp
+                CollectionTime = (DateTime)p.PickedUp,
+
+
             };
+
 
             DO.Customer custumerSender = dalo.GetCustomer(p.SenderId);
             DO.Customer custumerReceiver = dalo.GetCustomer(p.ReceiverId);
             parcel.Sender = new() { Id = custumerSender.Id, Name = custumerSender.Name };
             parcel.Resiver = new() { Id = custumerReceiver.Id, Name = custumerReceiver.Name };
+            //אם החבילה עדיין לא שוייכה אין לה רחפן בטעינה 
+
+
+            //DO.Drone drone = dalo.GetDrone(p.DroneID);
+            //parcel.DroneInParcel = new()
+            //{
+            //    Id = p.DroneID,
+            //    Battery = drone.Battery,
+            //};
+
+            //parcel.DroneInParcel.Location = new()
+            //{//מיקום הרחםן כמיקום השולח
+            //    Latitude = custumerSender.Latitude,
+            //    Longitude = custumerSender.Longitude
+            //};
+
+
+
+
 
             //If the parcel has already been associated-שוייכה
             //update DroneInParcel
-            if (parcel.CollectionTime == DateTime.MinValue)
+            if (parcel.CollectionTime == DateTime.MinValue)///////////////////
             {
                 DroneToList droneToList = DronesL.Find(x => x.Id == p.DroneID);
                 parcel.DroneInParcel = new() { Id = p.Id, Battery = droneToList.Battery, Location = droneToList.Location };
@@ -319,7 +341,7 @@ namespace BL
         }
         public Parcel GetParcelByDroneId(int droneId)
         {
-           DO.Parcel p= dalo.GetParcelByDroneId(droneId);
+            DO.Parcel p = dalo.GetParcelByDroneId(droneId);
             Parcel par = new Parcel();
             par.Id = p.Id;
             par.ParcelCreationTime = p.Create;
@@ -328,13 +350,13 @@ namespace BL
             par.SupplyTime = p.Supplied;
             par.CollectionTime = p.PickedUp;
             par.ParcelCreationTime = p.Create;
-            par.AssignmentToParcelTime= p.Assigned; ;
-            DO.Customer sender=  dalo.GetCustomer(p.SenderId);
+            par.AssignmentToParcelTime = p.Assigned; ;
+            DO.Customer sender = dalo.GetCustomer(p.SenderId);
             DO.Customer reciver = dalo.GetCustomer(p.ReceiverId);
             par.Resiver = new()
             {
                 Id = reciver.Id,
-                Name=reciver.Name
+                Name = reciver.Name
             };
 
             par.Sender = new()
@@ -342,7 +364,7 @@ namespace BL
                 Id = sender.Id,
                 Name = sender.Name
             };
-            
+
             return par;
         }
     }

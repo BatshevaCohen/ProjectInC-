@@ -20,7 +20,7 @@
 
             <Grid 
                 x:Name="UpdatCustumereGrid" 
-                Visibility="Collapsed" 
+                Visibility="Visible" 
                 VerticalAlignment="Top" 
                 Margin="39,51,0,0" 
                 HorizontalAlignment="Left" Height="156" Width="267">

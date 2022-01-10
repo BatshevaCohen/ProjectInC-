@@ -21,8 +21,8 @@ namespace ConsoleUI
             MenuOptions menuOptions;
             EntityOptions entityOptions;
             UpdateOptions updateOptions;
-            IDal dalobject = DalFactory.GetDal(); 
-
+            //IDal dalobject = DalFactory.GetDal();
+            DalApi.IDal dalobject = DalApi.DalFactory.GetDal();
             do
             {
                 Console.WriteLine("WELCOME!");

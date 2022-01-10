@@ -84,8 +84,8 @@ namespace PL
                 drone.ParcelInTransfer = new()
                 {
                     Id = parcel.Id,
-                    Weight = parcel.Weight,
-                    Priority = parcel.Priority
+                    Weight = (Weight)parcel.Weight,
+                    Priority = (Priority)parcel.Priority
                 };
                 if (parcel.CollectionTime != DateTime.MinValue)
                 {

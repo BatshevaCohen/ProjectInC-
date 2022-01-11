@@ -12,13 +12,13 @@ namespace DAL
     /// <summary>
     /// constractor 
     /// </summary>
-     internal sealed  partial  class  DalObject : IDal
+    internal sealed partial class DalObject : IDal
     {
 
         //singelton
         //internal static IDal Instance;
 
-        static readonly IDal instance= new DalObject();
+        static readonly IDal instance = new DalObject();
 
         internal static IDal Instance { get => instance; }
 
@@ -51,7 +51,7 @@ namespace DAL
         /// <returns></returns>
         public List<Distance> MinimumDistance(double longitude, double latitude)
         {
-            List<Distance> listDis= new List<Distance>();
+            List<Distance> listDis = new List<Distance>();
             foreach (Station element in DataSource.Stations)
             {
                 Distance Distance = new() { };
@@ -76,6 +76,13 @@ namespace DAL
                     (1 - Math.Cos((longitude2 - longitude1) * p)) / 2;
 
             return 12742 * Math.Asin(Math.Sqrt(a)); // 2 * R; R = 6371 km
+        }
+        public void RemoveParcel(Parcel p)
+        {
+            int index = DataSource.Parcels.FindIndex(x => (x.Id == p.Id));
+            if (index == -1)
+                throw new NonExistsException($"id number {p.Id} not found");
+            DataSource.Parcels.RemoveAt(index);
         }
     }
 }

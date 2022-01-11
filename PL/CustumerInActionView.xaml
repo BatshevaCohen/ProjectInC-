@@ -46,7 +46,7 @@
                     Margin="3" 
                     HorizontalAlignment="Left" 
                     Grid.Column="0" 
-                    Content="custumer id::"/>
+                    Content="custumer id:"/>
                 <TextBox 
                     x:Name="idCusTextBox" 
                     Width="120" 

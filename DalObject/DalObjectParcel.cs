@@ -54,6 +54,11 @@ namespace DAL
             return DataSource.Parcels.Where(predicate).ToList();
         }
         /// <summary>
+        /// remove parcel frome the list
+        /// </summary>
+        /// <param name="p"></param>
+        
+        /// <summary>
         /// shows the list of packages that haven't been associated to a drone
         /// </summary>
         /// <returns></returns>

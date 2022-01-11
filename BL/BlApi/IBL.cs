@@ -126,5 +126,6 @@ namespace BlApi
         double CalculateDistance(double longitude1, double latitude1, double longitude2, double latitude2);
 
         List<DroneInCharging> GetDroneInCgargingList(int stationId);
+        void RemoveParcel(int idparcel);
     }
 }

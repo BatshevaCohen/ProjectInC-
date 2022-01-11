@@ -367,5 +367,32 @@ namespace BL
 
             return par;
         }
+        private ParcelStatus GetParcelStatus(DO.Parcel pr)
+        {
+            if (pr.Create == null)
+                return ParcelStatus.Created;
+            if (pr.PickedUp == null)
+                return ParcelStatus.Assigned;
+            if (pr.Assigned == null)
+                return ParcelStatus.PickedUp;
+            return ParcelStatus.Supplied;
+        }
+        public void RemoveParcel(int id)
+        {
+            DO.Parcel parcel;
+            try
+            {
+                parcel = dalo.GetParcel(id);
+            }
+            catch (Exception ex)
+            {
+
+                throw new RemoveException("", ex);
+            }
+            ParcelStatus status = GetParcelStatus(parcel);
+            if (status != ParcelStatus.Assigned)
+                throw new RemoveException("delivery was proccessed, cannot remove parcel");
+            dalo.RemoveParcel(parcel);
+        }
     }
 }

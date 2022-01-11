@@ -14,7 +14,7 @@
             Opacity="0.5"/>
 
         <Grid x:Name="Grid_ShowParcel" Margin="85,41,368,33" RenderTransformOrigin="0.5,0.5" 
-              Visibility="Visible">
+              Visibility="Collapsed">
             <Grid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -199,7 +199,7 @@
 
         <Grid 
             Name="AddDrone" 
-            Visibility="Collapsed" Margin="10,-10,10,10">
+            Visibility="Visible" Margin="10,-10,10,10">
 
             <Grid 
                 x:Name="ADDParcelGrid" 

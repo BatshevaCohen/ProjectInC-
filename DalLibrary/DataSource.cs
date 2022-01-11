@@ -70,12 +70,11 @@ namespace DAL
             {
                 Drones.Add(new Drone()
                 {
-                    Id = 1000 * i, //4-9 digit
+                    Id = r.Next(1000, 9999), //4-9 digit
                     Model = arrDroneModel[i - 1],
                     MaxWeight = RandomEnumValue<WeightCategories>(),
                     Battery = r.Next(0, 100),
                 });
-
             }
 
             //adding stations

@@ -12,7 +12,7 @@
         <Image 
             Source="Images/purple background.jpg"
             Stretch="Fill"
-            Opacity="0.5" Margin="0,-37,0,37"/>
+            Opacity="0.5"/>
 
         <Grid
             Name="ShowCustumerGrid" 
@@ -100,31 +100,13 @@
                     Margin="3" 
                     HorizontalAlignment="Left" 
                     Grid.Column="0" 
-                    Content="Latitude:"/>
+                    Content="Location:"/>
                 <TextBox 
-                    x:Name="latitudeTextBox" 
+                    x:Name="LocationTextBox" 
                     Width="120" 
                     VerticalAlignment="Center" 
-                    Text="{Binding Location.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                    Text="{Binding Location, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
                     Grid.Row="6" 
-                    Margin="3" 
-                    Height="23" 
-                    HorizontalAlignment="Left" 
-                    Grid.Column="1" 
-                    IsEnabled="False"/>
-                <Label 
-                    Content="Longitude:"
-                    VerticalAlignment="Center" 
-                    Grid.Row="7" 
-                    Margin="3" 
-                    HorizontalAlignment="Left" 
-                    Grid.Column="0"/>
-                <TextBox 
-                    x:Name="longitudeTextBox" 
-                    Width="120" 
-                    VerticalAlignment="Center" 
-                    Text="{Binding Location.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                    Grid.Row="7" 
                     Margin="3" 
                     Height="23" 
                     HorizontalAlignment="Left" 

@@ -36,12 +36,24 @@ namespace PL
                 new ParcelInActionView(parTL, myBL, this).Show();
             }
         }
-
+        /// <summary>
+        /// A button to add a new parcel
+        /// </summary>
+        /// <param name="sender">Button type</param>
+        /// <param name="e"></param>
         private void btnAddParcel_Click(object sender, RoutedEventArgs e)
         {
             new ParcelInActionView( myBL).Show();
         }
-
-       
+        /// <summary>
+        /// A button that refresh the list of parcels order by the reciver
+        /// </summary>
+        /// <param name="sender">Button type</param>
+        /// <param name="e"></param>
+        private void RefreshBaseParcelTargetButton_Click(object sender, RoutedEventArgs e)
+        {
+            ParcelListView.ItemsSource = myBL.ShowParcelList().OrderBy(p => p.ReciverName);
+            ParcelListView.Items.Refresh();
+        }
     }
 }

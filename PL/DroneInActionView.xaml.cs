@@ -90,7 +90,6 @@ namespace PL
                 if (parcel.CollectionTime != DateTime.MinValue)
                 {
                     drone.ParcelInTransfer.ParcelTransferStatus = ParcelTransferStatus.WaitingToBePickedUp;
-
                 }
                 if (parcel.CollectionTime == DateTime.MinValue && parcel.SupplyTime != DateTime.MinValue)
                 {
@@ -210,7 +209,6 @@ namespace PL
                     MessageBox.Show(ex.Message);
                 }
             }
-
         }
 
         /// <summary>
@@ -353,7 +351,6 @@ namespace PL
 
             int stationId = Int32.Parse(stationsComboBox.Text);  // = 12345;
 
-
             Drone drone = new Drone()
             {
                 Id = Int32.Parse(idTextBox.Text),
@@ -363,7 +360,6 @@ namespace PL
                 Weight = (Weight)droneWeightComboBox.SelectedItem,
             };
             
-
             drone.ParcelInTransfer = new()
             {
                 Id = 0

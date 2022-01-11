@@ -18,7 +18,7 @@ namespace BO
         public override string ToString()
         {
             String result = "";
-            result += $"Location is: {SexagesimalAngle.FromDouble(Latitude)}, {SexagesimalAngle.FromDouble(Longitude)}\n";
+            result += $"({SexagesimalAngle.FromDouble(Latitude)}, {SexagesimalAngle.FromDouble(Longitude)})\n";
             return result;
         }
     }

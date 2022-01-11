@@ -5,19 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
+        WindowStartupLocation="CenterScreen"
         Title="ParcelInActionView" Height="680" Width="700">
     <Grid>
         <Image 
             Source="Images/purple background.jpg"
             Stretch="Fill"
-            Opacity="0.5" Margin="10,0,-10,0"/>
+            Opacity="0.5"/>
 
-        <Grid x:Name="Grid_ShowParcel" Margin="85,41,368,33" RenderTransformOrigin="0.5,0.5" Visibility="Visible">
+        <Grid x:Name="Grid_ShowParcel" Margin="85,41,368,33" RenderTransformOrigin="0.5,0.5" 
+              Visibility="Visible">
             <Grid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
                     <SkewTransform/>
-                    <RotateTransform Angle="-0.19"/>
+                    <RotateTransform Angle="0"/>
                     <TranslateTransform/>
                 </TransformGroup>
             </Grid.RenderTransform>
@@ -55,9 +57,9 @@
                    HorizontalAlignment="Left" Margin="-17,-44,0,44" Width="126" Grid.ColumnSpan="2"/>
 
 
-            <Label 
+            <!--<Label 
                 Content="Status"
-                Grid.Row="3" Margin="0,0,99,34" Grid.RowSpan="2"/>
+                Grid.Row="3" Margin="-34,9,132,25" Grid.RowSpan="2"/>-->
 
             <Label Content="Sender details:" 
                    FontWeight="Bold" Margin="2,32,3,6" Grid.RowSpan="2" Grid.Row="9"/>
@@ -138,7 +140,8 @@
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
                 Height="60" Width="198" 
-                Click="btnUpdateParcel_Click" Margin="474,103,0,0" Visibility="Visible"/>
+                Click="btnUpdateParcel_Click" 
+                Margin="474,75,0,0" Visibility="Visible"/>
         <Button 
                 x:Name="btnShowDrone"  
                 Content="Drone dateiles" 
@@ -147,7 +150,8 @@
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
                 Height="60" Width="198" 
-                Click="btnShowDrone_Click" Margin="474,193,0,0" Visibility="Visible"/>
+                Click="btnShowDrone_Click" 
+                Margin="474,150,0,0" Visibility="Visible"/>
 
         <Button 
                 x:Name="btnShowCustumerReciver"  
@@ -157,7 +161,8 @@
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
                 Height="60" Width="198" 
-                Click="btnShowCustumerReciver_Click" Margin="474,272,0,0" Visibility="Visible"/>
+                Click="btnShowCustumerReciver_Click" 
+                Margin="474,225,0,0" Visibility="Visible"/>
         <Button 
                 x:Name="btnShowCustumerSender"  
                 Content="custumer Sender datailes" 
@@ -166,7 +171,8 @@
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
                 Height="60" Width="198" 
-                Click="btnShowCustumerSender_Click" Margin="474,356,0,0" Visibility="Visible"/>
+                Click="btnShowCustumerSender_Click" 
+                Margin="474,301,0,0" Visibility="Visible"/>
         <Button 
                 x:Name="btnRemuveParcel"  
                 Content="Remove Parcel" 
@@ -175,7 +181,8 @@
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
                 Height="60" Width="198" 
-                Click="btnRemoveParcel_Click" Margin="474,439,0,0" Visibility="Visible"/>
+                Click="btnRemoveParcel_Click" 
+                Margin="474,375,0,0" Visibility="Visible"/>
         <Button 
                 x:Name="btnClose" 
                 Content="Close" 
@@ -186,13 +193,13 @@
                 Click="closeButton_Click"  
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
-                Width="108" Margin="510,576,0,0" />
+                Width="108" Margin="519,549,0,0" />
 
 
 
         <Grid 
             Name="AddDrone" 
-            Visibility="Visible" Margin="10,-10,10,10">
+            Visibility="Collapsed" Margin="10,-10,10,10">
 
             <Grid 
                 x:Name="ADDParcelGrid" 
@@ -310,7 +317,17 @@
 
 
         </Grid>
-        <Button x:Name="btnOK" Content="OK" Margin="397,365,195,267" Visibility="Collapsed" Click="OK_Click"/>
+
+        <Button x:Name="btnOK" 
+                Content="OK" 
+                Margin="474,450,0,0" 
+                Visibility="Visible" 
+                Click="OK_Click"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Height="60" Width="198" 
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+/>
 
 
     </Grid>

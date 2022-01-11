@@ -20,7 +20,6 @@
 
         <Button 
             x:Name="btnShowDronesList"
-            ToolTip="Show drone list"
             Content="Show drone list"  
             FontFamily="Brush Script MT"
             FontSize="30"

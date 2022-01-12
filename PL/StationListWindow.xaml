@@ -43,15 +43,6 @@
                     VerticalAlignment="Top" 
                     FontSize="18" Height="51" Width="242" Grid.ColumnSpan="2" Margin="33,15,0,0" FontWeight="Bold"/>
 
-                <Button
-                    x:Name="ClearStatus"
-                    Content="Clear"
-                    Style="{StaticResource MaterialDesignFlatButton}"
-                    HorizontalAlignment="Center"
-                    Click="ClearStatus_Click"
-                    Margin="0,71,0,29" 
-                    Width="79" Grid.Column="1" />
-
 
 
 
@@ -78,22 +69,13 @@
                     VerticalAlignment="Top" Width="193" Height="32"/>
                  -->
                 <Button 
-                    x:Name="btnStationList"
-                    Content="Station List" 
-                    Click="Station_List_Click" 
-                    Margin="30,71,0,0"
-                    HorizontalAlignment="Left"
-                    VerticalAlignment="Top" 
-                    Width="221" 
-                    Height="32"/>
-                <Button 
                     Content="Availble charging spote station"  
                     Click="Availble_charging_spote_station_Click"
                     HorizontalAlignment="Left" 
-                    Margin="33,0,0,0" 
+                    Margin="33,66,0,0" 
                     VerticalAlignment="Top" 
                     Width="221" 
-                    Height="32" Grid.Row="1"/>
+                    Height="32"/>
 
 
             </Grid>

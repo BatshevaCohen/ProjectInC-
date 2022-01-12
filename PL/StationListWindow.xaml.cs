@@ -26,23 +26,12 @@ namespace PL
         {
             this.bL = bl;
             InitializeComponent();
-            
-        }
-        
-
-        private void ClearStatus_Click(object sender, RoutedEventArgs e)
-        {
-           
+            StationsListView.ItemsSource = bL.ShowStationList().ToList();
         }
 
         private void Availble_charging_spote_station_Click(object sender, RoutedEventArgs e)
         {
             StationsListView.ItemsSource = bL.ShowStationList().Where(x => x.AvailableChargingSpots > 0);
-        }
-
-        private void Station_List_Click(object sender, RoutedEventArgs e)
-        {
-            StationsListView.ItemsSource = bL.ShowStationList().ToList();
         }
 
         private void StationListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)

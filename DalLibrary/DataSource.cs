@@ -13,7 +13,7 @@ namespace DAL
         /// database of DO entities
         /// </summary>
         public static int OrdinalNumber = 1000000;
-        internal static List<Drone> Drones = new(2) { };
+        internal static List<Drone> Drones = new(5) { };
         internal static List<Station> Stations = new(5) { };
         internal static List<Customer> Customer = new(100) { };
         internal static List<Parcel> Parcels = new(1000) { };

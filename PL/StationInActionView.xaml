@@ -110,21 +110,17 @@
                 x:Name="AddGridStation" 
                 Visibility="Collapsed" 
                 VerticalAlignment="Top" 
-                Margin="10,10,0,0" 
+                Margin="10,28,0,0" 
                 HorizontalAlignment="Left" Height="157" Width="307">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Label 
@@ -140,9 +136,9 @@
                     VerticalAlignment="Top" 
                     Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
                     Grid.Row="0" 
-                    Margin="117,5,0,0" 
+                    Margin="0,10,0,0" 
                     Height="23" 
-                    HorizontalAlignment="Left" 
+                    HorizontalAlignment="Center" 
                     Grid.Column="1" 
                     IsEnabled="True"/>
             <Label 
@@ -157,34 +153,70 @@
                     Width="120" 
                     VerticalAlignment="Top" 
                     Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                    Margin="119,0,0,0" 
+                    Margin="0,10,0,0" 
                     Height="23" 
-                    HorizontalAlignment="Left" 
+                    HorizontalAlignment="Center" 
                     Grid.Column="1" 
                     IsEnabled="True" Grid.Row="1"/>
             <Label 
                     VerticalAlignment="Top" 
-                    Grid.Row="1" 
-                    Margin="0,28,0,0" 
+                    Grid.Row="2" 
+                    Margin="0,4,0,0" 
                     HorizontalAlignment="Left" 
                     Grid.Column="0" 
-                    Content="Available Charging Spots:" Grid.ColumnSpan="2" Height="25" Width="144" Grid.RowSpan="3"/>
+                    Content="Available Charging Spots:" Grid.ColumnSpan="2" Height="25" Width="144"/>
             <TextBox 
                     x:Name="AvailableChargingSpotsTextBoxadd" 
                     Width="120" 
-                    VerticalAlignment="Center"  
+                    VerticalAlignment="Top"  
                     Text="{Binding AvailableChargingSpots, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  
-                    Grid.Row="3" 
-                    Margin="117,0,0,0" 
+                    Grid.Row="2" 
+                    Margin="0,6,0,0" 
                     Height="23" 
-                    HorizontalAlignment="Left" 
+                    HorizontalAlignment="Center" 
                     Grid.Column="1"
                 IsEnabled="True"/>
 
 
             <Label 
                     VerticalAlignment="Center" 
-                    Grid.Row="6" 
+                    Grid.Row="3" 
+                    Margin="3" 
+                    HorizontalAlignment="Left" 
+                    Grid.Column="0" 
+                    Content="Location:"/>
+            <Label 
+                    x:Name="LocationLable" 
+                    Width="120" 
+                    VerticalAlignment="Top" 
+                    Content="{Binding Location}"
+                    Grid.Row="3" 
+                    Margin="0,10,0,0" 
+                    Height="23" 
+                    HorizontalAlignment="Center" 
+                    Grid.Column="1" 
+                    IsEnabled="True"/>
+
+            <Grid/>
+        </Grid>
+
+        <Grid
+                x:Name="LocationGridStation" 
+                Visibility="Collapsed" 
+                VerticalAlignment="Top" 
+                Margin="12,235,0,0" 
+                HorizontalAlignment="Left" Height="67" Width="305">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <Label 
+                    VerticalAlignment="Center" 
+                    Grid.Row="0" 
                     Margin="3" 
                     HorizontalAlignment="Left" 
                     Grid.Column="0" 
@@ -194,33 +226,25 @@
                     Width="120" 
                     VerticalAlignment="Top" 
                     Text="{Binding Location.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                    Grid.Row="6" 
-                    Margin="120,2,0,0" 
-                    Height="23" 
-                    HorizontalAlignment="Left" 
+                    Grid.Row="0" 
+                    Height="24" 
+                    HorizontalAlignment="Center" 
                     Grid.Column="1" 
                     IsEnabled="True"/>
             <Label 
                     Content="Longitude:"
                     VerticalAlignment="Center" 
-                    Grid.Row="7" 
-                    Margin="3" 
-                    HorizontalAlignment="Left" 
-                    Grid.Column="0"/>
+                    HorizontalAlignment="Left" Grid.Row="1" Width="99" Margin="17,0,0,0"/>
             <TextBox 
                     x:Name="longitudeTextBoxadd" 
                     Width="120" 
-                    VerticalAlignment="Top" 
+                    VerticalAlignment="Center" 
                     Text="{Binding Location.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                    Grid.Row="7" 
-                    Margin="120,0,0,0" 
+                    Grid.Row="1" 
                     Height="23" 
-                    HorizontalAlignment="Left" 
+                    HorizontalAlignment="Center" 
                     Grid.Column="1" 
                     IsEnabled="True"/>
-            <Grid/>
-
-
         </Grid>
 
         <Button x:Name="btnAddStation"

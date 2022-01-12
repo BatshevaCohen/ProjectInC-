@@ -7,7 +7,8 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="DroneInActionView" Height="403" Width="704" Loaded="Window_Loaded">
+        Title="DroneInActionView" Height="403" Width="704" 
+        Loaded="Window_Loaded">
     <Window.Resources>
         <local:LattitudeToDmsConverter x:Key="LattitudeToDmsConverter"/>
         <local:LongtitudeToDmsConverter x:Key="LongtitudeToDmsConverter"/>
@@ -21,11 +22,11 @@
 
         <Grid 
             Name="ShowDrone" 
-            Visibility="Visible" Margin="10,-10,10,10">
+            Visibility="Collapsed" Margin="10,-10,10,10">
 
             <Grid 
                 x:Name="UpdateGrid" 
-                Visibility="Visible" 
+                Visibility="Collapsed" 
                 VerticalAlignment="Top" 
                 Margin="31,61,0,0" 
                 HorizontalAlignment="Left" Height="224" Width="371">

@@ -20,6 +20,7 @@ namespace PL
 
         BO.Drone drone;
         private DroneToList? droneToList;
+        private Drone newDrone;
         IBL mybl;
 
         /// <summary>
@@ -149,6 +150,8 @@ namespace PL
             {
                 MessageBox.Show("Please update the drone's name");
             }
+            //newDrone = mybl.GetDrone(Int32.Parse(idTextBox.Text));
+            //DataContext = newDrone;
         }
 
         /// <summary>
@@ -402,6 +405,7 @@ namespace PL
         {
             this.Close();
         }
+
     }
 }
 

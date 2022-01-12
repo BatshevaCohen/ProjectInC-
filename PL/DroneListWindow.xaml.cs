@@ -136,7 +136,15 @@ namespace PL
                 new DroneInActionView(droneToList, bL, this).Show();
             }
         }
-
+        /// <summary>
+        /// refresh the list view of the drone
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void refreshWindow(object sender, EventArgs e)
+        {
+            RefreshDronesListView();
+        }
         /// <summary>
         ///  Close button
         /// </summary>

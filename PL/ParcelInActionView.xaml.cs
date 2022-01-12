@@ -116,7 +116,7 @@ namespace PL
             }
             else
             {
-                MessageBox.Show("there are not drone suply!!");
+                MessageBox.Show("there is no drone to supply!!");
             }
         }
         /// <summary>
@@ -190,11 +190,11 @@ namespace PL
             if(p.DroneInParcel!=null)
             {
                 myBl.RemoveParcel(p.Id);
-                MessageBox.Show("parcel remove sucssecfully!");
+                MessageBox.Show("parcel removed sucssecfully!");
             }
             else
             {
-                MessageBox.Show("parcel cant remove it wait to drone!");
+                MessageBox.Show("parcel is waiting to drone and can't be removed");
             }
         }
     }

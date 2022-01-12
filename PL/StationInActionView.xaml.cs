@@ -44,8 +44,6 @@ namespace PL
                 AvailableChargingSpots = stationToL.AvailableChargingSpots
             };
 
-
-
             station.droneInChargings = mybl.GetStation(stationToL.Id).droneInChargings;
 
             if (station.droneInChargings.Count() > 0)
@@ -58,7 +56,6 @@ namespace PL
                     newItem.Content = item;
                     listVDtoneInCharging.Items.Add(newItem);
                 }
-
             }
             else
             {
@@ -75,7 +72,6 @@ namespace PL
             AddGridStation.Visibility = Visibility.Visible;
             DataContext = station;
             stationListWindow.StationsListView.Items.Refresh();
-
         }
 
         private void btnUpdateStation_Click(object sender, RoutedEventArgs e)
@@ -88,7 +84,7 @@ namespace PL
             if (StationName != NameTextBox.Text)
             {
                 mybl.UpdateStetion(Int32.Parse(stationIdTextBox.Text), StationName, Int32.Parse(AvailableChargingSpotsTextBox.Text));
-                MessageBox.Show("Drone updated seccessfuly!");
+                MessageBox.Show("Station updated seccessfuly!");
                 stationIdTextBox.Text = newName;
             }
             else

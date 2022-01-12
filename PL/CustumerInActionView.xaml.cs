@@ -107,16 +107,16 @@ namespace PL
             String CustomerName = (nameTextBox.Text);
             String CustomerPhone = (phoneTextBox.Text);
             Customer c= myBl.GetCustomer(Int32.Parse(idCusTextBox.Text));
-            if (CustomerName==c.Name&&CustomerPhone==c.Phone)
+            if (CustomerName == c.Name && CustomerPhone == c.Phone)
             {
-                MessageBox.Show("please update your name or phone!");
+                MessageBox.Show("Please update name or phone number");
             }
             else 
             {
                 try
                 {
                     myBl.UpdateCustomer(Int32.Parse(idCusTextBox.Text), CustomerName, CustomerPhone);
-                    MessageBox.Show("your datails update succesfully!");
+                    MessageBox.Show("your datails updated succesfully!");
                 }
                 catch(Exception ex){MessageBox.Show(ex.Message);}
               

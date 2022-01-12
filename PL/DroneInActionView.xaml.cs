@@ -259,7 +259,7 @@ namespace PL
                 if (droneStatusComboBox.Text == "Shipping" && drone.ParcelInTransfer != null)
                 {
                     mybl.UpdateParcelPickUpByDrone(Int32.Parse(idTextBox.Text));
-                    MessageBox.Show("Drone pick up the parcel seccessfully!");
+                    MessageBox.Show("Drone picked up the parcel seccessfully!");
                     droneStatusComboBox.Text = "Shipping";
 
                     btnDroneToCharge.Visibility = Visibility.Hidden;
@@ -287,7 +287,7 @@ namespace PL
                     try
                     {
                         mybl.UpdateParcelSuppliedByDrone(Int32.Parse(idTextBox.Text));
-                        MessageBox.Show("Drone pick up the parcel seccessfully!");
+                        MessageBox.Show("Drone picked up the parcel seccessfully!");
                         droneStatusComboBox.Text = "Available";
                         btnDroneToCharge.Visibility = Visibility.Visible;
                         btnDroneToDelivery.Visibility = Visibility.Hidden;

@@ -77,12 +77,5 @@ namespace DAL
 
             return 12742 * Math.Asin(Math.Sqrt(a)); // 2 * R; R = 6371 km
         }
-        public void RemoveParcel(Parcel p)
-        {
-            int index = DataSource.Parcels.FindIndex(x => (x.Id == p.Id));
-            if (index == -1)
-                throw new NonExistsException($"id number {p.Id} not found");
-            DataSource.Parcels.RemoveAt(index);
-        }
     }
 }

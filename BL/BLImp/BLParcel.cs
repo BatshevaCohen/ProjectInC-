@@ -377,6 +377,11 @@ namespace BL
                 return ParcelStatus.PickedUp;
             return ParcelStatus.Supplied;
         }
+        /// <summary>
+        /// remove parcel by ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <exception cref="RemoveException"></exception>
         public void RemoveParcel(int id)
         {
             DO.Parcel parcel;

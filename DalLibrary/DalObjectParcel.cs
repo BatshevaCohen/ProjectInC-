@@ -138,11 +138,6 @@ namespace DAL
             return p;
         }
 
-
-        public void DischargeDrone(int drone_id, double longt, double latit)
-        {
-            throw new NotImplementedException();
-        }
         public List<Parcel> GetListOfParcelSending(int id)
         {
             List<Parcel> Listparcels = new();
@@ -187,6 +182,22 @@ namespace DAL
                 }
             }
             return minDistance;
+        }
+        /// <summary>
+        /// remove parcel frome the list
+        /// </summary>
+        /// <param name="p"></param>
+        public void RemoveParcel(Parcel p)
+        {
+            int index = DataSource.Parcels.FindIndex(x => (x.Id == p.Id));
+            if (index == -1)
+                throw new NonExistsException($"id number {p.Id} not found");
+            DataSource.Parcels.RemoveAt(index);
+        }
+
+        public void DischargeDrone(int drone_id, double longt, double latit)
+        {
+            throw new NotImplementedException();
         }
     }  
 }

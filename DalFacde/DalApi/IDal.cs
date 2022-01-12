@@ -35,7 +35,7 @@ namespace DalApi
         /// <param name="latitude1"></param>
         /// <param name="longitude2"></param>
         /// <param name="latitude2"></param>
-        /// <returns></returns>
+        /// <returns>double</returns>
         double CalculateDistance(double longitude1, double latitude1, double longitude2, double latitude2);
         /// <summary>
         /// send drone to charging
@@ -43,7 +43,7 @@ namespace DalApi
         /// <param name="drone_id"></param>
         /// <param name="longt"></param>
         /// <param name="latit"></param>
-        void DischargeDrone(int drone_id, double longt,double latit);
+        void ChargeDrone_needToCheck_IfWork(int drone_id, double longt,double latit);
         /// <summary>
         /// send drone to release from charging
         /// </summary>
@@ -99,7 +99,7 @@ namespace DalApi
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        List<Parcel> GetListOfParcelSending(int id);
+        List<Parcel> GetListOfParcelSender(int id);
 
         /// <summary>
         /// List of packages that belong to the customer reciever

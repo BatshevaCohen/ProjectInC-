@@ -131,9 +131,7 @@ namespace DAL
                     DataSource.Stations.Add(s);
                     return s;
                 }
-
             }
-
             throw new Exception("couldn't find station by drones location");
         }
 
@@ -159,12 +157,21 @@ namespace DAL
                 DataSource.Config.ChargingRate };
             return result;
         }
+
+
         public void updateBatteryDrone(int id, double dis)
         {
             Drone d = DataSource.Drones.Find(x => x.Id == id);
             DataSource.Drones.Remove(d);
             d.Battery -= dis * 0.01;
             DataSource.Drones.Add(d);
+        }
+
+
+
+        public void ChargeDrone_needToCheck_IfWork(int drone_id, double longt, double latit)
+        {
+            throw new NotImplementedException();
         }
     }
 }

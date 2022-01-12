@@ -5,11 +5,12 @@ using System.Text;
 using System.Threading.Tasks;
 
 using DO;
+using DalApi;
 
 
 namespace DAL
 {
-    internal sealed  partial class DalObject : DalApi.IDal
+    internal sealed partial class DalObject : IDal
     {
         /// <summary>
         /// add Customer to the Customers list
@@ -74,6 +75,5 @@ namespace DAL
             else
                 return DataSource.Customer.Where(predicate).ToList();
         }
-
     }
 }

@@ -53,10 +53,6 @@ namespace DAL
             }
             return DataSource.Parcels.Where(predicate).ToList();
         }
-        /// <summary>
-        /// remove parcel frome the list
-        /// </summary>
-        /// <param name="p"></param>
         
         /// <summary>
         /// shows the list of packages that haven't been associated to a drone
@@ -97,8 +93,6 @@ namespace DAL
             parcel.DroneID = drone.Id;
             parcel.Assigned = DateTime.Now;
             return parcel.Id;
-            
-            
         }
         /// <summary>
         /// Update function for parcel
@@ -143,12 +137,12 @@ namespace DAL
             return p;
         }
 
-
-        public void DischargeDrone(int drone_id, double longt, double latit)
-        {
-            throw new NotImplementedException();
-        }
-        public List<Parcel> GetListOfParcelSending(int id)
+        /// <summary>
+        /// get the list of parcels of one sender
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public List<Parcel> GetListOfParcelSender(int id)
         {
             List<Parcel> Listparcels = new();
             foreach (Parcel item in DataSource.Parcels)
@@ -160,6 +154,11 @@ namespace DAL
             }
             return Listparcels;
         }
+        /// <summary>
+        /// get the list of parcels of one reciver
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public List<Parcel> GetListOfParcelRecirver(int id)
         {
             List<Parcel> Recieverparcels = new();
@@ -192,6 +191,17 @@ namespace DAL
                 }
             }
             return minDistance;
+        }
+        /// <summary>
+        /// remove parcel frome the list
+        /// </summary>
+        /// <param name="p"></param>
+        public void RemoveParcel(Parcel p)
+        {
+            int index = DataSource.Parcels.FindIndex(x => (x.Id == p.Id));
+            if (index == -1)
+                throw new NonExistsException($"id number {p.Id} not found");
+            DataSource.Parcels.RemoveAt(index);
         }
     }  
 }

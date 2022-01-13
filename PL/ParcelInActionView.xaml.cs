@@ -84,7 +84,6 @@ namespace PL
 
         private void btnUpdateParcel_Click(object sender, RoutedEventArgs e)
         {
-
         }
         /// <summary>
         /// open drone windowes parcel

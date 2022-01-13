@@ -11,6 +11,7 @@ namespace DAL
 {
     internal sealed  partial class DalObject : DalApi.IDal
     {
+        #region Coustumer
         /// <summary>
         /// add Customer to the Customers list
         /// </summary>
@@ -74,5 +75,6 @@ namespace DAL
             else
                 return DataSource.Customer.Where(predicate).ToList();
         }
+        #endregion
     }
 }

@@ -10,6 +10,7 @@ namespace DAL
 {
     internal sealed partial class DalObject : DalApi.IDal
     {
+        #region Drone
         /// <summary>
         /// add Drone to the drons list
         /// </summary>
@@ -163,5 +164,6 @@ namespace DAL
             d.Battery -= dis * 0.01;
             DataSource.Drones.Add(d);
         }
+        #endregion
     }
 }

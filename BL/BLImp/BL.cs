@@ -157,7 +157,8 @@ namespace BL
             droneTo.DroneStatuses = DroneStatuses.Shipping;
             droneTo.Model = "DFGHJ56";
             droneTo.Weight = Weight.Medium;
-            droneTo.ParcelNumberTransferred = 111111;
+            //dalo.AddParcel(new DO.Parcel { Id = 11111 });
+            //droneTo.ParcelNumberTransferred = 111111;
 
             droneTo.Location = new()
             {

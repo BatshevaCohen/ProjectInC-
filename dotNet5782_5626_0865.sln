@@ -1,21 +1,17 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 17
-VisualStudioVersion = 17.0.32014.148
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31727.386
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Targil0", "Targil0\Targil0.csproj", "{7E9D4488-B345-4C72-B238-A1D8DEDCCACC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalFacade", "DalFacde\DalFacade.csproj", "{BACEFF21-586A-46EC-919E-52806BD936C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "BL", "BL\BL.csproj", "{D18D0AAE-C141-4D15-9852-843DD8FE37FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalObject", "DalObject\DalObject.csproj", "{38E8681C-FE56-4384-94A0-C605D9729975}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleUI_BL", "ConsoleUI_BL\ConsoleUI_BL.csproj", "{026B1E9B-6126-4AF9-8CC2-D5371D478761}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BL", "BL\BL.csproj", "{D18D0AAE-C141-4D15-9852-843DD8FE37FB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConsoleUI", "ConsoleUI\ConsoleUI.csproj", "{963673D8-2094-4472-B4B2-FED1A95967A9}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleUI_BL", "ConsoleUI_BL\ConsoleUI_BL.csproj", "{026B1E9B-6126-4AF9-8CC2-D5371D478761}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleUI", "ConsoleUI\ConsoleUI.csproj", "{963673D8-2094-4472-B4B2-FED1A95967A9}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "PL", "PL\PL.csproj", "{7B9CE851-FA14-42CC-81F2-FF68F58B54EB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PL", "PL\PL.csproj", "{7B9CE851-FA14-42CC-81F2-FF68F58B54EB}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7AAE5B0D-691B-40AA-A434-0926BA0FE456}"
 EndProject
@@ -24,7 +20,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{D94B75E5-8A3
 		xml\config.xml = xml\config.xml
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DalLibrary", "DalLibrary\DalLibrary.csproj", "{A90DD643-B502-44D2-BE43-B88040AD646F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalLibrary", "DalLibrary\DalLibrary.csproj", "{A90DD643-B502-44D2-BE43-B88040AD646F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DXML", "DXML\DXML.csproj", "{A2E55C30-DEEE-4813-A454-AC19720CA2B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -36,14 +34,6 @@ Global
 		{7E9D4488-B345-4C72-B238-A1D8DEDCCACC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7E9D4488-B345-4C72-B238-A1D8DEDCCACC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7E9D4488-B345-4C72-B238-A1D8DEDCCACC}.Release|Any CPU.Build.0 = Release|Any CPU
-		{BACEFF21-586A-46EC-919E-52806BD936C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{BACEFF21-586A-46EC-919E-52806BD936C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{BACEFF21-586A-46EC-919E-52806BD936C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{BACEFF21-586A-46EC-919E-52806BD936C5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{38E8681C-FE56-4384-94A0-C605D9729975}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{38E8681C-FE56-4384-94A0-C605D9729975}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{38E8681C-FE56-4384-94A0-C605D9729975}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{38E8681C-FE56-4384-94A0-C605D9729975}.Release|Any CPU.Build.0 = Release|Any CPU
 		{D18D0AAE-C141-4D15-9852-843DD8FE37FB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{D18D0AAE-C141-4D15-9852-843DD8FE37FB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D18D0AAE-C141-4D15-9852-843DD8FE37FB}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -64,6 +54,10 @@ Global
 		{A90DD643-B502-44D2-BE43-B88040AD646F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A90DD643-B502-44D2-BE43-B88040AD646F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A90DD643-B502-44D2-BE43-B88040AD646F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A2E55C30-DEEE-4813-A454-AC19720CA2B1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A2E55C30-DEEE-4813-A454-AC19720CA2B1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A2E55C30-DEEE-4813-A454-AC19720CA2B1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A2E55C30-DEEE-4813-A454-AC19720CA2B1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

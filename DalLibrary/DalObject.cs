@@ -14,7 +14,7 @@ namespace DAL
     /// </summary>
     internal sealed partial class DalObject : IDal
     {
-
+        #region Definition
         //singelton
         //internal static IDal Instance;
 
@@ -77,5 +77,6 @@ namespace DAL
 
             return 12742 * Math.Asin(Math.Sqrt(a)); // 2 * R; R = 6371 km
         }
+        #endregion
     }
 }

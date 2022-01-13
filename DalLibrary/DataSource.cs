@@ -134,7 +134,7 @@ namespace DAL
                 // the sender can't be the reciver
                 do
                 {
-                    targetId = r.Next(1, 10);
+                    targetId = r.Next(1, 10); 
                 } while (targetId == senderId);
 
                 Parcels.Add(new Parcel()

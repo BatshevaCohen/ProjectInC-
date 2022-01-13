@@ -23,9 +23,9 @@ namespace DO
             result += $"Reciving customer is {ReceiverId}, \n";
             result += $"Package weight is {Weight}, \n";
             result += $"Priority is {Priority}, \n";
-            result += $"Quadocopter ID is {DroneID}, \n";
+            result += $"Drone ID is {DroneID}, \n";
             result += $"Creating package time is {Create}, \n";
-            result += $"Package to quadocopter affiliation time is {Assigned}, \n";
+            result += $"Package to drone affiliation time is {Assigned}, \n";
             result += $"Collecting package time is {PickedUp}, \n";
             result += $"Client reciving time is {Supplied}, \n";
 

@@ -36,7 +36,6 @@ namespace PL
             AddGrid.Visibility = Visibility.Visible;
             btnAddDrone.Visibility = Visibility.Visible;
             btnAddDrone_cencel.Visibility = Visibility.Visible;
-
             droneWeightComboBox.ItemsSource = Enum.GetValues(typeof(Weight));
             AddDroneStatusComboBox.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             mybl = bL;

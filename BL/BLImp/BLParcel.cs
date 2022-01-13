@@ -350,7 +350,7 @@ namespace BL
             par.SupplyTime = p.Supplied;
             par.CollectionTime = p.PickedUp;
             par.ParcelCreationTime = p.Create;
-            par.AssignmentToParcelTime = p.Assigned; ;
+            par.AssignmentToParcelTime = p.Assigned;
             DO.Customer sender = dalo.GetCustomer(p.SenderId);
             DO.Customer reciver = dalo.GetCustomer(p.ReceiverId);
             par.Resiver = new()

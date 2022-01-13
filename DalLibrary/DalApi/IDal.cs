@@ -126,7 +126,7 @@ namespace DalApi
         /// </summary>
         /// <param name="Reciverid"></param>
         /// <returns></returns
-        double GetDistanceBetweenLocationAndClosestBaseStation(int Reciverid);
+        double GetDistanceBetweenLocationAndClosestStation(int Reciverid);
 
         /// <summary>
         ///  A function that calculates the distance between two points on the map

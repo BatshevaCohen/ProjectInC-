@@ -92,7 +92,7 @@ namespace BL
                         };
 
                         double distance = dalo.GetDistanceBetweenLocationsOfParcels(p.SenderId, p.ReceiverId)
-                            + dalo.GetDistanceBetweenLocationAndClosestBaseStation(p.ReceiverId);
+                            + dalo.GetDistanceBetweenLocationAndClosestStation(p.ReceiverId);
                         switch (p.Weight)
                         {
                             case DO.WeightCategories.Light:
@@ -138,7 +138,7 @@ namespace BL
                             Longitude = customer.Longitude
                         };
                         // Battery mode will be recharged between a minimal charge that will allow it to reach the station closest to charging and a full charge
-                        double distance = dalo.GetDistanceBetweenLocationAndClosestBaseStation(parcelsDelivered[index].ReceiverId);
+                        double distance = dalo.GetDistanceBetweenLocationAndClosestStation(parcelsDelivered[index].ReceiverId);
 
                         // זה זמניייייייייייי השורה הזאת עשתה חריגה 
                         droneBL.Battery = 30;

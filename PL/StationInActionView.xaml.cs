@@ -59,7 +59,7 @@ namespace PL
             }
             else
             {
-                listVDtoneInCharging.Visibility = Visibility.Hidden;
+                listVDtoneInCharging.Visibility = Visibility.Collapsed;
             }
             DataContext = station;
 

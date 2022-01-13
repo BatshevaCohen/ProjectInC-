@@ -199,7 +199,7 @@
                 Width="182" 
                 Click="btnCollectParcel_Click" Margin="452,143,0,0"/>
             <Button 
-                x:Name="btnReleaiseToCharge" 
+                x:Name="btnDischarge" 
                 Content="Discharge" 
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="25"
@@ -208,7 +208,7 @@
                 VerticalAlignment="Top" 
                 Width="180" 
                 Height="60" 
-                Click="btnReleaiseToCharge_Click" Margin="453,143,0,0"/>
+                Click="btnDischarge_Click" Margin="453,143,0,0"/>
             <Button 
                 x:Name="btnParcelDelivery" 
                 Content="Parcel delivery"

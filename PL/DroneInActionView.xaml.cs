@@ -169,11 +169,11 @@ namespace PL
                     mybl.UpdateChargeDrone(Int32.Parse(idTextBox.Text));
                     MessageBox.Show("Drone sent to charge seccessfuly!");
                     droneStatusComboBox.Text = "Maintenance";
-                    btnDroneToCharge.Visibility = Visibility.Hidden;
-                    btnCollectParcel.Visibility = Visibility.Hidden;
-                    btnDroneToDelivery.Visibility = Visibility.Hidden;
-                    btnReleaiseToCharge.Visibility = Visibility.Visible;
-                    btnParcelDelivery.Visibility = Visibility.Hidden;
+                    btnDroneToCharge.Visibility = Visibility.Collapsed;
+                    btnCollectParcel.Visibility = Visibility.Collapsed;
+                    btnDroneToDelivery.Visibility = Visibility.Collapsed;
+                    btnDischarge.Visibility = Visibility.Visible;
+                    btnParcelDelivery.Visibility = Visibility.Collapsed;
                 }
                 catch (Exception ex)
                 {
@@ -187,13 +187,13 @@ namespace PL
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnReleaiseToCharge_Click(object sender, RoutedEventArgs e)
+        private void btnDischarge_Click(object sender, RoutedEventArgs e)
         {
             if (droneStatusComboBox.Text == "Maintenance")
             {
-                //input box- so the user will insert the charging time
-                TimeSpan chargingTime = TimeSpan.Parse(Interaction.InputBox("Please enter time of charging", "Time of charging", ""));
-
+                //input box- so the user will insert the charging time--- HH:MM
+                TimeSpan chargingTime = TimeSpan.Parse(Interaction.InputBox("Please insert time of charging in: HH:MM", "Time of charging", ""));
+                
                 try
                 {
                     mybl.DischargeDrone(Int32.Parse(idTextBox.Text), chargingTime);
@@ -203,9 +203,9 @@ namespace PL
 
                     btnDroneToCharge.Visibility = Visibility.Visible;
                     btnDroneToDelivery.Visibility = Visibility.Visible;
-                    btnReleaiseToCharge.Visibility = Visibility.Hidden;
-                    btnCollectParcel.Visibility = Visibility.Hidden;
-                    btnParcelDelivery.Visibility = Visibility.Hidden;
+                    btnDischarge.Visibility = Visibility.Collapsed;
+                    btnCollectParcel.Visibility = Visibility.Collapsed;
+                    btnParcelDelivery.Visibility = Visibility.Collapsed;
                 }
                 catch (Exception ex)
                 {
@@ -228,9 +228,9 @@ namespace PL
                     mybl.UpdateParcelToDrone(Int32.Parse(idTextBox.Text));
                     MessageBox.Show("Drone sent to delivery seccessfuly!");
                     droneStatusComboBox.Text = "Shipping";
-                    btnDroneToCharge.Visibility = Visibility.Hidden;
-                    btnDroneToDelivery.Visibility = Visibility.Hidden;
-                    btnReleaiseToCharge.Visibility = Visibility.Hidden;
+                    btnDroneToCharge.Visibility = Visibility.Collapsed;
+                    btnDroneToDelivery.Visibility = Visibility.Collapsed;
+                    btnDischarge.Visibility = Visibility.Collapsed;
                     btnCollectParcel.Visibility = Visibility.Visible;
                     btnParcelDelivery.Visibility = Visibility.Visible;
                 }
@@ -262,9 +262,9 @@ namespace PL
                     MessageBox.Show("Drone picked up the parcel seccessfully!");
                     droneStatusComboBox.Text = "Shipping";
 
-                    btnDroneToCharge.Visibility = Visibility.Hidden;
-                    btnDroneToDelivery.Visibility = Visibility.Hidden;
-                    btnReleaiseToCharge.Visibility = Visibility.Hidden;
+                    btnDroneToCharge.Visibility = Visibility.Collapsed;
+                    btnDroneToDelivery.Visibility = Visibility.Collapsed;
+                    btnDischarge.Visibility = Visibility.Collapsed;
                     btnCollectParcel.Visibility = Visibility.Visible;
                     btnParcelDelivery.Visibility = Visibility.Visible;
                 }
@@ -290,10 +290,10 @@ namespace PL
                         MessageBox.Show("Drone picked up the parcel seccessfully!");
                         droneStatusComboBox.Text = "Available";
                         btnDroneToCharge.Visibility = Visibility.Visible;
-                        btnDroneToDelivery.Visibility = Visibility.Hidden;
-                        btnReleaiseToCharge.Visibility = Visibility.Hidden;
+                        btnDroneToDelivery.Visibility = Visibility.Collapsed;
+                        btnDischarge.Visibility = Visibility.Collapsed;
                         btnCollectParcel.Visibility = Visibility.Visible;
-                        btnParcelDelivery.Visibility = Visibility.Hidden;
+                        btnParcelDelivery.Visibility = Visibility.Collapsed;
                     }
                     catch (Exception ex)
                     {
@@ -312,33 +312,33 @@ namespace PL
             {
                 btnDroneToCharge.Visibility = Visibility.Visible;
                 btnDroneToDelivery.Visibility = Visibility.Visible;
-                btnReleaiseToCharge.Visibility = Visibility.Hidden;
-                btnCollectParcel.Visibility = Visibility.Hidden;
-                btnParcelDelivery.Visibility = Visibility.Hidden;
+                btnDischarge.Visibility = Visibility.Collapsed;
+                btnCollectParcel.Visibility = Visibility.Collapsed;
+                btnParcelDelivery.Visibility = Visibility.Collapsed;
             }
             else if (droneStatusComboBox.Text == "Maintenance")
             {
-                btnDroneToCharge.Visibility = Visibility.Hidden;
-                btnDroneToDelivery.Visibility = Visibility.Hidden;
-                btnReleaiseToCharge.Visibility = Visibility.Visible;
-                btnCollectParcel.Visibility = Visibility.Hidden;
-                btnParcelDelivery.Visibility = Visibility.Hidden;
+                btnDroneToCharge.Visibility = Visibility.Collapsed;
+                btnDroneToDelivery.Visibility = Visibility.Collapsed;
+                btnDischarge.Visibility = Visibility.Visible;
+                btnCollectParcel.Visibility = Visibility.Collapsed;
+                btnParcelDelivery.Visibility = Visibility.Collapsed;
             }
             // the drone status in shipping
 
             else if (droneStatusComboBox.Text == "shipping" && drone.ParcelInTransfer.Id != 0 && p.CollectionTime != DateTime.MinValue)
             {
-                btnDroneToCharge.Visibility = Visibility.Hidden;
-                btnDroneToDelivery.Visibility = Visibility.Hidden;
-                btnReleaiseToCharge.Visibility = Visibility.Hidden;
+                btnDroneToCharge.Visibility = Visibility.Collapsed;
+                btnDroneToDelivery.Visibility = Visibility.Collapsed;
+                btnDischarge.Visibility = Visibility.Collapsed;
                 btnCollectParcel.Visibility = Visibility.Visible;
                 btnParcelDelivery.Visibility = Visibility.Visible;
             }
             else if (droneStatusComboBox.Text == "shipping" && drone.ParcelInTransfer.Id != 0 && p.CollectionTime == DateTime.MinValue)
             {
-                btnDroneToCharge.Visibility = Visibility.Hidden;
-                btnDroneToDelivery.Visibility = Visibility.Hidden;
-                btnReleaiseToCharge.Visibility = Visibility.Hidden;
+                btnDroneToCharge.Visibility = Visibility.Collapsed;
+                btnDroneToDelivery.Visibility = Visibility.Collapsed;
+                btnDischarge.Visibility = Visibility.Collapsed;
                 btnCollectParcel.Visibility = Visibility.Visible;
                 btnParcelDelivery.Visibility = Visibility.Visible;
             }

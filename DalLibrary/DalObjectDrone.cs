@@ -60,7 +60,6 @@ namespace DAL
                 {
                     DroneList.Add(element);
                 }
-
                 return DroneList;
             }
             else
@@ -118,7 +117,6 @@ namespace DAL
         /// <exception cref="Exception"></exception>
         public Station DischargeDroneByLocation(int droneID, double droneLatitude, double droneLongitude)
         {
-
             Drone d = DataSource.Drones.Find(x => x.Id == droneID);
             Station s = new Station();
             foreach (Station item in DataSource.Stations) //finds the station
@@ -131,9 +129,7 @@ namespace DAL
                     DataSource.Stations.Add(s);
                     return s;
                 }
-
             }
-
             throw new Exception("couldn't find station by drones location");
         }
 
@@ -159,6 +155,7 @@ namespace DAL
                 DataSource.Config.ChargingRate };
             return result;
         }
+
         public void updateBatteryDrone(int id, double dis)
         {
             Drone d = DataSource.Drones.Find(x => x.Id == id);

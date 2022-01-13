@@ -17,7 +17,7 @@ namespace DAL
         internal static List<Station> Stations = new(5) { };
         internal static List<Customer> Customer = new(100) { };
         internal static List<Parcel> Parcels = new(1000) { };
-        internal static List<DroneCharge> DroneCharges = new() { };
+        internal static List<DroneCharge> DroneCharges = new(10) { };
         public static List<User> userList;
 
         static Random r = new() { };

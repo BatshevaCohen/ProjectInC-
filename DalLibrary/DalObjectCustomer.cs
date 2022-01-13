@@ -74,6 +74,5 @@ namespace DAL
             else
                 return DataSource.Customer.Where(predicate).ToList();
         }
-
     }
 }

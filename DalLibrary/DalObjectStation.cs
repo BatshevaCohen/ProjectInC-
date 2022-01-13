@@ -210,7 +210,7 @@ namespace DAL
         /// </summary>
         /// <param name="targetId">target Id</param>
         /// <returns>Minimum distance to the nearest station</returns>
-        public double GetDistanceBetweenLocationAndClosestBaseStation(int Reciverid)
+        public double GetDistanceBetweenLocationAndClosestStation(int Reciverid)
         {
             double minDistance = 1000000000000;
             Customer target = GetCustomer(Reciverid);

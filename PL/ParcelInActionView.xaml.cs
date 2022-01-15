@@ -74,9 +74,18 @@ namespace PL
             btnShowCustumerSender.Visibility = Visibility.Visible;
             myBl = bl;
             Parcel p = myBl.GetParcel(parTL.Id);
+            //If there is no drone associated with the parcel hiden all the detailes
             if (p.DroneInParcel == null)
             {
-                //וסורי אין לי כוח לעשות את זה lלהחביא את הלייבלים וטקסטבוקס של הרחפן שמשוייך לחבילה 
+                lblBatteryDrone.Visibility = Visibility.Collapsed;
+                lblDroneInParcel.Visibility = Visibility.Collapsed;
+                lblIDDrone.Visibility = Visibility.Collapsed;
+                lblLatiDrone.Visibility = Visibility.Collapsed;
+                lbllongiDrone.Visibility = Visibility.Collapsed;
+                batteryDroneParcelTXB.Visibility = Visibility.Collapsed;
+                IdDroneParcelTXB.Visibility = Visibility.Collapsed;
+                LatitudeDroneParcelTXB.Visibility = Visibility.Collapsed;
+                LongitudeDroneParcelTXB.Visibility = Visibility.Collapsed;
             }
             DataContext = p;
         }

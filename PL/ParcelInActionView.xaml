@@ -99,18 +99,18 @@
                 Grid.Row="9" Margin="1,1,2,2"/>
             <!--לבדוק שמציג את הלוקיישן טוב לפי הבונוס-->
 
-            <Label Content="Drone In Parcel:" Margin="0,1,6,31" Grid.Row="13" FontWeight="Bold" Grid.RowSpan="2"/>
-            <Label Content="Id" Margin="4,2,5,1" Grid.Row="14"/>
+            <Label x:Name="lblDroneInParcel" Content="Drone In Parcel:" Margin="0,1,6,31" Grid.Row="13" FontWeight="Bold" Grid.RowSpan="2"/>
+            <Label x:Name="lblIDDrone" Content="Id" Margin="4,2,5,1" Grid.Row="14"/>
             <TextBox x:Name="IdDroneParcelTXB" 
                      Text="{Binding DroneInParcel.Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                      TextWrapping="Wrap" Grid.Column="1" Margin="1,33,9,34" Grid.RowSpan="3" Grid.Row="13" IsEnabled="False"/>
-            <Label Content="battery" Margin="1,1,1,2" Grid.Row="15"/>
+            <Label x:Name="lblBatteryDrone" Content="battery" Margin="1,1,1,2" Grid.Row="15"/>
             <TextBox x:Name="batteryDroneParcelTXB"  Text="{Binding DroneInParcel.Battery, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                       TextWrapping="Wrap" Grid.Column="1" Margin="1,34,2,3" Grid.Row="14" IsEnabled="False" Grid.RowSpan="2" />
-            <Label Content="Latitude" Margin="0,32,3,5" Grid.Row="15" Grid.RowSpan="2"/>
+            <Label x:Name="lbllongiDrone" Content="Latitude" Margin="0,32,3,5" Grid.Row="15" Grid.RowSpan="2"/>
             <TextBox x:Name="LatitudeDroneParcelTXB"  Text="{Binding DroneInParcel.Location.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                      TextWrapping="Wrap" Grid.Column="1" Margin="3,32,6,4" Grid.Row="15" IsEnabled="False" Grid.RowSpan="2"/>
-            <Label Content="Longitude" Margin="0,1,8,-1" Grid.Row="17"/>
+            <Label x:Name="lblLatiDrone" Content="Longitude" Margin="0,1,8,-1" Grid.Row="17"/>
             <TextBox x:Name="LongitudeDroneParcelTXB"  Text="{Binding DroneInParcel.Location.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                      TextWrapping="Wrap" Grid.Column="1" Margin="2,32,1,3" Grid.Row="16" IsEnabled="False" Grid.RowSpan="2"/>
             <Label Content="Priority parcel" Margin="1,1,7,2" Grid.Row="1"/>
@@ -141,7 +141,7 @@
                 VerticalAlignment="Top" 
                 Height="60" Width="198" 
                 Click="btnUpdateParcel_Click" 
-                Margin="474,75,0,0" Visibility="Visible"/>
+                Margin="474,75,0,0" Visibility="Collapsed"/>
         <Button 
                 x:Name="btnShowDrone"  
                 Content="Drone dateiles" 
@@ -151,7 +151,7 @@
                 VerticalAlignment="Top" 
                 Height="60" Width="198" 
                 Click="btnShowDrone_Click" 
-                Margin="474,150,0,0" Visibility="Visible"/>
+                Margin="474,150,0,0" Visibility="Collapsed"/>
 
         <Button 
                 x:Name="btnShowCustumerReciver"  
@@ -162,7 +162,7 @@
                 VerticalAlignment="Top" 
                 Height="60" Width="198" 
                 Click="btnShowCustumerReciver_Click" 
-                Margin="474,225,0,0" Visibility="Visible"/>
+                Margin="474,225,0,0" Visibility="Collapsed"/>
         <Button 
                 x:Name="btnShowCustumerSender"  
                 Content="custumer Sender datailes" 
@@ -172,7 +172,7 @@
                 VerticalAlignment="Top" 
                 Height="60" Width="198" 
                 Click="btnShowCustumerSender_Click" 
-                Margin="474,301,0,0" Visibility="Visible"/>
+                Margin="474,301,0,0" Visibility="Collapsed"/>
         <Button 
                 x:Name="btnRemuveParcel"  
                 Content="Remove Parcel" 
@@ -182,7 +182,7 @@
                 VerticalAlignment="Top" 
                 Height="60" Width="198" 
                 Click="btnRemoveParcel_Click" 
-                Margin="474,375,0,0" Visibility="Visible"/>
+                Margin="474,375,0,0" Visibility="Collapsed"/>
         <Button 
                 x:Name="btnClose" 
                 Content="Close" 
@@ -320,12 +320,12 @@
 
         <Button x:Name="btnOK" 
                 Content="OK" 
-                Margin="474,450,0,0" 
-                Visibility="Visible" 
+                Margin="519,489,0,0" 
+                Visibility="Collapsed" 
                 Click="OK_Click"
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
-                Height="60" Width="198" 
+                Height="35" Width="108" 
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
 />
 

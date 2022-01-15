@@ -251,7 +251,17 @@ namespace BL
             if (parcel.CollectionTime == DateTime.MinValue)///////////////////
             {
                 DroneToList droneToList = DronesL.Find(x => x.Id == p.DroneID);
-                parcel.DroneInParcel = new() { Id = p.Id, Battery = droneToList.Battery, Location = droneToList.Location };
+                parcel.DroneInParcel = new()
+                {
+                    Id = p.Id,
+                    Battery = droneToList.Battery,
+                    Location = new()
+                    {
+                        Latitude=droneToList.Location.Latitude,
+                        Longitude=droneToList.Location.Longitude
+
+                    }
+                };
             }
             return parcel;
         }

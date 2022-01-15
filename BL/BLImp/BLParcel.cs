@@ -226,19 +226,21 @@ namespace BL
             parcel.Resiver = new() { Id = custumerReceiver.Id, Name = custumerReceiver.Name };
             //אם החבילה עדיין לא שוייכה אין לה רחפן בטעינה 
 
+            if (parcel.DroneInParcel != null)
+            {
+                DO.Drone drone = dalo.GetDrone(p.DroneID);
+                parcel.DroneInParcel = new()
+                {
+                    Id = p.DroneID,
+                    Battery = drone.Battery,
+                };
 
-            //DO.Drone drone = dalo.GetDrone(p.DroneID);
-            //parcel.DroneInParcel = new()
-            //{
-            //    Id = p.DroneID,
-            //    Battery = drone.Battery,
-            //};
-
-            //parcel.DroneInParcel.Location = new()
-            //{//מיקום הרחםן כמיקום השולח
-            //    Latitude = custumerSender.Latitude,
-            //    Longitude = custumerSender.Longitude
-            //};
+                parcel.DroneInParcel.Location = new()
+                {//מיקום הרחםן כמיקום השולח
+                    Latitude = custumerSender.Latitude,
+                    Longitude = custumerSender.Longitude
+                };
+            }
 
 
 

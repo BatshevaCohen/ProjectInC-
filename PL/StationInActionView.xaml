@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:PL"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"        
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
         Title="StationInActionView" Height="450" Width="708">
@@ -45,9 +46,11 @@
                     Margin="3" 
                     HorizontalAlignment="Left" 
                     Grid.Column="0" 
-                    Content="Station id:"/>
+                    Content="Station id:"
+                    FontFamily="Comic Sans MS"/>
             <TextBox 
                     x:Name="stationIdTextBox" 
+                FontFamily="Comic Sans MS"
                     Width="120" 
                     VerticalAlignment="Center" 
                     Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
@@ -59,6 +62,7 @@
                     IsEnabled="False"/>
             <Label 
                     VerticalAlignment="Center" 
+                FontFamily="Comic Sans MS"
                     Grid.Row="1" 
                     Margin="3" 
                     HorizontalAlignment="Left" 
@@ -66,6 +70,7 @@
                     Content="Name:"/>
             <TextBox 
                     x:Name="NameTextBox" 
+                    FontFamily="Comic Sans MS"
                     Width="120" 
                     VerticalAlignment="Center" 
                     Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
@@ -78,6 +83,7 @@
             <Label 
                     VerticalAlignment="Center" 
                     Grid.Row="3" 
+                    FontFamily="Comic Sans MS"
                     Margin="3" 
                     HorizontalAlignment="Left" 
                     Grid.Column="0" 
@@ -89,15 +95,10 @@
                     Text="{Binding AvailableChargingSpots, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  
                     Grid.Row="3" 
                     Margin="3" 
+                    FontFamily="Comic Sans MS"
                     Height="23" 
                     HorizontalAlignment="Left" 
                     Grid.Column="1"/>
-            <Button x:Name="btnUpdateStation"
-                Content="Update station"
-                    Margin="233,15,-263,13"
-                    Grid.Row="1"
-                    Visibility="Visible"
-                    Click="btnUpdateStation_Click" Grid.Column="1" Grid.RowSpan="3"/>
 
             <!--<WrapPanel Grid.ColumnSpan="2" Margin="33,64,3,-139" Grid.Row="5">
                 <ListView  x:Name="listVDtoneInCharging" Margin="24,56,17,-97"  ItemsSource="{Binding DroneInCharging}" Width="212" Height="114" RenderTransformOrigin="0.51,-0.314" MouseDoubleClick="StationInActionView_MouseDoubleClick" />
@@ -105,6 +106,14 @@
 
 
         </Grid>
+        <Button x:Name="btnUpdateStation"
+                Content="Update station"
+                Visibility="Collapsed"
+                FontFamily="Comic Sans MS"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                materialDesign:ButtonAssist.CornerRadius="10" 
+                Click="btnUpdateStation_Click" 
+                Margin="59,158,401,217"/>
 
         <Grid 
                 x:Name="AddGridStation" 
@@ -127,11 +136,13 @@
                     VerticalAlignment="Center" 
                     Grid.Row="0" 
                     Margin="3" 
+                FontFamily="Comic Sans MS"
                     HorizontalAlignment="Left" 
                     Grid.Column="0" 
                     Content="Station id:"/>
             <TextBox 
                     x:Name="stationIdTextBoxadd" 
+                FontFamily="Comic Sans MS"
                     Width="120" 
                     VerticalAlignment="Top" 
                     Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
@@ -143,6 +154,7 @@
                     IsEnabled="True"/>
             <Label 
                     VerticalAlignment="Center" 
+                FontFamily="Comic Sans MS"
                     Grid.Row="1" 
                     Margin="3" 
                     HorizontalAlignment="Left" 
@@ -150,6 +162,7 @@
                     Content="Name:"/>
             <TextBox 
                     x:Name="NameTextBoxadd" 
+                FontFamily="Comic Sans MS"
                     Width="120" 
                     VerticalAlignment="Top" 
                     Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
@@ -160,6 +173,7 @@
                     IsEnabled="True" Grid.Row="1"/>
             <Label 
                     VerticalAlignment="Top" 
+                FontFamily="Comic Sans MS"
                     Grid.Row="2" 
                     Margin="0,4,0,0" 
                     HorizontalAlignment="Left" 
@@ -168,6 +182,7 @@
             <TextBox 
                     x:Name="AvailableChargingSpotsTextBoxadd" 
                     Width="120" 
+                FontFamily="Comic Sans MS"
                     VerticalAlignment="Top"  
                     Text="{Binding AvailableChargingSpots, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  
                     Grid.Row="2" 
@@ -180,6 +195,7 @@
 
             <Label 
                     VerticalAlignment="Center" 
+                    FontFamily="Comic Sans MS"
                     Grid.Row="3" 
                     Margin="3" 
                     HorizontalAlignment="Left" 
@@ -187,6 +203,7 @@
                     Content="Location:"/>
             <Label 
                     x:Name="LocationLable" 
+                    FontFamily="Comic Sans MS"
                     Width="120" 
                     VerticalAlignment="Top" 
                     Content="{Binding Location}"
@@ -215,14 +232,16 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <Label 
-                    VerticalAlignment="Center" 
+                    VerticalAlignment="Top" 
                     Grid.Row="0" 
-                    Margin="3" 
+                    Margin="17,7,0,0" 
                     HorizontalAlignment="Left" 
+                FontFamily="Comic Sans MS"
                     Grid.Column="0" 
                     Content="Latitude:"/>
             <TextBox 
                     x:Name="latitudeTextBoxadd" 
+                FontFamily="Comic Sans MS"
                     Width="120" 
                     VerticalAlignment="Top" 
                     Text="{Binding Location.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
@@ -233,11 +252,13 @@
                     IsEnabled="True"/>
             <Label 
                     Content="Longitude:"
+                FontFamily="Comic Sans MS"
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Left" Grid.Row="1" Width="99" Margin="17,0,0,0"/>
             <TextBox 
                     x:Name="longitudeTextBoxadd" 
                     Width="120" 
+                FontFamily="Comic Sans MS"
                     VerticalAlignment="Center" 
                     Text="{Binding Location.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
                     Grid.Row="1" 
@@ -248,25 +269,33 @@
         </Grid>
 
         <Button x:Name="btnAddStation"
-            Content="Add" Margin="116,217,0,185"
-                 Visibility="Collapsed"
-              Style="{StaticResource MaterialDesignRaisedDarkButton}" 
-             
-            HorizontalAlignment="Left" Width="148" 
-              Click="btnAddeStation_Click"
+                FontFamily="Comic Sans MS"
+                Content="Add" 
+                Margin="70,217,0,167"
+                Visibility="Collapsed"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                materialDesign:ButtonAssist.CornerRadius="10" 
+                HorizontalAlignment="Left" 
+                Width="148" 
+                Height="50"
+                Click="btnAddeStation_Click"
                 />
-        <ListView  x:Name="listVDtoneInCharging" MouseDoubleClick="StationInActionView_MouseDoubleClick" Margin="36,222,445,90" Visibility="Collapsed">
+        <ListView  x:Name="listVDtoneInCharging" 
+                   FontFamily="Comic Sans MS" 
+                   MouseDoubleClick="StationInActionView_MouseDoubleClick" Margin="36,222,445,90" 
+                   Visibility="Collapsed">
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ID" Width="110" DisplayMemberBinding="{Binding Id}" />
                     <GridViewColumn Header="Battery"  Width="110" DisplayMemberBinding="{Binding Battery}"/>
                 </GridView>
-            </ListView.View>
-            <Label Content="Label"/>
+            </ListView.View> />
 
 
         </ListView>
-        <Label x:Name="lable_droneincharging" Content="Drones in charging in this station:" Margin="36,175,384,217" Visibility="Collapsed"/>
+        <Label x:Name="lable_droneincharging" Content="Drones in charging in this station:" Margin="36,175,384,217" 
+               FontFamily="Comic Sans MS"
+               Visibility="Collapsed"/>
 
 
     </Grid>

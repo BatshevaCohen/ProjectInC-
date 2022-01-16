@@ -19,7 +19,7 @@
             Grid.ColumnSpan="2"/>
 
         <Grid x:Name="enterDetailsGrid"
-              Visibility="Collapsed">
+              Visibility="Visible">
             <!--ID icon-->
             <materialDesign:PackIcon 
             Kind="Account"             

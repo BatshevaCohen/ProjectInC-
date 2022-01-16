@@ -8,7 +8,8 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using Microsoft.VisualBasic;
-
+using System.Windows.Input;
+using System.Text.RegularExpressions;
 
 namespace PL
 {
@@ -36,8 +37,9 @@ namespace PL
             AddGrid.Visibility = Visibility.Visible;
             btnAddDrone.Visibility = Visibility.Visible;
             btnAddDrone_cencel.Visibility = Visibility.Visible;
+            AddButtonsGrid.Visibility= Visibility.Visible;
             droneWeightComboBox.ItemsSource = Enum.GetValues(typeof(Weight));
-            AddDroneStatusComboBox.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
+            //AddDroneStatusComboBox.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             mybl = bL;
             IEnumerable<StationToList> listStationToList = mybl.ShowStationList();
             List<int> stationIDs = new();
@@ -303,6 +305,11 @@ namespace PL
             else
                 MessageBox.Show("Can't supply parcel by the drone");
         }
+        /// <summary>
+        /// window load
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
             Parcel p = mybl.GetParcelByDroneId(drone.Id);
@@ -357,7 +364,6 @@ namespace PL
             {
                 Id = Int32.Parse(idTextBox.Text),
                 Model = droneModelTextBox.Text,
-                Battery = Int32.Parse(batteryPrecentTextBox.Text),
                 DroneStatuses = DroneStatuses.Maintenance,
                 Weight = (Weight)droneWeightComboBox.SelectedItem,
             };
@@ -393,6 +399,17 @@ namespace PL
             
             ParcelInTransferDetails parcelInTransfer= new ParcelInTransferDetails(drone.ParcelInTransfer);
             parcelInTransfer.Show();
+        }
+        /// <summary>
+        /// check that the text box includes numberic values only- you can't enter something that isn't digit
+        /// from:https://stackoverflow.com/questions/1268552/how-do-i-get-a-textbox-to-only-accept-numeric-input-in-wpf
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
 
         /// <summary>

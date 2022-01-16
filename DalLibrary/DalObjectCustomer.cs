@@ -19,7 +19,7 @@ namespace DAL
         /// <returns></returns>
         public void AddCustomer(Customer c)
         {
-            if (DataSource.Customer.Exists(client => client.Id == c.Id))
+            if (DataSource.Customer.Exists(x => x.Id == c.Id))
             {
                 throw new CustomerException($"ID {c.Id} already exists!!");
             }
@@ -75,6 +75,7 @@ namespace DAL
             else
                 return DataSource.Customer.Where(predicate).ToList();
         }
+        
         #endregion
     }
 }

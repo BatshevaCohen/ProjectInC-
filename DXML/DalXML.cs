@@ -1,254 +1,216 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DLXML;
-using DalApi;
+﻿using Dal;
 using DO;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Xml.Linq;
 
 namespace DXML
 {
-    class DalXML//:IDal
+    internal sealed partial class DalXml// : DalApi.IDal
     {
-        //string dronePath = "drons.xml";
+        XMLTools XMLTools;
+        string dronePath = @"drons.xml";
+        string stationPath = @"Stations.xml";
+        string parcelPath = @"Parcels.xml";
+        string customerPath = @"Customers.xml";
 
-        //#region singelton
-        //static readonly DXML instance = new DXML();
-        //static DXML() { }// static ctor to ensure instance init is done just before first usage
-        //DXML() { } // default => private
-        //public static DXML Instance { get => instance; }// The public Instance property to use
-        //#endregion
+        //זה גמור!
+        #region singelton
+        static DalXml instance;
+        private static object locker = new object();
+        private XElement CustumerRoot;
 
-        //#region Coustumer
-        ///// <summary>
-        ///// add Customer to the Customers list
-        ///// </summary>
-        ///// <param name="c"></param>
-        ///// <returns></returns>
-        //public void AddCustomer(Customer c)
-        //{
-        //    if (DataSource.Customer.Exists(client => client.Id == c.Id))
-        //    {
-        //        throw new CustomerException($"ID {c.Id} already exists!!");
-        //    }
-        //    else
-        //        DataSource.Customer.Add(c);
-        //}
-        ///// <summary>
-        ///// update customee name and phone---
-        ///// </summary>
-        ///// <param name="custumerId"></param>
-        ///// <param name="name"></param>
-        ///// <param name="phone"></param>
-        //public void UpdateCustumer(int custumerId, string name, string phone)
-        //{
-        //    if (!DataSource.Customer.Exists(x => x.Id == custumerId))
-        //    {
-        //        throw new Exception($"custumer {custumerId} is not exite!!");
-        //    }
-        //    Customer customer = DataSource.Customer.Find(x => x.Id == custumerId);
-        //    DataSource.Customer.Remove(customer);
-        //    customer.Name = name;
-        //    customer.Phone = phone;
-        //    DataSource.Customer.Add(customer);
-        //}
-        ///// <summary>
-        ///// Get Customer by id
-        ///// </summary>
-        ///// <param name="id"></param>
-        //public Customer GetCustomer(int IDc)
-        //{
-        //    //if ID does not exist for customer
-        //    if (!DataSource.Customer.Exists(item => item.Id == IDc))
-        //    {
-        //        throw new CustomerException($"ID: {IDc} does not exist!!");
-        //    }
-        //    return DataSource.Customer.First(c => c.Id == IDc);
-        //}
+        /// <summary>
+        /// constructor - calls DataSource.initialize() to initialize lists
+        /// </summary>
+        private DalXml()
+        {
+            string dir = @"..\xml\";
+            XMLTools = new XMLTools();
+            if (!File.Exists(dir + dronePath))
+                CreateFiles();
+            else
+                LoadData();
+        }
 
-        ///// <summary>
-        ///// Show list of Customers
-        ///// </summary>
-        //public IEnumerable<Customer> ShowCustomerList(Func<Customer, bool> predicate = null)
-        //{
-        //    if (predicate == null)
-        //    {
-        //        List<Customer> CustomerList = new();
-        //        foreach (Customer element in DataSource.Customer)
-        //        {
-        //            CustomerList.Add(element);
-        //        }
-        //        return CustomerList;
-        //    }
-        //    else
-        //        return DataSource.Customer.Where(predicate).ToList();
-        //}
-        //#endregion
+        /// <summary>
+        /// instance of DalObject class - same object is always returned
+        /// </summary>
+        public static DalXml Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    lock (locker)
+                    {
+                        if (instance == null)
+                            instance = new DalXml();
+                    }
+                }
+                return instance;
+            }
+        }
 
-        //#region Drone
-        ///// <summary>
-        ///// add Drone to the drons list
-        ///// </summary>
-        ///// <param name="d"></param>
-        ///// <returns></returns>
-        //public void AddDrone(Drone d)
-        //{
-        //    List<DO.Drone> dronsList = XMLTools.LoadListFromXMLSerializer<Drone>(dronePath);
-        //    if (dronsList.Exists(drone => drone.Id == d.Id))
-        //    {
-        //        throw new DroneException($"ID {d.Id} already exists!!");
-        //    }
-        //    else
-        //    {
-        //        dronsList.Add(d);
-        //        XMLTools.SaveListToXMLSerializer<Drone>(dronsList, dronePath);
-        //    }
-
-        //}
-        ///// <summary>
-        ///// Update name of drone
-        ///// </summary>
-        ///// <param name="id"></param>
-        ///// <param name="model"></param>
-        //public void UpdateNameOfDrone(int id, string model)
-        //{
-        //    Drone drone = DataSource.Drones.Find(x => x.Id == id);
-        //    DataSource.Drones.Remove(drone);
-        //    drone.Model = model;
-        //    DataSource.Drones.Add(drone);
-        //}
-        ///// <summary>
-        ///// view function for Drone
-        ///// </summary>
-        ///// <param name="id"></param>
-        //public Drone GetDrone(int id)
-        //{
-        //    if (!DataSource.Drones.Exists(item => item.Id == id))
-        //    {
-        //        throw new DroneException($"ID: {id} does not exist!!");
-        //    }
-        //    return DataSource.Drones.Find(c => c.Id == id);
-        //}
-        ///// <summary>
-        ///// view lists functions for Drone
-        ///// </summary>
-        //public IEnumerable<Drone> ShowDroneList(Func<Drone, bool> predicate = null)
-        //{
-        //    if (predicate == null)
-        //    {
-        //        List<Drone> DroneList = new List<Drone>();
-        //        foreach (Drone element in DataSource.Drones)
-        //        {
-        //            DroneList.Add(element);
-        //        }
-
-        //        return DroneList;
-        //    }
-        //    else
-        //        return DataSource.Drones.Where(predicate).ToList();
-        //}
-
-        ///// <summary>
-        ///// Send a drone to charge
-        ///// </summary>
-        ///// <param name="droneId">the drone to send to charge</param>
-        ///// <param name="stationId">the station to send it to charge</param>
-        //public void SendDroneToCharge(int droneId, int stationId)
-        //{
-        //    Drone drone = GetDrone(droneId);
-        //    Station station = GetStation(stationId);
-        //    DataSource.Stations.Remove(station);
-
-        //    DataSource.DroneCharges.Add(new DroneCharge
-        //    {
-        //        DroneId = drone.Id,
-        //        StationId = station.Id
-        //    });
-        //    station.ChargeSpots--;
-
-        //    DataSource.Stations.Add(station);
-        //}
-        ///// <summary>
-        ///// release a drone from charge
-        ///// </summary>
-        ///// <param name="droneId">the id of the drone to release</param>
-        //public void ReleaseDroneFromCharging(int droneId)
-        //{
-        //    Drone drone = GetDrone(droneId);
-        //    DataSource.Drones.Remove(drone);
-
-        //    DroneCharge droneCharge = DataSource.DroneCharges.Find(x => x.DroneId == droneId);
+        #endregion
 
 
-        //    int stationId = droneCharge.StationId;
-        //    Station station = GetStation(stationId);
-        //    DataSource.Stations.Remove(station);
+        #region DalXML Drones
 
-        //    station.ChargeSpots++;
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="d"></param>
+        public void AddDrone(Drone d)
+        {
+            List<DO.Drone> dronsList = XMLTools.LoadListFromXMLSerializer<Drone>(dronePath);
+            if (dronsList.Exists(drone => drone.Id == d.Id))
+            {
+                throw new DroneException($"ID {d.Id} already exists!!");
+            }
+            else
+            {
+                dronsList.Add(d);
+                XMLTools.SaveListToXMLSerializer<Drone>(dronsList, dronePath);
+            }
 
-        //    DataSource.Stations.Add(station);
-        //    DataSource.Drones.Add(drone);
-        //    DataSource.DroneCharges.Remove(droneCharge);
+        }
+        /// <summary>
+        /// Update Name Of Drone
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="model"></param>
+        public void UpdateNameOfDrone(int id, string model)
+        {
+            List<DO.Drone> dronsList = XMLTools.LoadListFromXMLSerializer<Drone>(dronePath);
+            Drone drone = dronsList.Find(x => x.Id == id);
+            dronsList.Remove(drone);
+            drone.Model = model;
+            dronsList.Add(drone);
+            XMLTools.SaveListToXMLSerializer<Drone>(dronsList, dronePath);
+        }
+        public Drone GetDrone(int id)
+        {
+            List<DO.Drone> dronsList = XMLTools.LoadListFromXMLSerializer<Drone>(dronePath);
+            if (dronsList.Exists(item => item.Id == id))
+            {
+                throw new DroneException($"ID: {id} does not exist!!");
+            }
+            return dronsList.Find(c => c.Id == id);
+        }
+        public IEnumerable<Drone> ShowDroneList(Func<Drone, bool> predicate = null)
+        {
+            List<DO.Drone> dronsList = XMLTools.LoadListFromXMLSerializer<Drone>(dronePath);
+            if (predicate == null)
+            {
+                List<Drone> DroneList = new List<Drone>();
+                foreach (Drone element in dronsList)
+                {
+                    DroneList.Add(element);
+                }
+                return DroneList;
+            }
+            else
+                return dronsList.Where(predicate).ToList();
+        }
 
-        //}
-        ///// <summary>
-        ///// discharge drone
-        ///// <param name="droneID"></param>
-        ///// <param name="droneLatitude"></param>
-        ///// <param name="droneLongitude"></param>
-        ///// <exception cref="Exception"></exception>
-        //public Station DischargeDroneByLocation(int droneID, double droneLatitude, double droneLongitude)
-        //{
 
-        //    Drone d = DataSource.Drones.Find(x => x.Id == droneID);
-        //    Station s = new Station();
-        //    foreach (Station item in DataSource.Stations) //finds the station
-        //    {
-        //        if (item.Latitude == droneLatitude && item.Longitude == droneLongitude)
-        //        {
-        //            DataSource.Stations.Remove(s);
-        //            s = item;
-        //            s.ChargeSpots++;
-        //            DataSource.Stations.Add(s);
-        //            return s;
-        //        }
+        #endregion
 
-        //    }
 
-        //    throw new Exception("couldn't find station by drones location");
-        //}
+        #region DalXML Stations
 
-        ///// <summary>
-        ///// Update the station to have one less spot for charging (because we sent a drone to charg there)
-        ///// </summary>
-        ///// <param name="StationId"></param>
-        ///// <param name="drone"></param>
-        //public Station UpdateStationChargingSpots(int StationId)
-        //{
-        //    Station station = DataSource.Stations.Find(x => x.Id == StationId);
-        //    station.ChargeSpots -= 1;
-        //    return station;
-        //}
-        ///// <summary>
-        ///// Method of applying drone power
-        ///// </summary>
-        ///// <returns>An array of the amount of power consumption of a drone for each situation</returns>
-        //public double[] PowerConsumptionRequest()
-        //{
-        //    double[] result = {DataSource.Config.Light, DataSource.Config.Heavy,
-        //        DataSource.Config.Medium, DataSource.Config.Heavy,
-        //        DataSource.Config.ChargingRate };
-        //    return result;
-        //}
-        //public void updateBatteryDrone(int id, double dis)
-        //{
-        //    Drone d = DataSource.Drones.Find(x => x.Id == id);
-        //    DataSource.Drones.Remove(d);
-        //    d.Battery -= dis * 0.01;
-        //    DataSource.Drones.Add(d);
-        //}
-        //#endregion
+        #endregion DalXML Stations
 
+        //זה גמור!
+        #region DalXML Coustumer
+        private void CreateFiles()
+        {
+            string dir = @"..\xml\";
+            CustumerRoot = new XElement("Custumer");
+            CustumerRoot.Save(dir + customerPath);
+        }
+
+        private void LoadData()
+        {
+            string dir = @"..\xml\";
+            try
+            {
+                CustumerRoot = XElement.Load(dir + customerPath);
+            }
+            catch
+            {
+                Console.WriteLine("File upload problem");
+            }
+        }
+
+        public void AddCustomer(Customer customer)
+        {
+            LoadData();
+            if (CustumerRoot.Elements().Any(custo => Convert.ToInt32(custo.Element("ID").Value) == customer.Id))
+                throw new CustomerException($"ID {customer.Id} already exists!!");
+
+            CustumerRoot.Add(new XElement("Custumer",
+                new XElement("ID", customer.Id),
+                new XElement("Name", customer.Name),
+                new XElement("Phone", customer.Phone)));
+            CustumerRoot.Save(customer + customerPath);
+        }
+        public Customer GetCustomer(int Custumerid)
+        {
+            LoadData();
+
+            Customer? c = new Customer();
+
+            c = (from cus in CustumerRoot.Elements()
+                 where Convert.ToInt32(cus.Element("ID").Value) == Custumerid
+                 select new Customer()
+                 {
+                     Id = Convert.ToInt32(cus.Element("ID").Value),
+                     Name = cus.Element("Name").Value,
+                     Phone = cus.Element("Phone").Value,
+                 }).FirstOrDefault();
+            if (c.Value.Id == 0)
+                throw new Exception($"custumer {Custumerid} is not exite!!");
+
+            return (Customer)c;
+        }
+        public IEnumerable<Customer> ShowCustomerList(Func<Customer, bool> predicate = null)
+        {
+            LoadData();
+            IEnumerable<Customer> custumers;
+            custumers = from cus in CustumerRoot.Elements()
+                        select new Customer()
+                        {
+                            Id = Convert.ToInt32(cus.Element("ID").Value),
+                            Name = cus.Element("Name").Value,
+                            Phone = cus.Element("Phone").Value
+                        };
+
+            return custumers;
+        }
+        public void UpdateCustumer(Customer customer)
+        {
+            LoadData();
+
+            XElement cus = (from cus1 in CustumerRoot.Elements()
+                            where Convert.ToInt32(cus1.Element("ID").Value) == customer.Id
+                            select cus1).FirstOrDefault();
+            cus.Element("Name").Value = customer.Name;
+            cus.Element("Phone").Value = customer.Phone;
+            CustumerRoot.Save(customerPath);
+
+        }
     }
+
+    #endregion DalXML Coustumer
+
+    #region DalXML Parcel
+
+    #endregion DalXML Parcel
+
+    //לעשות פונקציה למספר רץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץ
+
 }

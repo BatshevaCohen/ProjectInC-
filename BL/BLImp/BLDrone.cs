@@ -219,7 +219,21 @@ namespace BL
                 Weight = (Weight)d.MaxWeight
             };
             //to find the locations drone---
-            DroneToList droneToList = DronesL.Find(x => x.Id == droneId);
+            foreach (var item in DronesL)
+            {
+                if(item.Id==droneId)
+                {
+                    drone.Location = new()
+                    {
+                        Latitude = item.Location.Latitude,
+                        Longitude = item.Location.Longitude
+
+                    };
+                }
+            }
+      
+
+            
             if (drone.DroneStatuses != DroneStatuses.Shipping)
             {
                 return drone;

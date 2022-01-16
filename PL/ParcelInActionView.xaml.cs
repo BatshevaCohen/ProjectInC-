@@ -37,7 +37,7 @@ namespace PL
             WeightComboBox.ItemsSource = Enum.GetValues(typeof(Weight));
             PriorityComboBox.ItemsSource = Enum.GetValues(typeof(Priority));
             //select option of custumer id and name to reciver or sender parcel
-            StatusComboBox.ItemsSource = Enum.GetValues(typeof(ParcelStatus));
+           
             IEnumerable<CustomerInParcel> c = from customer in myBl.ShowCustomerList()
                                               let cs = new CustomerInParcel { Id = customer.Id, Name = customer.Name }
                                               select cs;
@@ -72,18 +72,83 @@ namespace PL
             btnShowDrone.Visibility = Visibility.Visible;
             btnShowCustumerReciver.Visibility = Visibility.Visible;
             btnShowCustumerSender.Visibility = Visibility.Visible;
+            btnRemuveParcel.Visibility = Visibility.Visible;
             myBl = bl;
             Parcel p = myBl.GetParcel(parTL.Id);
+            //If there is no drone associated with the parcel hiden all the detailes
             if (p.DroneInParcel == null)
             {
-                //וסורי אין לי כוח לעשות את זה lלהחביא את הלייבלים וטקסטבוקס של הרחפן שמשוייך לחבילה 
+                lblBatteryDrone.Visibility = Visibility.Collapsed;
+                lblDroneInParcel.Visibility = Visibility.Collapsed;
+                lblIDDrone.Visibility = Visibility.Collapsed;
+                lblLatiDrone.Visibility = Visibility.Collapsed;
+                lbllongiDrone.Visibility = Visibility.Collapsed;
+                batteryDroneParcelTXB.Visibility = Visibility.Collapsed;
+                IdDroneParcelTXB.Visibility = Visibility.Collapsed;
+                LatitudeDroneParcelTXB.Visibility = Visibility.Collapsed;
+                LongitudeDroneParcelTXB.Visibility = Visibility.Collapsed;
             }
             DataContext = p;
         }
 
-
+        /// <summary>
+        /// Checks the status of the package and updates it accordingly
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnUpdateParcel_Click(object sender, RoutedEventArgs e)
         {
+            //there are drone!
+            if(lblDroneInParcel.Visibility== Visibility.Visible)
+            {
+             Drone drone= myBl.GetDrone(int.Parse(IdDroneParcelTXB.Text));
+                Parcel pr = myBl.GetParcel(int.Parse(idTXB.Text));
+
+                //Assign parcel to drone 
+                if (drone.DroneStatuses == DroneStatuses.Available)
+                {
+                    try
+                    {
+                        myBl.UpdateParcelToDrone(int.Parse(IdDroneParcelTXB.Text));
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                }
+                    //Updete that the parcel has picked up by a drone
+                    if (pr.AssignmentToParcelTime == DateTime.MinValue&& pr.CollectionTime == DateTime.MinValue)
+                    {
+                        try
+                        {
+                            myBl.UpdateParcelPickUpByDrone(int.Parse(IdDroneParcelTXB.Text));
+                            MessageBox.Show("Updete parcel has picked up by a drone sucssesfully!");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                    //Update that the parcel supplied to the reciver (by the drone)
+                    if (pr.CollectionTime != DateTime.MinValue&& pr.SupplyTime == DateTime.MinValue)
+                    {
+                        try
+                        {
+                            myBl.UpdateParcelSuppliedByDrone(int.Parse(IdDroneParcelTXB.Text));
+                            MessageBox.Show("update parcel supplied to the reciver sucssefully! ");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show(ex.Message);
+                        }
+                    }
+                   
+                
+            }
+            else
+            {
+                MessageBox.Show("ther are no drone to update ");
+            }
         }
         /// <summary>
         /// open drone windowes parcel
@@ -102,9 +167,13 @@ namespace PL
                     DroneStatuses = drone.DroneStatuses,
                     Weight = drone.Weight,
                     Model = drone.Model,
-                    ParcelNumberTransferred = drone.ParcelInTransfer.Id,
+                    //ParcelNumberTransferred = drone.ParcelInTransfer.Id,
 
                 };
+                if(drTL.ParcelNumberTransferred>0)
+                {
+                    drTL.ParcelNumberTransferred = drone.ParcelInTransfer.Id;
+                }
                 drTL.Location = new()
                 {
                     Latitude = drone.Location.Latitude,
@@ -186,10 +255,21 @@ namespace PL
         private void btnRemoveParcel_Click(object sender, RoutedEventArgs e)
         {
             Parcel p = myBl.GetParcel(Int32.Parse(ParcelIDTextBox.Text));
+           
+           
+          
             if(p.DroneInParcel!=null)
             {
-                myBl.RemoveParcel(p.Id);
-                MessageBox.Show("parcel removed sucssecfully!");
+                try
+                {
+                    myBl.RemoveParcel(p.Id);
+                    MessageBox.Show("parcel removed sucssecfully!");
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+
             }
             else
             {

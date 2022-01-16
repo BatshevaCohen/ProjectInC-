@@ -102,7 +102,7 @@ namespace DAL
             });
             DroneCharge droneCharge = new()
             {
-                DroneId = 1000,
+                DroneId = 123456,
                 StationId=12345,
             };
             DataSource.DroneCharges.Add(droneCharge);
@@ -112,7 +112,7 @@ namespace DAL
             {
                 Customer.Add(new Customer()
                 {
-                    Id = i,
+                    Id = r.Next(100000000,999999999),
                     Name = arrClientFirstName[i],
                     Phone = "05" + r.Next(0, 8) + "-" + r.Next(1000000, 9999999),
                     Longitude = r.Next(-180, 179) + r.NextDouble(),
@@ -126,16 +126,15 @@ namespace DAL
                     }
                 });
             }
-            //adding parcels
-            for (int i = 1; i <= 10; i++)
+            for (int i = 1; i <= 5; i++)
             {
                 //choose two different ids for sender and target from Customer's id
-                int senderId = r.Next(1, 10);
+                int senderId = Customer[i].Id;
                 int targetId;
                 // the sender can't be the reciver
                 do
                 {
-                    targetId = r.Next(1, 10); 
+                    targetId = Customer[i+1].Id;
                 } while (targetId == senderId);
 
                 Parcels.Add(new Parcel()
@@ -145,16 +144,46 @@ namespace DAL
                     ReceiverId = targetId,
                     Weight = RandomEnumValue<WeightCategories>(),
                     Priority = RandomEnumValue<Priorities>(),
-                    DroneID = r.Next(1000, 5000),
+                    
                     Create = MyDateTime(),
                     Assigned = MyDateTime(),
                     PickedUp = MyDateTime(),
                     Supplied = MyDateTime()
                 });
-            }
 
-            userList = CreateUsers();
+            }
+            //adding parcels
+            for (int i = 4; i <= 8; i++)
+            {
+                //choose two different ids for sender and target from Customer's id
+                int senderId = Customer[i].Id;
+                int targetId;
+                // the sender can't be the reciver
+                do
+                {
+                    targetId = Customer[i+1].Id;
+                } while (targetId == senderId);
+
+                Parcels.Add(new Parcel()
+                {
+                    Id = ++OrdinalNumber,    //serial number
+                    SenderId = senderId,
+                    ReceiverId = targetId,
+                    Weight = RandomEnumValue<WeightCategories>(),
+                    Priority = RandomEnumValue<Priorities>(),
+                    DroneID =Drones[i/3].Id,
+                    Create = DateTime.MinValue,
+                    Assigned = DateTime.MinValue,
+                    PickedUp = DateTime.MinValue,
+                    Supplied = DateTime.MinValue
+                });
+
+            }
+          
+
+                userList = CreateUsers();
         }
+
 
         /// <summary>
         /// function for random enums

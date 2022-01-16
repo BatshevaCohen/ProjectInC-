@@ -7,42 +7,33 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="StationListWindow" Height="696" Width="957">
+        Title="StationListWindow" Height="425" Width="714"
+        Activated="refreshWindow">
     <Grid Name="MainGrid">
 
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*"/>
-            <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
+        <!--<Grid.RowDefinitions>
+            <RowDefinition Height="261"/>
+            <RowDefinition Height="435"/>
+        </Grid.RowDefinitions>-->
 
         <Image 
             Source="Images/purple background.jpg"
             Stretch="Fill"
             Opacity="0.5"
-            Grid.ColumnSpan="2"/>
+            Grid.RowSpan="2"/>
 
         <Grid Name="LeftGrid" Grid.Column="0">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid Name="LeftUpperGrid" Grid.Column="0" Margin="0,0,0,304" Grid.RowSpan="2">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="76*"/>
-                    <RowDefinition Height="141*"/>
-                </Grid.RowDefinitions>
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="261*"/>
-                    <ColumnDefinition Width="218*"/>
-                </Grid.ColumnDefinitions>
 
-                <Label 
+            <Grid Name="LeftUpperGrid" Grid.Column="0" Margin="0,0,0,304" Grid.RowSpan="2">
+
+                <!--<Label 
                     x:Name="lblTBD" 
                     Content="Select a list of stations:" 
                     ToolTip="Select a list of stations:"
+                    FontFamily="Comic Sans MS"
                     HorizontalAlignment="Left"  
                     VerticalAlignment="Top" 
-                    FontSize="18" Height="51" Width="242" Grid.ColumnSpan="2" Margin="33,15,0,0" FontWeight="Bold"/>
+                    FontSize="18" Height="51" Width="242" Margin="24,34,0,0" FontWeight="Bold"/>-->
 
 
 
@@ -73,12 +64,13 @@
                     Content="Show availble charging station"  
                     Click="Availble_charging_spote_station_Click"
                     HorizontalAlignment="Left" 
-                    Margin="33,66,0,0" 
+                    FontFamily="Comic Sans MS"
+                    Margin="48,39,0,0" 
                     VerticalAlignment="Top" 
                     Style="{StaticResource MaterialDesignRaisedButton}"
-                    Height="38"
+                    Height="44"
                     materialDesign:ButtonAssist.CornerRadius="10"
-                    Width="242" Grid.ColumnSpan="2"/>
+                    Width="242"/>
 
 
             </Grid>
@@ -86,30 +78,79 @@
 
             <ListView 
                 Name="StationsListView" 
+                FontFamily="Comic Sans MS"
                 MouseDoubleClick="StationListView_MouseDoubleClick" 
-                Grid.Column="1" 
-                Margin="550,0,-500,0" 
-                Grid.RowSpan="2"/>
+                Margin="25,118,25,52">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Stretch"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="Id" Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Id}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Name" Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding Name}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Available Charging Spots"  Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding AvailableChargingSpots}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Unavailable Charging spots"  Width="Auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <TextBlock Text="{Binding UnavailableChargingSpots}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
 
+                    </GridView>
+                </ListView.View>
+            </ListView>
         </Grid>
-        <Label 
+        <!--<Label 
             Content="To add a station:" 
-            Margin="36,193,222,0" 
+            Margin="368,39,197,0" 
             FontSize="18" 
             FontWeight="Bold"
             VerticalAlignment="Top" 
-            Width="221" 
-            Height="56"/>
+            FontFamily="Comic Sans MS" 
+            Height="56"/>-->
         <Button
             x:Name="btnAddStation"
-            Content="Add" 
-            Margin="36,279,222,0" 
+            Content="Add station" 
+            FontFamily="Comic Sans MS"
+            Margin="335,41,225,0" 
             Click="btnAddStation_Click"
             VerticalAlignment="Top" 
             Style="{StaticResource MaterialDesignRaisedButton}"
-             materialDesign:ButtonAssist.CornerRadius="10"
-            Width="221" 
-            Height="32"/>
+             materialDesign:ButtonAssist.CornerRadius="10" 
+            Height="44"/>
+        <Button 
+                x:Name="btnClose" 
+                Content="Close" 
+                FontFamily="Comic Sans MS"
+                Background="#da2d2d"
+                Style="{StaticResource MaterialDesignRaisedButton}"
+             materialDesign:ButtonAssist.CornerRadius="10" 
+                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                Click="closeButton_Click"  
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Width="108" Margin="548,47,0,0" />
 
 
     </Grid>

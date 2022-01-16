@@ -142,7 +142,7 @@ namespace PL
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void refreshWindow(object sender, EventArgs e)
-        {
+        { 
             RefreshDronesListView();
         }
         /// <summary>

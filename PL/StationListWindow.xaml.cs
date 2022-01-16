@@ -51,5 +51,30 @@ namespace PL
         {
             new StationInActionView(this, bL).Show();
         }
+        /// <summary>
+        /// close
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void closeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
+        /// <summary>
+        /// refresh the list view that shows the drones information
+        /// </summary>
+        public void RefreshStationListView()
+        {
+            this.StationsListView.ItemsSource = bL.ShowStationList();
+        }
+        /// <summary>
+        /// refresh the list view of the drone
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void refreshWindow(object sender, EventArgs e)
+        {
+            RefreshStationListView();
+        }
     }
 }

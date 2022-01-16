@@ -64,6 +64,11 @@ namespace PL
             DataContext = station;
 
         }
+        /// <summary>
+        /// Add station view
+        /// </summary>
+        /// <param name="stationListWindow"></param>
+        /// <param name="bL"></param>
         public StationInActionView(StationListWindow stationListWindow, IBL bL)
         {
             mybl = bL;
@@ -73,19 +78,22 @@ namespace PL
             DataContext = station;
             stationListWindow.StationsListView.Items.Refresh();
         }
-
+        /// <summary>
+        /// update station button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnUpdateStation_Click(object sender, RoutedEventArgs e)
         {
-            btnUpdateStation.Visibility = Visibility.Visible;
-            UpdateGrid.Visibility = Visibility.Visible;
             String StationName = mybl.GetStation(Int32.Parse(stationIdTextBox.Text)).Name;
-            string newName = stationIdTextBox.Text;
+            string newName = NameTextBox.Text;
             //only if the name has changed by the user
             if (StationName != NameTextBox.Text)
             {
-                mybl.UpdateStetion(Int32.Parse(stationIdTextBox.Text), StationName, Int32.Parse(AvailableChargingSpotsTextBox.Text));
+                mybl.UpdateStetion(Int32.Parse(stationIdTextBox.Text), newName, Int32.Parse(AvailableChargingSpotsTextBox.Text));
                 MessageBox.Show("Station updated seccessfuly!");
-                stationIdTextBox.Text = newName;
+                NameTextBox.Text = newName;
+                this.Close();
             }
             else
             {

@@ -41,15 +41,17 @@
                 <Label 
                     x:Name="lblTBD" 
                     Content="status" 
+                    FontFamily="Comic Sans MS"
                     ToolTip="Choose a stetus"
-                    HorizontalAlignment="Center"  
+                    HorizontalAlignment="Left"  
                     VerticalAlignment="Top" 
                     FontSize="18" 
-                    Margin="0,26,0,0" Height="32" Width="54"/>
+                    Margin="104,30,0,0" Height="32" Width="100"/>
 
                 <Button
                     x:Name="ClearStatus"
                     Content="Clear"
+                    FontFamily="Comic Sans MS"
                     Grid.Column="1"
                     Style="{StaticResource MaterialDesignFlatButton}"
                     HorizontalAlignment="Right"
@@ -59,6 +61,7 @@
                 <ComboBox
                     x:Name="comboStatusSelector"
                     Grid.Column="1"
+                    FontFamily="Comic Sans MS"
                     ToolTip="Choose a status"
                     Style="{StaticResource MaterialDesignFilledComboBox}"
                     IsEnabled="{Binding IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"
@@ -68,14 +71,16 @@
                     x:Name="lblTBD2" 
                     Content="weight"
                     Grid.Row="1"
+                    FontFamily="Comic Sans MS"
                     ToolTip="Choose weight category"
-                    HorizontalAlignment="Center" 
+                    HorizontalAlignment="Left" 
                     VerticalAlignment="Top" 
-                    FontSize="18" Margin="0,15,0,0" Height="32" Width="60"/>
+                    FontSize="18" Margin="111,22,0,0" Height="32" Width="100"/>
 
                 <ComboBox 
                     x:Name="comboWeghitSelector" 
                     Grid.Column="1"
+                    FontFamily="Comic Sans MS"
                     ToolTip="Choose weight category"
                     Style="{StaticResource MaterialDesignFilledComboBox}"
                     IsEnabled="{Binding IsChecked, ElementName=FilledComboBoxEnabledCheckBox}"
@@ -85,6 +90,7 @@
                     x:Name="ClearWeight"
                     Grid.Column="1" 
                     Content="Clear"
+                    FontFamily="Comic Sans MS"
                     Style="{StaticResource MaterialDesignFlatButton}"
                     HorizontalAlignment="Left" 
                     Margin="205,24,0,0" 
@@ -94,6 +100,7 @@
 
                 <Button 
                     x:Name="btnADDdrone"
+                    FontFamily="Comic Sans MS"
                     Content="Add a new drone" 
                     HorizontalAlignment="Center" 
                     Margin="0,111,0,0" 
@@ -104,7 +111,8 @@
                 <Button 
                     Grid.Column="1" 
                     x:Name="btnClose" 
-                    Content="close"   
+                    Content="close" 
+                    FontFamily="Comic Sans MS"
                     HorizontalAlignment="Left" 
                     Margin="29,111,0,0" 
                     Grid.Row="1" 
@@ -112,13 +120,14 @@
                     VerticalAlignment="Top" Width="193" Height="32"/>
 
 
-            </Grid> 
+            </Grid>
 
 
             <ListView 
                 x:Name="DronesListView" 
                 MouseDoubleClick="DronesListView_MouseDoubleClick" 
                 Grid.Column="1" 
+                FontFamily="Comic Sans MS"
                 Margin="550,0,-500,0" 
                 Grid.RowSpan="2"/>
 

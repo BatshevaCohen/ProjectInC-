@@ -210,12 +210,13 @@ namespace BL
         public Drone GetDrone(int droneId)
         {
             DO.Drone d = dalo.GetDrone(droneId);
+            DroneStatuses droneStatuses = DronesL.Find(x => x.Id == droneId).DroneStatuses;
             Drone drone = new()
             {
                 Id = d.Id,
                 Model = d.Model,
                 Battery = d.Battery,
-                DroneStatuses = (DroneStatuses)d.Status,
+                DroneStatuses = droneStatuses,
                 Weight = (Weight)d.MaxWeight
             };
             //to find the locations drone---

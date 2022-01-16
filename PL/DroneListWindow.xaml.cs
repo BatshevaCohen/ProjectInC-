@@ -6,6 +6,7 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using BO;
 using BlApi;
+using System.Runtime.InteropServices;
 
 namespace PL
 {

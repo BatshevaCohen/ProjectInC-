@@ -189,10 +189,10 @@ namespace DAL
         /// <param name="p"></param>
         public void RemoveParcel(Parcel p)
         {
-            int index = DataSource.Parcels.FindIndex(x => (x.Id == p.Id));
-            if (index == -1)
+            int dellParcel_index = DataSource.Parcels.FindIndex(x => (x.Id == p.Id));
+            if (dellParcel_index == -1)
                 throw new NonExistsException($"id number {p.Id} not found");
-            DataSource.Parcels.RemoveAt(index);
+            DataSource.Parcels.RemoveAt(dellParcel_index);
         }
 
         public void DischargeDrone(int drone_id, double longt, double latit)

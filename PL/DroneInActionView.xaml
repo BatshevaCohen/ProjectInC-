@@ -363,7 +363,7 @@
 
         </Grid>-->
 
-        <Grid x:Name="AddGrid" Visibility="Visible" VerticalAlignment="Top" Margin="41,51,0,0" HorizontalAlignment="Left" Height="198">
+        <Grid x:Name="AddGrid" Visibility="Collapsed" VerticalAlignment="Top" Margin="41,51,0,0" HorizontalAlignment="Left" Height="198">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
                 <RowDefinition Height="Auto"/>

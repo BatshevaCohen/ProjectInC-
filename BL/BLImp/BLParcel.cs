@@ -226,21 +226,7 @@ namespace BL
             parcel.Resiver = new() { Id = custumerReceiver.Id, Name = custumerReceiver.Name };
             //אם החבילה עדיין לא שוייכה אין לה רחפן בטעינה 
 
-            if (parcel.DroneInParcel != null)
-            {
-                DO.Drone drone = dalo.GetDrone(p.DroneID);
-                parcel.DroneInParcel = new()
-                {
-                    Id = p.DroneID,
-                    Battery = drone.Battery,
-                };
-
-                parcel.DroneInParcel.Location = new()
-                {//מיקום הרחםן כמיקום השולח
-                    Latitude = custumerSender.Latitude,
-                    Longitude = custumerSender.Longitude
-                };
-            }
+          
 
 
 
@@ -253,13 +239,12 @@ namespace BL
                 DroneToList droneToList = DronesL.Find(x => x.Id == p.DroneID);
                 parcel.DroneInParcel = new()
                 {
-                    Id = p.Id,
+                    Id = p.DroneID,
                     Battery = droneToList.Battery,
                     Location = new()
                     {
                         Latitude=droneToList.Location.Latitude,
                         Longitude=droneToList.Location.Longitude
-
                     }
                 };
             }

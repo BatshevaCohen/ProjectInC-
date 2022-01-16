@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,14 +33,20 @@ namespace PL
             btnAddCustumer_cencel.Visibility = Visibility.Visible;
             btnOKCustumer.Visibility = Visibility.Visible;
             DataContext = cusm;
+            idCusTextBoxAdd.Focus();
             // CustumerListWindow.CustumerListView.Items.Refresh();
 
         }
+        /// <summary>
+        /// see customer details and update customer
+        /// </summary>
+        /// <param name="cusTL"></param>
+        /// <param name="bL"></param>
+        /// <param name="custumerListWindow"></param>
         public CustumerInActionView(CustomerToList cusTL, BlApi.IBL bL, CustumerListWindow custumerListWindow)
         {
             InitializeComponent();
             UpdatCustumereGrid.Visibility = Visibility.Visible;
-
             btnAddCustumer_cencel.Visibility = Visibility.Visible;
             btnUpdateCustumer.Visibility = Visibility.Visible;
             myBl = bL;
@@ -95,14 +102,15 @@ namespace PL
                 listVSenderParcel.Visibility = Visibility.Visible;
             }
             DataContext = cst;
-
-
         }
 
-
+        /// <summary>
+        /// UPDATE buttonn for customer details
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnUpdateCustumer_Click(object sender, RoutedEventArgs e)
         {
-
             UpdatCustumereGrid.Visibility = Visibility.Visible;
             String CustomerName = (nameTextBox.Text);
             String CustomerPhone = (phoneTextBox.Text);
@@ -117,40 +125,89 @@ namespace PL
                 {
                     myBl.UpdateCustomer(Int32.Parse(idCusTextBox.Text), CustomerName, CustomerPhone);
                     MessageBox.Show("your datails updated succesfully!");
+                    this.Close();
                 }
                 catch(Exception ex){MessageBox.Show(ex.Message);}
               
             }
         }
-
+        /// <summary>
+        /// ADD a new customer buttonn
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnOKCustumer_Click(object sender, RoutedEventArgs e)
         {
-            Customer cusm = new Customer()
+            if (idCusTextBoxAdd.Text.Length == 0)
             {
-                Id = Int32.Parse(idCusTextBoxAdd.Text),
-                Name = (nameTextBoxAdd.Text),
-                Phone = phoneTextBoxAdd.Text,
-            };
-            cusm.Location = new()
-            {
-                Latitude = double.Parse(latitudeTextBoxAdd.Text),
-                Longitude = double.Parse(longitudeTextBoxAdd.Text),
-            };
-            try
-            {
-                myBl.AddCustomer(cusm);
-                this.Close();
+                MessageBox.Show("Please enter ID");
+                idCusTextBoxAdd.Focus();
             }
-            catch (Exception ex)
+            else if (nameTextBoxAdd.Text.Length == 0)
             {
-                MessageBox.Show(ex.Message);
+                MessageBox.Show("Please enter name");
+                nameTextBoxAdd.Focus();
+            }
+            else if (phoneTextBoxAdd.Text.Length == 0)
+            {
+                MessageBox.Show("Please enter Phone number");
+                phoneTextBoxAdd.Focus();
+            }
+            else if (latitudeTextBoxAdd.Text.Length == 0)
+            {
+                MessageBox.Show("Please enter latitude");
+                latitudeTextBoxAdd.Focus();
+            }
+            else if (longitudeTextBoxAdd.Text.Length == 0)
+            {
+                MessageBox.Show("Please enter longitude");
+                longitudeTextBoxAdd.Focus();
+            }
+
+            else if (idCusTextBoxAdd.Text.Length != 9)
+                MessageBox.Show("ID should have 9 digits");
+            else if (phoneTextBoxAdd.Text.Length < 9 || phoneTextBoxAdd.Text.Length > 10)
+                MessageBox.Show("Incorrect phone number");
+            else if (double.Parse(longitudeTextBoxAdd.Text) < -180 || double.Parse(longitudeTextBoxAdd.Text) > 180)
+                MessageBox.Show("Incorrect Longitude");
+            else if (double.Parse(latitudeTextBoxAdd.Text) < -90 || double.Parse(latitudeTextBoxAdd.Text) > 90)
+                MessageBox.Show("Incorrect Latitude");
+            else
+            {
+                Customer cusm = new Customer()
+                {
+                    Id = Int32.Parse(idCusTextBoxAdd.Text),
+                    Name = (nameTextBoxAdd.Text),
+                    Phone = phoneTextBoxAdd.Text,
+                };
+                cusm.Location = new()
+                {
+                    Latitude = double.Parse(latitudeTextBoxAdd.Text),
+                    Longitude = double.Parse(longitudeTextBoxAdd.Text),
+                };
+                try
+                {
+                    myBl.AddCustomer(cusm);
+                    MessageBox.Show("New customer added succesfully!");
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
-
+        /// <summary>
+        /// CENCEL adding customer button
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddCustumer_cancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
+
+
         private void ParcelsList_MouseDoubleClick(object sender, RoutedEventArgs e)
         {
             ParcelCustomer parcelCustomer;
@@ -162,6 +219,40 @@ namespace PL
             {
                 //  new ParcelInActionView(myBL, myBL.GetParcel(parcelCustomer.Id)).Show();
             }
+        }
+
+        /// <summary>
+        /// check that the text box includes numberic values only- you can't enter something that isn't digit
+        /// from:https://stackoverflow.com/questions/1268552/how-do-i-get-a-textbox-to-only-accept-numeric-input-in-wpf
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+        /// <summary>
+        /// check that the text box includes letters only- you can't enter something that isn't letters
+        /// from:https://stackoverflow.com/questions/1268552/how-do-i-get-a-textbox-to-only-accept-numeric-input-in-wpf
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AlphabetValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^a-zA-Z]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+        /// <summary>
+        /// check that the text box includes letters only- you can't enter something that isn't letters
+        /// from:https://stackoverflow.com/questions/1268552/how-do-i-get-a-textbox-to-only-accept-numeric-input-in-wpf
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DoubleNumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9.]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
     }
 

@@ -29,7 +29,11 @@ namespace PL
             this.CustumerListView.ItemsSource = myBL.ShowCustomerList();
         }
 
-
+        /// <summary>
+        /// double click on customer to see customer details
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CustomerInActionView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             CustomerToList? cusTL = CustumerListView.SelectedItem as CustomerToList;
@@ -38,17 +42,39 @@ namespace PL
                 new CustumerInActionView(cusTL, myBL, this).Show();
             }
         }
-
+        /// <summary>
+        /// ADD button for customer
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddCustumer_Click(object sender, RoutedEventArgs e)
         {
             new CustumerInActionView(myBL,this).Show();
         }
-
+        /// <summary>
+        /// close window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddCustumer_cancel_Click(object sender, RoutedEventArgs e)
         {
             Close();
         }
-       
-      
+        /// <summary>
+        /// refresh the list view that shows the customers information
+        /// </summary>
+        public void RefreshCustomerListView()
+        {
+            this.CustumerListView.ItemsSource = myBL.ShowCustomerList();
+        }
+        /// <summary>
+        /// refresh the list view of the drone
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void refreshWindow(object sender, EventArgs e)
+        {
+            RefreshCustomerListView();
+        }
     }
 }

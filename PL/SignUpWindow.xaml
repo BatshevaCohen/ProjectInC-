@@ -20,7 +20,7 @@
 
         <Grid x:Name="enterDetailsGrid"
               Visibility="Visible">
-            <!--ID icon-->
+            <!--Name icon-->
             <materialDesign:PackIcon 
             Kind="Account"             
             Margin="132,111,0,0" 

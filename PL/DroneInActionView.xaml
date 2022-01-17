@@ -45,7 +45,6 @@
                 </Grid.ColumnDefinitions>
 
                 <Label 
-                    
                     VerticalAlignment="Center" 
                     Grid.Row="0" 
                     Margin="3" 

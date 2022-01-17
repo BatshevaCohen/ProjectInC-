@@ -102,6 +102,7 @@
             <Button 
                     x:Name="btnClose" 
                     Content="close" 
+                    Background="#da2d2d"
                     FontFamily="Comic Sans MS"
                     Style="{StaticResource MaterialDesignRaisedButton}"
                     materialDesign:ButtonAssist.CornerRadius="10"
@@ -165,7 +166,7 @@
                         <GridViewColumn Header="Location"  Width="Auto">
                             <GridViewColumn.CellTemplate>
                                 <DataTemplate>
-                                    <TextBlock Text="{Binding Location}" TextAlignment="Center" Margin="-5,-1" Padding="2"/>
+                                    <TextBlock Text="{Binding Location}" TextAlignment="Center" HorizontalAlignment="Center" Margin="-5,-1" Padding="2"/>
                                 </DataTemplate>
                             </GridViewColumn.CellTemplate>
                         </GridViewColumn>

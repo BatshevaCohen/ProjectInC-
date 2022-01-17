@@ -12,11 +12,12 @@ namespace DXML
     {
         XMLTools XMLTools;
         string dronePath = @"drons.xml";
+        string customerPath = @"Customers.xml";
         string stationPath = @"Stations.xml";
         string parcelPath = @"Parcels.xml";
-        string customerPath = @"Customers.xml";
+        
 
-        //זה גמור!
+       
         #region singelton
         static DalXml instance;
         private static object locker = new object();
@@ -29,7 +30,7 @@ namespace DXML
         {
             string dir = @"..\xml\";
             XMLTools = new XMLTools();
-            if (!File.Exists(dir + dronePath))
+            if (!File.Exists(dir + customerPath))
                 CreateFiles();
             else
                 LoadData();
@@ -206,6 +207,7 @@ namespace DXML
     }
 
     #endregion DalXML Coustumer
+
 
     #region DalXML Parcel
 

@@ -312,7 +312,13 @@ namespace PL
         /// <param name="e"></param>
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Parcel p = mybl.GetParcelByDroneId(drone.Id);
+            //אם החבילה במצב מישלוח יש ביא הרחפן מקושר לחבילה
+            Parcel p=new();
+            if (droneStatusComboBox.Text == "shipping")
+            {
+                p = mybl.GetParcelByDroneId(drone.Id);
+            }
+
 
             if (droneStatusComboBox.Text == "Available")
             {

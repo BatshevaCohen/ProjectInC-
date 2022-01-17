@@ -7,7 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="CustumerInActionView" Height="600" Width="900">
+        Title="CustumerInActionView" Height="600" Width="780">
 
     <Grid>
 
@@ -308,50 +308,69 @@
             </Grid>
 
         </Grid>
-        <ListView Margin="83,413,31,26" 
-                      FontFamily="Comic Sans MS" 
-                      Name="listVReciverParcel" 
-                      Visibility="Collapsed" 
-                      RenderTransformOrigin="0.5,0.5" 
-                      MouseDoubleClick="ParcelsList_MouseDoubleClick">
-            <ListView.RenderTransform>
-                <TransformGroup>
-                    <ScaleTransform/>
-                    <SkewTransform AngleY="0.107"/>
-                    <RotateTransform/>
-                    <TranslateTransform Y="0.765"/>
-                </TransformGroup>
-            </ListView.RenderTransform>
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Id}" />
-                    <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Weight}" />
-                    <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding Priority}" />
-                    <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding ParcelStatus}" />
-                    <GridViewColumn Width="Auto" DisplayMemberBinding="{Binding CustomerInParcel}" />
-                </GridView>
-            </ListView.View>
+        <Grid x:Name="grid_showListView"
+              Visibility="Visible">
+            
+            <Grid x:Name="Sender_Grid"> 
+                <Label x:Name="lblS" Content="Sender:" FontFamily="Comic Sans MS" Margin="0,437,0,85" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left"/>
+                <ListView Margin="85,421,6,18" 
+                          FontFamily="Comic Sans MS"
+                          x:Name="listVSenderParcel"
+                          RenderTransformOrigin="0.5,0.5"
+                          Width="680"
+                          MouseDoubleClick="ParcelsList_MouseDoubleClick">
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform AngleY="0.107"/>
+                        <RotateTransform/>
+                        <TranslateTransform Y="0.765"/>
+                    </TransformGroup>
+                </ListView.RenderTransform>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Width="80" DisplayMemberBinding="{Binding Id}" />
+                                <GridViewColumn Width="120" DisplayMemberBinding="{Binding Weight}" />
+                                <GridViewColumn Width="120" DisplayMemberBinding="{Binding Priority}" />
+                                <GridViewColumn Width="150" DisplayMemberBinding="{Binding ParcelStatus}" />
+                                <GridViewColumn Width="200" DisplayMemberBinding="{Binding CustomerInParcel}" />
+                            </GridView>
+                        </ListView.View>
+                </ListView>
+            </Grid>
 
-        </ListView>
-        <ListView  x:Name="listVSenderParcel" 
-                       Visibility="Collapsed" 
+            <Grid x:Name="Reciver_Grid">
+
+                <Label x:Name="lblR" Content="Resiver:" Margin="0,258,0,256" FontFamily="Comic Sans MS" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left"/>
+                <ListView  x:Name="listVReciverParcel" 
                        FontFamily="Comic Sans MS"
-                       Margin="85,248,10,188" 
+                       Margin="84,248,10,188"
+                       Width="680"
                        MouseDoubleClick="ParcelsList_MouseDoubleClick" >
-            <ListView.View>
-                <GridView>
-                    <GridViewColumn Header="ID" Width="Auto" DisplayMemberBinding="{Binding Id}" />
-                    <GridViewColumn Header="Weight" Width="Auto" DisplayMemberBinding="{Binding Weight}" />
-                    <GridViewColumn Header="Priority"   Width="Auto" DisplayMemberBinding="{Binding Priority}" />
-                    <GridViewColumn Header="Parcel Status"   Width="Auto" DisplayMemberBinding="{Binding ParcelStatus}" />
-                    <GridViewColumn Header="Customer Id"   Width="Auto" DisplayMemberBinding="{Binding CustomerInParcel}" />
+                <ListView.ItemContainerStyle>
+                    <Style TargetType="ListViewItem">
+                        <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                    </Style>
+                </ListView.ItemContainerStyle>
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="ID" Width="80" DisplayMemberBinding="{Binding Id}" />
+                        <GridViewColumn Header="Weight" Width="120" DisplayMemberBinding="{Binding Weight}" />
+                        <GridViewColumn Header="Priority"   Width="120" DisplayMemberBinding="{Binding Priority}" />
+                        <GridViewColumn Header="Parcel Status"   Width="150" DisplayMemberBinding="{Binding ParcelStatus}" />
+                        <GridViewColumn Header="Customer Id"   Width="200" DisplayMemberBinding="{Binding CustomerInParcel}" />
 
-                </GridView>
-            </ListView.View>
-        </ListView>
-        <Label x:Name="lblS" Content="Sender:" FontFamily="Comic Sans MS" Margin="0,391,782,131" FontWeight="Bold" FontSize="20" Visibility="Collapsed"/>
-        <Label x:Name="lblR" Content="Resiver:" Margin="5,272,789,243" FontFamily="Comic Sans MS" FontSize="18" FontWeight="Bold" Visibility="Collapsed"/>
-
+                    </GridView>
+                </ListView.View>
+                </ListView>
+            </Grid>
+        </Grid>
+        
         <Button 
                 x:Name="btnAddCustumer_cencel" 
                 Content="Cencel" 
@@ -359,7 +378,7 @@
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="10"
                 HorizontalAlignment="Left" 
-                Margin="703,60,0,0" 
+                Margin="574,60,0,0" 
                 VerticalAlignment="Top" 
                 Height="55" Width="100" 
                 Visibility="Collapsed"
@@ -373,7 +392,7 @@
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="10"
                 HorizontalAlignment="Left" 
-                Margin="553,60,0,0" 
+                Margin="424,60,0,0" 
                 VerticalAlignment="Top" 
                 Height="55" Width="100" 
                 Visibility="Collapsed"
@@ -386,7 +405,7 @@
                 Style="{StaticResource MaterialDesignRaisedButton}"
                 materialDesign:ButtonAssist.CornerRadius="10"                
                 HorizontalAlignment="Left" 
-                Margin="553,60,0,0" 
+                Margin="424,60,0,0" 
                 VerticalAlignment="Top" 
                 Height="55" Width="100" 
                 Visibility="Collapsed" 

@@ -49,6 +49,7 @@ namespace PL
             UpdatCustumereGrid.Visibility = Visibility.Visible;
             btnAddCustumer_cencel.Visibility = Visibility.Visible;
             btnUpdateCustumer.Visibility = Visibility.Visible;
+            grid_showListView.Visibility = Visibility.Visible;
             myBl = bL;
 
             Customer cst = new()
@@ -64,18 +65,16 @@ namespace PL
                 Longitude = c.Location.Longitude
             };
             cst.ReceiveParcels = new List<ParcelCustomer>();
-            if (c.ReceiveParcels != null || c.SentParcels != null)
+            if (c.ReceiveParcels != null && c.SentParcels != null)
             {
-                lblS.Visibility = Visibility.Visible;
-                lblR.Visibility = Visibility.Visible;
-                listVReciverParcel.Visibility = Visibility.Visible;
-                listVSenderParcel.Visibility = Visibility.Visible;
+                grid_showListView.Visibility=Visibility.Visible;
             }
-            if (c.ReceiveParcels != null)
+            else if (c.ReceiveParcels != null)
             {
                 foreach (var item in c.ReceiveParcels)
                 {
-                    listVReciverParcel.Visibility = Visibility.Visible;
+                    grid_showListView.Visibility = Visibility.Visible;
+                    Sender_Grid.Visibility = Visibility.Collapsed;
                     ListViewItem newItem = new ListViewItem();
                     newItem.Content = item;
                     listVReciverParcel.Items.Add(newItem.Content);
@@ -83,15 +82,15 @@ namespace PL
             }
             else
             {
-                listVReciverParcel.Visibility = Visibility.Visible;
+                grid_showListView.Visibility = Visibility.Visible;
+                Reciver_Grid.Visibility=Visibility.Collapsed;
             }
             cst.SentParcels = new List<ParcelCustomer>();
             if (c.SentParcels != null)
             {
-
                 foreach (var item in c.SentParcels)
                 {
-                    listVSenderParcel.Visibility = Visibility.Visible;
+                    grid_showListView.Visibility = Visibility.Visible;
                     ListViewItem newItem = new ListViewItem();
                     newItem.Content = item;
                     listVSenderParcel.Items.Add(newItem);
@@ -99,7 +98,7 @@ namespace PL
             }
             else
             {
-                listVSenderParcel.Visibility = Visibility.Visible;
+                grid_showListView.Visibility = Visibility.Visible;
             }
             DataContext = cst;
         }

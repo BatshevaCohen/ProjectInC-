@@ -7,7 +7,7 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="CustumerListWindow" Height="450" Width="800"
+        Title="Custumer display" Height="498" Width="800"
         Activated="refreshWindow">
 
     <Grid>
@@ -24,7 +24,7 @@
                 Name="CustumerListView" 
                 FontFamily="Comic Sans MS"
                 MouseDoubleClick="CustomerInActionView_MouseDoubleClick" 
-                Margin="15,0,10,35">
+                Margin="12,-99,12,91">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
                         <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -87,10 +87,12 @@
             </ListView>
 
 
-            <Label Content="Select a custumer to display"
-                   Margin="220,-81,312,336" 
-                   FontFamily="Comic Sans MS" 
-                   FontSize="18"/>
+            <!--<Label Content="Custumers display"
+                   Margin="250,-109,379,426" 
+                   FontFamily="Comic Sans MS"
+                   HorizontalAlignment="Center"
+                   VerticalAlignment="Center"
+                   FontSize="18"/>-->
             <Button 
                 x:Name="btnAddCustumer" 
                 Content="Add customer" 
@@ -98,10 +100,21 @@
                  materialDesign:ButtonAssist.CornerRadius="10"
                 FontFamily="Comic Sans MS"
                 HorizontalAlignment="Left" 
-                Margin="597,-94,0,0" 
+                Margin="506,291,0,0" 
                 VerticalAlignment="Top" 
-                Height="55" Width="134" 
+                Height="38" Width="123" 
                 Click="btnAddCustumer_Click"/>
+            <Button 
+                x:Name="btnClose" 
+                Content="Close" 
+                FontFamily="Comic Sans MS"
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                materialDesign:ButtonAssist.CornerRadius="10"
+                HorizontalAlignment="Left" 
+                VerticalAlignment="Top" 
+                Height="38" Width="100" 
+                Margin="664,291,0,0" 
+                Background="Red" Click="btnClose_Click"/>
         </Grid>
     </Grid>
 </Window>

@@ -76,5 +76,14 @@ namespace PL
         {
             RefreshCustomerListView();
         }
+        /// <summary>
+        /// close the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnClose_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
     }
 }

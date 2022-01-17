@@ -50,6 +50,10 @@ namespace PL
             btnAddCustumer_cencel.Visibility = Visibility.Visible;
             btnUpdateCustumer.Visibility = Visibility.Visible;
             grid_showListView.Visibility = Visibility.Visible;
+            listVReciverParcel.Visibility = Visibility.Visible;
+            listVSenderParcel.Visibility = Visibility.Visible;
+            lblR.Visibility = Visibility.Visible;
+            lblS.Visibility = Visibility.Visible;
             myBl = bL;
 
             Customer cst = new()

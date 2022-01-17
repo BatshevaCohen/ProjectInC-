@@ -312,12 +312,12 @@
               Visibility="Visible">
             
             <Grid x:Name="Sender_Grid"> 
-                <Label x:Name="lblS" Content="Sender:" FontFamily="Comic Sans MS" Margin="0,437,0,85" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left"/>
-                <ListView Margin="85,421,6,18" 
+                <Label x:Name="lblS" Visibility="Collapsed" Content="Sender:" FontFamily="Comic Sans MS" Margin="0,437,0,85" FontWeight="Bold" FontSize="20" HorizontalAlignment="Left"/>
+                <ListView  Margin="85,421,6,18" 
                           FontFamily="Comic Sans MS"
                           x:Name="listVSenderParcel"
                           RenderTransformOrigin="0.5,0.5"
-                          Width="680"
+                          Width="680" Visibility="Hidden"
                           MouseDoubleClick="ParcelsList_MouseDoubleClick">
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">
@@ -346,11 +346,11 @@
 
             <Grid x:Name="Reciver_Grid">
 
-                <Label x:Name="lblR" Content="Resiver:" Margin="0,258,0,256" FontFamily="Comic Sans MS" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left"/>
+                <Label x:Name="lblR" Visibility="Collapsed"  Content="Resiver:" Margin="0,258,0,256" FontFamily="Comic Sans MS" FontSize="18" FontWeight="Bold" HorizontalAlignment="Left"/>
                 <ListView  x:Name="listVReciverParcel" 
                        FontFamily="Comic Sans MS"
                        Margin="84,248,10,188"
-                       Width="680"
+                       Width="680" Visibility="Collapsed"
                        MouseDoubleClick="ParcelsList_MouseDoubleClick" >
                 <ListView.ItemContainerStyle>
                     <Style TargetType="ListViewItem">

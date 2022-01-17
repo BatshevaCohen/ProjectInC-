@@ -15,9 +15,8 @@ namespace DXML
         string customerPath = @"Customers.xml";
         string stationPath = @"Stations.xml";
         string parcelPath = @"Parcels.xml";
-        
+        string droneChargePath = @"droneCharges.xml";
 
-       
         #region singelton
         static DalXml instance;
         private static object locker = new object();
@@ -57,7 +56,6 @@ namespace DXML
 
         #endregion
 
-
         #region DalXML Drones
 
         /// <summary>
@@ -76,7 +74,6 @@ namespace DXML
                 dronsList.Add(d);
                 XMLTools.SaveListToXMLSerializer<Drone>(dronsList, dronePath);
             }
-
         }
         /// <summary>
         /// Update Name Of Drone
@@ -116,15 +113,135 @@ namespace DXML
             else
                 return dronsList.Where(predicate).ToList();
         }
+        /// <summary>
+        /// Send a drone to charge
+        /// </summary>
+        /// <param name="droneId">the drone to send to charge</param>
+        /// <param name="stationId">the station to send it to charge</param>
+        public void SendDroneToCharge(int droneId, int stationId)
+        {
+            List<DO.Drone> dronsList = XMLTools.LoadListFromXMLSerializer<Drone>(dronePath);
+            List<DO.Station> stationList = XMLTools.LoadListFromXMLSerializer<Station>(stationPath);
+            List<DO.DroneCharge> dronechargeList = XMLTools.LoadListFromXMLSerializer<DroneCharge>(droneChargePath);
+
+            Drone drone = GetDrone(droneId);
+            Station station = GetStation(stationId);
+            stationList.Remove(station);
+
+            dronechargeList.Add(new DroneCharge
+            {
+                DroneId = drone.Id,
+                StationId = station.Id
+            });
+            station.ChargeSpots--;
+
+            stationList.Add(station);
+        }
+        /// <summary>
+        /// release a drone from charge
+        /// </summary>
+        /// <param name="droneId">the id of the drone to release</param>
+        public void ReleaseDroneFromCharging(int droneId)
+        {
+            List<DO.Drone> dronsList = XMLTools.LoadListFromXMLSerializer<Drone>(dronePath);
+               List<DO.DroneCharge> dronechargeList = XMLTools.LoadListFromXMLSerializer<DroneCharge>(droneChargePath);
+            List<DO.Station> stationList = XMLTools.LoadListFromXMLSerializer<Station>(stationPath);
+            Drone drone = GetDrone(droneId);
+            dronsList.Remove(drone);
+
+            DroneCharge droneCharge = dronechargeList.Find(x => x.DroneId == droneId);
 
 
+            int stationId = droneCharge.StationId;
+            Station station = GetStation(stationId);
+            stationList.Remove(station);
+
+            station.ChargeSpots++;
+
+            stationList.Add(station);
+            dronsList.Add(drone);
+            dronechargeList.Remove(droneCharge);
+
+        }
+
+        /// <summary>
+        /// discharge drone
+        /// <param name="droneID"></param>
+        /// <param name="droneLatitude"></param>
+        /// <param name="droneLongitude"></param>
+        /// <exception cref="Exception"></exception>
+        public Station DischargeDroneByLocation(int droneID, double droneLatitude, double droneLongitude)
+        {
+            List<DO.Drone> dronsList = XMLTools.LoadListFromXMLSerializer<Drone>(dronePath);
+            List<DO.Station> stationList = XMLTools.LoadListFromXMLSerializer<Station>(stationPath);
+            Drone d = dronsList.Find(x => x.Id == droneID);
+            Station s = new Station();
+            foreach (Station item in stationList) //finds the station
+            {
+                if (item.Latitude == droneLatitude && item.Longitude == droneLongitude)
+                {
+                    stationList.Remove(s);
+                    s = item;
+                    s.ChargeSpots++;
+                    stationList.Add(s);
+                    return s;
+                }
+            }
+            throw new Exception("couldn't find station by drones location");
+        }
+        /// <summary>
+        /// Update the station to have one less spot for charging (because we sent a drone to charg there)
+        /// </summary>
+        /// <param name="StationId"></param>
+        /// <param name="drone"></param>
+        public Station UpdateStationChargingSpots(int StationId)
+        {
+            List<DO.Station> stationList = XMLTools.LoadListFromXMLSerializer<Station>(stationPath);
+            Station station = stationList.Find(x => x.Id == StationId);
+            station.ChargeSpots -= 1;
+            return station;
+        }
+
+        /// <summary>
+        /// Method of applying drone power
+        /// </summary>
+        /// <returns>An array of the amount of power consumption of a drone for each situation</returns>
+        public double[] PowerConsumptionRequest()
+        {
+            XElement Config = XElement.Load(@"..\xml\config.xml");
+             double[] result = { double.Parse(Config.Element("DroneElecUseEmpty").Value),
+             double.Parse(Config.Element("Light").Value),
+             double.Parse(Config.Element("Heavy").Value),
+             double.Parse(Config.Element("Medium").Value),
+             double.Parse(Config.Element("ChargingRate").Value), };
+             return result;
+        }
+        public void updateBatteryDrone(int id, double dis)
+        {
+            List<DO.Drone> dronsList = XMLTools.LoadListFromXMLSerializer<Drone>(dronePath);
+            Drone d = dronsList.Find(x => x.Id == id);
+            dronsList.Remove(d);
+            d.Battery -= dis * 0.01;
+            dronsList.Add(d);
+        }
         #endregion
 
-
         #region DalXML Stations
+        /// <summary>
+        /// View Station
+        /// </summary>
+        /// <param name="id"></param>
+        public Station GetStation(int id)
+        {
+            List<DO.Station> stationList = XMLTools.LoadListFromXMLSerializer<Station>(stationPath);
+            if (!stationList.Exists(item => item.Id == id))
+            {
+                throw new StationException($"ID: {id} does not exist!!");
+            }
+            return stationList.First(c => c.Id == id);
+        }
 
         #endregion DalXML Stations
-
         //זה גמור!
         #region DalXML Coustumer
         private void CreateFiles()
@@ -204,15 +321,106 @@ namespace DXML
             CustumerRoot.Save(customerPath);
 
         }
+        #endregion DalXML Coustumer
+        //גמור בה
+        #region DalXML Parcel
+        public void AddParcel(Parcel p)
+        {
+            List<DO.Parcel> parcelList = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
+            if (parcelList.Exists(parcel => parcel.Id == p.Id))
+            {
+                throw new ParcelException($"ID {p.Id} already exists!!");
+            }
+            else
+            {
+                parcelList.Add(p);
+                XMLTools.SaveListToXMLSerializer<Parcel>(parcelList, parcelPath);
+            }
+        }
+        /// <summary>
+        /// view function for Parcel with id
+        /// </summary>
+        /// <param name="id"></param>
+        public Parcel GetParcel(int id)
+        {
+            List<Parcel> parcelList = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
+            if (!parcelList.Exists(item => item.Id == id))
+            {
+                throw new ParcelException($"ID: {id} does not exist!!");
+            };
+            return parcelList.First(c => c.Id == id);
+        }
+        /// <summary>
+        /// view lists functions for Parcel
+        /// </summary>
+        public IEnumerable<Parcel> ShowParcelList(Func<Parcel, bool> predicate = null)
+        {
+            List<Parcel> parcelList = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
+            if (predicate == null)
+            {
+
+                foreach (Parcel element in parcelList)
+                {
+                    parcelList.Add(element);
+                }
+                return parcelList;
+            }
+            return parcelList.Where(predicate).ToList();
+        }
+        /// <summary>
+        /// shows the list of packages that haven't been associated to a drone
+        /// </summary>
+        /// <returns></returns>
+        public IEnumerable<Parcel> ShowNonAssociatedParcelList()
+        {
+            List<Parcel> NonAssociatedParcelList = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
+            foreach (Parcel element in NonAssociatedParcelList)
+            {
+                if (element.DroneID == 0)
+                    NonAssociatedParcelList.Add(element);
+            }
+            return NonAssociatedParcelList;
+        }
+        public double GetDistanceBetweenLocationsOfParcels(int senderId, int targetId)
+        {
+            List<Station> stationList = XMLTools.LoadListFromXMLSerializer<Station>(stationPath);
+            double minDistance = 1000000000000;
+            Customer sender = GetCustomer(senderId);
+            Customer target = GetCustomer(targetId);
+            foreach (var s in stationList)
+            {
+                double dictance = Math.Sqrt(Math.Pow(sender.Latitude - target.Latitude, 2) + Math.Pow(sender.Longitude - target.Longitude, 2));
+                if (minDistance > dictance)
+                {
+                    minDistance = dictance;
+                }
+            }
+            return minDistance;
+        }
+        /// <summary>
+        /// remove parcel frome the list
+        /// </summary>
+        /// <param name="p"></param>
+        public void RemoveParcel(Parcel p)
+        {
+            List<Parcel> parcelList = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
+            int dellParcel_index = parcelList.FindIndex(x => (x.Id == p.Id));
+            if (dellParcel_index == -1)
+                throw new ParcelException($"ID {p.Id} not dound!");
+            parcelList.RemoveAt(dellParcel_index);
+            XMLTools.SaveListToXMLSerializer<Parcel>(parcelList, parcelPath);
+        }
+        public void DischargeDrone(int drone_id, double longt, double latit)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion DalXML Parcel
+
+        //לעשות פונקציה למספר רץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץ
+    
+
     }
 
-    #endregion DalXML Coustumer
 
-
-    #region DalXML Parcel
-
-    #endregion DalXML Parcel
-
-    //לעשות פונקציה למספר רץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץץ
 
 }

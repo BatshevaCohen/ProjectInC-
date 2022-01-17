@@ -152,7 +152,7 @@ namespace DAL
         public double[] PowerConsumptionRequest()
         {
             double[] result = {DataSource.Config.Light, DataSource.Config.Heavy,
-                DataSource.Config.Medium, DataSource.Config.Heavy,
+                DataSource.Config.Medium,
                 DataSource.Config.ChargingRate };
             return result;
         }

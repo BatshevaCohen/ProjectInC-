@@ -191,7 +191,7 @@ namespace DAL
         {
             int dellParcel_index = DataSource.Parcels.FindIndex(x => (x.Id == p.Id));
             if (dellParcel_index == -1)
-                throw new NonExistsException($"id number {p.Id} not found");
+                throw new ParcelException($"ID {p.Id} not dound!");
             DataSource.Parcels.RemoveAt(dellParcel_index);
         }
 

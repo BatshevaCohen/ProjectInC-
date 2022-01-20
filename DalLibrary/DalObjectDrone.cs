@@ -149,13 +149,7 @@ namespace DAL
         /// Method of applying drone power
         /// </summary>
         /// <returns>An array of the amount of power consumption of a drone for each situation</returns>
-        public double[] PowerConsumptionRequest()
-        {
-            double[] result = {DataSource.Config.Light, DataSource.Config.Heavy,
-                DataSource.Config.Medium,
-                DataSource.Config.ChargingRate };
-            return result;
-        }
+      
 
         public void updateBatteryDrone(int id, double dis)
         {

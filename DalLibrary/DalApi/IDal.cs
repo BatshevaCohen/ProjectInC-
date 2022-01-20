@@ -279,11 +279,7 @@ namespace DalApi
         /// <param name="longitude"></param>
         /// <returns></returns>
         Station GetClosestStation(double latitude, double longitude);
-        /// <summary>
-        /// Method of applying drone power
-        /// </summary>
-        /// <returns></returns>
-        double[] PowerConsumptionRequest();
+      
         /// <summary>
         /// send a drone to charge
         /// </summary>
@@ -298,14 +294,15 @@ namespace DalApi
         void UpdateUser(User userToUpdate);
 
         #endregion
-
+        
         /// <summary>
         /// delete user
         /// throw BadUserException
         /// </summary>
         /// <param name="userName">name of user to delete</param>
         void DeleteUser(string userName);
-        List<Tuple<int, double>> GetListOfDronInChargeing(int stationId);
+       
         void RemoveParcel(Parcel parcel);
+        List<Tuple<int, double>> GetListOfDronInChargeing(int stationId);
     }
 }

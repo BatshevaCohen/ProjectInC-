@@ -95,13 +95,13 @@ namespace BL
                         switch (p.Weight)
                         {
                             case DO.WeightCategories.Light:
-                                droneBL.Battery = r.Next((int)(distance * dalo.PowerConsumptionRequest()[1] + 1), 101);
+                                droneBL.Battery = r.Next((int)(distance * dalo.PowerRequest()[1] + 1), 101);
                                 break;
                             case DO.WeightCategories.Medium:
-                                droneBL.Battery = r.Next((int)(distance * dalo.PowerConsumptionRequest()[2] + 1), 101);
+                                droneBL.Battery = r.Next((int)(distance * dalo.PowerRequest()[2] + 1), 101);
                                 break;
                             case DO.WeightCategories.Heavy:
-                                droneBL.Battery = r.Next((int)(distance * dalo.PowerConsumptionRequest()[3] + 1), 101);
+                                droneBL.Battery = r.Next((int)(distance * dalo.PowerRequest()[3] + 1), 101);
                                 break;
                             default:
                                 break;

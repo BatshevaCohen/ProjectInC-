@@ -41,5 +41,7 @@ namespace DO
             get { return myActivity; }
             set { myActivity = value; }
         }
+
+     
     }
 }

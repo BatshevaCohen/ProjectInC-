@@ -22,7 +22,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{D94B75E5-8A3
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalLibrary", "DalLibrary\DalLibrary.csproj", "{A90DD643-B502-44D2-BE43-B88040AD646F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DXML", "DXML\DXML.csproj", "{A2E55C30-DEEE-4813-A454-AC19720CA2B1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DXML", "DXML\DXML.csproj", "{A2E55C30-DEEE-4813-A454-AC19720CA2B1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -61,9 +61,6 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
-	EndGlobalSection
-	GlobalSection(NestedProjects) = preSolution
-		{D94B75E5-8A3A-4220-BE9A-4A6082D964F2} = {7AAE5B0D-691B-40AA-A434-0926BA0FE456}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {D6E4C400-EF72-4CEF-979D-5225C40EC379}

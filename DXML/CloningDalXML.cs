@@ -5,14 +5,11 @@ using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DAL
+namespace DXML
 {
-    /// <summary>
-    /// extention func used to Used in the transition between the layers
-    /// </summary>
-    internal static class Cloning
+     internal static class Cloning
     {
-        public static T Clone<T>(this T original)
+        internal static T Clone<T>(this T original)
         {
             T copyToObject = (T)Activator.CreateInstance(original.GetType());
 

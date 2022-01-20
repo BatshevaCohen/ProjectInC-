@@ -258,7 +258,7 @@
             <TextBox 
                     x:Name="longitudeTextBoxadd" 
                     Width="120" 
-                FontFamily="Comic Sans MS"
+                    FontFamily="Comic Sans MS"
                     VerticalAlignment="Center" 
                     Text="{Binding Location.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
                     Grid.Row="1" 
@@ -281,20 +281,31 @@
                 />
         <ListView  x:Name="listVDtoneInCharging" 
                    FontFamily="Comic Sans MS" 
-                   MouseDoubleClick="StationInActionView_MouseDoubleClick" Margin="36,222,445,90" 
-                   Visibility="Collapsed">
+                   MouseDoubleClick="StationInActionView_MouseDoubleClick" Margin="455,90,50,132" 
+                   Visibility="Visible">
+            <ListView.ItemContainerStyle>
+                <Style TargetType="ListViewItem">
+                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+                </Style>
+            </ListView.ItemContainerStyle>
             <ListView.View>
                 <GridView>
-                    <GridViewColumn Header="ID" Width="110" DisplayMemberBinding="{Binding Id}" />
-                    <GridViewColumn Header="Battery"  Width="110" DisplayMemberBinding="{Binding Battery}"/>
+                    <GridViewColumn Header="ID" Width="Auto" DisplayMemberBinding="{Binding Id}" />
+                    <GridViewColumn Header="Battery"  Width="Auto" DisplayMemberBinding="{Binding Battery}"/>
                 </GridView>
             </ListView.View> />
 
 
         </ListView>
-        <Label x:Name="lable_droneincharging" Content="Drones in charging in this station:" Margin="36,175,384,217" 
+        <Label x:Name="lable_droneincharging" 
+               Content="Drones in charging in this station:" 
+               FontSize="14"
                FontFamily="Comic Sans MS"
-               Visibility="Collapsed"/>
+               FontWeight="SemiBold"
+               HorizontalAlignment="Center"
+               VerticalAlignment="Center"
+               Height="30"
+               Visibility="Visible" Width="256" Margin="428,47,0,349"/>
 
 
     </Grid>

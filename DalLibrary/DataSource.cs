@@ -100,12 +100,12 @@ namespace DAL
                 Latitude = 44.4
                 
             });
-            DroneCharge droneCharge = new()
-            {
-                DroneId = 123456,
-                StationId=12345,
-            };
-            DataSource.DroneCharges.Add(droneCharge);
+            //DroneCharge droneCharge = new()
+            //{
+            //    DroneId = 123456,
+            //    StationId=12345,
+            //};
+            //DataSource.DroneCharges.Add(droneCharge);
 
             //adding customers
             for (int i = 0; i < 10; i++)

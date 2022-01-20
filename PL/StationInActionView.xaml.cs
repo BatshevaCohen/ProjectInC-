@@ -126,10 +126,14 @@ namespace PL
                 MessageBox.Show(ex.Message);
             }
         }
-
+        /// <summary>
+        /// double-click on a row in the drones in charging list view
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StationInActionView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            DroneInCharging droneInCharging = listVDtoneInCharging.SelectedItem as DroneInCharging;
+            DroneInCharging? droneInCharging = listVDtoneInCharging.SelectedItem as DroneInCharging;
             Drone d = mybl.GetDrone(droneInCharging.Id);
             DroneToList droneTo = new DroneToList()
             {

@@ -213,16 +213,15 @@
                     HorizontalAlignment="Center" 
                     Grid.Column="1" 
                     IsEnabled="True"/>
-
             <Grid/>
         </Grid>
 
         <Grid
-                x:Name="LocationGridStation" 
-                Visibility="Collapsed" 
-                VerticalAlignment="Top" 
-                Margin="12,235,0,0" 
-                HorizontalAlignment="Left" Height="67" Width="305">
+            x:Name="LocationGridStation" 
+            Visibility="Collapsed" 
+            VerticalAlignment="Top" 
+            Margin="12,235,0,0" 
+            HorizontalAlignment="Left" Height="67" Width="305">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -256,16 +255,16 @@
                     VerticalAlignment="Center" 
                     HorizontalAlignment="Left" Grid.Row="1" Width="99" Margin="17,0,0,0"/>
             <TextBox 
-                    x:Name="longitudeTextBoxadd" 
-                    Width="120" 
-                    FontFamily="Comic Sans MS"
-                    VerticalAlignment="Center" 
-                    Text="{Binding Location.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                    Grid.Row="1" 
-                    Height="23" 
-                    HorizontalAlignment="Center" 
-                    Grid.Column="1" 
-                    IsEnabled="True"/>
+                x:Name="longitudeTextBoxadd" 
+                Width="120" 
+                FontFamily="Comic Sans MS"
+                VerticalAlignment="Center" 
+                Text="{Binding Location.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                Grid.Row="1" 
+                Height="23" 
+                HorizontalAlignment="Center" 
+                Grid.Column="1" 
+                IsEnabled="True"/>
         </Grid>
 
         <Button x:Name="btnAddStation"
@@ -277,12 +276,10 @@
                 materialDesign:ButtonAssist.CornerRadius="10" 
                 HorizontalAlignment="Left" 
                 Width="131"
-                Click="btnAddeStation_Click"
-                />
-        <ListView  x:Name="listVDtoneInCharging" 
-                   FontFamily="Comic Sans MS" 
-                   MouseDoubleClick="StationInActionView_MouseDoubleClick" Margin="455,90,50,132" 
-                   Visibility="Visible">
+                Click="btnAddeStation_Click"/>
+
+        <ListView x:Name="DroneInCharge_ListView"
+                  FontFamily="Comic Sans MS" Margin="440,86,46,139">
             <ListView.ItemContainerStyle>
                 <Style TargetType="ListViewItem">
                     <Setter Property="HorizontalContentAlignment" Value="Center"/>
@@ -293,10 +290,9 @@
                     <GridViewColumn Header="ID" Width="Auto" DisplayMemberBinding="{Binding Id}" />
                     <GridViewColumn Header="Battery"  Width="Auto" DisplayMemberBinding="{Binding Battery}"/>
                 </GridView>
-            </ListView.View> />
-
-
+            </ListView.View>
         </ListView>
+
         <Label x:Name="lable_droneincharging" 
                Content="Drones in charging in this station:" 
                FontSize="14"

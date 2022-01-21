@@ -51,15 +51,15 @@ namespace PL
                 lable_droneincharging.Visibility = Visibility.Visible;
                 foreach (DroneInCharging item in station.droneInChargings)
                 {
-                    listVDtoneInCharging.Visibility = Visibility.Visible;
+                    DroneInCharge_ListView.Visibility = Visibility.Visible;
                     ListViewItem newItem = new ListViewItem();
                     newItem.Content = item;
-                    listVDtoneInCharging.Items.Add(newItem);
+                    DroneInCharge_ListView.Items.Add(newItem);
                 }
             }
             else
             {
-                listVDtoneInCharging.Visibility = Visibility.Collapsed;
+                DroneInCharge_ListView.Visibility = Visibility.Collapsed;
             }
             DataContext = station;
 
@@ -133,7 +133,7 @@ namespace PL
         /// <param name="e"></param>
         private void StationInActionView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            DroneInCharging? droneInCharging = listVDtoneInCharging.SelectedItem as DroneInCharging;
+            DroneInCharging? droneInCharging = DroneInCharge_ListView.SelectedItem as DroneInCharging;
             Drone d = mybl.GetDrone(droneInCharging.Id);
             DroneToList droneTo = new DroneToList()
             {

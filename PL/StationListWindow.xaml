@@ -140,17 +140,17 @@
              materialDesign:ButtonAssist.CornerRadius="10" 
             Height="44"/>
         <Button 
-                x:Name="btnClose" 
-                Content="Close" 
-                FontFamily="Comic Sans MS"
-                Background="#da2d2d"
-                Style="{StaticResource MaterialDesignRaisedButton}"
-             materialDesign:ButtonAssist.CornerRadius="10" 
-                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                Click="closeButton_Click"  
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Top" 
-                Width="108" Margin="548,47,0,0" />
+            x:Name="btnClose" 
+            Content="Close" 
+            FontFamily="Comic Sans MS"
+            Background="#da2d2d"
+            Style="{StaticResource MaterialDesignRaisedButton}"
+            materialDesign:ButtonAssist.CornerRadius="10" 
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+            Click="closeButton_Click"  
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" 
+            Width="108" Margin="548,47,0,0" />
 
 
     </Grid>

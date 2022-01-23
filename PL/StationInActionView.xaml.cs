@@ -27,8 +27,13 @@ namespace PL
         public StationInActionView()
         {
             InitializeComponent();
-            
         }
+        /// <summary>
+        /// station view
+        /// </summary>
+        /// <param name="stationToL"></param>
+        /// <param name="bL"></param>
+        /// <param name="stationListWindow"></param>
         public StationInActionView(StationToList stationToL, IBL bL, StationListWindow stationListWindow)
         {
             InitializeComponent();
@@ -101,10 +106,13 @@ namespace PL
             }
         }
 
-
+        /// <summary>
+        /// click on button add station
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddeStation_Click(object sender, RoutedEventArgs e)
         {
-
             Station station = new Station()
             {
                 Id = Int32.Parse(stationIdTextBoxadd.Text),
@@ -131,9 +139,14 @@ namespace PL
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void StationInActionView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void DroneInCharge_ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            DroneInCharging? droneInCharging = DroneInCharge_ListView.SelectedItem as DroneInCharging;
+            Station station = mybl.GetStation(Int32.Parse(stationIdTextBox.Text));
+            DroneInCharging droneInCharging = new DroneInCharging()
+            {
+                Id = station.droneInChargings[0].Id,
+                Battery = station.droneInChargings[0].Battery
+            };
             Drone d = mybl.GetDrone(droneInCharging.Id);
             DroneToList droneTo = new DroneToList()
             {
@@ -149,9 +162,16 @@ namespace PL
                 Latitude = d.Location.Latitude,
                 Longitude = d.Location.Longitude,
             };
-
             new DroneInActionView(droneTo, mybl).Show();
         }
-
+        /// <summary>
+        /// close
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void closeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

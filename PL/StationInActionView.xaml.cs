@@ -142,10 +142,15 @@ namespace PL
         private void DroneInCharge_ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Station station = mybl.GetStation(Int32.Parse(stationIdTextBox.Text));
+            int var = 0;
+            if (DroneInCharge_ListView.SelectedItems.Count > 0)
+            {
+                var = DroneInCharge_ListView.Items.IndexOf(DroneInCharge_ListView.SelectedItems[0]);
+            }
             DroneInCharging droneInCharging = new DroneInCharging()
             {
-                Id = station.droneInChargings[0].Id,
-                Battery = station.droneInChargings[0].Battery
+                Id = station.droneInChargings[var].Id,
+                Battery = station.droneInChargings[var].Battery
             };
             Drone d = mybl.GetDrone(droneInCharging.Id);
             DroneToList droneTo = new DroneToList()
@@ -164,6 +169,7 @@ namespace PL
             };
             new DroneInActionView(droneTo, mybl).Show();
         }
+
         /// <summary>
         /// close
         /// </summary>

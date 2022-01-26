@@ -1,5 +1,7 @@
-﻿using Dal;
+﻿
+using Dal;
 using DO;
+using DXML;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,34 +9,44 @@ using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
 
-namespace DXML
+namespace DAL
 {
-    internal sealed partial class DXML : DalApi.IDal
+     sealed class DXML : DalApi.IDal
     {
+        private XElement CustumerRoot;
         XMLTools XMLTools;
-        string dronePath = @"drons.xml";
-        string customerPath = @"Customers.xml";
-        string stationPath = @"Stations.xml";
-        string parcelPath = @"Parcels.xml";
-        string droneChargePath = @"droneCharges.xml";
-        string UserPath = @"users.xml";
+        static string dronePath = @"Drones.xml";
+        static string customerPath = @"Customers.xml";
+        static string stationPath = @"Stations.xml";
+        static string parcelPath = @"Parcels.xml";
+        static string droneChargePath = @"droneCharges.xml";
+        static string UserPath = @"users.xml";
 
         #region singelton
         static DXML instance;
         private static object locker = new object();
-        private XElement CustumerRoot;
+        
 
         /// <summary>
         /// constructor - calls DataSource.initialize() to initialize lists
         /// </summary>
         private DXML()
         {
-            string dir = @"..\xml\";
-            XMLTools = new XMLTools();
-            if (!File.Exists(dir + customerPath))
-                CreateFiles();
-            else
-                LoadData();
+            //string dir = @"..\xml\";
+            //XMLTools = new XMLTools();
+            //if (!File.Exists(dir + customerPath))
+            //    CreateFiles();
+            //else
+            //    LoadData();
+        }
+    static DXML()
+        {
+            DataSource.Initialize();
+            XMLTools.SaveListToXMLSerializer<Drone>(DataSource.Drones, dronePath);
+            XMLTools.SaveListToXMLSerializer<Parcel>(DataSource.Parcels, parcelPath);
+            XMLTools.SaveListToXMLSerializer<Station>(DataSource.Stations, stationPath);
+            XMLTools.SaveListToXMLSerializer<User>(DataSource.userList, UserPath);
+            XMLTools.SaveListToXMLSerializer<DroneCharge>(DataSource.DroneCharges, droneChargePath);
         }
 
         /// <summary>
@@ -46,7 +58,7 @@ namespace DXML
             {
                 if (instance == null)
                 {
-                    lock (locker)
+                 //   lock (locker)
                     {
                         if (instance == null)
                             instance = new DXML();
@@ -246,7 +258,7 @@ namespace DXML
             List<DO.Drone> dronsList = XMLTools.LoadListFromXMLSerializer<Drone>(dronePath);
             Drone d = dronsList.Find(x => x.Id == id);
             dronsList.Remove(d);
-            d.Battery -= dis * 0.01;
+            d.Battery -= dis * 0.001;
             dronsList.Add(d);
         }
         public void UpdateAddDroneToCharge(int dronId, int stationId)

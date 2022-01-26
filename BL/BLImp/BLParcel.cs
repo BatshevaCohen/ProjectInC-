@@ -122,7 +122,7 @@ namespace BL
                 DronesL.Find(x => x.Id == droneId).Location.Latitude = sender.Location.Latitude;
                 DronesL.Find(x => x.Id == droneId).Location.Longitude = sender.Location.Longitude;
                 // for each KM - 1% of the battery
-                DronesL.Find(x => x.Id == droneId).Battery -= distance * 0.01;
+                DronesL.Find(x => x.Id == droneId).Battery -= distance * 0.001;
                 //update the pick up time to the current time
                 parcel.PickedUp = DateTime.Now;
                 dalo.updateBatteryDrone(droneId, distance);

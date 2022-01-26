@@ -8,17 +8,17 @@ using System.Threading.Tasks;
 
 namespace DAL
 {
-    public static class DataSource
+    internal class DataSource
     {
         /// <summary>
         /// database of DO entities
         /// </summary>
         public static int OrdinalNumber = 1000000;
-        public static List<Drone> Drones = new(5) { };
-        public static List<Station> Stations = new(5) { };
-        public static List<Customer> Customer = new(100) { };
-        public static List<Parcel> Parcels = new(1000) { };
-        public static List<DroneCharge> DroneCharges = new(10) { };
+        internal static List<Drone> Drones = new(5) { };
+        internal static List<Station> Stations = new(5) { };
+        internal static List<Customer> Customer = new(100) { };
+        internal static List<Parcel> Parcels = new(1000) { };
+        internal static List<DroneCharge> DroneCharges = new(10) { };
         public static List<User> userList;
 
         static Random r = new() { };
@@ -180,8 +180,9 @@ namespace DAL
 
             }
           
-
+            
                 userList = CreateUsers();
+
         }
 
 

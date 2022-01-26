@@ -1,4 +1,5 @@
-﻿using DO;
+﻿using DalApi;
+using DO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -6,7 +7,9 @@ using System.Text;
 using System.Threading.Tasks;
 
 
-namespace DAL
+
+
+namespace dataSours
 {
     public static class DataSource
     {
@@ -14,11 +17,11 @@ namespace DAL
         /// database of DO entities
         /// </summary>
         public static int OrdinalNumber = 1000000;
-        public static List<Drone> Drones = new(5) { };
-        public static List<Station> Stations = new(5) { };
-        public static List<Customer> Customer = new(100) { };
-        public static List<Parcel> Parcels = new(1000) { };
-        public static List<DroneCharge> DroneCharges = new(10) { };
+        internal static List<Drone> Drones = new(5) { };
+        internal static List<Station> Stations = new(5) { };
+        internal static List<Customer> Customer = new(100) { };
+        internal static List<Parcel> Parcels = new(1000) { };
+        internal static List<DroneCharge> DroneCharges = new(10) { };
         public static List<User> userList;
 
         static Random r = new() { };
@@ -98,7 +101,7 @@ namespace DAL
                 ChargeSpots = 10,
                 Longitude = 33.3,
                 Latitude = 44.4
-                
+
             });
             //DroneCharge droneCharge = new()
             //{
@@ -112,17 +115,17 @@ namespace DAL
             {
                 Customer.Add(new Customer()
                 {
-                    Id = r.Next(100000000,999999999),
+                    Id = r.Next(100000000, 999999999),
                     Name = arrClientFirstName[i],
                     Phone = "05" + r.Next(0, 8) + "-" + r.Next(1000000, 9999999),
                     Longitude = r.Next(-180, 179) + r.NextDouble(),
                     Latitude = r.Next(-90, 89) + r.NextDouble(),
-                    User = new User() 
-                    { 
-                        UserName= CreateUsers().ToArray()[i].UserName,
-                        Password= CreateUsers().ToArray()[i].Password,
-                        MyActivity= CreateUsers().ToArray()[i].MyActivity,
-                        Permission= CreateUsers().ToArray()[i].Permission,
+                    User = new User()
+                    {
+                        UserName = CreateUsers().ToArray()[i].UserName,
+                        Password = CreateUsers().ToArray()[i].Password,
+                        MyActivity = CreateUsers().ToArray()[i].MyActivity,
+                        Permission = CreateUsers().ToArray()[i].Permission,
                     }
                 });
             }
@@ -134,7 +137,7 @@ namespace DAL
                 // the sender can't be the reciver
                 do
                 {
-                    targetId = Customer[i+1].Id;
+                    targetId = Customer[i + 1].Id;
                 } while (targetId == senderId);
 
                 Parcels.Add(new Parcel()
@@ -144,7 +147,7 @@ namespace DAL
                     ReceiverId = targetId,
                     Weight = RandomEnumValue<WeightCategories>(),
                     Priority = RandomEnumValue<Priorities>(),
-                    
+
                     Create = MyDateTime(),
                     Assigned = MyDateTime(),
                     PickedUp = MyDateTime(),
@@ -161,7 +164,7 @@ namespace DAL
                 // the sender can't be the reciver
                 do
                 {
-                    targetId = Customer[i+1].Id;
+                    targetId = Customer[i + 1].Id;
                 } while (targetId == senderId);
 
                 Parcels.Add(new Parcel()
@@ -171,7 +174,7 @@ namespace DAL
                     ReceiverId = targetId,
                     Weight = RandomEnumValue<WeightCategories>(),
                     Priority = RandomEnumValue<Priorities>(),
-                    DroneID =Drones[i/3].Id,
+                    DroneID = Drones[i / 3].Id,
                     Create = DateTime.MinValue,
                     Assigned = DateTime.MinValue,
                     PickedUp = DateTime.MinValue,
@@ -179,9 +182,10 @@ namespace DAL
                 });
 
             }
-          
 
+            //XMLTools.SaveListToXMLSerializer()
                 userList = CreateUsers();
+
         }
 
 

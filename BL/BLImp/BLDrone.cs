@@ -176,6 +176,8 @@ namespace BL
             // save dVal in second
             double dVal = (chargingTime.TotalMilliseconds) / 1000;
 
+            //TimeSpan duration = DateTime.Now.Subtract((DateTime)dc.EntranceTime);
+            // double time = duration.Hours + (double)duration.Minutes / 60 + (double)duration.Seconds / 3600;
             //finds the drone by its ID
             DroneToList dronel = DronesL.Find(x => x.Id == droneID);
             DO.Station station = new();

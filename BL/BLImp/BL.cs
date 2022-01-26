@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using BO;
 using BlApi;
 using DalApi;
+using DLAPI;
+
 namespace BL
 {
     internal sealed partial class BL : IBL
@@ -29,7 +31,7 @@ namespace BL
         private BL()
         {
             //Access to the layer DAL
-            dalo = DalFactory.GetDal();
+            dalo = DLFactory.GetDL();
             dronesL = new List<DroneToList>();
             var Drones = dalo.ShowDroneList();
             DronesInitialize(Drones);
@@ -138,7 +140,7 @@ namespace BL
                         };
                         // Battery mode will be recharged between a minimal charge that will allow it to reach the station closest to charging and a full charge
                         double distance = dalo.GetDistanceBetweenLocationAndClosestStation(parcelsDelivered[index].ReceiverId);
-
+                        //צריך לטפל דחוףףףף שלא נשכח בבטריה להגביל אותהב100% כי היא ממשיכהלהיות גם מספרים הזויים!!!!!
                         // זה זמניייייייייייי השורה הזאת עשתה חריגה 
                         droneBL.Battery = 30;
                         //  droneBL.Battery = r.Next((int)(distance * dalo.PowerConsumptionRequest()[0] + 1), 101);

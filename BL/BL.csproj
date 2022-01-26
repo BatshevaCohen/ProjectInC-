@@ -12,6 +12,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\DalLibrary\DalLibrary.csproj" />
+	  <ProjectReference Include="..\DXML\DXML.csproj" />
 	</ItemGroup>
 
 </Project>

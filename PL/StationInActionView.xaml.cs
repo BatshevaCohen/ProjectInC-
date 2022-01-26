@@ -27,8 +27,13 @@ namespace PL
         public StationInActionView()
         {
             InitializeComponent();
-            
         }
+        /// <summary>
+        /// station view
+        /// </summary>
+        /// <param name="stationToL"></param>
+        /// <param name="bL"></param>
+        /// <param name="stationListWindow"></param>
         public StationInActionView(StationToList stationToL, IBL bL, StationListWindow stationListWindow)
         {
             InitializeComponent();
@@ -51,15 +56,15 @@ namespace PL
                 lable_droneincharging.Visibility = Visibility.Visible;
                 foreach (DroneInCharging item in station.droneInChargings)
                 {
-                    listVDtoneInCharging.Visibility = Visibility.Visible;
+                    DroneInCharge_ListView.Visibility = Visibility.Visible;
                     ListViewItem newItem = new ListViewItem();
                     newItem.Content = item;
-                    listVDtoneInCharging.Items.Add(newItem);
+                    DroneInCharge_ListView.Items.Add(newItem);
                 }
             }
             else
             {
-                listVDtoneInCharging.Visibility = Visibility.Collapsed;
+                DroneInCharge_ListView.Visibility = Visibility.Collapsed;
             }
             DataContext = station;
 
@@ -101,10 +106,13 @@ namespace PL
             }
         }
 
-
+        /// <summary>
+        /// click on button add station
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAddeStation_Click(object sender, RoutedEventArgs e)
         {
-
             Station station = new Station()
             {
                 Id = Int32.Parse(stationIdTextBoxadd.Text),
@@ -131,9 +139,19 @@ namespace PL
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void StationInActionView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void DroneInCharge_ListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            DroneInCharging? droneInCharging = listVDtoneInCharging.SelectedItem as DroneInCharging;
+            Station station = mybl.GetStation(Int32.Parse(stationIdTextBox.Text));
+            int var = 0;
+            if (DroneInCharge_ListView.SelectedItems.Count > 0)
+            {
+                var = DroneInCharge_ListView.Items.IndexOf(DroneInCharge_ListView.SelectedItems[0]);
+            }
+            DroneInCharging droneInCharging = new DroneInCharging()
+            {
+                Id = station.droneInChargings[var].Id,
+                Battery = station.droneInChargings[var].Battery
+            };
             Drone d = mybl.GetDrone(droneInCharging.Id);
             DroneToList droneTo = new DroneToList()
             {
@@ -149,9 +167,17 @@ namespace PL
                 Latitude = d.Location.Latitude,
                 Longitude = d.Location.Longitude,
             };
-
             new DroneInActionView(droneTo, mybl).Show();
         }
 
+        /// <summary>
+        /// close
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void closeButton_Click(object sender, RoutedEventArgs e)
+        {
+            this.Close();
+        }
     }
 }

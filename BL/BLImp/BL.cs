@@ -20,21 +20,20 @@ namespace BL
 
         #region Singleton
 
-        private static readonly IBL instance;
+        private static readonly IBL instance = new BL();
+       
+
         public static IBL Instance { get => instance; }
         #endregion Singleton
-        static BL()
-        {
-            instance = new BL();
-        }
+        
 
         private BL()
         {
             //Access to the layer DAL
             dalo = DLFactory.GetDL();
             dronesL = new List<DroneToList>();
-            var Drones = dalo.ShowDroneList();
-            DronesInitialize(Drones);
+            //var Drones = dalo.ShowDroneList();
+            //DronesInitialize(Drones);
         }
         /// <summary>
         /// Constractor for drones initializing

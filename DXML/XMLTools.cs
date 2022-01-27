@@ -11,11 +11,7 @@ namespace Dal
     internal class XMLTools
     {
         //static string dir = ""; //= @"..\xml\";
-        static XMLTools()
-        {
-            //if (!Directory.Exists(dir))
-            //    Directory.CreateDirectory(dir);
-        }
+       
 
 
         #region SaveLoadWithXMLSerializer
@@ -23,7 +19,7 @@ namespace Dal
         {
             try
             {
-                FileStream file = new FileStream(filePath, FileMode.Create);
+                FileStream file = new FileStream(filePath, FileMode.CreateNew);
                 XmlSerializer x = new XmlSerializer(list.GetType());
                 x.Serialize(file, list);
                 file.Close();

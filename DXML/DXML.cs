@@ -14,7 +14,7 @@ namespace DAL
      sealed class DXML : DalApi.IDal
     {
         private XElement CustumerRoot;
-        XMLTools XMLTools;
+        //XMLTools XMLTools;
         static string dronePath = @"Drones.xml";
         static string customerPath = @"Customers.xml";
         static string stationPath = @"Stations.xml";
@@ -23,7 +23,7 @@ namespace DAL
         static string UserPath = @"users.xml";
 
         #region singelton
-        static DXML instance;
+        public static DXML Instance { get; } = new DXML();
         private static object locker = new object();
         
 
@@ -43,30 +43,30 @@ namespace DAL
         {
             DataSource.Initialize();
             XMLTools.SaveListToXMLSerializer<Drone>(DataSource.Drones, dronePath);
-            XMLTools.SaveListToXMLSerializer<Parcel>(DataSource.Parcels, parcelPath);
-            XMLTools.SaveListToXMLSerializer<Station>(DataSource.Stations, stationPath);
-            XMLTools.SaveListToXMLSerializer<User>(DataSource.userList, UserPath);
-            XMLTools.SaveListToXMLSerializer<DroneCharge>(DataSource.DroneCharges, droneChargePath);
+            //XMLTools.SaveListToXMLSerializer<Parcel>(DataSource.Parcels, parcelPath);
+            //XMLTools.SaveListToXMLSerializer<Station>(DataSource.Stations, stationPath);
+            //XMLTools.SaveListToXMLSerializer<User>(DataSource.userList, UserPath);
+            //XMLTools.SaveListToXMLSerializer<DroneCharge>(DataSource.DroneCharges, droneChargePath);
         }
 
-        /// <summary>
-        /// instance of DalObject class - same object is always returned
-        /// </summary>
-        public static DXML Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                 //   lock (locker)
-                    {
-                        if (instance == null)
-                            instance = new DXML();
-                    }
-                }
-                return instance;
-            }
-        }
+        ///// <summary>
+        ///// instance of DalObject class - same object is always returned
+        ///// </summary>
+        //public static DXML Instance
+        //{
+        //    get
+        //    {
+        //        if (instance == null)
+        //        {
+        //         //   lock (locker)
+        //            {
+        //                if (instance == null) 
+                           
+        //            }
+        //        }
+        //        return instance;
+        //    }
+        //}
 
         #endregion
 
@@ -112,6 +112,7 @@ namespace DAL
             }
             return dronsList.Find(c => c.Id == id);
         }
+
         public IEnumerable<Drone> ShowDroneList(Func<Drone, bool> predicate = null)
         {
             List<DO.Drone> dronsList = XMLTools.LoadListFromXMLSerializer<Drone>(dronePath);

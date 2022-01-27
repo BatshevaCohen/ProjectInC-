@@ -13,13 +13,13 @@ namespace DAL
         /// <summary>
         /// database of DO entities
         /// </summary>
-        public static int OrdinalNumber = 1000000;
-        public static List<Drone> Drones = new(5) { };
-        public static List<Station> Stations = new(5) { };
-        public static List<Customer> Customer = new(100) { };
-        public static List<Parcel> Parcels = new(1000) { };
-        public static List<DroneCharge> DroneCharges = new(10) { };
-        public static List<User> userList;
+        public static int OrdinalNumber  = 1000000;
+        public static List<Drone> Drones { get; set; } = new(5) { };
+        public static List<Station> Stations { get; set; } = new(5) { };
+        public static List<Customer> Customer { get; set; } = new(100) { };
+        public static List<Parcel> Parcels { get; set; } = new(1000) { };
+        public static List<DroneCharge> DroneCharges { get; set; } = new(10) { };
+        public static List<User>  userList;
 
         static Random r = new() { };
 

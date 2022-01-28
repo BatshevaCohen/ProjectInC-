@@ -41,8 +41,8 @@ namespace DAL
         }
     static DXML()
         {
-            DataSource.Initialize();
-            XMLTools.SaveListToXMLSerializer<Drone>(DataSource.Drones, dronePath);
+            //DataSource.Initialize();
+            //XMLTools.SaveListToXMLSerializer<Drone>(DataSource.Drones, dronePath);
             //XMLTools.SaveListToXMLSerializer<Parcel>(DataSource.Parcels, parcelPath);
             //XMLTools.SaveListToXMLSerializer<Station>(DataSource.Stations, stationPath);
             //XMLTools.SaveListToXMLSerializer<User>(DataSource.userList, UserPath);
@@ -359,16 +359,8 @@ namespace DAL
         public IEnumerable<Station> ShowStationList(Func<Station, bool> predicate = null)
         {
             List<DO.Station> stationList = XMLTools.LoadListFromXMLSerializer<Station>(stationPath);
-            if (predicate == null)
-            {
-               
-                foreach (Station element in stationList)
-                {
-                    stationList.Add(element);
-                }
-                return stationList;
-            }
-            return stationList.Where(predicate).ToList();
+
+            return stationList.Where(x => predicate == null ? true : predicate(x)).ToList();
         }
         /// <summary>
         /// A function that returns a minimum distance between a point and a station
@@ -446,19 +438,18 @@ namespace DAL
         #endregion DalXML Stations
  
         #region DalXML Coustumer
-        private void CreateFiles()
-        {
-            string dir = @"..\xml\";
-            CustumerRoot = new XElement("Custumer");
-            CustumerRoot.Save(dir + customerPath);
-        }
+        
+
 
         private void LoadData()
         {
-            string dir = @"..\xml\";
+           
             try
             {
-                CustumerRoot = XElement.Load(dir + customerPath);
+                //DataSource.Initialize();
+                //XMLTools.SaveListToXMLSerializer(DataSource.Customer, customerPath);
+                CustumerRoot ??= XElement.Load(customerPath);
+
             }
             catch
             {
@@ -482,20 +473,20 @@ namespace DAL
         {
             LoadData();
 
-            Customer? c = new Customer();
 
-            c = (from cus in CustumerRoot.Elements()
-                 where Convert.ToInt32(cus.Element("ID").Value) == Custumerid
+
+            Customer c = (from cus in CustumerRoot.Elements()
+                 where Convert.ToInt32(cus.Element("Id").Value) == Custumerid
                  select new Customer()
                  {
-                     Id = Convert.ToInt32(cus.Element("ID").Value),
+                     Id = Convert.ToInt32(cus.Element("Id").Value),
                      Name = cus.Element("Name").Value,
                      Phone = cus.Element("Phone").Value,
                  }).FirstOrDefault();
-            if (c.Value.Id == 0)
-                throw new Exception($"custumer {Custumerid} is not exite!!");
+            //if (c.Id == 0)
+                //throw new Exception($"custumer {Custumerid} is not exite!!");
 
-            return (Customer)c;
+            return c;
         }
         public IEnumerable<Customer> ShowCustomerList(Func<Customer, bool> predicate = null)
         {
@@ -557,19 +548,11 @@ namespace DAL
         /// <summary>
         /// view lists functions for Parcel
         /// </summary>
-        public IEnumerable<Parcel> ShowParcelList(Func<Parcel, bool> predicate = null)
+        public IEnumerable<Parcel> ShowParcelList(Predicate<Parcel> predicate = null)
         {
             List<Parcel> parcelList = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
-            if (predicate == null)
-            {
-
-                foreach (Parcel element in parcelList)
-                {
-                    parcelList.Add(element);
-                }
-                return parcelList;
-            }
-            return parcelList.Where(predicate).ToList();
+         
+            return parcelList.Where(x=> predicate == null ? true : predicate(x)).ToList();
         }
         /// <summary>
         /// Search for the package in delivery mode

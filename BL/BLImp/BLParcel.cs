@@ -234,7 +234,7 @@ namespace BL
 
             //If the parcel has already been associated-שוייכה
             //update DroneInParcel
-            if (parcel.CollectionTime == DateTime.MinValue)///////////////////
+            if (p.DroneID !=0)///////////////////
             {
                 DroneToList droneToList = DronesL.Find(x => x.Id == p.DroneID);
                 parcel.DroneInParcel = new()

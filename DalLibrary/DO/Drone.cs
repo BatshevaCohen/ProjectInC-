@@ -21,7 +21,7 @@ namespace DO
             result += $"Model is {Model}, \n";
             result += $"Drone weight is {MaxWeight}, \n";
             result += $"Battery precent is: {Battery}, \n";
-            result += $"Drone state is {Status}, \n";
+            //result += $"Drone state is {Status}, \n";
 
             return result;
         }

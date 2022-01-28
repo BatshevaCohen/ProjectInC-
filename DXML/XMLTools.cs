@@ -19,7 +19,7 @@ namespace Dal
         {
             try
             {
-                FileStream file = new FileStream(filePath, FileMode.CreateNew);
+                FileStream file = new FileStream(filePath, FileMode.Create);
                 XmlSerializer x = new XmlSerializer(list.GetType());
                 x.Serialize(file, list);
                 file.Close();

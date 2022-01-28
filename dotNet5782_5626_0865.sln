@@ -18,6 +18,11 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "xml", "xml", "{D94B75E5-8A3A-4220-BE9A-4A6082D964F2}"
 	ProjectSection(SolutionItems) = preProject
 		xml\config.xml = xml\config.xml
+		PL\bin\Debug\net5.0-windows\droneCharges.xml = PL\bin\Debug\net5.0-windows\droneCharges.xml
+		PL\bin\Debug\net5.0-windows\Drones.xml = PL\bin\Debug\net5.0-windows\Drones.xml
+		PL\bin\Debug\net5.0-windows\Parcels.xml = PL\bin\Debug\net5.0-windows\Parcels.xml
+		PL\bin\Debug\net5.0-windows\Stations.xml = PL\bin\Debug\net5.0-windows\Stations.xml
+		PL\bin\Debug\net5.0-windows\users.xml = PL\bin\Debug\net5.0-windows\users.xml
 	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DalLibrary", "DalLibrary\DalLibrary.csproj", "{A90DD643-B502-44D2-BE43-B88040AD646F}"

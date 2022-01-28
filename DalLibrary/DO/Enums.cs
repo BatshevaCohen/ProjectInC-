@@ -10,7 +10,7 @@ namespace DO
 
     public enum DroneStatuses
     {
-        Available = 1,
+        Available ,
         Maintenance,
         Shipping
     }

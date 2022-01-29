@@ -119,6 +119,12 @@ namespace BlApi
         /// <param name="userName">Name of user</param>
         /// <returns></returns>
         User GetUser(string userName);
+        /// <summary>
+        /// Finds the customer by his user 
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>Customer</returns>
+        DO.Customer GetCustomer_ByUsername(User user);
         #endregion
 
 

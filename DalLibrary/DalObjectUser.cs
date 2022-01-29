@@ -60,6 +60,7 @@ namespace DAL
                 throw new ReadDataException("No User meets the conditions");
             return myUsers;
         }
+
         /// <summary>
         /// update user (delete the old and add the new)
         /// throw BadUserException

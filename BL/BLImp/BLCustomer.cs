@@ -243,5 +243,24 @@ namespace BL
         {
             Instance.AddUser(tmpUser);
         }
+
+        /// <summary>
+        /// Finds the customer by his user 
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>Customer</returns>
+        public DO.Customer GetCustomer_ByUsername(User user)
+        {
+            DO.User user1 = new DO.User()
+            {
+                UserName = user.UserName,
+                Password = user.Password,
+                Permission = DO.Permit.User,
+                MyActivity = DO.Activity.On
+            };
+            DO.Customer customer = new DO.Customer();
+            customer = dalo.GetCustomer_ByUsername(user1);
+            return customer;
+        }
     }
 }

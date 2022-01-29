@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using BO;
 using BlApi;
+
 namespace BL
 {
     internal sealed partial class BL : IBL
@@ -282,7 +283,7 @@ namespace BL
                 Permission = DO.Permit.User
             };
             IEnumerable<DO.Parcel> parcelListUser = dalo.ShowParcelList(user1);
-            var customer = DalApi.IDal.GetCustomer_ByUsername(user1);
+            DO.Customer customer = GetCustomer_ByUsername(user1);
             List<ParcelToList> parcelList = new() { };
             foreach (DO.Parcel item in parcelListUser)
             {
@@ -304,6 +305,25 @@ namespace BL
                 }
             }
             return parcelList;
+        }
+
+        /// <summary>
+        /// Finds the customer by his user 
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>Customer</returns>
+        public DO.Customer GetCustomer_ByUsername(DO.User user)
+        {
+            DO.User user1 = new DO.User()
+            {
+                UserName = user.UserName,
+                Password = user.Password,
+                Permission = DO.Permit.User,
+                MyActivity = DO.Activity.On
+            };
+            DO.Customer customer = new DO.Customer();
+            customer = dalo.GetCustomer_ByUsername(user1);
+            return customer;
         }
 
         /// <summary>

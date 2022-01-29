@@ -149,10 +149,6 @@ namespace BL
                 DronesL.Add(droneBL);
             }
            
-            
-
-          
-
             //get Station to update Location
             DO.Station station = dalo.GetStation(12345);
            

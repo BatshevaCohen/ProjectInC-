@@ -3,10 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using BO;
 using BlApi;
-
 namespace BL
 {
     internal sealed partial class BL : IBL
@@ -219,18 +217,11 @@ namespace BL
 
             };
 
-
             DO.Customer custumerSender = dalo.GetCustomer(p.SenderId);
             DO.Customer custumerReceiver = dalo.GetCustomer(p.ReceiverId);
             parcel.Sender = new() { Id = custumerSender.Id, Name = custumerSender.Name };
             parcel.Resiver = new() { Id = custumerReceiver.Id, Name = custumerReceiver.Name };
             //אם החבילה עדיין לא שוייכה אין לה רחפן בטעינה 
-
-          
-
-
-
-
 
             //If the parcel has already been associated-שוייכה
             //update DroneInParcel

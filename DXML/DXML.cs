@@ -246,7 +246,7 @@ namespace DAL
         /// <returns>An array of the amount of power consumption of a drone for each situation</returns>
         public double[] PowerRequest()
         {
-            XElement Config = XElement.Load(@"..\xml\config.xml");
+            XElement Config = XElement.Load(@"config.xml");
              double[] result = { double.Parse(Config.Element("DroneElecUseEmpty").Value),
              double.Parse(Config.Element("Light").Value),
              double.Parse(Config.Element("Heavy").Value),

@@ -39,7 +39,7 @@ namespace DAL
         /// <summary>
         /// view lists functions for Parcel
         /// </summary>
-        public IEnumerable<Parcel> ShowParcelList(Func<Parcel, bool> predicate = null)
+        public IEnumerable<Parcel> ShowParcelList(Predicate<Parcel> predicate = null)
         {
             if (predicate == null)
             {
@@ -50,7 +50,7 @@ namespace DAL
                 }
                 return ParcelList;
             }
-            return DataSource.Parcels.Where(predicate).ToList();
+            return DataSource.Parcels.Where(x => predicate == null ? true : predicate(x)).ToList();
         }
 
         /// <summary>

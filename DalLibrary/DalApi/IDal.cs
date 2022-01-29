@@ -173,7 +173,7 @@ namespace DalApi
         /// Show Parcel List
         /// </summary>
         /// <returns></returns>
-        IEnumerable<Parcel> ShowParcelList(Func<Parcel, bool> predicate = null);
+        IEnumerable<Parcel> ShowParcelList(Predicate<Parcel> predicate = null);
         /// <summary>
         /// show list of non-associated parcels
         /// </summary>

@@ -17,10 +17,10 @@ namespace DalApi
         /// </summary>
         public class DalPackage
         {
-            public string Name;
-            public string PkgName;
-            public string NameSpace;
-            public string ClassName;
+            public  string Name;
+            public   string PkgName;
+            public  string NameSpace;
+            public  string ClassName;
         }
         /// <summary>
         /// name of class being used for current cunfiguration
@@ -36,9 +36,9 @@ namespace DalApi
         /// </summary>
         static DalConfig()
         {
-            XElement dalConfig = XElement.Load(@"..\xml\config.xml");
-            DalName = dalConfig.Element("dl").Value;
-            DalPackages = (from pkg in dalConfig.Element("dl-packages").Elements()
+            XElement dalConfig = XElement.Load(@"config.xml");
+            DalName = dalConfig.Element("dal").Value;
+            DalPackages = (from pkg in dalConfig.Element("dal-packages").Elements()
                            let tmp1 = pkg.Attribute("namespace")
                            let nameSpace = tmp1 == null ? "Dal" : tmp1.Value
                            let tmp2 = pkg.Attribute("class")

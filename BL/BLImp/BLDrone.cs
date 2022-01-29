@@ -173,9 +173,10 @@ namespace BL
         /// <exception cref="Exception"></exception>
         public void DischargeDrone(int droneID, TimeSpan chargingTime)
         {
-            // save dVal in second
-            double dVal = (chargingTime.TotalMilliseconds) / 1000;
-
+            // save value in second
+            double value = (chargingTime.Hours + chargingTime.Minutes / 100.0 + chargingTime.Seconds / 10000.0) * (chargingTime > TimeSpan.Zero ? 1 : -1);
+            //TimeSpan duration = DateTime.Now.Subtract((DateTime)dc.EntranceTime);
+            // double time = duration.Hours + (double)duration.Minutes / 60 + (double)duration.Seconds / 3600;
             //finds the drone by its ID
             DroneToList dronel = DronesL.Find(x => x.Id == droneID);
             DO.Station station = new();
@@ -188,7 +189,7 @@ namespace BL
                 double droneLocationLongitude = dronel.Location.Longitude;
                 station = dalo.DischargeDroneByLocation(droneID, droneLocationLatitude, droneLocationLongitude);
                 DroneInCharging droneInCharge = new();
-                dronel.Battery += dVal * dalo.PowerRequest()[4];
+                dronel.Battery += value * dalo.PowerRequest()[4];
                 DronesL.Remove(dronel);
                 dronel.DroneStatuses = DroneStatuses.Available;
                 DronesL.Add(dronel);

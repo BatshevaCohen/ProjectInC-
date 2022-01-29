@@ -6,6 +6,8 @@ using System.Threading.Tasks;
 using BO;
 using BlApi;
 using DalApi;
+using DLAPI;
+
 namespace BL
 {
     internal sealed partial class BL : IBL
@@ -18,18 +20,17 @@ namespace BL
 
         #region Singleton
 
-        private static readonly IBL instance;
+        private static readonly IBL instance = new BL();
+       
+
         public static IBL Instance { get => instance; }
         #endregion Singleton
-        static BL()
-        {
-            instance = new BL();
-        }
+        
 
         private BL()
         {
             //Access to the layer DAL
-            dalo = DalFactory.GetDal();
+            dalo = DLFactory.GetDL();
             dronesL = new List<DroneToList>();
             var Drones = dalo.ShowDroneList();
             DronesInitialize(Drones);
@@ -137,10 +138,10 @@ namespace BL
                         };
                         // Battery mode will be recharged between a minimal charge that will allow it to reach the station closest to charging and a full charge
                         double distance = dalo.GetDistanceBetweenLocationAndClosestStation(parcelsDelivered[index].ReceiverId);
-
+                        //צריך לטפל דחוףףףף שלא נשכח בבטריה להגביל אותהב100% כי היא ממשיכהלהיות גם מספרים הזויים!!!!!
                         // זה זמניייייייייייי השורה הזאת עשתה חריגה 
                         droneBL.Battery = 30;
-                        //  droneBL.Battery = r.Next((int)(distance * dalo.PowerConsumptionRequest()[0] + 1), 101);
+                        // droneBL.Battery = r.Next((int)(distance * dalo.PowerConsumptionRequest()[0] + 1), 101);
 
 
                     }
@@ -148,50 +149,14 @@ namespace BL
                 DronesL.Add(droneBL);
             }
            
-            DroneToList droneTo = new DroneToList();
+            
 
-            droneTo.Battery = 99;
-            droneTo.Id = 123456;
-            droneTo.DroneStatuses = DroneStatuses.Shipping;
-            droneTo.Model = "DFGHJ56";
-            droneTo.Weight = Weight.Medium;
-            //dalo.AddParcel(new DO.Parcel { Id = 11111 });
-            //droneTo.ParcelNumberTransferred = 111111;
-
-            droneTo.Location = new()
-            {
-                Latitude = 43.321,
-                Longitude = -32.567,
-            };
-            DronesL.Add(droneTo);
-            DO.Drone d = new()
-            {
-                Battery = 99,
-                Id = 123456,
-
-                Model = "DFGHJ56",
-                MaxWeight = DO.WeightCategories.Medium,
-            };
-            dalo.AddDrone(d);
-
-            DO.Drone d1 = new()
-            {
-                Id = 99999,
-                Model = "face",
-                MaxWeight = DO.WeightCategories.Heavy,
-                Battery = 99,
-                Status = DO.DroneStatuses.Maintenance //when added a new drone it goes to initial charging
-            };
+          
 
             //get Station to update Location
             DO.Station station = dalo.GetStation(12345);
            
-            dalo.AddDrone(d1); //adds the drone to the dal object
-            dalo.UpdateChargeSpots(station.Id);
-            if (station.ChargeSpots > 0)
-            {
-                dalo.UpdateAddDroneToCharge(droneTo.Id, station.Id);
-            }
+       
         }
         
         /// <summary>

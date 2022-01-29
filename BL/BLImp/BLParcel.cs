@@ -5,7 +5,6 @@ using System.Text;
 using System.Threading.Tasks;
 using BO;
 using BlApi;
-
 namespace BL
 {
     internal sealed partial class BL : IBL
@@ -121,7 +120,7 @@ namespace BL
                 DronesL.Find(x => x.Id == droneId).Location.Latitude = sender.Location.Latitude;
                 DronesL.Find(x => x.Id == droneId).Location.Longitude = sender.Location.Longitude;
                 // for each KM - 1% of the battery
-                DronesL.Find(x => x.Id == droneId).Battery -= distance * 0.01;
+                DronesL.Find(x => x.Id == droneId).Battery -= distance * 0.001;
                 //update the pick up time to the current time
                 parcel.PickedUp = DateTime.Now;
                 dalo.updateBatteryDrone(droneId, distance);
@@ -216,22 +215,15 @@ namespace BL
                 CollectionTime = (DateTime)p.PickedUp,
             };
 
-
             DO.Customer custumerSender = dalo.GetCustomer(p.SenderId);
             DO.Customer custumerReceiver = dalo.GetCustomer(p.ReceiverId);
             parcel.Sender = new() { Id = custumerSender.Id, Name = custumerSender.Name };
             parcel.Resiver = new() { Id = custumerReceiver.Id, Name = custumerReceiver.Name };
             //אם החבילה עדיין לא שוייכה אין לה רחפן בטעינה 
 
-          
-
-
-
-
-
             //If the parcel has already been associated-שוייכה
             //update DroneInParcel
-            if (parcel.CollectionTime == DateTime.MinValue)///////////////////
+            if (p.DroneID !=0)///////////////////
             {
                 DroneToList droneToList = DronesL.Find(x => x.Id == p.DroneID);
                 parcel.DroneInParcel = new()

@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace DXML
+namespace dataSours
 {
     class Program
     {

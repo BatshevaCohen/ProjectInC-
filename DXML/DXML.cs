@@ -1,5 +1,7 @@
-﻿using Dal;
+﻿
+using Dal;
 using DO;
+using DXML;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -7,54 +9,64 @@ using System.Linq;
 using System.Reflection;
 using System.Xml.Linq;
 
-namespace DXML
+namespace DAL
 {
-    internal sealed partial class DXML : DalApi.IDal
+     sealed class DXML : DalApi.IDal
     {
-        XMLTools XMLTools;
-        string dronePath = @"drons.xml";
-        string customerPath = @"Customers.xml";
-        string stationPath = @"Stations.xml";
-        string parcelPath = @"Parcels.xml";
-        string droneChargePath = @"droneCharges.xml";
-        string UserPath = @"users.xml";
+        private XElement CustumerRoot;
+        //XMLTools XMLTools;
+        static string dronePath = @"Drones.xml";
+        static string customerPath = @"Customers.xml";
+        static string stationPath = @"Stations.xml";
+        static string parcelPath = @"Parcels.xml";
+        static string droneChargePath = @"droneCharges.xml";
+        static string UserPath = @"users.xml";
 
         #region singelton
-        static DXML instance;
+        public static DXML Instance { get; } = new DXML();
         private static object locker = new object();
-        private XElement CustumerRoot;
+        
 
         /// <summary>
         /// constructor - calls DataSource.initialize() to initialize lists
         /// </summary>
         private DXML()
         {
-            string dir = @"..\xml\";
-            XMLTools = new XMLTools();
-            if (!File.Exists(dir + customerPath))
-                CreateFiles();
-            else
-                LoadData();
+            //string dir = @"..\xml\";
+            //XMLTools = new XMLTools();
+            //if (!File.Exists(dir + customerPath))
+            //    CreateFiles();
+            //else
+            //    LoadData();
+        }
+    static DXML()
+        {
+            //DataSource.Initialize();
+            //XMLTools.SaveListToXMLSerializer<Drone>(DataSource.Drones, dronePath);
+            //XMLTools.SaveListToXMLSerializer<Parcel>(DataSource.Parcels, parcelPath);
+            //XMLTools.SaveListToXMLSerializer<Station>(DataSource.Stations, stationPath);
+            //XMLTools.SaveListToXMLSerializer<User>(DataSource.userList, UserPath);
+            //XMLTools.SaveListToXMLSerializer<DroneCharge>(DataSource.DroneCharges, droneChargePath);
         }
 
-        /// <summary>
-        /// instance of DalObject class - same object is always returned
-        /// </summary>
-        public static DXML Instance
-        {
-            get
-            {
-                if (instance == null)
-                {
-                    lock (locker)
-                    {
-                        if (instance == null)
-                            instance = new DXML();
-                    }
-                }
-                return instance;
-            }
-        }
+        ///// <summary>
+        ///// instance of DalObject class - same object is always returned
+        ///// </summary>
+        //public static DXML Instance
+        //{
+        //    get
+        //    {
+        //        if (instance == null)
+        //        {
+        //         //   lock (locker)
+        //            {
+        //                if (instance == null) 
+                           
+        //            }
+        //        }
+        //        return instance;
+        //    }
+        //}
 
         #endregion
 
@@ -100,6 +112,7 @@ namespace DXML
             }
             return dronsList.Find(c => c.Id == id);
         }
+
         public IEnumerable<Drone> ShowDroneList(Func<Drone, bool> predicate = null)
         {
             List<DO.Drone> dronsList = XMLTools.LoadListFromXMLSerializer<Drone>(dronePath);
@@ -233,7 +246,7 @@ namespace DXML
         /// <returns>An array of the amount of power consumption of a drone for each situation</returns>
         public double[] PowerRequest()
         {
-            XElement Config = XElement.Load(@"..\xml\config.xml");
+            XElement Config = XElement.Load(@"config.xml");
              double[] result = { double.Parse(Config.Element("DroneElecUseEmpty").Value),
              double.Parse(Config.Element("Light").Value),
              double.Parse(Config.Element("Heavy").Value),
@@ -246,7 +259,7 @@ namespace DXML
             List<DO.Drone> dronsList = XMLTools.LoadListFromXMLSerializer<Drone>(dronePath);
             Drone d = dronsList.Find(x => x.Id == id);
             dronsList.Remove(d);
-            d.Battery -= dis * 0.01;
+            d.Battery -= dis * 0.001;
             dronsList.Add(d);
         }
         public void UpdateAddDroneToCharge(int dronId, int stationId)
@@ -346,16 +359,8 @@ namespace DXML
         public IEnumerable<Station> ShowStationList(Func<Station, bool> predicate = null)
         {
             List<DO.Station> stationList = XMLTools.LoadListFromXMLSerializer<Station>(stationPath);
-            if (predicate == null)
-            {
-               
-                foreach (Station element in stationList)
-                {
-                    stationList.Add(element);
-                }
-                return stationList;
-            }
-            return stationList.Where(predicate).ToList();
+
+            return stationList.Where(x => predicate == null ? true : predicate(x)).ToList();
         }
         /// <summary>
         /// A function that returns a minimum distance between a point and a station
@@ -433,19 +438,18 @@ namespace DXML
         #endregion DalXML Stations
  
         #region DalXML Coustumer
-        private void CreateFiles()
-        {
-            string dir = @"..\xml\";
-            CustumerRoot = new XElement("Custumer");
-            CustumerRoot.Save(dir + customerPath);
-        }
+        
+
 
         private void LoadData()
         {
-            string dir = @"..\xml\";
+           
             try
             {
-                CustumerRoot = XElement.Load(dir + customerPath);
+                //DataSource.Initialize();
+                //XMLTools.SaveListToXMLSerializer(DataSource.Customer, customerPath);
+                CustumerRoot ??= XElement.Load(customerPath);
+
             }
             catch
             {
@@ -469,20 +473,20 @@ namespace DXML
         {
             LoadData();
 
-            Customer? c = new Customer();
 
-            c = (from cus in CustumerRoot.Elements()
-                 where Convert.ToInt32(cus.Element("ID").Value) == Custumerid
+
+            Customer c = (from cus in CustumerRoot.Elements()
+                 where Convert.ToInt32(cus.Element("Id").Value) == Custumerid
                  select new Customer()
                  {
-                     Id = Convert.ToInt32(cus.Element("ID").Value),
+                     Id = Convert.ToInt32(cus.Element("Id").Value),
                      Name = cus.Element("Name").Value,
                      Phone = cus.Element("Phone").Value,
                  }).FirstOrDefault();
-            if (c.Value.Id == 0)
-                throw new Exception($"custumer {Custumerid} is not exite!!");
+            //if (c.Id == 0)
+                //throw new Exception($"custumer {Custumerid} is not exite!!");
 
-            return (Customer)c;
+            return c;
         }
         public IEnumerable<Customer> ShowCustomerList(Func<Customer, bool> predicate = null)
         {
@@ -544,19 +548,11 @@ namespace DXML
         /// <summary>
         /// view lists functions for Parcel
         /// </summary>
-        public IEnumerable<Parcel> ShowParcelList(Func<Parcel, bool> predicate = null)
+        public IEnumerable<Parcel> ShowParcelList(Predicate<Parcel> predicate = null)
         {
             List<Parcel> parcelList = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
-            if (predicate == null)
-            {
-
-                foreach (Parcel element in parcelList)
-                {
-                    parcelList.Add(element);
-                }
-                return parcelList;
-            }
-            return parcelList.Where(predicate).ToList();
+         
+            return parcelList.Where(x=> predicate == null ? true : predicate(x)).ToList();
         }
         /// <summary>
         /// Search for the package in delivery mode

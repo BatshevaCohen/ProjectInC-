@@ -80,6 +80,7 @@ namespace PL
             InitializeComponent();
             btnAddStation.Visibility = Visibility.Visible;
             AddGridStation.Visibility = Visibility.Visible;
+            LocationGridStation.Visibility= Visibility.Visible;
             DataContext = station;
             stationListWindow.StationsListView.Items.Refresh();
         }

@@ -144,6 +144,13 @@ namespace DalApi
         /// <returns></returns>
         User GetUser(string userName);
 
+        /// <summary>
+        /// Finds the customer by his user 
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>Customer</returns>
+        Customer GetCustomer_ByUsername(User user);
+
         #endregion
 
         #region  SHOW LISTS:
@@ -184,6 +191,13 @@ namespace DalApi
         /// <param name="predicate">the condition (bool)</param>
         /// <returns>IEnumerable implemented by users satisfies the cindition</returns>
         IEnumerable<User> GetAllUsersBy(Predicate<User> predicate);
+
+        /// <summary>
+        /// Show LIST of parcels for USER
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        IEnumerable<Parcel> ShowParcelList(User user);
         #endregion
 
         #region Update:

@@ -99,6 +99,7 @@ namespace BlApi
         IEnumerable<DroneToList> ShowDroneList();
         IEnumerable<CustomerToList> ShowCustomerList();
         IEnumerable<ParcelToList> ShowParcelList();
+        IEnumerable<ParcelToList> ShowParcelList(User user); //show parcel for user
         IEnumerable<ParcelToList> ShowNonAssociatedParcelList();
         IEnumerable<StationToList> ShowChargeableStationList();
 

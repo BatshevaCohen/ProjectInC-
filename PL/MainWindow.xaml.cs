@@ -13,21 +13,10 @@ namespace PL
     {
         IBL myBL;
 
-
         /// <summary>
-        /// TEMPERARY CONSTRACTOR FOR DEBUGGING
+        /// Constractor- after signing in- shows the main window- for admin only
         /// </summary>
         public MainWindow()
-        {
-            myBL = BlFactory.GetBl();
-            InitializeComponent();
-        }
-
-        /// <summary>
-        /// constractor
-        /// </summary>
-        /// <param name="userType"></param>
-        public MainWindow(BO.Permit userType)
         {
             myBL = BlFactory.GetBl();
             InitializeComponent();
@@ -59,7 +48,11 @@ namespace PL
             CustumerListWindow wnd = new CustumerListWindow(myBL);
             wnd.Show();
         }
-
+        /// <summary>
+        /// button to open the window of the parcels
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnShowParcelesList_Click(object sender, RoutedEventArgs e)
         {
             ParcelListWindowe wnd = new ParcelListWindowe(myBL);

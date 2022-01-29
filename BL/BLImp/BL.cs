@@ -52,7 +52,6 @@ namespace BL
                     Id = droneDL.Id,
                     Model = droneDL.Model,
                     Weight = (Weight)droneDL.MaxWeight
-
                 };
 
                 List<DO.Parcel> parcelList = parcels.FindAll(p => p.DroneID == droneBL.Id);

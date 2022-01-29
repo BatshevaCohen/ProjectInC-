@@ -64,19 +64,25 @@ namespace PL
             {
                 string name = UserNameTextBox.Text;
                 string password = PasswordTextBox.Password;
+                User user1 = new User()
+                {
+                    UserName = name,
+                    Password = password,
+                    Permission = Permit.User
+                };
                 try
                 {
-                    var user = bL.GetUser(name);
+                    User user = bL.GetUser(name);
                     if (password == user.Password)
                     {
-                        if (user.Permission == BO.Permit.User) //checks permit
+                        if (user.Permission == BO.Permit.User) //USER
                         {
-                            new MainWindow(user.Permission).Show();
+                            new ParcelListWindowe(bL, user1).Show();
                             Close();
                         }
-                        else if(user.Permission == BO.Permit.Admin) //user is Admin
+                        else if(user.Permission == BO.Permit.Admin) //Admin
                         {
-                            new MainWindow(user.Permission).Show();
+                            new MainWindow().Show();
                             Close();
                         }
                         else
@@ -100,22 +106,6 @@ namespace PL
                     //errormessage.TextWrapping = TextWrapping.WrapWithOverflow;
                 }
             }
-
-
-
-        //string userType = "user";
-        //    if (UserNameTextBox.Text == "admin" && PasswordTextBox.Password.ToString() == "admin")
-        //    {
-        //        userType = "admin";
-        //        MainWindow.Show(userType);
-        //    }
-        //    else if (UserNameTextBox.Text == "user" && PasswordTextBox.Password.ToString() == "user")
-        //    {
-        //        userType="user";
-        //        MainWindow.Show(userType);
-        //    }
-        //    else
-        //        MessageBox.Show("User name or password are not correct!");
         }
 
         /// <summary>
@@ -153,33 +143,5 @@ namespace PL
                 SignIn_Button_Click((object)sender, e);
             }
         }
-
-        ///// <summary>
-        ///// reveal the password
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //private void ShowPasswordCharsCheckBox_Checked(object sender, RoutedEventArgs e)
-        //{
-        //    PasswordTextBox.DataContext = PasswordTextBox.Password;
-        //    PasswordTextBox.Visibility = System.Windows.Visibility.Collapsed;
-        //    MyTextBox.Visibility = System.Windows.Visibility.Visible;
-
-        //    MyTextBox.Focus();
-        //}
-
-        ///// <summary>
-        ///// bring back the password to char="•"
-        ///// </summary>
-        ///// <param name="sender"></param>
-        ///// <param name="e"></param>
-        //private void ShowPasswordCharsCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        //{
-        //    PasswordTextBox.DataContext = PasswordTextBox.Password;
-        //    PasswordTextBox.Visibility = System.Windows.Visibility.Visible;
-        //    MyTextBox.Visibility = System.Windows.Visibility.Collapsed;
-
-        //    PasswordTextBox.Focus();
-        //}
     }
 }

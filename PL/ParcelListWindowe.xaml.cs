@@ -21,11 +21,26 @@ namespace PL
     public partial class ParcelListWindowe : Window
     {
         BlApi.IBL myBL;
+        /// <summary>
+        /// Constractor- shows the all of the parcels- FOR ADMIN
+        /// </summary>
+        /// <param name="bl"></param>
         public ParcelListWindowe(BlApi.IBL bl)
         {
             myBL = bl;
             InitializeComponent();
             this.ParcelListView.ItemsSource = myBL.ShowParcelList();
+        }
+
+        /// <summary>
+        /// Constractor- shows the parcels of the specific USER (after signing in)
+        /// </summary>
+        /// <param name="bl"></param>
+        public ParcelListWindowe(BlApi.IBL bl, User user)
+        {
+            myBL = bl;
+            InitializeComponent();
+            this.ParcelListView.ItemsSource = myBL.ShowParcelList(user);
         }
 
         private void ParcelListView_SelectionChanged(object sender, SelectionChangedEventArgs e)

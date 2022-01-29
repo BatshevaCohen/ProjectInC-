@@ -72,8 +72,6 @@ namespace BL
                 Latitude = c.Latitude,
                 Longitude = c.Longitude,
             };
-           
-
             //Packages that the sending customer has
 
             List<DO.Parcel> parcelSendin = dalo.GetListOfParcelSending(customer.Id);
@@ -147,6 +145,7 @@ namespace BL
             }
             return customer;
         }
+
         /// <summary>
         /// Show LIST of customers
         /// </summary>

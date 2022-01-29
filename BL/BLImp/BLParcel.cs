@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using BO;
 using BlApi;
 
@@ -215,8 +214,6 @@ namespace BL
                 ParcelCreationTime = (DateTime)p.Create,
                 SupplyTime = (DateTime)p.Assigned,
                 CollectionTime = (DateTime)p.PickedUp,
-
-
             };
 
 
@@ -274,6 +271,45 @@ namespace BL
                     ParcelStatus = FindParcelStatus(item)
                 };
                 parcelList.Add(parcelTL);
+            }
+            return parcelList;
+        }
+
+        /// <summary>
+        /// Show LIST of parcels for USER
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public IEnumerable<ParcelToList> ShowParcelList(User user)
+        {
+            //converting from BO.Customer to DO.Customer
+            DO.User user1 = new()
+            {
+                UserName = user.UserName,
+                Password = user.Password,
+                Permission = DO.Permit.User
+            };
+            IEnumerable<DO.Parcel> parcelListUser = dalo.ShowParcelList(user1);
+            var customer = DalApi.IDal.GetCustomer_ByUsername(user1);
+            List<ParcelToList> parcelList = new() { };
+            foreach (DO.Parcel item in parcelListUser)
+            {
+                //find the parcel in the BL-- in order to find the raciver and the sender's name
+                Parcel parcel = GetParcel(item.Id);
+                //shows only the parsels that the user sent
+                if (parcel.Sender.Id == customer.Id)
+                {
+                    ParcelToList parcelTL = new()
+                    {
+                        Id = item.Id,
+                        ReciverName = parcel.Resiver.Name,
+                        SenderName = parcel.Sender.Name,
+                        Weight = (Weight)item.Weight,
+                        Priority = (Priority)item.Priority,
+                        ParcelStatus = FindParcelStatus(item)
+                    };
+                    parcelList.Add(parcelTL);
+                }
             }
             return parcelList;
         }

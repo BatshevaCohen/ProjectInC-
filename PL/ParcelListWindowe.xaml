@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
@@ -14,18 +15,20 @@
             Stretch="Fill"
             Opacity="0.5"/>
         <Button 
-                x:Name="btnAddParcel"  
-                Content="Add parcel" 
-                Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Top" 
-                Height="60" Width="180" 
-                Click="btnAddParcel_Click" 
-                Margin="86,61,0,0"/>
+            x:Name="btnAddParcel"  
+            Content="Add parcel" 
+            Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            materialDesign:ButtonAssist.CornerRadius="10"    
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+            HorizontalAlignment="Left" 
+            VerticalAlignment="Top" 
+            Height="60" Width="180" 
+            Click="btnAddParcel_Click" 
+            Margin="86,61,0,0"/>
         <Button 
             x:Name="refreshParcelByTarget" 
             Style="{StaticResource MaterialDesignRaisedDarkButton}"
+            materialDesign:ButtonAssist.CornerRadius="10"
             Content="refresh by reciver" 
             Click="RefreshBaseParcelTargetButton_Click" 
             HorizontalAlignment="Left" 

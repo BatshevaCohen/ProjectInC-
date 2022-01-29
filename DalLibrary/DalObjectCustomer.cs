@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using DO;
 
 
@@ -27,7 +26,7 @@ namespace DAL
                 DataSource.Customer.Add(c);
         }
         /// <summary>
-        /// update customee name and phone---
+        /// update customer name and phone---
         /// </summary>
         /// <param name="custumerId"></param>
         /// <param name="name"></param>
@@ -74,6 +73,20 @@ namespace DAL
             }
             else
                 return DataSource.Customer.Where(predicate).ToList();
+        }
+        /// <summary>
+        /// Finds the customer by his user 
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>Customer</returns>
+        public Customer GetCustomer_ByUsername(User user)
+        {
+            //if Username does not exist for customer
+            if (!DataSource.Customer.Exists(item => item.User.UserName == user.UserName))
+            {
+                throw new CustomerException($"User: {user} does not exist!!");
+            }
+            return DataSource.Customer.First(c => c.User.UserName == user.UserName);
         }
         
         #endregion

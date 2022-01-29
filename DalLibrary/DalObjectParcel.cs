@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
 using DO;
 
 
@@ -53,6 +52,39 @@ namespace DAL
             }
             return DataSource.Parcels.Where(predicate).ToList();
         }
+
+        /// <summary>
+        /// Show LIST of parcels for USER
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
+        public IEnumerable<Parcel> ShowParcelList(User user)
+        {
+            var customer = GetCustomer_ByUsername(user);
+            IEnumerable<DO.Parcel> parcels = ShowParcelList();
+            List<Parcel> parcelList = new() { };
+            foreach (DO.Parcel item in parcels)
+            {
+                //find the parcel in the BL-- in order to find the raciver and the sender's name
+                Parcel parcel = GetParcel(item.Id);
+                //shows only the parsels that the user sent
+                if (parcel.SenderId == customer.Id)
+                {
+                    Parcel myParcel = new()
+                    {
+                        Id = item.Id,
+                        ReceiverId = item.ReceiverId,
+                        SenderId = parcel.SenderId,
+                        Weight = (WeightCategories)item.Weight,
+                        Priority = (Priorities)item.Priority,
+                        DroneID = item.DroneID
+                    };
+                    parcelList.Add(myParcel);
+                }
+            }
+            return parcelList;
+        }
+
         /// <summary>
         /// shows the list of packages that haven't been associated to a drone
         /// </summary>
@@ -150,6 +182,7 @@ namespace DAL
             }
             return Listparcels;
         }
+
         public List<Parcel> GetListOfParcelRecirver(int id)
         {
             List<Parcel> Recieverparcels = new();

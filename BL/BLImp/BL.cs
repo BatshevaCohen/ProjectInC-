@@ -138,10 +138,8 @@ namespace BL
                         };
                         // Battery mode will be recharged between a minimal charge that will allow it to reach the station closest to charging and a full charge
                         double distance = dalo.GetDistanceBetweenLocationAndClosestStation(parcelsDelivered[index].ReceiverId);
-                        //צריך לטפל דחוףףףף שלא נשכח בבטריה להגביל אותהב100% כי היא ממשיכהלהיות גם מספרים הזויים!!!!!
-                        // זה זמניייייייייייי השורה הזאת עשתה חריגה 
-                        droneBL.Battery = 30;
-                        // droneBL.Battery = r.Next((int)(distance * dalo.PowerConsumptionRequest()[0] + 1), 101);
+                       
+                         droneBL.Battery = r.Next((int)(distance * dalo.PowerRequest()[0] + 1), 101);
 
 
                     }

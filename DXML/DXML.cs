@@ -464,9 +464,12 @@ namespace DAL
                 throw new CustomerException($"ID {customer.Id} already exists!!");
 
             CustumerRoot.Add(new XElement("Custumer",
-                new XElement("ID", customer.Id),
+                new XElement("Id", customer.Id),
                 new XElement("Name", customer.Name),
-                new XElement("Phone", customer.Phone)));
+                new XElement("Phone", customer.Phone),
+                new XElement("Latitude"),customer.Latitude),
+                new XElement("Longitude"), customer.Longitude);
+
             CustumerRoot.Save(customer + customerPath);
         }
         public Customer GetCustomer(int Custumerid)
@@ -482,6 +485,8 @@ namespace DAL
                      Id = Convert.ToInt32(cus.Element("Id").Value),
                      Name = cus.Element("Name").Value,
                      Phone = cus.Element("Phone").Value,
+                     Latitude = Convert.ToDouble(cus.Element("Latitude").Value),
+                     Longitude = Convert.ToDouble(cus.Element("Longitude").Value)
                  }).FirstOrDefault();
             //if (c.Id == 0)
                 //throw new Exception($"custumer {Custumerid} is not exite!!");
@@ -495,9 +500,12 @@ namespace DAL
             custumers = from cus in CustumerRoot.Elements()
                         select new Customer()
                         {
-                            Id = Convert.ToInt32(cus.Element("ID").Value),
+                            Id = Convert.ToInt32(cus.Element("Id").Value),
                             Name = cus.Element("Name").Value,
-                            Phone = cus.Element("Phone").Value
+                            Phone = cus.Element("Phone").Value,
+                            Latitude = Convert.ToDouble(cus.Element("Latitude").Value),
+                            Longitude = Convert.ToDouble(cus.Element("Longitude").Value)
+                            
                         };
 
             return custumers;
@@ -507,7 +515,7 @@ namespace DAL
             LoadData();
 
             XElement cus = (from cus1 in CustumerRoot.Elements()
-                            where Convert.ToInt32(cus1.Element("ID").Value) == custumerId
+                            where Convert.ToInt32(cus1.Element("Id").Value) == custumerId
                             select cus1).FirstOrDefault();
             cus.Element("Name").Value = name;
             cus.Element("Phone").Value = phone;
@@ -808,7 +816,17 @@ namespace DAL
 
             return 12742 * Math.Asin(Math.Sqrt(a)); // 2 * R; R = 6371 km
         }
-        #endregion 
+
+        public Customer GetCustomer_ByUsername(User user)
+        {
+            throw new NotImplementedException();
+        }
+
+        public IEnumerable<Parcel> ShowParcelList(User user)
+        {
+            throw new NotImplementedException();
+        }
+        #endregion
 
     }
 

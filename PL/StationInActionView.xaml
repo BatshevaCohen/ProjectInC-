@@ -118,7 +118,7 @@
 
         <Grid 
             x:Name="AddGridStation" 
-            Visibility="Collapsed" 
+            Visibility="Visible" 
             VerticalAlignment="Top" 
             Margin="10,28,0,0" 
             HorizontalAlignment="Left" Height="157" Width="307">

@@ -224,7 +224,7 @@ namespace BL
             foreach (var item in DronesL)
             {
                 if(item.Id==droneId)
-                {
+                {//
                     drone.Location = new()
                     {
                         Latitude = item.Location.Latitude,

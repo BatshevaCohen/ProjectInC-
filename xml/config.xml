@@ -5,4 +5,10 @@
 		<list class="DalObject" namespace="DAL">DalObject</list>
 		<xml class="DXML" namespace="DAL">DXML</xml>
 	</dal-packages>
+	
+	<Light>10</Light>
+	<Medium>50</Medium>
+	<Heavy>150</Heavy>
+	<ChargingRate>10.25</ChargingRate>
+	<Available>1</Available>
 </config>

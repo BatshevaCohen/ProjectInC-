@@ -34,12 +34,14 @@ namespace DAL
 
         public double[] PowerRequest()
         {
-            double[] arr = new double[5];
-            arr[0] = DataSource.Config.Available;
-            arr[1] = DataSource.Config.Heavy;
-            arr[2] = DataSource.Config.Light;
-            arr[3] = DataSource.Config.Medium;
-            arr[4] = DataSource.Config.ChargingRate;
+
+            double[] arr = new double[5]{
+
+            DataSource.Config.Available,
+            DataSource.Config.Heavy,
+            DataSource.Config.Light,
+            DataSource.Config.Medium,
+            DataSource.Config.ChargingRate };
             return arr;
         }
 

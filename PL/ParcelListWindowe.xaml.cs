@@ -70,5 +70,15 @@ namespace PL
             ParcelListView.ItemsSource = myBL.ShowParcelList().OrderBy(p => p.ReciverName);
             ParcelListView.Items.Refresh();
         }
+
+        /// <summary>
+        /// BONUS-- Show deleted parcels by flag
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ShowDeletedParcels_Click(object sender, RoutedEventArgs e)
+        {
+            לממש!!!!
+        }
     }
 }

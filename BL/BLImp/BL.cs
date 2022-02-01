@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using BO;
 using BlApi;
 using DalApi;
-using DLAPI;
+
 
 namespace BL
 {
@@ -138,9 +138,9 @@ namespace BL
                         };
                         // Battery mode will be recharged between a minimal charge that will allow it to reach the station closest to charging and a full charge
                         double distance = dalo.GetDistanceBetweenLocationAndClosestStation(parcelsDelivered[index].ReceiverId);
-                       
-                         droneBL.Battery = r.Next((int)(distance * dalo.PowerRequest()[0] + 1), 101);
 
+                       
+                        droneBL.Battery = r.Next((int)(distance * dalo.PowerRequest()[0] + 1));
 
                     }
                 }

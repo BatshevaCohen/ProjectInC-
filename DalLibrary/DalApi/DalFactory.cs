@@ -1,11 +1,10 @@
 ﻿
-using DalApi;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.Serialization;
 
-namespace DLAPI
+namespace DalApi
 {
     /// <summary>
     /// Static Factory class for creating Dal tier implementation object according to

@@ -1,31 +1,33 @@
 ﻿
-using Dal;
+
 using DO;
-using DXML;
+
 using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using System.Xml;
 using System.Xml.Linq;
 
 namespace DAL
 {
-     sealed class DXML : DalApi.IDal
+    sealed class DXML : DalApi.IDal
     {
         private XElement CustumerRoot;
-        //XMLTools XMLTools;
+
         static string dronePath = @"Drones.xml";
         static string customerPath = @"Customers.xml";
         static string stationPath = @"Stations.xml";
         static string parcelPath = @"Parcels.xml";
         static string droneChargePath = @"droneCharges.xml";
         static string UserPath = @"users.xml";
+       // string ConfigPath = @"Config.xml";
 
         #region singelton
         public static DXML Instance { get; } = new DXML();
         private static object locker = new object();
-        
+
 
         /// <summary>
         /// constructor - calls DataSource.initialize() to initialize lists
@@ -39,7 +41,7 @@ namespace DAL
             //else
             //    LoadData();
         }
-    static DXML()
+        static DXML()
         {
             //DataSource.Initialize();
             //XMLTools.SaveListToXMLSerializer<Drone>(DataSource.Drones, dronePath);
@@ -61,7 +63,7 @@ namespace DAL
         //         //   lock (locker)
         //            {
         //                if (instance == null) 
-                           
+
         //            }
         //        }
         //        return instance;
@@ -160,7 +162,7 @@ namespace DAL
         public void UpdateRemoveDroneToCharge(int dronId, int stationId)
         {
             List<DO.Drone> dronsList = XMLTools.LoadListFromXMLSerializer<Drone>(dronePath);
-           
+
             List<DO.DroneCharge> dronechargeList = XMLTools.LoadListFromXMLSerializer<DroneCharge>(droneChargePath);
             DroneCharge droneCharge = new()
             {
@@ -181,7 +183,7 @@ namespace DAL
         public void ReleaseDroneFromCharging(int droneId)
         {
             List<DO.Drone> dronsList = XMLTools.LoadListFromXMLSerializer<Drone>(dronePath);
-               List<DO.DroneCharge> dronechargeList = XMLTools.LoadListFromXMLSerializer<DroneCharge>(droneChargePath);
+            List<DO.DroneCharge> dronechargeList = XMLTools.LoadListFromXMLSerializer<DroneCharge>(droneChargePath);
             List<DO.Station> stationList = XMLTools.LoadListFromXMLSerializer<Station>(stationPath);
             Drone drone = GetDrone(droneId);
             dronsList.Remove(drone);
@@ -246,13 +248,17 @@ namespace DAL
         /// <returns>An array of the amount of power consumption of a drone for each situation</returns>
         public double[] PowerRequest()
         {
+
             XElement Config = XElement.Load(@"config.xml");
-             double[] result = { double.Parse(Config.Element("DroneElecUseEmpty").Value),
-             double.Parse(Config.Element("Light").Value),
-             double.Parse(Config.Element("Heavy").Value),
-             double.Parse(Config.Element("Medium").Value),
-             double.Parse(Config.Element("ChargingRate").Value), };
-             return result;
+
+            double[] result = new double[5]{
+             Double.Parse(Config.Element("Available").Value),
+             Double.Parse(Config.Element("Heavy").Value),
+             Double.Parse(Config.Element("Light").Value),
+             Double.Parse(Config.Element("Medium").Value),
+             Double.Parse(Config.Element("ChargingRate").Value), };
+            return result;
+
         }
         public void updateBatteryDrone(int id, double dis)
         {
@@ -273,7 +279,7 @@ namespace DAL
         }
         public List<Tuple<int, double>> GetListOfDronInChargeing(int stationId)
         {
-           
+
             List<DO.DroneCharge> droneChargeList = XMLTools.LoadListFromXMLSerializer<DroneCharge>(droneChargePath);
             List<DO.Drone> droneList = XMLTools.LoadListFromXMLSerializer<Drone>(dronePath);
             List<Tuple<int, double>> listOnIDandBattery = new List<Tuple<int, double>>();
@@ -433,17 +439,17 @@ namespace DAL
             }
             return minDistance;
         }
-      
+
 
         #endregion DalXML Stations
- 
+
         #region DalXML Coustumer
-        
+
 
 
         private void LoadData()
         {
-           
+
             try
             {
                 //DataSource.Initialize();
@@ -459,7 +465,7 @@ namespace DAL
 
         public void AddCustomer(Customer customer)
         {
-            LoadData();
+            //LoadData();
             if (CustumerRoot.Elements().Any(custo => Convert.ToInt32(custo.Element("ID").Value) == customer.Id))
                 throw new CustomerException($"ID {customer.Id} already exists!!");
 
@@ -467,7 +473,7 @@ namespace DAL
                 new XElement("Id", customer.Id),
                 new XElement("Name", customer.Name),
                 new XElement("Phone", customer.Phone),
-                new XElement("Latitude"),customer.Latitude),
+                new XElement("Latitude"), customer.Latitude),
                 new XElement("Longitude"), customer.Longitude);
 
             CustumerRoot.Save(customer + customerPath);
@@ -479,17 +485,17 @@ namespace DAL
 
 
             Customer c = (from cus in CustumerRoot.Elements()
-                 where Convert.ToInt32(cus.Element("Id").Value) == Custumerid
-                 select new Customer()
-                 {
-                     Id = Convert.ToInt32(cus.Element("Id").Value),
-                     Name = cus.Element("Name").Value,
-                     Phone = cus.Element("Phone").Value,
-                     Latitude = Convert.ToDouble(cus.Element("Latitude").Value),
-                     Longitude = Convert.ToDouble(cus.Element("Longitude").Value)
-                 }).FirstOrDefault();
+                          where Convert.ToInt32(cus.Element("Id").Value) == Custumerid
+                          select new Customer()
+                          {
+                              Id = Convert.ToInt32(cus.Element("Id").Value),
+                              Name = cus.Element("Name").Value,
+                              Phone = cus.Element("Phone").Value,
+                              Latitude = Convert.ToDouble(cus.Element("Latitude").Value),
+                              Longitude = Convert.ToDouble(cus.Element("Longitude").Value)
+                          }).FirstOrDefault();
             //if (c.Id == 0)
-                //throw new Exception($"custumer {Custumerid} is not exite!!");
+            //throw new Exception($"custumer {Custumerid} is not exite!!");
 
             return c;
         }
@@ -505,7 +511,7 @@ namespace DAL
                             Phone = cus.Element("Phone").Value,
                             Latitude = Convert.ToDouble(cus.Element("Latitude").Value),
                             Longitude = Convert.ToDouble(cus.Element("Longitude").Value)
-                            
+
                         };
 
             return custumers;
@@ -559,8 +565,8 @@ namespace DAL
         public IEnumerable<Parcel> ShowParcelList(Predicate<Parcel> predicate = null)
         {
             List<Parcel> parcelList = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
-         
-            return parcelList.Where(x=> predicate == null ? true : predicate(x)).ToList();
+
+            return parcelList.Where(x => predicate == null ? true : predicate(x)).ToList();
         }
         /// <summary>
         /// Search for the package in delivery mode
@@ -619,7 +625,7 @@ namespace DAL
         public List<Parcel> GetListOfParcelSending(int id)
         {
             List<Parcel> Senderparcels = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
-            
+
             foreach (Parcel item in Senderparcels)
             {
                 if (item.SenderId == id)
@@ -632,7 +638,7 @@ namespace DAL
         public List<Parcel> GetListOfParcelRecirver(int id)
         {
             List<Parcel> Recieverparcels = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
-           
+
             foreach (Parcel item in Recieverparcels)
             {
                 if (item.ReceiverId == id)
@@ -682,7 +688,7 @@ namespace DAL
             Parcel p = parcelList.Find(x => x.Id == parcel_id);
             p.Supplied = DateTime.Now;
         }
-           /// <summary>
+        /// <summary>
         /// Get Parce lBy DroneIds parcel
         /// </summary>
         /// <param name="DroneId"></param>
@@ -715,7 +721,7 @@ namespace DAL
         #endregion DalXML Parcel
 
         #region DalXML User
-        
+
         public User GetUser(string userName)
         {
             List<DO.User> userList = XMLTools.LoadListFromXMLSerializer<User>(UserPath);

@@ -22,7 +22,7 @@ namespace ConsoleUI
             EntityOptions entityOptions;
             UpdateOptions updateOptions;
             //IDal dalobject = DalFactory.GetDal();
-            DalApi.IDal dalobject = DalApi.DalFactory.GetDal();
+            DalApi.IDal dalobject = DalApi.DLFactory.GetDL();
             do
             {
                 Console.WriteLine("WELCOME!");

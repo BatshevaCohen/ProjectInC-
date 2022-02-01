@@ -155,7 +155,7 @@ namespace DAL
         {
             Drone d = DataSource.Drones.Find(x => x.Id == id);
             DataSource.Drones.Remove(d);
-            d.Battery -= dis * 0.01;
+            d.Battery -= dis * 0.1;
             DataSource.Drones.Add(d);
         }
         #endregion

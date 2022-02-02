@@ -626,7 +626,7 @@ namespace DAL
             if (dellParcel_index == -1)
                 throw new ParcelException($"ID {p.Id} not dound!");
             parcelList.RemoveAt(dellParcel_index);
-            XMLTools.SaveListToXMLSerializer<Parcel>(parcelList, parcelPath);//
+            XMLTools.SaveListToXMLSerializer<Parcel>(parcelList, parcelPath);////
         }
         public List<Parcel> GetListOfParcelSending(int id)
         {

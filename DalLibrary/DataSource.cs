@@ -126,7 +126,7 @@ namespace DAL
                     }
                 });
             }
-            for (int i = 1; i <= 5; i++)
+            for (int i = 0; i <= 4; i++)
             {
                 //choose two different ids for sender and target from Customer's id
                 int senderId = Customer[i].Id;
@@ -144,7 +144,7 @@ namespace DAL
                     ReceiverId = targetId,
                     Weight = RandomEnumValue<WeightCategories>(),
                     Priority = RandomEnumValue<Priorities>(),
-                    
+                    DroneID = Drones[i].Id,
                     Create = MyDateTime(),
                     Assigned = MyDateTime(),
                     PickedUp = MyDateTime(),
@@ -153,31 +153,50 @@ namespace DAL
 
             }
             //adding parcels
-            for (int i = 4; i <= 8; i++)
+            for (int i = 5; i <= 8; i++)
             {
-                //choose two different ids for sender and target from Customer's id
-                int senderId = Customer[i].Id;
-                int targetId;
-                // the sender can't be the reciver
-                do
+                if (i != 8)
                 {
-                    targetId = Customer[i+1].Id;
-                } while (targetId == senderId);
+                    //choose two different ids for sender and target from Customer's id
+                    int senderId = Customer[i].Id;
+                    int targetId;
+                    // the sender can't be the reciver
+                    do
+                    {
+                        targetId = Customer[i + 1].Id;
+                    } while (targetId == senderId);
 
-                Parcels.Add(new Parcel()
+                    Parcels.Add(new Parcel()
+                    {
+                        Id = ++OrdinalNumber,    //serial number
+                        SenderId = senderId,
+                        ReceiverId = targetId,
+                        Weight = RandomEnumValue<WeightCategories>(),
+                        Priority = RandomEnumValue<Priorities>(),
+                       
+                        Create = DateTime.MinValue,
+                        Assigned = DateTime.MinValue,
+                        PickedUp = DateTime.MinValue,
+                        Supplied = DateTime.MinValue
+                    });
+
+                }
+                else
                 {
-                    Id = ++OrdinalNumber,    //serial number
-                    SenderId = senderId,
-                    ReceiverId = targetId,
-                    Weight = RandomEnumValue<WeightCategories>(),
-                    Priority = RandomEnumValue<Priorities>(),
-                    DroneID =Drones[i/3].Id,
-                    Create = DateTime.MinValue,
-                    Assigned = DateTime.MinValue,
-                    PickedUp = DateTime.MinValue,
-                    Supplied = DateTime.MinValue
-                });
-
+                    Parcels.Add(new Parcel()
+                    {
+                        Id = ++OrdinalNumber,    //serial number
+                        SenderId = Customer[8].Id,
+                        ReceiverId = Customer[9].Id,
+                        Weight = RandomEnumValue<WeightCategories>(),
+                        Priority = RandomEnumValue<Priorities>(),
+                       
+                        Create = DateTime.MinValue,
+                        Assigned = DateTime.MinValue,
+                        PickedUp = DateTime.MinValue,
+                        Supplied = DateTime.MinValue,
+                    });
+                }
             }
           
 

@@ -22,7 +22,7 @@ namespace DAL
         static string parcelPath = @"Parcels.xml";
         static string droneChargePath = @"droneCharges.xml";
         static string UserPath = @"users.xml";
-       // string ConfigPath = @"Config.xml";
+        // string ConfigPath = @"Config.xml";
 
         #region singelton
         public static DXML Instance { get; } = new DXML();
@@ -108,9 +108,10 @@ namespace DAL
         public Drone GetDrone(int id)
         {
             List<DO.Drone> dronsList = XMLTools.LoadListFromXMLSerializer<Drone>(dronePath);
-            if (dronsList.Exists(item => item.Id == id))
+            if (!dronsList.Exists(item => item.Id == id))
             {
                 throw new DroneException($"ID: {id} does not exist!!");
+
             }
             return dronsList.Find(c => c.Id == id);
         }
@@ -248,7 +249,7 @@ namespace DAL
         /// <returns>An array of the amount of power consumption of a drone for each situation</returns>
         public double[] PowerRequest()
         {
-            
+
             XElement Config = XElement.Load(@"config.xml");
 
             return (from e in Config.Element("Data").Elements()
@@ -475,24 +476,34 @@ namespace DAL
         }
         public Customer GetCustomer(int Custumerid)
         {
-            LoadData();
 
 
 
-            Customer c = (from cus in CustumerRoot.Elements()
-                          where Convert.ToInt32(cus.Element("Id").Value) == Custumerid
-                          select new Customer()
-                          {
-                              Id = Convert.ToInt32(cus.Element("Id").Value),
-                              Name = cus.Element("Name").Value,
-                              Phone = cus.Element("Phone").Value,
-                              Latitude = Convert.ToDouble(cus.Element("Latitude").Value),
-                              Longitude = Convert.ToDouble(cus.Element("Longitude").Value)
-                          }).FirstOrDefault();
+            List<DO.Customer> custumerList = XMLTools.LoadListFromXMLSerializer<Customer>(customerPath);
+            if (!custumerList.Exists(item => item.Id == Custumerid))
+            {
+                throw new CustomerException($"ID: {Custumerid} does not exist!!");
+
+            }
+            return custumerList.Find(c => c.Id == Custumerid);
+            //LoadData();
+            //Customer c = new Customer();
+            //c = (from cus in CustumerRoot.Elements()
+            //     where Convert.ToInt32(cus.Element("Id").Value) == Custumerid
+            //     select new Customer()
+            //     {
+            //         Id = Convert.ToInt32(cus.Element("Id").Value),
+            //         Name = cus.Element("Name").Value,
+            //         Phone = cus.Element("Phone").Value,
+            //         Latitude = Convert.ToDouble(cus.Element("Latitude").Value),
+            //         Longitude = Convert.ToDouble(cus.Element("Longitude").Value)
+            //     }).FirstOrDefault();
+
+
             //if (c.Id == 0)
             //throw new Exception($"custumer {Custumerid} is not exite!!");
 
-            return c;
+           
         }
         public IEnumerable<Customer> ShowCustomerList(Func<Customer, bool> predicate = null)
         {
@@ -621,27 +632,21 @@ namespace DAL
         {
             List<Parcel> Senderparcels = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
 
-            foreach (Parcel item in Senderparcels)
-            {
-                if (item.SenderId == id)
-                {
-                    Senderparcels.Add(item);
-                }
-            }
-            return Senderparcels;
+            //foreach (Parcel item in Senderparcels)
+            //{
+            //    if (item.SenderId == id)
+            //    {
+            //        Senderparcels.Add(item);
+            //    }
+            //}
+            return Senderparcels.Where(x =>  x.SenderId==id).ToList();
+           // return Senderparcels;
         }
         public List<Parcel> GetListOfParcelRecirver(int id)
         {
             List<Parcel> Recieverparcels = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
 
-            foreach (Parcel item in Recieverparcels)
-            {
-                if (item.ReceiverId == id)
-                {
-                    Recieverparcels.Add(item);
-                }
-            }
-            return Recieverparcels;
+            return Recieverparcels.Where(x => x.ReceiverId == id).ToList();
         }
         /// <summary>
         /// update function: parcel to drone by id

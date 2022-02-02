@@ -86,6 +86,7 @@ namespace BL
             DO.Station station = new();
             //finds the drone by the recived ID
 
+
             DroneToList dronel = DronesL.Find(x => x.Id == droneId);
             //if the drone is available- it can be sent for charging
             if (dronel.DroneStatuses == DroneStatuses.Available)

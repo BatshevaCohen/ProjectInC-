@@ -823,14 +823,37 @@ namespace DAL
             return 12742 * Math.Asin(Math.Sqrt(a)); // 2 * R; R = 6371 km
         }
 
+        /// <summary>
+        /// Finds the customer by his user 
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns>Customer</returns>
         public Customer GetCustomer_ByUsername(User user)
         {
-            throw new NotImplementedException();
+            List<Customer> customers = XMLTools.LoadListFromXMLSerializer<Customer>(customerPath);
+            //if Username does not exist for customer
+            if (!customers.Exists(item => item.User.UserName == user.UserName))
+            {
+                throw new CustomerException($"User: {user} does not exist!!");
+            }
+            return customers.First(c => c.User.UserName == user.UserName);
         }
 
+        
+        /// <summary>
+        /// Show LIST of parcels for USER
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="NotImplementedException"></exception>
         public IEnumerable<Parcel> ShowParcelList(User user)
         {
-            throw new NotImplementedException();
+            List<Parcel> parcels = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
+       
+            var customer = GetCustomer_ByUsername(user);
+            //IEnumerable<DO.Parcel> parcels = ShowParcelList();
+         
+          
+            return parcels.Where(x=>x.SenderId==customer.Id||x.ReceiverId== customer.Id);
         }
         #endregion
 

@@ -68,7 +68,7 @@ namespace DAL
                 //find the parcel in the BL-- in order to find the raciver and the sender's name
                 Parcel parcel = GetParcel(item.Id);
                 //shows only the parsels that the user sent
-                if (parcel.SenderId == customer.Id)
+                if (parcel.SenderId == customer.Id || parcel.ReceiverId == customer.Id)
                 {
                     Parcel myParcel = new()
                     {

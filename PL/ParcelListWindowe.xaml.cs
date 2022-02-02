@@ -78,7 +78,29 @@ namespace PL
         /// <param name="e"></param>
         private void ShowDeletedParcels_Click(object sender, RoutedEventArgs e)
         {
-            לממש!!!!
+            //לממש!!!!
+        }
+
+        /// <summary>
+        /// double click on parcel in the list will open the ParcelInActionView Window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ParcelListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ParcelInActionView? parcelInActionView = ParcelListView.SelectedItem as ParcelInActionView;
+            if (parcelInActionView != null)
+                parcelInActionView.Show();
+        }
+
+        /// <summary>
+        /// Close the window
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void closeButton_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
         }
     }
 }

@@ -1,17 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 using BO;
 
 namespace PL
@@ -25,6 +17,7 @@ namespace PL
         private CustomerToList custumerToList;
         Customer cusm;
         BlApi.IBL myBl;
+
         public CustumerInActionView(BlApi.IBL bl, CustumerListWindow custumerListWindow)
         {
             myBl = bl;
@@ -166,6 +159,16 @@ namespace PL
                 MessageBox.Show("Please enter longitude");
                 longitudeTextBoxAdd.Focus();
             }
+            else if(ChooseUserNameTextBox.Text.Length == 0)
+            {
+                MessageBox.Show("Please enter username foe the new customer");
+                ChooseUserNameTextBox.Focus();
+            }
+            else if(ChoosePasswordTextBox.Text.Length == 0)
+            {
+                MessageBox.Show("Please choose password foe the new customer");
+                ChoosePasswordTextBox.Focus();
+            }
 
             else if (idCusTextBoxAdd.Text.Length != 9)
                 MessageBox.Show("ID should have 9 digits");
@@ -187,6 +190,11 @@ namespace PL
                 {
                     Latitude = double.Parse(latitudeTextBoxAdd.Text),
                     Longitude = double.Parse(longitudeTextBoxAdd.Text),
+                };
+                cusm.User = new()
+                {
+                    UserName = ChooseUserNameTextBox.Text,
+                    Password = ChoosePasswordTextBox.Text
                 };
                 try
                 {

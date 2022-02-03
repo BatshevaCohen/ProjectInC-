@@ -22,10 +22,6 @@
             Opacity="0.5"/>
 
         <Grid 
-            Name="ShowDrone" 
-            Visibility="Visible" Margin="10,-10,10,10">
-
-            <Grid 
                 x:Name="UpdateGrid" 
                 Visibility="Collapsed" 
                 VerticalAlignment="Top" 
@@ -167,7 +163,7 @@
 
             </Grid>
 
-            <Grid x:Name="Buttons_Grid" Visibility="Visible">
+            <Grid x:Name="Buttons_Grid" Visibility="Collapsed">
                 <Button 
                     x:Name="btnDroneToDelivery" 
                     Content="Send to delivery" 
@@ -273,11 +269,10 @@
                     Margin="371,213,0,0" Click="btnShowParcelInTrnsfer_Click" />
 
             </Grid>
-        </Grid>
 
 
 
-        <Grid x:Name="AddGrid" Visibility="Visible"
+        <Grid x:Name="AddGrid" Visibility="Collapsed"
               VerticalAlignment="Top" Margin="41,51,0,0" HorizontalAlignment="Left" Height="143" Width="274">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -343,7 +338,7 @@
         </Grid>
         <Grid
             x:Name="AddButtonsGrid"
-            Visibility="Visible">
+            Visibility="Collapsed">
             <Button 
                 x:Name="btnAddDrone" 
                 Content="Add" 

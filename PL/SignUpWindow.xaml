@@ -19,7 +19,7 @@
             Grid.ColumnSpan="2"/>
 
         <Grid x:Name="enterDetailsGrid"
-              Visibility="Visible">
+              Visibility="Collapsed">
             <!--Name icon-->
             <materialDesign:PackIcon 
             Kind="Account"             
@@ -189,21 +189,13 @@
         </Grid>
 
         <Grid x:Name="UserNameAndPassword_Grid"
-              Visibility="Collapsed">
+              Visibility="Visible">
             <!--Person icon-->
             <materialDesign:PackIcon 
             Kind="Account"             
             Margin="132,151,0,0" 
             Width="27" RenderTransformOrigin="0.5,0.5" 
             Height="30" >
-                <materialDesign:PackIcon.RenderTransform>
-                    <TransformGroup>
-                        <ScaleTransform/>
-                        <SkewTransform AngleY="0"/>
-                        <RotateTransform/>
-                        <TranslateTransform Y="0"/>
-                    </TransformGroup>
-                </materialDesign:PackIcon.RenderTransform>
             </materialDesign:PackIcon>
             <TextBox 
                 x:Name="ChooseUserNameTextBox"

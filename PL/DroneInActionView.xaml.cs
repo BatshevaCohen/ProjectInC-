@@ -62,7 +62,6 @@ namespace PL
             InitializeComponent();
             mybl = bL;
             UpdateGrid.Visibility = Visibility.Visible;
-            ShowDrone.Visibility = Visibility.Visible;
             Buttons_Grid.Visibility = Visibility.Visible;
             AddButtonsGrid.Visibility = Visibility.Collapsed;
             AddGrid.Visibility= Visibility.Collapsed;

@@ -35,8 +35,8 @@ namespace PL
             drone = new BO.Drone();
             DataContext = drone;
             AddGrid.Visibility = Visibility.Visible;
-            btnAddDrone.Visibility = Visibility.Visible;
-            btnAddDrone_cencel.Visibility = Visibility.Visible;
+            Buttons_Grid.Visibility = Visibility.Collapsed;
+            UpdateGrid.Visibility = Visibility.Collapsed;
             AddButtonsGrid.Visibility= Visibility.Visible;
             droneWeightComboBox.ItemsSource = Enum.GetValues(typeof(Weight));
             //AddDroneStatusComboBox.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
@@ -63,6 +63,9 @@ namespace PL
             mybl = bL;
             UpdateGrid.Visibility = Visibility.Visible;
             ShowDrone.Visibility = Visibility.Visible;
+            Buttons_Grid.Visibility = Visibility.Visible;
+            AddButtonsGrid.Visibility = Visibility.Collapsed;
+            AddGrid.Visibility= Visibility.Collapsed;
             this.droneToList = droneToList;
             droneStatusComboBox.ItemsSource = Enum.GetValues(typeof(DroneStatuses));
             drone = new BO.Drone()
@@ -402,7 +405,6 @@ namespace PL
         /// <param name="e"></param>
         private void btnShowParcelInTrnsfer_Click(object sender, RoutedEventArgs e)
         {
-            
             ParcelInTransferDetails parcelInTransfer= new ParcelInTransferDetails(drone.ParcelInTransfer);
             parcelInTransfer.Show();
         }

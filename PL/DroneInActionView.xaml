@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="DroneInActionView" Height="403" Width="704" 
+        Title="DroneInActionView" Height="402" Width="578" 
         Loaded="Window_Loaded">
     <Window.Resources>
         <local:LattitudeToDmsConverter x:Key="LattitudeToDmsConverter"/>
@@ -29,7 +29,7 @@
                 Visibility="Collapsed" 
                 VerticalAlignment="Top" 
                 Margin="31,61,0,0" 
-                HorizontalAlignment="Left" Height="224" Width="388">
+                HorizontalAlignment="Left" Height="224" Width="311">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto"/>
                     <RowDefinition Height="Auto"/>
@@ -166,42 +166,59 @@
 
             </Grid>
 
-            <Button 
-                x:Name="btnDroneToDelivery" 
-                Content="Send drone to delivery" 
-                FontFamily="Comic Sans MS"
-                Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                materialDesign:ButtonAssist.CornerRadius="25"
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Top" 
-                Width="182" 
-                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                Click="btnDroneToDelivery_Click" Height="60" Margin="454,225,0,0" />
+            <Grid x:Name="Buttons_Grid" Visibility="Visible">
+                <Button 
+                    x:Name="btnDroneToDelivery" 
+                    Content="Send to delivery" 
+                    FontFamily="Comic Sans MS"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    materialDesign:ButtonAssist.CornerRadius="25"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" 
+                    Width="130" 
+                    Height="36"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Click="btnDroneToDelivery_Click" Margin="371,41,0,0" />
 
-            <Button 
-                x:Name="btnUpdateDrone" 
-                Content="Update drone's name" 
-                FontFamily="Comic Sans MS"
-                Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                materialDesign:ButtonAssist.CornerRadius="25"
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Top" 
-                Height="60" 
-                Width="180" 
-                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                Click="btnUpdateDrone_Click" Margin="455,61,0,0"/>
-            <Button 
-                x:Name="btnDroneToCharge"  
-                Content="Send drone to charge" 
-                FontFamily="Comic Sans MS"
-                Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                materialDesign:ButtonAssist.CornerRadius="25"
-                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Top" 
-                Height="60" Width="180" 
-                Click="btnDroneToCharge_Click" Margin="453,143,0,0"/>
-            <Button 
+                <Button 
+                    x:Name="btnUpdateDrone" 
+                    Content="Update name" 
+                    FontFamily="Comic Sans MS"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    materialDesign:ButtonAssist.CornerRadius="25"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" 
+                    Background="Indigo"
+                    Height="36" 
+                    Width="130" 
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Click="btnUpdateDrone_Click" Margin="25,284,0,0"/>
+                <Button 
+                    x:Name="btnDroneToCharge"  
+                    Content="Send to charge" 
+                    FontFamily="Comic Sans MS"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    materialDesign:ButtonAssist.CornerRadius="25"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    HorizontalAlignment="Left" 
+                    Background="Indigo"
+                    VerticalAlignment="Top" 
+                    Height="36" Width="130" 
+                    Click="btnDroneToCharge_Click" Margin="180,286,0,0"/>
+                <Button 
+                    x:Name="btnDischarge" 
+                    Content="Discharge" 
+                    FontFamily="Comic Sans MS"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    materialDesign:ButtonAssist.CornerRadius="25"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" 
+                    Background="Indigo"
+                    Width="130" 
+                    Height="36" 
+                    Click="btnDischarge_Click" Margin="180,284,0,0"/>
+                <Button 
                 x:Name="btnCollectParcel" 
                 Content="Collect parcel" 
                 FontFamily="Comic Sans MS"
@@ -210,22 +227,11 @@
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
-                Height="60" 
-                Width="182" 
-                Click="btnCollectParcel_Click" Margin="452,143,0,0"/>
-            <Button 
-                x:Name="btnDischarge" 
-                Content="Discharge" 
-                FontFamily="Comic Sans MS"
-                Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                materialDesign:ButtonAssist.CornerRadius="25"
-                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Top" 
-                Width="180" 
-                Height="60" 
-                Click="btnDischarge_Click" Margin="453,143,0,0"/>
-            <Button 
+                Height="36" 
+                Width="130" 
+                Click="btnCollectParcel_Click" Margin="371,99,0,0"/>
+
+                <Button 
                 x:Name="btnParcelDelivery" 
                 Content="Parcel delivery"
                 FontFamily="Comic Sans MS"
@@ -234,39 +240,43 @@
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
-                Height="60" 
-                Width="182" 
-                Click="btnParcelDelivery_Click" Margin="453,143,0,0"/>
-            <Button 
-                x:Name="btnClose" 
-                Content="Close" 
-                FontFamily="Comic Sans MS"
-                Background="#da2d2d"
-                Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                materialDesign:ButtonAssist.CornerRadius="25"
-                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
-                Click="closeButton_Click"  
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Top" 
-                Width="108" Margin="491,320,0,0" />
-            <Button 
-                x:Name="btnShowParcelInTrnsfer"
-                Visibility="Collapsed"
-                Content="Parcel details" 
-                FontFamily="Comic Sans MS"
-                Style="{StaticResource MaterialDesignRaisedDarkButton}"
-                materialDesign:ButtonAssist.CornerRadius="25"
-                HorizontalAlignment="Left" 
-                VerticalAlignment="Top" 
-                Width="182" 
-                IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
-                Height="60" 
-                Margin="335,225,0,0" Click="btnShowParcelInTrnsfer_Click" />
+                Height="36" 
+                Width="130" 
+                Click="btnParcelDelivery_Click" Margin="371,156,0,0"/>
+                <Button 
+                    x:Name="btnClose" 
+                    Content="Close" 
+                    FontFamily="Comic Sans MS"
+                    Background="Firebrick"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    materialDesign:ButtonAssist.CornerRadius="25"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
+                    Click="closeButton_Click"  
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" 
+                    Width="130" 
+                    Height="36"
+                    Margin="371,286,0,0" />
+                <Button 
+                    x:Name="btnShowParcelInTrnsfer"
+                    Visibility="Visible"
+                    Content="Parcel details" 
+                    FontFamily="Comic Sans MS"
+                    Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                    materialDesign:ButtonAssist.CornerRadius="25"
+                    HorizontalAlignment="Left" 
+                    VerticalAlignment="Top" 
+                    Width="130" 
+                    Height="36"
+                    IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type Window}}}"
+                    Margin="371,213,0,0" Click="btnShowParcelInTrnsfer_Click" />
+
+            </Grid>
         </Grid>
 
 
 
-        <Grid x:Name="AddGrid" Visibility="Collapsed"
+        <Grid x:Name="AddGrid" Visibility="Visible"
               VerticalAlignment="Top" Margin="41,51,0,0" HorizontalAlignment="Left" Height="143" Width="274">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto"/>
@@ -332,7 +342,7 @@
         </Grid>
         <Grid
             x:Name="AddButtonsGrid"
-            Visibility="Collapsed">
+            Visibility="Visible">
             <Button 
                 x:Name="btnAddDrone" 
                 Content="Add" 
@@ -340,22 +350,22 @@
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="25"
                 HorizontalAlignment="Left" 
-                Margin="60,286,0,0" 
+                Margin="54,259,0,0" 
                 VerticalAlignment="Top" 
                 Height="55" Width="100" 
                 Click="btnAddDrone_Click"/>
             <Button 
-            x:Name="btnAddDrone_cencel" 
-            Content="Cencel" 
-            FontFamily="Comic Sans MS"
-            Style="{StaticResource MaterialDesignRaisedDarkButton}"
-            materialDesign:ButtonAssist.CornerRadius="25"
-            HorizontalAlignment="Left" 
-            Margin="178,286,0,0" 
-            VerticalAlignment="Top" 
-            Height="55" Width="100" 
-            Background="Red"
-            Click="btnAddDrone_cencel_Click"/>
+                x:Name="btnAddDrone_cencel" 
+                Content="Cencel" 
+                FontFamily="Comic Sans MS"
+                Style="{StaticResource MaterialDesignRaisedDarkButton}"
+                materialDesign:ButtonAssist.CornerRadius="25"
+                HorizontalAlignment="Left" 
+                Margin="189,258,0,0" 
+                VerticalAlignment="Top" 
+                Height="56" Width="100" 
+                Background="Firebrick"
+                Click="btnAddDrone_cencel_Click"/>
         </Grid>
     </Grid>
 

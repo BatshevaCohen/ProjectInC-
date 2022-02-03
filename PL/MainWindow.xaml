@@ -7,7 +7,7 @@
         xmlns:local="clr-namespace:PL"
         xmlns:gif = "https://github.com/XamlAnimatedGif/XamlAnimatedGif"
         mc:Ignorable="d"
-        Title="MainWindow" Height="600" Width="700"
+        Title="MainWindow" Height="563" Width="700"
         WindowStartupLocation="CenterScreen"
         WindowStyle="SingleBorderWindow">
 
@@ -32,7 +32,7 @@
             Style="{StaticResource MaterialDesignPaperButton}"
             materialDesign:ButtonAssist.CornerRadius="10"
             HorizontalAlignment="Left" 
-            Margin="37,175,0,0" 
+            Margin="37,273,0,0" 
             VerticalAlignment="Top"
             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
             Click="btnShowDronesList_Click" Height="58" Width="280"/>
@@ -44,7 +44,7 @@
             Style="{StaticResource MaterialDesignPaperButton}"
             materialDesign:ButtonAssist.CornerRadius="10"
             HorizontalAlignment="Left" 
-            Margin="37,255,0,0" 
+            Margin="37,354,0,0" 
             VerticalAlignment="Top"
             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
             Click="btnShowStationList_Click" Height="58" Width="280"/>
@@ -56,7 +56,7 @@
             Style="{StaticResource MaterialDesignPaperButton}"
             materialDesign:ButtonAssist.CornerRadius="10"
             HorizontalAlignment="Left" 
-            Margin="37,341,0,0" 
+            Margin="37,434,0,0" 
             VerticalAlignment="Top"
             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
             Click="btnShowCustumersList_Click" Height="58" Width="280"/>
@@ -68,10 +68,22 @@
             Style="{StaticResource MaterialDesignPaperButton}"
             materialDesign:ButtonAssist.CornerRadius="10"
             HorizontalAlignment="Left" 
-            Margin="37,430,0,0" 
+            Margin="37,194,0,0" 
             VerticalAlignment="Top"
             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
             Click="btnShowParcelesList_Click" Height="58" Width="280"/>
+        <Button 
+            x:Name="btnParcelsForUSER"
+            Content="Parcels"  
+            FontFamily="Comic Sans MS"
+            FontSize="25"
+            Style="{StaticResource MaterialDesignPaperButton}"
+            materialDesign:ButtonAssist.CornerRadius="10"
+            HorizontalAlignment="Left" 
+            Margin="37,194,0,0" 
+            VerticalAlignment="Top"
+            IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}" 
+            Click="btnParcelsForUSER_Click" Height="58" Width="280"/>
 
 
         <Label Content="Hello" 
@@ -88,12 +100,38 @@
                Margin="310,32,0,0" 
                VerticalAlignment="Top"/>
 
-        <Label Content="What would you like to see?" 
+        <Label x:Name="AdminLable"
+               Content="What would you like to see?" 
                FontSize="30"
+               Visibility="Visible"
                FontFamily="Comic Sans MS"
                HorizontalAlignment="Center" 
                Margin="0,92,0,0" 
                VerticalAlignment="Top"/>
+        <Label x:Name="UserLable"
+               Content="Click to see your parcels" 
+               FontSize="30"
+               Visibility="Collapsed"
+               FontFamily="Comic Sans MS"
+               HorizontalAlignment="Center" 
+               Margin="0,92,0,0" 
+               VerticalAlignment="Top"/>
+        <!--lables for inner thing-->
+        <Label 
+            x:Name="username_lbl"
+            Content="username_here"
+            Visibility="Collapsed"
+            HorizontalAlignment="Left" 
+            Margin="37,32,0,0" 
+            VerticalAlignment="Top"/>
+        <Label 
+            x:Name="userPassword_lbl"
+            Content="userPassword_here"
+            Visibility="Collapsed"
+            HorizontalAlignment="Left" 
+            Margin="37,32,0,0" 
+            VerticalAlignment="Top"/>
+        
 
     </Grid>
 

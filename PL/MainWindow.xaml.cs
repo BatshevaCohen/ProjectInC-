@@ -1,6 +1,6 @@
 ﻿using System.Windows;
 using BlApi;
-
+using BO;
 
 namespace PL
 {
@@ -14,13 +14,35 @@ namespace PL
         IBL myBL;
 
         /// <summary>
-        /// Constractor- after signing in- shows the main window- for admin only
+        /// Constractor- after signing in- shows the main window- for ADMIN
         /// </summary>
-        public MainWindow(string username = "!")
+        public MainWindow(string username = ":-)")
         {
             myBL = BlFactory.GetBl();
             InitializeComponent();
+            UserLable.Visibility = Visibility.Collapsed;
+            AdminLable.Visibility = Visibility.Visible;
+            btnShowParcelList.Visibility = Visibility.Visible;
+            btnParcelsForUSER.Visibility = Visibility.Collapsed;
             nameOfUser_lable.Content = username + "!";
+        }
+        /// <summary>
+        /// Constractor- after signing in- shows the main window- for USER
+        /// </summary>
+        public MainWindow(IBL bL, User user)
+        {
+            myBL = BlFactory.GetBl();
+            InitializeComponent();
+            AdminLable.Visibility = Visibility.Collapsed;
+            UserLable.Visibility = Visibility.Visible;
+            btnShowDronesList.Visibility = Visibility.Collapsed;
+            btnShowStationList.Visibility = Visibility.Collapsed;
+            btnShowCustumerList.Visibility = Visibility.Collapsed;
+            btnShowParcelList.Visibility = Visibility.Collapsed;
+            btnParcelsForUSER.Visibility = Visibility.Visible;
+            nameOfUser_lable.Content = user.UserName.ToString() + "!";
+            username_lbl.Content = user.UserName;
+            userPassword_lbl.Content = user.Password;
         }
 
         /// <summary>
@@ -57,6 +79,22 @@ namespace PL
         private void btnShowParcelesList_Click(object sender, RoutedEventArgs e)
         {
             ParcelListWindowe wnd = new ParcelListWindowe(myBL);
+            wnd.Show();
+        }
+        /// <summary>
+        /// button to open the window of the parcels for the USER- only his parcels
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnParcelsForUSER_Click(object sender, RoutedEventArgs e)
+        {
+            User user = new User()
+            {
+                UserName = username_lbl.Content.ToString(),
+                Password = userPassword_lbl.Content.ToString(),
+                Permission = Permit.User
+            };
+            ParcelListWindowe wnd = new ParcelListWindowe(myBL, user);
             wnd.Show();
         }
     }

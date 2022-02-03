@@ -1,6 +1,4 @@
-﻿
-
-using DO;
+﻿using DO;
 
 using System;
 using System.Collections.Generic;
@@ -9,7 +7,6 @@ using System.Linq;
 using System.Reflection;
 using System.Xml;
 using System.Xml.Linq;
-
 namespace DAL
 {
     sealed class DXML : DalApi.IDal
@@ -396,23 +393,16 @@ namespace DAL
             }
             return minDistance;
         }
-
-
         #endregion DalXML Stations
 
         #region DalXML Coustumer
-
-
-
         private void LoadData()
         {
-
             try
             {
                 //DataSource.Initialize();
                 //XMLTools.SaveListToXMLSerializer(DataSource.Customer, customerPath);
                 CustumerRoot ??= XElement.Load(customerPath);
-
             }
             catch
             {
@@ -423,21 +413,12 @@ namespace DAL
         public void AddCustomer(Customer customer)
         {
             LoadData();
-            
-
             CustumerRoot.Add(new XElement("Custumer",
                 new XElement("Id", customer.Id),
                 new XElement("Name", customer.Name),
                 new XElement("Phone", customer.Phone),
                 new XElement("Latitude"), customer.Latitude),
                 new XElement("Longitude"), customer.Longitude);
-            //CustumerRoot.Add(new XElement("User",
-            //    new XElement("UserName", customer.User.UserName),
-            //    new XElement("Password", customer.User.Password),
-            //    new XElement("MyActivity", customer.User.MyActivity),
-            //    new XElement("Permission"), customer.User.Permission));
-                
-
             CustumerRoot.Save(customerPath);
         }
         public Customer GetCustomer(int Custumerid)
@@ -825,7 +806,4 @@ namespace DAL
         #endregion
 
     }
-
-
-
 }

@@ -3,8 +3,7 @@ using DO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-//Shirel Kadosh
-//Batsheva Cohen
+
 namespace ConsoleUI
 {
     class Program
@@ -17,11 +16,9 @@ namespace ConsoleUI
 
         private static void ShowMenu()
         {
-
             MenuOptions menuOptions;
             EntityOptions entityOptions;
             UpdateOptions updateOptions;
-            //IDal dalobject = DalFactory.GetDal();
             DalApi.IDal dalobject = DalApi.DLFactory.GetDL();
             do
             {

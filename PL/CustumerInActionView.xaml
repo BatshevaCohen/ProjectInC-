@@ -23,7 +23,7 @@
 
             <Grid 
                 x:Name="UpdatCustumereGrid" 
-                Visibility="Collapsed" 
+                Visibility="Visible" 
                 VerticalAlignment="Top" 
                 Margin="39,51,0,0" 
                 HorizontalAlignment="Left" Height="156" Width="267">
@@ -127,7 +127,7 @@
 
             <Grid 
                 x:Name="AddCustumerGrid" 
-                Visibility="Visible" 
+                Visibility="Collapsed" 
                 VerticalAlignment="Top" 
                 Margin="31,61,0,0" 
                 HorizontalAlignment="Left" Height="309" Width="266">
@@ -420,7 +420,7 @@
                 Margin="424,60,0,0" 
                 VerticalAlignment="Top" 
                 Height="55" Width="100" 
-                Visibility="Visible" 
+                Visibility="Collapsed" 
                 Click="btnOKCustumer_Click"/>
     </Grid>
 

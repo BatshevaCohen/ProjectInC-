@@ -82,7 +82,7 @@ namespace PL
                         }
                         else if(user.Permission == BO.Permit.Admin) //Admin
                         {
-                            new MainWindow().Show();
+                            new MainWindow(name).Show();
                             Close();
                         }
                         else

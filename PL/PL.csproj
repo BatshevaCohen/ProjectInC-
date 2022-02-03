@@ -8,6 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\droneGIF.gif" />
     <None Remove="Images\light purple background.jpg" />
     <None Remove="Images\MainWinPic.jpg" />
     <None Remove="Images\purple background.jpg" />
@@ -16,6 +17,7 @@
   <ItemGroup>
     <PackageReference Include="MaterialDesignColors" Version="2.0.4" />
     <PackageReference Include="MaterialDesignThemes" Version="4.3.0" />
+    <PackageReference Include="XamlAnimatedGif" Version="2.0.2" />
   </ItemGroup>
 
   <ItemGroup>
@@ -23,6 +25,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Resource Include="Images\droneGIF.gif" />
     <Resource Include="Images\light purple background.jpg" />
     <Resource Include="Images\MainWinPic.jpg" />
     <Resource Include="Images\purple background.jpg" />

@@ -16,10 +16,11 @@ namespace PL
         /// <summary>
         /// Constractor- after signing in- shows the main window- for admin only
         /// </summary>
-        public MainWindow()
+        public MainWindow(string username = "!")
         {
             myBL = BlFactory.GetBl();
             InitializeComponent();
+            nameOfUser_lable.Content = username + "!";
         }
 
         /// <summary>

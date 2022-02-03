@@ -41,8 +41,8 @@ namespace PL
             mybl = bL;
             DataContext = stationToL;
             this.StationToList = stationToL;
-            btnUpdateStation.Visibility = Visibility.Visible;
             UpdateGrid.Visibility = Visibility.Visible;
+            btnClose.Visibility = Visibility.Visible;
             station = new()
             {
                 Id = stationToL.Id,
@@ -79,6 +79,7 @@ namespace PL
         {
             mybl = bL;
             InitializeComponent();
+            btnClose2.Visibility = Visibility.Visible;
             AddGridStation.Visibility = Visibility.Visible;
             //LocationGridStation.Visibility= Visibility.Visible;
             DataContext = station;
@@ -113,12 +114,6 @@ namespace PL
         /// <param name="e"></param>
         private void btnAddeStation_Click(object sender, RoutedEventArgs e)
         {
-            ///לעשות בדיקת תקינות לתיבות!!!!!!!!!
-            ///
-            ///
-            ///
-
-
             //all fields shouldn't be empty
             if (stationIdTextBoxadd.Text.Length == 0)
                 MessageBox.Show("Please enter station ID");
@@ -244,6 +239,22 @@ namespace PL
         private void closeButton_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        /// <summary>
+        /// if the text have changed by the user- show the button "update station"
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void detailsChanged_update(object sender, TextChangedEventArgs e)
+        {
+            //btnUpdateStation.Visibility = Visibility.Visible;
+        }
+
+        private void detailsChanged_update(object sender, MouseEventArgs e)
+        {
+            btnUpdateStation.Visibility = Visibility.Visible;
+
         }
     }
 }

@@ -193,6 +193,7 @@ namespace PL
                     myBl.AddCustomer(cusm);
                     MessageBox.Show("New customer added succesfully!");
                     this.Close();
+                    
                 }
                 catch (Exception ex)
                 {

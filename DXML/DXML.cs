@@ -423,8 +423,7 @@ namespace DAL
         public void AddCustomer(Customer customer)
         {
             LoadData();
-            //if (CustumerRoot.Elements().Any(custo => Convert.ToInt32(custo.Element("ID").Value) == customer.Id))
-            //    throw new CustomerException($"ID {customer.Id} already exists!!");
+            
 
             CustumerRoot.Add(new XElement("Custumer",
                 new XElement("Id", customer.Id),
@@ -432,14 +431,17 @@ namespace DAL
                 new XElement("Phone", customer.Phone),
                 new XElement("Latitude"), customer.Latitude),
                 new XElement("Longitude"), customer.Longitude);
+            //CustumerRoot.Add(new XElement("User",
+            //    new XElement("UserName", customer.User.UserName),
+            //    new XElement("Password", customer.User.Password),
+            //    new XElement("MyActivity", customer.User.MyActivity),
+            //    new XElement("Permission"), customer.User.Permission));
+                
 
             CustumerRoot.Save(customerPath);
         }
         public Customer GetCustomer(int Custumerid)
         {
-
-
-
             List<DO.Customer> custumerList = XMLTools.LoadListFromXMLSerializer<Customer>(customerPath);
             if (!custumerList.Exists(item => item.Id == Custumerid))
             {
@@ -459,7 +461,6 @@ namespace DAL
             //         Latitude = Convert.ToDouble(cus.Element("Latitude").Value),
             //         Longitude = Convert.ToDouble(cus.Element("Longitude").Value)
             //     }).FirstOrDefault();
-
 
             //if (c.Id == 0)
             //throw new Exception($"custumer {Custumerid} is not exite!!");

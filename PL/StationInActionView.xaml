@@ -7,7 +7,9 @@
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"        
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="StationInActionView" Height="450" Width="708">
+        Title="StationInActionView" 
+        Height="424" Width="746">
+    
     <Grid x:Name="MainGrid">
         <Image 
             Source="Images/purple background.jpg"
@@ -20,94 +22,92 @@
                 </LinearGradientBrush>
             </Image.OpacityMask>
         </Image>
+
+
         <Grid 
         x:Name="UpdateGrid" 
-        Visibility="Collapsed" 
+        Visibility="Visible" 
         VerticalAlignment="Top" 
         Margin="36,34,0,0" 
-        HorizontalAlignment="Left" Height="90" Width="294">
+        HorizontalAlignment="Left" Height="119" Width="337">
             <Grid.RowDefinitions>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
-                <RowDefinition Height="Auto"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
+                <RowDefinition Height="*"/>
 
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="Auto"/>
-                <ColumnDefinition Width="Auto"/>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
 
             <Label 
-                    VerticalAlignment="Center" 
-                    Grid.Row="0" 
-                    Margin="3" 
-                    HorizontalAlignment="Left" 
-                    Grid.Column="0" 
-                    Content="Station id:"
-                    FontFamily="Comic Sans MS"/>
+                Content="Station id:"
+                VerticalAlignment="Center" 
+                Grid.Row="0" 
+                Grid.Column="0" 
+                Margin="3" 
+                HorizontalAlignment="Left" 
+                FontFamily="Comic Sans MS"/>
             <TextBox 
-                    x:Name="stationIdTextBox" 
-                    FontFamily="Comic Sans MS"
-                    Width="120" 
-                    VerticalAlignment="Center" 
-                    Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                    Grid.Row="0" 
-                    Margin="3" 
-                    Height="23" 
-                    HorizontalAlignment="Left" 
-                    Grid.Column="1" 
-                    IsEnabled="False"/>
-            <Label 
-                    VerticalAlignment="Center" 
+                x:Name="stationIdTextBox" 
                 FontFamily="Comic Sans MS"
-                    Grid.Row="1" 
-                    Margin="3" 
-                    HorizontalAlignment="Left" 
-                    Grid.Column="0" 
-                    Content="Name:"/>
+                Width="120" 
+                VerticalAlignment="Center" 
+                Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                Grid.Row="0" 
+                Grid.Column="1" 
+                Margin="3" 
+                Height="23" 
+                HorizontalAlignment="Left" 
+                IsEnabled="False"/>
+            <Label  
+                Content="Name:"
+                VerticalAlignment="Center" 
+                FontFamily="Comic Sans MS"
+                Grid.Row="1"
+                Grid.Column="0" 
+                Margin="3" 
+                HorizontalAlignment="Left"/>
             <TextBox 
-                    x:Name="NameTextBox" 
-                    FontFamily="Comic Sans MS"
-                    Width="120" 
-                    VerticalAlignment="Center" 
-                    Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                    Grid.Row="1" 
-                    Margin="3" 
-                    Height="23" 
-                    HorizontalAlignment="Left" 
-                    Grid.Column="1" 
-                    IsEnabled="True"/>
+                x:Name="NameTextBox" 
+                FontFamily="Comic Sans MS"
+                Width="120" 
+                VerticalAlignment="Center" 
+                Text="{Binding Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                Grid.Row="1" 
+                Margin="3" 
+                Height="23" 
+                HorizontalAlignment="Left" 
+                Grid.Column="1" 
+                IsEnabled="True"/>
             <Label 
-                    VerticalAlignment="Center" 
-                    Grid.Row="3" 
-                    FontFamily="Comic Sans MS"
-                    Margin="3" 
-                    HorizontalAlignment="Left" 
-                    Grid.Column="0" 
-                    Content="Available Charging Spots:"/>
+                Content="Available Charging Spots:"
+                VerticalAlignment="Center" 
+                Grid.Row="2" 
+                Grid.Column="0"
+                FontFamily="Comic Sans MS"
+                Margin="3" 
+                HorizontalAlignment="Left"/>
             <TextBox 
-                    x:Name="AvailableChargingSpotsTextBox" 
-                    Width="120" 
-                    VerticalAlignment="Center"  
-                    Text="{Binding AvailableChargingSpots, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  
-                    Grid.Row="3" 
-                    Margin="3" 
-                    FontFamily="Comic Sans MS"
-                    Height="23" 
-                    HorizontalAlignment="Left" 
-                    Grid.Column="1"/>
+                x:Name="AvailableChargingSpotsTextBox" 
+                Width="120" 
+                VerticalAlignment="Center"  
+                Text="{Binding AvailableChargingSpots, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  
+                Grid.Row="2" 
+                Grid.Column="1"
+                Margin="3" 
+                FontFamily="Comic Sans MS"
+                Height="23" 
+                HorizontalAlignment="Left"/>
 
             <Button x:Name="btnUpdateStation"
                 Content="Update station"
-                Visibility="Collapsed"
+                Visibility="Visible"
                 FontFamily="Comic Sans MS"
                 Style="{StaticResource MaterialDesignRaisedButton}"
                 materialDesign:ButtonAssist.CornerRadius="10" 
-                Click="btnUpdateStation_Click" 
-                Margin="59,158,401,217"/>
+                Click="btnUpdateStation_Click" Grid.ColumnSpan="2" Margin="65,66,53,-58" Grid.Row="2" />
 
             <!--<WrapPanel Grid.ColumnSpan="2" Margin="33,64,3,-139" Grid.Row="5">
                 <ListView  x:Name="listVDtoneInCharging" Margin="24,56,17,-97"  ItemsSource="{Binding DroneInCharging}" Width="212" Height="114" RenderTransformOrigin="0.51,-0.314" MouseDoubleClick="StationInActionView_MouseDoubleClick" />
@@ -118,16 +118,17 @@
 
         <Grid 
             x:Name="AddGridStation" 
-            Visibility="Visible" 
+            Visibility="Collapsed" 
             VerticalAlignment="Top" 
-            Margin="10,28,0,0" 
-            HorizontalAlignment="Left" Height="157" Width="307">
+            Margin="20,32,0,0" 
+            HorizontalAlignment="Left" Height="234" Width="353">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
+                <RowDefinition Height="50"/>
             </Grid.RowDefinitions>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*"/>
@@ -180,7 +181,7 @@
                     Margin="0,4,0,0" 
                     HorizontalAlignment="Left" 
                     Grid.Column="0" 
-                    Content="Available Charging Spots:" Grid.ColumnSpan="2" Height="25" Width="144"/>
+                    Content="Available Charging Spots:" Height="25" Width="166"/>
             <TextBox 
                     x:Name="AvailableChargingSpotsTextBoxadd" 
                     Width="120" 
@@ -233,70 +234,23 @@
                     Grid.Column="1" 
                     IsEnabled="True"/>
 
+            <Button 
+                x:Name="btnAddStation"
+                FontFamily="Comic Sans MS"
+                Content="Add" 
+                Style="{StaticResource MaterialDesignRaisedButton}"
+                materialDesign:ButtonAssist.CornerRadius="10" 
+                HorizontalAlignment="Left"
+                VerticalAlignment="Bottom"
+                Width="130"
+                Height="35"
+                Click="btnAddeStation_Click" 
+                Grid.ColumnSpan="2"
+                Grid.Row="5" Margin="112,0,0,0"/>
+
             <Grid/>
         </Grid>
 
-        <Grid
-            x:Name="LocationGridStation" 
-            Visibility="Collapsed" 
-            VerticalAlignment="Top" 
-            Margin="12,235,0,0" 
-            HorizontalAlignment="Left" Height="67" Width="305">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
-            </Grid.RowDefinitions>
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="*"/>
-                <ColumnDefinition Width="*"/>
-            </Grid.ColumnDefinitions>
-            <Label 
-                    VerticalAlignment="Top" 
-                    Grid.Row="0" 
-                    Margin="17,7,0,0" 
-                    HorizontalAlignment="Left" 
-                FontFamily="Comic Sans MS"
-                    Grid.Column="0" 
-                    Content="Latitude:"/>
-            <TextBox 
-                    x:Name="latitudeTextBoxadd" 
-                FontFamily="Comic Sans MS"
-                    Width="120" 
-                    VerticalAlignment="Top" 
-                    Text="{Binding Location.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                    Grid.Row="0" 
-                    Height="24" 
-                    HorizontalAlignment="Center" 
-                    Grid.Column="1" 
-                    IsEnabled="True"/>
-            <Label 
-                    Content="Longitude:"
-                FontFamily="Comic Sans MS"
-                    VerticalAlignment="Center" 
-                    HorizontalAlignment="Left" Grid.Row="1" Width="99" Margin="17,0,0,0"/>
-            <TextBox 
-                x:Name="longitudeTextBoxadd" 
-                Width="120" 
-                FontFamily="Comic Sans MS"
-                VerticalAlignment="Center" 
-                Text="{Binding Location.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
-                Grid.Row="1" 
-                Height="23" 
-                HorizontalAlignment="Center" 
-                Grid.Column="1" 
-                IsEnabled="True"/>
-        </Grid>
-
-        <Button x:Name="btnAddStation"
-                FontFamily="Comic Sans MS"
-                Content="Add" 
-                Margin="98,346,0,56"
-                Visibility="Collapsed"
-                Style="{StaticResource MaterialDesignRaisedButton}"
-                materialDesign:ButtonAssist.CornerRadius="10" 
-                HorizontalAlignment="Left" 
-                Width="131"
-                Click="btnAddeStation_Click"/>
 
         <ListView x:Name="DroneInCharge_ListView"
                   FontFamily="Comic Sans MS" Margin="440,86,46,139"
@@ -336,7 +290,7 @@
             Click="closeButton_Click"  
             HorizontalAlignment="Left" 
             VerticalAlignment="Top" 
-            Width="108" Margin="551,368,0,0" />
+            Width="108" Margin="556,314,0,0" />
     </Grid>
 
 

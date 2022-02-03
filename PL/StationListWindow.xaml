@@ -9,6 +9,7 @@
         WindowStartupLocation="CenterScreen"
         Title="StationListWindow" Height="425" Width="714"
         Activated="refreshWindow">
+    
     <Grid Name="MainGrid">
 
         <!--<Grid.RowDefinitions>

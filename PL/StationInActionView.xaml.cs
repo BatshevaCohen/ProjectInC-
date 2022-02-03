@@ -29,7 +29,7 @@ namespace PL
             InitializeComponent();
         }
         /// <summary>
-        /// station view
+        /// station view - UPDATE
         /// </summary>
         /// <param name="stationToL"></param>
         /// <param name="bL"></param>
@@ -78,9 +78,8 @@ namespace PL
         {
             mybl = bL;
             InitializeComponent();
-            btnAddStation.Visibility = Visibility.Visible;
             AddGridStation.Visibility = Visibility.Visible;
-            LocationGridStation.Visibility= Visibility.Visible;
+            //LocationGridStation.Visibility= Visibility.Visible;
             DataContext = station;
             stationListWindow.StationsListView.Items.Refresh();
         }
@@ -94,11 +93,10 @@ namespace PL
             String StationName = mybl.GetStation(Int32.Parse(stationIdTextBox.Text)).Name;
             string newName = NameTextBox.Text;
             //only if the name has changed by the user
-            if (StationName != NameTextBox.Text)
+            if (StationName != newName)
             {
                 mybl.UpdateStetion(Int32.Parse(stationIdTextBox.Text), newName, Int32.Parse(AvailableChargingSpotsTextBox.Text));
                 MessageBox.Show("Station updated seccessfuly!");
-                NameTextBox.Text = newName;
                 this.Close();
             }
             else
@@ -114,6 +112,7 @@ namespace PL
         /// <param name="e"></param>
         private void btnAddeStation_Click(object sender, RoutedEventArgs e)
         {
+            AddGridStation.Visibility = Visibility.Visible;
             Station station = new Station()
             {
                 Id = Int32.Parse(stationIdTextBoxadd.Text),
@@ -122,8 +121,8 @@ namespace PL
             };
             station.Location = new()
             {
-                Latitude = double.Parse(latitudeTextBoxadd.Text),
-                Longitude = double.Parse(longitudeTextBoxadd.Text),
+                Latitude = double.Parse(LatitudeTxtBox.Text),
+                Longitude = double.Parse(LongitudeTxtBox.Text),
             };
             try
             {
@@ -170,6 +169,15 @@ namespace PL
             };
             new DroneInActionView(droneTo, mybl).Show();
         }
+        ///// <summary>
+        ///// window load
+        ///// </summary>
+        ///// <param name="sender"></param>
+        ///// <param name="e"></param>
+        //private void Window_Loaded(object sender, RoutedEventArgs e)
+        //{
+        //    StationListWindow stationListWindow = new StationListWindow(mybl);
+        //}
 
         /// <summary>
         /// close

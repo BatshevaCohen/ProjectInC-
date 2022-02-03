@@ -33,7 +33,11 @@ namespace PL
         {
             StationsListView.ItemsSource = bL.ShowStationList().Where(x => x.AvailableChargingSpots > 0);
         }
-
+        /// <summary>
+        /// double clicking on a station from the list eill lead you to update the station
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void StationListView_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             StationToList? station = StationsListView.SelectedItem as StationToList;

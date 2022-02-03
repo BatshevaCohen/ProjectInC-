@@ -27,6 +27,7 @@ namespace PL
         {
             InitializeComponent();
             bL= BlFactory.GetBl();
+            UserNameTextBox.Focus();
         }
 
         /// <summary>
@@ -77,7 +78,9 @@ namespace PL
                     {
                         if (user.Permission == BO.Permit.User) //USER
                         {
-                            new ParcelListWindowe(bL, user1).Show();
+                            new MainWindow(bL, user1).Show();
+
+                            //new ParcelListWindowe(bL, user1).Show();
                             Close();
                         }
                         else if(user.Permission == BO.Permit.Admin) //Admin

@@ -701,6 +701,8 @@ namespace DAL
             if (userList.FirstOrDefault(user => user.UserName == tmpUser.UserName && user.MyActivity == Activity.On) != null)
                 throw new BadUserException("User already exist", tmpUser.UserName);
             userList.Add(tmpUser.Clone());
+            XMLTools.SaveListToXMLSerializer<User>(userList, UserPath);
+
         }
         public IEnumerable<User> GetAllUsers()
         {

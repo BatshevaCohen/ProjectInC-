@@ -251,7 +251,7 @@ namespace PL
                 //new customer doesn't have any parcels
                 customer.SentParcels = null;
                 customer.ReceiveParcels = null;
-
+                bl.AddCustomer(customer);
                 //go to sign in page again- and doesn't need to fill in the username and password again
                 new UsersMainWindow(username, password).Show();
                 this.Close();

@@ -21,6 +21,18 @@ namespace BL
             userDO.CopyPropertiesTo(userBO);
             return userBO;
         }
+        public void AddUser(User tmpUser)
+        {
+            // Instance.AddUser(tmpUser);
+            DO.User u = new()
+            {
+                Password = tmpUser.Password,
+                UserName = tmpUser.UserName,
+                Permission=DO.Permit.User,
+                MyActivity=DO.Activity.On
+            };
+            dalo.AddUser(u);
+        }
         /// <summary>
         /// Returns User that has that name
         /// 

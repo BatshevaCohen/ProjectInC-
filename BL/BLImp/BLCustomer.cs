@@ -41,6 +41,14 @@ namespace BL
                 Longitude = customer.Location.Longitude,
                 Latitude = customer.Location.Latitude
             };
+            //צריך ליצור איזה חלונית לתת לקסטומר החדש שנכנס דרך המערכת לבחור שם משתמש טססמה... 
+            //c.User = new()
+            //{
+            //    Password = customer.User.Password,
+            //    UserName = customer.User.UserName,
+            //    MyActivity = DO.Activity.On,
+            //    Permission=DO.Permit.User
+            //};
            
             dalo.AddCustomer(c);
         }
@@ -239,10 +247,7 @@ namespace BL
             return customerList;
         }
 
-        public void AddUser(User tmpUser)
-        {
-            Instance.AddUser(tmpUser);
-        }
+        
 
         /// <summary>
         /// Finds the customer by his user 

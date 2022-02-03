@@ -144,7 +144,7 @@
             x:Name="btnClose" 
             Content="Close" 
             FontFamily="Comic Sans MS"
-            Background="#da2d2d"
+            Background="Firebrick"
             Style="{StaticResource MaterialDesignRaisedButton}"
             materialDesign:ButtonAssist.CornerRadius="10" 
             IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"

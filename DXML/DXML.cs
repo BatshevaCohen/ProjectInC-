@@ -293,6 +293,7 @@ namespace DAL
             }
             else
                 stationList.Add(s);
+            XMLTools.SaveListToXMLSerializer<Station>(stationList, stationPath);
         }
         /// <summary>
         /// Update station data
@@ -312,6 +313,7 @@ namespace DAL
             station.ChargeSpots = charging_spots;
             station.Name = name;
             stationList.Add(station);
+            XMLTools.SaveListToXMLSerializer<Station>(stationList, stationPath);
         }
         /// <summary>
         /// View Station List

@@ -14,6 +14,7 @@ namespace DAL
 {
     sealed class DXML : DalApi.IDal
     {
+        #region file
         private XElement CustumerRoot;
 
         static string dronePath = @"Drones.xml";
@@ -23,53 +24,11 @@ namespace DAL
         static string droneChargePath = @"droneCharges.xml";
         static string UserPath = @"users.xml";
         // string ConfigPath = @"Config.xml";
+        #endregion
 
         #region singelton
         public static DXML Instance { get; } = new DXML();
         private static object locker = new object();
-
-
-        /// <summary>
-        /// constructor - calls DataSource.initialize() to initialize lists
-        /// </summary>
-        private DXML()
-        {
-            //string dir = @"..\xml\";
-            //XMLTools = new XMLTools();
-            //if (!File.Exists(dir + customerPath))
-            //    CreateFiles();
-            //else
-            //    LoadData();
-        }
-        static DXML()
-        {
-            //DataSource.Initialize();
-            //XMLTools.SaveListToXMLSerializer<Drone>(DataSource.Drones, dronePath);
-            //XMLTools.SaveListToXMLSerializer<Parcel>(DataSource.Parcels, parcelPath);
-            //XMLTools.SaveListToXMLSerializer<Station>(DataSource.Stations, stationPath);
-            //XMLTools.SaveListToXMLSerializer<User>(DataSource.userList, UserPath);
-            //XMLTools.SaveListToXMLSerializer<DroneCharge>(DataSource.DroneCharges, droneChargePath);
-        }
-
-        ///// <summary>
-        ///// instance of DalObject class - same object is always returned
-        ///// </summary>
-        //public static DXML Instance
-        //{
-        //    get
-        //    {
-        //        if (instance == null)
-        //        {
-        //         //   lock (locker)
-        //            {
-        //                if (instance == null) 
-
-        //            }
-        //        }
-        //        return instance;
-        //    }
-        //}
-
         #endregion
 
         #region DalXML Drones
@@ -461,9 +420,9 @@ namespace DAL
 
         public void AddCustomer(Customer customer)
         {
-            //LoadData();
-            if (CustumerRoot.Elements().Any(custo => Convert.ToInt32(custo.Element("ID").Value) == customer.Id))
-                throw new CustomerException($"ID {customer.Id} already exists!!");
+            LoadData();
+            //if (CustumerRoot.Elements().Any(custo => Convert.ToInt32(custo.Element("ID").Value) == customer.Id))
+            //    throw new CustomerException($"ID {customer.Id} already exists!!");
 
             CustumerRoot.Add(new XElement("Custumer",
                 new XElement("Id", customer.Id),
@@ -472,7 +431,7 @@ namespace DAL
                 new XElement("Latitude"), customer.Latitude),
                 new XElement("Longitude"), customer.Longitude);
 
-            CustumerRoot.Save(customer + customerPath);
+            CustumerRoot.Save(customerPath);
         }
         public Customer GetCustomer(int Custumerid)
         {
@@ -507,20 +466,23 @@ namespace DAL
         }
         public IEnumerable<Customer> ShowCustomerList(Func<Customer, bool> predicate = null)
         {
-            LoadData();
-            IEnumerable<Customer> custumers;
-            custumers = from cus in CustumerRoot.Elements()
-                        select new Customer()
-                        {
-                            Id = Convert.ToInt32(cus.Element("Id").Value),
-                            Name = cus.Element("Name").Value,
-                            Phone = cus.Element("Phone").Value,
-                            Latitude = Convert.ToDouble(cus.Element("Latitude").Value),
-                            Longitude = Convert.ToDouble(cus.Element("Longitude").Value)
+            List<DO.Customer> cusList = XMLTools.LoadListFromXMLSerializer<Customer>(customerPath);
 
-                        };
+            return cusList.Where(x => predicate == null ? true : predicate(x)).ToList();
+            //LoadData();
+            //IEnumerable<Customer> custumers;
+            //custumers = from cus in CustumerRoot.Elements()
+            //            select new Customer()
+            //            {
+            //                Id = Convert.ToInt32(cus.Element("Id").Value),
+            //                Name = cus.Element("Name").Value,
+            //                Phone = cus.Element("Phone").Value,
+            //                Latitude = Convert.ToDouble(cus.Element("Latitude").Value),
+            //                Longitude = Convert.ToDouble(cus.Element("Longitude").Value)
 
-            return custumers;
+            //            };
+
+            //return custumers;
         }
         public void UpdateCustumer(int custumerId, string name, string phone)
         {

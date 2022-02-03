@@ -7,6 +7,7 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
         Title="DroneInActionView" Height="402" Width="578" 
         Loaded="Window_Loaded">
     <Window.Resources>

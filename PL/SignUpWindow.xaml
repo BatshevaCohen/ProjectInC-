@@ -117,14 +117,14 @@
             Height="30"/>
             <TextBox 
             x:Name="LongitudeTextBox"
-            materialDesign:HintAssist.Hint="Longitude"
-            materialDesign:TextFieldAssist.HasClearButton="True"
             Margin="164,378,164,0" 
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
-            materialDesign:HintAssist.HelperText="Numbers only" 
-            MaxLength="10"
             Height="25"
+            MaxLength="10"
+            materialDesign:HintAssist.Hint="Longitude"
+            materialDesign:TextFieldAssist.HasClearButton="True"
+            materialDesign:HintAssist.HelperText="Numbers only"
             PreviewTextInput="DoubleNumberValidationTextBox">
             </TextBox>
             <!--Address icon-->

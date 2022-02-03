@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -112,26 +113,46 @@ namespace PL
         /// <param name="e"></param>
         private void btnAddeStation_Click(object sender, RoutedEventArgs e)
         {
-            AddGridStation.Visibility = Visibility.Visible;
-            Station station = new Station()
+            ///לעשות בדיקת תקינות לתיבות!!!!!!!!!
+            ///
+            ///
+            ///
+
+
+            //all fields shouldn't be empty
+            if (stationIdTextBoxadd.Text.Length == 0)
+                MessageBox.Show("Please enter station ID");
+            else if (NameTextBoxadd.Text.Length == 0)
+                MessageBox.Show("Please enter station name");
+            else if (AvailableChargingSpotsTextBoxadd.Text.Length == 0)
+                MessageBox.Show("Please enter number of available charging spots");
+            else if (LongitudeTxtBox.Text.Length == 0)
+                MessageBox.Show("Please enter longitude");
+            else if (LatitudeTxtBox.Text.Length == 0)
+                MessageBox.Show("Please enter latitude");
+            else
             {
-                Id = Int32.Parse(stationIdTextBoxadd.Text),
-                Name = (NameTextBoxadd.Text),
-                AvailableChargingSpots = Int32.Parse(AvailableChargingSpotsTextBoxadd.Text),
-            };
-            station.Location = new()
-            {
-                Latitude = double.Parse(LatitudeTxtBox.Text),
-                Longitude = double.Parse(LongitudeTxtBox.Text),
-            };
-            try
-            {
-                mybl.AddStation(station);
-                this.Close();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
+                Station station = new Station()
+                {
+                    Id = Int32.Parse(stationIdTextBoxadd.Text),
+                    Name = (NameTextBoxadd.Text),
+                    AvailableChargingSpots = Int32.Parse(AvailableChargingSpotsTextBoxadd.Text),
+                };
+                station.Location = new()
+                {
+                    Latitude = double.Parse(LatitudeTxtBox.Text),
+                    Longitude = double.Parse(LongitudeTxtBox.Text),
+                };
+                try
+                {
+                    mybl.AddStation(station);
+                    MessageBox.Show("Station added seccessfuly");
+                    this.Close();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
             }
         }
         /// <summary>
@@ -178,6 +199,42 @@ namespace PL
         //{
         //    StationListWindow stationListWindow = new StationListWindow(mybl);
         //}
+
+
+
+        /// <summary>
+        /// check that the text box includes numberic values only- you can't enter something that isn't digit
+        /// from:https://stackoverflow.com/questions/1268552/how-do-i-get-a-textbox-to-only-accept-numeric-input-in-wpf
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+        /// <summary>
+        /// check that the text box includes letters only- you can't enter something that isn't letters
+        /// from:https://stackoverflow.com/questions/1268552/how-do-i-get-a-textbox-to-only-accept-numeric-input-in-wpf
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AlphabetValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^a-zA-Z]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+        /// <summary>
+        /// check that the text box includes letters only- you can't enter something that isn't letters
+        /// from:https://stackoverflow.com/questions/1268552/how-do-i-get-a-textbox-to-only-accept-numeric-input-in-wpf
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void DoubleNumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9.]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
 
         /// <summary>
         /// close

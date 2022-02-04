@@ -73,20 +73,7 @@ namespace DAL
             return DataSource.Stations.Where(predicate).ToList();
         }
 
-        ///// <summary>
-        /////  shows stations with available charging spots
-        ///// </summary>
-        ///// <returns></returns>
-        //public IEnumerable<Station> ShowChargeableStationList()
-        //{
-        //    List<Station> ChargeableBaseStationList = new ();
-        //    foreach (Station element in DataSource.Stations)
-        //    {
-        //        if (element.ChargeSpots > 0)
-        //            ChargeableBaseStationList.Add(element);
-        //    }
-        //    return ChargeableBaseStationList;
-        //}
+       
 
 
 

@@ -40,8 +40,9 @@ namespace BL
                 Phone = customer.Phone,
                 Longitude = customer.Location.Longitude,
                 Latitude = customer.Location.Latitude
+                
             };
-            //צריך ליצור איזה חלונית לתת לקסטומר החדש שנכנס דרך המערכת לבחור שם משתמש טססמה... 
+      
             c.User = new()
             {
                 Password = customer.User.Password,

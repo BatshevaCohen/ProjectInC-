@@ -11,15 +11,18 @@
         WindowStyle="SingleBorderWindow">
 
     <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="389*"/>
+            <RowDefinition Height="240*"/>
+        </Grid.RowDefinitions>
         <!--Background-->
         <Image 
             Source="Images/purple background.jpg"
             Stretch="Fill"
-            Opacity="0.5"
-            Grid.ColumnSpan="2"/>
+            Opacity="0.5" Grid.RowSpan="2"/>
 
         <Grid x:Name="enterDetailsGrid"
-              Visibility="Collapsed">
+              Visibility="Collapsed" Grid.RowSpan="2">
             <!--Name icon-->
             <materialDesign:PackIcon 
             Kind="Account"             
@@ -189,7 +192,7 @@
         </Grid>
 
         <Grid x:Name="UserNameAndPassword_Grid"
-              Visibility="Visible">
+              Visibility="Collapsed" Grid.RowSpan="2">
             <!--Person icon-->
             <materialDesign:PackIcon 
             Kind="Account"             

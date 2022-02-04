@@ -228,6 +228,8 @@ namespace DAL
                 DroneId = dronId,
                 StationId = stationId
             });
+            XMLTools.SaveListToXMLSerializer<DroneCharge>(droneChargeList, droneChargePath);
+
         }
         public List<Tuple<int, double>> GetListOfDronInChargeing(int stationId)
         {
@@ -412,14 +414,34 @@ namespace DAL
 
         public void AddCustomer(Customer customer)
         {
-            LoadData();
-            CustumerRoot.Add(new XElement("Custumer",
-                new XElement("Id", customer.Id),
-                new XElement("Name", customer.Name),
-                new XElement("Phone", customer.Phone),
-                new XElement("Latitude"), customer.Latitude),
-                new XElement("Longitude"), customer.Longitude);
-            CustumerRoot.Save(customerPath);
+            List<DO.Customer> cusromerList = XMLTools.LoadListFromXMLSerializer<Customer>(customerPath);
+            if (!cusromerList.Exists(customer => customer.Id == customer.Id))
+            {
+                throw new CustomerException($"ID {customer.Id} already exists!!");
+            }
+            else
+            {
+                cusromerList.Add(customer);
+                XMLTools.SaveListToXMLSerializer<Customer>(cusromerList, customerPath);
+            }
+            //LoadData();
+
+            //CustumerRoot.Add(new XElement("Custumer",
+            //    new XElement("Id", customer.Id),
+            //    new XElement("Name", customer.Name),
+            //    new XElement("Phone", customer.Phone),
+            //    new XElement("Latitude"), customer.Latitude),
+            //    new XElement("Longitude"), customer.Longitude);
+
+            //List<DO.User> userList = XMLTools.LoadListFromXMLSerializer<User>(UserPath);
+            //if (userList.FirstOrDefault(user => user.UserName == customer.User.UserName && user.MyActivity == Activity.On) != null)
+            //    throw new BadUserException("User already exist", customer.User.UserName);
+            //userList.Add(customer.User.Clone());
+            //XMLTools.SaveListToXMLSerializer<User>(userList, UserPath);
+
+            //CustumerRoot.Save(customerPath);
+
+
         }
         public Customer GetCustomer(int Custumerid)
         {
@@ -446,7 +468,7 @@ namespace DAL
             //if (c.Id == 0)
             //throw new Exception($"custumer {Custumerid} is not exite!!");
 
-           
+
         }
         public IEnumerable<Customer> ShowCustomerList(Func<Customer, bool> predicate = null)
         {
@@ -585,8 +607,8 @@ namespace DAL
             //        Senderparcels.Add(item);
             //    }
             //}
-            return Senderparcels.Where(x =>  x.SenderId==id).ToList();
-           // return Senderparcels;
+            return Senderparcels.Where(x => x.SenderId == id).ToList();
+            // return Senderparcels;
         }
         public List<Parcel> GetListOfParcelRecirver(int id)
         {
@@ -787,7 +809,7 @@ namespace DAL
             return customers.First(c => c.User.UserName == user.UserName);
         }
 
-        
+
         /// <summary>
         /// Show LIST of parcels for USER
         /// </summary>
@@ -796,12 +818,12 @@ namespace DAL
         public IEnumerable<Parcel> ShowParcelList(User user)
         {
             List<Parcel> parcels = XMLTools.LoadListFromXMLSerializer<Parcel>(parcelPath);
-       
+
             var customer = GetCustomer_ByUsername(user);
             //IEnumerable<DO.Parcel> parcels = ShowParcelList();
-         
-          
-            return parcels.Where(x=>x.SenderId==customer.Id||x.ReceiverId== customer.Id);
+
+
+            return parcels.Where(x => x.SenderId == customer.Id || x.ReceiverId == customer.Id);
         }
         #endregion
 

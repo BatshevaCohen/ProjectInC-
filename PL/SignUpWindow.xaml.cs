@@ -215,7 +215,9 @@ namespace PL
                 BO.User user = new BO.User() //creates new user to register
                 {
                     UserName = username,
-                    Password = password
+                    Password = password,
+                    Permission=Permit.User
+                    
                 };
                 if (IsManager)
                 {
@@ -228,7 +230,7 @@ namespace PL
                 try
                 {
                     bl.AddUser(user); //registers user
-                    MessageBox.Show("You have Registered successfully.");
+                    MessageBox.Show("WELCOME!.");
                     Reset();
                 }
                 catch (BO.BOBadUserException exception)
@@ -251,6 +253,13 @@ namespace PL
                 //new customer doesn't have any parcels
                 customer.SentParcels = null;
                 customer.ReceiveParcels = null;
+               customer.User = new() //creates new user to register
+                {
+                    UserName = username,
+                    Password = password,
+                    Permission = Permit.User
+
+                };
                 bl.AddCustomer(customer);
                 //go to sign in page again- and doesn't need to fill in the username and password again
                 new UsersMainWindow(username, password).Show();

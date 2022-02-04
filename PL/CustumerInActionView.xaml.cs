@@ -194,11 +194,16 @@ namespace PL
                 cusm.User = new()
                 {
                     UserName = ChooseUserNameTextBox.Text,
-                    Password = ChoosePasswordTextBox.Text
+                    Password = ChoosePasswordTextBox.Text,
+                    Permission=Permit.User,
+                    
+                    
                 };
+                
                 try
                 {
                     myBl.AddCustomer(cusm);
+                    myBl.AddUser(cusm.User);
                     MessageBox.Show("New customer added succesfully!");
                     this.Close();
                     

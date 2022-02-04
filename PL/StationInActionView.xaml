@@ -240,7 +240,7 @@
 
 
         <ListView x:Name="DroneInCharge_ListView"
-                  FontFamily="Comic Sans MS" Margin="53,214,433,40"
+                  FontFamily="Comic Sans MS" Margin="53,214,237,40"
                   MouseDoubleClick="DroneInCharge_ListView_MouseDoubleClick"
                   Visibility="Collapsed">
             <ListView.ItemContainerStyle>

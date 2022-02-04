@@ -14,7 +14,6 @@ using System.Windows.Shapes;
 using MaterialDesignThemes.Wpf;
 using BO;
 using BlApi;
-
 namespace PL
 {
     /// <summary>
@@ -65,25 +64,26 @@ namespace PL
             {
                 string name = UserNameTextBox.Text;
                 string password = PasswordTextBox.Password;
+                
                 User user1 = new User()
                 {
                     UserName = name,
                     Password = password,
-                    Permission = Permit.User
+                    //Permission = Permit.User
                 };
                 try
                 {
-                    User user = bL.GetUser(name);
-                    if (password == user.Password)
+                 //   User user = bL.GetUser(user1.UserName);
+                    if (password == user1.Password)
                     {
-                        if (user.Permission == BO.Permit.User) //USER
+                        if (user1.Permission == BO.Permit.User) //USER
                         {
                             new MainWindow(bL, user1).Show();
 
                             //new ParcelListWindowe(bL, user1).Show();
                             Close();
                         }
-                        else if(user.Permission == BO.Permit.Admin) //Admin
+                        else if(user1.Permission == BO.Permit.Admin) //Admin
                         {
                             new MainWindow(name).Show();
                             Close();

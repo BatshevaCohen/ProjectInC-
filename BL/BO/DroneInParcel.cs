@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,7 +21,7 @@ namespace BO
             String result = "";
             result += $"Drone ID is {Id}, \n";
             result += $"Battery precent is: {Battery}, \n";
-            result += $"Drone location is {Location}, \n";
+            result += $"Drone location is {Location} \n";
             
             return result;
         }

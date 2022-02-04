@@ -39,11 +39,16 @@ namespace BL
             parcel.DroneInParcel = null;
             DO.Parcel p = new()
             {
-                //               Id = parcel.Id,
+                Id = parcel.Id,
                 SenderId = parcel.Sender.Id,
                 ReceiverId = parcel.Resiver.Id,
                 Weight = (DO.WeightCategories)parcel.Weight,
                 Priority = (DO.Priorities)parcel.Priority,
+                Create = DateTime.Now,
+                Assigned = DateTime.Now,
+                PickedUp = DateTime.Now,
+                Supplied=DateTime.Now
+            
             };
             dalo.AddParcel(p);
         }

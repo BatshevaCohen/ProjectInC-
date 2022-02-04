@@ -16,7 +16,7 @@
             Opacity="0.5"/>
 
         <Grid x:Name="Grid_ShowParcel" Margin="85,41,350,10" RenderTransformOrigin="0.5,0.5" 
-              Visibility="Visible">
+              Visibility="Collapsed">
             <Grid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -217,14 +217,11 @@
 
             <Grid 
                 x:Name="ADDParcelGrid" 
-                Visibility="Collapsed" 
+                Visibility="Visible" 
                 VerticalAlignment="Top" 
                 Margin="10,44,0,0" 
-                HorizontalAlignment="Left" Height="380" Width="330">
+                HorizontalAlignment="Left" Height="259" Width="330">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="50"/>
@@ -243,13 +240,15 @@
                     Content="parcel Id:" Width="118" Height="30"/>
                 <TextBox 
                     x:Name="ParcelIDTextBox" 
-                    Width="119" 
-                    VerticalAlignment="Center" 
-                      Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                    Width="151" 
                     Height="30" 
-                    HorizontalAlignment="Center" 
-                    Grid.Column="1" 
-                    IsEnabled="True"/>
+                    VerticalAlignment="Top" 
+                    HorizontalAlignment="Left" 
+                    materialDesign:HintAssist.HelperText="7-10 digits" 
+                    MaxLength="10"
+                    PreviewTextInput="NumberValidationTextBox"
+                    materialDesign:TextFieldAssist.HasClearButton="True" 
+                    IsEnabled="True" Margin="7,4,0,0" Grid.Column="1"/>
                 <Label 
                     VerticalAlignment="Center" 
                     Grid.Row="1" 

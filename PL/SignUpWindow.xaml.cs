@@ -230,7 +230,7 @@ namespace PL
                 try
                 {
                     bl.AddUser(user); //registers user
-                    MessageBox.Show("WELCOME!.");
+                    MessageBox.Show($"WELCOME {username}!");
                     Reset();
                 }
                 catch (BO.BOBadUserException exception)
@@ -242,7 +242,7 @@ namespace PL
                 BO.Customer customer = new BO.Customer()
                 {
                     Id = Int32.Parse(IDTextBox.Text),
-                    Name = FirstNameTextBox.Text + LastNameTextBox.Text,
+                    Name = FirstNameTextBox.Text,// + LastNameTextBox.Text,
                     Phone = PhoneTextBox.Text,
                 };
                 customer.Location = new BO.Location()

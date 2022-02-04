@@ -64,16 +64,22 @@ namespace PL
             {
                 string name = UserNameTextBox.Text;
                 string password = PasswordTextBox.Password;
-                
+
+                //ADMINS
+
                 User user1 = new User()
                 {
                     UserName = name,
                     Password = password,
-                    //Permission = Permit.User
                 };
+                if ((UserNameTextBox.Text == "shirel" && PasswordTextBox.Password == "shirel") || (UserNameTextBox.Text == "batsheve" && PasswordTextBox.Password == "batsheva"))
+                    user1.Permission = Permit.Admin;
+                else
+                    user1.Permission = Permit.User;
+
                 try
                 {
-                 //   User user = bL.GetUser(user1.UserName);
+                 
                     if (password == user1.Password)
                     {
                         if (user1.Permission == BO.Permit.User) //USER

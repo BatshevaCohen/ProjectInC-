@@ -515,7 +515,7 @@ namespace DAL
             }
             else
             {
-                p.Id = getParcelRunIdConfig();
+            //    p.Id = getParcelRunIdConfig();
                 parcelList.Add(p);
                 XMLTools.SaveListToXMLSerializer<Parcel>(parcelList, parcelPath);
             }
@@ -747,8 +747,8 @@ namespace DAL
 
         #region help func
         private int getParcelRunIdConfig()
-        {
-            XElement config = XElement.Load(@"..\xml\config.xml");
+        {//..\xml\
+            XElement config = XElement.Load(@"config.xml");
             int runId = Convert.ToInt32(config.Element("runId").Value);
             XElement configElement = (from dr in config.Elements()
                                       where dr.Name == "runId"

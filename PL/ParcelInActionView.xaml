@@ -15,7 +15,7 @@
             Stretch="Fill"
             Opacity="0.5"/>
 
-        <Grid x:Name="Grid_ShowParcel" Margin="85,41,368,33" RenderTransformOrigin="0.5,0.5" 
+        <Grid x:Name="Grid_ShowParcel" Margin="85,41,350,10" RenderTransformOrigin="0.5,0.5" 
               Visibility="Collapsed">
             <Grid.RenderTransform>
                 <TransformGroup>
@@ -110,8 +110,15 @@
             <TextBox x:Name="batteryDroneParcelTXB"  Text="{Binding DroneInParcel.Battery, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                       TextWrapping="Wrap" Grid.Column="1" Margin="1,34,2,3" Grid.Row="14" IsEnabled="False" Grid.RowSpan="2" />
             <Label x:Name="lbllongiDrone" Content="Latitude" Margin="0,32,3,5" Grid.Row="15" Grid.RowSpan="2"/>
-            <TextBox x:Name="LatitudeDroneParcelTXB"  Text="{Binding DroneInParcel.Location.Latitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
-                     TextWrapping="Wrap" Grid.Column="1" Margin="3,32,6,4" Grid.Row="15" IsEnabled="False" Grid.RowSpan="2"/>
+            <TextBox 
+                x:Name="LatitudeDroneParcelTXB"  
+                Text="{Binding DroneInParcel.Location, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                TextWrapping="Wrap" 
+                Grid.Column="1" 
+                Margin="3,32,6,4" 
+                Grid.Row="15" 
+                IsEnabled="False" 
+                Grid.RowSpan="2"/>
             <Label x:Name="lblLatiDrone" Content="Longitude" Margin="0,1,8,-1" Grid.Row="17"/>
             <TextBox x:Name="LongitudeDroneParcelTXB"  Text="{Binding DroneInParcel.Location.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                      TextWrapping="Wrap" Grid.Column="1" Margin="2,32,1,3" Grid.Row="16" IsEnabled="False" Grid.RowSpan="2"/>
@@ -210,14 +217,11 @@
 
             <Grid 
                 x:Name="ADDParcelGrid" 
-                Visibility="Collapsed" 
+                Visibility="Visible" 
                 VerticalAlignment="Top" 
                 Margin="10,44,0,0" 
-                HorizontalAlignment="Left" Height="380" Width="330">
+                HorizontalAlignment="Left" Height="259" Width="330">
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
-                    <RowDefinition Height="50"/>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="50"/>
                     <RowDefinition Height="50"/>
@@ -236,13 +240,15 @@
                     Content="parcel Id:" Width="118" Height="30"/>
                 <TextBox 
                     x:Name="ParcelIDTextBox" 
-                    Width="119" 
-                    VerticalAlignment="Center" 
-                      Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                    Width="151" 
                     Height="30" 
-                    HorizontalAlignment="Center" 
-                    Grid.Column="1" 
-                    IsEnabled="True"/>
+                    VerticalAlignment="Top" 
+                    HorizontalAlignment="Left" 
+                    materialDesign:HintAssist.HelperText="7-10 digits" 
+                    MaxLength="10"
+                    PreviewTextInput="NumberValidationTextBox"
+                    materialDesign:TextFieldAssist.HasClearButton="True" 
+                    IsEnabled="True" Margin="7,4,0,0" Grid.Column="1"/>
                 <Label 
                     VerticalAlignment="Center" 
                     Grid.Row="1" 

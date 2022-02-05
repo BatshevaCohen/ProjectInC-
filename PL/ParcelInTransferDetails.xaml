@@ -6,14 +6,14 @@
         xmlns:local="clr-namespace:PL"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="ParcelInTransferDetails" Height="650" Width="500">
+        Title="ParcelInTransferDetails" Height="615" Width="500">
     <Grid>
         <Image 
             Source="Images/purple background.jpg"
             Stretch="Fill"
             Opacity="0.5"/>
 
-        <Grid x:Name="Grid_ParcelInTransfer" Margin="92,66,92,65">
+        <Grid x:Name="Grid_ParcelInTransfer" Margin="73,10,55,10">
             <Grid.RowDefinitions>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
@@ -146,7 +146,7 @@
             <!--לבדוק שמציג את הלוקיישן טוב לפי הבונוס-->
             <TextBlock
                 x:Name="ReciverLocationTxtBox"
-                Text="{Binding CollectingLocation.ToString, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                Text="{Binding CollectingLocation, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                 Grid.Row="13"
                 Grid.Column="1"
                 IsEnabled="False"/>

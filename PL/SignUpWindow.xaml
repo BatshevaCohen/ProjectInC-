@@ -22,7 +22,7 @@
             Opacity="0.5" Grid.RowSpan="2"/>
 
         <Grid x:Name="enterDetailsGrid"
-              Visibility="Collapsed" Grid.RowSpan="2">
+              Visibility="Visible" Grid.RowSpan="2">
             <!--Name icon-->
             <materialDesign:PackIcon 
             Kind="Account"             

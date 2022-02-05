@@ -14,6 +14,8 @@ using System.Windows.Shapes;
 using MaterialDesignThemes.Wpf;
 using BO;
 using BlApi;
+using System.Text.RegularExpressions;
+
 namespace PL
 {
     /// <summary>
@@ -126,6 +128,18 @@ namespace PL
             if (UserNameTextBox.Text.Count() != 0 && PasswordTextBox.Password.Count() != 0)
                 return true;
             return false;
+        }
+
+        /// <summary>
+        /// check that the text box includes letters only- you can't enter something that isn't letters
+        /// from:https://stackoverflow.com/questions/1268552/how-do-i-get-a-textbox-to-only-accept-numeric-input-in-wpf
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void AlphabetValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^a-zA-Z]+");
+            e.Handled = regex.IsMatch(e.Text);
         }
 
         /// <summary>

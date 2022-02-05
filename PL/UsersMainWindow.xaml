@@ -39,6 +39,7 @@
             TextWrapping="Wrap" 
             VerticalAlignment="Top" 
             materialDesign:HintAssist.HelperText="Enter letters only" 
+            PreviewTextInput="AlphabetValidationTextBox"
             Height="25">
         </TextBox>
         <materialDesign:PackIcon 

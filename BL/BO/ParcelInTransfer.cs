@@ -1,4 +1,5 @@
-﻿using System;
+﻿using DO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -31,7 +32,7 @@ namespace BO
             result += $"The parcel's weight is: {Weight}, \n";
             result += $"The parcel's sender is: {Sender}, \n";
             result += $"The parcel's Reciver is: {Reciver}, \n";
-            result += $"The location of parcel's collection is: {CollectingLocation}, \n";
+            result += $"The location of parcel's collection is: ({SexagesimalAngle.FromDouble(CollectingLocation.Latitude)}, {SexagesimalAngle.FromDouble(CollectingLocation.Longitude)}), \n";
             result += $"The location to supply the parcel is: {SupplyTargetLocation}, \n";
             result += $"The dictance of the transportation is: {TransportDistance}, \n";
             return result;

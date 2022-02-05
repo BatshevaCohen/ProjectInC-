@@ -110,16 +110,14 @@
                     HorizontalAlignment="Left" 
                     Grid.Column="0" 
                     Content="Location:"/>
-                <TextBox 
+                <Label 
                     x:Name="LocationTextBox" 
-                    FontFamily="Comic Sans MS"
-                    Width="120" 
+                    FontFamily="Comic Sans MS" 
                     VerticalAlignment="Center" 
-                    Text="{Binding Location, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" 
+                  Content="{Binding Location}"
                     Grid.Row="6" 
-                    Margin="3" 
+                    Margin="3,0,-20,0" 
                     Height="23" 
-                    HorizontalAlignment="Left" 
                     Grid.Column="1" 
                     IsEnabled="False"/>
 

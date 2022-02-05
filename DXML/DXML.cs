@@ -424,22 +424,7 @@ namespace DAL
                 cusromerList.Add(customer);
                 XMLTools.SaveListToXMLSerializer<Customer>(cusromerList, customerPath);
             }
-            //LoadData();
-
-            //CustumerRoot.Add(new XElement("Custumer",
-            //    new XElement("Id", customer.Id),
-            //    new XElement("Name", customer.Name),
-            //    new XElement("Phone", customer.Phone),
-            //    new XElement("Latitude"), customer.Latitude),
-            //    new XElement("Longitude"), customer.Longitude);
-
-            //List<DO.User> userList = XMLTools.LoadListFromXMLSerializer<User>(UserPath);
-            //if (userList.FirstOrDefault(user => user.UserName == customer.User.UserName && user.MyActivity == Activity.On) != null)
-            //    throw new BadUserException("User already exist", customer.User.UserName);
-            //userList.Add(customer.User.Clone());
-            //XMLTools.SaveListToXMLSerializer<User>(userList, UserPath);
-
-            //CustumerRoot.Save(customerPath);
+           
 
 
         }
@@ -452,21 +437,7 @@ namespace DAL
 
             }
             return custumerList.Find(c => c.Id == Custumerid);
-            //LoadData();
-            //Customer c = new Customer();
-            //c = (from cus in CustumerRoot.Elements()
-            //     where Convert.ToInt32(cus.Element("Id").Value) == Custumerid
-            //     select new Customer()
-            //     {
-            //         Id = Convert.ToInt32(cus.Element("Id").Value),
-            //         Name = cus.Element("Name").Value,
-            //         Phone = cus.Element("Phone").Value,
-            //         Latitude = Convert.ToDouble(cus.Element("Latitude").Value),
-            //         Longitude = Convert.ToDouble(cus.Element("Longitude").Value)
-            //     }).FirstOrDefault();
-
-            //if (c.Id == 0)
-            //throw new Exception($"custumer {Custumerid} is not exite!!");
+           
 
 
         }
@@ -475,20 +446,8 @@ namespace DAL
             List<DO.Customer> cusList = XMLTools.LoadListFromXMLSerializer<Customer>(customerPath);
 
             return cusList.Where(x => predicate == null ? true : predicate(x)).ToList();
-            //LoadData();
-            //IEnumerable<Customer> custumers;
-            //custumers = from cus in CustumerRoot.Elements()
-            //            select new Customer()
-            //            {
-            //                Id = Convert.ToInt32(cus.Element("Id").Value),
-            //                Name = cus.Element("Name").Value,
-            //                Phone = cus.Element("Phone").Value,
-            //                Latitude = Convert.ToDouble(cus.Element("Latitude").Value),
-            //                Longitude = Convert.ToDouble(cus.Element("Longitude").Value)
-
-            //            };
-
-            //return custumers;
+          
+           
         }
         public void UpdateCustumer(int custumerId, string name, string phone)
         {

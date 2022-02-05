@@ -72,7 +72,7 @@ namespace PL
                     UserName = name,
                     Password = password,
                 };
-                if ((UserNameTextBox.Text == "shirel" && PasswordTextBox.Password == "shirel") || (UserNameTextBox.Text == "batsheve" && PasswordTextBox.Password == "batsheva"))
+                if ((UserNameTextBox.Text == "shirel" && PasswordTextBox.Password == "shirel") || (UserNameTextBox.Text == "batsheva" && PasswordTextBox.Password == "batsheva"))
                     user1.Permission = Permit.Admin;
                 else
                     user1.Permission = Permit.User;

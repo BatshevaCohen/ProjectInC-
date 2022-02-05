@@ -27,7 +27,7 @@ namespace PL
             btnOKCustumer.Visibility = Visibility.Visible;
             DataContext = cusm;
             idCusTextBoxAdd.Focus();
-            // CustumerListWindow.CustumerListView.Items.Refresh();
+           // CustumerListWindow.CustumerListView.Items.Refresh();
 
         }
         /// <summary>

@@ -81,12 +81,10 @@ namespace PL
                 lblBatteryDrone.Visibility = Visibility.Collapsed;
                 lblDroneInParcel.Visibility = Visibility.Collapsed;
                 lblIDDrone.Visibility = Visibility.Collapsed;
-                lblLatiDrone.Visibility = Visibility.Collapsed;
                 lbllongiDrone.Visibility = Visibility.Collapsed;
                 batteryDroneParcelTXB.Visibility = Visibility.Collapsed;
                 IdDroneParcelTXB.Visibility = Visibility.Collapsed;
                 LatitudeDroneParcelTXB.Visibility = Visibility.Collapsed;
-                LongitudeDroneParcelTXB.Visibility = Visibility.Collapsed;
             }
             DataContext = p;
         }
@@ -254,7 +252,7 @@ namespace PL
         /// <param name="e"></param>
         private void btnRemoveParcel_Click(object sender, RoutedEventArgs e)
         {
-            Parcel p = myBl.GetParcel(Int32.Parse(ParcelIDTextBox.Text));
+            Parcel p = myBl.GetParcel(Int32.Parse(idTXB.Text));
            
            
           

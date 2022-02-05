@@ -15,8 +15,10 @@
             Stretch="Fill"
             Opacity="0.5"/>
 
-        <Grid x:Name="Grid_ShowParcel" Margin="85,41,350,10" RenderTransformOrigin="0.5,0.5" 
-              Visibility="Collapsed">
+        <Grid x:Name="Grid_ShowParcel" 
+              Margin="85,41,350,10" 
+              RenderTransformOrigin="0.5,0.5" 
+              Visibility="Visible">
             <Grid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>
@@ -43,20 +45,19 @@
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="*"/>
             </Grid.RowDefinitions>
 
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="108*"/>
+                <ColumnDefinition Width="Auto"/>
 
-                <ColumnDefinition Width="89*"/>
+                <ColumnDefinition Width="Auto"/>
             </Grid.ColumnDefinitions>
 
             <Label Content="Parcel datailes:" 
                    FontWeight="ExtraBold"
                    Grid.Row="0"
                    FontSize="14"
-                   HorizontalAlignment="Left" Margin="-17,-44,0,44" Width="126" Grid.ColumnSpan="2"/>
+                   HorizontalAlignment="Left" Margin="-17,-44,0,44" Width="126"/>
 
             <Label Content="Sender details:" 
                    FontWeight="Bold" Margin="2,32,3,6" Grid.RowSpan="2" Grid.Row="9"/>
@@ -104,19 +105,18 @@
             <Label x:Name="lblBatteryDrone" Content="battery" Margin="1,1,1,2" Grid.Row="15"/>
             <TextBox x:Name="batteryDroneParcelTXB"  Text="{Binding DroneInParcel.Battery, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                       TextWrapping="Wrap" Grid.Column="1" Margin="1,34,2,3" Grid.Row="14" IsEnabled="False" Grid.RowSpan="2" />
-            <Label x:Name="lbllongiDrone" Content="Latitude" Margin="0,32,3,5" Grid.Row="15" Grid.RowSpan="2"/>
-            <TextBox 
+            <Label x:Name="lbllongiDrone" Content="Location" Margin="0,32,3,5" Grid.Row="15" Grid.RowSpan="2"/>
+            <Label 
                 x:Name="LatitudeDroneParcelTXB"  
-                Text="{Binding DroneInParcel.Location, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
-                TextWrapping="Wrap" 
+                Content="{Binding DroneInParcel.Location, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
                 Grid.Column="1" 
                 Margin="3,32,6,4" 
                 Grid.Row="15" 
                 IsEnabled="False" 
                 Grid.RowSpan="2"/>
-            <Label x:Name="lblLatiDrone" Content="Longitude" Margin="0,1,8,-1" Grid.Row="17"/>
-            <TextBox x:Name="LongitudeDroneParcelTXB"  Text="{Binding DroneInParcel.Location.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
-                     TextWrapping="Wrap" Grid.Column="1" Margin="2,32,1,3" Grid.Row="16" IsEnabled="False" Grid.RowSpan="2"/>
+            <!--<Label x:Name="lblLatiDrone" Content="Longitude" Margin="0,1,8,-1" Grid.Row="17"/>-->
+            <!--<TextBox x:Name="LongitudeDroneParcelTXB"  Text="{Binding DroneInParcel.Location.Longitude, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"
+                     TextWrapping="Wrap" Grid.Column="1" Margin="2,32,1,3" Grid.Row="16" IsEnabled="False" Grid.RowSpan="2"/>-->
             <Label Content="Priority parcel" Margin="1,1,7,2" Grid.Row="1"/>
             <TextBox x:Name="priorityTXB"  Text="{Binding Priority, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" TextWrapping="Wrap" Grid.Column="1" Margin="0,32,3,4" IsEnabled="False" Grid.RowSpan="2"/>
             <Label Content="Weight parcel" Margin="3,1,4,4" Grid.Row="2"/>
@@ -131,7 +131,11 @@
             <TextBox x:Name="SupplyTXB"  Text="{Binding SupplyTime, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" IsEnabled="False" TextWrapping="Wrap" Grid.Column="1" Margin="3,4,-1,4" Grid.Row="6"/>
             <TextBox x:Name="SenderNameTXB"  Text="{Binding Sender.Name, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}" IsEnabled="False"  TextWrapping="Wrap" Grid.Column="1" Margin="4,32,1,0" Grid.RowSpan="2" Grid.Row="11"/>
             <Label Content="parcel id" Margin="0,0,0,4"/>
-            <TextBox x:Name="idTXB"  Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  TextWrapping="Wrap" Grid.Column="1" Margin="0,3,-2,3"/>
+            <TextBox x:Name="idTXB"  
+                     Text="{Binding Id, Mode=TwoWay, NotifyOnValidationError=true, ValidatesOnExceptions=true}"  
+                     TextWrapping="Wrap" 
+                     IsEnabled="False"
+                     Grid.Column="1" Margin="0,3,-2,3"/>
 
         </Grid>
 
@@ -203,12 +207,6 @@
                 HorizontalAlignment="Left" 
                 VerticalAlignment="Top" 
                 Width="108" Margin="519,549,0,0" />
-
-
-
-        <Grid 
-            Name="AddDrone" 
-            Visibility="Visible" Margin="10,-10,10,10">
 
             <Grid 
                 x:Name="ADDParcelGrid" 
@@ -305,7 +303,6 @@
                 </ComboBox>
             </Grid>
 
-        </Grid>
 
         <Button x:Name="btnOK" 
                 Content="OK" 

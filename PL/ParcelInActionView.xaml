@@ -217,7 +217,7 @@
 
             <Grid 
                 x:Name="ADDParcelGrid" 
-                Visibility="Visible" 
+                Visibility="Collapsed" 
                 VerticalAlignment="Top" 
                 Margin="10,44,0,0" 
                 HorizontalAlignment="Left" Height="259" Width="330">

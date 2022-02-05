@@ -12,6 +12,7 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\BL\BL.csproj" />
 	  <ProjectReference Include="..\DalLibrary\DalLibrary.csproj" />
 	</ItemGroup>
 

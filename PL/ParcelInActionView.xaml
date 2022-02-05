@@ -195,7 +195,7 @@
         <Button 
                 x:Name="btnClose" 
                 Content="Close" 
-                Background="#da2d2d"
+                Background="Firebrick"
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="10" 
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"

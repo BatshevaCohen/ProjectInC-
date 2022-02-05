@@ -84,16 +84,16 @@ namespace BL
         public void UpdateChargeDrone(int droneId)
         {
             DO.Station station = new();
+
             //finds the drone by the recived ID
-
-
             DroneToList dronel = DronesL.Find(x => x.Id == droneId);
+
             //if the drone is available- it can be sent for charging
             if (dronel.DroneStatuses == DroneStatuses.Available)
             {
                 //list of the distances from the drone to every station
                 List<DO.Distance> disStationFromDrone = dalo.MinimumDistance(dronel.Location.Longitude, dronel.Location.Latitude);
-                double min = 9999999;
+                double min = double.MaxValue;
                 int idS, counter = 0;
                 bool flag = false;
                 //number of distances in the list

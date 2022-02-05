@@ -16,6 +16,13 @@
             Stretch="Fill"
             Opacity="0.5"
             Grid.ColumnSpan="2"/>
+        <!--<Label Content="Welcom" 
+               FontSize="30"
+               Font
+               HorizontalAlignment="Left" 
+               Margin="216,101,0,0" 
+               VerticalAlignment="Top"/>-->
+
         <!--Person icon-->
         <materialDesign:PackIcon 
             Kind="Account"             

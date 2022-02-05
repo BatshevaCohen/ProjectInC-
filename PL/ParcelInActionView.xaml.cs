@@ -2,13 +2,8 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
 using System.Windows;
-using System.Windows.Controls;
-using System.Windows.Data;
-using System.Windows.Documents;
 using System.Windows.Input;
 
 namespace PL
@@ -168,7 +163,7 @@ namespace PL
                     //ParcelNumberTransferred = drone.ParcelInTransfer.Id,
 
                 };
-                if(drTL.ParcelNumberTransferred>0)
+                if (drTL.ParcelNumberTransferred > 0) 
                 {
                     drTL.ParcelNumberTransferred = drone.ParcelInTransfer.Id;
                 }
@@ -176,7 +171,6 @@ namespace PL
                 {
                     Latitude = drone.Location.Latitude,
                     Longitude = drone.Location.Longitude,
-
                 };
                 new DroneInActionView(drTL, myBl).Show();
             }

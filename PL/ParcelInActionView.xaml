@@ -18,7 +18,7 @@
         <Grid x:Name="Grid_ShowParcel" 
               Margin="85,41,350,10" 
               RenderTransformOrigin="0.5,0.5" 
-              Visibility="Visible">
+              Visibility="Collapsed">
             <Grid.RenderTransform>
                 <TransformGroup>
                     <ScaleTransform/>

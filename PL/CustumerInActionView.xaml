@@ -11,7 +11,7 @@
         Title="CustumerInActionView" 
         Height="600" Width="780">
 
-    <Grid>
+    <Grid> 
 
         <Image 
             Source="Images/purple background.jpg"

@@ -108,4 +108,16 @@
     <PickedUp>2021-02-11T09:18:16</PickedUp>
     <Supplied>2021-02-13T09:47:49</Supplied>
   </Parcel>
+  <Parcel>
+    <Id>201033333</Id>
+    <SenderId>820450455</SenderId>
+    <ReceiverId>492111160</ReceiverId>
+    <Weight>Light</Weight>
+    <Priority>Emergency</Priority>
+    <DroneID>0</DroneID>
+    <Create>2022-02-05T22:58:13.5292845+02:00</Create>
+    <Assigned>2022-02-05T22:58:13.5292893+02:00</Assigned>
+    <PickedUp>2022-02-05T22:58:13.5292897+02:00</PickedUp>
+    <Supplied>2022-02-05T22:58:13.5292901+02:00</Supplied>
+  </Parcel>
 </ArrayOfParcel>

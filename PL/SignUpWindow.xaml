@@ -174,8 +174,8 @@
                         <TranslateTransform/>
                     </TransformGroup>
                 </TextBlock.RenderTransform>
-            <Hyperlink NavigateUri="https://www.latlong.net"
-                       ToolTip="you can fin your location here: https://www.latlong.net"
+            <Hyperlink 
+                       ToolTip="you can find your location here: https://www.latlong.net"
                        RequestNavigate="Hyperlink_RequestNavigate">
                 <Hyperlink.Inlines>
                     <Run Text="Find your location"/>

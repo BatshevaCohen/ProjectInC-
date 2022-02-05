@@ -50,7 +50,7 @@
             Click="btnShowStationList_Click" Height="58" Width="280"/>
         <Button 
             x:Name="btnShowCustumerList"
-            Content="Custumers"  
+            Content="Customers"  
             FontFamily="Comic Sans MS"
             FontSize="25"
             Style="{StaticResource MaterialDesignPaperButton}"

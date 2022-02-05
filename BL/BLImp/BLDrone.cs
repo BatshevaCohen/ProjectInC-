@@ -93,7 +93,7 @@ namespace BL
             {
                 //list of the distances from the drone to every station
                 List<DO.Distance> disStationFromDrone = dalo.MinimumDistance(dronel.Location.Longitude, dronel.Location.Latitude);
-                double min = double.MaxValue;
+                double minDistance = double.MaxValue;
                 int idS, counter = 0;
                 bool flag = false;
                 //number of distances in the list
@@ -104,9 +104,9 @@ namespace BL
                     foreach (DO.Distance item in disStationFromDrone)
                     {
                         //to find the station with the minimum distance from the drone
-                        if (item.Length <= min)
+                        if (item.Length <= minDistance)
                         {
-                            min = item.Length;
+                            minDistance = item.Length;
                             idS = item.Id;
                         }
 
@@ -115,14 +115,14 @@ namespace BL
                         if (station.ChargeSpots > 0)
                         {
                             //only if there is enough battery
-                            if (dronel.Battery > min * 10 / 100)
+                            if (dronel.Battery > minDistance * 10 / 100)
                             {
                                 flag = true;
-                                //function to update Battery, drone mode drone location
-                                UpdateDroneToStation(droneId, station.Id, min);
+                                //function to update Battery, drone mode and distance
+                                UpdateDroneToStation(droneId, station.Id, minDistance);
                             }
                             else
-                                throw new DroneBatteryException("there is not enough battery to send the drone to the station ");
+                                throw new DroneBatteryException("there is not enough battery to send the drone to charge in the station ");
                         }
                         counter++;
                         disStationFromDrone.Remove(item);
@@ -145,8 +145,8 @@ namespace BL
         /// Update drone to station
         /// </summary>
         /// <param name="droneId"></param>
-        /// <param name="stationId"></param>
-        /// <param name="minDistance"></param>
+        /// <param name="stationId">where the drone is going to charge</param>
+        /// <param name="minDistance">the distance between the drone and the station</param>
         public void UpdateDroneToStation(int droneId, int stationId, double minDistance)
         {
             //update for the way to the station
@@ -161,7 +161,8 @@ namespace BL
             dronel.Location.Latitude = station.Latitude;
             dronel.Location.Longitude = station.Longitude;
             double droneBattery = minDistance * 0.1;
-            dronel.Battery = droneBattery;
+            //the battery is going down on the way to the station
+            dronel.Battery -= droneBattery;
             //עידכון עמדות טעינה פנוייות 
             dalo.UpdateChargeSpots(station.Id);
             //הוספת מופע לרשימת הרחפנים בטעינה
@@ -178,14 +179,10 @@ namespace BL
         {
             // save value in second
             double value = (chargingTime.Hours + chargingTime.Minutes / 100.0 + chargingTime.Seconds / 10000.0) * (chargingTime > TimeSpan.Zero ? 1 : -1);
-            //TimeSpan duration = DateTime.Now.Subtract((DateTime)dc.EntranceTime);
-            // double time = duration.Hours + (double)duration.Minutes / 60 + (double)duration.Seconds / 3600;
             //finds the drone by its ID
             DroneToList dronel = DronesL.Find(x => x.Id == droneID);
             DO.Station station = new();
-            //only a drone that was in charging c
-
-            //ould be discharge
+            //only a drone that was in charging c would be discharge
             if (dronel.DroneStatuses == DroneStatuses.Maintenance)
             {
                 double droneLocationLatitude = dronel.Location.Latitude;

@@ -8,10 +8,6 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
-using MaterialDesignThemes.Wpf;
 using BO;
 using BlApi;
 using System.Text.RegularExpressions;
@@ -23,11 +19,10 @@ namespace PL
     /// </summary>
     public partial class UsersMainWindow : Window
     {
-        BlApi.IBL bL;
+        BlApi.IBL bL= BlFactory.GetBl();
         public UsersMainWindow()
         {
             InitializeComponent();
-            bL= BlFactory.GetBl();
             UserNameTextBox.Focus();
         }
 
@@ -93,7 +88,7 @@ namespace PL
                         }
                         else if(user1.Permission == BO.Permit.Admin) //Admin
                         {
-                            new MainWindow(name).Show();
+                            new MainWindow(bL, name).Show();
                             Close();
                         }
                         else

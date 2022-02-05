@@ -24,14 +24,29 @@ namespace DAL
         #endregion
 
         #region singelton
-        public static DXML Instance { get; } = new DXML();
+        static DXML Instance { get; } = new DXML();
         private static object locker = new object();
+        static DXML() { }
+        private DXML() { }
+        //{
+        //    Random random = new Random();
+        //    var parcelList = ShowParcelList().ToList();
+        //    for (int i = 0; i < ShowParcelList().Count(); i++)
+        //    {
+        //        var parcel = parcelList[i];
+        //        parcel.Create = new(random.Next(2017, 2021), random.Next(0, 12), random.Next(0, 29));
+        //        parcel.Assigned = parcel.Create.Value.AddDays(random.Next(0, 3));
+        //        parcel.PickedUp = parcel.Assigned.Value.AddDays(random.Next(0, 3));
+        //        parcel.Supplied = parcel.PickedUp.Value.AddDays(random.Next(0, 3));
+        //        AddParcel(parcel);
+        //    }
+        //}
         #endregion
 
         #region DalXML Drones
 
         /// <summary>
-        /// 
+        /// add drone
         /// </summary>
         /// <param name="d"></param>
         public void AddDrone(Drone d)

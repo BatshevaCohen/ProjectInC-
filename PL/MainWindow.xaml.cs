@@ -16,10 +16,10 @@ namespace PL
         /// <summary>
         /// Constractor- after signing in- shows the main window- for ADMIN
         /// </summary>
-        public MainWindow(string username = ":-)")
+        public MainWindow(IBL bl, string username = ":-)")
         {
-            myBL = BlFactory.GetBl();
             InitializeComponent();
+            myBL = bl;
             UserLable.Visibility = Visibility.Collapsed;
             AdminLable.Visibility = Visibility.Visible;
             btnShowParcelList.Visibility = Visibility.Visible;
@@ -31,7 +31,7 @@ namespace PL
         /// </summary>
         public MainWindow(IBL bL, User user)
         {
-            myBL = BlFactory.GetBl();
+            myBL = bL;
             InitializeComponent();
             AdminLable.Visibility = Visibility.Collapsed;
             UserLable.Visibility = Visibility.Visible;

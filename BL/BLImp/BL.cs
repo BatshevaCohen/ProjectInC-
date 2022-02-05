@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 using BO;
 using BlApi;
 using DalApi;
-
+using System.Threading;
 
 namespace BL
 {
@@ -20,13 +20,10 @@ namespace BL
 
         #region Singleton
 
-        private static readonly IBL instance = new BL();
-       
+        public static IBL instance { get; } = new BL();
 
-        public static IBL Instance { get => instance; }
         #endregion Singleton
-        
-
+        static BL() { }
         private BL()
         {
             //Access to the layer DAL
@@ -34,6 +31,7 @@ namespace BL
             dronesL = new List<DroneToList>();
             var Drones = dalo.ShowDroneList();
             DronesInitialize(Drones);
+            
         }
         /// <summary>
         /// Constractor for drones initializing
@@ -54,6 +52,7 @@ namespace BL
                     Model = droneDL.Model,
                     Weight = (Weight)droneDL.MaxWeight
                 };
+                droneBL.Location = new();
 
                 List<DO.Parcel> parcelList = parcels.FindAll(p => p.DroneID == droneBL.Id);
 
@@ -168,3 +167,18 @@ namespace BL
         }
     }
 }
+
+
+//Random random = new Random();
+//var parcelList = dalo.ShowParcelList().ToList();
+//for (int i = 0; i < parcelList.Count(); i++)
+//{
+//    var parcel = parcelList[i];
+//    object obj = new DateTime(2021, random.Next(0, 12), random.Next(0, 28), random.Next(0, 60), random.Next(0, 60), random.Next(0, 24));
+//    parcel.Create = (DateTime)obj;
+//    parcel.Assigned = parcel.Create.AddDays(random.Next(0, 3)).AddSeconds(random.Next(0, 60)).AddMinutes(random.Next(0, 60)).AddHours(random.Next(0, 24));
+//    parcel.PickedUp = parcel.Assigned.AddDays(random.Next(0, 3)).AddSeconds(random.Next(0, 60)).AddMinutes(random.Next(0, 60)).AddHours(random.Next(0, 24));
+//    parcel.Supplied = parcel.PickedUp.AddDays(random.Next(0, 3)).AddSeconds(random.Next(0, 60)).AddMinutes(random.Next(0, 60)).AddHours(random.Next(0, 24));
+//    dalo.RemoveParcel(parcel);
+//    dalo.AddParcel(parcel);
+//}

@@ -10,9 +10,6 @@ using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
-using System.Windows.Shapes;
 
 namespace PL
 {
@@ -31,6 +28,7 @@ namespace PL
         {
             InitializeComponent();
             ADDParcelGrid.Visibility = Visibility.Visible;
+            Grid_ShowParcel.Visibility = Visibility.Collapsed;
             btnOK.Visibility = Visibility.Visible;
             myBl = bl;
             parcel = new();
@@ -69,6 +67,7 @@ namespace PL
             InitializeComponent();
 
             Grid_ShowParcel.Visibility = Visibility.Visible;
+            ADDParcelGrid.Visibility = Visibility.Collapsed;
             btnUpdateParcel.Visibility = Visibility.Visible;
             btnShowDrone.Visibility = Visibility.Visible;
             btnShowCustumerReciver.Visibility = Visibility.Visible;

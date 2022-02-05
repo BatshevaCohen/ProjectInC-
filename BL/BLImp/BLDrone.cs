@@ -121,6 +121,8 @@ namespace BL
                                 //function to update Battery, drone mode drone location
                                 UpdateDroneToStation(droneId, station.Id, min);
                             }
+                            else
+                                throw new DroneBatteryException("there is not enough battery to send the drone to the station ");
                         }
                         counter++;
                         disStationFromDrone.Remove(item);

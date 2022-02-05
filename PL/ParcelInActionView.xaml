@@ -58,11 +58,6 @@
                    FontSize="14"
                    HorizontalAlignment="Left" Margin="-17,-44,0,44" Width="126" Grid.ColumnSpan="2"/>
 
-
-            <!--<Label 
-                Content="Status"
-                Grid.Row="3" Margin="-34,9,132,25" Grid.RowSpan="2"/>-->
-
             <Label Content="Sender details:" 
                    FontWeight="Bold" Margin="2,32,3,6" Grid.RowSpan="2" Grid.Row="9"/>
             <Label
@@ -200,7 +195,7 @@
         <Button 
                 x:Name="btnClose" 
                 Content="Close" 
-                Background="#da2d2d"
+                Background="Firebrick"
                 Style="{StaticResource MaterialDesignRaisedDarkButton}"
                 materialDesign:ButtonAssist.CornerRadius="10" 
                 IsEnabled="{Binding DataContext.ControlsEnabled, RelativeSource={RelativeSource FindAncestor, AncestorType=Window}}"
